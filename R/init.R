@@ -2,7 +2,7 @@
 
 .onAttach <- function(libname, pkgname){
   packageStartupMessage("\n * Rdimtools for Dimension Reduction and Estimation maintained by Kisung You (University of Notre Dame).
-                         \n * We are continuously developing this package. Please feel free to share your comments, suggestions or bugs to the maintainer.")
+                         \n * We are continuously developing this package. Please feel free to share your comments, suggestions or bugs to the maintainer via either email or github issue page (http://github.com/kisungyou/Rdimtools/issues).")
 }
 
 # .onLoad <- function(libname, pkgname){

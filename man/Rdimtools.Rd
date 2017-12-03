@@ -62,6 +62,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.mvu}} \tab U \tab Maximum Variance Unfolding / Semidefinite Embedding \cr
 \code{\link{do.plp}} \tab U \tab Piecewise Laplacian Projection \cr
 \code{\link{do.ree}} \tab U \tab Robust Euclidean Embedding \cr
+\code{\link{do.rpca}}\tab U \tab Robust Principal Component Analysis \cr
 \code{\link{do.sammon}} \tab U \tab Sammon Mapping \cr
 \code{\link{do.sne}} \tab U \tab Stochastic Neighbor Embedding \cr
 \code{\link{do.tsne}} \tab U \tab t-distributed Stochastic Neighbor Embedding
