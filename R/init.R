@@ -26,3 +26,8 @@
 #   .pkgenv[["RStudio_outofdate"]] <- RStudio_outofdate
 # zzzz = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "do."))))
 # }
+
+
+# GITHUB
+# git remote add origin git@github.com:kisungyou/Rdimtools.git <- called origin
+# git push -u origin master

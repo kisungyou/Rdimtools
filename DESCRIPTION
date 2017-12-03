@@ -22,4 +22,6 @@ Imports: Rcpp (>= 0.12.12), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RS
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
 RdMacros: Rdpack
+URL: http://github.com/kisungyou/Rdimtools
+BugReports: http://github.com/kisungyou/Rdimtools/issues
 
