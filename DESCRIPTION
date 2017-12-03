@@ -3,7 +3,7 @@ Type: Package
 Title: Dimension Reduction and Estimation Methods
 Version: 0.2.0
 Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),
-                     email = "kyou@nd.edu"),
+                     email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X")),
               person("Donggun", "Kim", role = "ctb", 
               email = "dgkim5360@gmail.com"),
               person("Yoon Mo", "Jung", role = "ctb", 
