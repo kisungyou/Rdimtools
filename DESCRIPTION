@@ -18,8 +18,10 @@ License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.2.0)
-Imports: Rcpp (>= 0.12.12), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RSpectra, CVXR
+Imports: Rcpp (>= 0.12.10), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RSpectra, CVXR
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
 RdMacros: Rdpack
+URL: http://github.com/kisungyou/Rdimtools
+BugReports: http://github.com/kisungyou/Rdimtools/issues
 
