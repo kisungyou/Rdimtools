@@ -33,7 +33,6 @@
 #' @examples
 #' \dontrun{
 #' ## generate "cswiss" data
-#' ## in order to pass CRAN pretest, n is set to be small.
 #' X = aux.gensamples(dname="cswiss",n=99)
 #'
 #' ## 1. no pca scaling

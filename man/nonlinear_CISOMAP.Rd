@@ -39,6 +39,7 @@ preserving full isometry, maintaining infinitestimal angles - conformality - in 
 it alters geodesic distance to reflect scale information.
 }
 \examples{
+\dontrun{
 ## generate data
 X <- aux.gensamples(dname="cswiss",n=500)
 
@@ -56,7 +57,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="Isomap")
 plot(output2$Y[,1],output2$Y[,2],main="C-Isomap")
 plot(output3$Y[,1],output3$Y[,2],main="Binarized C-Isomap")
-
+}
 
 }
 \references{

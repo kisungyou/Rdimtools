@@ -23,25 +23,27 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'## generate data
-#'X <- aux.gensamples(dname="cswiss",n=500)
 #'
-#'## 1. original Isomap
-#'output1 <- do.isomap(X,ndim=2)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' X <- aux.gensamples(dname="cswiss",n=500)
 #'
-#'## 2. C-Isomap
-#'output2 <- do.cisomap(X,ndim=2)
+#' ## 1. original Isomap
+#' output1 <- do.isomap(X,ndim=2)
 #'
-#'## 3. C-Isomap on a binarized graph
-#'output3 <- do.cisomap(X,ndim=2,weight=FALSE)
+#' ## 2. C-Isomap
+#' output2 <- do.cisomap(X,ndim=2)
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="Isomap")
-#'plot(output2$Y[,1],output2$Y[,2],main="C-Isomap")
-#'plot(output3$Y[,1],output3$Y[,2],main="Binarized C-Isomap")
+#' ## 3. C-Isomap on a binarized graph
+#' output3 <- do.cisomap(X,ndim=2,weight=FALSE)
 #'
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="Isomap")
+#' plot(output2$Y[,1],output2$Y[,2],main="C-Isomap")
+#' plot(output3$Y[,1],output3$Y[,2],main="Binarized C-Isomap")
+#' }
 #'
 #' @references
 #' \insertRef{silva_global_2003}{Rdimtools}
