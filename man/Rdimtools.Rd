@@ -7,7 +7,7 @@
 \alias{Rdimtools-package}
 \title{Dimension Reduction and Estimation Methods}
 \description{
-\pkg{Rdimtools} is an R implementation of a number of dimension reduction and estimation methods
+\pkg{Rdimtools} is an R suite of a number of dimension reduction and estimation methods
 implemented using \pkg{RcppArmadillo} for efficient computations. Please see the section below for
 the complete composition of this package and what we can provide in a unifying interface across many
 methods.
@@ -20,8 +20,8 @@ implementations of other useful methods respectively.
 
 \bold{\code{do.}} functions are for dimension reduction (or, \emph{manifold learning}) methods.
 A simple taxonomy of the methods would be to categorize based on the linearity of
-embedding mappings. In the table below, TYPE represents whether it is \emph{supervised}(S),
-\emph{semisupervised}(SS), or \emph{unsupervised}(U).
+embedding mappings. In the table below, TYPE represents whether it is \emph{supervised} (S),
+\emph{semisupervised} (SS), or \emph{unsupervised} (U).
 
 For \emph{linear} methods, we have
 \tabular{lcl}{

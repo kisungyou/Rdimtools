@@ -43,8 +43,7 @@ for (i in 1:length(casenames)){
 }
 }
 \references{
-van der Maatehn, L., Postma, E. and van den Herik, J. (2009) \emph{Dimensionality
-Reduction : A Comparative Review}. TiCC Technical Report 2009-005.
+\insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
 }
 \author{
 Kisung You

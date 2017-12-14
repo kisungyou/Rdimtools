@@ -169,8 +169,10 @@ aux.preprocess <- function(data,type="center"){
 #'   data = aux.gensamples(n=sample(1000:2000,1),noise=runif(1)[1],dname=casenames[i])
 #' }
 #' }
-#' @references van der Maatehn, L., Postma, E. and van den Herik, J. (2009) \emph{Dimensionality
-#' Reduction : A Comparative Review}. TiCC Technical Report 2009-005.
+#' @references
+#' \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
+#'
+#'
 #' @author Kisung You
 #' @rdname aux_gensamples
 #' @export
