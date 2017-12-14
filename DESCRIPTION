@@ -2,12 +2,8 @@ Package: Rdimtools
 Type: Package
 Title: Dimension Reduction and Estimation Methods
 Version: 0.2.0
-Authors@R: c(person("Kisung", "You", role = c("aut", "cre"),
-                     email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X")),
-              person("Donggun", "Kim", role = "ctb", 
-              email = "dgkim5360@gmail.com"),
-              person("Yoon Mo", "Jung", role = "ctb", 
-              email = "yoonmojung@skku.edu"))
+Authors@R: person("Kisung", "You", role = c("aut", "cre"),
+                     email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X")) 
 Description: We provide a rich collection of linear and nonlinear dimension reduction techniques.
 	Intrinsic dimension estimation methods for exploratory analysis are also provided.
     For more details on dimensionality techniques, see the paper by
