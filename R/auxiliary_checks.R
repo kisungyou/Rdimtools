@@ -2,9 +2,7 @@
 # 01. check_ndim   : universal
 # 02. check_WMAT   : REE
 # 03. check_label  : label information and return a well-processed one.
-
-
-
+# 04. check_NumMM  : bounded number
 
 
 # 01. check_ndim ----------------------------------------------------------
@@ -59,4 +57,27 @@ check_label <- function(label, n){
     warning("* Supervised Learning : given 'label' has all unique elements.")
   }
   return(label)
+}
+
+# 04. check_NumMM  : bounded real number
+# 05. check_IntMM  : bounded integer
+
+
+# 04. check_NumMM ---------------------------------------------------------
+# return TRUE if it is a valid one.
+#' @noRd
+#' @keywords internal
+check_NumMM <- function(x, min, max, compact=TRUE){
+  cond1 = (length(as.vector(x))==1)
+  cond2 = (!is.na(x))
+  if (compact){
+    cond3 = ((min<=x)&&(x<=max))
+  } else {
+    cond3 = ((min<x)&&(x<max))
+  }
+  if (cond1&&cond2&&cond3){
+    return(TRUE)
+  } else {
+    return(FALSE)
+  }
 }

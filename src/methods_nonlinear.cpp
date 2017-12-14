@@ -517,3 +517,102 @@ Rcpp::List method_ree(arma::mat& B, arma::mat& W, arma::mat& D, const double ini
   return Rcpp::List::create(Rcpp::Named("B")=Bold,
                             Rcpp::Named("iter")=iter);
 }
+
+
+// 10. SPE : Stochastic Proximity Embedding
+// [[Rcpp::export]]
+arma::mat method_spe(arma::mat& R, arma::mat& iX, const int C, const int S,
+                     double lambda, double drate, arma::mat matselector){
+  // 1. setup
+  arma::mat X = iX;
+  const int nrowX = iX.n_rows;
+  const double tolerance = 0.00001;
+  double denomeps = 0.0000001;
+
+  // 2. let's iterate
+  arma::vec idx2;
+  int selectit = 0;
+  int i=0;
+  int j=0;
+  double dij = 0.0;
+  arma::rowvec xi;
+  arma::rowvec xj;
+  double coefficient = 0.0;
+  for (int iterC=0;iterC<C;iterC++){ // iteration for 'C' cycles
+    // 2-1. iteration for S steps
+    for (int iterS=0;iterS<S;iterS++){
+      // 2-1-1. select two points
+      i = static_cast<int>(matselector(selectit, 0));
+      j = static_cast<int>(matselector(selectit, 1));
+
+      xi = X.row(i);
+      xj = X.row(j);
+
+      // 2-1-2. compute distance dij
+      dij = arma::norm(xi-xj, 2);
+
+      // 2-1-3. maybe, update?
+      if (std::abs(dij-R(i,j)) > tolerance){
+        coefficient = (lambda*(R(i,j)-dij))/(2*(dij+denomeps));
+
+        X.row(i) = xi + coefficient*(xi-xj);
+        X.row(j) = xj + coefficient*(xj-xi);
+      }
+      // 2-1-10. update selectit
+      selectit += 1;
+    }
+    // 2-2. update lambda
+    lambda *= drate;
+  }
+
+  // 3. return output
+  return(X);
+}
+// [[Rcpp::export]]
+arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
+                      double lambda, double drate, arma::mat matselector, const double cutoff){
+  // 1. setup
+  arma::mat X = iX;
+  const int nrowX = iX.n_rows;
+  const double tolerance = 0.00001;
+  double denomeps = 0.0000001;
+
+  // 2. let's iterate
+  arma::vec idx2;
+  int selectit = 0;
+  int i=0;
+  int j=0;
+  double dij = 0.0;
+  arma::rowvec xi;
+  arma::rowvec xj;
+  double coefficient = 0.0;
+  for (int iterC=0;iterC<C;iterC++){ // iteration for 'C' cycles
+    // 2-1. iteration for S steps
+    for (int iterS=0;iterS<S;iterS++){
+      // 2-1-1. select two points
+      i = static_cast<int>(matselector(selectit, 0));
+      j = static_cast<int>(matselector(selectit, 1));
+
+      xi = X.row(i);
+      xj = X.row(j);
+
+      // 2-1-2. compute distance dij
+      dij = arma::norm(xi-xj, 2);
+
+      // 2-1-3. maybe, update?
+      if ((R(i,j)<=cutoff)||(dij<R(i,j))){
+        coefficient = (lambda*(R(i,j)-dij))/(2*(dij+denomeps));
+        X.row(i) = xi + coefficient*(xi-xj);
+        X.row(j) = xj + coefficient*(xj-xi);
+      }
+
+      // 2-1-10. update selectit
+      selectit += 1;
+    }
+    // 2-2. update lambda
+    lambda *= drate;
+  }
+
+  // 3. return output
+  return(X);
+}

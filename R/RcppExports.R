@@ -143,3 +143,11 @@ method_ree <- function(B, W, D, initc, abstol, maxiter) {
     .Call('_Rdimtools_method_ree', PACKAGE = 'Rdimtools', B, W, D, initc, abstol, maxiter)
 }
 
+method_spe <- function(R, iX, C, S, lambda, drate, matselector) {
+    .Call('_Rdimtools_method_spe', PACKAGE = 'Rdimtools', R, iX, C, S, lambda, drate, matselector)
+}
+
+method_ispe <- function(R, iX, C, S, lambda, drate, matselector, cutoff) {
+    .Call('_Rdimtools_method_ispe', PACKAGE = 'Rdimtools', R, iX, C, S, lambda, drate, matselector, cutoff)
+}
+

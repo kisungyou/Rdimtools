@@ -6,7 +6,7 @@
 #' methods.
 #'
 #' @section Composition of the package:
-#' The package consists of three families of functions whose names start with \code{do.},\code{est.} and \code{aux.}
+#' The package consists of three families of functions whose names start with \code{do.}, \code{est.}, and \code{aux.}
 #' for performing dimension reduction/manifold learning, estimating intrinsic dimension, and some efficient
 #' implementations of other useful methods respectively.
 #'
@@ -44,6 +44,7 @@
 #' \code{\link{do.cisomap}} \tab U \tab Conformal Isometric Feature Mapping \cr
 #' \code{\link{do.dm}} \tab U \tab Diffusion Maps \cr
 #' \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
+#' \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 #' \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
 #' \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 #' \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
@@ -57,6 +58,7 @@
 #' \code{\link{do.rpca}}\tab U \tab Robust Principal Component Analysis \cr
 #' \code{\link{do.sammon}} \tab U \tab Sammon Mapping \cr
 #' \code{\link{do.sne}} \tab U \tab Stochastic Neighbor Embedding \cr
+#' \code{\link{do.spe}} \tab U \tab Stochastic Proximity Embedding \cr
 #' \code{\link{do.tsne}} \tab U \tab t-distributed Stochastic Neighbor Embedding
 #' }
 #'

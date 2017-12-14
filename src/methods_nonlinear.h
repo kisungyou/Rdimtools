@@ -35,5 +35,9 @@ double method_ree_cost(arma::mat W, arma::mat D, arma::mat B);
 arma::mat method_ree_subgradient(arma::mat B, arma::mat W, arma::mat D);
 Rcpp::List method_ree(arma::mat& B, arma::mat& W, arma::mat& D, const double initc,
                       const double abstol, const int maxiter);
+// 10. SPE
+arma::mat method_spe(arma::mat& R, arma::mat& iX, const int C, const int S, double lambda, double drate, arma::mat matselector);
+arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
+                      double lambda, double drate, arma::mat matselector, const double cutoff);
 
 #endif

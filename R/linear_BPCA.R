@@ -62,7 +62,7 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
   aux.typecheck(X)
   # 2. ndim
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
-    stop("*do.pca : 'ndim' is a positive integer in [1,#(covariates)).")
+    stop("* do.bpca : 'ndim' is a positive integer in [1,#(covariates)).")
   }
   # 3. preprocess
   if (missing(preprocess)){

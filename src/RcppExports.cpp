@@ -380,6 +380,41 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_spe
+arma::mat method_spe(arma::mat& R, arma::mat& iX, const int C, const int S, double lambda, double drate, arma::mat matselector);
+RcppExport SEXP _Rdimtools_method_spe(SEXP RSEXP, SEXP iXSEXP, SEXP CSEXP, SEXP SSEXP, SEXP lambdaSEXP, SEXP drateSEXP, SEXP matselectorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type R(RSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type iX(iXSEXP);
+    Rcpp::traits::input_parameter< const int >::type C(CSEXP);
+    Rcpp::traits::input_parameter< const int >::type S(SSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type drate(drateSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type matselector(matselectorSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_spe(R, iX, C, S, lambda, drate, matselector));
+    return rcpp_result_gen;
+END_RCPP
+}
+// method_ispe
+arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S, double lambda, double drate, arma::mat matselector, const double cutoff);
+RcppExport SEXP _Rdimtools_method_ispe(SEXP RSEXP, SEXP iXSEXP, SEXP CSEXP, SEXP SSEXP, SEXP lambdaSEXP, SEXP drateSEXP, SEXP matselectorSEXP, SEXP cutoffSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type R(RSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type iX(iXSEXP);
+    Rcpp::traits::input_parameter< const int >::type C(CSEXP);
+    Rcpp::traits::input_parameter< const int >::type S(SSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type drate(drateSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type matselector(matselectorSEXP);
+    Rcpp::traits::input_parameter< const double >::type cutoff(cutoffSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_ispe(R, iX, C, S, lambda, drate, matselector, cutoff));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
@@ -411,6 +446,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_lleWauto", (DL_FUNC) &_Rdimtools_method_lleWauto, 2},
     {"_Rdimtools_method_lleM", (DL_FUNC) &_Rdimtools_method_lleM, 1},
     {"_Rdimtools_method_ree", (DL_FUNC) &_Rdimtools_method_ree, 6},
+    {"_Rdimtools_method_spe", (DL_FUNC) &_Rdimtools_method_spe, 7},
+    {"_Rdimtools_method_ispe", (DL_FUNC) &_Rdimtools_method_ispe, 8},
     {NULL, NULL, 0}
 };
 

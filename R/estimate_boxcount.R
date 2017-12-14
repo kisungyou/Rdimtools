@@ -83,7 +83,7 @@ est.boxcount <- function(X,nlevel=50,show=FALSE){
   result = output
   if (show){
     plot(log(1/output$r),log(output$Nr),
-         main="boxcount::linear slope",
+         main="boxcount:: use linear slope",
          xlab = "log(1/r)", ylab = "log(N(r))",type="b")
   }
   return(result)
