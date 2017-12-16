@@ -49,7 +49,7 @@
 #' @rdname linear_FA
 #' @author Kisung You
 #' @export
-do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-10){
+do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-6){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){

@@ -5,7 +5,7 @@
 \title{Exploratory Factor Analysis}
 \usage{
 do.fa(X, ndim = 2, preprocess = "center", maxiter = 1000,
-  tolerance = 1e-10)
+  tolerance = 1e-06)
 }
 \arguments{
 \item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations

@@ -31,7 +31,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
 \code{\link{do.ica}} \tab U \tab Independent Component Analysis \cr
-\code{\link{do.isoproj}} \tab U \tab Isometric projection \cr
+\code{\link{do.isoproj}} \tab U \tab Isometric Projection \cr
 \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 \code{\link{do.lpp}} \tab U \tab Locality Preserving Embedding \cr
@@ -50,6 +50,8 @@ Also, we have \emph{nonlinear} methods implemented
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.cisomap}} \tab U \tab Conformal Isometric Feature Mapping \cr
+\code{\link{do.crca}} \tab U \tab Curvilinear Component Analysis \cr
+\code{\link{do.crda}} \tab U \tab Curvilinear Distance Analysis \cr
 \code{\link{do.dm}} \tab U \tab Diffusion Maps \cr
 \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
 \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
@@ -80,12 +82,12 @@ FUNCTION \tab ALGORITHM \cr
 Finally, there are some auxiliary functions (\bold{\code{aux.}} family),
 \tabular{ll}{
 FUNCTION \tab DESCRIPTION \cr
-\code{\link{aux.gensamples}} \tab generate samples from predefined shapes \cr
-\code{\link{aux.graphnbd}} \tab make a neighborhood graph given certain criteria \cr
-\code{\link{aux.kernelcov}} \tab compute a centered gram matrix with 20 kernels supported \cr
-\code{\link{aux.preprocess}} \tab perform preprocessing of centering, decorrelating, or whitening \cr
+\code{\link{aux.gensamples}} \tab generates samples from predefined shapes \cr
+\code{\link{aux.graphnbd}} \tab builds a neighborhood graph given certain criteria \cr
+\code{\link{aux.kernelcov}} \tab computes a centered gram matrix with 20 kernels supported \cr
+\code{\link{aux.preprocess}} \tab performs preprocessing of centering, decorrelating, or whitening \cr
 \code{\link{aux.shortestpath}} \tab Floyd-Warshall algorithm (it's \emph{Fast}!) \cr
-\code{\link{aux.pkgstat}} \tab report the number of functions available for each category
+\code{\link{aux.pkgstat}} \tab reports the number of functions available for each category
 }
 }
 

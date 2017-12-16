@@ -616,3 +616,77 @@ arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
   // 3. return output
   return(X);
 }
+
+// 11. CRCA : Curvilinear Component Analysis
+arma::mat method_crca_dist(arma::mat RowMat){
+  const int n = RowMat.n_rows;
+  arma::mat output(n,n,fill::zeros);
+  arma::rowvec vec1;
+  arma::rowvec vec2;
+  double norm12 = 0.0;
+  for (int i=0;i<(n-1);i++){
+    vec1 = RowMat.row(i);
+    for (int j=(i+1);j<n;j++){
+      vec2 = RowMat.row(j);
+
+      norm12 = arma::norm(vec1-vec2,2);
+      output(i,j) = norm12;
+      output(j,i) = norm12;
+    }
+  }
+  return(output);
+}
+// [[Rcpp::export]]
+Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double alpha, const int maxiter, const double tolerance, arma::vec& vecselector){
+  // 1. get parameters
+  const int n = Yinit.n_rows;
+  const int ndim = Yinit.n_cols;
+
+  // 2. settings
+  arma::mat Y = Yinit; // deep copy
+  arma::mat Yij = method_crca_dist(Y);
+
+  // 3. iterate !
+  double increment = 1000.0;
+  int t = 0;
+  double tdb = 0.0;
+  int i = 0;
+  double alpha_t = 0.0;
+
+  arma::rowvec veci;
+  arma::rowvec vecj;
+
+  while (increment > tolerance){
+    // 3-1. select i
+    i    = static_cast<int>(vecselector(t));
+    veci = Y.row(i);
+
+    // 3-2. alpha_t
+    tdb = static_cast<double>(t);
+    alpha_t = alpha/(1.0+tdb);
+
+    // 3-3. iterate over j
+    for (int j=0;j<n;j++){
+      vecj = Y.row(j);
+      if (i!=j){
+        if (Yij(i,j)<=lambda){
+          Y.row(j) = vecj + alpha_t*(Xij(i,j)-Yij(i,j))*(vecj-veci)/(Yij(i,j));
+        }
+      }
+    }
+
+    // 3-4. update Yij and increment //////////////////////////////////////////// abs part
+    Yij = method_crca_dist(Y);
+    increment = (abs(Xij-Yij)).max();
+
+    // 3-5. update iteration count
+    t = t + 1;
+    if (t>=maxiter){
+      break;
+    }
+  }
+
+  // 4. return output
+  return Rcpp::List::create(Rcpp::Named("Y")=Y,
+                            Rcpp::Named("niter")=t);
+}

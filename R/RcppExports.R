@@ -151,3 +151,7 @@ method_ispe <- function(R, iX, C, S, lambda, drate, matselector, cutoff) {
     .Call('_Rdimtools_method_ispe', PACKAGE = 'Rdimtools', R, iX, C, S, lambda, drate, matselector, cutoff)
 }
 
+method_crca <- function(Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector) {
+    .Call('_Rdimtools_method_crca', PACKAGE = 'Rdimtools', Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector)
+}
+

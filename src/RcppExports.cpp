@@ -415,6 +415,23 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_crca
+Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double alpha, const int maxiter, const double tolerance, arma::vec& vecselector);
+RcppExport SEXP _Rdimtools_method_crca(SEXP XijSEXP, SEXP YinitSEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP maxiterSEXP, SEXP toleranceSEXP, SEXP vecselectorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type Xij(XijSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Yinit(YinitSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const double >::type tolerance(toleranceSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type vecselector(vecselectorSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_crca(Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
@@ -448,6 +465,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_ree", (DL_FUNC) &_Rdimtools_method_ree, 6},
     {"_Rdimtools_method_spe", (DL_FUNC) &_Rdimtools_method_spe, 7},
     {"_Rdimtools_method_ispe", (DL_FUNC) &_Rdimtools_method_ispe, 8},
+    {"_Rdimtools_method_crca", (DL_FUNC) &_Rdimtools_method_crca, 7},
     {NULL, NULL, 0}
 };
 
