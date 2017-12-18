@@ -70,6 +70,9 @@ do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","decorrelate"
       stop("* do.anmm : no degerate class of size 1 is allowed.")
     }
   }
+  if (any(is.na(label))||(any(is.infinite(label)))){
+    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+  }
 
   #   3. ndim
   if (!check_ndim(ndim,p)){

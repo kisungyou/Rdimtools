@@ -31,5 +31,7 @@ arma::mat method_olpp(arma::mat& X, arma::mat& S, const int ndim);
 // 10. BPCA
 arma::mat auxiliary_outer(arma::colvec x, arma::colvec y);
 Rcpp::List method_bpca(arma::mat& T, const double reltol, const int maxiter);
+// 11. EXTLPP
+arma::mat method_trfextlpp(arma::mat& D, double a, double b);
 
 #endif

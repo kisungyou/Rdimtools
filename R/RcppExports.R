@@ -93,6 +93,11 @@ method_bpca <- function(T, reltol, maxiter) {
 }
 
 #' @keywords internal
+method_trfextlpp <- function(D, a, b) {
+    .Call('_Rdimtools_method_trfextlpp', PACKAGE = 'Rdimtools', D, a, b)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal

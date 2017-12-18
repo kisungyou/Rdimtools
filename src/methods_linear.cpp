@@ -9,6 +9,7 @@
  * 08. NPE
  * 09. OLPP
  * 10. BPCA
+ * 11. EXTLPP
 */
 
 #include <RcppArmadillo.h>
@@ -538,3 +539,36 @@ Rcpp::List method_bpca(arma::mat& T, const double reltol, const int maxiter){
                             Rcpp::Named("itercount")=itercount
                             );
 }
+
+/*
+ * 11. Extended Locality Preserving Projection
+ * NOTE : simply Z-transform via the S_ij mapping
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::mat method_trfextlpp(arma::mat& D, double a, double b){
+  const int n = D.n_rows;
+  arma::mat output(n,n,fill::zeros);
+  double tval = 0.0;
+  double outval = 0.0;
+  for (int i=0;i<(n-1);i++){
+    for (int j=i;j<n;j++){
+      tval = D(i,j);
+
+      if (tval<=a){
+        outval = 1.0;
+      } else if ((a<tval)&&(tval<=((a+b)/2.0))){
+        outval = 1-2*std::pow((tval-a)/(b-a), 2.0);
+      } else if ((((a+b)/2)<tval)&&(tval<=b)){
+        outval = 2*std::pow((tval-a)/(b-a),2);
+      } else {
+        outval = 0.0;
+      }
+
+      output(i,j) = outval;
+      output(j,i) = outval;
+    }
+  }
+  return(output);
+}
+

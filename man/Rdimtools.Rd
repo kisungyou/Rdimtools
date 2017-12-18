@@ -32,6 +32,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+\code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
 \code{\link{do.ica}} \tab U \tab Independent Component Analysis \cr
 \code{\link{do.isoproj}} \tab U \tab Isometric Projection \cr
@@ -39,11 +40,11 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.kudp}} \tab U \tab Kernel-Weighted Unsupervised Discriminant Projection \cr
 \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
-\code{\link{do.lpp}} \tab U \tab Locality Preserving Embedding \cr
+\code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
-\code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Embedding \cr
+\code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Projection \cr
 \code{\link{do.opls}} \tab S \tab Orthogonal Partial Least Squares \cr
 \code{\link{do.pca}} \tab U \tab Principal Component Analysis \cr
 \code{\link{do.pls}} \tab S \tab Partial Least Squares \cr

@@ -39,6 +39,7 @@ It performs PCA as intermittent preprocessing for rank singularity issue. Author
 by Locality Preserving Projection, which minimizes the local scatter only.
 }
 \examples{
+\dontrun{
 ## generate sample data
 X = aux.gensamples(n=200)
 
@@ -52,6 +53,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1],out1$Y[,2],main="connectivity 5\%")
 plot(out2$Y[,1],out2$Y[,2],main="connectivity 10\%")
 plot(out3$Y[,1],out3$Y[,2],main="connectivity 25\%")
+}
 
 }
 \references{

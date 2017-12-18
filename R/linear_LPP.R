@@ -1,4 +1,4 @@
-#' Locality Preserving Projections
+#' Locality Preserving Projection
 #'
 #' \code{do.lpp} is a linear approximation to Laplacian Eigenmaps. More precisely,
 #' it aims at finding a linear approximation to the eigenfunctions of the Laplace-Beltrami
@@ -13,7 +13,9 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.
-#' @param preprocess an additional option for preprocessing the data.
+#' @param preprocess  an additional option for preprocessing the data.
+#' Default is "center" and other options of "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}
 #'
 #' @return a named list containing
@@ -55,7 +57,7 @@
 #' @author Kisung You
 #' @rdname linear_LPP
 #' @export
-do.lpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,preprocess="null",t=1.0){
+do.lpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,preprocess="center",t=1.0){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -82,8 +84,8 @@ do.lpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
     stop("* do.lpp : 'weight' should be a logical variable.")
   }
   algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.lpp : 'preprocess' should be one of 4 values.")
+  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
+    stop("* do.lpp : 'preprocess' should be one of 3 options.")
   }
   if (!is.numeric(t)||(t<=0)||is.na(t)||is.infinite(t)){
     stop("* do.lpp : 't' is a bandwidth parameter in (0,infinity).")

@@ -37,6 +37,7 @@ up to how many elements can a loading have non-zero elements. We adopted semidef
 the original problem and optimization is done via \pkg{CVXR}.
 }
 \examples{
+\dontrun{
 ## generate default dataset and make its dimension two-folds.
 Xpart <- aux.gensamples()
 X <- cbind(Xpart,Xpart)
@@ -49,6 +50,7 @@ out2 <- do.spca(X,ndim=2,suppk=6)
 par(mfrow=c(1,2))
 image(out1$projection, main="support = 1")
 image(out2$projection, main="support = 6")
+}
 
 }
 \references{

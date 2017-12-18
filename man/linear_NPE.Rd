@@ -54,6 +54,7 @@ regularization parameter and put penalty for stable computation. See also
 \code{\link{do.lle}} for more details.
 }
 \examples{
+\dontrun{
 # generate data
 X <- aux.gensamples(n=333)
 
@@ -71,6 +72,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="5\%")
 plot(output2$Y[,1],output2$Y[,2],main="25\%")
 plot(output3$Y[,1],output3$Y[,2],main="50\%")
+}
 
 }
 \references{

@@ -41,6 +41,7 @@ whence UDP uses binary connectivity. If \code{kbandwidth} is \eqn{+\infty}, it b
 a standard UDP problem. Like UDP, it also performs PCA preprocessing for rank-deficient case.
 }
 \examples{
+\dontrun{
 ## generate sample data
 X = aux.gensamples(n=200)
 
@@ -54,6 +55,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1],out1$Y[,2],main="bandwidth=0.1")
 plot(out2$Y[,1],out2$Y[,2],main="bandwidth=10")
 plot(out3$Y[,1],out3$Y[,2],main="bandwidth=1000")
+}
 
 }
 \references{

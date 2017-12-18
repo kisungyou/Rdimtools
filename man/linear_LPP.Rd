@@ -2,10 +2,10 @@
 % Please edit documentation in R/linear_LPP.R
 \name{do.lpp}
 \alias{do.lpp}
-\title{Locality Preserving Projections}
+\title{Locality Preserving Projection}
 \usage{
 do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = "null", t = 1)
+  weight = TRUE, preprocess = "center", t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -22,7 +22,9 @@ See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{weight}{\code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.}
 
-\item{preprocess}{an additional option for preprocessing the data.}
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
 
 \item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}}
 }
