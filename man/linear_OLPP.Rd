@@ -9,7 +9,7 @@ do.olpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
   "decorrelate", "whiten"), t = 1)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations}
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
 
 \item{ndim}{an integer-valued target dimension.}
 
@@ -30,8 +30,8 @@ See also \code{\link{aux.graphnbd}} for more details.}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
 }

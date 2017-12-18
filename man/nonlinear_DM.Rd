@@ -8,7 +8,7 @@ do.dm(X, ndim = 2, preprocess = "null", diffscale = 1, timescale = 1,
   threshold = 1e-07)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
@@ -26,7 +26,7 @@ are supported. See also \code{\link{aux.preprocess}} for more details.}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{eigvals}{a vector of eigenvalues for Markov transition matrix.}
 }
@@ -37,6 +37,7 @@ data space using Diffusion Maps (DM). It exploits diffusion process and distance
 equivalent representations in low-dimensional space.
 }
 \examples{
+\dontrun{
 ## generate Swiss Roll data of 28 data points.
 ## in order to pass CRAN pretest, n is set to be small.
 X <- aux.gensamples(n=28)
@@ -63,6 +64,7 @@ plot(out6$Y[,1],out6$Y[,2],main="(diff=10,time=1)")
 plot(out7$Y[,1],out7$Y[,2],main="(diff=1,time=10)")
 plot(out8$Y[,1],out8$Y[,2],main="(diff=5,time=10)")
 plot(out9$Y[,1],out9$Y[,2],main="(diff=10,time=10)")
+}
 
 }
 \references{

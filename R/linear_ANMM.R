@@ -6,23 +6,23 @@
 #' same class while pushing neighboring points of different classes far away. It is known
 #' that ANMM does suffer less from small sample size problem, which is bottleneck for LDA.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param label a length-\code{n} vector of data class labels.
+#' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null" and three options of "center", "decorrelate", or "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
 #' @param No neighborhood size for same-class data points; either a constant number or
-#' a vector of length-\code{n} can be provided, as long as the values reside in \code{[2,n]}.
+#' a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.
 #' @param Ne neighborhood size for different-class data points; either a constant number or
-#' a vector of length-\code{n} can be provided, as long as the values reside in \code{[2,n]}.
+#' a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
 #' @examples

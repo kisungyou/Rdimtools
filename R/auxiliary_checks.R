@@ -59,10 +59,6 @@ check_label <- function(label, n){
   return(label)
 }
 
-# 04. check_NumMM  : bounded real number
-# 05. check_IntMM  : bounded integer
-
-
 # 04. check_NumMM ---------------------------------------------------------
 # return TRUE if it is a valid one.
 #' @noRd

@@ -7,19 +7,19 @@
 do.cca(data1, data2, ndim = 2)
 }
 \arguments{
-\item{data1}{an \code{(n-by-N)} data matrix whose rows are observations}
+\item{data1}{an \eqn{(n\times N)} data matrix whose rows are observations}
 
-\item{data2}{an \code{(n-by-M)} data matrix whose rows are observations}
+\item{data2}{an \eqn{(n\times M)} data matrix whose rows are observations}
 
 \item{ndim}{an integer-valued target dimension.}
 }
 \value{
 a named list containing
 \describe{
-\item{Y1}{an \code{(n-by-ndim)} matrix of projected observations from \code{data1}.}
-\item{Y2}{an \code{(n-by-ndim)} matrix of projected observations from \code{data2}.}
-\item{projection1}{a \code{(N-by-ndim)} whose columns are loadings for \code{data1}.}
-\item{projection2}{a \code{(M-by-ndim)} whose columns are loadings for \code{data2}.}
+\item{Y1}{an \eqn{(n\times ndim)} matrix of projected observations from \code{data1}.}
+\item{Y2}{an \eqn{(n\times ndim)} matrix of projected observations from \code{data2}.}
+\item{projection1}{a \eqn{(N\times ndim)} whose columns are loadings for \code{data1}.}
+\item{projection2}{a \eqn{(M\times ndim)} whose columns are loadings for \code{data2}.}
 \item{trfinfo1}{a list containing information for out-of-sample prediction for \code{data1}.}
 \item{trfinfo2}{a list containing information for out-of-sample prediction for \code{data2}.}
 \item{eigvals}{a vector of eigenvalues for iterative decomposition.}

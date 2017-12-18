@@ -8,7 +8,7 @@
 #' variance. Measured by summation of top eigenvalues from sample covariance,
 #' we use the minimal summation to be larger than \code{varratio}.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension or ``auto'' option using \emph{varratio.}
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
@@ -20,9 +20,9 @@
 #' chosen as ``auto''.
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{vars}{a vector containing variances of projected data onto principal components.}
-#' \item{projection}{a \code{(p-by-ndim)} whose columns are principal components.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'

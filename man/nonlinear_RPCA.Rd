@@ -8,7 +8,7 @@ do.rpca(X, lambda = sqrt(1/(max(dim(X)))), preprocess = c("center",
   "decorrelate", "whiten"))
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations and columns represent independent variables.}
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
 
 \item{lambda}{parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.}
 
@@ -17,8 +17,8 @@ do.rpca(X, lambda = sqrt(1/(max(dim(X)))), preprocess = c("center",
 \value{
 a named list containing
 \describe{
-\item{L}{an \code{(n-by-p)} low-rank matrix.}
-\item{S}{an \code{(n-by-p)} sparse matrix.}
+\item{L}{an \eqn{(n\times p)} low-rank matrix.}
+\item{S}{an \eqn{(n\times p)} sparse matrix.}
 \item{cvxr.status}{``optimal'' denotes the problem was solved. See\code{\link[CVXR]{psolve}} for more details on solvability.}
 \item{cvxr.niters}{the number of iterations taken.}
 \item{cvxr.solver}{type of solver used by \pkg{CVXR}.}

@@ -6,7 +6,7 @@
 #' up to how many elements can a loading have non-zero elements. We adopted semidefinite relaxation of
 #' the original problem and optimization is done via \pkg{CVXR}.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
@@ -18,12 +18,13 @@
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \code{(p-by-ndim)} whose columns are principal components.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate default dataset and make its dimension two-folds.
 #' Xpart <- aux.gensamples()
 #' X <- cbind(Xpart,Xpart)
@@ -36,6 +37,7 @@
 #' par(mfrow=c(1,2))
 #' image(out1$projection, main="support = 1")
 #' image(out2$projection, main="support = 6")
+#' }
 #'
 #' @references
 #' \insertRef{zou_sparse_2006}{Rdimtools}

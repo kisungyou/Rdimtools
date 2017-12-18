@@ -9,15 +9,15 @@
 #' it should be considered as \emph{preprocessing} procedure of denoising. Note that after RPCA is applied, \eqn{L} should be used
 #' as kind of a new data matrix for any manifold learning scheme to be applied. \pkg{CVXR} was used for \code{do.rpca}.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations and columns represent independent variables.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param lambda parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.
 #' @param preprocess an additional option for preprocessing the data. Default is ``center'', and other methods of ``decorrelate'' and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
 #'
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{L}{an \code{(n-by-p)} low-rank matrix.}
-#' \item{S}{an \code{(n-by-p)} sparse matrix.}
+#' \item{L}{an \eqn{(n\times p)} low-rank matrix.}
+#' \item{S}{an \eqn{(n\times p)} sparse matrix.}
 #' \item{cvxr.status}{``optimal'' denotes the problem was solved. See\code{\link[CVXR]{psolve}} for more details on solvability.}
 #' \item{cvxr.niters}{the number of iterations taken.}
 #' \item{cvxr.solver}{type of solver used by \pkg{CVXR}.}

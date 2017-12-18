@@ -4,13 +4,13 @@
 #' description in high-dimensional - possible, nonlinear - subspace on low-dimensional target space.
 #' \code{do.sne} fully adopts algorithm details in an original paper by Hinton and Roweis (2002).
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations and columns represent independent variables.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param perplexity desired level of perplexity; ranging [5,50].
 #' @param eta learning parameter.
 #' @param maxiter maximum number of iterations.
 #' @param jitter level of white noise added at the beginning.
-#' @param jitterdecay decay parameter in (0,1). The closer to 0, the faster artificial noise decays.
+#' @param jitterdecay decay parameter in \eqn{(0,1)}. The closer to 0, the faster artificial noise decays.
 #' @param momentum level of acceleration in learning.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
@@ -21,7 +21,7 @@
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{vars}{a vector containing betas used in perplexity matching.}
 #' }

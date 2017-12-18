@@ -8,7 +8,7 @@ do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
   weight = TRUE, preprocess = "null", t = 1)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations}
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
 
 \item{ndim}{an integer-valued target dimension.}
 
@@ -29,9 +29,9 @@ See also \code{\link{aux.graphnbd}} for more details.}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
 }

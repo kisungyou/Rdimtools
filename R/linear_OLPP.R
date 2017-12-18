@@ -5,7 +5,7 @@
 #' It adopts PCA as preprocessing step and uses only one eigenvector at each iteration in that
 #' it might incur warning messages for solving near-singular system of linear equations.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' @param ndim an integer-valued target dimension.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
@@ -19,8 +19,8 @@
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'

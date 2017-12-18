@@ -23,7 +23,7 @@ aux.gensamples(n = 496, noise = 0.1, dname = "swiss")
 }}
 }
 \value{
-an \code{(n-by-3)} matrix of generated data by row.
+an \eqn{(n\times 3)} matrix of generated data by row.
 }
 \description{
 It generates samples from predefined 3-d shapes, set by \code{dname} parameter.

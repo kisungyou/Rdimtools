@@ -8,7 +8,7 @@ do.spca(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
   suppk = ceiling(ncol(X)/10))
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
@@ -24,8 +24,8 @@ every element in \code{suppk} should have range of [1,p].}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are principal components.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
 }

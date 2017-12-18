@@ -8,7 +8,7 @@ aux.graphnbd(data, method = "euclidean", type = c("proportion", 0.1),
   symmetric = "union", pval = 2)
 }
 \arguments{
-\item{data}{an \code{(n-by-p)} data matrix.}
+\item{data}{an \eqn{(n\times p)} data matrix.}
 
 \item{method}{type of distance to be used. See also \code{\link[stats]{dist}}.}
 
@@ -20,7 +20,7 @@ aux.graphnbd(data, method = "euclidean", type = c("proportion", 0.1),
 
 \item{symmetric}{either ``intersect'' or ``union'' for symmetrization, or ``asymmetric''.}
 
-\item{pval}{a \code{p}-norm option for Minkowski distance.}
+\item{pval}{a \eqn{p}-norm option for Minkowski distance.}
 }
 \value{
 a named list containing \describe{

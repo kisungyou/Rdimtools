@@ -7,10 +7,10 @@
 aux.shortestpath(dist)
 }
 \arguments{
-\item{dist}{either an \code{(n-by-n)} matrix or a \code{dist} class object.}
+\item{dist}{either an \eqn{(n\times n)} matrix or a \code{dist} class object.}
 }
 \value{
-an \code{(n-by-n)} matrix containing pairwise shortest path.
+an \eqn{(n\times n)} matrix containing pairwise shortest path.
 }
 \description{
 This is a fast implementation of Floyd-Warshall algorithm to find the

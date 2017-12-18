@@ -8,7 +8,7 @@ do.ica(X, ndim = 2, type = "logcosh", tpar = 1, sym = FALSE,
   tol = 1e-06, redundancy = TRUE, maxiter = 100)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
@@ -26,9 +26,9 @@ and columns represent independent variables.}
 \item{maxiter}{maximum number of iterations allowed.
 
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 }}
 }
 \description{
@@ -41,7 +41,7 @@ see this \href{https://en.wikipedia.org/wiki/FastICA}{Wikipedia} page.
 \details{
 In most of ICA literature, we have \deqn{S = X*W} where \eqn{W} is an unmixing matrix for
 the given data \eqn{X}. In order to preserve consistency throughout our package, we changed
-the notation; \code{Y} a projected matrix for \eqn{S} and \code{projection} for unmixing matrix \eqn{W}.
+the notation; \eqn{Y} a projected matrix for \eqn{S}, and \code{projection} for unmixing matrix \eqn{W}.
 }
 \examples{
 # generate data

@@ -8,10 +8,10 @@ do.anmm(X, label, ndim = 2, preprocess = c("null", "center", "decorrelate",
   "whiten"), No = ceiling(nrow(X)/10), Ne = ceiling(nrow(X)/10))
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
-\item{label}{a length-\code{n} vector of data class labels.}
+\item{label}{a length-\eqn{n} vector of data class labels.}
 
 \item{ndim}{an integer-valued target dimension.}
 
@@ -20,17 +20,17 @@ Default is "null" and three options of "center", "decorrelate", or "whiten"
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
 \item{No}{neighborhood size for same-class data points; either a constant number or
-a vector of length-\code{n} can be provided, as long as the values reside in \code{[2,n]}.}
+a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.}
 
 \item{Ne}{neighborhood size for different-class data points; either a constant number or
-a vector of length-\code{n} can be provided, as long as the values reside in \code{[2,n]}.}
+a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.}
 }
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 }
 }
 \description{

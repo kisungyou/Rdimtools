@@ -5,7 +5,7 @@
 #' and graft the others in a manner to preserve as much pairwise distance from
 #' all the other data points to landmark points as possible.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param ltype on how to select landmark points, either \code{"random"} or \code{"MaxMin"}.
@@ -22,7 +22,7 @@
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'

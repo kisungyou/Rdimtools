@@ -9,12 +9,12 @@ do.ree(X, ndim = 2, W = NA, preprocess = "null", initc = 1,
   "minkowski"), maxiter = 100, abstol = 0.001)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{W}{an \code{(n-by-n)} weight matrix. Default is uniform weight of 1s.}
+\item{W}{an \eqn{(n\times n)} weight matrix. Default is uniform weight of 1s.}
 
 \item{preprocess}{an additional option for preprocessing the data.
 Default is ``null'' and  other methods of ``center'',``decorrelate'', or ``whiten''
@@ -31,7 +31,7 @@ are supported. See also \code{\link{aux.preprocess}} for more details.}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{niter}{the number of iterations taken til convergence. }
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }

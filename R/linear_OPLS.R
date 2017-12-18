@@ -6,14 +6,14 @@
 #' variance of input - covariance of \code{data1} and relates it under cross-covariance setting. Therefore,
 #' OPLS only returns projection information of \code{data1}, just like any other unsupervised methods in our package.
 #'
-#' @param data1 an \code{(n-by-N)} data matrix whose rows are observations.
-#' @param data2 an \code{(n-by-M)} data matrix whose rows are observations.
+#' @param data1 an \eqn{(n\times N)} data matrix whose rows are observations.
+#' @param data2 an \eqn{(n\times M)} data matrix whose rows are observations.
 #' @param ndim an integer-valued target dimension.
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix of projected observations from \code{data1}.}
-#' \item{projection}{a \code{(N-by-ndim)} whose columns are loadings for \code{data1}.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix of projected observations from \code{data1}.}
+#' \item{projection}{an \eqn{(N\times ndim)} whose columns are loadings for \code{data1}.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction for \code{data1}.}
 #' \item{eigvals}{a vector of eigenvalues for iterative decomposition.}
 #' }

@@ -53,16 +53,16 @@ aux.typecheck <- function(data){
 #' to have diagonal covariance terms only. \code{"whiten"} option sets the sample
 #' covariance to have all diagonal terms equal to 1, equally weighting each variable.
 #'
-#' @param data an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param data an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param type one of "center", "decorrelate", or "whiten". See below for more details.
 #' @return named list containing:
 #' \describe{
-#' \item{pX}{an \code{(n-by-p)} matrix after preprocessing in accordance with \code{type} parameter}
+#' \item{pX}{an \eqn{(n\times p)} matrix after preprocessing in accordance with \code{type} parameter}
 #' \item{info}{a list containing \itemize{
 #' \item \code{type:} name of preprocessing procedure.
 #' \item \code{mean:} a mean vector of length \eqn{p}.
-#' \item \code{multiplier:} a \code{(p-by-p)} matrix for "decorrelate" or "whiten" or 1 for "center".}}
+#' \item \code{multiplier:} a \eqn{(p\times p)} matrix for "decorrelate" or "whiten" or 1 for "center".}}
 #' }
 #' @examples
 #' \dontrun{
@@ -156,7 +156,7 @@ aux.preprocess <- function(data,type="center"){
 #' \item{\code{"cswiss"}}{cut swiss}
 #' \item{\code{"twinpeaks"}}{two peaks}
 #' }
-#' @return an \code{(n-by-3)} matrix of generated data by row.
+#' @return an \eqn{(n\times 3)} matrix of generated data by row.
 #' @examples
 #' ## Generate samples for three different shapes
 #' d1 = aux.gensamples(dname="twinpeaks",noise=0.01)
@@ -298,7 +298,7 @@ aux.gensamples <- function(n=496,noise=0.1,dname="swiss"){
 #' nearest neighbors of each other and \code{union} for only either of them to be present.
 #'
 #'
-#' @param data an \code{(n-by-p)} data matrix.
+#' @param data an \eqn{(n\times p)} data matrix.
 #' @param method type of distance to be used. See also \code{\link[stats]{dist}}.
 #' @param type a defining pattern of neighborhood criterion. One of \describe{
 #' \item{c("knn", k)}{knn with \code{k} a positive integer.}
@@ -306,7 +306,7 @@ aux.gensamples <- function(n=496,noise=0.1,dname="swiss"){
 #' \item{c("proportion", ratio)}{takes an \code{ratio} in (0,1) portion of edges to be connected.}
 #' }
 #' @param symmetric either ``intersect'' or ``union'' for symmetrization, or ``asymmetric''.
-#' @param pval a \code{p}-norm option for Minkowski distance.
+#' @param pval a \eqn{p}-norm option for Minkowski distance.
 #' @return a named list containing \describe{
 #' \item{mask}{a binary matrix of indicating existence of an edge for each element.}
 #' \item{dist}{corresponding distance matrix. \code{-Inf} is returned for non-connecting edges.}
@@ -539,8 +539,8 @@ aux.graphnbdD <- function(D,type=c("proportion",0.1),symmetric="union",pval=2.0)
 #' shortest path in a pairwise sense using 'RcppArmadillo'. A logical input
 #' is also accepted.
 #'
-#' @param dist either an \code{(n-by-n)} matrix or a \code{dist} class object.
-#' @return an \code{(n-by-n)} matrix containing pairwise shortest path.
+#' @param dist either an \eqn{(n\times n)} matrix or a \code{dist} class object.
+#' @return an \eqn{(n\times n)} matrix containing pairwise shortest path.
 #' @examples
 #' \dontrun{
 #' ## Generate 10-sample data
@@ -673,7 +673,7 @@ aux.MaxMinLandmark <- function(X,npoints,pdflag=FALSE){
 #' \item{generalized Student-t}{\eqn{=1/(1+\|x-y\|^d)}, \eqn{d\ge 1}}
 #' }
 #'
-#' @param X an \code{(n-by-p)} data matrix
+#' @param X an \eqn{(n\times p)} data matrix
 #' @param ktype a vector containing the type of kernel and parameters involved. Below the usage is
 #' consistent with description
 #' \describe{
@@ -700,8 +700,8 @@ aux.MaxMinLandmark <- function(X,npoints,pdflag=FALSE){
 #' }
 #'
 #' @return a named list containing \describe{
-#' \item{K}{a \code{(p-by-p)} kernelizd gram matrix.}
-#' \item{Kcenter}{a \code{(p-by-p)} centered version of \code{K}.}
+#' \item{K}{a \eqn{(p\times p)} kernelizd gram matrix.}
+#' \item{Kcenter}{a \eqn{(p\times p)} centered version of \code{K}.}
 #' }
 #'
 #' @examples
@@ -1023,14 +1023,16 @@ aux.pkgstat <- function(){
   ndo  = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "do."))))
   nest = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "est."))))
   naux = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "aux."))))
+  noos = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "oos."))))
 
-  "*  dimension reduction : "
-  mdo  = paste("*  cat1. manifold learning techniques           : ",ndo,sep="")
-  mest = paste("*  cat2. intrinsic dimension estimation methods : ",nest,sep="")
-  maux = paste("*  cat3. auxiliary functions available          : ",naux,sep="")
+  mdo  = paste("*  cat1{do.}  manifold learning techniques           : ",ndo,sep="")
+  mest = paste("*  cat2{est.} intrinsic dimension estimation methods : ",nest,sep="")
+  moos = paste("*  cat3{oos.} out-of-sample projection methods       : ",noos,sep="")
+  maux = paste("*  cat4{aux.} auxiliary functions available          : ",naux,sep="")
   print("* Number of functions available in Rdimtools package")
   print(mdo)
   print(mest)
+  print(moos)
   print(maux)
 }
 

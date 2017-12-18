@@ -7,7 +7,7 @@
 aux.kernelcov(X, ktype)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} data matrix}
+\item{X}{an \eqn{(n\times p)} data matrix}
 
 \item{ktype}{a vector containing the type of kernel and parameters involved. Below the usage is
 consistent with description
@@ -36,8 +36,8 @@ consistent with description
 }
 \value{
 a named list containing \describe{
-\item{K}{a \code{(p-by-p)} kernelizd gram matrix.}
-\item{Kcenter}{a \code{(p-by-p)} centered version of \code{K}.}
+\item{K}{a \eqn{(p\times p)} kernelizd gram matrix.}
+\item{Kcenter}{a \eqn{(p\times p)} centered version of \code{K}.}
 }
 }
 \description{
