@@ -8,5 +8,11 @@ do.extlpp(X, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
   preprocess = c("center", "decorrelate", "whiten"))
 }
 \description{
-Extended Locality Preserving Projection
+this is
+}
+\references{
+\insertRef{shikkenawis_improving_2012}{Rdimtools}
+}
+\author{
+Kisung You
 }

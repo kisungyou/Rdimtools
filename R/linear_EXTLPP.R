@@ -2,6 +2,10 @@
 #'
 #'
 #'
+#' @references
+#' \insertRef{shikkenawis_improving_2012}{Rdimtools}
+#'
+#' @author Kisung You
 #' @rdname linear_EXTLPP
 #' @export
 do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
