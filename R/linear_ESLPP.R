@@ -1,12 +1,11 @@
-#' Extended Locality Preserving Projection
+#' Extended Supervised Locality Preserving Projection
 #'
-#' Extended Locality Preserving Projection (EXTLPP) is an unsupervised
-#' dimension reduction algorithm with a bit of flavor in adopting
-#' discriminative idea by nature. It raises a question on the data points
-#' at \emph{moderate} distance in that a Z-shaped function is introduced in
-#' defining similarity derived from Euclidean distance.
+#' Extended LPP and Supervised LPP are two variants of the celebrated Locality Preserving Projection (LPP) algorithm for dimension
+#' reduction. Their combination, Extended Supervised LPP, is a combination of two algorithmic novelties in one that
+#' it reflects discriminant information with realistic distance measure via Z-score function.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
+#' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param numk the number of neighboring points for k-nn graph construction.
 #' @param preprocess  an additional option for preprocessing the data.
@@ -21,29 +20,38 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
+#'
 #' @examples
-#' ## generate data
-#' X <- aux.gensamples(n=123)
+#' ## generate data of 2 types with clear difference
+#' diff = 15
+#' dt1  = aux.gensamples(n=123)-diff;
+#' dt2  = aux.gensamples(n=123)+diff;
 #'
-#' ## run Extended LPP with different neighborhood graph
-#' out1 <- do.extlpp(X, numk=5)
-#' out2 <- do.extlpp(X, numk=10)
-#' out3 <- do.extlpp(X, numk=25)
+#' ## merge the data and create a label correspondingly
+#' Y      = rbind(dt1,dt2)
+#' label  = c(rep(1,123), rep(2,123))
 #'
-#' ## Visualize three different projections
+#' ## compare LPP, SLPP and ESLPP
+#' outLPP  <- do.lpp(Y)
+#' outSLPP <- do.slpp(Y, label)
+#' outESLPP <- do.eslpp(Y, label)
+#'
+#' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="k=5")
-#' plot(out2$Y[,1], out2$Y[,2], main="k=10")
-#' plot(out3$Y[,1], out3$Y[,2], main="k=25")
+#' plot(outLPP$Y[,1], outLPP$Y[,2], main="LPP")
+#' plot(outSLPP$Y[,1], outSLPP$Y[,2], main="SLPP")
+#' plot(outESLPP$Y[,1], outESLPP$Y[,2], main="ESLPP")
 #'
 #' @references
+#' \insertRef{zheng_gabor_2007}{Rdimtools}
+#'
 #' \insertRef{shikkenawis_improving_2012}{Rdimtools}
 #'
-#' @seealso \code{\link{do.lpp}}
+#' @seealso \code{\link{do.lpp}}, \code{\link{do.slpp}}, \code{\link{do.extlpp}}
 #' @author Kisung You
-#' @rdname linear_EXTLPP
+#' @rdname linear_ESLPP
 #' @export
-do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
+do.eslpp <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                       preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -51,13 +59,23 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   aux.typecheck(X)
   n = nrow(X)
   p = ncol(X)
-  #   2. ndim
+  #   2. label : check and return a de-factored vector
+  #   For this example, there should be no degenerate class of size 1.
+  label  = check_label(label, n)
+  ulabel = unique(label)
+  for (i in 1:length(ulabel)){
+    if (sum(label==ulabel[i])==1){
+      stop("* do.eslpp : no degerate class of size 1 is allowed.")
+    }
+  }
+  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  #   3. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.extlpp : 'ndim' is a positive integer in [1,#(covariates)).")}
-  #   3. numk
+  if (!check_ndim(ndim,p)){stop("* do.eslpp : 'ndim' is a positive integer in [1,#(covariates)).")}
+  #   4. numk
   numk = as.integer(numk)
-  if (!check_NumMM(numk,1,n/2,compact=FALSE)){stop("* do.extlpp : 'numk' should be an integer in [2,nrow(X)/2).")}
-  #   4. preprocess
+  if (!check_NumMM(numk,1,n/2,compact=FALSE)){stop("* do.eslpp : 'numk' should be an integer in [2,nrow(X)/2).")}
+  #   5. preprocess
   if (missing(preprocess)){    algpreprocess = "center"  }
   else {    algpreprocess = match.arg(preprocess)  }
 
@@ -93,12 +111,19 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   veca = rep(min(vecb)/20,numk)
 
   #   4. compute S
-  S = array(0,c(n,n))
+  Stmp = array(0,c(n,n))
   for (i in 1:numk){
     tgtidx = clustidx[[i]]
-    S[tgtidx,tgtidx] = method_trfextlpp(PD[tgtidx,tgtidx],veca[i],vecb[i])
+    Stmp[tgtidx,tgtidx] = method_trfextlpp(PD[tgtidx,tgtidx],veca[i],vecb[i])
   }
-  diag(S) = 0.0
+  diag(Stmp) = 0.0
+
+  ############# EXTENDED "SUPERVISED" SENSE
+  S = array(0,c(n,n))
+  for (i in 1:length(ulabel)){
+    tgtidx = which(label==ulabel[i])
+    S[tgtidx,tgtidx] = Stmp[tgtidx,tgtidx]
+  }
 
   #   5. graph laplaciana and generalized eigenvalue problem
   D = diag(rowSums(S))

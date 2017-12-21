@@ -7,11 +7,54 @@
 do.extlpp(X, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
   preprocess = c("center", "decorrelate", "whiten"))
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{numk}{the number of neighboring points for k-nn graph construction.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-this is
+Extended Locality Preserving Projection (EXTLPP) is an unsupervised
+dimension reduction algorithm with a bit of flavor in adopting
+discriminative idea by nature. It raises a question on the data points
+at \emph{moderate} distance in that a Z-shaped function is introduced in
+defining similarity derived from Euclidean distance.
+}
+\examples{
+## generate data
+X <- aux.gensamples(n=123)
+
+## run Extended LPP with different neighborhood graph
+out1 <- do.extlpp(X, numk=5)
+out2 <- do.extlpp(X, numk=10)
+out3 <- do.extlpp(X, numk=25)
+
+## Visualize three different projections
+par(mfrow=c(1,3))
+plot(out1$Y[,1], out1$Y[,2], main="k=5")
+plot(out2$Y[,1], out2$Y[,2], main="k=10")
+plot(out3$Y[,1], out3$Y[,2], main="k=25")
+
 }
 \references{
 \insertRef{shikkenawis_improving_2012}{Rdimtools}
+}
+\seealso{
+\code{\link{do.lpp}}
 }
 \author{
 Kisung You

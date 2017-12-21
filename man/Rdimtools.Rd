@@ -32,6 +32,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+\code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
 \code{\link{do.ica}} \tab U \tab Independent Component Analysis \cr
@@ -50,6 +51,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.pls}} \tab S \tab Partial Least Squares \cr
 \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
 \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
+\code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection
 }
