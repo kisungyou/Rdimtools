@@ -96,7 +96,8 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   S = array(0,c(n,n))
   for (i in 1:numk){
     tgtidx = clustidx[[i]]
-    S[tgtidx,tgtidx] = method_trfextlpp(PD[tgtidx,tgtidx],veca[i],vecb[i])
+    tgtmat = as.matrix(PD[tgtidx,tgtidx],nrow=length(tgtidx))
+    S[tgtidx,tgtidx] = method_trfextlpp(tgtmat,as.double(veca[i]),as.double(vecb[i]))
   }
   diag(S) = 0.0
 
