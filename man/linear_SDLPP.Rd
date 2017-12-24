@@ -18,17 +18,49 @@ do.sdlpp(X, ndim = 2, t = 1, preprocess = c("center", "decorrelate",
 Default is "center" and other options of "decorrelate" and "whiten"
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 }
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Sample-Dependent Locality Preserving Projection
+Many variants of Locality Preserving Projection are contingent on
+graph construction schemes in that they sometimes return a range of
+heterogeneous results when parameters are controlled to cover a wide range of values.
+This algorithm takes an approach called \emph{sample-dependent construction} of
+graph connectivity in that it tries to discover intrinsic structures of data
+solely based on data.
 }
 \examples{
+\dontrun{
 ## generate data
-X <-
+X <- aux.gensamples(n=200,dname="crown")
+
+## compare with PCA
+out1 <- do.pca(X,ndim=2)
+out2 <- do.sdlpp(X, t=0.1)
+out3 <- do.sdlpp(X, t=1)
+out4 <- do.sdlpp(X, t=10.0)
+
+## visualize
+par(mfrow=c(2,2))
+plot(out1$Y[,1], out1$Y[,2], main="PCA")
+plot(out2$Y[,1], out2$Y[,2], main="SDLPP; t=0.1")
+plot(out3$Y[,1], out3$Y[,2], main="SDLPP; t=1")
+plot(out4$Y[,1], out4$Y[,2], main="SDLPP; t=10")
+}
 
 
 }
 \references{
 \insertRef{yang_sample-dependent_2010}{Rdimtools}
+}
+\seealso{
+\code{\link{do.lpp}}
 }
 \author{
 Kisung You

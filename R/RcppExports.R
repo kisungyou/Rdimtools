@@ -98,6 +98,11 @@ method_trfextlpp <- function(D, a, b) {
 }
 
 #' @keywords internal
+method_lspp_computeW <- function(S, svec) {
+    .Call('_Rdimtools_method_lspp_computeW', PACKAGE = 'Rdimtools', S, svec)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal

@@ -267,6 +267,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_lspp_computeW
+arma::mat method_lspp_computeW(arma::mat& S, arma::vec& svec);
+RcppExport SEXP _Rdimtools_method_lspp_computeW(SEXP SSEXP, SEXP svecSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type S(SSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type svec(svecSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_lspp_computeW(S, svec));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_sne
 arma::mat method_sne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
 RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
@@ -468,6 +480,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_olpp", (DL_FUNC) &_Rdimtools_method_olpp, 3},
     {"_Rdimtools_method_bpca", (DL_FUNC) &_Rdimtools_method_bpca, 3},
     {"_Rdimtools_method_trfextlpp", (DL_FUNC) &_Rdimtools_method_trfextlpp, 3},
+    {"_Rdimtools_method_lspp_computeW", (DL_FUNC) &_Rdimtools_method_lspp_computeW, 2},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},

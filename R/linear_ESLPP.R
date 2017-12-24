@@ -22,6 +22,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 2 types with clear difference
 #' diff = 15
 #' dt1  = aux.gensamples(n=123)-diff;
@@ -41,6 +42,7 @@
 #' plot(outLPP$Y[,1], outLPP$Y[,2], main="LPP")
 #' plot(outSLPP$Y[,1], outSLPP$Y[,2], main="SLPP")
 #' plot(outESLPP$Y[,1], outESLPP$Y[,2], main="ESLPP")
+#' }
 #'
 #' @references
 #' \insertRef{zheng_gabor_2007}{Rdimtools}

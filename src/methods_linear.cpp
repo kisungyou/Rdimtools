@@ -10,6 +10,7 @@
  * 09. OLPP
  * 10. BPCA
  * 11. EXTLPP
+ * 12. LSPP
 */
 
 #include <RcppArmadillo.h>
@@ -572,3 +573,20 @@ arma::mat method_trfextlpp(arma::mat& D, double a, double b){
   return(output);
 }
 
+/*
+ * 12. Local Similarity Preserving Projection
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::mat method_lspp_computeW(arma::mat& S, arma::vec& svec){
+  const int n = S.n_rows;
+  arma::mat W(n,n,fill::zeros);
+  for (int i=0;i<n;i++){
+    for (int j=0;j<n;j++){
+      if (S(i,j)>=svec(i)){
+        W(i,j) = S(i,j);
+      }
+    }
+  }
+  return(W);
+}

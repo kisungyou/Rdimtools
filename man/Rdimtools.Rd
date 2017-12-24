@@ -42,6 +42,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
+\code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
