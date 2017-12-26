@@ -31,9 +31,9 @@ a common method of introducing nonlinearity by transforming, usually, covariance
 other gram-type estimate to make it flexible in Reproducing Kernel Hilbert Space.
 }
 \examples{
+\dontrun{
 ## generate ribbon-shaped data
-## in order to pass CRAN pretest, n is set to be small.
-X = aux.gensamples(dname="ribbon",n=28)
+X = aux.gensamples(dname="ribbon",n=123)
 
 ## 1. standard KPCA with gaussian kernel
 output1 <- do.kpca(X,ndim=2)
@@ -49,6 +49,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="Gaussian kernel")
 plot(output2$Y[,1],output2$Y[,2],main="Gaussian kernel with sigma=5")
 plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
+}
 
 }
 \references{

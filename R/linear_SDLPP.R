@@ -109,7 +109,7 @@ do.sdlpp <- function(X, ndim=2, t = 1.0,
 
   #   4. compute Projection Matrix
   geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = matrix(geigs$vectors[,1:ndim],nrow=p)
+  projection = as.matrix(geigs$vectors[,1:ndim],nrow=p)
   eigenvalue = as.vector(geigs$values[1:ndim])
 
   #------------------------------------------------------------------------

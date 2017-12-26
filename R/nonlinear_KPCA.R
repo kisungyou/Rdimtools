@@ -19,9 +19,9 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate ribbon-shaped data
-#' ## in order to pass CRAN pretest, n is set to be small.
-#' X = aux.gensamples(dname="ribbon",n=28)
+#' X = aux.gensamples(dname="ribbon",n=123)
 #'
 #' ## 1. standard KPCA with gaussian kernel
 #' output1 <- do.kpca(X,ndim=2)
@@ -37,6 +37,7 @@
 #' plot(output1$Y[,1],output1$Y[,2],main="Gaussian kernel")
 #' plot(output2$Y[,1],output2$Y[,2],main="Gaussian kernel with sigma=5")
 #' plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
+#' }
 #'
 #' @seealso \code{\link{aux.kernelcov}}
 #' @references
@@ -88,7 +89,7 @@ do.kpca <- function(X,ndim=2,preprocess="null",kernel=c("gaussian",1.0)){
 
   # 5. result
   result = list()
-  result$Y = t(t(eigvecs[,1:k]) %*% Koriginal)
+  result$Y = t(t(eigvecs[,1:k]) %*% Kcentered)
   result$trfinfo = trfinfo
   result$vars = (eigvals[1:k])/N
   return(result)

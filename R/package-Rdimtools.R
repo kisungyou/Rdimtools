@@ -30,6 +30,7 @@
 #' \code{\link{do.kmvp}} \tab S \tab Kernel-Weighted Maximum Variance Projection \cr
 #' \code{\link{do.kudp}} \tab U \tab Kernel-Weighted Unsupervised Discriminant Projection \cr
 #' \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
+#' \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
@@ -58,6 +59,7 @@
 #' \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
 #' \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 #' \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
+#' \code{\link{do.klde}} \tab S \tab Kernel Local Discriminant Embedding \cr
 #' \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 #' \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 #' \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr
