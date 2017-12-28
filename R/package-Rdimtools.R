@@ -31,6 +31,7 @@
 #' \code{\link{do.kudp}} \tab U \tab Kernel-Weighted Unsupervised Discriminant Projection \cr
 #' \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 #' \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
+#' \code{\link{do.lea}} \tab U \tab Locally Linear Embedded Eigenspace Analysis \cr
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr

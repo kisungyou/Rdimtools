@@ -2,9 +2,7 @@
 #'
 #' \code{do.npe} performs a linear dimensionality reduction using Neighborhood Preserving
 #' Embedding (NPE) proposed by He et al (2005). It can be regarded as a linear approximation
-#' to Laplacian Eigenmaps.
-#'
-#' Like Locally Linear Embedding (LLE), it is possible for the weight matrix being rank deficient.
+#' to Locally Linear Embedding (LLE). Like LLE, it is possible for the weight matrix being rank deficient.
 #' If \code{regtype} is set to \code{TRUE} with a proper value of \code{regparam}, it will
 #' perform Tikhonov regularization as designated. When regularization is needed
 #' with \code{regtype} parameter to be \code{FALSE}, it will automatically find a suitable
