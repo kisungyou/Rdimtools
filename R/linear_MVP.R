@@ -119,6 +119,9 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
 
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
+  #   1. adjust projection
+  projection_all = aux.adjprojection(projection_all)
+  #   2. return
   result = list()
   result$Y = pX%*%projection_all
   result$trfinfo = trfinfo

@@ -41,6 +41,7 @@ is removed in order to respect original work. For 1-dimensional projection, whic
 authors provided a detour for rank correcting mechanism but it is omitted for practical reason.
 }
 \examples{
+\dontrun{
 ## generate samples
 X <- aux.gensamples(n=123)
 
@@ -54,7 +55,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="LLE")
 plot(out2$Y[,1], out2$Y[,2], main="NPE")
 plot(out3$Y[,1], out3$Y[,2], main="LEA")
-
+}
 
 }
 \references{

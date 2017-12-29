@@ -39,7 +39,7 @@
 #' ## visualize
 #' par(mfrow=c(1,2))
 #' plot(outPCA$Y[,1], outPCA$Y[,2], main="LPP")
-#' plot(outLSPP$Y[,1], outLSPP$Y[,2], main="SLPP")
+#' plot(outLSPP$Y[,1], outLSPP$Y[,2], main="LSPP")
 #'
 #' @references
 #' \insertRef{huang_local_2015}{Rdimtools}
@@ -140,9 +140,9 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
 
   #------------------------------------------------------------------------
   ## RETURN
-  projection = projection_first%*%projection_second
+  projection = aux.adjprojection(projection_first%*%projection_second)
   result = list()
-  result$Y = pcapX%*%projection_second
+  result$Y = pX%*%projection
   result$eigval = eigenvalue
   result$trfinfo = trfinfo
   result$projection = projection

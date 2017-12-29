@@ -150,10 +150,12 @@ do.npe <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
   eigvecs = output$eigvec
 
   # 7. return output
+  #   1. adjust projection
+  projector = aux.adjprojection(eigvecs[,1:ndim])
   result = list()
-  result$Y = pX %*% eigvecs[,1:ndim]
+  result$Y = pX %*% projector
   result$eigval = eigvals
-  result$projection = eigvecs[,1:ndim]
+  result$projection = projector
   trfinfo$algtype   = "linear"
   result$trfinfo = trfinfo
   return(result)

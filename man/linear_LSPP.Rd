@@ -53,7 +53,7 @@ outLSPP <- do.slpp(Y, label, ndim=2)
 ## visualize
 par(mfrow=c(1,2))
 plot(outPCA$Y[,1], outPCA$Y[,2], main="LPP")
-plot(outLSPP$Y[,1], outLSPP$Y[,2], main="SLPP")
+plot(outLSPP$Y[,1], outLSPP$Y[,2], main="LSPP")
 
 }
 \references{

@@ -136,10 +136,13 @@ do.lpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
     return(result)
   } else {
     # 7. return output
+    #   1. adjust projection
+    projection = aux.adjprojection(eigvecs[,1:ndim])
+    #   2. return output
     result = list()
-    result$Y = pX %*% eigvecs[,1:ndim]
+    result$Y = pX %*% projection
     result$eigval = eigvals[1:ndim]
-    result$projection = eigvecs[,1:ndim]
+    result$projection = projection
     trfinfo$algtype = "linear"
     result$trfinfo = trfinfo
     return(result)

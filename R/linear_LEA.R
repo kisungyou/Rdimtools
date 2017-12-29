@@ -26,6 +26,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate samples
 #' X <- aux.gensamples(n=123)
 #'
@@ -39,7 +40,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="LLE")
 #' plot(out2$Y[,1], out2$Y[,2], main="NPE")
 #' plot(out3$Y[,1], out3$Y[,2], main="LEA")
-#'
+#' }
 #'
 #' @references
 #' \insertRef{fu_locally_2005}{Rdimtools}
@@ -111,6 +112,9 @@ do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","int
 
   #------------------------------------------------------------------------
   ## RETURN
+  #   1. projction
+  projection = aux.adjprojection(projection)
+  #   2. return output
   result = list()
   result$Y = pX%*%projection
   result$trfinfo = trfinfo
