@@ -42,6 +42,7 @@ It adopts PCA as preprocessing step and uses only one eigenvector at each iterat
 it might incur warning messages for solving near-singular system of linear equations.
 }
 \examples{
+\dontrun{
 ## generate 2 normal groups of data that are far away
 X = rbind(matrix(rnorm(200),nrow=20), (matrix(rnorm(200),nrow=20)+10))
 
@@ -54,6 +55,7 @@ output2 <- do.olpp(X,ndim=2,type=c("proportion",0.25))
 par(mfrow=c(1,2))
 plot(output1$Y[,1],output1$Y[,2],main="10\% connected")
 plot(output2$Y[,1],output2$Y[,2],main="25\% connected")
+}
 
 }
 \references{

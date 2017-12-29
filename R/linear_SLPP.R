@@ -113,7 +113,10 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
 
   #------------------------------------------------------------------------
   ## RETURN
-  projection = projection_first%*%projection_second
+  #   1. adjust projection
+  projection = aux.adjprojection(projection_first%*%projection_second)
+
+  #   2.
   result = list()
   result$Y = pX%*%projection
   result$eigval = eigenvalue

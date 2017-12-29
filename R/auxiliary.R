@@ -12,6 +12,7 @@
 # 09. aux.kernelcentering  : centering the kernel/gram matrix
 # 10. aux.kernelprojection : given uncentered gram matrix, find the projected data
 #                            note that it results (ndim-by-N) matrix, columns are projected vectors.
+# 11. aux.adjprojection    : adjust projection matrix
 
 
 #  ------------------------------------------------------------------------
@@ -1063,3 +1064,21 @@ aux.kernelprojection <- function(KK, ndim){
   Y          = (t(KKceigen$vectors[,1:ndim]) %*% KK)
   return(Y)
 }
+
+
+
+
+# 11. aux.adjprojection : adjust projection matrix ------------------------
+#' @keywords internal
+#' @noRd
+aux.adjprojection <- function(P){
+  p = ncol(P)
+  Pid = (t(P)%*%P)
+  if (max(abs(diag(p)-Pid))>1e-10){
+    output = qr.Q(qr(P))
+  } else {
+    output = P
+  }
+  return(output)
+}
+

@@ -123,6 +123,8 @@ do.udp <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","d
 
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
+  # 1. adjust projection
+  proj_all = aux.adjprojection(proj_all)
 
   # 2. result list
   result = list()

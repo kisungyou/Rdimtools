@@ -114,6 +114,9 @@ do.sdlpp <- function(X, ndim=2, t = 1.0,
 
   #------------------------------------------------------------------------
   ## RETURN
+  #   1. adjust projection
+  projection = aux.adjprojection(projection)
+  #   2. return
   result = list()
   result$Y = pX%*%projection
   result$eigval = eigenvalue

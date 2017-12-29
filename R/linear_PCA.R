@@ -104,7 +104,7 @@ do.pca <- function(X,ndim="auto",cor=FALSE,preprocess="center",varratio=0.9){
   }
 
   # 5. result
-  partials = eigvecs[,1:tgtidx]
+  partials = aux.adjprojection(eigvecs[,1:tgtidx])
   result = list()
   result$Y          = (pX %*% partials)
   result$vars       = eigvals[1:tgtidx]

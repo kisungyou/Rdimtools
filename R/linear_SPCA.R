@@ -109,6 +109,10 @@ do.spca <- function(X,ndim=2,preprocess=c("center","decorrelate","whiten"),suppk
   }
 
   ## Return output
+  #   1. adjust projection
+  projection = aux.adjprojection(projection)
+
+  #   2. output!
   result   = list()
   result$Y = pX%*%projection
   result$projection = projection

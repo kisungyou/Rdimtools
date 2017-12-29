@@ -21,24 +21,25 @@
 #' }
 #'
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'' and three options of ``center'',``decorrelate'', or ``whiten''
+#' Default is ``null'' and options of  ``center'' , ``decorrelate'' and ``whiten''
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
 #' @param type a type of random projection, one of "gaussian","achlioptas" or "sparse".
 #' @param s a tuning parameter for determining values in projection matrix. While default
 #' is to use \eqn{max(log \sqrt{p},3)}, it is required for \eqn{s \ge 3}.
 #' @return a named list containing
 #' \describe{
-#' \item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{epsilon}{an estimated error \eqn{\epsilon} in accordance with JL lemma.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
 #'@examples
+#'\dontrun{
 #'# generate Swiss Roll data of 2,000 data points.
 #'X <- aux.gensamples(n=2000)
 #'
@@ -49,7 +50,6 @@
 #'output2 <- do.rndproj(X,ndim=2,type="achlioptas")
 #'
 #'## 3. Sparse projection
-#'p <- ncol(X)   ## number of covariates
 #'output3 <- do.rndproj(X,type="sparse",s=5)        ## fulfill condition on s
 #'
 #'## Visualize three different projections
@@ -57,6 +57,7 @@
 #'plot(output1$Y[,1],output1$Y[,2],main="Gaussian")
 #'plot(output2$Y[,1],output2$Y[,2],main="Arclioptas")
 #'plot(output3$Y[,1],output3$Y[,2],main="Sparse")
+#'}
 #'
 #'@references
 #'\insertRef{beals_extensions_1984}{Rdimtools}
@@ -68,7 +69,8 @@
 #'
 #' @rdname linear_RNDPROJ
 #' @export
-do.rndproj <- function(X,ndim=2,preprocess="null",type="gaussian",s=max(sqrt(ncol(X)),3.0)){
+do.rndproj <- function(X,ndim=2,preprocess=c("null","center","whiten","decorrelate"),
+                       type=c("gaussian","achlioptas","sparse"),s=max(sqrt(ncol(X)),3.0)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -84,14 +86,15 @@ do.rndproj <- function(X,ndim=2,preprocess="null",type="gaussian",s=max(sqrt(nco
   # 2-2. Random Projection Specific
   #   type           : 'gaussian'(default),'achlioptas','sparse'
   #   s for 'sparse' : sqrt(d), d/log(d), or >=3
-
-
-  if (!is.element(preprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.rndproj : 'preprocess' should have one of 4 values.")
+  if (missing(preprocess)){
+    preprocess = "null"
+  } else {
+    preprocess = match.arg(preprocess)
   }
-  rptype = type
-  if (!is.element(rptype,c("gaussian","achlioptas","sparse"))){
-    stop("* do.rndproj : 'type' parameter should be one of three options.")
+  if (missing(type)){
+    rptype = "gaussian"
+  } else {
+    rptype = match.arg(type)
   }
   if (rptype=="gaussian"){ # simple binarized option
     typegaussianflag = TRUE

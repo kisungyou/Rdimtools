@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate 2 normal groups of data that are far away
 #' X = rbind(matrix(rnorm(200),nrow=20), (matrix(rnorm(200),nrow=20)+10))
 #'
@@ -37,6 +38,7 @@
 #' par(mfrow=c(1,2))
 #' plot(output1$Y[,1],output1$Y[,2],main="10% connected")
 #' plot(output2$Y[,1],output2$Y[,2],main="25% connected")
+#' }
 #'
 #' @references
 #' \insertRef{cai_orthogonal_2006}{Rdimtools}
@@ -115,9 +117,12 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   Wolpp = (method_olpp(t(Xpca), wD, ndim));
 
   #   step 4. computation !
+  #   1. adjust projection matrix
+  proj_all = aux.adjprojection(Wpca%*%Wolpp)
+  #   2. return output
   result = list()
-  result$Y = Xpca%*%Wolpp
-  result$projection = Wpca%*%Wolpp
+  result$Y = pX%*%proj_all
+  result$projection = proj_all
   trfinfo$algtype = "linear"
   result$trfinfo = trfinfo
   return(result)

@@ -4,17 +4,18 @@
 \alias{do.rndproj}
 \title{Random Projection}
 \usage{
-do.rndproj(X, ndim = 2, preprocess = "null", type = "gaussian",
+do.rndproj(X, ndim = 2, preprocess = c("null", "center", "whiten",
+  "decorrelate"), type = c("gaussian", "achlioptas", "sparse"),
   s = max(sqrt(ncol(X)), 3))
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'' and three options of ``center'',``decorrelate'', or ``whiten''
+Default is ``null'' and options of  ``center'' , ``decorrelate'' and ``whiten''
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a type of random projection, one of "gaussian","achlioptas" or "sparse".}
@@ -25,8 +26,8 @@ is to use \eqn{max(log \sqrt{p},3)}, it is required for \eqn{s \ge 3}.}
 \value{
 a named list containing
 \describe{
-\item{Y}{an \code{(n-by-ndim)} matrix whose rows are embedded observations.}
-\item{projection}{a \code{(p-by-ndim)} whose columns are basis for projection.}
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{epsilon}{an estimated error \eqn{\epsilon} in accordance with JL lemma.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
@@ -54,6 +55,7 @@ for \eqn{s}, any user-supported \eqn{s \ge 3} is allowed.
 }
 }
 \examples{
+\dontrun{
 # generate Swiss Roll data of 2,000 data points.
 X <- aux.gensamples(n=2000)
 
@@ -64,7 +66,6 @@ output1 <- do.rndproj(X,ndim=2)
 output2 <- do.rndproj(X,ndim=2,type="achlioptas")
 
 ## 3. Sparse projection
-p <- ncol(X)   ## number of covariates
 output3 <- do.rndproj(X,type="sparse",s=5)        ## fulfill condition on s
 
 ## Visualize three different projections
@@ -72,6 +73,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="Gaussian")
 plot(output2$Y[,1],output2$Y[,2],main="Arclioptas")
 plot(output3$Y[,1],output3$Y[,2],main="Sparse")
+}
 
 }
 \references{

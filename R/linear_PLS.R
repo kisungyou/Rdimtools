@@ -7,16 +7,16 @@
 #' eigen-decomposition formulation, as the problem dimension matters only up to original dimensionality.
 #' For more details, see \href{https://en.wikipedia.org/wiki/Partial_least_squares_regression}{Wikipedia entry} on PLS.
 #'
-#' @param data1 an \code{(n-by-N)} data matrix whose rows are observations
-#' @param data2 an \code{(n-by-M)} data matrix whose rows are observations
+#' @param data1 an \eqn{(n\times N)} data matrix whose rows are observations
+#' @param data2 an \eqn{(n\times M)} data matrix whose rows are observations
 #' @param ndim an integer-valued target dimension.
 #'
 #' @return a named list containing
 #' \describe{
-#' \item{Y1}{an \code{(n-by-ndim)} matrix of projected observations from \code{data1}.}
-#' \item{Y2}{an \code{(n-by-ndim)} matrix of projected observations from \code{data2}.}
-#' \item{projection1}{a \code{(N-by-ndim)} whose columns are loadings for \code{data1}.}
-#' \item{projection2}{a \code{(M-by-ndim)} whose columns are loadings for \code{data2}.}
+#' \item{Y1}{an \eqn{(n\times ndim)} matrix of projected observations from \code{data1}.}
+#' \item{Y2}{an \eqn{(n\times ndim)} matrix of projected observations from \code{data2}.}
+#' \item{projection1}{an \eqn{(N\times ndim)} whose columns are loadings for \code{data1}.}
+#' \item{projection2}{an \eqn{(M\times ndim)} whose columns are loadings for \code{data2}.}
 #' \item{trfinfo1}{a list containing information for out-of-sample prediction for \code{data1}.}
 #' \item{trfinfo2}{a list containing information for out-of-sample prediction for \code{data2}.}
 #' \item{eigvals}{a vector of eigenvalues for iterative decomposition.}
