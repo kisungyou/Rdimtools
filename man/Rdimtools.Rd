@@ -32,6 +32,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+\code{\link{do.dspp}} \tab S \tab Discriminative Sparsity Preserving Projection \cr
 \code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
@@ -42,10 +43,13 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
 \code{\link{do.lea}} \tab U \tab Locally Linear Embedded Eigenspace Analysis \cr
+\code{\link{do.lfda}} \tab S \tab Local Fisher Discriminant Analysis \cr
+\code{\link{do.llp}} \tab U \tab Local Learning Projections \cr
 \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
+\code{\link{do.mmc}} \tab S \tab Maximum Margin Criterion \cr
 \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
 \code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Projection \cr
@@ -57,6 +61,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
 \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
+\code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
 \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection
 }
 
@@ -71,6 +76,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
 \code{\link{do.klde}} \tab S \tab Kernel Local Discriminant Embedding \cr
+\code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr

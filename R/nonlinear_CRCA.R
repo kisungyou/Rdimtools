@@ -25,6 +25,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' ## generate sample data
 #' X <- aux.gensamples(n=200)
 #'
@@ -38,6 +39,7 @@
 #' plot(out1$Y[,1],out1$Y[,2],main="alpha=1.0")
 #' plot(out2$Y[,1],out2$Y[,2],main="alpha=5.0")
 #' plot(out3$Y[,1],out3$Y[,2],main="alpha=10.0")
+#' }
 #'
 #'
 #' @references

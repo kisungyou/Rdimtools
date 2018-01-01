@@ -2,7 +2,7 @@
 # 00. aux.typecheck        : check whether the data is poorly given
 # 01. aux.preprocess       : preprocess of centering, decorrelation or whitening
 # 02. aux.gensamples       : generate a few popular data examples
-# 03. aux.graphnbd         : compute neighborhood graph structure
+# 03. aux.graphnbd         : construct nearest-neighborhood graph
 #     aux.graphnbdD        : distance matrix is already given
 # 04. aux.shortestpath     : compute shortest paths given neighborhood graph
 # 05. aux.MaxMinLandmark   : choose a single landmark point
@@ -13,7 +13,6 @@
 # 10. aux.kernelprojection : given uncentered gram matrix, find the projected data
 #                            note that it results (ndim-by-N) matrix, columns are projected vectors.
 # 11. aux.adjprojection    : adjust projection matrix
-
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -277,7 +276,7 @@ aux.gensamples <- function(n=496,noise=0.1,dname="swiss"){
 #  ------------------------------------------------------------------------
 # 3. AUX.GRAPHNBD
 #  ------------------------------------------------------------------------
-#' Find nearest neighborhood
+#' Construct Nearest-Neighborhood Graph
 #'
 #' Given data, it first computes pairwise distance (\code{method}) using one of measures
 #' defined from \code{\link[stats]{dist}} function. Then, \code{type} controls how nearest neighborhood
@@ -1081,4 +1080,3 @@ aux.adjprojection <- function(P){
   }
   return(output)
 }
-

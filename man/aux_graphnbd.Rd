@@ -2,7 +2,7 @@
 % Please edit documentation in R/auxiliary.R
 \name{aux.graphnbd}
 \alias{aux.graphnbd}
-\title{Find nearest neighborhood}
+\title{Construct Nearest-Neighborhood Graph}
 \usage{
 aux.graphnbd(data, method = "euclidean", type = c("proportion", 0.1),
   symmetric = "union", pval = 2)

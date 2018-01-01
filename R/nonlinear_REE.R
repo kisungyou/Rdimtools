@@ -27,6 +27,7 @@
 #'
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll data
 #' X = aux.gensamples(n=123)
 #'
@@ -40,6 +41,7 @@
 #' par(mfrow=c(1,2))
 #' plot(output1$Y[,1],output1$Y[,2],main="centered")
 #' plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
+#' }
 #'
 #' @references
 #' \insertRef{cayton_robust_2006}{Rdimtools}

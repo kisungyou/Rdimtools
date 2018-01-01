@@ -11,6 +11,7 @@
  * 10. BPCA
  * 11. EXTLPP
  * 12. LSPP
+ * 13. KMCC
 */
 
 #include <RcppArmadillo.h>
@@ -589,4 +590,31 @@ arma::mat method_lspp_computeW(arma::mat& S, arma::vec& svec){
     }
   }
   return(W);
+}
+
+
+/*
+ * 13. Kernelized Maximum Margin Criterion
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::vec method_kmmcvec(arma::mat& X, arma::mat& partmat, double param){
+  // 1. get parameter
+  const int n  = X.n_rows;
+  const int ni = partmat.n_rows;
+  double param22 = 2*param*param;
+  // 2. compute
+  arma::rowvec vec1(n,fill::zeros);
+  arma::rowvec vec2(n,fill::zeros);
+  arma::vec output(n,fill::zeros);
+  for (int i=0;i<n;i++){
+    double tmp = 0.0;
+    vec1 = X.row(i);
+    for (int j=0;j<ni;j++){
+      vec2 = partmat.row(j);
+      tmp += exp(-(norm(vec1-vec2,2)*norm(vec1-vec2,2))/param22);
+    }
+    output(i) = tmp/ni;
+  }
+  return(output);
 }

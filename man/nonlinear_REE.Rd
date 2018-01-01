@@ -44,6 +44,7 @@ paper introduced a subgradient algorithm to overcome memory-intensive nature of
 original semidefinite programming formulation.
 }
 \examples{
+\dontrun{
 ## generate swiss roll data
 X = aux.gensamples(n=123)
 
@@ -57,6 +58,7 @@ output2 <- do.ree(X,ndim=2,preprocess="decorrelate",maxiter=50)
 par(mfrow=c(1,2))
 plot(output1$Y[,1],output1$Y[,2],main="centered")
 plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
+}
 
 }
 \references{

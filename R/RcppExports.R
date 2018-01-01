@@ -103,6 +103,11 @@ method_lspp_computeW <- function(S, svec) {
 }
 
 #' @keywords internal
+method_kmmcvec <- function(X, partmat, param) {
+    .Call('_Rdimtools_method_kmmcvec', PACKAGE = 'Rdimtools', X, partmat, param)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal

@@ -34,6 +34,7 @@ if two nodes belong to the same class, it assigns weight of 1, i.e., \eqn{S_{ij}
 \eqn{x_j} have same class labelings.
 }
 \examples{
+\dontrun{
 ## generate data of 2 types with clear difference
 diff = 15
 dt1  = aux.gensamples(n=123)-diff;
@@ -51,6 +52,7 @@ outSLPP <- do.slpp(Y, label)
 par(mfrow=c(1,2))
 plot(outLPP$Y[,1], outLPP$Y[,2], main="LPP")
 plot(outSLPP$Y[,1], outSLPP$Y[,2], main="SLPP")
+}
 
 }
 \references{
