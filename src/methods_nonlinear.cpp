@@ -500,7 +500,7 @@ Rcpp::List method_ree(arma::mat& B, arma::mat& W, arma::mat& D, const double ini
     // 2-4. compute newer cost
     cost_k = method_ree_cost(W,D,Bnew);
     if (cost_k < cost){
-      cost = cost;
+      cost = cost_k;
       Btgt = Bnew;
     }
 

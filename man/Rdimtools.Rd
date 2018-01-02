@@ -76,6 +76,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
 \code{\link{do.klde}} \tab S \tab Kernel Local Discriminant Embedding \cr
+\code{\link{do.klfda}} \tab S \tab Kernel Local Fisher Discriminant Analysis \cr
 \code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr

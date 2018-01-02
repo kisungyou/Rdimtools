@@ -37,5 +37,7 @@ arma::mat method_trfextlpp(arma::mat& D, double a, double b);
 arma::mat method_lspp_computeW(arma::mat& S, arma::vec& svec);
 // 13. KMMC
 arma::vec method_kmmcvec(arma::mat& X, arma::mat& partmat, double param);
+// 14. LFDA
+double method_lfda_maximaldistance(arma::rowvec& tvec, arma::mat& tmat);
 
 #endif

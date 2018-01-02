@@ -1,9 +1,8 @@
-#' Local Fisher Discriminant Analysis
+#' Kernel Local Fisher Discriminant Analysis
 #'
-#' Local Fisher Discriminant Analysis (LFDA) is a linear dimension reduction method for
-#' supervised case, i.e., labels are given. It reflects \emph{local} information to overcome
-#' undesired results of traditional Fisher Discriminant Analysis which results in a poor mapping
-#' when samples in a single class form form several separate clusters.
+#' Kernel LFDA is a nonlinear extension of LFDA method using kernel trick. It applies conventional kernel method
+#' to extend excavation of hidden patterns in a more flexible manner in tradeoff of computational load. For simplicity,
+#' only the gaussian kernel parametrized by its bandwidth \code{t} is supported.
 #'
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -19,15 +18,16 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param localscaling \code{TRUE} to use local scaling method for construction affinity matrix, \code{FALSE} for binary affinity.
+#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate 3 different groups of data X and label vector
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
 #' x2 = matrix(rnorm(4*10), nrow=10)
@@ -36,25 +36,29 @@
 #' label = c(rep(1,10), rep(2,10), rep(3,10))
 #'
 #' ## try different affinity matrices
-#' out1 = do.lfda(X, label)
-#' out2 = do.lfda(X, label, localscaling=FALSE)
+#' out1 = do.klfda(X, label, t=0.1)
+#' out2 = do.klfda(X, label, t=1)
+#' out3 = do.klfda(X, label, t=10)
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="binary affinity matrix")
-#' plot(out2$Y[,1], out2$Y[,2], main="local scaling affinity")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y[,1], out1$Y[,2], main="bandwidth=0.1")
+#' plot(out2$Y[,1], out2$Y[,2], main="bandwidth=1")
+#' plot(out3$Y[,1], out3$Y[,2], main="bandwidth=10")
+#' }
 #'
 #' @references
 #' \insertRef{sugiyama_local_2006}{Rdimtools}
 #'
 #' \insertRef{zelnik-manor_self-tuning_2005}{Rdimtools}
 #'
+#' @seealso \code{\link{do.lfda}}
 #' @author Kisung You
-#' @rdname linear_LFDA
+#' @rdname nonlinear_KLFDA
 #' @export
-do.lfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
-                    type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
-                    localscaling=TRUE){
+do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+                     type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
+                     localscaling=TRUE, t=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -94,6 +98,9 @@ do.lfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   if (!is.logical(localscaling)){
     stop("* do.lfda : 'localscaling' must be a logical flag.")
   }
+  #   8. t : kernel bandwidth
+  t = as.double(t)
+  if (!check_NumMM(t, 0, 1e+10, compact=FALSE)){stop("* do.klfda : 't' is a bandwidth parameter for gaussian kernel.")}
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
@@ -156,35 +163,26 @@ do.lfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
       }
     }
   }
-  #   6. Construct Swbar and Sbbar
-  Swbar = array(0,c(p,p))
-  Sbbar = array(0,c(p,p))
-  for (i in 1:n){
-    vec1 = as.vector(pX[i,])
-    for (j in 1:n){
-      vec2 = as.vector(pX[j,])
-      vecdiff = vec1-vec2
-      outdiff = outer(vecdiff,vecdiff)
-
-      Swbar = Swbar + ((Aijw[i,j])*outdiff)
-      Sbbar = Sbbar + ((Aijb[i,j])*outdiff)
-    }
-  }
-
+  Aijm = Aijw + Aijb
+  #   6. Compute Laplacian matrices Lijm and Lijb
+  Lijw = diag(rowSums(Aijw))-Aijw
+  Lijm = diag(rowSums(Aijm))-Aijm
+  #   7. compute Kernel Matrix
+  K = exp(-(as.matrix(dist(pX))^2)/(2*(t^2)))
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : MAIN LFDA : USE TOP EIGENVECTORS
-  Smbar = Swbar+Sbbar
-  projection = geigen::geigen(Smbar, Swbar, TRUE)$vectors[,p:(p-ndim+1)]
+  ## COMPUTATION : MAIN KLFDA
+  #  since direct computation is difficult, I used a detour using Rlinsolve and RSpectra
+  LHS = K%*%Lijm%*%K
+  RHS = K%*%Lijw%*%K
+
+  CHS = Rlinsolve::lsolve.bicgstab(RHS, LHS, verbose=FALSE)$x
+  pseudoproj = RSpectra::eigs(CHS, ndim)$vectors
 
   #------------------------------------------------------------------------
   ## RETURN
-  #   1. projction
-  projection = aux.adjprojection(projection)
-  #   2. return output
   result = list()
-  result$Y = pX%*%projection
+  result$Y = K%*%pseudoproj
   result$trfinfo = trfinfo
-  result$projection = projection
   return(result)
 }

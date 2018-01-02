@@ -12,6 +12,7 @@
  * 11. EXTLPP
  * 12. LSPP
  * 13. KMCC
+ * 14. LFDA
 */
 
 #include <RcppArmadillo.h>
@@ -615,6 +616,33 @@ arma::vec method_kmmcvec(arma::mat& X, arma::mat& partmat, double param){
       tmp += exp(-(norm(vec1-vec2,2)*norm(vec1-vec2,2))/param22);
     }
     output(i) = tmp/ni;
+  }
+  return(output);
+}
+
+/*
+ * 14. Local Fisher Discriminant Analysis
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+double method_lfda_maximaldistance(arma::rowvec& tvec, arma::mat& tmat){
+  // 1. get parameter
+  const int N = tmat.n_rows;
+  const int p = tvec.n_elem;
+
+  // 2. output : iteratively update
+  double output = 0.0;
+  double tmpout = 0.0;
+  // 3. variable declaration 64
+  arma::rowvec vec1;
+  arma::rowvec vec2;
+  vec1 = tvec;
+  for (int i=0;i<N;i++){
+    vec2 = tmat.row(i);
+    tmpout = norm(vec1-vec2,2);
+    if (tmpout > output){
+      output = tmpout;
+    }
   }
   return(output);
 }

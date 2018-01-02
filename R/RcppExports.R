@@ -108,6 +108,11 @@ method_kmmcvec <- function(X, partmat, param) {
 }
 
 #' @keywords internal
+method_lfda_maximaldistance <- function(tvec, tmat) {
+    .Call('_Rdimtools_method_lfda_maximaldistance', PACKAGE = 'Rdimtools', tvec, tmat)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal
