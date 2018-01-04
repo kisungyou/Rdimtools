@@ -1,12 +1,10 @@
-#' Semi-Supervised Discriminant Analysis
+#' Kernel Semi-Supervised Discriminant Analysis
 #'
-#' Semi-Supervised Discriminant Analysis (SDA) is a linear dimension reduction method
-#' when label is partially missing, i.e., semi-supervised. The labeled data
-#' points are used to maximize the separability between classes while
-#' the unlabeled ones to estimate the intrinsic structure of the data.
-#' Regularization in case of rank-deficient case is also supported via an \eqn{\ell_2}
-#' scheme via \code{beta}.
-#'
+#' Kernel Semi-Supervised Discriminant Analysis (KSDA) is a nonlinear variant of
+#' SDA (\code{\link{do.sda}}). For simplicity, we enabled heat/gaussian kernel only.
+#' Note that this method is \emph{quite} sensitive to choices of
+#' parameters, \code{alpha}, \code{beta}, and \code{t}. Especially when data
+#' are well separated in the original space, it may lead to unsatisfactory results.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
@@ -18,14 +16,15 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param alpha balancing parameter between model complexity and empirical loss.
 #' @param beta Tikhonov regularization parameter.
+#' @param t bandwidth parameter for heat kernel.
 #'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
+#' @seealso \code{\link{do.sda}}
 #' @examples
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
@@ -36,15 +35,15 @@
 #' Y      = rbind(dt1,dt2,dt3)
 #' label  = c(rep(1,33), rep(2,33), rep(3,33))
 #'
-#' ## copy a label and let 20% of elements be missing
+#' ## copy a label and let 10% of elements be missing
 #' nlabel = length(label)
-#' nmissing = round(nlabel*0.20)
+#' nmissing = round(nlabel*0.10)
 #' label_missing = label
 #' label_missing[sample(1:nlabel, nmissing)]=NA
 #'
 #' ## compare true case with missing-label case
-#' out1 = do.sda(Y, label)
-#' out2 = do.sda(Y, label_missing)
+#' out1 = do.ksda(Y, label, beta=0, t=0.1)
+#' out2 = do.ksda(Y, label_missing, beta=0, t=0.1)
 #'
 #' ## visualize
 #' par(mfrow=c(1,2))
@@ -54,10 +53,10 @@
 #' @references
 #' \insertRef{cai_semi-supervised_2007}{Rdimtools}
 #'
-#' @rdname linear_SDA
+#' @rdname nonlinear_KSDA
 #' @author Kisung You
 #' @export
-do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1.0){
+do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1.0, t=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -75,17 +74,20 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   labelrank  = rank(label)
   #   3. ndim
   if (!check_ndim(ndim,p)){
-    stop("* do.sda : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.ksda : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   ndim = as.integer(ndim)
   #   4. alpha : balancing
   alpha = as.double(alpha)
-  if (!check_NumMM(alpha,0,Inf,compact=FALSE)){stop("* do.sda : 'alpha' needs to be a positive real number.")}
+  if (!check_NumMM(alpha,0,Inf,compact=FALSE)){stop("* do.ksda : 'alpha' needs to be a positive real number.")}
   #   5. beta : regularization
   beta = as.double(beta)
-  if (!check_NumMM(beta,0,Inf,compact=TRUE)){stop("* do.sda : 'beta; needs to be a nonnegative real number.")}
+  if (!check_NumMM(beta,0,Inf,compact=TRUE)){stop("* do.ksda : 'beta; needs to be a nonnegative real number.")}
   #   6. neighborhood type
   nbdtype = type
+  #   7. t : kernel bandwidth
+  t = as.double(t)
+  if (!check_NumMM(t, 0, 1e+10, compact=FALSE)){stop("* do.ksda : 't' is a bandwidth parameter for gaussian kernel.")}
 
   #   (Implicit) preprocessing
   algpreprocess = "center"
@@ -97,8 +99,8 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   #   1. preprocessing with re-labeling of data
   tmplist = aux.preprocess(X,type=algpreprocess)
   trfinfo = tmplist$info
-  pXoriginal   = tmplist$pX
-  pX      = pXoriginal[labelorder,]
+  pX      = tmplist$pX[labelorder,]
+
   trfinfo$algtype = "linear"
   label   = label[labelorder]
   #   2. neighborhood graph
@@ -116,23 +118,26 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   #   5. Itilde
   Itilde = array(0,c(n,n))
   Itilde[1:idxmaxlabeled, 1:idxmaxlabeled] = diag(idxmaxlabeled)
+  #   6. computation
+  K = exp(-(as.matrix(dist(pX))^2)/(2*(t^2)))
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. setup
-  LHS = t(pX)%*%W%*%pX
-  RHS = t(pX)%*%(    Itilde + (alpha*L) + (beta*diag(n)) )%*%pX
+  LHS = K%*%W%*%K
+  RHS = K%*%(    Itilde + (alpha*L) + (beta*diag(n)) )%*%K
   #   2. top eigenvectors
-  solgeigen = geigen::geigen(LHS, RHS, TRUE)$vectors[,p:(p-ndim+1)]
-  #   3. adjust
-  projection = aux.adjprojection(solgeigen)
+  pseudoproj = geigen::geigen(LHS, RHS, TRUE)$vectors[,p:(p-ndim+1)]
+  #   3. find projected ones : recovering its order will be performed later.
+  Y = K%*%pseudoproj
+
+
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pXoriginal%*%projection
+  result$Y = Y[labelrank,]
   result$trfinfo = trfinfo
-  result$projection = projection
   return(result)
 
 
@@ -140,30 +145,3 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
 
 
 }
-
-
-
-
-#  ------------------------------------------------------------------------
-#' @keywords internal
-#' @noRd
-sda_build_Wl <- function(vec){
-  uvec = unique(vec)
-  c = length(uvec)
-  l = length(vec)
-  output = array(0,c(l,l))
-  start = 1
-  for (i in 1:c){
-    li = sum(vec==uvec[i])
-    output[start:(start+li-1),start:(start+li-1)] = 1/li
-    start = start + li
-  }
-  return(output)
-}
-
-
-
-
-
-
-

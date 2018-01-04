@@ -13,6 +13,8 @@ and columns represent independent variables.}
 \item{label}{a length-\eqn{n} vector of data class labels.}
 
 \item{ndim}{an integer-valued target dimension.}
+
+\item{alpha}{Tikhonow regularization parameter.}
 }
 \value{
 a named list containing
@@ -23,7 +25,11 @@ a named list containing
 }
 }
 \description{
-Regularized Discriminant Analysis
+In small sample case, Linear Discriminant Analysis (LDA) may suffer from
+rank deficiency issue. Applied mathematics has used Tikhonov regularization -
+also known as \eqn{\ell_2} regularization/shrinkage - to adjust linear operator.
+Regularized Discriminant Analysis (RDA) adopts such idea to stabilize
+eigendecomposition in LDA formulation.
 }
 \examples{
 ## generate data of 3 types with clear difference

@@ -83,6 +83,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.klfda}} \tab S \tab Kernel Local Fisher Discriminant Analysis \cr
 \code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
+\code{\link{do.ksda}} \tab SS \tab Kernel Semi-Supervised Discriminant Analysis \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr
 \code{\link{do.lle}} \tab U \tab Locally Linear Embedding \cr

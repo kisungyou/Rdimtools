@@ -1,11 +1,18 @@
 #' Regularized Discriminant Analysis
 #'
+#' In small sample case, Linear Discriminant Analysis (LDA) may suffer from
+#' rank deficiency issue. Applied mathematics has used Tikhonov regularization -
+#' also known as \eqn{\ell_2} regularization/shrinkage - to adjust linear operator.
+#' Regularized Discriminant Analysis (RDA) adopts such idea to stabilize
+#' eigendecomposition in LDA formulation.
+#'
 #'
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
+#' @param alpha Tikhonow regularization parameter.
 #'
 #' @return a named list containing
 #' \describe{
@@ -110,7 +117,7 @@ do.rda <- function(X, label, ndim=2, alpha=1.0){
   #   run Rlinsolve
   W = Rlinsolve::lsolve.bicgstab(RHS, LHS, verbose=FALSE)$x
   #   adjust
-  topW = aux.adjprojection(RSpectra::eigs(W)$vectors)
+  topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
 
   #------------------------------------------------------------------------
   ## RETURN

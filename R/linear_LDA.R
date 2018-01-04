@@ -124,7 +124,7 @@ do.lda <- function(X, label, ndim=2){
     }
     RLIN = Rlinsolve::lsolve.bicgstab(SW, SB, verbose=FALSE)
     W    = RLIN$x
-    topW = aux.adjprojection(RSpectra::eigs(W)$vectors)
+    topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
     Y    = pX%*%topW
 
     result$Y = Y
