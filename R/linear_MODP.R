@@ -126,7 +126,7 @@ do.modp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   L  = diag(rowSums(W))-W
   Sl = (t(pX)%*%L%*%pX)/(2*n*n)
   #   5-2. St : total : non-local Sn = St-Sl
-  St = aux_scatter(pX)/(2*n*n)
+  St = aux_scatter_pairwise(pX)/(2*n*n)
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN ODP
   #   1. cost function

@@ -7,9 +7,11 @@
  * 6. aux_eigendecomposition : eigendecomposition of a given symmetric matrix
  * 7. aux_minmax : find minimum and maximum values for each dimension
  * 8. aux_regout : regress out a vector on a matrix : row-sense
- * 9. aux_scatter : sum{(x_i-x_j)(x_i-x_j)^T}
+ * 9. aux_scatter          : sum{(x_i-mu)(x_i-mu)^T}
+ *    aux_scatter_pairwise : sum{sum{(x_i-x_j)(x_i-x_j)^T}}
  *
  */
+
 #include <RcppArmadillo.h>
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -539,20 +541,40 @@ arma::mat aux_regout(arma::mat& X, arma::rowvec tgt){
 }
 
 /*
- * 9. aux_scatter : sum{(x_i-x_j)(x_i-x_j)^T}
+ * 9-1. aux_scatter          : sum{(x_i-mu)(x_i-mu)^T}
+ * 9-2. aux_scatter_pairwise : sum{sum{(x_i-x_j)(x_i-x_j)^T}}
  */
 // [[Rcpp::export]]
-arma::mat aux_scatter(arma::mat X){
+arma::mat aux_scatter(arma::mat& X, arma::rowvec& mu){
   // 1. parameters
   const int n = X.n_rows;
   const int p = X.n_cols;
-  // 2. output
+  // 2. output and settings
+  arma::mat output(p,p,fill::zeros);
+
+  arma::rowvec vecrow(p,fill::zeros);
+  arma::colvec veccol(p,fill::zeros);
+  // 3. iteration
+  for (int i=0;i<n;i++){
+    vecrow = X.row(i)-mu;
+    veccol = vecrow.t();
+    output += (veccol*vecrow);
+  }
+  return(output);
+}
+// [[Rcpp::export]]
+arma::mat aux_scatter_pairwise(arma::mat& X){
+  // 1. parameters
+  const int n = X.n_rows;
+  const int p = X.n_cols;
+  // 2. output and setting
   arma::mat output(p,p,fill::zeros);
   arma::rowvec vec1(p,fill::zeros);
   arma::rowvec vec2(p,fill::zeros);
 
   arma::colvec veccol(p,fill::zeros);
   arma::rowvec vecrow(p,fill::zeros);
+  // 3. iteration
   for (int i=0;i<n;i++){
     vec1 = X.row(i);
     for (int j=0;j<n;j++){
@@ -560,7 +582,7 @@ arma::mat aux_scatter(arma::mat X){
       if (i!=j){
         vecrow = vec1-vec2;
         veccol = vecrow.t();
-        output += veccol*vecrow;
+        output += (veccol*vecrow);
       }
     }
   }

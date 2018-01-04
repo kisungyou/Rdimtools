@@ -59,7 +59,9 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.pca}} \tab U \tab Principal Component Analysis \cr
 \code{\link{do.pls}} \tab S \tab Partial Least Squares \cr
 \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
+\code{\link{do.rda}} \tab S \tab Regularized Discriminant Analysis \cr
 \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
+\code{\link{do.sda}} \tab SS \tab Semi-Supervised Discriminant Analysis \cr
 \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
 \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr

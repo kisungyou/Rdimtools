@@ -131,7 +131,7 @@ do.odp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   L  = diag(rowSums(W))-W
   Sl = (t(pX)%*%L%*%pX)/(2*n*n)
   #   5-2. St : total : non-local Sn = St-Sl
-  St = aux_scatter(pX)/(2*n*n)
+  St = aux_scatter_pairwise(pX)/(2*n*n)
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN ODP
@@ -143,9 +143,6 @@ do.odp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   projection = aux.adjprojection(projection)
 
   #------------------------------------------------------------------------
-  test_R = St*(2*n*n)
-  test_C = aux_scatter(pX)
-
   ## RETURN
   result = list()
   result$Y = pX%*%projection

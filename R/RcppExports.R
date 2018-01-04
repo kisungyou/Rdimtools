@@ -33,8 +33,12 @@ aux_regout <- function(X, tgt) {
     .Call('_Rdimtools_aux_regout', PACKAGE = 'Rdimtools', X, tgt)
 }
 
-aux_scatter <- function(X) {
-    .Call('_Rdimtools_aux_scatter', PACKAGE = 'Rdimtools', X)
+aux_scatter <- function(X, mu) {
+    .Call('_Rdimtools_aux_scatter', PACKAGE = 'Rdimtools', X, mu)
+}
+
+aux_scatter_pairwise <- function(X) {
+    .Call('_Rdimtools_aux_scatter_pairwise', PACKAGE = 'Rdimtools', X)
 }
 
 #' @keywords internal

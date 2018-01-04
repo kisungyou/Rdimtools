@@ -100,7 +100,7 @@ do.lda <- function(X, label, ndim=2){
     SW    = lda_outer(pX[idx1,]) + lda_outer(pX[idx2,])
     mdiff = matrix(colMeans(pX[idx2,])-colMeans(pX[idx1,]))
     RLIN  = Rlinsolve::lsolve.bicgstab(SW, mdiff, verbose=FALSE)
-    w     = as.matrix(RLIN$x)
+    w     = aux.adjprojection(as.matrix(RLIN$x))
     Y     = pX%*%w
 
     result$Y = Y
@@ -124,8 +124,7 @@ do.lda <- function(X, label, ndim=2){
     }
     RLIN = Rlinsolve::lsolve.bicgstab(SW, SB, verbose=FALSE)
     W    = RLIN$x
-    eigW = eigen(W)
-    topW = eigW$vectors[,1:ndim]
+    topW = aux.adjprojection(RSpectra::eigs(W)$vectors)
     Y    = pX%*%topW
 
     result$Y = Y

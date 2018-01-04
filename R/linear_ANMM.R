@@ -75,10 +75,10 @@ do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","decorrelate"
   }
 
   #   3. ndim
+  ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
     stop("* do.anmm : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  ndim = as.integer(ndim)
   #   4. preprocess
   algpreprocess = match.arg(preprocess)
   #   5. No : size for Homogeneous   Neighborhood
