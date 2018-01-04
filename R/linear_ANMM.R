@@ -109,6 +109,8 @@ do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","decorrelate"
   #   4. extract eigenvector
   eigSC      = RSpectra::eigs_sym(S-C, ndim, which="LA")
   projection = matrix(eigSC$vectors, nrow=p)
+  #   5. adjust eigenvectors
+  projection = aux.adjprojection(projection)
 
   #------------------------------------------------------------------------
   ## RETURN

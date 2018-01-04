@@ -40,8 +40,10 @@
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 #' \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 #' \code{\link{do.mmc}} \tab S \tab Maximum Margin Criterion \cr
+#' \code{\link{do.modp}} \tab S \tab Modified Orthogonal Discriminant Projection \cr
 #' \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 #' \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
+#' \code{\link{do.odp}} \tab S \tab Orthogonal Discriminant Projection \cr
 #' \code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Projection \cr
 #' \code{\link{do.opls}} \tab S \tab Orthogonal Partial Least Squares \cr
 #' \code{\link{do.pca}} \tab U \tab Principal Component Analysis \cr

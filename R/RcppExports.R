@@ -33,6 +33,10 @@ aux_regout <- function(X, tgt) {
     .Call('_Rdimtools_aux_regout', PACKAGE = 'Rdimtools', X, tgt)
 }
 
+aux_scatter <- function(X) {
+    .Call('_Rdimtools_aux_scatter', PACKAGE = 'Rdimtools', X)
+}
+
 #' @keywords internal
 methods_boxcount <- function(tX, Imin, currentr) {
     .Call('_Rdimtools_methods_boxcount', PACKAGE = 'Rdimtools', tX, Imin, currentr)

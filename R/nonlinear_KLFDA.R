@@ -71,7 +71,7 @@ do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whit
   ulabel = unique(label)
   for (i in 1:length(ulabel)){
     if (sum(label==ulabel[i])==1){
-      stop("* do.lfda : no degerate class of size 1 is allowed.")
+      stop("* do.klfda : no degerate class of size 1 is allowed.")
     }
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
@@ -79,7 +79,7 @@ do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whit
   }
   #   3. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.lfda : 'ndim' is a positive integer in [1,#(covariates)).")}
+  if (!check_ndim(ndim,p)){stop("* do.klfda : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   4. preprocess
   if (missing(preprocess)){
     algpreprocess = "center"
@@ -108,7 +108,7 @@ do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whit
   tmplist = aux.preprocess(X,type=algpreprocess)
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+  trfinfo$algtype = "nonlinear"
   #   2. neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
