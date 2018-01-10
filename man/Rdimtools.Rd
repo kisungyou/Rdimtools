@@ -49,6 +49,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.llp}} \tab U \tab Local Learning Projections \cr
 \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
+\code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 \code{\link{do.mmc}} \tab S \tab Maximum Margin Criterion \cr
@@ -63,8 +64,10 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
 \code{\link{do.rda}} \tab S \tab Regularized Discriminant Analysis \cr
 \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
+\code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
 \code{\link{do.sda}} \tab SS \tab Semi-Supervised Discriminant Analysis \cr
 \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
+\code{\link{do.sir}} \tab S \tab Sliced Inverse Regression \cr
 \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
