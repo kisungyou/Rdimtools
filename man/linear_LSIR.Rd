@@ -11,6 +11,9 @@ do.lsir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
 \description{
 Localized Sliced Inverse Regression
 }
+\references{
+\insertRef{wu_localized_2010}{Rdimtools}
+}
 \seealso{
 \code{\link{do.sir}}
 }

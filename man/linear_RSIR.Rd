@@ -28,6 +28,7 @@ X[,4:10] = matrix(runif(7*n), nrow=n)
 y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
 
 ## try with different regularization methods
+## use default number of slices
 out1 = do.rsir(X, y, regmethod="Ridge")
 out2 = do.rsir(X, y, regmethod="Tikhonov")
 out3 = do.rsir(X, y, regmethod="PCA")
@@ -36,11 +37,23 @@ out5 = do.rsir(X, y, regmethod="PCATikhonov")
 outsir = do.sir(X, y)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="2 slices")
-plot(out2$Y[,1], out2$Y[,2], main="10 slices")
-plot(out3$Y[,1], out3$Y[,2], main="25 slices")
+par(mfrow=c(2,3))
+plot(out1$Y[,1], out1$Y[,2], main="reg::Ridge")
+plot(out2$Y[,1], out2$Y[,2], main="reg::Tikhonov")
+plot(out3$Y[,1], out3$Y[,2], main="reg::PCA")
+plot(out4$Y[,1], out4$Y[,2], main="reg::PCA+Ridge")
+plot(out5$Y[,1], out5$Y[,2], main="reg::PCA+Tikhonov")
+plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
 
+}
+\references{
+\insertRef{chiaromonte_dimension_2002}{Rdimtools}
+
+\insertRef{zhong_rsir:_2005}{Rdimtools}
+
+\insertRef{bernard-michel_gaussian_2009}{Rdimtools}
+
+\insertRef{bernard-michel_retrieval_2009}{Rdimtools}
 }
 \seealso{
 \code{\link{do.sir}}

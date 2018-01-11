@@ -55,6 +55,7 @@
 #' \code{\link{do.rda}} \tab S \tab Regularized Discriminant Analysis \cr
 #' \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
 #' \code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
+#' \code{\link{do.save}} \tab S \tab Sliced Average Variance Estimation \cr
 #' \code{\link{do.sda}} \tab SS \tab Semi-Supervised Discriminant Analysis \cr
 #' \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
 #' \code{\link{do.sir}} \tab S \tab Sliced Inverse Regression \cr

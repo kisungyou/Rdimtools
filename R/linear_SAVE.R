@@ -1,7 +1,4 @@
-#' Sliced Inverse Regression
-#'
-#' do at once : SIR, LSIR, RSIR, SAVE
-#'
+#' Sliced Average Variance Estimation
 #'
 #' @examples
 #' ## generate swiss roll with auxiliary dimensions
@@ -20,9 +17,9 @@
 #' y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
 #'
 #' ## try with different numbers of slices
-#' out1 = do.sir(X, y, h=2)
-#' out2 = do.sir(X, y, h=5)
-#' out3 = do.sir(X, y, h=10)
+#' out1 = do.save(X, y, h=2)
+#' out2 = do.save(X, y, h=5)
+#' out3 = do.save(X, y, h=10)
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
@@ -31,12 +28,13 @@
 #' plot(out3$Y[,1], out3$Y[,2], main="10 slices")
 #'
 #' @references
-#' \insertRef{li_sliced_1991}{Rdimtools}
+#' \insertRef{dennis_cook_save:_2000}{Rdimtools}
 #'
+#' @seealso \code{\link{do.sir}}
 #' @author Kisung You
-#' @rdname linear_SIR
+#' @rdname linear_SAVE
 #' @export
-do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c("center","decorrelate","whiten")){
+do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -50,12 +48,13 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c
   }
   #   3. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.sir : 'ndim' is a positive integer in [1,#(covariates)).")}
+  if (!check_ndim(ndim,p)){stop("* do.save : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   4. h : number of slices
   h = as.integer(h)
   if (!is.factor(response)){
     if (!check_NumMM(h,2,ceiling(n/2),compact=TRUE)){stop("* do.save : the number of slices should be in [2,n/2].")}
-  }  #   5. preprocess
+  }
+  #   5. preprocess
   if (missing(preprocess)){
     algpreprocess = "center"
   } else {
@@ -77,32 +76,29 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c
   }
   ulabel = unique(label)
   nlabel = length(ulabel)
-  #   3. compute classwise and overall mean
-  class_mean  = array(0,c(nlabel,p))
-  class_count = rep(0,nlabel)
-  for (i in 1:nlabel){
-    idxclass = which(label==ulabel[i])
-    class_mean[i,] = as.vector(colMeans(pX[idxclass,]) )
-    class_count[i] = length(idxclass)
+  #   3. compute scaling as noted from the method.
+  #   3-1. mean
+  tmp_mean = colMeans(pX)
+  #   3-2. eigendecomposition of covariance matrix
+  tmp_SigmaInvHalf = save_SigmaInvHalf(pX)
+  #   3-3. adjust values
+  tmpZ = array(0,c(n,p))
+  for (i in 1:n){
+    tmpZ[i,] = as.vector(pX[i,])-tmp_mean
   }
-  all_mean = as.vector(colMeans(pX))
-  #   4. compute Empirical Covariance
-  mat_Sigma = aux_scatter(pX, all_mean)/n
-  #   5. compute Between-Slice Covariance
-  mat_Gamma = array(0,c(p,p))
-  for (i in 1:nlabel){
-    vecdiff = (as.vector(class_mean[i,])-(all_mean))
-    mat_Gamma = mat_Gamma + outer(vecdiff,vecdiff)*as.double(class_count[i])/n
+  Z    = tmpZ%*%tmp_SigmaInvHalf
+  #   4. Construct M
+  M = array(0,c(p,p))
+  for (s in 1:nlabel){
+    idxs = which(label==ulabel[s])
+    ns   = length(idxs)
+    IVs  = diag(p)-cov(pX[idxs,]) # difference !
+    M    = M + (ns/n)*(IVs%*%IVs)
   }
-
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION
-  #   1. do matrix inversion.. I hate it.
-  costInv = lsolve.bicgstab(mat_Sigma, mat_Gamma, verbose=FALSE)$x
-  #   2. find top eigenvectors
-  projection = aux.adjprojection(RSpectra::eigs(costInv, ndim)$vectors)
-
+  projection = aux.adjprojection(RSpectra::eigs(M, ndim)$vectors)
 
   #------------------------------------------------------------------------
   ## RETURN
@@ -117,30 +113,24 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c
 
 
 
-
-
 #  ------------------------------------------------------------------------
 #' @keywords internal
 #' @noRd
-sir_makelabel <- function(responsevec, h){
-  n = length(responsevec)
-  output = rep(0,n)
-  hn = floor(n/h)
-  startidx = 1
-  currentlabel = 1
-  orderlabel = order(responsevec)
-  for (i in 1:(h-1)){
-    # zeros, find the index
-    idxorders = orderlabel[startidx:(startidx+hn-1)]
-    # first, fill in the label
-    output[idxorders] = currentlabel
-    # second, update
-    startidx = startidx + hn
-    currentlabel = currentlabel + 1
+save_SigmaInvHalf <- function(X){
+  coveig = eigen(cov(X))
+  # 1. adjust eigenvalues
+  evalues = coveig$values
+  nevals  = length(evalues)
+  newvals = rep(0,nevals)
+  for (i in 1:nevals){
+    tgt = evalues[i]
+    if (tgt>0){
+      newvals[i] = 1/sqrt(tgt)
+    }
   }
-  # final
-  idxorders = orderlabel[startidx:n]
-  output[idxorders] = currentlabel
+  # 2. eigenvectors
+  Mlambda = coveig$vectors
+  # 3. compute output
+  output = Mlambda%*%diag(newvals)%*%t(Mlambda)
   return(output)
 }
-

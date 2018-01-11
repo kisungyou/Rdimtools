@@ -2,6 +2,9 @@
 #'
 #'
 #'
+#' @references
+#' \insertRef{wu_localized_2010}{Rdimtools}
+#'
 #' @seealso \code{\link{do.sir}}
 #' @author Kisung You
 #' @rdname linear_LSIR
@@ -24,8 +27,9 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   if (!check_ndim(ndim,p)){stop("* do.lsir : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   4. h : number of slices
   h = as.integer(h)
-  if (!check_NumMM(h,2,ceiling(n/2),compact=TRUE)){stop("* do.lsir : the number of slices should be in [2,n/2].")}
-  #   5. preprocess
+  if (!is.factor(response)){
+    if (!check_NumMM(h,2,ceiling(n/2),compact=TRUE)){stop("* do.save : the number of slices should be in [2,n/2].")}
+  }  #   5. preprocess
   if (missing(preprocess)){
     algpreprocess = "center"
   } else {
@@ -47,7 +51,11 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   pX      = tmplist$pX
   trfinfo$algtype = "linear"
   #   2. build label matrix
-  label  = as.integer(sir_makelabel(response, h))
+  if (!is.factor(response)){
+    label  = as.integer(sir_makelabel(response, h))
+  } else {
+    label = as.integer(response)
+  }
   ulabel = unique(label)
   nlabel = length(ulabel)
   #   3. compute classwise and overall mean
