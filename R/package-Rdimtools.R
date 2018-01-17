@@ -19,7 +19,9 @@
 #' For \emph{linear} methods, we have
 #' \tabular{lcl}{
 #' FUNCTION \tab TYPE \tab ALGORITHM \cr
+#' \code{\link{do.adr}} \tab U \tab Adaptive Dimension Reduction \cr
 #' \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
+#' \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 #' \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 #' \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
 #' \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
@@ -33,11 +35,13 @@
 #' \code{\link{do.kmvp}} \tab S \tab Kernel-Weighted Maximum Variance Projection \cr
 #' \code{\link{do.kudp}} \tab U \tab Kernel-Weighted Unsupervised Discriminant Projection \cr
 #' \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
+#' \code{\link{do.ldakm}} \tab U \tab Combination of LDA and K-means \cr
 #' \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
 #' \code{\link{do.lea}} \tab U \tab Locally Linear Embedded Eigenspace Analysis \cr
 #' \code{\link{do.lfda}} \tab S \tab Local Fisher Discriminant Analysis \cr
 #' \code{\link{do.llp}} \tab U \tab Local Learning Projections \cr
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
+#' \code{\link{do.lpe}} \tab U \tab Locality Pursuit Embedding \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 #' \code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
@@ -59,6 +63,7 @@
 #' \code{\link{do.sda}} \tab SS \tab Semi-Supervised Discriminant Analysis \cr
 #' \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
 #' \code{\link{do.sir}} \tab S \tab Sliced Inverse Regression \cr
+#' \code{\link{do.slpe}} \tab S \tab Supervised Locality Pursuit Embedding \cr
 #' \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 #' \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 #' \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
@@ -133,6 +138,7 @@
 #' @import RSpectra
 #' @import CVXR
 #' @import geigen
+#' @importFrom pracma pinv
 #' @importFrom Matrix rankMatrix
 #' @importFrom Rlinsolve lsolve.bicgstab
 #' @importFrom Rtsne Rtsne
