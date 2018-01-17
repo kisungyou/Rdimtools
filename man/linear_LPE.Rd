@@ -7,8 +7,30 @@
 do.lpe(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
   numk = max(ceiling(nrow(X)/10), 2))
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
+and columns represent independent variables.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+
+\item{numk}{size of \eqn{k}-nn neighborhood in original dimensional space.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Locality Pursuit Embedding
+Locality Pursuit Embedding (LPE) is an unsupervised linear dimension reduction method.
+It aims at preserving local structure by solving a variational problem that models
+the local geometrical structure by the Euclidean distances.
 }
 \examples{
 \dontrun{

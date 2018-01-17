@@ -29,7 +29,9 @@ a named list containing
 }
 }
 \description{
-Adaptive Dimension Reduction
+Adaptive Dimension Reduction (ADR) iteratively finds the best subspace to perform data clustering. It can be regarded as
+one of remedies for clustering in high dimensional space. Eigenvectors of a between-cluster scatter matrix are used
+as basis of projection.
 }
 \examples{
 ## generate swiss roll data
@@ -42,9 +44,9 @@ out3 = do.adr(X, abstol=1e-4)
 
 ## visualize
 par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="tol=1e-2")
-plot(out2$Y[,1], out2$Y[,2], main="tol=1e-3")
-plot(out3$Y[,1], out3$Y[,2], main="tol=1e-4")
+plot(out1$Y[,1], out1$Y[,2], main="ADR::tol=1e-2")
+plot(out2$Y[,1], out2$Y[,2], main="ADR::tol=1e-3")
+plot(out3$Y[,1], out3$Y[,2], main="ADR::tol=1e-4")
 
 }
 \references{

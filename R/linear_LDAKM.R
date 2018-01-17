@@ -1,5 +1,9 @@
 #' Combination of LDA and K-means
 #'
+#' \code{do.ldakm} is an unsupervised subspace discovery method that combines linear discriminant analysis (LDA) and K-means algorithm.
+#' It tries to build an adaptive framework that selects the most discriminative subspace. It iteratively applies two methods in that
+#' the clustering process is integrated with the subspace selection, and continuously updates its discrimative basis. From its formulation
+#' with respect to generalized eigenvalue problem, it can be considered as generalization of Adaptive Subspace Iteration (ASI) and Adaptive Dimension Reduction (ADR).
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
@@ -27,13 +31,13 @@
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="tol=1e-2")
-#' plot(out2$Y[,1], out2$Y[,2], main="tol=1e-3")
-#' plot(out3$Y[,1], out3$Y[,2], main="tol=1e-4")
+#' plot(out1$Y[,1], out1$Y[,2], main="LDA-KM::tol=1e-2")
+#' plot(out2$Y[,1], out2$Y[,2], main="LDA-KM::tol=1e-3")
+#' plot(out3$Y[,1], out3$Y[,2], main="LDA-KM::tol=1e-4")
 #'
 #' @references
 #' \insertRef{ding_adaptive_2007}{Rdimtools}
-#'
+#' @seealso \code{\link{do.asi}}, \code{\link{do.adr}}
 #' @author Kisung You
 #' @rdname linear_LDAKM
 #' @export
