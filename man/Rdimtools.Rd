@@ -34,9 +34,11 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+\code{\link{do.crp}} \tab U \tab Collaborative Representation-based Projection \cr
 \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
 \code{\link{do.dne}} \tab S \tab Discriminant Neighborhood Embedding \cr
 \code{\link{do.dspp}} \tab S \tab Discriminative Sparsity Preserving Projection \cr
+\code{\link{do.elpp2}} \tab U \tab Enhanced Locality Preserving Projection (2013) \cr
 \code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
@@ -67,6 +69,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Projection \cr
 \code{\link{do.opls}} \tab S \tab Orthogonal Partial Least Squares \cr
 \code{\link{do.pca}} \tab U \tab Principal Component Analysis \cr
+\code{\link{do.pflpp}} \tab U \tab Parameter-Free Locality Preserving Projection \cr
 \code{\link{do.pls}} \tab S \tab Partial Least Squares \cr
 \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
 \code{\link{do.rda}} \tab S \tab Regularized Discriminant Analysis \cr
