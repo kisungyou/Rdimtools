@@ -107,14 +107,11 @@ do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","int
   IW = diag(n)-W
   LHS = (t(pX)%*%t(IW)%*%IW%*%pX)
   RHS = (t(pX)%*%pX)
-  projection = geigen::geigen(LHS, RHS, TRUE)$vectors[,2:(ndim+1)]
+  projection = aux.adjprojection(geigen::geigen(LHS, RHS, TRUE)$vectors[,2:(ndim+1)])
 
 
   #------------------------------------------------------------------------
   ## RETURN
-  #   1. projction
-  projection = aux.adjprojection(projection)
-  #   2. return output
   result = list()
   result$Y = pX%*%projection
   result$trfinfo = trfinfo

@@ -65,7 +65,7 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
       stop("* do.lspp : no degerate class of size 1 is allowed.")
     }
   }
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.lspp : 'ndim' is a positive integer in [1,#(covariates)).")}
@@ -91,7 +91,7 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
     projection_first = diag(p)
     pcapX = pX
   } else{
-    projection_first = eigen(cov(pX))$vectors[,1:pcadim]
+    projection_first = aux.adjprojection(eigen(cov(pX))$vectors[,1:pcadim])
     pcapX = pX%*%projection_first
   }
 
@@ -134,13 +134,15 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
   LHS = t(pcapX)%*%Ls%*%pcapX
   RHS = t(pcapX)%*%Ds%*%pcapX
   geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection_second = matrix(geigs$vectors[,1:ndim],nrow=p)
+  projection_second = aux.adjprojection(geigs$vectors[,1:ndim])
   eigenvalue = as.vector(geigs$values[1:ndim])
 
 
   #------------------------------------------------------------------------
   ## RETURN
-  projection = aux.adjprojection(projection_first%*%projection_second)
+  #   1. all projection
+  projection = (projection_first%*%projection_second)
+  #   2. return output
   result = list()
   result$Y = pX%*%projection
   result$eigval = eigenvalue

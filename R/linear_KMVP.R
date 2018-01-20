@@ -70,7 +70,7 @@ do.kmvp <- function(X, label, ndim=2,
   }
   N = length(ulabel)
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -97,7 +97,7 @@ do.kmvp <- function(X, label, ndim=2,
   trfinfo$algtype = "linear"
   #   2. perform PCA onto (N-1) dimensional space
   outPCA = do.pca(pX,ndim=(N-1))
-  projection_first = outPCA$projection
+  projection_first = aux.adjprojection(outPCA$projection)
   ppX = outPCA$Y
   #   3. Start of MVP algorithm here.
   #   3-1. Laplacian Part
@@ -122,8 +122,7 @@ do.kmvp <- function(X, label, ndim=2,
   #   4. solve geigen
   LHS = t(ppX)%*%M%*%ppX
   RHS = t(ppX)%*%L%*%ppX
-  geigs = geigen::geigen(LHS, RHS, TRUE) # note that they are aligned in an increasing order anyway.
-  projection_second = geigs$vectors[,1:ndim]
+  projection_second = aux.geigen(LHS,RHS,ndim,maximal=FALSE)
   projection_all = projection_first%*%projection_second
 
   #------------------------------------------------------------------------

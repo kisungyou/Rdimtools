@@ -4,8 +4,9 @@
 \alias{do.isoproj}
 \title{Isometric Projection}
 \usage{
-do.isoproj(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  preprocess = "center")
+do.isoproj(X, ndim = 2, type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"),
+  preprocess = c("center", "whiten", "decorrelate"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

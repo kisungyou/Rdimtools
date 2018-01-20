@@ -66,7 +66,7 @@ do.modp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
     }
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -132,9 +132,7 @@ do.modp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #   1. cost function
   costS = ((1-alpha)*St)-(alpha*Sl)
   #   2. top eigenvectors
-  projection = RSpectra::eigs(costS, ndim)$vectors
-  #   3. adjust projection matrix
-  projection = aux.adjprojection(projection)
+  projection = aux.adjprojection(RSpectra::eigs(costS, ndim)$vectors)
 
   #------------------------------------------------------------------------
   ## RETURN

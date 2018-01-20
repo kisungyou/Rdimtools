@@ -70,7 +70,7 @@ do.eslpp <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
       stop("* do.eslpp : no degerate class of size 1 is allowed.")
     }
   }
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.eslpp : 'ndim' is a positive integer in [1,#(covariates)).")}
@@ -136,7 +136,7 @@ do.eslpp <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
 
   #   6. compute Projection Matrix
   geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = matrix(geigs$vectors[,1:ndim],nrow=p)
+  projection = aux.adjprojection(geigs$vectors[,1:ndim])
   eigenvalue = as.vector(geigs$values[1:ndim])
 
   #------------------------------------------------------------------------

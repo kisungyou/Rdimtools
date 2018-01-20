@@ -6,8 +6,6 @@
 #' Regularized Discriminant Analysis (RDA) adopts such idea to stabilize
 #' eigendecomposition in LDA formulation.
 #'
-#'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
@@ -73,7 +71,7 @@ do.rda <- function(X, label, ndim=2, alpha=1.0){
     warning("* do.rda : given 'label' has all unique elements.")
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)

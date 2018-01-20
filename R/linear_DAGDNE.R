@@ -70,7 +70,7 @@ do.dagdne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   #   For this example, there should be no degenerate class of size 1.
   label  = check_label(label, n)
   ulabel = unique(label)
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
@@ -81,7 +81,7 @@ do.dagdne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   trfinfo$algtype = "linear"
   #   2. Homogeneous and Heterogeneous Neighbors
   #   2-1. find neighborhood logical matrix
-  logicalmat = dagdne_nbdlogical(pX, label, numk)
+  logicalmat = aux.nbdlogical(pX, label, numk, numk)
   mat_hom    = logicalmat$hom
   mat_het    = logicalmat$het
   #   2-2. find adjacency matrix
@@ -120,45 +120,3 @@ do.dagdne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   result$projection = projection
   return(result)
 }
-
-
-
-
-#  ------------------------------------------------------------------------
-#' @keywords internal
-#' @noRd
-dagdne_nbdlogical <- function(X, label, numk){
-  D = as.matrix(dist(X))
-  n = nrow(D)
-  # 1. homogeneous logical matrix
-  logical_hom = array(FALSE,c(n,n))
-  for (i in 1:n){
-    # 1-1. index of same class
-    idxhom = setdiff(which(label==label[i]), i)
-    # 1-2. which is the smallest numk ?
-    partD = as.vector(D[i,idxhom])
-    # 1-3. partially smallest ones
-    partidx = which(      partD <= max(sort(partD)[1:max(min(numk, length(idxhom)),1)])    )
-    # 1-4. adjust idxhom
-    idxhomadj = idxhom[partidx]
-    logical_hom[i,idxhomadj] = TRUE
-  }
-  # 2. heterogeneous logical matrix
-  logical_het = array(FALSE,c(n,n))
-  for (i in 1:n){
-    idxhet = which(label!=label[i])
-    partD = as.vector(D[i, idxhet])
-    partidx = which(partD <= max(sort(partD)[1:max(min(numk, length(idxhet)),1)]))
-    idxhetadj = idxhet[partidx]
-    logical_het[i,idxhetadj] = TRUE
-  }
-  output = list()
-  output$hom = logical_hom
-  output$het = logical_het
-  return(output)
-}
-
-
-
-
-

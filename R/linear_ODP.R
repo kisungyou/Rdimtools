@@ -4,7 +4,6 @@
 #' The method maximizes weighted difference between local and non-local scatter while local information is also preserved by
 #' constructing a neighborhood graph.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
@@ -71,7 +70,7 @@ do.odp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
     }
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -138,9 +137,7 @@ do.odp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #   1. cost function
   costS = ((1-alpha)*St)-(alpha*Sl)
   #   2. top eigenvectors
-  projection = RSpectra::eigs(costS, ndim)$vectors
-  #   3. adjust projection matrix
-  projection = aux.adjprojection(projection)
+  projection = aux.adjprojection(RSpectra::eigs(costS, ndim)$vectors)
 
   #------------------------------------------------------------------------
   ## RETURN

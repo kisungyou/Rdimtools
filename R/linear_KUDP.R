@@ -104,12 +104,8 @@ do.kudp <- function(X, ndim=2, type=c("proportion",0.1),
     final_SL = (t(tmp_X)%*%L%*%(tmp_X))/(M*M)
     final_SN = final_ST - final_SL
 
-    # 2. geigen : ascending
-    geigs = geigen::geigen(final_SN, final_SL, TRUE)
-
-    # 3. new projection
-    lastidx = length(geigs$values)
-    proj_second = geigs$vectors[,lastidx:(lastidx-ndim+1)]
+    # 2. geigen : use bottom ones
+    proj_second = aux.geigen(final_SN, final_SL, ndim, maximal=TRUE)
     proj_all = (proj_first %*% proj_second)
   } else {
     eigSt = eigen(tmpSt)
@@ -123,10 +119,8 @@ do.kudp <- function(X, ndim=2, type=c("proportion",0.1),
     # Step 4.
     SL_tilde = (t(Xtilde)%*%L%*%Xtilde)/(M*M)
     SN_tilde = (ST_tilde-SL_tilde)
-    geigs = geigen::geigen(SN_tilde, SL_tilde, TRUE)
 
-    lastidx = length(geigs$values)
-    proj_second = geigs$vectors[,lastidx:(lastidx-ndim+1)]
+    proj_second = aux.geigen(SN_tilde, SL_tilde, ndim, maximal=TRUE)
     proj_all    = (proj_first%*%proj_second)
   }
 

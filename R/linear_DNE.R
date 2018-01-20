@@ -70,7 +70,7 @@ do.dne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   #   For this example, there should be no degenerate class of size 1.
   label  = check_label(label, n)
   ulabel = unique(label)
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY

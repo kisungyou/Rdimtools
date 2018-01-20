@@ -64,7 +64,7 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
       stop("* do.slpp : no degerate class of size 1 is allowed.")
     }
   }
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){    stop("* do.slpp : 'ndim' is a positive integer in [1,#(covariates)].")  }

@@ -72,7 +72,7 @@ do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
       stop("* do.klde : no degerate class of size 1 is allowed.")
     }
   }
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.klde : 'ndim' is a positive integer in [1,#(covariates)).")}

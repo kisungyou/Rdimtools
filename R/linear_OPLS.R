@@ -99,7 +99,7 @@ do.opls <- function(data1,data2,ndim=2){
   ## Return output
   result = list()
   result$Y = xT
-  result$projection = xP
+  result$projection = aux.adjprojection(xP)
   result$trfinfo    = trfinfoX
   result$eigvals       = evals
   return(result)

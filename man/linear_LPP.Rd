@@ -4,8 +4,9 @@
 \alias{do.lpp}
 \title{Locality Preserving Projection}
 \usage{
-do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = "center", t = 1)
+do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
+  "intersect", "asymmetric"), weight = TRUE, preprocess = c("center",
+  "whiten", "decorrelate"), t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

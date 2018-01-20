@@ -91,7 +91,7 @@ do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-6){
 
   LHS = tpX %*% (tmplist$pX)
   RHS = tpX %*% result$Y
-  result$projection = solve(LHS,RHS)
+  result$projection = aux.adjprojection(solve(LHS,RHS))
 
   result$loadings = t(output$L)
   result$noise   = output$Pvec

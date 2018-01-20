@@ -128,6 +128,6 @@ do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),prepro
 
   LHS = t(pX)%*%pX
   RHS = t(pX)%*%(result$Y)
-  result$projection = solve(LHS,RHS) # projection
+  result$projection = aux.adjprojection(solve(LHS,RHS)) # projection
   return(result)
 }

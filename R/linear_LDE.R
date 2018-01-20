@@ -112,7 +112,7 @@ do.lde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
 
   #   4. compute Projection Matrix
   geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = as.matrix(geigs$vectors[,1:ndim],nrow=p)
+  projection = aux.adjprojection(geigs$vectors[,1:ndim])
   eigenvalue = as.vector(geigs$values[1:ndim])
 
   #------------------------------------------------------------------------

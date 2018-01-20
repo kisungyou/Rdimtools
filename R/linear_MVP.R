@@ -64,7 +64,7 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   }
   N = length(ulabel)
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -110,18 +110,14 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #   3-3. compute M
   Mhalf = diag(n)-W
   M     = (t(Mhalf)%*%Mhalf)
-  #   4. solve geigen
+  #   4. solve geigen with lowest
   LHS = t(ppX)%*%M%*%ppX
   RHS = t(ppX)%*%L%*%ppX
-  geigs = geigen::geigen(LHS, RHS, TRUE) # note that they are aligned in an increasing order anyway.
-  projection_second = geigs$vectors[,1:ndim]
+  projection_second = aux.geigen(LHS,RHS,ndim,maximal=FALSE)
   projection_all = projection_first%*%projection_second
 
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
-  #   1. adjust projection
-  projection_all = aux.adjprojection(projection_all)
-  #   2. return
   result = list()
   result$Y = pX%*%projection_all
   result$trfinfo = trfinfo

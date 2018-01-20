@@ -59,7 +59,7 @@ do.slpe <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   label  = check_label(label, n)
   ulabel = unique(label)
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   labelorder = order(label)
   labelrank  = rank(label)

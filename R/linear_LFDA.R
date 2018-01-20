@@ -71,7 +71,7 @@ do.lfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
     }
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -175,13 +175,10 @@ do.lfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN LFDA : USE TOP EIGENVECTORS
   Smbar = Swbar+Sbbar
-  projection = geigen::geigen(Smbar, Swbar, TRUE)$vectors[,p:(p-ndim+1)]
+  projection = aux.geigen(Smbar, Swbar, ndim, maximal=TRUE)
 
   #------------------------------------------------------------------------
   ## RETURN
-  #   1. projction
-  projection = aux.adjprojection(projection)
-  #   2. return output
   result = list()
   result$Y = pX%*%projection
   result$trfinfo = trfinfo

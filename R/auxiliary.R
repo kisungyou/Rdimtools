@@ -13,6 +13,8 @@
 # 10. aux.kernelprojection : given uncentered gram matrix, find the projected data
 #                            note that it results (ndim-by-N) matrix, columns are projected vectors.
 # 11. aux.adjprojection    : adjust projection matrix
+# 12. aux.nbdlogical       : find homogeneous and heterogeneous neighborhood indexing
+# 13. aux.geigen           : geigen in my taste
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1065,8 +1067,6 @@ aux.kernelprojection <- function(KK, ndim){
 }
 
 
-
-
 # 11. aux.adjprojection : adjust projection matrix ------------------------
 #' @keywords internal
 #' @noRd
@@ -1079,4 +1079,56 @@ aux.adjprojection <- function(P){
     output = P
   }
   return(output)
+}
+
+
+
+# 12. aux.nbdlogical : find homogeneous and heterogeneous neighbor --------
+#' @keywords internal
+#' @noRd
+aux.nbdlogical <- function(X, label, khomo, khet){
+  D = as.matrix(dist(X))
+  n = nrow(D)
+  # 1. homogeneous logical matrix
+  logical_hom = array(FALSE,c(n,n))
+  for (i in 1:n){
+    # 1-1. index of same class
+    idxhom = setdiff(which(label==label[i]), i)
+    # 1-2. which is the smallest numk ?
+    partD = as.vector(D[i,idxhom])
+    # 1-3. partially smallest ones
+    partidx = which(      partD <= max(sort(partD)[1:max(min(khomo, length(idxhom)),1)])    )
+    # 1-4. adjust idxhom
+    idxhomadj = idxhom[partidx]
+    logical_hom[i,idxhomadj] = TRUE
+  }
+  # 2. heterogeneous logical matrix
+  logical_het = array(FALSE,c(n,n))
+  for (i in 1:n){
+    idxhet = which(label!=label[i])
+    partD = as.vector(D[i, idxhet])
+    partidx = which(partD <= max(sort(partD)[1:max(min(khet, length(idxhet)),1)]))
+    idxhetadj = idxhet[partidx]
+    logical_het[i,idxhetadj] = TRUE
+  }
+  output = list()
+  output$hom = logical_hom
+  output$het = logical_het
+  return(output)
+}
+
+
+
+# 13. aux.geigen : in my taste --------------------------------------------
+#' @keywords internal
+#' @noRd
+aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
+  geigs = geigen::geigen(top, bottom)
+  maxp  = length(geigs$values)
+  if (maximal==TRUE){
+    projection = aux.adjprojection(geigs$vectors[,maxp:(maxp-ndim+1)])
+  } else {
+    projection = aux.adjprojection(geigs$vectors[,1:ndim])
+  }
+  return(projection)
 }

@@ -97,7 +97,7 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   pXpca = do.pca(pX, ndim=pcadim, preprocess="center")
   Xpca  = pXpca$Y
-  Wpca  = pXpca$projection
+  Wpca  = aux.adjprojection(pXpca$projection)
 
   #   step 2. adjacency graph
   #   here, wD is now Distance Matrix, which is denoted as S in the note.
@@ -114,11 +114,12 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   }
 
   #   step 3. main projection matrix
-  Wolpp = (method_olpp(t(Xpca), wD, ndim));
+  Wolpp = aux.adjprojection(method_olpp(t(Xpca), wD, ndim));
 
   #   step 4. computation !
   #   1. adjust projection matrix
-  proj_all = aux.adjprojection(Wpca%*%Wolpp)
+  proj_all = (Wpca%*%Wolpp)
+
   #   2. return output
   result = list()
   result$Y = pX%*%proj_all

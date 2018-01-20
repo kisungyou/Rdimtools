@@ -110,7 +110,7 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
 
   #   6. compute Projection Matrix
   geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = matrix(geigs$vectors[,1:ndim],nrow=p)
+  projection = aux.adjprojection(geigs$vectors[,1:ndim])
   eigenvalue = as.vector(geigs$values[1:ndim])
 
   #------------------------------------------------------------------------

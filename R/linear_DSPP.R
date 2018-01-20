@@ -70,7 +70,7 @@ do.dspp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
       stop("* do.dspp : no degerate class of size 1 is allowed.")
     }
   }
-  if (any(is.na(label))||(any(is.infinite(label)))){warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
+  if (any(is.na(label))||(any(is.infinite(label)))){stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")  }
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.dspp : 'ndim' is a positive integer in [1,#(covariates)).")}
@@ -165,10 +165,10 @@ do.dspp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   LHS = ((t(pX)%*%Lw%*%pX) + (rho*Sw))
   RHS = (t(pX)%*%Lb%*%pX)
   #   3. use with SMALLEST ones
-  projection = geigen::geigen(LHS,RHS,TRUE)$vectors[,1:ndim]
+  projection = aux.geigen(LHS,RHS,ndim,maximal=FALSE)
+
   #------------------------------------------------------------------------
   ## RETURN OUTPUT
-  projection = aux.adjprojection(projection)
 
   result = list()
   result$Y = pX%*%projection

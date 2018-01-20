@@ -62,7 +62,7 @@ do.kmmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   }
   N = length(ulabel)
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)

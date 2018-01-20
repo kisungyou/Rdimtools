@@ -124,6 +124,6 @@ do.ica <- function(X,ndim=2,type="logcosh",tpar=1,sym=FALSE,tol=1e-6,redundancy=
   result = list()
   result$Y = t(output$S)
   result$trfinfo = trfinfo
-  result$projection = (output$W)
+  result$projection = aux.adjprojection(output$W)
   return(result)
 }

@@ -46,7 +46,10 @@
 #' \code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 #' \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
+#' \code{\link{do.mfa}} \tab S \tab Marginal Fisher Analysis \cr
+#' \code{\link{do.mlie}} \tab S \tab Maximal Local Interclass Embedding \cr
 #' \code{\link{do.mmc}} \tab S \tab Maximum Margin Criterion \cr
+#' \code{\link{do.mmp}} \tab SS \tab Maximum Margin Projection \cr
 #' \code{\link{do.modp}} \tab S \tab Modified Orthogonal Discriminant Projection \cr
 #' \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 #' \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
@@ -82,6 +85,7 @@
 #' \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
 #' \code{\link{do.klde}} \tab S \tab Kernel Local Discriminant Embedding \cr
 #' \code{\link{do.klfda}} \tab S \tab Kernel Local Fisher Discriminant Analysis \cr
+#' \code{\link{do.kmfa}} \tab S \tab Kernel Marginal Fisher Analysis \cr
 #' \code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 #' \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 #' \code{\link{do.ksda}} \tab SS \tab Kernel Semi-Supervised Discriminant Analysis \cr
@@ -97,6 +101,7 @@
 #' \code{\link{do.sammon}} \tab U \tab Sammon Mapping \cr
 #' \code{\link{do.sne}} \tab U \tab Stochastic Neighbor Embedding \cr
 #' \code{\link{do.spe}} \tab U \tab Stochastic Proximity Embedding \cr
+#' \code{\link{do.splapeig}} \tab S \tab Supervised Laplacian Eigenmaps \cr
 #' \code{\link{do.tsne}} \tab U \tab t-distributed Stochastic Neighbor Embedding
 #' }
 #'

@@ -64,7 +64,7 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   }
   N = length(ulabel)
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
@@ -115,17 +115,14 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION
   costS = Sb-Sw
-  projection = RSpectra::eigs(costS, ndim)$vectors
+  projection = aux.adjprojection(RSpectra::eigs(costS, ndim)$vectors)
 
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
-  #   1. adjust projection
-  projection_all = aux.adjprojection(projection)
-  #   2. return
   result = list()
-  result$Y = pX%*%projection_all
+  result$Y = pX%*%projection
   result$trfinfo = trfinfo
-  result$projection = projection_all
+  result$projection = projection
   return(result)
 }
 

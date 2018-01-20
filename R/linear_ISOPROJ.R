@@ -25,20 +25,20 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'## generate data
-#'X <- aux.gensamples(n=28)
+#' @examples
+#' ## generate data
+#' X <- aux.gensamples(n=28)
 #'
-#'## 1. connecting 10% of data for graph construction.
-#'output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.10))
+#' ## 1. connecting 10% of data for graph construction.
+#' output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.10))
 #'
-#'## 2. constructing 25%-connected graph
-#'output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
+#' ## 2. constructing 25%-connected graph
+#' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
 #'
-#'## Visualize two different projections
-#'par(mfrow=c(1,2))
-#'plot(output1$Y[,1],output1$Y[,2],main="10%")
-#'plot(output2$Y[,1],output2$Y[,2],main="25%")
+#' ## Visualize two different projections
+#' par(mfrow=c(1,2))
+#' plot(output1$Y[,1],output1$Y[,2],main="10%")
+#' plot(output2$Y[,1],output2$Y[,2],main="25%")
 #'
 #' @references
 #' \insertRef{cai_isometric_2007}{Rdimtools}
@@ -46,7 +46,9 @@
 #' @rdname linear_ISOPROJ
 #' @author Kisung You
 #' @export
-do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",preprocess="center"){
+do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
+                       symmetric=c("union","intersect","asymmetric"),
+                       preprocess=c("center","whiten","decorrelate")){
   ## PREPROCESSING
   # Preprocessing : typecheck is always first step to perform.
   aux.typecheck(X)
@@ -62,14 +64,17 @@ do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",prepr
   # 2. isomap itself
   #   preprocess : 'center','decorrelate', or 'whiten'
   nbdtype = type
-  nbdsymmetric = symmetric
-  if (!is.element(nbdsymmetric,c("union","intersect","asymmetric"))){
-    stop("* do.isoproj : 'symmetric' should have one of three values.")
+  if (missing(symmetric)){
+    nbdsymmetric = "union"
+  } else {
+    nbdsymmetric = match.arg(symmetric)
   }
+
   algweight = TRUE
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
-    stop("* do.isoproj : 'preprocess' should be one of three values.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
 
   ## COMPUTATION
@@ -121,9 +126,10 @@ do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",prepr
 
 
   ## RETURN OUTPUT
+  projection = aux.adjprojection(A)
   result = list()
-  result$Y = pX%*%A
-  result$projection = A
+  result$Y = pX%*%projection
+  result$projection = projection
   result$trfinfo    = trfinfo
   return(result)
 }

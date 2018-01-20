@@ -74,7 +74,7 @@ do.lda <- function(X, label, ndim=2){
     warning("* do.lda : given 'label' has all unique elements.")
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
-    warning("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
+    stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
 
   #   3. ndim
