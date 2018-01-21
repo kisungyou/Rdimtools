@@ -32,6 +32,7 @@
 #' \code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 #' \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 #' \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
+#' \code{\link{do.fscore}} \tab S \tab Fisher Score \cr
 #' \code{\link{do.ica}} \tab U \tab Independent Component Analysis \cr
 #' \code{\link{do.isoproj}} \tab U \tab Isometric Projection \cr
 #' \code{\link{do.kmvp}} \tab S \tab Kernel-Weighted Maximum Variance Projection \cr
@@ -48,10 +49,12 @@
 #' \code{\link{do.lpe}} \tab U \tab Locality Pursuit Embedding \cr
 #' \code{\link{do.lpmip}} \tab U \tab Locality-Preserved Maximum Information Projection \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
+#' \code{\link{do.lscore}} \tab U \tab Laplacian Score \cr
 #' \code{\link{do.lsda}} \tab S \tab Locality Sensitive Discriminant Analysis \cr
 #' \code{\link{do.lsdf}} \tab SS \tab Locality Sensitive Discriminant Feature \cr
 #' \code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
+#' \code{\link{do.mcfs}} \tab U \tab Multi-Cluster Feature Selection \cr
 #' \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 #' \code{\link{do.mfa}} \tab S \tab Marginal Fisher Analysis \cr
 #' \code{\link{do.mlie}} \tab S \tab Maximal Local Interclass Embedding \cr
@@ -154,6 +157,7 @@
 #' @import CVXR
 #' @import geigen
 #' @importFrom pracma pinv
+#' @importFrom ADMM admm.lasso
 #' @importFrom Matrix rankMatrix
 #' @importFrom Rlinsolve lsolve.bicgstab
 #' @importFrom Rtsne Rtsne

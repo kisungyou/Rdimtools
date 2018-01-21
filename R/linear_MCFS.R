@@ -1,9 +1,8 @@
-#' Locality Sensitive Discriminant Feature
+#' Multi-Cluster Feature Selection
 #'
-#' Locality Sensitive Discriminant Feature (LSDF) is a semi-supervised feature selection method.
-#' It utilizes both labeled and unlabeled data points in that labeled points are used to maximize
-#' the margin between data opints from different classes, while labeled ones are used to discover
-#' the geometrical structure of the data space.
+#' Multi-Cluster Feature Selection (MCFS) is an unsupervised feature selection method. Based on
+#' a multi-cluster assumption, it aims at finding meaningful features using sparse reconstruction of
+#' spectral basis using LASSO.
 #'
 #' @examples
 #' \dontrun{
@@ -16,27 +15,20 @@
 #' X      = rbind(dt1,dt2,dt3)
 #' label  = c(rep(1,33), rep(2,33), rep(3,33))
 #'
-#' ## copy a label and let 20% of elements be missing
-#' nlabel = length(label)
-#' nmissing = round(nlabel*0.20)
-#' label_missing = label
-#' label_missing[sample(1:nlabel, nmissing)]=NA
-#'
-#' ## try different neighborhood sizes
-#' out1 = do.lsdf(X, label_missing, type=c("proportion",0.01))
-#' out2 = do.lsdf(X, label_missing, type=c("proportion",0.1))
-#' out3 = do.lsdf(X, label_missing, type=c("proportion",0.25))
+#' ## try different regularization parameters
+#' out1 = do.mcfs(X, lambda=0.01)
+#' out2 = do.mcfs(X, lambda=0.1)
+#' out3 = do.mcfs(X, lambda=1)
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="1% connectivity")
-#' plot(out2$Y[,1], out2$Y[,2], main="10% connectivity")
-#' plot(out3$Y[,1], out3$Y[,2], main="25% connectivity")
+#' plot(out1$Y[,1], out1$Y[,2], main="lambda=0.01")
+#' plot(out2$Y[,1], out2$Y[,2], main="lambda=0.1")
+#' plot(out3$Y[,1], out3$Y[,2], main="lambda=1")
 #' }
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
@@ -45,7 +37,8 @@
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null" and other options of "center", "decorrelate" and "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param gamma within-class weight parameter for same-class data.
+#' @param K assumed number of clusters in the original dataset.
+#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
 #' \describe{
@@ -56,43 +49,43 @@
 #' }
 #'
 #' @references
-#' \insertRef{cai_locality_2007}{Rdimtools}
+#' \insertRef{cai_unsupervised_2010}{Rdimtools}
 #'
-#' @rdname linear_LSDF
+#' @rdname linear_MCFS
 #' @author Kisung You
 #' @export
-do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
-                    preprocess=c("null","center","whiten","decorrelate"), gamma=100){
+do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
+                    preprocess=c("null","center","whiten","decorrelate"),
+                    K=max(round(nrow(X)/5),2), lambda=1.0, t=10.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
   aux.typecheck(X)
   n = nrow(X)
   p = ncol(X)
-  #   2. label : check and return a de-factored vector
-  #   For this example, there should be no degenerate class of size 1.
-  label  = check_label(label, n)
-  ulabel = unique(label)
-  if (all(!is.na(ulabel))){
-    message("* Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.")
-  }
-  #   3. ndim
+  #   2. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
-    stop("* do.lsdf : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.mcfs : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. type
+  #   3. type
   nbdtype = type
   nbdsymmetric = "union"
-  #   5. preprocess
+  #   4. preprocess
   if (missing(preprocess)){
-    algpreprocess = "null"
+    algpreprocess = "center"
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  #   6. gamma
-  gamma = as.double(gamma)
-  if (!check_NumMM(gamma,1,1e+10)){stop("* do.lsdf : 'gamma' is a large positive real number.")}
+  #   5. K : cluster numbers
+  K = as.integer(K)
+  if (!check_NumMM(K,2,round(nrow(X)/5))){stop("* do.mcfs : 'K' is an assumed cluster size in [2,#(samples)/2].")}
+  #   6. lambda
+  lambdaval = as.double(lambda)
+  if (!check_NumMM(lambdaval,0,Inf,compact=FALSE)){stop("* do.mcfs : 'lambda' is a LASSO parameter in (0,Inf).")}
+  #   7. t : bandwidth parameter
+  t = as.double(t)
+  if (!check_NumMM(t,1e-10,Inf,compact=TRUE)){stop("* do.mcfs : 't' is a bandwidth parameter in (0,Inf).")}
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
@@ -107,48 +100,41 @@ do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
     pX      = tmplist$pX
   }
   trfinfo$algtype = "linear"
-
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
   nbdmask   = nbdstruct$mask
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : MAIN COMPUTATION FOR LSDF
-  #   1. build Within- and between-class weights
-  Sb = array(0,c(n,n))
-  Sw = array(0,c(n,n))
-  for (i in 1:(n-1)){
-    class1 = label[i]
-    for (j in (i+1):n){
-      class2 = label[j]
-      if (((!is.na(class1))&&(!is.na(class2)))&&(class1==class2)){
-        Sw[i,j] = gamma
-        Sw[j,i] = gamma
-      } else if ((isTRUE(nbdmask[i,j])||isTRUE(nbdmask[j,i]))&&(is.na(class1)||is.na(class2))){
-        Sw[i,j] = 1.0
-        Sw[j,i] = 1.0
-      }
-      if (((!is.na(class1))&&(!is.na(class2)))&&(class1!=class2)){
-        Sb[i,j] = 1.0
-        Sb[j,i] = 1.0
-      }
-    }
+  ## COMPUTATION : MAIN PART FOR MULTI-CLUSTER FEATURE SELECTION
+  #   1. construct nbd graph with weights; W
+  Dsqmat = exp(-(as.matrix(dist(pX))^2)/t)
+  W      = Dsqmat*nbdmask
+  #   2. solve generalized eigenvalue problem
+  D = diag(rowSums(W))
+  L = D-W
+  Y = aux.geigen(L,D,K,maximal=FALSE)
+  #   3. solve K number of LASSO problems
+  A = array(0,c(p,K))
+  for (i in 1:K){
+    # 3-1. take one column vector
+    y      = as.vector(Y[,i])
+    # 3-2. solve with LASSO; I will do it with mine
+    solved = ADMM::admm.lasso(pX, y, lambda=lambdaval)$x
+    # 3-3. record the solved
+    A[,i]  = as.vector(solved)
   }
-  #   2. laplacian graphs
-  Lw = diag(rowSums(Sw))-Sw
-  Lb = diag(rowSums(Sb))-Sb
-  #   3. compute feature scores
+  #   4. find the solution
   fscore = rep(0,p)
-  for (j in 1:p){
-    fr = as.vector(pX[,j])
-    term1 = sum(as.vector(Lb%*%matrix(fr))*fr)
-    term2 = sum(as.vector(Lw%*%matrix(fr))*fr)
-    fscore[j] = term1/term2
+  for (i in 1:p){
+    # 4-1. select one vector
+    veca = base::abs(as.vector(A[i,]))
+    # 4-2. take the largest
+    fscore[i] = max(veca)
   }
-  #   4. find the largest ones
+  #   5. select the largest ones
   idxvec = base::order(fscore, decreasing=TRUE)[1:ndim]
-  #   5. find the projection matrix
+  #   6. find the projection matrix
   projection = aux.featureindicator(p,ndim,idxvec)
 
   #------------------------------------------------------------------------

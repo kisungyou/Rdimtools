@@ -19,7 +19,6 @@
 #' combinatorial laplacian where connectivity is represented as 1 or 0 only.
 #' @param kernelscale kernel scale parameter. Default value is 1.0.
 #'
-#'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}

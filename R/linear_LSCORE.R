@@ -1,9 +1,9 @@
-#' Locality Sensitive Discriminant Feature
+#' Laplacian Score
 #'
-#' Locality Sensitive Discriminant Feature (LSDF) is a semi-supervised feature selection method.
-#' It utilizes both labeled and unlabeled data points in that labeled points are used to maximize
-#' the margin between data opints from different classes, while labeled ones are used to discover
-#' the geometrical structure of the data space.
+#' Laplacian Score (LSCORE) is an unsupervised linear feature extraction method. For each
+#' feature/variable, it computes Laplacian score based on an observation that data from the
+#' same class are often close to each other. Its power of locality preserving property is used, and
+#' the algorithm selects variables with largest scores.
 #'
 #' @examples
 #' \dontrun{
@@ -16,27 +16,20 @@
 #' X      = rbind(dt1,dt2,dt3)
 #' label  = c(rep(1,33), rep(2,33), rep(3,33))
 #'
-#' ## copy a label and let 20% of elements be missing
-#' nlabel = length(label)
-#' nmissing = round(nlabel*0.20)
-#' label_missing = label
-#' label_missing[sample(1:nlabel, nmissing)]=NA
-#'
-#' ## try different neighborhood sizes
-#' out1 = do.lsdf(X, label_missing, type=c("proportion",0.01))
-#' out2 = do.lsdf(X, label_missing, type=c("proportion",0.1))
-#' out3 = do.lsdf(X, label_missing, type=c("proportion",0.25))
+#' ## try different kernel bandwidth
+#' out1 = do.lscore(X, t=0.1)
+#' out2 = do.lscore(X, t=1)
+#' out3 = do.lscore(X, t=10)
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="1% connectivity")
-#' plot(out2$Y[,1], out2$Y[,2], main="10% connectivity")
-#' plot(out3$Y[,1], out3$Y[,2], main="25% connectivity")
+#' plot(out1$Y[,1], out1$Y[,2], main="bandwidth=0.1")
+#' plot(out2$Y[,1], out2$Y[,2], main="bandwidth=1")
+#' plot(out3$Y[,1], out3$Y[,2], main="bandwidth=10")
 #' }
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
@@ -45,7 +38,7 @@
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null" and other options of "center", "decorrelate" and "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param gamma within-class weight parameter for same-class data.
+#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
 #' \describe{
@@ -56,43 +49,36 @@
 #' }
 #'
 #' @references
-#' \insertRef{cai_locality_2007}{Rdimtools}
+#' \insertRef{he_laplacian_2005}{Rdimtools}
 #'
-#' @rdname linear_LSDF
+#' @rdname linear_LSCORE
 #' @author Kisung You
 #' @export
-do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
-                    preprocess=c("null","center","whiten","decorrelate"), gamma=100){
+do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
+                      preprocess=c("null","center","whiten","decorrelate"), t=10.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
   aux.typecheck(X)
   n = nrow(X)
   p = ncol(X)
-  #   2. label : check and return a de-factored vector
-  #   For this example, there should be no degenerate class of size 1.
-  label  = check_label(label, n)
-  ulabel = unique(label)
-  if (all(!is.na(ulabel))){
-    message("* Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.")
-  }
-  #   3. ndim
+  #   2. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
-    stop("* do.lsdf : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.lscore : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. type
+  #   3. type
   nbdtype = type
   nbdsymmetric = "union"
-  #   5. preprocess
+  #   4. preprocess
   if (missing(preprocess)){
     algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  #   6. gamma
-  gamma = as.double(gamma)
-  if (!check_NumMM(gamma,1,1e+10)){stop("* do.lsdf : 'gamma' is a large positive real number.")}
+  #   5. t : kernel bandwidth
+  t = as.double(t)
+  if (!check_NumMM(t, 1e-15, Inf, compact=TRUE)){stop("* do.lscore : 't' is a kernel bandwidth parameter in (0,Inf).")}
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
@@ -114,39 +100,31 @@ do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
   nbdmask   = nbdstruct$mask
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : MAIN COMPUTATION FOR LSDF
-  #   1. build Within- and between-class weights
-  Sb = array(0,c(n,n))
-  Sw = array(0,c(n,n))
-  for (i in 1:(n-1)){
-    class1 = label[i]
-    for (j in (i+1):n){
-      class2 = label[j]
-      if (((!is.na(class1))&&(!is.na(class2)))&&(class1==class2)){
-        Sw[i,j] = gamma
-        Sw[j,i] = gamma
-      } else if ((isTRUE(nbdmask[i,j])||isTRUE(nbdmask[j,i]))&&(is.na(class1)||is.na(class2))){
-        Sw[i,j] = 1.0
-        Sw[j,i] = 1.0
-      }
-      if (((!is.na(class1))&&(!is.na(class2)))&&(class1!=class2)){
-        Sb[i,j] = 1.0
-        Sb[j,i] = 1.0
-      }
-    }
-  }
-  #   2. laplacian graphs
-  Lw = diag(rowSums(Sw))-Sw
-  Lb = diag(rowSums(Sb))-Sb
-  #   3. compute feature scores
+  ## COMPUTATION : MAIN PART FOR LAPLACIAN SCORE
+  #   1. weight matrix
+  Dsqmat  = exp(-(as.matrix(dist(pX))^2)/t)
+  S       = Dsqmat*nbdmask
+  diag(S) = 0
+  #   2. auxiliary matrices
+  D = diag(rowSums(S))
+  L = D-S
+  #   3. compute Laplacian score
+  n1 = as.vector(rep(1,n))
+  D1 = as.vector(D%*%matrix(rep(1,n)))
   fscore = rep(0,p)
   for (j in 1:p){
+    # 3-1. select each feature
     fr = as.vector(pX[,j])
-    term1 = sum(as.vector(Lb%*%matrix(fr))*fr)
-    term2 = sum(as.vector(Lw%*%matrix(fr))*fr)
+    # 3-2. adjust fr
+    corrector  = as.double(sum(fr*D1)/sum(n1*D1))
+    frtilde    = fr-corrector
+    matfrtilde = matrix(frtilde)
+    # 3-3. compute the score
+    term1 = sum(as.vector(L%*%matfrtilde)*frtilde)
+    term2 = sum(as.vector(D%*%matfrtilde)*frtilde)
     fscore[j] = term1/term2
   }
-  #   4. find the largest ones
+  #   4. select the largest ones
   idxvec = base::order(fscore, decreasing=TRUE)[1:ndim]
   #   5. find the projection matrix
   projection = aux.featureindicator(p,ndim,idxvec)

@@ -22,12 +22,14 @@
 #  ------------------------------------------------------------------------
 #' @noRd
 #' @keywords internal
-aux.typecheck <- function(data){
+aux.typecheck <- function(data, verbose=FALSE){
   # data frame into matrix
   matinput = as.matrix(data)
   if ((dim(matinput)[1]==1)||(dim(matinput)[2]==1)){
-    warning("WARNING : input data should be matrix, not a vector.")
-    return(FALSE)
+    if (verbose==TRUE){
+      message("WARNING : input data should be matrix, not a vector.")
+    }
+    matinput = matrix(matinput)
   }
 
   # check if there exists any NA, Inf, -Inf
@@ -67,6 +69,7 @@ aux.typecheck <- function(data){
 #' \item \code{mean:} a mean vector of length \eqn{p}.
 #' \item \code{multiplier:} a \eqn{(p\times p)} matrix for "decorrelate" or "whiten" or 1 for "center".}}
 #' }
+#'
 #' @examples
 #' \dontrun{
 #' ## Generate data
