@@ -25,6 +25,8 @@ are supported. See also \code{\link{aux.preprocess}} for more details.}
 
 \item{K}{assumed number of clusters in the original dataset.}
 
+\item{lambda}{\eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.}
+
 \item{t}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
 }
 \value{

@@ -17,7 +17,6 @@
 #' \eqn{S_B}, between-group variance, has maximum rank of \code{K-1}. Therefore, the maximal
 #' subspace can only be spanned by at most \code{K-1} orthogonal vectors.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
@@ -31,6 +30,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -45,6 +45,7 @@
 #'
 #' ## visualize
 #' plot(output$Y[,1], output$Y[,2], main="3 groups on 2d plane")
+#' }
 #'
 #' @references
 #' \insertRef{fisher_use_1936}{Rdimtools}

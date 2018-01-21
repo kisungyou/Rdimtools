@@ -20,13 +20,13 @@ and columns represent independent variables.}
 Default is "center" and other options of "decorrelate" and "whiten"
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
+\item{alpha}{balancing parameter for between- and within-class scatter in \eqn{[0,1]}.}
+
 \item{k1}{the number of same-class neighboring points (homogeneous neighbors).}
 
 \item{k2}{the number of different-class neighboring points (heterogeneous neighbors).}
 
 \item{t}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
-
-\item{beta}{balancing parameter for between- and within-class scatter in \eqn{[0,1]}.}
 }
 \value{
 a named list containing

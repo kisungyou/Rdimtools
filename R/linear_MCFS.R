@@ -4,6 +4,28 @@
 #' a multi-cluster assumption, it aims at finding meaningful features using sparse reconstruction of
 #' spectral basis using LASSO.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param ndim an integer-valued target dimension.
+#' @param type a vector of neighborhood graph construction. Following types are supported;
+#'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
+#'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
+#'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "null" and other options of "center", "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param K assumed number of clusters in the original dataset.
+#' @param lambda \eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.
+#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' ## generate data of 3 types with clear difference
@@ -25,27 +47,6 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="lambda=0.01")
 #' plot(out2$Y[,1], out2$Y[,2], main="lambda=0.1")
 #' plot(out3$Y[,1], out3$Y[,2], main="lambda=1")
-#' }
-#'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
-#' @param ndim an integer-valued target dimension.
-#' @param type a vector of neighborhood graph construction. Following types are supported;
-#'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
-#'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
-#'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param K assumed number of clusters in the original dataset.
-#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
-#'
-#' @return a named list containing
-#' \describe{
-#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
 #' @references

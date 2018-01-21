@@ -82,7 +82,8 @@
 #' \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 #' \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
 #' \code{\link{do.ssldp}} \tab SS \tab Semi-Supervised Locally Discriminant Projection \cr
-#' \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection
+#' \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection \cr
+#' \code{\link{do.ulda}} \tab S \tab Uncorrelated Linear Discriminant Analysis
 #' }
 #'
 #' Also, we have \emph{nonlinear} methods implemented
@@ -161,7 +162,7 @@
 #' @importFrom Matrix rankMatrix
 #' @importFrom Rlinsolve lsolve.bicgstab
 #' @importFrom Rtsne Rtsne
-#' @importFrom stats dist cov rnorm runif kmeans cor
+#' @importFrom stats dist cov rnorm runif kmeans cor var
 #' @importFrom graphics par image plot
 #' @importFrom Rcpp evalCpp
 #' @useDynLib Rdimtools

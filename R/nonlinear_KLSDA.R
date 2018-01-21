@@ -4,6 +4,24 @@
 #' to extend excavation of hidden patterns in a more flexible manner in tradeoff of computational load. For simplicity,
 #' only the gaussian kernel parametrized by its bandwidth \code{t} is supported.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param label a length-\eqn{n} vector of data class labels.
+#' @param ndim an integer-valued target dimension.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options of "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param alpha balancing parameter for between- and within-class scatter in \eqn{[0,1]}.
+#' @param k1 the number of same-class neighboring points (homogeneous neighbors).
+#' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
+#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' }
+#'
 #' @examples
 #' ## generate 3 different groups of data X and label vector
 #' x1 = matrix(rnorm(4*10), nrow=10)-50
@@ -25,24 +43,6 @@
 #'
 #' @references
 #' \insertRef{cai_locality_2007}{Rdimtools}
-#'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
-#' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param beta balancing parameter for between- and within-class scatter in \eqn{[0,1]}.
-#' @param k1 the number of same-class neighboring points (homogeneous neighbors).
-#' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
-#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
-#'
-#' @return a named list containing
-#' \describe{
-#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' }
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLSDA

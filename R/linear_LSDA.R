@@ -5,6 +5,24 @@
 #' at each local area in which the nearby points with the same label are close to each other while
 #' the nearby points with different labels are far apart.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param label a length-\eqn{n} vector of data class labels.
+#' @param ndim an integer-valued target dimension.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options of "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param alpha balancing parameter for between- and within-class scatter in \eqn{[0,1]}.
+#' @param k1 the number of same-class neighboring points (homogeneous neighbors).
+#' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
 #' @examples
 #' ## generate 3 different groups of data X and label vector
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
@@ -26,24 +44,6 @@
 #'
 #' @references
 #' \insertRef{cai_locality_2007}{Rdimtools}
-#'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
-#' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param beta balancing parameter for between- and within-class scatter in \eqn{[0,1]}.
-#' @param k1 the number of same-class neighboring points (homogeneous neighbors).
-#' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
-#'
-#' @return a named list containing
-#' \describe{
-#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
-#' }
 #'
 #' @author Kisung You
 #' @rdname linear_LSDA
