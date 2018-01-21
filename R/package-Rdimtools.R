@@ -39,12 +39,17 @@
 #' \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 #' \code{\link{do.ldakm}} \tab U \tab Combination of LDA and K-means \cr
 #' \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
+#' \code{\link{do.ldp}} \tab S \tab Locally Discriminating Projection \cr
 #' \code{\link{do.lea}} \tab U \tab Locally Linear Embedded Eigenspace Analysis \cr
 #' \code{\link{do.lfda}} \tab S \tab Local Fisher Discriminant Analysis \cr
 #' \code{\link{do.llp}} \tab U \tab Local Learning Projections \cr
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
+#' \code{\link{do.lpca}} \tab U \tab Locally Principal Component Analysis \cr
 #' \code{\link{do.lpe}} \tab U \tab Locality Pursuit Embedding \cr
+#' \code{\link{do.lpmip}} \tab U \tab Locality-Preserved Maximum Information Projection \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
+#' \code{\link{do.lsda}} \tab S \tab Locality Sensitive Discriminant Analysis \cr
+#' \code{\link{do.lsdf}} \tab SS \tab Locality Sensitive Discriminant Feature \cr
 #' \code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 #' \code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
 #' \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
@@ -62,7 +67,7 @@
 #' \code{\link{do.pflpp}} \tab U \tab Parameter-Free Locality Preserving Projection \cr
 #' \code{\link{do.pls}} \tab S \tab Partial Least Squares \cr
 #' \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
-#' \code{\link{do.rda}} \tab S \tab Regularized Discriminant Analysis \cr
+#' \code{\link{do.rlda}} \tab S \tab Regularized Linear Discriminant Analysis \cr
 #' \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
 #' \code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
 #' \code{\link{do.save}} \tab S \tab Sliced Average Variance Estimation \cr
@@ -73,6 +78,7 @@
 #' \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
 #' \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 #' \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
+#' \code{\link{do.ssldp}} \tab SS \tab Semi-Supervised Locally Discriminant Projection \cr
 #' \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection
 #' }
 #'
@@ -88,6 +94,7 @@
 #' \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
 #' \code{\link{do.klde}} \tab S \tab Kernel Local Discriminant Embedding \cr
 #' \code{\link{do.klfda}} \tab S \tab Kernel Local Fisher Discriminant Analysis \cr
+#' \code{\link{do.klsda}} \tab S \tab Kernel Locality Sensitive Discriminant Analysis \cr
 #' \code{\link{do.kmfa}} \tab S \tab Kernel Marginal Fisher Analysis \cr
 #' \code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 #' \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr

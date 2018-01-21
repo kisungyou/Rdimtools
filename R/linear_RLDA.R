@@ -1,9 +1,9 @@
-#' Regularized Discriminant Analysis
+#' Regularized Linear Discriminant Analysis
 #'
 #' In small sample case, Linear Discriminant Analysis (LDA) may suffer from
 #' rank deficiency issue. Applied mathematics has used Tikhonov regularization -
 #' also known as \eqn{\ell_2} regularization/shrinkage - to adjust linear operator.
-#' Regularized Discriminant Analysis (RDA) adopts such idea to stabilize
+#' Regularized Linear Discriminant Analysis (RLDA) adopts such idea to stabilize
 #' eigendecomposition in LDA formulation.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -20,6 +20,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -30,23 +31,24 @@
 #' label  = c(rep(1,33), rep(2,33), rep(3,33))
 #'
 #' ## try different regularization parameters
-#' out1 <- do.rda(Y, label, alpha=0.1)
-#' out2 <- do.rda(Y, label, alpha=1)
-#' out3 <- do.rda(Y, label, alpha=10)
+#' out1 <- do.rlda(Y, label, alpha=0.1)
+#' out2 <- do.rlda(Y, label, alpha=1)
+#' out3 <- do.rlda(Y, label, alpha=10)
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
 #' plot(out1$Y[,1], out1$Y[,2], main="alpha=0.1")
 #' plot(out2$Y[,1], out2$Y[,2], main="alpha=1")
 #' plot(out3$Y[,1], out3$Y[,2], main="alpha=10")
+#' }
 #'
 #' @references
 #' \insertRef{friedman_regularized_1989}{Rdimtools}
 #'
 #' @author Kisung You
-#' @rdname linear_RDA
+#' @rdname linear_rlda
 #' @export
-do.rda <- function(X, label, ndim=2, alpha=1.0){
+do.rlda <- function(X, label, ndim=2, alpha=1.0){
   ## Note : refer to do.klfda
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -60,29 +62,29 @@ do.rda <- function(X, label, ndim=2, alpha=1.0){
   ulabel = unique(label)
   for (i in 1:length(ulabel)){
     if (sum(label==ulabel[i])==1){
-      stop("* do.rda : no degerate class of size 1 is allowed.")
+      stop("* do.rlda : no degerate class of size 1 is allowed.")
     }
   }
   K      = length(ulabel)
   if (K==1){
-    stop("* do.rda : 'label' should have at least 2 unique labelings.")
+    stop("* do.rlda : 'label' should have at least 2 unique labelings.")
   }
   if (K==n){
-    warning("* do.rda : given 'label' has all unique elements.")
+    warning("* do.rlda : given 'label' has all unique elements.")
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
     stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.rda : 'ndim' is a positive integer in [1,#(covariates)).")}
+  if (!check_ndim(ndim,p)){stop("* do.rlda : 'ndim' is a positive integer in [1,#(covariates)).")}
 
   #   4. alpha : regularization parameter
   alpha = as.double(alpha)
   if (alpha==0){
-    stop("* do.rda : 'alpha=0' condition leads to applying lda. Use 'do.lda' instead.")
+    stop("* do.rlda : 'alpha=0' condition leads to applying lda. Use 'do.lda' instead.")
   }
-  if (!check_NumMM(alpha,0,Inf,compact=TRUE)){stop("* do.rda : 'alpha' is a regularization parameter in (0,Inf).")}
+  if (!check_NumMM(alpha,0,Inf,compact=TRUE)){stop("* do.rlda : 'alpha' is a regularization parameter in (0,Inf).")}
 
   #   (implicit) : preprocess
   algpreprocess = "center"
@@ -108,7 +110,7 @@ do.rda <- function(X, label, ndim=2, alpha=1.0){
     Sb     = Sb + Nk*outer(mdiff,mdiff)
   }
   #------------------------------------------------------------------------
-  ## COMPUTATION : MAIN RDA
+  ## COMPUTATION : MAIN rlda
   #  let's use Rlinsolve and geigen structure
   LHS = Sb
   RHS = St + alpha*diag(p)

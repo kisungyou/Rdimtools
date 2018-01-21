@@ -74,10 +74,10 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   labelorder = order(label)
   labelrank  = rank(label)
   #   3. ndim
+  ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
     stop("* do.sda : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  ndim = as.integer(ndim)
   #   4. alpha : balancing
   alpha = as.double(alpha)
   if (!check_NumMM(alpha,0,Inf,compact=FALSE)){stop("* do.sda : 'alpha' needs to be a positive real number.")}
@@ -123,9 +123,7 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   LHS = t(pX)%*%W%*%pX
   RHS = t(pX)%*%(    Itilde + (alpha*L) + (beta*diag(n)) )%*%pX
   #   2. top eigenvectors
-  solgeigen = geigen::geigen(LHS, RHS, TRUE)$vectors[,p:(p-ndim+1)]
-  #   3. adjust
-  projection = aux.adjprojection(solgeigen)
+  projection = aux.geigen(LHS, RHS, ndim, maximal=TRUE)
 
   #------------------------------------------------------------------------
   ## RETURN
@@ -134,11 +132,6 @@ do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)
-
-
-
-
-
 }
 
 

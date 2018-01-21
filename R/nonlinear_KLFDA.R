@@ -4,7 +4,6 @@
 #' to extend excavation of hidden patterns in a more flexible manner in tradeoff of computational load. For simplicity,
 #' only the gaussian kernel parametrized by its bandwidth \code{t} is supported.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.

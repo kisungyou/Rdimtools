@@ -44,6 +44,7 @@ it aims at finding a linear approximation to the eigenfunctions of the Laplace-B
 operator on the graph-approximated data manifold.
 }
 \examples{
+\dontrun{
 ## generate data
 ## in order to pass CRAN pretest, n is set to be small.
 X <- aux.gensamples(dname="twinpeaks",n=28)
@@ -65,6 +66,7 @@ plot(output2$Y[,1],output2$Y[,2],main="25\%")
 plot(output3$Y[,1],output3$Y[,2],main="50\%")
 } else {
 message("* do.lpp : example : one of three trials must have failed.")
+}
 }
 
 

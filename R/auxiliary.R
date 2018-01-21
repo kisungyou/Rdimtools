@@ -15,6 +15,7 @@
 # 11. aux.adjprojection    : adjust projection matrix
 # 12. aux.nbdlogical       : find homogeneous and heterogeneous neighborhood indexing
 # 13. aux.geigen           : geigen in my taste
+# 14. aux.featureindicator : generate (p-by-ndim) indicator matrix for projection
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1117,8 +1118,6 @@ aux.nbdlogical <- function(X, label, khomo, khet){
   return(output)
 }
 
-
-
 # 13. aux.geigen : in my taste --------------------------------------------
 #' @keywords internal
 #' @noRd
@@ -1131,4 +1130,21 @@ aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
     projection = aux.adjprojection(geigs$vectors[,1:ndim])
   }
   return(projection)
+}
+
+
+# 14. aux.featureindicator : generate indicator matrix --------------------
+#     generate (p-by-ndim) indicator matrix for projection
+#' @keywords internal
+#' @noRd
+aux.featureindicator <- function(p,ndim,idxvec){
+  if (length(idxvec)!=ndim){
+    stop("* aux.featureindicator : selection had some problem.")
+  }
+  output = array(0,c(p,ndim))
+  for (i in 1:ndim){
+    selectedcolumn = as.integer(idxvec[i])
+    output[selectedcolumn,i] = 1
+  }
+  return(output)
 }
