@@ -30,25 +30,26 @@
 #' \item{eigvals}{a vector of eigenvalues from computation of embedding matrix.}
 #' }
 #'
-#'@examples
-#'## Generate Data
-#'## in order to pass CRAN pretest, n is set to be small.
-#'X = aux.gensamples(n=28)
+#' @examples
+#' \dontrun{
+#' ## Generate Data
+#' X = aux.gensamples(n=100)
 #'
-#'## 1. connecting 10% of data for graph construction.
-#'output1 <- do.lle(X,ndim=2,type=c("proportion",0.10))
+#' ## 1. connecting 10% of data for graph construction.
+#' output1 <- do.lle(X,ndim=2,type=c("proportion",0.10))
 #'
-#'## 2. constructing 20%-connected graph
-#'output2 <- do.lle(X,ndim=2,type=c("proportion",0.20))
+#' ## 2. constructing 20%-connected graph
+#' output2 <- do.lle(X,ndim=2,type=c("proportion",0.20))
 #'
-#'## 3. constructing 10%-connected with bigger regularization parameter
-#'output3 <- do.lle(X,ndim=2,type=c("proportion",0.5),regparam=10)
+#' ## 3. constructing 10%-connected with bigger regularization parameter
+#' output3 <- do.lle(X,ndim=2,type=c("proportion",0.5),regparam=10)
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="5%")
-#'plot(output2$Y[,1],output2$Y[,2],main="10%")
-#'plot(output3$Y[,1],output3$Y[,2],main="10%+Binary")
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="5%")
+#' plot(output2$Y[,1],output2$Y[,2],main="10%")
+#' plot(output3$Y[,1],output3$Y[,2],main="10%+Binary")
+#'}
 #'
 #' @seealso \href{https://www.cs.nyu.edu/~roweis/lle/}{Prof.Roweis' website}
 #' @references
@@ -59,7 +60,7 @@
 #' @rdname nonlinear_LLE
 #' @export
 do.lle <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,
-                   preprocess="null",regtype=FALSE, regparam=1.0){
+                   preprocess=c("null","center","decorrelate","whiten"),regtype=FALSE, regparam=1.0){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -87,9 +88,10 @@ do.lle <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
   if (!is.logical(algweight)){
     stop("* do.lle : 'weight' is a logical variable.")
   }
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","decorrelate","whiten"))){
-    stop("* do.lle : 'preprocess' option is invalid.")
+  if (missing(preprocess)){
+    algpreprocess = "null"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   if (!is.logical(regtype)){
     stop("* do.lle : 'regtype' should be a logical variable.")

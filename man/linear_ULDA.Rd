@@ -7,8 +7,29 @@
 do.ulda(X, label, ndim = 2, preprocess = c("center", "whiten",
   "decorrelate"))
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
+and columns represent independent variables.}
+
+\item{label}{a length-\eqn{n} vector of data class labels.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Uncorrelated Linear Discriminant Analysis
+Uncorrelated LDA (ULDA) is an extension of LDA by using the uncorrelated discriminant transformation
+and Kahrunen-Loeve expansion of the basis.
 }
 \examples{
 \dontrun{
@@ -27,8 +48,17 @@ out2 = do.ulda(X, label)
 
 ## visualize
 par(mfrow=c(1,2))
-plot(out1$Y[,1], out1$Y[,2])
-plot(out2$Y[,1], out2$Y[,2])
+plot(out1$Y[,1], out1$Y[,2], main="LDA")
+plot(out2$Y[,1], out2$Y[,2], main="Uncorrelated LDA")
 }
 
+}
+\references{
+\insertRef{jin_face_2001}{Rdimtools}
+}
+\seealso{
+\code{\link{do.lda}}
+}
+\author{
+Kisung You
 }

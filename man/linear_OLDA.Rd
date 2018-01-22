@@ -7,8 +7,54 @@
 do.olda(X, label, ndim = 2, preprocess = c("center", "whiten",
   "decorrelate"))
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
+and columns represent independent variables.}
+
+\item{label}{a length-\eqn{n} vector of data class labels.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Orthogonal Linear Discriminant Analysis
+Orthogonal LDA (OLDA) is an extension of classical LDA where the discriminant vectors are
+orthogonal to each other.
+}
+\examples{
+\dontrun{
+## generate data of 3 types with clear difference
+dt1  = aux.gensamples(n=33)-100
+dt2  = aux.gensamples(n=33)
+dt3  = aux.gensamples(n=33)+100
+
+## merge the data and create a label correspondingly
+X      = rbind(dt1,dt2,dt3)
+label  = c(rep(1,33), rep(2,33), rep(3,33))
+
+## compare with LDA
+out1 = do.lda(X, label)
+out2 = do.olda(X, label)
+
+## visualize
+par(mfrow=c(1,2))
+plot(out1$Y[,1], out1$Y[,2], main="LDA")
+plot(out2$Y[,1], out2$Y[,2], main="Orthogonal LDA")
+}
+
+}
+\references{
+\insertRef{ye_characterization_2005}{Rdimtools}
 }
 \author{
 Kisung You

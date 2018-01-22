@@ -5,7 +5,8 @@
 \title{Neighborhood Preserving Embedding}
 \usage{
 do.npe(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = "null", regtype = FALSE, regparam = 1)
+  weight = TRUE, preprocess = c("null", "center", "whiten", "decorrelate"),
+  regtype = FALSE, regparam = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

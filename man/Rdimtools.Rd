@@ -34,6 +34,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+\code{\link{do.cnpe}} \tab U \tab Complete Neighborhood Preserving Embedding \cr
 \code{\link{do.crp}} \tab U \tab Collaborative Representation-based Projection \cr
 \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
 \code{\link{do.dne}} \tab S \tab Discriminant Neighborhood Embedding \cr

@@ -60,7 +60,8 @@
 #' @author Kisung You
 #' @rdname linear_NPE
 #' @export
-do.npe <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,preprocess="null",regtype=FALSE,regparam=1){
+do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weight=TRUE,
+                   preprocess=c("null","center","whiten","decorrelate"), regtype=FALSE, regparam=1){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -81,10 +82,12 @@ do.npe <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
   nbdtype = type
   nbdsymmetric = symmetric
   algweight = weight
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.npe : 'preprocess' argument is invalid.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
+
   if (!is.logical(regtype)){stop("* do.npe : 'regtype' should be a logical variable.")}
   if (!is.numeric(regparam)||is.na(regparam)||is.infinite(regparam)||(regparam<=0)){
     stop("* do.npe : 'regparam' should be a positive real-valued number; it is a Tikhonov Regularization Factor.")}

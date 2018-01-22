@@ -24,6 +24,7 @@
 #' \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 #' \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 #' \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
+#' \code{\link{do.cnpe}} \tab U \tab Complete Neighborhood Preserving Embedding \cr
 #' \code{\link{do.crp}} \tab U \tab Collaborative Representation-based Projection \cr
 #' \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
 #' \code{\link{do.dne}} \tab S \tab Discriminant Neighborhood Embedding \cr
@@ -66,6 +67,7 @@
 #' \code{\link{do.odp}} \tab S \tab Orthogonal Discriminant Projection \cr
 #' \code{\link{do.olda}} \tab S \tab Orthogonal Linear Discriminant Analysis \cr
 #' \code{\link{do.olpp}} \tab U \tab Orthogonal Locality Preserving Projection \cr
+#' \code{\link{do.onpp}} \tab U \tab Orthogonal Neighborhood Preserving Projections \cr
 #' \code{\link{do.opls}} \tab S \tab Orthogonal Partial Least Squares \cr
 #' \code{\link{do.pca}} \tab U \tab Principal Component Analysis \cr
 #' \code{\link{do.pflpp}} \tab U \tab Parameter-Free Locality Preserving Projection \cr

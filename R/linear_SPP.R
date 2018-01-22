@@ -6,7 +6,6 @@
 #' we used \pkg{CVXR} for convenient computation, which may lead to slower execution
 #' once used for large dataset.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
@@ -101,9 +100,6 @@ do.spp <- function(X, ndim=2, preprocess = c("center","decorrelate","whiten"), r
   result$projection = projection
   return(result)
 }
-
-
-
 
 #  ------------------------------------------------------------------------
 #' @keywords internal
