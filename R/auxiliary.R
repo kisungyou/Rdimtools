@@ -12,7 +12,8 @@
 # 09. aux.kernelcentering  : centering the kernel/gram matrix
 # 10. aux.kernelprojection : given uncentered gram matrix, find the projected data
 #                            note that it results (ndim-by-N) matrix, columns are projected vectors.
-# 11. aux.adjprojection    : adjust projection matrix
+# 11. aux.adjprojection    : adjust projection matrix by simply normalizing each column
+#     aux.adjqr            : qr decomposition is used for adjusting
 # 12. aux.nbdlogical       : find homogeneous and heterogeneous neighborhood indexing
 # 13. aux.geigen           : geigen in my taste
 # 14. aux.featureindicator : generate (p-by-ndim) indicator matrix for projection
@@ -1074,19 +1075,28 @@ aux.kernelprojection <- function(KK, ndim){
 # 11. aux.adjprojection : adjust projection matrix ------------------------
 #' @keywords internal
 #' @noRd
-aux.adjprojection <- function(P){
+aux.adjqr <- function(P){
   p = ncol(P)
   Pid = (t(P)%*%P)
-  if (max(abs(diag(p)-Pid))>1e-10){
+  if (max(abs(diag(p)-Pid))>1e-18){
     output = qr.Q(qr(P))
   } else {
     output = P
   }
   return(output)
 }
-
-
-
+#' @keywords internal
+#' @noRd
+aux.adjprojection <- function(P){
+  n = nrow(P)
+  p = ncol(P)
+  output = array(0,c(n,p))
+  for (i in 1:p){
+    cvec = as.vector(P[,i])
+    output[,i] = cvec/sqrt(sum(cvec*cvec))
+  }
+  return(output)
+}
 # 12. aux.nbdlogical : find homogeneous and heterogeneous neighbor --------
 #' @keywords internal
 #' @noRd
@@ -1127,10 +1137,20 @@ aux.nbdlogical <- function(X, label, khomo, khet){
 aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
   geigs = geigen::geigen(top, bottom)
   maxp  = length(geigs$values)
-  if (maximal==TRUE){
-    projection = aux.adjprojection(geigs$vectors[,maxp:(maxp-ndim+1)])
+  if (ndim>1){
+    if (maximal==TRUE){
+      projection = aux.adjprojection(geigs$vectors[,maxp:(maxp-ndim+1)])
+    } else {
+      projection = aux.adjprojection(geigs$vectors[,1:ndim])
+    }
   } else {
-    projection = aux.adjprojection(geigs$vectors[,1:ndim])
+    if (maximal==TRUE){
+      vecsol     = geigs$vectors[,maxp]
+      projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
+    } else {
+      vecsol     = geigs$vectors[,1]
+      projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
+    }
   }
   return(projection)
 }

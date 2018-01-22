@@ -1,4 +1,4 @@
-#' Uncorrelated Linear Discriminant Analysis
+#' Orthogonal Linear Discriminant Analysis
 #'
 #'
 #' @examples
@@ -14,17 +14,18 @@
 #'
 #' ## compare with LDA
 #' out1 = do.lda(X, label)
-#' out2 = do.ulda(X, label)
+#' out2 = do.olda(X, label)
 #'
 #' ## visualize
 #' par(mfrow=c(1,2))
 #' plot(out1$Y[,1], out1$Y[,2], main="LDA")
-#' plot(out2$Y[,1], out2$Y[,2], main="Uncorrelated LDA")
+#' plot(out2$Y[,1], out2$Y[,2], main="Orthogonal LDA")
 #' }
 #'
-#' @rdname linear_ULDA
+#' @rdname linear_OLDA
+#' @author Kisung You
 #' @export
-do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate")){
+do.olda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -33,16 +34,16 @@ do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
   p = ncol(X)
   #   2. label vector
   if ((!is.vector(label))||(length(label)!=n)){
-    stop("* do.ulda : 'label' is required to be a vector of class labels.")
+    stop("* do.olda : 'label' is required to be a vector of class labels.")
   }
   label  = as.numeric(as.factor(label))
   ulabel = unique(label)
   K      = length(ulabel)
   if (K==1){
-    stop("* do.ulda : 'label' should have at least 2 unique labelings.")
+    stop("* do.olda : 'label' should have at least 2 unique labelings.")
   }
   if (K==n){
-    stop("* do.ulda : given 'label' has all unique elements.")
+    stop("* do.olda : given 'label' has all unique elements.")
   }
   if (any(is.na(label))||(any(is.infinite(label)))){
     stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
@@ -50,7 +51,7 @@ do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
-    stop("* do.ulda : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.olda : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   #   4. preprocess
   if (missing(preprocess)){
@@ -117,14 +118,16 @@ do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
   }
   # 2-4. remove column names
   colnames(Dmat)=NULL
-  # 2-5. adjust
-  Dmat = aux.adjprojection(Dmat)
 
   #------------------------------------------------------------------------
   ## RETURN
+  #   1. adjust with orthogonalization
+  projection = aux.adjqr(Dmat)
+
+  #   2. return output
   result = list()
-  result$Y = pX%*%Dmat
+  result$Y = pX%*%projection
   result$trfinfo = trfinfo
-  result$projection = Dmat
+  result$projection = projection
   return(result)
 }
