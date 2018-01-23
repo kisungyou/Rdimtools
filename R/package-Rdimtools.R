@@ -48,6 +48,7 @@
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 #' \code{\link{do.lpca}} \tab U \tab Locally Principal Component Analysis \cr
 #' \code{\link{do.lpe}} \tab U \tab Locality Pursuit Embedding \cr
+#' \code{\link{do.lpfda}} \tab S \tab Locality Preserving Fisher Discriminant Analysis \cr
 #' \code{\link{do.lpmip}} \tab U \tab Locality-Preserved Maximum Information Projection \cr
 #' \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
 #' \code{\link{do.lscore}} \tab U \tab Laplacian Score \cr
@@ -61,7 +62,9 @@
 #' \code{\link{do.mlie}} \tab S \tab Maximal Local Interclass Embedding \cr
 #' \code{\link{do.mmc}} \tab S \tab Maximum Margin Criterion \cr
 #' \code{\link{do.mmp}} \tab SS \tab Maximum Margin Projection \cr
+#' \code{\link{do.mmsd}} \tab S \tab Multiple Maximum Scatter Difference \cr
 #' \code{\link{do.modp}} \tab S \tab Modified Orthogonal Discriminant Projection \cr
+#' \code{\link{do.msd}} \tab S \tab Maximum Scatter Difference \cr
 #' \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
 #' \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
 #' \code{\link{do.odp}} \tab S \tab Orthogonal Discriminant Projection \cr
