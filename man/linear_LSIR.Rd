@@ -8,8 +8,64 @@ do.lsir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
   preprocess = c("center", "decorrelate", "whiten"), numk = max(2,
   round(nrow(X)/10)), tau = 1)
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
+and columns represent independent variables.}
+
+\item{response}{a length-\eqn{n} vector of response variable.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{h}{the number of slices to divide the range of response vector.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+
+\item{numk}{size of determining neighborhood via \eqn{k}-nearest neighbor selection.}
+
+\item{tau}{regularization parameter for adjusting rank-deficient scatter matrix.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Localized Sliced Inverse Regression
+Localized SIR (SIR) is an extension of celebrated SIR method. As its name suggests,
+the \emph{locality} concept is brought in that for each slice, only local data points
+are considered in order to discover intrinsic structure of the data.
+}
+\examples{
+## generate swiss roll with auxiliary dimensions
+## it follows reference example from LSIR paper.
+n = 123
+theta = runif(n)
+h     = runif(n)
+t     = (1+2*theta)*(3*pi/2)
+X     = array(0,c(n,10))
+X[,1] = t*cos(t)
+X[,2] = 21*h
+X[,3] = t*sin(t)
+X[,4:10] = matrix(runif(7*n), nrow=n)
+
+## corresponding response vector
+y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
+
+## try different number of neighborhoods
+out1 = do.lsir(X, y, numk=5)
+out2 = do.lsir(X, y, numk=10)
+out3 = do.lsir(X, y, numk=25)
+
+## visualize
+par(mfrow=c(1,3))
+plot(out1$Y[,1], out1$Y[,2], main="LSIR::nbd size=5")
+plot(out2$Y[,1], out2$Y[,2], main="LSIR::nbd size=10")
+plot(out3$Y[,1], out3$Y[,2], main="LSIR::nbd size=25")
+
 }
 \references{
 \insertRef{wu_localized_2010}{Rdimtools}

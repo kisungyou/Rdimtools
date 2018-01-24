@@ -151,6 +151,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// handy_plus
+arma::mat handy_plus(arma::mat& X);
+RcppExport SEXP _Rdimtools_handy_plus(SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(handy_plus(X));
+    return rcpp_result_gen;
+END_RCPP
+}
+// handy_hadamartABC
+arma::mat handy_hadamartABC(arma::mat& A, arma::mat& B, arma::mat& C);
+RcppExport SEXP _Rdimtools_handy_hadamartABC(SEXP ASEXP, SEXP BSEXP, SEXP CSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type C(CSEXP);
+    rcpp_result_gen = Rcpp::wrap(handy_hadamartABC(A, B, C));
+    return rcpp_result_gen;
+END_RCPP
+}
+// handy_hadamartABCsqrt
+arma::mat handy_hadamartABCsqrt(arma::mat& A, arma::mat& B, arma::mat& C);
+RcppExport SEXP _Rdimtools_handy_hadamartABCsqrt(SEXP ASEXP, SEXP BSEXP, SEXP CSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type C(CSEXP);
+    rcpp_result_gen = Rcpp::wrap(handy_hadamartABCsqrt(A, B, C));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_pca
 Rcpp::List method_pca(arma::mat& psdX);
 RcppExport SEXP _Rdimtools_method_pca(SEXP psdXSEXP) {
@@ -324,6 +361,34 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::rowvec& >::type tvec(tvecSEXP);
     Rcpp::traits::input_parameter< arma::mat& >::type tmat(tmatSEXP);
     rcpp_result_gen = Rcpp::wrap(method_lfda_maximaldistance(tvec, tmat));
+    return rcpp_result_gen;
+END_RCPP
+}
+// method_nnprojmax
+arma::mat method_nnprojmax(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter);
+RcppExport SEXP _Rdimtools_method_nnprojmax(SEXP CSEXP, SEXP UinitSEXP, SEXP tolSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Uinit(UinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_nnprojmax(C, Uinit, tol, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// method_nnprojmin
+arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter);
+RcppExport SEXP _Rdimtools_method_nnprojmin(SEXP CSEXP, SEXP UinitSEXP, SEXP tolSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type C(CSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Uinit(UinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_nnprojmin(C, Uinit, tol, maxiter));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -519,6 +584,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_scatter_pairwise", (DL_FUNC) &_Rdimtools_aux_scatter_pairwise, 1},
     {"_Rdimtools_methods_boxcount", (DL_FUNC) &_Rdimtools_methods_boxcount, 3},
     {"_Rdimtools_aux_numderiv", (DL_FUNC) &_Rdimtools_aux_numderiv, 2},
+    {"_Rdimtools_handy_plus", (DL_FUNC) &_Rdimtools_handy_plus, 1},
+    {"_Rdimtools_handy_hadamartABC", (DL_FUNC) &_Rdimtools_handy_hadamartABC, 3},
+    {"_Rdimtools_handy_hadamartABCsqrt", (DL_FUNC) &_Rdimtools_handy_hadamartABCsqrt, 3},
     {"_Rdimtools_method_pca", (DL_FUNC) &_Rdimtools_method_pca, 1},
     {"_Rdimtools_method_mds", (DL_FUNC) &_Rdimtools_method_mds, 1},
     {"_Rdimtools_method_mdsD", (DL_FUNC) &_Rdimtools_method_mdsD, 1},
@@ -533,6 +601,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_lspp_computeW", (DL_FUNC) &_Rdimtools_method_lspp_computeW, 2},
     {"_Rdimtools_method_kmmcvec", (DL_FUNC) &_Rdimtools_method_kmmcvec, 3},
     {"_Rdimtools_method_lfda_maximaldistance", (DL_FUNC) &_Rdimtools_method_lfda_maximaldistance, 2},
+    {"_Rdimtools_method_nnprojmax", (DL_FUNC) &_Rdimtools_method_nnprojmax, 4},
+    {"_Rdimtools_method_nnprojmin", (DL_FUNC) &_Rdimtools_method_nnprojmin, 4},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},

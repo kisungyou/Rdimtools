@@ -1,7 +1,25 @@
 #' Sliced Inverse Regression
 #'
-#' do at once : SIR, LSIR, RSIR, SAVE
+#' Sliced Inverse Regression (SIR) is a supervised linear dimension reduction technique.
+#' Unlike engineering-driven methods, SIR takes a concept of \emph{central subspace}, where
+#' conditional independence after projection is guaranteed. It first divides the range of
+#' response variable. Projection vectors are extracted where projected data best explains response variable.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param response a length-\eqn{n} vector of response variable.
+#' @param ndim an integer-valued target dimension.
+#' @param h the number of slices to divide the range of response vector.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
 #'
 #' @examples
 #' ## generate swiss roll with auxiliary dimensions
@@ -26,9 +44,9 @@
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="2 slices")
-#' plot(out2$Y[,1], out2$Y[,2], main="5 slices")
-#' plot(out3$Y[,1], out3$Y[,2], main="10 slices")
+#' plot(out1$Y[,1], out1$Y[,2], main="SIR::2 slices")
+#' plot(out2$Y[,1], out2$Y[,2], main="SIR::5 slices")
+#' plot(out3$Y[,1], out3$Y[,2], main="SIR::10 slices")
 #'
 #' @references
 #' \insertRef{li_sliced_1991}{Rdimtools}
@@ -45,7 +63,7 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c
   p = ncol(X)
   #   2. response
   response = as.double(response)
-  if ((!is.vector(response))||(any(is.na(response)))){
+  if ((any(is.infinite(response)))||(!is.vector(response))||(any(is.na(response)))){
     stop("* do.sir : 'response' should be a vector containing no NA values.")
   }
   #   3. ndim

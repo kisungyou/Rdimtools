@@ -35,6 +35,7 @@ identification by looking at the slope of the linear part in the middle using ei
 }
 
 \examples{
+\dontrun{
 ## generate three different dataset
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
@@ -45,6 +46,7 @@ par(mfrow=c(1,3))
 est.boxcount(X1,show=TRUE)
 est.boxcount(X2,show=TRUE)
 est.boxcount(X3,show=TRUE)
+}
 
 }
 \references{

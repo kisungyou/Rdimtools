@@ -7,8 +7,38 @@
 do.lpfda(X, label, ndim = 2, type = c("proportion", 0.1),
   preprocess = c("center", "whiten", "decorrelate"), t = 10)
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
+and columns represent independent variables.}
+
+\item{label}{a length-\eqn{n} vector of data class labels.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{type}{a vector of neighborhood graph construction. Following types are supported;
+\code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
+Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
+among all data points. See also \code{\link{aux.graphnbd}} for more details.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+
+\item{t}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
-Locality Preserving Fisher Discriminant Analysis
+Locality Preserving Fisher Discriminant Analysis (LPFDA) is a supervised variant of LPP.
+It can also be seemed as an improved version of LDA where the locality structure of the data
+is preserved. The algorithm aims at getting a subspace projection matrix by solving a generalized
+eigenvalue problem.
 }
 \examples{
 \dontrun{
@@ -21,16 +51,16 @@ dt3  = aux.gensamples(n=33)+100
 X      = rbind(dt1,dt2,dt3)
 label  = c(rep(1,33), rep(2,33), rep(3,33))
 
-## try different kernel bandwidth parameters
-out1 = do.lpfda(X, label, t=0.01)
-out2 = do.lpfda(X, label, t=1)
-out3 = do.lpfda(X, label, t=100)
+## try different proportion of connected edges
+out1 = do.lpfda(X, label, type=c("proportion",0.01))
+out2 = do.lpfda(X, label, type=c("proportion",0.1))
+out3 = do.lpfda(X, label, type=c("proportion",0.25))
 
 ## visualize
 par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="MMSD::C=0.01")
-plot(out2$Y[,1], out2$Y[,2], main="MMSD::C=1")
-plot(out3$Y[,1], out3$Y[,2], main="MMSD::C=100")
+plot(out1$Y[,1], out1$Y[,2], main="1\% connectivity")
+plot(out2$Y[,1], out2$Y[,2], main="10\% connectivity")
+plot(out3$Y[,1], out3$Y[,2], main="25\% connectivity")
 }
 
 }

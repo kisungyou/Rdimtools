@@ -48,6 +48,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.isoproj}} \tab U \tab Isometric Projection \cr
 \code{\link{do.kmvp}} \tab S \tab Kernel-Weighted Maximum Variance Projection \cr
 \code{\link{do.kudp}} \tab U \tab Kernel-Weighted Unsupervised Discriminant Projection \cr
+\code{\link{do.lasso}} \tab S \tab Least Absolute Shrinkage and Selection Operator \cr
 \code{\link{do.lda}} \tab S \tab Linear Discriminant Analysis \cr
 \code{\link{do.ldakm}} \tab U \tab Combination of LDA and K-means \cr
 \code{\link{do.lde}} \tab S \tab Local Discriminant Embedding \cr
@@ -76,6 +77,9 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.modp}} \tab S \tab Modified Orthogonal Discriminant Projection \cr
 \code{\link{do.msd}} \tab S \tab Maximum Scatter Difference \cr
 \code{\link{do.mvp}} \tab S \tab Maximum Variance Projection \cr
+\code{\link{do.nolpp}} \tab U \tab Nonnegative Orthogonal Locality Preserving Projection \cr
+\code{\link{do.nonpp}} \tab U \tab Nonnegative Orthogonal Neighborhood Preserving Projections \cr
+\code{\link{do.npca}} \tab U \tab Nonnegative Principal Component Analysis \cr
 \code{\link{do.npe}} \tab U \tab Neighborhood Preserving Embedding \cr
 \code{\link{do.odp}} \tab S \tab Orthogonal Discriminant Projection \cr
 \code{\link{do.olda}} \tab S \tab Orthogonal Linear Discriminant Analysis \cr

@@ -1,6 +1,53 @@
 #' Localized Sliced Inverse Regression
 #'
+#' Localized SIR (SIR) is an extension of celebrated SIR method. As its name suggests,
+#' the \emph{locality} concept is brought in that for each slice, only local data points
+#' are considered in order to discover intrinsic structure of the data.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param response a length-\eqn{n} vector of response variable.
+#' @param ndim an integer-valued target dimension.
+#' @param h the number of slices to divide the range of response vector.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param numk size of determining neighborhood via \eqn{k}-nearest neighbor selection.
+#' @param tau regularization parameter for adjusting rank-deficient scatter matrix.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
+#' @examples
+#' ## generate swiss roll with auxiliary dimensions
+#' ## it follows reference example from LSIR paper.
+#' n = 123
+#' theta = runif(n)
+#' h     = runif(n)
+#' t     = (1+2*theta)*(3*pi/2)
+#' X     = array(0,c(n,10))
+#' X[,1] = t*cos(t)
+#' X[,2] = 21*h
+#' X[,3] = t*sin(t)
+#' X[,4:10] = matrix(runif(7*n), nrow=n)
+#'
+#' ## corresponding response vector
+#' y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
+#'
+#' ## try different number of neighborhoods
+#' out1 = do.lsir(X, y, numk=5)
+#' out2 = do.lsir(X, y, numk=10)
+#' out3 = do.lsir(X, y, numk=25)
+#'
+#' ## visualize
+#' par(mfrow=c(1,3))
+#' plot(out1$Y[,1], out1$Y[,2], main="LSIR::nbd size=5")
+#' plot(out2$Y[,1], out2$Y[,2], main="LSIR::nbd size=10")
+#' plot(out3$Y[,1], out3$Y[,2], main="LSIR::nbd size=25")
 #'
 #' @references
 #' \insertRef{wu_localized_2010}{Rdimtools}
@@ -19,7 +66,7 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   p = ncol(X)
   #   2. response
   response = as.double(response)
-  if ((!is.vector(response))||(any(is.na(response)))){
+  if ((any(is.infinite(response)))||(!is.vector(response))||(any(is.na(response)))){
     stop("* do.sir : 'response' should be a vector containing no NA values.")
   }
   #   3. ndim
@@ -28,7 +75,7 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   #   4. h : number of slices
   h = as.integer(h)
   if (!is.factor(response)){
-    if (!check_NumMM(h,2,ceiling(n/2),compact=TRUE)){stop("* do.save : the number of slices should be in [2,n/2].")}
+    if (!check_NumMM(h,2,ceiling(n/2),compact=TRUE)){stop("* do.lsir : the number of slices should be in [2,n/2].")}
   }  #   5. preprocess
   if (missing(preprocess)){
     algpreprocess = "center"

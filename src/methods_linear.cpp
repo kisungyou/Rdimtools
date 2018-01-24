@@ -13,10 +13,12 @@
  * 12. LSPP
  * 13. KMCC
  * 14. LFDA
+ * 15. NPCA
 */
 
 #include <RcppArmadillo.h>
 #include "methods_linear.h"
+#include "methods_handytools.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -645,4 +647,103 @@ double method_lfda_maximaldistance(arma::rowvec& tvec, arma::mat& tmat){
     }
   }
   return(output);
+}
+
+
+/*
+ * 15. NNPROJMAX & NNPROJMIN
+ *            Used in Nonnegative Projection Methods in LINEAR.49.
+ *            Note that this function will be utilized further.
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::mat method_nnprojmax(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter){
+  // 1. size information
+  const int p = Uinit.n_rows;
+  const int ndim = Uinit.n_cols;
+
+  // 2. initialize variables;
+  arma::mat Uold = Uinit;
+  arma::mat Unew(p,ndim,fill::zeros);
+
+  arma::mat C1(p,p,fill::zeros); // for C+
+  arma::mat C2(p,p,fill::zeros); // for C-
+  C1 = handy_plus(C);
+  C2 = C1-C;
+
+  arma::mat term1(p,ndim,fill::zeros); // for numerator   term
+  arma::mat term2(p,ndim,fill::zeros); // for denominator term
+
+  // 3. iterate
+  double incstop = 100.0;
+  int iter = 0;
+  while (incstop > tol){
+    // 3-1. numerator term
+    term1 = C1*Uold + Uold*Uold.t()*C2*Uold;
+    term2 = C2*Uold + Uold*Uold.t()*C1*Uold;
+
+    // 3-2. update U
+    Unew = handy_hadamartABCsqrt(Uold, term1, term2);
+
+    // 3-3. update incstop
+    incstop = arma::norm(Uold-Unew,"fro")/arma::norm(Uold,"fro");
+
+    // 3-4. update U matrix itself
+    Uold = Unew;
+
+    // 3-5. iteration numbers
+    iter = iter + 1;
+    if (iter >= maxiter){
+      break;
+    }
+  }
+
+  // 4. return output
+  return(Uold);
+}
+//' @keywords internal
+// [[Rcpp::export]]
+arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter){
+  // 1. size information
+  const int p = Uinit.n_rows;
+  const int ndim = Uinit.n_cols;
+
+  // 2. initialize variables;
+  arma::mat Uold = Uinit;
+  arma::mat Unew(p,ndim,fill::zeros);
+
+  arma::mat C1(p,p,fill::zeros); // for C+
+  arma::mat C2(p,p,fill::zeros); // for C-
+  C1 = handy_plus(C);
+  C2 = C1-C;
+
+  arma::mat term1(p,ndim,fill::zeros); // for numerator   term
+  arma::mat term2(p,ndim,fill::zeros); // for denominator term
+
+  // 3. iterate
+  double incstop = 100.0;
+  int iter = 0;
+  while (incstop > tol){
+    // 3-1. numerator term
+    term1 = C2*Uold + Uold*Uold.t()*C1*Uold;
+    term2 = C1*Uold + Uold*Uold.t()*C2*Uold;
+
+    // 3-2. update U
+    Unew = handy_hadamartABCsqrt(Uold, term1, term2);
+
+    // 3-3. update incstop
+    incstop = arma::norm(Uold-Unew,"fro")/arma::norm(Uold,"fro");
+
+    // 3-4. update U matrix itself
+    Uold = Unew;
+
+    // 3-5. iteration numbers
+    iter = iter + 1;
+    if (iter >= maxiter){
+      break;
+    }
+  }
+
+  // 4. return output
+  return(Uold);
 }

@@ -51,6 +51,18 @@ aux_numderiv <- function(x, y) {
     .Call('_Rdimtools_aux_numderiv', PACKAGE = 'Rdimtools', x, y)
 }
 
+handy_plus <- function(X) {
+    .Call('_Rdimtools_handy_plus', PACKAGE = 'Rdimtools', X)
+}
+
+handy_hadamartABC <- function(A, B, C) {
+    .Call('_Rdimtools_handy_hadamartABC', PACKAGE = 'Rdimtools', A, B, C)
+}
+
+handy_hadamartABCsqrt <- function(A, B, C) {
+    .Call('_Rdimtools_handy_hadamartABCsqrt', PACKAGE = 'Rdimtools', A, B, C)
+}
+
 #' @keywords internal
 method_pca <- function(psdX) {
     .Call('_Rdimtools_method_pca', PACKAGE = 'Rdimtools', psdX)
@@ -118,6 +130,16 @@ method_kmmcvec <- function(X, partmat, param) {
 #' @keywords internal
 method_lfda_maximaldistance <- function(tvec, tmat) {
     .Call('_Rdimtools_method_lfda_maximaldistance', PACKAGE = 'Rdimtools', tvec, tmat)
+}
+
+#' @keywords internal
+method_nnprojmax <- function(C, Uinit, tol, maxiter) {
+    .Call('_Rdimtools_method_nnprojmax', PACKAGE = 'Rdimtools', C, Uinit, tol, maxiter)
+}
+
+#' @keywords internal
+method_nnprojmin <- function(C, Uinit, tol, maxiter) {
+    .Call('_Rdimtools_method_nnprojmin', PACKAGE = 'Rdimtools', C, Uinit, tol, maxiter)
 }
 
 #' @keywords internal

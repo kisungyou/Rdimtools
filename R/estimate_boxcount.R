@@ -20,7 +20,9 @@
 #' \item{r}{a vector of radius used.}
 #' \item{Nr}{a vector of boxes counted for each corresponding \code{r}.}
 #' }
+#'
 #' @examples
+#' \dontrun{
 #' ## generate three different dataset
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -31,6 +33,7 @@
 #' est.boxcount(X1,show=TRUE)
 #' est.boxcount(X2,show=TRUE)
 #' est.boxcount(X3,show=TRUE)
+#' }
 #'
 #' @references Ott, E. (1988) \emph{Chaos in Dynamical Systems}. Cambridge University Press.
 #' @author Kisung You

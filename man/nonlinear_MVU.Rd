@@ -40,9 +40,9 @@ since \code{do.mvu} depends on \href{https://CRAN.R-project.org/package=Rcsdp}{R
 efficiency when given a large dataset.
 }
 \examples{
-## generate ribbon-shaped data
-## in order to pass CRAN pretest, n is set to be small.
-X = aux.gensamples(dname="ribbon",n=28)
+\dontrun{
+## generate ribbon-shaped data with the small number of data
+X = aux.gensamples(dname="ribbon", n=50)
 
 ## 1. standard MVU
 output1 <- do.mvu(X,ndim=2)
@@ -58,6 +58,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="standard")
 plot(output2$Y[,1],output2$Y[,2],main="kpca projection")
 plot(output3$Y[,1],output3$Y[,2],main="densely connected graph")
+}
 
 }
 \references{

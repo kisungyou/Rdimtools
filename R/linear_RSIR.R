@@ -1,5 +1,28 @@
 #' Regularized Sliced Inverse Regression
 #'
+#' One of possible drawbacks in SIR method is that for high-dimensional data, it might suffer from
+#' rank deficiency of scatter/covariance matrix. Instead of naive matrix inversion, several have
+#' proposed regularization schemes that reflect several ideas from various incumbent methods.
+#'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param response a length-\eqn{n} vector of response variable.
+#' @param ndim an integer-valued target dimension.
+#' @param h the number of slices to divide the range of response vector.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param regmethod type of regularization scheme to be used.
+#' @param tau regularization parameter for adjusting rank-deficient scatter matrix.
+#' @param numpc number of principal components to be used in intermediate dimension reduction scheme.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
 #' @examples
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
@@ -27,11 +50,11 @@
 #'
 #' ## visualize
 #' par(mfrow=c(2,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="reg::Ridge")
-#' plot(out2$Y[,1], out2$Y[,2], main="reg::Tikhonov")
-#' plot(out3$Y[,1], out3$Y[,2], main="reg::PCA")
-#' plot(out4$Y[,1], out4$Y[,2], main="reg::PCA+Ridge")
-#' plot(out5$Y[,1], out5$Y[,2], main="reg::PCA+Tikhonov")
+#' plot(out1$Y[,1], out1$Y[,2], main="RSIR::Ridge")
+#' plot(out2$Y[,1], out2$Y[,2], main="RSIR::Tikhonov")
+#' plot(out3$Y[,1], out3$Y[,2], main="RSIR::PCA")
+#' plot(out4$Y[,1], out4$Y[,2], main="RSIR::PCA+Ridge")
+#' plot(out5$Y[,1], out5$Y[,2], main="RSIR::PCA+Tikhonov")
 #' plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
 #'
 #' @references
@@ -58,7 +81,7 @@ do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   p = ncol(X)
   #   2. response
   response = as.double(response)
-  if ((!is.vector(response))||(any(is.na(response)))){
+  if ((any(is.infinite(response)))||(!is.vector(response))||(any(is.na(response)))){
     stop("* do.rsir : 'response' should be a vector containing no NA values.")
   }
   #   3. ndim

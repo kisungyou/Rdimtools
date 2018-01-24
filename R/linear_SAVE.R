@@ -1,5 +1,25 @@
 #' Sliced Average Variance Estimation
 #'
+#' Sliced Average Variance Estimation (SAVE) is a supervised linear dimension reduction method.
+#' It is based on sufficiency principle with respect to central subspace concept under the
+#' linerity and constant covariance conditions. For more details, see the reference paper.
+#'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param response a length-\eqn{n} vector of response variable.
+#' @param ndim an integer-valued target dimension.
+#' @param h the number of slices to divide the range of response vector.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "center" and other options "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
 #' @examples
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
@@ -23,9 +43,9 @@
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="2 slices")
-#' plot(out2$Y[,1], out2$Y[,2], main="5 slices")
-#' plot(out3$Y[,1], out3$Y[,2], main="10 slices")
+#' plot(out1$Y[,1], out1$Y[,2], main="SAVE::2 slices")
+#' plot(out2$Y[,1], out2$Y[,2], main="SAVE::5 slices")
+#' plot(out3$Y[,1], out3$Y[,2], main="SAVE::10 slices")
 #'
 #' @references
 #' \insertRef{dennis_cook_save:_2000}{Rdimtools}
@@ -43,7 +63,7 @@ do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   p = ncol(X)
   #   2. response
   response = as.double(response)
-  if ((!is.vector(response))||(any(is.na(response)))){
+  if ((any(is.infinite(response)))||(!is.vector(response))||(any(is.na(response)))){
     stop("* do.sir : 'response' should be a vector containing no NA values.")
   }
   #   3. ndim
