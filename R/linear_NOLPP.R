@@ -1,5 +1,8 @@
 #' Nonnegative Orthogonal Locality Preserving Projection
 #'
+#' Nonnegative Orthogonal Locality Preserving Projection (NOLPP) is a variant of OLPP where
+#' projection vectors - or, basis for learned subspace - contain no negative values.
+#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
@@ -23,6 +26,7 @@
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 #'
+#' @seealso \code{\link{do.lopp}}
 #' @rdname linear_NOLPP
 #' @author Kisung You
 #' @export

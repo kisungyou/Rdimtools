@@ -1,5 +1,7 @@
 #' Nonnegative Orthogonal Neighborhood Preserving Projections
 #'
+#' Nonnegative Orthogonal Neighborhood Preserving Projections (NONPP) is a variant of ONPP where
+#' projection vectors - or, basis for learned subspace - contain no negative values.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
@@ -20,6 +22,7 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
+#' @seealso \code{\link{do.onpp}}
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 #'

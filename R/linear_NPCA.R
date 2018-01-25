@@ -1,5 +1,7 @@
 #' Nonnegative Principal Component Analysis
 #'
+#' Nonnegative Principal Component Analysis (NPCA) is a variant of PCA where
+#' projection vectors - or, basis for learned subspace - contain no negative values.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
@@ -19,6 +21,7 @@
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 #'
+#' @seealso \code{\link{do.pca}}
 #' @rdname linear_NPCA
 #' @author Kisung You
 #' @export

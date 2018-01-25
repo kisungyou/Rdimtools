@@ -35,10 +35,14 @@ a named list containing
 }
 }
 \description{
-Nonnegative Orthogonal Neighborhood Preserving Projections
+Nonnegative Orthogonal Neighborhood Preserving Projections (NONPP) is a variant of ONPP where
+projection vectors - or, basis for learned subspace - contain no negative values.
 }
 \references{
 \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
+}
+\seealso{
+\code{\link{do.onpp}}
 }
 \author{
 Kisung You

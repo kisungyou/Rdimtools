@@ -29,10 +29,14 @@ a named list containing
 }
 }
 \description{
-Nonnegative Principal Component Analysis
+Nonnegative Principal Component Analysis (NPCA) is a variant of PCA where
+projection vectors - or, basis for learned subspace - contain no negative values.
 }
 \references{
 \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
+}
+\seealso{
+\code{\link{do.pca}}
 }
 \author{
 Kisung You

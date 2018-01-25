@@ -37,10 +37,14 @@ a named list containing
 }
 }
 \description{
-Nonnegative Orthogonal Locality Preserving Projection
+Nonnegative Orthogonal Locality Preserving Projection (NOLPP) is a variant of OLPP where
+projection vectors - or, basis for learned subspace - contain no negative values.
 }
 \references{
 \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
+}
+\seealso{
+\code{\link{do.lopp}}
 }
 \author{
 Kisung You
