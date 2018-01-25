@@ -26,6 +26,7 @@ using namespace arma;
  * 13. KMMC
  * 14. LFDA
  * 15. NNPROJMAX & NNPROJMIN
+ * 16. NNEMBEDMIN
  */
 
 Rcpp::List method_pca(arma::mat& psdX);                             // 01. PCA
@@ -51,5 +52,7 @@ double method_lfda_maximaldistance(arma::rowvec& tvec,              // 14. LFDA
 arma::mat method_nnprojmax(arma::mat& C, arma::mat& Uinit,          // 15. NNPROJMAX & NNPROJMIN
                       const double tol, const int maxiter);
 arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter);
+arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit,         // 16. NNEMBEDMIN
+                            const double tol, const int maxiter);
 
 #endif

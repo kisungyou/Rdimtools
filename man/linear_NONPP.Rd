@@ -8,6 +8,32 @@ do.nonpp(X, ndim = 2, type = c("proportion", 0.1),
   preprocess = c("center", "decorrelate", "whiten"), maxiter = 1000,
   reltol = 1e-05)
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
+
+\item{ndim}{an integer-valued target dimension.}
+
+\item{type}{a vector of neighborhood graph construction. Following types are supported;
+\code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
+Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
+among all data points. See also \code{\link{aux.graphnbd}} for more details.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "center" and other options of "decorrelate" and "whiten"
+are supported. See also \code{\link{aux.preprocess}} for more details.}
+
+\item{maxiter}{number of maximum iteraions allowed.}
+
+\item{reltol}{stopping criterion for incremental relative error.}
+}
+\value{
+a named list containing
+\describe{
+\item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+}
+}
 \description{
 Nonnegative Orthogonal Neighborhood Preserving Projections
 }

@@ -1,4 +1,4 @@
-#' Locally-Linear Embedding
+#' Locally Linear Embedding
 #'
 #' Locally-Linear Embedding (LLE) was introduced approximately at the same time as Isomap.
 #' Its idea was motivated to describe entire data manifold by making a chain of local patches

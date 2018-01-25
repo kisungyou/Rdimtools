@@ -392,6 +392,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_nnembedmin
+arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit, const double tol, const int maxiter);
+RcppExport SEXP _Rdimtools_method_nnembedmin(SEXP MSEXP, SEXP YinitSEXP, SEXP tolSEXP, SEXP maxiterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type M(MSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Yinit(YinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_nnembedmin(M, Yinit, tol, maxiter));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_sne
 arma::mat method_sne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
 RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
@@ -603,6 +617,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_lfda_maximaldistance", (DL_FUNC) &_Rdimtools_method_lfda_maximaldistance, 2},
     {"_Rdimtools_method_nnprojmax", (DL_FUNC) &_Rdimtools_method_nnprojmax, 4},
     {"_Rdimtools_method_nnprojmin", (DL_FUNC) &_Rdimtools_method_nnprojmin, 4},
+    {"_Rdimtools_method_nnembedmin", (DL_FUNC) &_Rdimtools_method_nnembedmin, 4},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},

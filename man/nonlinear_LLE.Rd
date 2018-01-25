@@ -2,7 +2,7 @@
 % Please edit documentation in R/nonlinear_LLE.R
 \name{do.lle}
 \alias{do.lle}
-\title{Locally-Linear Embedding}
+\title{Locally Linear Embedding}
 \usage{
 do.lle(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
   weight = TRUE, preprocess = c("null", "center", "decorrelate", "whiten"),

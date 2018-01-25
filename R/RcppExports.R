@@ -143,6 +143,11 @@ method_nnprojmin <- function(C, Uinit, tol, maxiter) {
 }
 
 #' @keywords internal
+method_nnembedmin <- function(M, Yinit, tol, maxiter) {
+    .Call('_Rdimtools_method_nnembedmin', PACKAGE = 'Rdimtools', M, Yinit, tol, maxiter)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal

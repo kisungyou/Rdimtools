@@ -1,5 +1,10 @@
 #' Modified Orthogonal Discriminant Projection
 #'
+#' Modified Orthogonal Discriminant Projection (MODP) is a variant of Orthogonal Discriminant Projection (ODP).
+#' Authors argue the assumption in modeling ODP's mechanism to reflect distance and class labeling seem unsound.
+#' They propose a modified method to explore the intrinsic structure of original data and enhance
+#' the classification ability.
+#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
