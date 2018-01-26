@@ -26,7 +26,7 @@
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 #'
-#' @seealso \code{\link{do.lopp}}
+#' @seealso \code{\link{do.olpp}}
 #' @rdname linear_NOLPP
 #' @author Kisung You
 #' @export

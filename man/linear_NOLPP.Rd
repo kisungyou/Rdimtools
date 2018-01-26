@@ -44,7 +44,7 @@ projection vectors - or, basis for learned subspace - contain no negative values
 \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 }
 \seealso{
-\code{\link{do.lopp}}
+\code{\link{do.olpp}}
 }
 \author{
 Kisung You

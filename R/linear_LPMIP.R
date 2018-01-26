@@ -15,7 +15,7 @@
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null" and three options of "center", "decorrelate", or "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param sigma bandwidth parameter for heat kernel in \eqn{(0,\Infty)}.
+#' @param sigma bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #' @param alpha balancing parameter between two locality information in \eqn{[0,1]}.
 #'
 #' @return a named list containing
@@ -26,9 +26,8 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
 #' ## generate default dataset
-#' X <- aux.gensamples()
+#' X <- aux.gensamples(n=123)
 #'
 #' ## try different neighborhood size
 #' out1 <- do.lpmip(X, ndim=2, type=c("proportion",0.01))
@@ -40,7 +39,6 @@
 #' plot(out1$Y[,1],out1$Y[,2],main="1% connected")
 #' plot(out2$Y[,1],out2$Y[,2],main="10% connected")
 #' plot(out3$Y[,1],out3$Y[,2],main="25% connected")
-#' }
 #'
 #' @references
 #' \insertRef{haixian_wang_locality-preserved_2008}{Rdimtools}

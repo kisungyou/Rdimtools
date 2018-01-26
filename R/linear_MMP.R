@@ -48,7 +48,7 @@
 #' plot(out2$Y[,1], out2$Y[,2], main="20% missing labels")
 #'
 #' @references
-#' \insertRef{he_learning_2008}{Rdimtools}
+#' \insertRef{xiaofei_he_learning_2008}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname linear_MMP

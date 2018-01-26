@@ -129,6 +129,8 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
 
 
 
+
+# : -----------------------------------------------------------------------
 #' @keywords internal
 #' @noRd
 slpp_allones <- function(n){
