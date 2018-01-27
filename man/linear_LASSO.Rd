@@ -65,8 +65,7 @@ plot(out3$Y[,1], out3$Y[,2], main="LASSO::lambda=10")
 
 }
 \references{
-Tibshirani R (1996). "Regression Shrinkage and Selection via the Lasso.” \emph{Journal of the Royal Statistical Society. Series B (Methodological)},
-\bold{58}(1), pp. 267-288. ISSN 00359246.
+\insertRef{tibshirani_regression_1996}{ADMM}
 }
 \author{
 Kisung You

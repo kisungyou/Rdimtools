@@ -49,7 +49,7 @@
 #' @author Kisung You
 #' @rdname linear_LDE
 #' @export
-do.lde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
+do.lde <- function(X, label, ndim=2, t=1.0, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -72,7 +72,7 @@ do.lde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
   if (!check_ndim(ndim,p)){stop("* do.lde : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   4. t
   t = as.double(t)
-  if (!check_NumMM(t,0,1e+10,compact=TRUE)){stop("* do.lde : 't' should be a positive real number.")}
+  if (!check_NumMM(t,.Machine$double.eps,Inf,compact=TRUE)){stop("* do.lde : 't' should be a positive real number.")}
   #   5. numk
   numk = as.integer(numk)
   if (!check_NumMM(numk,1,n/2,compact=FALSE)){stop("* do.lde : 'numk' should be an integer in [2,nrow(X)/2).")}

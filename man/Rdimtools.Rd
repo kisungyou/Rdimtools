@@ -39,6 +39,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
 \code{\link{do.dne}} \tab S \tab Discriminant Neighborhood Embedding \cr
 \code{\link{do.dspp}} \tab S \tab Discriminative Sparsity Preserving Projection \cr
+\code{\link{do.elde}} \tab S \tab Exponential Local Discriminant Embedding \cr
 \code{\link{do.elpp2}} \tab U \tab Enhanced Locality Preserving Projection (2013) \cr
 \code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
@@ -113,6 +114,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.crca}} \tab U \tab Curvilinear Component Analysis \cr
 \code{\link{do.crda}} \tab U \tab Curvilinear Distance Analysis \cr
 \code{\link{do.dm}} \tab U \tab Diffusion Maps \cr
+\code{\link{do.dve}} \tab U \tab Distinguishing Variance Embedding \cr
 \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
 \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr
