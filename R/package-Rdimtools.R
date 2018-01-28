@@ -20,6 +20,7 @@
 #' \tabular{lcl}{
 #' FUNCTION \tab TYPE \tab ALGORITHM \cr
 #' \code{\link{do.adr}} \tab U \tab Adaptive Dimension Reduction \cr
+#' \code{\link{do.ammc}} \tab S \tab Adaptive Maximum Margin Criterion \cr
 #' \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
 #' \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 #' \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
@@ -47,6 +48,7 @@
 #' \code{\link{do.lea}} \tab U \tab Locally Linear Embedded Eigenspace Analysis \cr
 #' \code{\link{do.lfda}} \tab S \tab Local Fisher Discriminant Analysis \cr
 #' \code{\link{do.llp}} \tab U \tab Local Learning Projections \cr
+#' \code{\link{do.lltsa}} \tab U \tab Linear Local Tangent Space Alignment \cr
 #' \code{\link{do.lmds}} \tab U \tab Landmark Multidimensional Scaling \cr
 #' \code{\link{do.lpca}} \tab U \tab Locally Principal Component Analysis \cr
 #' \code{\link{do.lpe}} \tab U \tab Locality Pursuit Embedding \cr
@@ -84,6 +86,7 @@
 #' \code{\link{do.rlda}} \tab S \tab Regularized Linear Discriminant Analysis \cr
 #' \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
 #' \code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
+#' \code{\link{do.sammc}} \tab SS \tab Semi-Supervised Adaptive Maximum Margin Criterion \cr
 #' \code{\link{do.save}} \tab S \tab Sliced Average Variance Estimation \cr
 #' \code{\link{do.sda}} \tab SS \tab Semi-Supervised Discriminant Analysis \cr
 #' \code{\link{do.sdlpp}} \tab U \tab Sample-Dependent Locality Preserving Projection \cr
@@ -166,9 +169,9 @@
 #' @aliases Rdimtools-package
 #' @import Rcsdp
 #' @import Rdpack
-#' @import RSpectra
 #' @import CVXR
 #' @import geigen
+#' @importFrom RSpectra eigs svds
 #' @importFrom pracma pinv
 #' @importFrom ADMM admm.lasso
 #' @importFrom Matrix rankMatrix expm norm

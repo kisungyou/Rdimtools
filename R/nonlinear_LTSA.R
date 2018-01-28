@@ -15,7 +15,7 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'' and  other methods of ``center'',``decorrelate'', or ``whiten''
+#' Default is "center" and  other methods "decorrelate" and "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
@@ -25,33 +25,36 @@
 #' \item{eigvals}{a vector of eigenvalues from the final decomposition.}
 #' }
 #'
-#'@examples
-#'## generate data
-#'X <- aux.gensamples(dname="cswiss",n=100)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' X <- aux.gensamples(dname="cswiss",n=100)
 #'
-#'## 1. use 10%-connected graph
-#'output1 <- do.ltsa(X,ndim=2)
+#' ## 1. use 10%-connected graph
+#' output1 <- do.ltsa(X,ndim=2)
 #'
-#'## 2. use 25%-connected graph
-#'output2 <- do.ltsa(X,ndim=2,type=c("proportion",0.25))
+#' ## 2. use 25%-connected graph
+#' output2 <- do.ltsa(X,ndim=2,type=c("proportion",0.25))
 #'
-#'## 3. use 50%-connected graph
-#'output3 <- do.ltsa(X,ndim=2,type=c("proportion",0.50))
+#' ## 3. use 50%-connected graph
+#' output3 <- do.ltsa(X,ndim=2,type=c("proportion",0.50))
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="10%")
-#'plot(output2$Y[,1],output2$Y[,2],main="25%")
-#'plot(output3$Y[,1],output3$Y[,2],main="50%")
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="10%")
+#' plot(output2$Y[,1],output2$Y[,2],main="25%")
+#' plot(output3$Y[,1],output3$Y[,2],main="50%")
+#' }
 #'
 #' @references
 #' \insertRef{zhang_linear_2007}{Rdimtools}
 #'
-#'
 #' @author Kisung You
 #' @rdname nonlinear_LTSA
 #' @export
-do.ltsa <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",preprocess="null"){
+do.ltsa <- function(X, ndim=2, type=c("proportion",0.1),
+                    symmetric=c("union","intersect","asymmetric"),
+                    preprocess=c("center","decorrelate","whiten")){
   # process : typechecking
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -59,14 +62,16 @@ do.ltsa <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",preproce
   }
   ndim = as.integer(ndim)
   nbdtype = type
-  nbdsymmetric = symmetric
-  if (!is.element(nbdsymmetric,c("union","intersect","asymmetric"))){
-    stop("* do.ltsa : 'symmetric' should have one of three types.")
+  if (missing(symmetric)){
+    nbdsymmetric = "union"
+  } else {
+    nbdsymmetric = match.arg(symmetric)
   }
   algweight = FALSE
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","decorrelate","whiten"))){
-    stop("* do.ltsa : 'preprocess' should have one of four types.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
 
   # process : data processing

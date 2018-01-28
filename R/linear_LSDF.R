@@ -5,6 +5,27 @@
 #' the margin between data opints from different classes, while labeled ones are used to discover
 #' the geometrical structure of the data space.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param label a length-\eqn{n} vector of data class labels.
+#' @param ndim an integer-valued target dimension.
+#' @param type a vector of neighborhood graph construction. Following types are supported;
+#'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
+#'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
+#'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "null" and other options of "center", "decorrelate" and "whiten"
+#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' @param gamma within-class weight parameter for same-class data.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' ## generate data of 3 types with clear difference
@@ -34,27 +55,6 @@
 #' plot(out3$Y[,1], out3$Y[,2], main="25% connectivity")
 #' }
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
-#' @param ndim an integer-valued target dimension.
-#' @param type a vector of neighborhood graph construction. Following types are supported;
-#'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
-#'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
-#'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param gamma within-class weight parameter for same-class data.
-#'
-#' @return a named list containing
-#' \describe{
-#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
-#' }
-#'
 #' @references
 #' \insertRef{cai_locality_2007}{Rdimtools}
 #'
@@ -75,6 +75,9 @@ do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
   ulabel = unique(label)
   if (all(!is.na(ulabel))){
     message("* Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.")
+  }
+  if (any(is.infinite(ulabel))){
+    stop("* Semi-Supervised Learning : Inf is not allowed in label.")
   }
   #   3. ndim
   ndim = as.integer(ndim)
