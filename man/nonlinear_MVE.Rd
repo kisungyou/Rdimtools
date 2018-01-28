@@ -18,7 +18,8 @@ do.mve(X, ndim = 2, knn = ceiling(nrow(X)/10), kwidth = 1,
 \item{kwidth}{bandwidth for Gaussian kernel.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null" and other options of "center","decorrelate", and "whiten" are supported.
+See also \code{\link{aux.preprocess}} for more details.}
 
 \item{tol}{stopping criterion for incremental change.}
 

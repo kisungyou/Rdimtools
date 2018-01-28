@@ -108,6 +108,7 @@
 #' \code{\link{do.crda}} \tab U \tab Curvilinear Distance Analysis \cr
 #' \code{\link{do.dm}} \tab U \tab Diffusion Maps \cr
 #' \code{\link{do.dve}} \tab U \tab Distinguishing Variance Embedding \cr
+#' \code{\link{do.iltsa}} \tab U \tab Improved Local Tangent Space Alignment \cr
 #' \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
 #' \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
 #' \code{\link{do.keca}} \tab U \tab Kernel Entropy Component Analysis \cr

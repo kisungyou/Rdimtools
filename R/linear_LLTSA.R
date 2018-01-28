@@ -59,7 +59,7 @@ do.lltsa <- function(X, ndim=2, type=c("proportion",0.1),
   p = ncol(X)
   #   2. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.sammc : 'ndim' is a positive integer in [1,#(covariates)).")}
+  if (!check_ndim(ndim,p)){stop("* do.lltsa : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   3. nbd setup
   nbdtype = type
   if (missing(symmetric)){

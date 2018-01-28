@@ -9,6 +9,22 @@
 #' we adopted \href{https://CRAN.R-project.org/package=Rcsdp}{Rcsdp} package in that
 #' when given large-scale dataset, it may result in extremely deteriorated computational performance.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
+#' @param ndim an integer-valued target dimension.
+#' @param knn size of \eqn{k}-nn neighborhood.
+#' @param kwidth bandwidth for Gaussian kernel.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "null" and other options of "center","decorrelate", and "whiten" are supported.
+#' See also \code{\link{aux.preprocess}} for more details.
+#' @param tol stopping criterion for incremental change.
+#' @param maxiter maximum number of iterations allowed.
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' ## generate ribbon-shaped data
@@ -30,31 +46,13 @@
 #' @references
 #' \insertRef{shaw_minimum_2007}{Rdimtools}
 #'
-#'
-#'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
-#' @param ndim an integer-valued target dimension.
-#' @param knn size of \eqn{k}-nn neighborhood.
-#' @param kwidth bandwidth for Gaussian kernel.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param tol stopping criterion for incremental change.
-#' @param maxiter maximum number of iterations allowed.
-#'
-#' @return a named list containing
-#' \describe{
-#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' }
-#'
-#'
 #' @seealso \code{\link{do.mvu}}
 #' @author Kisung You
 #' @rdname nonlinear_MVE
 #' @export
-do.mve <- function(X,ndim=2,knn=ceiling(nrow(X)/10),kwidth=1.0,
+do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
                    preprocess=c("null","center","whiten","decorrelate"),
-                   tol=1e-4,maxiter=1000){
+                   tol=1e-4, maxiter=1000){
   #------------------------------------------------------------------------
   ## PARAMETER CHECK
   #   1. X : data matrix
