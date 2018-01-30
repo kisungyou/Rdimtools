@@ -65,6 +65,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.lpfda}} \tab S \tab Locality Preserving Fisher Discriminant Analysis \cr
 \code{\link{do.lpmip}} \tab U \tab Locality-Preserved Maximum Information Projection \cr
 \code{\link{do.lpp}} \tab U \tab Locality Preserving Projection \cr
+\code{\link{do.lqmi}} \tab S \tab Linear Quadratic Mutual Information \cr
 \code{\link{do.lscore}} \tab U \tab Laplacian Score \cr
 \code{\link{do.lsda}} \tab S \tab Locality Sensitive Discriminant Analysis \cr
 \code{\link{do.lsdf}} \tab SS \tab Locality Sensitive Discriminant Feature \cr
@@ -128,6 +129,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.kmfa}} \tab S \tab Kernel Marginal Fisher Analysis \cr
 \code{\link{do.kmmc}} \tab S \tab Kernel Maximium Margin Criterion \cr
 \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
+\code{\link{do.kqmi}} \tab S \tab Kernel Quadratic Mutual Information \cr
 \code{\link{do.ksda}} \tab SS \tab Kernel Semi-Supervised Discriminant Analysis \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr

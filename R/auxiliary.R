@@ -17,6 +17,7 @@
 # 12. aux.nbdlogical       : find homogeneous and heterogeneous neighborhood indexing
 # 13. aux.geigen           : geigen in my taste
 # 14. aux.featureindicator : generate (p-by-ndim) indicator matrix for projection
+# 15. aux.traceratio.max   : compute trace ratio problem for maximal basis
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1168,6 +1169,51 @@ aux.featureindicator <- function(p,ndim,idxvec){
   for (i in 1:ndim){
     selectedcolumn = as.integer(idxvec[i])
     output[selectedcolumn,i] = 1
+  }
+  return(output)
+}
+
+# 15. aux.traceratio.max : compute trace ratio problem for maximal --------
+#' @keywords internal
+#' @noRd
+aux.traceratio.max <- function(A,B,ndim,tol=1e-10){
+  # -------------------------------------------------------------
+  # PRELIMINARY SETTING
+  if (nrow(A)!=ncol(A)){
+    stop("* aux.traceratio : A is not square.")
+  } else {
+    d = nrow(A)
+  }
+  if (nrow(B)!=ncol(B)){
+    stop("* aux.traceratio : B is not square")
+  }
+  if (nrow(B)!=d){
+    stop("* aux.traceratio : B is not matching size of A.")
+  }
+  m = as.integer(ndim)
+  r = as.integer(Matrix::rankMatrix(B))
+
+  # -------------------------------------------------------------
+  # MAIN BRANCHING
+  if (m <= (d-r)){
+    Z = RSpectra::eigs(B,(d-r),which="SR")$vectors
+    cost = t(Z)%*%A%*%Z
+    Zright = RSpectra::eigs(cost, m)$vectors
+    output = Z%*%Zright;
+  } else {
+    lambda1 = sum(diag(A))/sum(diag(B))
+    lambda2 = sum(base::eigen(A, only.values=TRUE)$values[1:m])/sum(base::eigen(B, only.values = TRUE)$values[1:m])
+    lambda  = ((lambda1+lambda2)/2)
+    while ((lambda2 -lambda1)>tol){
+      gamma = sum(base::eigen((A-lambda*B), only.values = TRUE)$values[1:m])
+      if (gamma > 0){
+        lambda1 = lambda
+      } else {
+        lambda2 = lambda
+      }
+      lambda = ((lambda1+lambda2)/2)
+    }
+    output = RSpectra::eigs((A-lambda*B),ndim)$vectors
   }
   return(output)
 }

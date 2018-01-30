@@ -4,7 +4,7 @@ Title: Dimension Reduction and Estimation Methods
 Version: 0.3.0
 Authors@R: person("Kisung", "You", role = c("aut", "cre"),
                      email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X")) 
-Description: We provide a rich collection of linear and nonlinear dimension reduction techniques.
+Description: We provide 111 linear and nonlinear dimension reduction techniques.
 	Intrinsic dimension estimation methods for exploratory analysis are also provided.
     For more details on dimensionality techniques, see the paper by
     Ma and Zhu (2013) <doi:10.1111/j.1751-5823.2012.00182.x> if you are interested in

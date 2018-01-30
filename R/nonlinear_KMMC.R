@@ -75,7 +75,7 @@ do.kmmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   }
   #   5. t : kernel bandwidth
   t = as.double(t)
-  if (!check_NumMM(t, 0, 1e+10, compact=FALSE)){stop("* do.kmmc : 't' is a bandwidth parameter for gaussian kernel.")}
+  if (!check_NumMM(t, .Machine$double.eps, Inf, compact=TRUE)){stop("* do.kmmc : 't' is a bandwidth parameter for gaussian kernel.")}
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocess of data
