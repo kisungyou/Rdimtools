@@ -93,10 +93,6 @@ method_fa <- function(X, k, maxiter, tolerance) {
     .Call('_Rdimtools_method_fa', PACKAGE = 'Rdimtools', X, k, maxiter, tolerance)
 }
 
-method_lpp <- function(X, W) {
-    .Call('_Rdimtools_method_lpp', PACKAGE = 'Rdimtools', X, W)
-}
-
 #' @keywords internal
 method_npe <- function(X, W) {
     .Call('_Rdimtools_method_npe', PACKAGE = 'Rdimtools', X, W)

@@ -5,8 +5,8 @@
 \title{Locality Preserving Projection}
 \usage{
 do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), weight = TRUE, preprocess = c("center",
-  "whiten", "decorrelate"), t = 1)
+  "intersect", "asymmetric"), preprocess = c("center", "whiten",
+  "decorrelate"), t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -21,19 +21,16 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{symmetric}{one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 See also \code{\link{aux.graphnbd}} for more details.}
 
-\item{weight}{\code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.}
-
 \item{preprocess}{an additional option for preprocessing the data.
 Default is "center" and other options of "decorrelate" and "whiten"
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
-\item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}}
+\item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}.}
 }
 \value{
 a named list containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-\item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
@@ -46,27 +43,18 @@ operator on the graph-approximated data manifold.
 \examples{
 \dontrun{
 ## generate data
-## in order to pass CRAN pretest, n is set to be small.
-X <- aux.gensamples(dname="twinpeaks",n=28)
+X <- aux.gensamples(dname="twinpeaks",n=100)
 
-## 1. connecting 10\% of data for graph construction.
-output1 <- do.lpp(X,ndim=2,type=c("proportion",0.10))
-
-## 2. constructing 25\%-connected graph
-output2 <- do.lpp(X,ndim=2,type=c("proportion",0.25))
-
-## 3. constructing half-connected graph as binarized
-output3 <- do.lpp(X,ndim=2,type=c("proportion",0.5),weight=FALSE)
+## try different kernel bandwidths
+out1 <- do.lpp(X, t=0.1)
+out1 <- do.lpp(X, t=1)
+out1 <- do.lpp(X, t=10)
 
 ## Visualize three different projections
-if ((!is.na(output1))&&(!is.na(output2))&&(!is.na(output3))){
 par(mfrow=c(1,3))
-plot(output1$Y[,1],output1$Y[,2],main="10\%")
-plot(output2$Y[,1],output2$Y[,2],main="25\%")
-plot(output3$Y[,1],output3$Y[,2],main="50\%")
-} else {
-message("* do.lpp : example : one of three trials must have failed.")
-}
+plot(out1$Y[,1],out1$Y[,2],main="LPP::bandwidth=0.1")
+plot(out2$Y[,1],out2$Y[,2],main="LPP::bandwidth=1")
+plot(out3$Y[,1],out3$Y[,2],main="LPP::bandwidth=10")
 }
 
 

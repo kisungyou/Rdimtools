@@ -264,18 +264,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// method_lpp
-Rcpp::List method_lpp(arma::mat& X, arma::mat& W);
-RcppExport SEXP _Rdimtools_method_lpp(SEXP XSEXP, SEXP WSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::mat& >::type W(WSEXP);
-    rcpp_result_gen = Rcpp::wrap(method_lpp(X, W));
-    return rcpp_result_gen;
-END_RCPP
-}
 // method_npe
 Rcpp::List method_npe(arma::mat& X, arma::mat& W);
 RcppExport SEXP _Rdimtools_method_npe(SEXP XSEXP, SEXP WSEXP) {
@@ -607,7 +595,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_ica", (DL_FUNC) &_Rdimtools_method_ica, 7},
     {"_Rdimtools_method_rpgauss", (DL_FUNC) &_Rdimtools_method_rpgauss, 2},
     {"_Rdimtools_method_fa", (DL_FUNC) &_Rdimtools_method_fa, 4},
-    {"_Rdimtools_method_lpp", (DL_FUNC) &_Rdimtools_method_lpp, 2},
     {"_Rdimtools_method_npe", (DL_FUNC) &_Rdimtools_method_npe, 2},
     {"_Rdimtools_method_olpp", (DL_FUNC) &_Rdimtools_method_olpp, 3},
     {"_Rdimtools_method_bpca", (DL_FUNC) &_Rdimtools_method_bpca, 3},

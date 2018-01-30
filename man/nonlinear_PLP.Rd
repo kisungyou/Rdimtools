@@ -53,6 +53,7 @@ intermittently. Such functionality is, however, sacrificed in this version.
 }
 
 \examples{
+\dontrun{
 ## generate default dataset
 X <- aux.gensamples()
 
@@ -62,6 +63,7 @@ for (i in 1:5){
     out = do.plp(X,ndim=2,type=c("proportion",0.2))
     pm  = paste("iteration ",i,sep="")
     plot(out$Y[,1],out$Y[,2],main=pm)
+}
 }
 
 }

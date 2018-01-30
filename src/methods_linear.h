@@ -17,7 +17,7 @@ using namespace arma;
  * 04. ICA
  * 05. RNDPROJ
  * 06. FA
- * 07. LPP
+ * 07.
  * 08. NPE
  * 09. OLPP
  * 10. BPCA
@@ -38,7 +38,6 @@ Rcpp::List method_ica(arma::mat& X, const int C,
 Rcpp::List method_rpgauss(arma::mat& X, const int k);               // 05. RNDPROJ
 Rcpp::List method_fa(arma::mat& X, const int k, const int maxiter,  // 06. FA
                      const double tolerance);
-Rcpp::List method_lpp(arma::mat& X, arma::mat& W);                  // 07. LPP
 Rcpp::List method_npe(arma::mat& X, arma::mat& W);                  // 08. NPE
 arma::mat method_olpp(arma::mat& X, arma::mat& S, const int ndim);  // 09. OLPP
 arma::mat auxiliary_outer(arma::colvec x, arma::colvec y);          // 10. BPCA

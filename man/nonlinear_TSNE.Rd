@@ -58,23 +58,19 @@ which takes advantage of speed in sacrifice of accuracy.
 }
 \examples{
 \dontrun{
-## generate "cswiss" data
-X = aux.gensamples(dname="cswiss",n=99)
+## generate swiss roll data
+X = aux.gensamples(n=100)
 
-## 1. no pca scaling
-output1 <- do.tsne(X,ndim=2,pca=FALSE)
-
-## 2. no pca scaling + small perplexity
-output2 <- do.tsne(X,ndim=2,pca=FALSE,perplexity=10)
-
-## 3. no pca scaling + Barnes-Hut scheme
-output3 <- do.tsne(X,ndim=2,pca=FALSE,perplexity=5,BarnesHut=TRUE)
+## compare different perplexity
+out1 <- do.tsne(X, ndim=2, perplexity=5)
+out2 <- do.tsne(X, ndim=2, perplexity=10)
+out3 <- do.tsne(X, ndim=2, perplexity=50)
 
 ## Visualize three different projections
 par(mfrow=c(1,3))
-if ((length(output1)!=1)&&(!is.na(output1))){plot(output1$Y[,1],output1$Y[,2],main="Setting 1")}
-if ((length(output1)!=1)&&(!is.na(output2))){plot(output2$Y[,1],output2$Y[,2],main="Setting 2")}
-if ((length(output1)!=1)&&(!is.na(output3))){plot(output3$Y[,1],output3$Y[,2],main="Setting 3")}
+plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=5")
+plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=10")
+plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=50")
 }
 
 }

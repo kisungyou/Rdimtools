@@ -322,46 +322,8 @@ Rcpp::List method_fa(arma::mat& X, const int k, const int maxiter, const double 
 }
 
 /*
- * 7. Locality Preserving Projections (LPP)
+ * 07. Locality Preserving Projections (LPP)
  */
-// [[Rcpp::export]]
-Rcpp::List method_lpp(arma::mat& X, arma::mat& W){
-  // 7-1. basic settings
-  const int n = X.n_rows;
-  const int m = X.n_cols;
-  const int w1 = W.n_rows;
-  const int w2 = W.n_cols;
-
-  if (w1!=w2){
-    Rcpp::stop("ERROR : W is not a square matrix.");
-  }
-  if (m!=w2){
-    Rcpp::stop("ERROR : two inputs are not matching.");
-  }
-
-  // 7-2. main computation
-  // 7-2-1. Degree matrix D and Laplacian L
-  mat D(m,m);
-  for (int i=0;i<m;i++){
-    D(i,i) = as_scalar(sum(W.row(i)));
-  }
-  mat L = D-W;
-
-  // 7-2-2. LHS and RHS
-  mat LHS = X*L*X.t();
-  mat RHS = X*D*X.t();
-  mat SOL = solve(RHS, LHS);
-
-  // 7-2-3. eigendecomposition
-  vec eigval;
-  mat eigvec;
-  eig_sym(eigval, eigvec, SOL);
-
-  // 7-3. return results
-  return Rcpp::List::create(Rcpp::Named("eigval")=eigval,
-                            Rcpp::Named("eigvec")=eigvec);
-}
-
 
 /*
  * 08. Neighborhood Preserving Embedding (NPE)

@@ -16,6 +16,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate sample data and separate them
 #' X = aux.gensamples(n=500)
 #' idxtest  = sample(1:500,50)
@@ -35,6 +36,7 @@
 #' par(mfrow=c(1,2))
 #' plot(res_train$Y[,1], res_train$Y[,2], main="original PCA")
 #' plot(res_test$Ynew[,1], res_test$Ynew[,2], main="OOS results")
+#' }
 #'
 #' @author Kisung You
 #' @rdname oos_LINEAR

@@ -27,6 +27,7 @@ for mapping or projection. When we have new data, therefore, we can simply use t
 Inputs \code{projection} and \code{trfinfo} should be brought from original model you trained.
 }
 \examples{
+\dontrun{
 ## generate sample data and separate them
 X = aux.gensamples(n=500)
 idxtest  = sample(1:500,50)
@@ -46,6 +47,7 @@ res_test  = oos.linear(Xtest, res_train$projection, res_train$trfinfo)
 par(mfrow=c(1,2))
 plot(res_train$Y[,1], res_train$Y[,2], main="original PCA")
 plot(res_test$Ynew[,1], res_test$Ynew[,2], main="OOS results")
+}
 
 }
 \author{

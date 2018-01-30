@@ -12,16 +12,14 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
-#' @param weight \code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.
 #' @param preprocess  an additional option for preprocessing the data.
 #' Default is "center" and other options of "decorrelate" and "whiten"
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param t bandwidth for heat kernel in \eqn{(0,\infty)}
+#' @param t bandwidth for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
@@ -29,27 +27,18 @@
 #' @examples
 #' \dontrun{
 #' ## generate data
-#' ## in order to pass CRAN pretest, n is set to be small.
-#' X <- aux.gensamples(dname="twinpeaks",n=28)
+#' X <- aux.gensamples(dname="twinpeaks",n=100)
 #'
-#' ## 1. connecting 10% of data for graph construction.
-#' output1 <- do.lpp(X,ndim=2,type=c("proportion",0.10))
-#'
-#' ## 2. constructing 25%-connected graph
-#' output2 <- do.lpp(X,ndim=2,type=c("proportion",0.25))
-#'
-#' ## 3. constructing half-connected graph as binarized
-#' output3 <- do.lpp(X,ndim=2,type=c("proportion",0.5),weight=FALSE)
+#' ## try different kernel bandwidths
+#' out1 <- do.lpp(X, t=0.1)
+#' out1 <- do.lpp(X, t=1)
+#' out1 <- do.lpp(X, t=10)
 #'
 #' ## Visualize three different projections
-#' if ((!is.na(output1))&&(!is.na(output2))&&(!is.na(output3))){
 #' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="10%")
-#' plot(output2$Y[,1],output2$Y[,2],main="25%")
-#' plot(output3$Y[,1],output3$Y[,2],main="50%")
-#' } else {
-#' message("* do.lpp : example : one of three trials must have failed.")
-#' }
+#' plot(out1$Y[,1],out1$Y[,2],main="LPP::bandwidth=0.1")
+#' plot(out2$Y[,1],out2$Y[,2],main="LPP::bandwidth=1")
+#' plot(out3$Y[,1],out3$Y[,2],main="LPP::bandwidth=10")
 #' }
 #'
 #'
@@ -60,8 +49,10 @@
 #' @rdname linear_LPP
 #' @export
 do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
-                   symmetric=c("union","intersect","asymmetric"), weight=TRUE,
+                   symmetric=c("union","intersect","asymmetric"),
                    preprocess=c("center","whiten","decorrelate"), t=1.0){
+  #------------------------------------------------------------------------
+  ## PREPROCESSING
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -84,18 +75,13 @@ do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
   } else {
     nbdsymmetric = match.arg(symmetric)
   }
-  algweight = weight
-  if (!is.logical(algweight)){
-    stop("* do.lpp : 'weight' should be a logical variable.")
-  }
   if (missing(preprocess)){
     algpreprocess = "center"
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  if (!is.numeric(t)||(t<=0)||is.na(t)||is.infinite(t)){
-    stop("* do.lpp : 't' is a bandwidth parameter in (0,infinity).")
-  }
+  t = as.double(t)
+  if (!check_NumMM(t,.Machine$double.eps,Inf)){stop("* do.lpp : 't' is a bandwidth parameter in (0,infinity).")}
 
   # 3. process : data preprocessing
   if (algpreprocess=="null"){
@@ -107,50 +93,37 @@ do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
     trfinfo = tmplist$info
     pX      = tmplist$pX
   }
+  trfinfo$algtype = "linear"
   # 4. process : neighborhood selection
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
-  D     = nbdstruct$dist
-  Dmask = nbdstruct$mask
-  nD    = ncol(D)
-  # 5. process : nbd binarization
-  wD = Dmask*D
-  idnan = is.na(wD)
-  wD[idnan] = 0
-  if (!algweight){
-    wD = wD*exp(-matrix(as.double(Dmask),nrow=nD)/t)
-  }
 
-  # 6. main computation
-  tpX = t(pX)
-  output = tryCatch(
-    {suppressWarnings(method_lpp(tpX,wD))},
-    error=function(cond){
-      message("* do.lpp : 'error' in the method detected.")
-      return(NA)
-    },
-    warning=function(cond){
-      message("* do.lpp : 'warning' in the method detected.")
-      return(NA)
-    }
-  )
 
-  eigvals = output$eigval
-  eigvecs = output$eigvec
-  if (dim(eigvecs)[1]==0){
-    result = NA
-    return(result)
+  #------------------------------------------------------------------------
+  ## COMPUTATION : MAIN FOR LPP
+  #   1. choose the weights
+  tmpW    = exp(-(as.matrix(dist(pX))^2)/t)
+  nbdmask = nbdstruct$mask
+  if (is.infinite(t)){
+    matW = nbdmask*1.0
   } else {
-    # 7. return output
-    #   1. adjust projection
-    projection = aux.adjprojection(eigvecs[,1:ndim])
-    #   2. return output
-    result = list()
-    result$Y = pX %*% projection
-    result$eigval = eigvals[1:ndim]
-    result$projection = projection
-    trfinfo$algtype = "linear"
-    result$trfinfo = trfinfo
-    return(result)
+    matW = tmpW*nbdmask
   }
+
+  #   2. compute auxiliary matrices for eigenmaps
+  matD = diag(rowSums(matW))
+  matL = (matD-matW)
+
+  #   3. two terms and geigen
+  LHS = t(pX)%*%matL%*%pX
+  RHS = t(pX)%*%matD%*%pX
+  projection = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
+
+  #------------------------------------------------------------------------
+  ## RETURN
+  result = list()
+  result$Y = pX%*%projection
+  result$trfinfo = trfinfo
+  result$projection = projection
+  return(result)
 }
