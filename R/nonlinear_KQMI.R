@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate 3 different groups of data X and label vector
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
 #' x2 = matrix(rnorm(4*10), nrow=10)
@@ -39,6 +40,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="KQMI::t=0.01")
 #' plot(out2$Y[,1], out2$Y[,2], main="KQMI::t=1")
 #' plot(out3$Y[,1], out3$Y[,2], main="KQMI::t=100")
+#' }
 #'
 #' @references
 #' \insertRef{bouzas_graph_2015}{Rdimtools}
@@ -99,6 +101,9 @@ do.kqmi <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
   symM = ((M+t(M))/2)
   #   2. kernel and centered version
   Ktilde = exp(-(as.matrix(dist(pX))^2)/t)
+  if ((any(is.na(Ktilde)))||(any(is.infinite(Ktilde)))){
+    stop("* do.kqmi : kernel matrix contains Inf or NA. Please adjust kernel bandwidth value.")
+  }
   En     = array(1/n, c(n,n))
   matK   = (Ktilde - (En%*%Ktilde) - (Ktilde%*%En) + (En%*%Ktilde%*%En))
   #   3. decompose kernel matrix
@@ -110,7 +115,11 @@ do.kqmi <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
   eigcost = base::eigen(costmat)
   matB    = eigcost$vectors
   #   5. compute optimal projection
-  matA    = (matP%*%diag(1/vecL)%*%matB)
+  invvecL = 1/vecL
+  nogoodL = which(is.na(invvecL)||is.infinite(invvecL))
+  invvecL[nogoodL] = 0
+  invmatL = diag(invvecL)
+  matA    = (matP%*%invmatL%*%matB)
   #   6. compute pseudo-projection Astar
   pseudoproj = qr.Q(qr(matA))[,1:ndim]
 
