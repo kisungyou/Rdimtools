@@ -1033,7 +1033,7 @@ aux.pkgstat <- function(){
   naux = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "aux."))))
   noos = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "oos."))))
 
-  mdo  = paste("*  cat1{do.}  manifold learning techniques           : ",ndo,sep="")
+  mdo  = paste("*  cat1{do. } manifold learning techniques           : ",ndo,sep="")
   mest = paste("*  cat2{est.} intrinsic dimension estimation methods : ",nest,sep="")
   moos = paste("*  cat3{oos.} out-of-sample projection methods       : ",noos,sep="")
   maux = paste("*  cat4{aux.} auxiliary functions available          : ",naux,sep="")
