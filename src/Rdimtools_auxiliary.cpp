@@ -605,3 +605,9 @@ Rcpp::List aux_geigen(arma::mat& A, arma::mat& B){
   return Rcpp::List::create(Rcpp::Named("values")=eigval,
                             Rcpp::Named("vectors")=eigmat);
 }
+
+
+
+
+
+

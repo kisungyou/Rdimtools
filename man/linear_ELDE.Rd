@@ -52,14 +52,14 @@ label  = c(rep(1,33), rep(2,33), rep(3,33))
 
 ## try different kernel bandwidth
 out1 = do.elde(X, label, t=1)
-out2 = do.elde(X, label, t=25)
-out3 = do.elde(X, label, t=Inf)
+out2 = do.elde(X, label, t=10)
+out3 = do.elde(X, label, t=100)
 
 ## visualize
 par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="ELDE::bandwidth=1")
-plot(out2$Y[,1], out2$Y[,2], main="ELDE::bandwidth=25")
-plot(out3$Y[,1], out3$Y[,2], main="ELDE::bandwidth=Infty")
+plot(out2$Y[,1], out2$Y[,2], main="ELDE::bandwidth=10")
+plot(out3$Y[,1], out3$Y[,2], main="ELDE::bandwidth=100")
 
 }
 \references{

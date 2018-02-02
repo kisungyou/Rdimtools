@@ -18,6 +18,7 @@
 # 13. aux.geigen           : geigen in my taste
 # 14. aux.featureindicator : generate (p-by-ndim) indicator matrix for projection
 # 15. aux.traceratio.max   : compute trace ratio problem for maximal basis
+# 16. aux.pinv             : use SVD and NumPy scheme
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1237,3 +1238,21 @@ aux.traceratio.max <- function(A,B,ndim,tol=1e-10){
   }
   return(output)
 }
+
+# 16. aux.pinv : use SVD and NumPy Scheme ---------------------------------
+# https://en.wikipedia.org/wiki/Moore%E2%80%93Penrose_inverse#Singular_value_decomposition_(SVD)
+#' @keywords internal
+#' @noRd
+aux.pinv <- function(A){
+  svdA      = base::svd(A)
+  tolerance = (.Machine$double.eps)*max(c(nrow(A),ncol(A)))*as.double(max(svdA$d))
+
+  idxcut    = which(svdA$d <= tolerance)
+  invDvec   = (1/svdA$d)
+  invDvec[idxcut] = 0
+
+  output = (svdA$v%*%diag(invDvec)%*%t(svdA$u))
+  return(output)
+}
+
+

@@ -37,6 +37,7 @@ data points maintain their original neighborhood information while
 segregating different-class data distinct from each other.
 }
 \examples{
+\dontrun{
 ## generate data of 2 types with clear difference
 diff = 15
 dt1  = aux.gensamples(n=123)-diff;
@@ -56,6 +57,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="LDE::k=5")
 plot(out2$Y[,1], out2$Y[,2], main="LDE::k=10")
 plot(out3$Y[,1], out3$Y[,2], main="LDE::k=25")
+}
 
 }
 \references{

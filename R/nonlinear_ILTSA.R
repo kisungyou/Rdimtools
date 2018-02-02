@@ -115,7 +115,7 @@ do.iltsa <- function(X, ndim=2, type=c("proportion",0.1),
     vecdi = sqrt(eigXWi$values)
     # 1-4. Ti, Vi, and Ci
     Ti    = (diag(vecdi)%*%t(matEi)%*%diag(1/vecWi))
-    invTi = pracma::pinv(Ti)
+    invTi = aux.pinv(Ti)
     Vi    = (diag(ki)-(invTi%*%Ti))
     Ci    = (Vi%*%t(Vi))
     # 1-5. update scheme

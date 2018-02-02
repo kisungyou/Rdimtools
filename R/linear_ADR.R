@@ -83,8 +83,8 @@ do.adr <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), max
     pXkmeans  = kmeans(projected, k)
     # 3-2. LDA-KM(2) : learn again
     # 1. build H
-    H = ldakm_BuildH(pXkmeans$cluster)       # H : (n-times-k)
-    M = t(pX)%*%H%*%pracma::pinv(t(H)%*%H)   # M : (p-times-k)
+    H = ldakm_BuildH(pXkmeans$cluster)   # H : (n-times-k)
+    M = t(pX)%*%H%*%aux.pinv(t(H)%*%H)   # M : (p-times-k)
     # 2. build Sw (p-by-p)
     # Swterm1 = t(pX)-(M%*%t(H))
     # Sw = Swterm1%*%t(Swterm1)
