@@ -25,6 +25,7 @@
 #' \insertRef{hwann-tzong_chen_local_2005}{Rdimtools}
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 2 types with clear difference
 #' diff = 15
 #' dt1  = aux.gensamples(n=123)-diff;
@@ -44,6 +45,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="LDE::k=5")
 #' plot(out2$Y[,1], out2$Y[,2], main="LDE::k=10")
 #' plot(out3$Y[,1], out3$Y[,2], main="LDE::k=25")
+#' }
 #'
 #' @author Kisung You
 #' @rdname linear_LDE

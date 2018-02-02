@@ -112,8 +112,8 @@ do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
     }
     Sw = Sw + Pi*Si
   }
-  #   2-3. pseudo-inverse for Sw
-  invSw = pracma::pinv(Sw)
+  #   2-3. pseudo-inverse for Sw; using my function
+  invSw = aux.pinv(Sw)
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN PART FOR UNCORRELATED LDA

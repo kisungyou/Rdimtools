@@ -130,6 +130,8 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
   Ds = diag(rowSums(Ws))+diag(colSums(Ws))
   Ls = Ds-Wtilde
   #   6. projection : borrowed from SLPP : lowest ones
+  LHS = (t(pcapX)%*%Ls%*%pcapX)
+  RHS = (t(pcapX)%*%Ds%*%pcapX)
   projection_second = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
 
 

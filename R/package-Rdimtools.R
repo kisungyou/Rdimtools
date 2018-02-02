@@ -174,7 +174,6 @@
 #' @import Rdpack
 #' @import CVXR
 #' @importFrom RSpectra eigs svds
-#' @importFrom pracma pinv
 #' @importFrom ADMM admm.lasso admm.spca
 #' @importFrom Matrix rankMatrix expm norm
 #' @importFrom Rlinsolve lsolve.bicgstab
