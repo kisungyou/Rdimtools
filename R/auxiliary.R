@@ -1132,24 +1132,44 @@ aux.nbdlogical <- function(X, label, khomo, khet){
   return(output)
 }
 
-# 13. aux.geigen : in my taste --------------------------------------------
+# 13. aux.geigen : now it uses RcppArmadillo ------------------------------
 #' @keywords internal
 #' @noRd
 aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
-  geigs = geigen::geigen(top, bottom)
+  # 1. first, run CPP with RcppArmadillo
+  geigs = aux_geigen(top, bottom)
   maxp  = length(geigs$values)
-  if (ndim>1){
+
+  # 2. separate values and vectors
+  values  = geigs$values
+  vectors = geigs$vectors
+
+  if (maximal==TRUE){
+    partvals = values[1:ndim]
+  } else {
+    partvals = values[maxp:(maxp-ndim+1)]
+  }
+  if (all(base::abs(base::Im(partvals))<(100*(.Machine$double.eps)))){
+    values  = base::Re(values)
+    vectors = aux.adjprojection(base::Re(vectors))
+  } else {
+    stop("* aux.geigen : generalized eigenvalue problem returned imaginary eigenvalues.")
+  }
+
+
+  # 3. branching case
+  if (ndim > 1){
     if (maximal==TRUE){
-      projection = aux.adjprojection(geigs$vectors[,maxp:(maxp-ndim+1)])
+      projection = vectors[,1:ndim]
     } else {
-      projection = aux.adjprojection(geigs$vectors[,1:ndim])
+      projection = vectors[,maxp:(maxp-ndim+1)]
     }
   } else {
     if (maximal==TRUE){
-      vecsol     = geigs$vectors[,maxp]
+      vecsol = vectors[,1]
       projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
     } else {
-      vecsol     = geigs$vectors[,1]
+      vecsol = vectors[,maxp]
       projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
     }
   }

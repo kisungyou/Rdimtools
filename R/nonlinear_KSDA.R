@@ -127,7 +127,7 @@ do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=
   LHS = K%*%W%*%K
   RHS = K%*%(    Itilde + (alpha*L) + (beta*diag(n)) )%*%K
   #   2. top eigenvectors
-  pseudoproj = geigen::geigen(LHS, RHS, TRUE)$vectors[,p:(p-ndim+1)]
+  pseudoproj = aux.geigen(LHS, RHS, ndim, maximal=TRUE)
   #   3. find projected ones : recovering its order will be performed later.
   Y = K%*%pseudoproj
 

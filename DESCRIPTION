@@ -3,7 +3,7 @@ Type: Package
 Title: Dimension Reduction and Estimation Methods
 Version: 0.3.1
 Authors@R: person("Kisung", "You", role = c("aut", "cre"),
-                     email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X")) 
+                     email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X"))
 Description: We provide 111 linear and nonlinear dimension reduction techniques.
 	Intrinsic dimension estimation methods for exploratory analysis are also provided.
     For more details on dimensionality techniques, see the paper by
@@ -14,7 +14,7 @@ License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.2.0)
-Imports: Rcpp (>= 0.12.10), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RSpectra, CVXR, Matrix, geigen, pracma, ADMM
+Imports: Rcpp (>= 0.12.10), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RSpectra, CVXR, Matrix, pracma, ADMM
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
 RdMacros: Rdpack

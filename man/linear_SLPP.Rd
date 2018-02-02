@@ -22,7 +22,6 @@ are supported. See also \code{\link{aux.preprocess}} for more details.}
 a named list containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-\item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 }

@@ -114,8 +114,9 @@ do.dve <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("null","cen
   L      = diag(rowSums(W))-W
   Lprime = diag(rowSums(Wprime))-Wprime
 
-  #   4. solve for geigen problem
-  Youtput = geigen::geigen(Lprime, L)$vectors[,n:(n-ndim+1)]
+  #   4. solve for geigen problem : use largest ones
+  Youtput = aux.geigen(Lprime, L, ndim, maximal=TRUE)
+
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN STOPS FOR DVE

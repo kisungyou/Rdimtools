@@ -17,7 +17,6 @@
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
@@ -42,9 +41,9 @@
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="k=5")
-#' plot(out2$Y[,1], out2$Y[,2], main="k=10")
-#' plot(out3$Y[,1], out3$Y[,2], main="k=25")
+#' plot(out1$Y[,1], out1$Y[,2], main="LDE::k=5")
+#' plot(out2$Y[,1], out2$Y[,2], main="LDE::k=10")
+#' plot(out3$Y[,1], out3$Y[,2], main="LDE::k=25")
 #'
 #' @author Kisung You
 #' @rdname linear_LDE
@@ -110,16 +109,13 @@ do.lde <- function(X, label, ndim=2, t=1.0, numk=max(ceiling(nrow(X)/10),2),
   LHS = t(pX)%*%(diag(rowSums(W2))-W2)%*%pX
   RHS = t(pX)%*%(diag(rowSums(W1))-W1)%*%pX
 
-  #   4. compute Projection Matrix
-  geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = aux.adjprojection(geigs$vectors[,1:ndim])
-  eigenvalue = as.vector(geigs$values[1:ndim])
+  #   4. compute Projection Matrix : use lowest ones
+  projection = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
   result$Y = pX%*%projection
-  result$eigval = eigenvalue
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)

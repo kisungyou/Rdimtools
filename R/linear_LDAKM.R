@@ -91,7 +91,7 @@ do.ldakm <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), m
     # 3. build Sb (p-by-p)
     Sb = M%*%t(H)%*%H%*%t(M)
     # 3-3. BRANCHING :: Solve for Eigenvectors
-    Unew = aux.adjprojection(geigen::geigen(Sb,Sw)$vectors[,p:(p-ndim+1)])
+    Unew = aux.geigen(Sb, Sw, ndim, maximal=TRUE)
     # 3-4. update
     incstop = base::norm(Uold-Unew,"f")
     citer = citer + 1

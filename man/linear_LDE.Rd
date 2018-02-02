@@ -26,7 +26,6 @@ are supported. See also \code{\link{aux.preprocess}} for more details.}
 a named list containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-\item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 }
@@ -54,9 +53,9 @@ out3 <- do.lde(Y, label, numk=25)
 
 ## visualize
 par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="k=5")
-plot(out2$Y[,1], out2$Y[,2], main="k=10")
-plot(out3$Y[,1], out3$Y[,2], main="k=25")
+plot(out1$Y[,1], out1$Y[,2], main="LDE::k=5")
+plot(out2$Y[,1], out2$Y[,2], main="LDE::k=10")
+plot(out3$Y[,1], out3$Y[,2], main="LDE::k=25")
 
 }
 \references{

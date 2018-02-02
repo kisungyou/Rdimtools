@@ -112,8 +112,8 @@ do.kmfa <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #   3. formulation as generalized eigenvalue problem
   LHS = K%*%(D-W)%*%K
   RHS = K%*%(Dp-Wp)%*%K
-  #   4. solve for alphas
-  alphas = geigen::geigen(LHS,RHS)$vectors[,1:ndim]
+  #   4. solve for alphas : use lowest
+  alphas = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
 
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS

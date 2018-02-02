@@ -113,7 +113,7 @@ do.slpe <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #   3. geigen : lowest
   LHS = t(pcapX)%*%L%*%pcapX
   RHS = t(pcapX)%*%D%*%pcapX
-  projection_second = aux.adjprojection(geigen::geigen(LHS,RHS)$vectors[,1:ndim])
+  projection_second = aux.geigen(LHS,RHS,ndim,maximal=FALSE)
 
 
   #------------------------------------------------------------------------

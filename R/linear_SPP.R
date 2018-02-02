@@ -88,12 +88,10 @@ do.spp <- function(X, ndim=2, preprocess = c("center","decorrelate","whiten"), r
   LHS = t(pX)%*%Sbeta%*%pX
   RHS = t(pX)%*%pX
   #   4. projection matrix : top vectors
-  projection = geigen::geigen(LHS,RHS,TRUE)$vectors[,p:(p-ndim+1)]
+  projection = aux.geigen(LHS,RHS,ndim,maximal=TRUE)
 
   #------------------------------------------------------------------------
   ## RETURN OUTPUT
-  projection = aux.adjprojection(projection)
-
   result = list()
   result$Y = pX%*%projection
   result$trfinfo = trfinfo

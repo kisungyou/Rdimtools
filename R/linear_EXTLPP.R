@@ -16,7 +16,6 @@
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
@@ -108,16 +107,13 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   LHS = t(pX)%*%L%*%pX
   RHS = t(pX)%*%D%*%pX
 
-  #   6. compute Projection Matrix
-  geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection = aux.adjprojection(geigs$vectors[,1:ndim])
-  eigenvalue = as.vector(geigs$values[1:ndim])
+  #   6. compute Projection Matrix : use lowest ones
+  projection = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
   result$Y = pX%*%projection
-  result$eigval = eigenvalue
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)

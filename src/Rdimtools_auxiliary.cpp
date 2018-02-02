@@ -1,14 +1,15 @@
 /*
- * 1. aux_preprocess : center, decorrelate, or whiten
- * 2. aux_perplexity : given target perplexity, compute P
- * 3. aux_shortestpath : Floyd-Warshall algorithm.
- * 4. aux_landmarkMaxMin : select landmark points using MaxMin tactic
- * 5. aux_kernelcov : compute K and centered K matrix
- * 6. aux_eigendecomposition : eigendecomposition of a given symmetric matrix
- * 7. aux_minmax : find minimum and maximum values for each dimension
- * 8. aux_regout : regress out a vector on a matrix : row-sense
- * 9. aux_scatter          : sum{(x_i-mu)(x_i-mu)^T}
+ *  1. aux_preprocess : center, decorrelate, or whiten
+ *  2. aux_perplexity : given target perplexity, compute P
+ *  3. aux_shortestpath : Floyd-Warshall algorithm.
+ *  4. aux_landmarkMaxMin : select landmark points using MaxMin tactic
+ *  5. aux_kernelcov : compute K and centered K matrix
+ *  6. aux_eigendecomposition : eigendecomposition of a given symmetric matrix
+ *  7. aux_minmax : find minimum and maximum values for each dimension
+ *  8. aux_regout : regress out a vector on a matrix : row-sense
+ *  9. aux_scatter          : sum{(x_i-mu)(x_i-mu)^T}
  *    aux_scatter_pairwise : sum{sum{(x_i-x_j)(x_i-x_j)^T}}
+ * 10. aux_geigen : yes, with with decreasing order
  *
  */
 
@@ -589,3 +590,18 @@ arma::mat aux_scatter_pairwise(arma::mat& X){
   return(output);
 }
 
+
+
+
+/*
+ * 10. aux_geigen : in a decreasing order
+ */
+// [[Rcpp::export]]
+Rcpp::List aux_geigen(arma::mat& A, arma::mat& B){
+  arma::cx_vec eigval;
+  arma::cx_mat eigmat;
+
+  eig_pair(eigval, eigmat, A, B);
+  return Rcpp::List::create(Rcpp::Named("values")=eigval,
+                            Rcpp::Named("vectors")=eigmat);
+}

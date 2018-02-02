@@ -126,6 +126,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// aux_geigen
+Rcpp::List aux_geigen(arma::mat& A, arma::mat& B);
+RcppExport SEXP _Rdimtools_aux_geigen(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_geigen(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 // methods_boxcount
 arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, const double currentr);
 RcppExport SEXP _Rdimtools_methods_boxcount(SEXP tXSEXP, SEXP IminSEXP, SEXP currentrSEXP) {
@@ -572,6 +584,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// aux_mimick_geigen
+Rcpp::List aux_mimick_geigen(arma::mat& A, arma::mat& B);
+RcppExport SEXP _Rdimtools_aux_mimick_geigen(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_mimick_geigen(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
@@ -584,6 +608,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_regout", (DL_FUNC) &_Rdimtools_aux_regout, 2},
     {"_Rdimtools_aux_scatter", (DL_FUNC) &_Rdimtools_aux_scatter, 2},
     {"_Rdimtools_aux_scatter_pairwise", (DL_FUNC) &_Rdimtools_aux_scatter_pairwise, 1},
+    {"_Rdimtools_aux_geigen", (DL_FUNC) &_Rdimtools_aux_geigen, 2},
     {"_Rdimtools_methods_boxcount", (DL_FUNC) &_Rdimtools_methods_boxcount, 3},
     {"_Rdimtools_aux_numderiv", (DL_FUNC) &_Rdimtools_aux_numderiv, 2},
     {"_Rdimtools_handy_plus", (DL_FUNC) &_Rdimtools_handy_plus, 1},
@@ -617,6 +642,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_spe", (DL_FUNC) &_Rdimtools_method_spe, 7},
     {"_Rdimtools_method_ispe", (DL_FUNC) &_Rdimtools_method_ispe, 8},
     {"_Rdimtools_method_crca", (DL_FUNC) &_Rdimtools_method_crca, 7},
+    {"_Rdimtools_aux_mimick_geigen", (DL_FUNC) &_Rdimtools_aux_mimick_geigen, 2},
     {NULL, NULL, 0}
 };
 

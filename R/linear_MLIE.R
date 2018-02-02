@@ -88,7 +88,7 @@ do.mlie <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
     projection_first = diag(p)
     pcapX = pX
   } else{
-    projection_first = aux.adjprojection(eigen(cov(pX))$vectors[,1:pcadim])
+    projection_first = aux.adjprojection(RSpectra::eigs(cov(pX), pcadim)$vectors)
     pcapX = pX%*%projection_first
   }
 
@@ -111,7 +111,7 @@ do.mlie <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   RHS = t(pcapX)%*%(Ds-Ws)%*%pcapX
 
   #   3. use as MAXIMIZATION Problem
-  projection_second = aux.adjprojection(geigen::geigen(LHS,RHS)$vectors[,p:(p-ndim+1)])
+  projection_second = aux.geigen(LHS, RHS, ndim, maximal=TRUE)
 
 
   #------------------------------------------------------------------------

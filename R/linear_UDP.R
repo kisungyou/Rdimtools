@@ -95,17 +95,16 @@ do.udp <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","d
     final_SL = (t(tmp_X)%*%L%*%(tmp_X))/(M*M)
     final_SN = final_ST - final_SL
 
-    # 2. geigen : ascending
-    geigs = geigen::geigen(final_SN, final_SL, TRUE)
+    # 2. gEVD : ascending
+    #    now we don't need this part.
 
-    # 3. new projection
-    lastidx = length(geigs$values)
-    proj_second = geigs$vectors[,lastidx:(lastidx-ndim+1)]
+    # 3. new projection : find the largest/maximal ones
+    proj_second = aux.geigen(final_SN, final_SL, ndim, maximal=TRUE)
     proj_all = (proj_first %*% proj_second)
   } else {
     eigSt = eigen(tmpSt)
     topeigvals = eigSt$values[1:tmpndim]
-    proj_first = eigSt$vectors[,1:tmpndim] # P : (p-by-tmpndim)
+    proj_first = aux.adjprojection(eigSt$vectors[,1:tmpndim]) # P : (p-by-tmpndim)
     Xtilde = pX%*%proj_first
 
     ## MAIN PART for Low-Dimensional Case : $3.3. UDP Algorithm
@@ -114,10 +113,8 @@ do.udp <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","d
     # Step 4.
     SL_tilde = (t(Xtilde)%*%L%*%Xtilde)/(M*M)
     SN_tilde = (ST_tilde-SL_tilde)
-    geigs = geigen::geigen(SN_tilde, SL_tilde, TRUE)
 
-    lastidx = length(geigs$values)
-    proj_second = geigs$vectors[,lastidx:(lastidx-ndim+1)]
+    proj_second = aux.geigen(SN_tilde, SL_tilde, ndim, maximal=TRUE)
     proj_all    = (proj_first%*%proj_second)
   }
 

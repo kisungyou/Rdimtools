@@ -148,16 +148,14 @@ do.splapeig <- function(X, label, ndim=2,
   B = gamma*Lb + (1-gamma)*Ww
 
   #   5. compute TOP eigenvectors
-  geigs = geigen::geigen(B, Dw)
-  maxp  = length(geigs$values)
-  ZZ    = geigs$vectors[,maxp:(maxp-ndim+1)]
+  Youtput = aux.geigen(B, Dw, ndim, maximal=TRUE)
 
 
 
   #------------------------------------------------------------------------
   ## RETURN OUTPUT
   result = list()
-  result$Y = ZZ
+  result$Y = Youtput
   result$trfinfo  = trfinfo
   return(result)
 }

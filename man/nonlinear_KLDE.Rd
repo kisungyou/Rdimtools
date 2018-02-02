@@ -6,7 +6,7 @@
 \usage{
 do.klde(X, label, ndim = 2, t = 1, numk = max(ceiling(nrow(X)/10), 2),
   preprocess = c("center", "decorrelate", "whiten"), ktype = c("gaussian",
-  1), kcentering = FALSE)
+  1), kcentering = TRUE)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -32,7 +32,6 @@ a named list containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
-\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 }
 }
 \description{

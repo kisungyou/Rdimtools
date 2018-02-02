@@ -5,7 +5,7 @@
 \title{Sparse Principal Component Analysis}
 \usage{
 do.spca(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  suppk = ceiling(ncol(X)/10))
+  mu = 1, rho = 1, abstol = 1e-04, reltol = 0.01, maxiter = 1000)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,9 +17,15 @@ and columns represent independent variables.}
 Default is "center" and "decorrelate", or "whiten"
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
-\item{suppk}{the number of nonzero elements at each principal component.
-Either a number or vector of length \code{ndim} can be supplied. Note that
-every element in \code{suppk} should have range of [1,p].}
+\item{mu}{an augmented Lagrangian parameter.}
+
+\item{rho}{a regularization parameter for sparsity.}
+
+\item{abstol}{absolute tolerance stopping criterion.}
+
+\item{reltol}{relative tolerance stopping criterion.}
+
+\item{maxiter}{maximum number of iterations.}
 }
 \value{
 a named list containing
@@ -27,29 +33,31 @@ a named list containing
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 \item{trfinfo}{a list containing information for out-of-sample prediction.}
+\item{history}{a length-\code{ndim} list where each element is an iteration history. See \code{\link[ADMM]{admm.spca}} for more details.}
 }
 }
 \description{
 Sparse PCA (\code{do.spca}) is a variant of PCA in that each loading - or, principal
-component - should be sparse. Unlike \code{\link[elasticnet]{spca}} from \pkg{elasticnet} package,
-we only support sparsity type of \code{varnum} because it is more intuitive in explaining
-up to how many elements can a loading have non-zero elements. We adopted semidefinite relaxation of
-the original problem and optimization is done via \pkg{CVXR}.
+component - should be sparse. Instead of using generic optimization package,
+we opt for formulating a problem as semidefinite relaxation and utilizing ADMM. For more details
+of modeling and algorithmic aspects, please see \code{\link[ADMM]{admm.spca}}.
 }
 \examples{
 \dontrun{
-## generate default dataset and make its dimension two-folds.
-Xpart <- aux.gensamples()
-X <- cbind(Xpart,Xpart)
+## generate default dataset and make its dimension three-folds.
+Xp <- aux.gensamples()
+X  <- cbind(Xp,Xp,Xp)
 
-## two different choice of 'suppk'
-out1 <- do.spca(X,ndim=2,suppk=1)
-out2 <- do.spca(X,ndim=2,suppk=6)
+## try different regularization parameters for sparsity
+out1 <- do.spca(X,ndim=2,rho=0.01)
+out2 <- do.spca(X,ndim=2,rho=1)
+out3 <- do.spca(X,ndim=2,rho=100)
 
-## Visualize principal components
-par(mfrow=c(1,2))
-image(out1$projection, main="support = 1")
-image(out2$projection, main="support = 6")
+## Visualize principal components as columns in an image
+par(mfrow=c(1,3))
+image(t(out1$projection), main="SPCA::rho=0.01")
+image(t(out2$projection), main="SPCA::rho=1")
+image(t(out3$projection), main="SPCA::rho=100")
 }
 
 }
@@ -57,9 +65,11 @@ image(out2$projection, main="support = 6")
 \insertRef{zou_sparse_2006}{Rdimtools}
 
 \insertRef{daspremont_direct_2007}{Rdimtools}
+
+\insertRef{ma_alternating_2013}{ADMM}
 }
 \seealso{
-\code{\link{do.pca}}
+\code{\link{do.pca}}, \code{\link[ADMM]{admm.spca}}
 }
 \author{
 Kisung You

@@ -103,11 +103,13 @@ do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","int
     #   2-2. construct Gi, solve for wi, and assign to W matrix
     W[,nbdidx] = lea_constructG_and_w(pX[i,],pX[nbdidx,])
   }
-  # 3. learn embedding
+  # 3. learn embedding : smallest ones from {2 to (ndim+1)}
   IW = diag(n)-W
   LHS = (t(pX)%*%t(IW)%*%IW%*%pX)
   RHS = (t(pX)%*%pX)
-  projection = aux.adjprojection(geigen::geigen(LHS, RHS, TRUE)$vectors[,2:(ndim+1)])
+
+  projtmp    = aux.geigen(LHS, RHS, (ndim+1), maximal=FALSE)
+  projection = aux.adjprojection(projtmp[,2:(ndim+1)])
 
 
   #------------------------------------------------------------------------

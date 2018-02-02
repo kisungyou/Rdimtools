@@ -17,7 +17,6 @@
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
@@ -130,12 +129,8 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
   Wtilde = Ws+t(Ws)
   Ds = diag(rowSums(Ws))+diag(colSums(Ws))
   Ls = Ds-Wtilde
-  #   6. projection : borrowed from SLPP
-  LHS = t(pcapX)%*%Ls%*%pcapX
-  RHS = t(pcapX)%*%Ds%*%pcapX
-  geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection_second = aux.adjprojection(geigs$vectors[,1:ndim])
-  eigenvalue = as.vector(geigs$values[1:ndim])
+  #   6. projection : borrowed from SLPP : lowest ones
+  projection_second = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
 
 
   #------------------------------------------------------------------------
@@ -145,7 +140,6 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
   #   2. return output
   result = list()
   result$Y = pX%*%projection
-  result$eigval = eigenvalue
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)

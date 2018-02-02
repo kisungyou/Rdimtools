@@ -21,7 +21,6 @@
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
 #'
@@ -56,7 +55,7 @@
 #' @export
 do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","decorrelate","whiten"),
-                   ktype=c("gaussian",1.0), kcentering=FALSE){
+                   ktype=c("gaussian",1.0), kcentering=TRUE){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -125,20 +124,19 @@ do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
   LHS = K%*%(diag(rowSums(W2))-W2)%*%K
   RHS = K%*%(diag(rowSums(W1))-W1)%*%K
 
-  #   4. compute Projection Matrix
-  geigs = tryCatch(geigen::geigen(LHS, RHS, TRUE), error=function(e)e)
-  if (inherits(geigs,"error")){
+  #   4. compute pseudoprojection Matrix : use top ones
+  pseudoprojection = tryCatch(aux.geigen(LHS, RHS, ndim, maximal=TRUE), error=function(e)e)
+  if (inherits(pseudoprojection,"error")){
     warning("* do.klde : eigendecomposition on the kernel matrix failed.")
     return(0)
   }
-  projection = as.matrix(geigs$vectors[,n:(n-ndim+1)],nrow=p); #top alphas
+
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = K%*%projection
+  result$Y = K%*%pseudoprojection
   result$trfinfo = trfinfo
-  result$projection = projection
   return(result)
 }
 

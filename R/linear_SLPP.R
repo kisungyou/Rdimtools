@@ -15,7 +15,6 @@
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{eigval}{a vector of eigenvalues corresponding to basis expansion in an ascending order.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
@@ -86,7 +85,7 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
     projection_first = diag(p)
     pcapX = pX
   } else{
-    projection_first = eigen(cov(pX))$vectors[,1:pcadim]
+    projection_first = aux.adjprojection(eigen(cov(pX))$vectors[,1:pcadim])
     pcapX = pX%*%projection_first
   }
 
@@ -109,19 +108,18 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   LHS = t(pcapX)%*%L%*%pcapX
   RHS = t(pcapX)%*%D%*%pcapX
 
-  geigs = geigen::geigen(LHS, RHS, TRUE)
-  projection_second = matrix(geigs$vectors[,1:ndim],nrow=pcadim)
-  eigenvalue = as.vector(geigs$values[1:ndim])
+  #   4. use lowest vectors
+  projection_second = aux.geigen(LHS, RHS, ndim, maximal=FALSE)
+
 
   #------------------------------------------------------------------------
   ## RETURN
   #   1. adjust projection
-  projection = aux.adjprojection(projection_first%*%projection_second)
+  projection = (projection_first%*%projection_second)
 
   #   2.
   result = list()
   result$Y = pX%*%projection
-  result$eigval = eigenvalue
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)

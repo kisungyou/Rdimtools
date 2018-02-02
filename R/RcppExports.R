@@ -41,6 +41,10 @@ aux_scatter_pairwise <- function(X) {
     .Call('_Rdimtools_aux_scatter_pairwise', PACKAGE = 'Rdimtools', X)
 }
 
+aux_geigen <- function(A, B) {
+    .Call('_Rdimtools_aux_geigen', PACKAGE = 'Rdimtools', A, B)
+}
+
 #' @keywords internal
 methods_boxcount <- function(tX, Imin, currentr) {
     .Call('_Rdimtools_methods_boxcount', PACKAGE = 'Rdimtools', tX, Imin, currentr)
@@ -204,5 +208,9 @@ method_ispe <- function(R, iX, C, S, lambda, drate, matselector, cutoff) {
 
 method_crca <- function(Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector) {
     .Call('_Rdimtools_method_crca', PACKAGE = 'Rdimtools', Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector)
+}
+
+aux_mimick_geigen <- function(A, B) {
+    .Call('_Rdimtools_aux_mimick_geigen', PACKAGE = 'Rdimtools', A, B)
 }
 
