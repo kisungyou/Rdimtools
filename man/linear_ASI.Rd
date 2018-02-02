@@ -34,6 +34,7 @@ one of remedies for clustering in high dimensional space. Eigenvectors of a with
 as basis of projection.
 }
 \examples{
+\dontrun{
 ## generate swiss roll data
 X = aux.gensamples(n=123)
 
@@ -47,6 +48,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="ASI::tol=1e-2")
 plot(out2$Y[,1], out2$Y[,2], main="ASI::tol=1e-3")
 plot(out3$Y[,1], out3$Y[,2], main="ASI::tol=1e-4")
+}
 
 }
 \references{

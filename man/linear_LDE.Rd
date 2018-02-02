@@ -44,13 +44,13 @@ dt1  = aux.gensamples(n=123)-diff;
 dt2  = aux.gensamples(n=123)+diff;
 
 ## merge the data and create a label correspondingly
-Y      = rbind(dt1,dt2)
+X      = rbind(dt1,dt2)
 label  = c(rep(1,123), rep(2,123))
 
 ## try different neighborhood size
-out1 <- do.lde(Y, label, numk=5)
-out2 <- do.lde(Y, label, numk=10)
-out3 <- do.lde(Y, label, numk=25)
+out1 <- do.lde(X, label, numk=5)
+out2 <- do.lde(X, label, numk=10)
+out3 <- do.lde(X, label, numk=25)
 
 ## visualize
 par(mfrow=c(1,3))

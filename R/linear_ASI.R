@@ -20,6 +20,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll data
 #' X = aux.gensamples(n=123)
 #'
@@ -33,6 +34,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="ASI::tol=1e-2")
 #' plot(out2$Y[,1], out2$Y[,2], main="ASI::tol=1e-3")
 #' plot(out3$Y[,1], out3$Y[,2], main="ASI::tol=1e-4")
+#' }
 #'
 #' @references
 #' \insertRef{li_document_2004}{Rdimtools}
