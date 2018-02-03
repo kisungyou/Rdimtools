@@ -24,7 +24,7 @@
 #' }
 #'
 #' @examples
-#' ## generate 3 different groups of data X and label vector
+#' ## create a data matrix with clear difference
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
 #' x2 = matrix(rnorm(4*10), nrow=10)
 #' x3 = matrix(rnorm(4*10), nrow=10)+20

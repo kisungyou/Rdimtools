@@ -28,16 +28,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' # generate data
-#' X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
+#' ## generate data with clear difference
+#' X1 <- matrix(rnorm(100),nrow=10)-15
+#' X2 <- matrix(rnorm(100),nrow=10)
+#' X3 <- matrix(rnorm(100),nrow=10)+15
+#' X  <- rbind(X1,X2,X3)
 #'
-#' ## 1. projection using 2 principal components
-#' output <- do.pca(X,ndim=2)
-#' plot(output$Y[,1],output$Y[,2])
+#' ## try different preprocessing procedure
+#' out1 <- do.pca(X, ndim=2, preprocess="center")
+#' out2 <- do.pca(X, ndim=2, preprocess="decorrelate")
+#' out3 <- do.pca(X, ndim=2, preprocess="whiten")
 #'
-#' ## 2. automatic detection of target dimension accounting for 98% of variance
-#' output <- do.pca(X,ndim="auto",varratio=0.98)           # perform PCA
-#' plot(seq_len(length(output$vars)),output$vars,type="b") # plot variances
+#' ## visualize
+#' par(mfrow=c(1,3))
+#' plot(out1$Y[,1], out1$Y[,2], main="PCA::'center'")
+#' plot(out2$Y[,1], out2$Y[,2], main="PCA::'decorrelate'")
+#' plot(out3$Y[,1], out3$Y[,2], main="PCA::'whiten'")
 #' }
 #'
 #' @author Kisung You
@@ -46,30 +52,22 @@
 #'
 #' @rdname linear_PCA
 #' @export
-do.pca <- function(X,ndim="auto",cor=FALSE,preprocess="center",varratio=0.9){
+do.pca <- function(X,ndim="auto",cor=FALSE,preprocess=c("center","decorrelate","whiten"),varratio=0.9){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
 
   # 2. preprocessing
   #   2-1. center,decorrelate, or whiten
-  switch(preprocess,
-         center={
-           tmplist = aux.preprocess(X,"center")
-           pX      = tmplist$pX
-           trfinfo = tmplist$info
-         },
-         decorrelate={
-           tmplist = aux.preprocess(X,"decorrelate")
-           pX      = tmplist$pX
-           trfinfo = tmplist$info
-         },
-         whiten={
-           tmplist = aux.preprocess(X,"whiten")
-           pX      = tmplist$pX
-           trfinfo = tmplist$info
-         },
-         stop("* do.pca : invalid preprocessing type. choose one of three or leave it blank.")
-  )
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
+  }
+  tmplist = aux.preprocess(X,type=algpreprocess)
+  pX      = tmplist$pX
+  trfinfo = tmplist$info
+  trfinfo$algtype   = "linear"
+
   #   2-2. correlation or covariance matrix
   if (cor){
     psdX = cor(pX)
@@ -80,9 +78,10 @@ do.pca <- function(X,ndim="auto",cor=FALSE,preprocess="center",varratio=0.9){
   }
 
   # 3. run method_pca
-  output = method_pca(psdX)
-  eigvals = rev(output$eigval)
-  eigvecs = output$eigvec[,rev(seq_len(length(eigvals)))]
+  outeig  = base::eigen(psdX)
+  eigvals = outeig$values
+  eigvecs = aux.adjprojection(outeig$vectors)
+
 
   # 4. branching
   if (ndim=="auto"){
@@ -104,13 +103,12 @@ do.pca <- function(X,ndim="auto",cor=FALSE,preprocess="center",varratio=0.9){
   }
 
   # 5. result
-  partials = aux.adjprojection(eigvecs[,1:tgtidx])
+  partials = (eigvecs[,1:tgtidx])
   result = list()
   result$Y          = (pX %*% partials)
   result$vars       = eigvals[1:tgtidx]
 
   result$projection = partials
-  trfinfo$algtype   = "linear"
   result$trfinfo    = trfinfo
   return(result)
 }

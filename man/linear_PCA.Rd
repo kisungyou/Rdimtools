@@ -4,8 +4,8 @@
 \alias{do.pca}
 \title{Principal Component Analysis}
 \usage{
-do.pca(X, ndim = "auto", cor = FALSE, preprocess = "center",
-  varratio = 0.9)
+do.pca(X, ndim = "auto", cor = FALSE, preprocess = c("center",
+  "decorrelate", "whiten"), varratio = 0.9)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -44,16 +44,22 @@ we use the minimal summation to be larger than \code{varratio}.
 }
 \examples{
 \dontrun{
-# generate data
-X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
+## generate data with clear difference
+X1 <- matrix(rnorm(100),nrow=10)-15
+X2 <- matrix(rnorm(100),nrow=10)
+X3 <- matrix(rnorm(100),nrow=10)+15
+X  <- rbind(X1,X2,X3)
 
-## 1. projection using 2 principal components
-output <- do.pca(X,ndim=2)
-plot(output$Y[,1],output$Y[,2])
+## try different preprocessing procedure
+out1 <- do.pca(X, ndim=2, preprocess="center")
+out2 <- do.pca(X, ndim=2, preprocess="decorrelate")
+out3 <- do.pca(X, ndim=2, preprocess="whiten")
 
-## 2. automatic detection of target dimension accounting for 98\% of variance
-output <- do.pca(X,ndim="auto",varratio=0.98)           # perform PCA
-plot(seq_len(length(output$vars)),output$vars,type="b") # plot variances
+## visualize
+par(mfrow=c(1,3))
+plot(out1$Y[,1], out1$Y[,2], main="PCA::'center'")
+plot(out2$Y[,1], out2$Y[,2], main="PCA::'decorrelate'")
+plot(out3$Y[,1], out3$Y[,2], main="PCA::'whiten'")
 }
 
 }
