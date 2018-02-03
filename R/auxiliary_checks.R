@@ -43,7 +43,7 @@ check_WMAT <- function(W, n){
 #' @keywords internal
 check_label <- function(label, n){
   # 1. check if it is a proper vector
-  if ((!is.vector(label))||(length(label)!=n)){
+  if ((!is.vector(as.double(label)))||(length(label)!=n)){
     stop("* Supervised Learning : 'label' is required to be a vector of class labels.")
   }
   # 2. de-factoring the label

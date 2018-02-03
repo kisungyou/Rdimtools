@@ -22,8 +22,9 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate sample data
-#' X = aux.gensamples()
+#' X = aux.gensamples(n=100)
 #'
 #' ## compare with original SPE
 #' outSPE <- do.spe(X, ndim=2)
@@ -34,9 +35,10 @@
 #' ## Visualize
 #' par(mfrow=c(2,2))
 #' plot(outSPE$Y[,1], outSPE$Y[,2], main="SPE")
-#' plot(out1$Y[,1], out1$Y[,2], main="ISPE with cutoff=0.5")
-#' plot(out2$Y[,1], out2$Y[,2], main="ISPE with cutoff=5")
-#' plot(out3$Y[,1], out3$Y[,2], main="ISPE with cutoff=50")
+#' plot(out1$Y[,1], out1$Y[,2], main="ISPE::cutoff=0.5")
+#' plot(out2$Y[,1], out2$Y[,2], main="ISPE::cutoff=5")
+#' plot(out3$Y[,1], out3$Y[,2], main="ISPE::cutoff=50")
+#' }
 #'
 #' @references
 #' \insertRef{agrafiotis_self-organizing_2002}{Rdimtools}

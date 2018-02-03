@@ -55,10 +55,7 @@ do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","whiten","d
   n = nrow(X)
   p = ncol(X)
   #   2. label vector
-  if ((!is.vector(label))||(length(label)!=n)){
-    stop("* do.fscore : 'label' is required to be a vector of class labels.")
-  }
-  label  = as.numeric(as.factor(label))
+  label  = check_label(label, n)
   ulabel = unique(label)
   C      = length(ulabel)
   if (C==1){

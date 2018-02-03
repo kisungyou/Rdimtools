@@ -34,8 +34,9 @@ one of remedies for clustering in high dimensional space. Eigenvectors of a betw
 as basis of projection.
 }
 \examples{
-## generate swiss roll data
-X = aux.gensamples(n=123)
+## load iris data
+data(iris)
+X = as.matrix(iris[,1:4])
 
 ## try different tolerance level
 out1 = do.adr(X, abstol=1e-2)

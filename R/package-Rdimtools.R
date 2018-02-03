@@ -174,7 +174,7 @@
 #' @import Rdpack
 #' @import CVXR
 #' @importFrom RSpectra eigs svds
-#' @importFrom ADMM admm.lasso admm.spca
+#' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm
 #' @importFrom Rlinsolve lsolve.bicgstab
 #' @importFrom Rtsne Rtsne

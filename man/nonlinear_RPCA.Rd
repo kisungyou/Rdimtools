@@ -4,35 +4,36 @@
 \alias{do.rpca}
 \title{Robust Principal Component Analysis}
 \usage{
-do.rpca(X, lambda = sqrt(1/(max(dim(X)))), preprocess = c("center",
-  "decorrelate", "whiten"))
+do.rpca(X, mu = 1, lambda = sqrt(1/(max(dim(X)))), preprocess = c("null",
+  "center", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
 
+\item{mu}{an augmented Lagrangian parameter}
+
 \item{lambda}{parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.}
 
-\item{preprocess}{an additional option for preprocessing the data. Default is ``center'', and other methods of ``decorrelate'' and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "null" and other methods of "center","decorrelate" and "whiten" are supported. See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing
 \describe{
 \item{L}{an \eqn{(n\times p)} low-rank matrix.}
 \item{S}{an \eqn{(n\times p)} sparse matrix.}
-\item{cvxr.status}{``optimal'' denotes the problem was solved. See\code{\link[CVXR]{psolve}} for more details on solvability.}
-\item{cvxr.niters}{the number of iterations taken.}
-\item{cvxr.solver}{type of solver used by \pkg{CVXR}.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
 }
 }
 \description{
 Robust PCA (RPCA) is not like other methods in this package as finding explicit low-dimensional embedding with reduced number of columns.
 Rather, it is more of a decomposition method of data matrix \eqn{X}, possibly noisy, into low-rank and sparse matrices by
 solving the following,
-\deqn{\textrm{minimize}\quad \|L\|_* + \lambda \|S\|_1}
-\deqn{\textrm{subject to}\quad L+S=X}
+\deqn{\textrm{minimize}\quad \|L\|_* + \lambda \|S\|_1 \quad{s.t.} L+S=X}
 where \eqn{L} is a low-rank matrix, \eqn{S} is a sparse matrix and \eqn{\|\cdot\|_*} denotes nuclear norm, i.e., sum of singular values. Therefore,
 it should be considered as \emph{preprocessing} procedure of denoising. Note that after RPCA is applied, \eqn{L} should be used
-as kind of a new data matrix for any manifold learning scheme to be applied. \pkg{CVXR} was used for \code{do.rpca}.
+as kind of a new data matrix for any manifold learning scheme to be applied. For more details,
+see \code{\link[ADMM]{admm.rpca}}.
 }
 \examples{
 \dontrun{
@@ -42,20 +43,29 @@ noise = 0.2
 X = as.matrix(iris[,1:4])
 X = X + matrix(noise*rnorm(length(X)), nrow=nrow(X))
 
-## Compare 2 methods : {PCA} vs {RPCA + PCA}
-rpca     = do.rpca(X)
-out_pca  = do.pca(X,      ndim=2, preprocess="center")
-out_rpca = do.pca(rpca$L, ndim=2, preprocess="center")
+## try different regularization parameters
+rpca1 = do.rpca(X, lambda=0.1)
+rpca2 = do.rpca(X, lambda=1)
+rpca3 = do.rpca(X, lambda=10)
 
-## Visualize
-par(mfrow=c(1,2))
-plot(out_pca$Y[,1], out_pca$Y[,2], main="PCA")
-plot(out_rpca$Y[,1], out_rpca$Y[,2], main="RPCA")
+## apply identical PCA methods
+out1 = do.pca(rpca1$L, ndim=2)
+out2 = do.pca(rpca2$L, ndim=2)
+out3 = do.pca(rpca3$L, ndim=2)
+
+## visualize
+par(mfrow=c(1,3))
+plot(out1$Y[,1], out1$Y[,2], main="RPCA+PCA::lambda=0.1")
+plot(out2$Y[,1], out2$Y[,2], main="RPCA+PCA::lambda=1")
+plot(out3$Y[,1], out3$Y[,2], main="RPCA+PCA::lambda=10")
 }
 
 }
 \references{
 \insertRef{candes_robust_2011}{Rdimtools}
+}
+\seealso{
+\code{\link[ADMM]{admm.rpca}}
 }
 \author{
 Kisung You
