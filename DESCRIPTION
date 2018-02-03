@@ -13,7 +13,7 @@ Description: We provide 111 linear and nonlinear dimension reduction techniques.
 License: GPL (>=3)
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.2.0)
+Depends: R (>= 3.0.0)
 Imports: Rcpp (>= 0.12.10), graphics, stats, Rtsne, Rcsdp, Rdpack, Rlinsolve, RSpectra, CVXR, Matrix, ADMM
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.0.1
