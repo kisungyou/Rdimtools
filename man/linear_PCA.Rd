@@ -11,17 +11,17 @@ do.pca(X, ndim = "auto", cor = FALSE, preprocess = c("center",
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
-\item{ndim}{an integer-valued target dimension or ``auto'' option using \emph{varratio.}}
+\item{ndim}{an integer-valued target dimension or" "auto" option using \emph{varratio.}}
 
 \item{cor}{mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
 and \code{TRUE} for correlation matrix.}
 
 \item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-for more details.}
+where default is "default" and other methods of "decorrelate" and "whiten" are supported.
+See also \code{\link{aux.preprocess}} for more details.}
 
 \item{varratio}{a value in (0,1]. This value is only used when \code{ndim} is
-chosen as ``auto''.}
+chosen as "auto".}
 }
 \value{
 a named list containing

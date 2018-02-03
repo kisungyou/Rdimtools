@@ -10,14 +10,15 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param ndim an integer-valued target dimension or ``auto'' option using \emph{varratio.}
+#' @param ndim an integer-valued target dimension or" "auto" option using \emph{varratio.}
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
 #' and \code{TRUE} for correlation matrix.
 #' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-#' for more details.
+#' where default is "default" and other methods of "decorrelate" and "whiten" are supported.
+#' See also \code{\link{aux.preprocess}} for more details.
 #' @param varratio a value in (0,1]. This value is only used when \code{ndim} is
-#' chosen as ``auto''.
+#' chosen as "auto".
+#'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
