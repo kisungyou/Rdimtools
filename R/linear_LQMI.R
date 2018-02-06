@@ -93,7 +93,7 @@ do.lqmi  <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrela
   #   2. eigendecomposition for achieving W
   termA  = t(pX)%*%pX
   termB  = t(pX)%*%symM%*%pX
-  linsol = Rlinsolve::lsolve.bicgstab(termA, termB, verbose=FALSE)$x
+  linsol = aux.bicgstab(termA, termB, verbose=FALSE)$x
   W      = base::eigen(linsol)$vectors
   #   3. compute projection
   projection = qr.Q(qr(W))[,1:ndim]

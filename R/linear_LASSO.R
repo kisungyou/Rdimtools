@@ -93,6 +93,7 @@ do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","decorrel
     tmplist = aux.preprocess(X,type=algpreprocess)
     trfinfo = tmplist$info
     pX      = tmplist$pX
+    response = response-mean(response)
   }
   trfinfo$algtype = "linear"
 

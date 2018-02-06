@@ -79,7 +79,7 @@ do.ppca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten")){
   mlW    = (eigS$vectors[,1:q])%*%(diag(eigS$values[1:q] - mlsig2))
   #   5. Projection
   M = (t(mlW)%*%mlW)+(diag(ncol(mlW))*mlsig2)
-  SOL = Rlinsolve::lsolve.bicgstab(M, t(mlW), verbose=FALSE)
+  SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
   projection = t(SOL$x)
 
   #------------------------------------------------------------------------

@@ -99,7 +99,7 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
   mlsig2 = rcppbpca$sig2
   mlW    = rcppbpca$W[,smallidx]
   M = (t(mlW)%*%mlW)+(diag(ncol(mlW))*mlsig2)
-  SOL = Rlinsolve::lsolve.bicgstab(M, t(mlW), verbose=FALSE)
+  SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
   projection = t(SOL$x)
 
 

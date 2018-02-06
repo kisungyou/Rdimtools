@@ -46,6 +46,18 @@ aux_geigen <- function(A, B) {
 }
 
 #' @keywords internal
+#' @noRd
+linsolve.bicgstab.single <- function(A, b, xinit, reltol, maxiter, M) {
+    .Call('_Rdimtools_single_bicgstab', PACKAGE = 'Rdimtools', A, b, xinit, reltol, maxiter, M)
+}
+
+#' @keywords internal
+#' @noRd
+linsolve.bicgstab.single.sparse <- function(A, b, xinit, reltol, maxiter, M) {
+    .Call('_Rdimtools_single_bicgstab_sparse', PACKAGE = 'Rdimtools', A, b, xinit, reltol, maxiter, M)
+}
+
+#' @keywords internal
 methods_boxcount <- function(tX, Imin, currentr) {
     .Call('_Rdimtools_methods_boxcount', PACKAGE = 'Rdimtools', tX, Imin, currentr)
 }

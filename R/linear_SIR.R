@@ -117,7 +117,7 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION
   #   1. do matrix inversion.. I hate it.
-  costInv = lsolve.bicgstab(mat_Sigma, mat_Gamma, verbose=FALSE)$x
+  costInv = aux.bicgstab(mat_Sigma, mat_Gamma, verbose=FALSE)$x
   #   2. find top eigenvectors
   projection = aux.adjprojection(RSpectra::eigs(costInv, ndim)$vectors)
 

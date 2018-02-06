@@ -96,7 +96,7 @@ do.cca <- function(data1,data2,ndim=2){
 
     LHS = rbind(cbind(zerosNN, Cxy), cbind(t(Cxy), zerosMM))
     RHS = rbind(cbind(Cx, zerosNM), cbind(zerosMN, Cy))
-    SOL = Rlinsolve::lsolve.bicgstab(RHS, LHS, verbose=FALSE)
+    SOL = aux.bicgstab(RHS, LHS, verbose=FALSE)
 
     res = RSpectra::eigs_sym(SOL$x, 1, which="LA")
     evals[i] = res$values[1]

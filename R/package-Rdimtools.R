@@ -176,7 +176,6 @@
 #' @importFrom RSpectra eigs svds
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm
-#' @importFrom Rlinsolve lsolve.bicgstab
 #' @importFrom Rtsne Rtsne
 #' @importFrom stats dist cov rnorm runif kmeans cor var
 #' @importFrom graphics par image plot

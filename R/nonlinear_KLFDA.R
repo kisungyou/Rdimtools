@@ -175,7 +175,7 @@ do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whit
   LHS = K%*%Lijm%*%K
   RHS = K%*%Lijw%*%K
 
-  CHS = Rlinsolve::lsolve.bicgstab(RHS, LHS, verbose=FALSE)$x
+  CHS = aux.bicgstab(RHS, LHS, verbose=FALSE)$x
   pseudoproj = RSpectra::eigs(CHS, ndim)$vectors
 
   #------------------------------------------------------------------------

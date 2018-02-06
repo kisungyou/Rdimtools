@@ -127,7 +127,7 @@ do.ulda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
     tmpB = t(Dmat)%*%invSw
 
     #   2-2. solve intermediate inverse problem
-    tmpsolve = Rlinsolve::lsolve.bicgstab(tmpA, tmpB, verbose=FALSE)$x
+    tmpsolve = aux.bicgstab(tmpA, tmpB, verbose=FALSE)$x
     Pmat = diagIp - (Dmat)%*%tmpsolve
 
     # 2-3. cost function for outer generalized eigenvalue problem and solve

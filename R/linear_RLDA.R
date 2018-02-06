@@ -115,7 +115,7 @@ do.rlda <- function(X, label, ndim=2, alpha=1.0){
   LHS = Sb
   RHS = St + alpha*diag(p)
   #   run Rlinsolve
-  W = Rlinsolve::lsolve.bicgstab(RHS, LHS, verbose=FALSE)$x
+  W = aux.bicgstab(RHS, LHS, verbose=FALSE)$x
   #   adjust
   topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
 

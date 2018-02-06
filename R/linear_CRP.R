@@ -102,7 +102,7 @@ do.crp <- function(X, ndim=2, preprocess=c("center","whiten","decorrelate"), lam
   St = aux_scatter(pcapX, allmean)
   Sl = t(pcapX)%*%(diag(n)-W-t(W)+(W%*%t(W)))%*%pcapX
   #   3. solve for matrix inversion
-  solinv = Rlinsolve::lsolve.bicgstab(Sl, St, verbose=FALSE)$x
+  solinv = aux.bicgstab(Sl, St, verbose=FALSE)$x
   #   4. extract projection eigenvectors
   projection_second = aux.adjprojection(RSpectra::eigs(solinv, ndim)$vectors)
 
@@ -130,12 +130,12 @@ crp_l2weight <- function(A,y,lambda){
   n = ncol(A)
   if (nrow(A)<ncol(A)){
     invinside = A%*%t(A)+lambda*diag(m)
-    solreg    = as.vector(Rlinsolve::lsolve.bicgstab(invinside, y, verbose=FALSE)$x)
+    solreg    = as.vector(aux.bicgstab(invinside, y, verbose=FALSE)$x)
     sol       = as.vector(t(A)%*%matrix(solreg))
   } else {
     LHS = (t(A)%*%A + lambda*diag(n))
     RHS = as.vector(t(A)%*%y)
-    sol = as.vector(Rlinsolve::lsolve.bicgstab(LHS, RHS, verbose=FALSE)$x)
+    sol = as.vector(aux.bicgstab(LHS, RHS, verbose=FALSE)$x)
   }
   return(sol)
 }

@@ -97,7 +97,7 @@ do.lda <- function(X, label, ndim=2){
     idx2  = which(label==ulabel[2])
     SW    = lda_outer(pX[idx1,]) + lda_outer(pX[idx2,])
     mdiff = matrix(colMeans(pX[idx2,])-colMeans(pX[idx1,]))
-    RLIN  = Rlinsolve::lsolve.bicgstab(SW, mdiff, verbose=FALSE)
+    RLIN  = aux.bicgstab(SW, mdiff, verbose=FALSE)
     w     = aux.adjprojection(as.matrix(RLIN$x))
     Y     = pX%*%w
 
@@ -120,7 +120,7 @@ do.lda <- function(X, label, ndim=2){
       mdiff  = (colMeans(pX[idxnow,])-m)
       SB     = SB + Nk*outer(mdiff,mdiff)
     }
-    RLIN = Rlinsolve::lsolve.bicgstab(SW, SB, verbose=FALSE)
+    RLIN = aux.bicgstab(SW, SB, verbose=FALSE)
     W    = RLIN$x
     topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
     Y    = pX%*%topW

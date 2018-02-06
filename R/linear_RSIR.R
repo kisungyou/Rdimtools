@@ -178,7 +178,7 @@ do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   LHS = (Omega%*%mat_Sigma)+diag(p)
   RHS = (Omega%*%mat_Gamma)
   #   2. perform matrix inversion
-  costInv = lsolve.bicgstab(LHS, RHS, verbose=FALSE)$x
+  costInv = aux.bicgstab(LHS, RHS, verbose=FALSE)$x
   #   2. find top eigenvectors
   projection = aux.adjprojection(RSpectra::eigs(costInv, ndim)$vectors)
 

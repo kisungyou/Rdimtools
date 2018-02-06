@@ -138,6 +138,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// single_bicgstab
+Rcpp::List single_bicgstab(const arma::mat& A, const arma::colvec& b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::mat& M);
+RcppExport SEXP _Rdimtools_single_bicgstab(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type M(MSEXP);
+    rcpp_result_gen = Rcpp::wrap(single_bicgstab(A, b, xinit, reltol, maxiter, M));
+    return rcpp_result_gen;
+END_RCPP
+}
+// single_bicgstab_sparse
+Rcpp::List single_bicgstab_sparse(const arma::sp_mat A, const arma::sp_mat b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::sp_mat M);
+RcppExport SEXP _Rdimtools_single_bicgstab_sparse(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type M(MSEXP);
+    rcpp_result_gen = Rcpp::wrap(single_bicgstab_sparse(A, b, xinit, reltol, maxiter, M));
+    return rcpp_result_gen;
+END_RCPP
+}
 // methods_boxcount
 arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, const double currentr);
 RcppExport SEXP _Rdimtools_methods_boxcount(SEXP tXSEXP, SEXP IminSEXP, SEXP currentrSEXP) {
@@ -609,6 +641,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_scatter", (DL_FUNC) &_Rdimtools_aux_scatter, 2},
     {"_Rdimtools_aux_scatter_pairwise", (DL_FUNC) &_Rdimtools_aux_scatter_pairwise, 1},
     {"_Rdimtools_aux_geigen", (DL_FUNC) &_Rdimtools_aux_geigen, 2},
+    {"_Rdimtools_single_bicgstab", (DL_FUNC) &_Rdimtools_single_bicgstab, 6},
+    {"_Rdimtools_single_bicgstab_sparse", (DL_FUNC) &_Rdimtools_single_bicgstab_sparse, 6},
     {"_Rdimtools_methods_boxcount", (DL_FUNC) &_Rdimtools_methods_boxcount, 3},
     {"_Rdimtools_aux_numderiv", (DL_FUNC) &_Rdimtools_aux_numderiv, 2},
     {"_Rdimtools_handy_plus", (DL_FUNC) &_Rdimtools_handy_plus, 1},
