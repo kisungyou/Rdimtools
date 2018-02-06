@@ -1,7 +1,7 @@
 Package: Rdimtools
 Type: Package
 Title: Dimension Reduction and Estimation Methods
-Version: 0.3.1
+Version: 0.3.2
 Authors@R: person("Kisung", "You", role = c("aut", "cre"),
                      email = "kyou@nd.edu",comment=c(ORCID="0000-0002-8584-459X"))
 Description: We provide 111 linear and nonlinear dimension reduction techniques.
