@@ -41,6 +41,7 @@ framework to transform original data into a new space via distance diffusion map
 similar to kernel-based nonlinear mapping.
 }
 \examples{
+\dontrun{
 ## generate data of 3 types with difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -60,6 +61,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="ELDE::bandwidth=1")
 plot(out2$Y[,1], out2$Y[,2], main="ELDE::bandwidth=10")
 plot(out3$Y[,1], out3$Y[,2], main="ELDE::bandwidth=100")
+}
 
 }
 \references{

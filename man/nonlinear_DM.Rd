@@ -4,8 +4,8 @@
 \alias{do.dm}
 \title{Diffusion Maps}
 \usage{
-do.dm(X, ndim = 2, preprocess = "null", diffscale = 1, timescale = 1,
-  threshold = 1e-07)
+do.dm(X, ndim = 2, preprocess = "null", bandwidth = 1, timescale = 1,
+  multiscale = FALSE)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -14,14 +14,14 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'' and three options of ``center'',``decorrelate'', or ``whiten''
+Default is "null" and three options of ``center'',``decorrelate'', or ``whiten''
 are supported. See also \code{\link{aux.preprocess}} for more details.}
 
-\item{diffscale}{a scaling parameter for diffusion kernel. Default is 1 and should be a positive real number with 0 inclusive.}
+\item{bandwidth}{a scaling parameter for diffusion kernel. Default is 1 and should be a nonnegative real number.}
 
-\item{timescale}{a target scale whose value represents behavior of heat kernels at time \emph{t}. Default is 1 and should be a positive real number >0.}
+\item{timescale}{a target scale whose value represents behavior of heat kernels at time \emph{t}. Default is 1 and should be a positive real number.}
 
-\item{threshold}{a numerical threshold for making laplacian sparse. Default is 1e-6.}
+\item{multiscale}{logical; \code{FALSE} is to use the fixed \code{timescale} value, \code{TRUE} to ignore the given value.}
 }
 \value{
 a named list containing
@@ -38,32 +38,19 @@ equivalent representations in low-dimensional space.
 }
 \examples{
 \dontrun{
-## generate Swiss Roll data of 28 data points.
-## in order to pass CRAN pretest, n is set to be small.
-X <- aux.gensamples(n=28)
+## generate swiss roll data
+X <- aux.gensamples(n=200)
 
-## Various combinations of (diffscale, timescale)
-out1 <- do.dm(X,ndim=2,diffscale=1,timescale=0.1)
-out2 <- do.dm(X,ndim=2,diffscale=5,timescale=0.1)
-out3 <- do.dm(X,ndim=2,diffscale=10,timescale=0.1)
-out4 <- do.dm(X,ndim=2,diffscale=1,timescale=1)
-out5 <- do.dm(X,ndim=2,diffscale=5,timescale=1)
-out6 <- do.dm(X,ndim=2,diffscale=10,timescale=1)
-out7 <- do.dm(X,ndim=2,diffscale=1,timescale=10)
-out8 <- do.dm(X,ndim=2,diffscale=5,timescale=10)
-out9 <- do.dm(X,ndim=2,diffscale=10,timescale=10)
+## compare different bandwidths
+out1 <- do.dm(X,bandwidth=10)
+out2 <- do.dm(X,bandwidth=100)
+out3 <- do.dm(X,bandwidth=1000)
 
-## Visualize 9 different combinations
-par(mfrow=c(3,3))
-plot(out1$Y[,1],out1$Y[,2],main="(diff=1,time=0.1)")
-plot(out2$Y[,1],out2$Y[,2],main="(diff=5,time=0.1)")
-plot(out3$Y[,1],out3$Y[,2],main="(diff=10,time=0.1)")
-plot(out4$Y[,1],out4$Y[,2],main="(diff=1,time=1)")
-plot(out5$Y[,1],out5$Y[,2],main="(diff=5,time=1)")
-plot(out6$Y[,1],out6$Y[,2],main="(diff=10,time=1)")
-plot(out7$Y[,1],out7$Y[,2],main="(diff=1,time=10)")
-plot(out8$Y[,1],out8$Y[,2],main="(diff=5,time=10)")
-plot(out9$Y[,1],out9$Y[,2],main="(diff=10,time=10)")
+## visualize
+par(mfrow=c(1,3))
+plot(out1$Y[,1],out1$Y[,2],main="DM::bandwidth=10")
+plot(out2$Y[,1],out2$Y[,2],main="DM::bandwidth=100")
+plot(out3$Y[,1],out3$Y[,2],main="DM::bandwidth=1000")
 }
 
 }

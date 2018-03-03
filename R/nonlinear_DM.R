@@ -8,11 +8,11 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'' and three options of ``center'',``decorrelate'', or ``whiten''
+#' Default is "null" and three options of ``center'',``decorrelate'', or ``whiten''
 #' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param diffscale a scaling parameter for diffusion kernel. Default is 1 and should be a positive real number with 0 inclusive.
-#' @param timescale a target scale whose value represents behavior of heat kernels at time \emph{t}. Default is 1 and should be a positive real number >0.
-#' @param threshold a numerical threshold for making laplacian sparse. Default is 1e-6.
+#' @param bandwidth a scaling parameter for diffusion kernel. Default is 1 and should be a nonnegative real number.
+#' @param timescale a target scale whose value represents behavior of heat kernels at time \emph{t}. Default is 1 and should be a positive real number.
+#' @param multiscale logical; \code{FALSE} is to use the fixed \code{timescale} value, \code{TRUE} to ignore the given value.
 #'
 #' @return a named list containing
 #' \describe{
@@ -22,52 +22,40 @@
 #' }
 #'
 #'
-#'@examples
-#'\dontrun{
-#'## generate Swiss Roll data of 28 data points.
-#'## in order to pass CRAN pretest, n is set to be small.
-#'X <- aux.gensamples(n=28)
+#' @examples
+#' \dontrun{
+#' ## generate swiss roll data
+#' X <- aux.gensamples(n=200)
 #'
-#'## Various combinations of (diffscale, timescale)
-#'out1 <- do.dm(X,ndim=2,diffscale=1,timescale=0.1)
-#'out2 <- do.dm(X,ndim=2,diffscale=5,timescale=0.1)
-#'out3 <- do.dm(X,ndim=2,diffscale=10,timescale=0.1)
-#'out4 <- do.dm(X,ndim=2,diffscale=1,timescale=1)
-#'out5 <- do.dm(X,ndim=2,diffscale=5,timescale=1)
-#'out6 <- do.dm(X,ndim=2,diffscale=10,timescale=1)
-#'out7 <- do.dm(X,ndim=2,diffscale=1,timescale=10)
-#'out8 <- do.dm(X,ndim=2,diffscale=5,timescale=10)
-#'out9 <- do.dm(X,ndim=2,diffscale=10,timescale=10)
+#' ## compare different bandwidths
+#' out1 <- do.dm(X,bandwidth=10)
+#' out2 <- do.dm(X,bandwidth=100)
+#' out3 <- do.dm(X,bandwidth=1000)
 #'
-#'## Visualize 9 different combinations
-#'par(mfrow=c(3,3))
-#'plot(out1$Y[,1],out1$Y[,2],main="(diff=1,time=0.1)")
-#'plot(out2$Y[,1],out2$Y[,2],main="(diff=5,time=0.1)")
-#'plot(out3$Y[,1],out3$Y[,2],main="(diff=10,time=0.1)")
-#'plot(out4$Y[,1],out4$Y[,2],main="(diff=1,time=1)")
-#'plot(out5$Y[,1],out5$Y[,2],main="(diff=5,time=1)")
-#'plot(out6$Y[,1],out6$Y[,2],main="(diff=10,time=1)")
-#'plot(out7$Y[,1],out7$Y[,2],main="(diff=1,time=10)")
-#'plot(out8$Y[,1],out8$Y[,2],main="(diff=5,time=10)")
-#'plot(out9$Y[,1],out9$Y[,2],main="(diff=10,time=10)")
-#'}
+#' ## visualize
+#' par(mfrow=c(1,3))
+#' plot(out1$Y[,1],out1$Y[,2],main="DM::bandwidth=10")
+#' plot(out2$Y[,1],out2$Y[,2],main="DM::bandwidth=100")
+#' plot(out3$Y[,1],out3$Y[,2],main="DM::bandwidth=1000")
+#' }
 #'
 #'@references
 #'\insertRef{nadler_diffusion_2005}{Rdimtools}
 #'
 #'\insertRef{coifman_diffusion_2006}{Rdimtools}
 #'
-#'
 #' @rdname nonlinear_DM
 #' @author Kisung You
 #' @export
-do.dm <- function(X,ndim=2,preprocess="null",diffscale=1,timescale=1,threshold=1e-7){
+do.dm <- function(X,ndim=2,preprocess="null",
+                  bandwidth=1.0,timescale=1.0,
+                  multiscale=FALSE){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
+  ndim = as.integer(ndim)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("* do.dm : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  k = as.integer(ndim)
   n = nrow(X)
   d = ncol(X)
 
@@ -75,7 +63,7 @@ do.dm <- function(X,ndim=2,preprocess="null",diffscale=1,timescale=1,threshold=1
   # 2-1. Common
   #   preprocess     : 'null'(default),'center','whiten','decorrelate'
   # 2-2. Diffusion Maps only
-  #   diffscale      : 1(default) or a real number >= 0
+  #   bandwidth      : 1(default) or a real number >= 0
   #   timescale      : 1(default) or a real number >  0
   #   threshold      : 1e-7(default)
 
@@ -85,20 +73,22 @@ do.dm <- function(X,ndim=2,preprocess="null",diffscale=1,timescale=1,threshold=1
   if (preprocess=="null"){
     preprocess = FALSE
   }
-  if (!is.numeric(diffscale)|(diffscale<0)|is.infinite(diffscale)){
-    stop("* do.dm : 'diffscale' should be a real number >= 0.")
+  if (!is.numeric(bandwidth)|(bandwidth<0)|is.infinite(bandwidth)){
+    stop("* do.dm : 'bandwidth' should be a real number >= 0.")
   }
   if (!is.numeric(timescale)|(timescale<=0)|is.infinite(timescale)){
     stop("* do.dm : 'timescale' should be a positive real number > 0.")
   }
-  if (!is.numeric(threshold)|is.infinite(threshold)|(threshold<0)){
-    stop("* do.dm : 'threshold' value should be a small number >= 0.")
+  if (!is.logical(multiscale)){
+    stop("* do.dm : 'multiscale' should be a logical variable.")
   }
-  threshold = max((min(1e-7,threshold)),(.Machine$double.eps)*10)
+  if (multiscale==TRUE){
+    message("* do.dm : when 'multiscale' is TRUE, the given timescale value is ignored.")
+  }
 
 
-  # 3. Run
-  #   3-1. preprocess
+
+  # 3. Preprocess
   if (preprocess==FALSE){
     trfinfo = list()
     trfinfo$type = "null"
@@ -108,34 +98,34 @@ do.dm <- function(X,ndim=2,preprocess="null",diffscale=1,timescale=1,threshold=1
     trfinfo = tmplist$info
     pX      = tmplist$pX
   }
-  #   3-2. diffusion matrix
-  K = exp(-((as.matrix(dist(pX)))^2)/diffscale)
-  #   3-3. I'll use symmetric version
-  Dalpha = diag(1/sqrt(rowSums(K)))
-  A = Dalpha %*% K %*% Dalpha
-  A[(abs(A)<threshold)] = 0
-  #   3-4. SVD decomposition
-  rep.col<-function(x,n){
-    matrix(rep(x,each=n), ncol=n, byrow=TRUE)
+
+  # 4. Main Computation : Scheme by Ann B. Lee (http://www.stat.cmu.edu/~annlee/software.htm)
+  #   4-1. compute symmetric graph laplacian
+  K = exp(-((as.matrix(dist(pX)))^2)/bandwidth)
+  v = diag(1/sqrt(rowSums(K)))
+  A = v%*%K%*%v
+  #   4-2. SVD Computation
+  svdA = base::svd(A)
+  U    = svdA$u[,1:(ndim+1)]
+  psi = U/matrix(rep(as.vector(U[,1]), (ndim+1)),ncol=(ndim+1),byrow=FALSE)
+  phi = U*matrix(rep(as.vector(U[,1]), (ndim+1)),ncol=(ndim+1),byrow=FALSE)
+  eigenvals = svdA$d
+
+  #   4-3. compute embedding :: depending on timescale
+  if (multiscale==FALSE){
+    lambda_t = (svdA$d[2:(ndim+1)]^timescale)
+    Y = psi[,2:(ndim+1)]*outer(rep(1,n),as.vector(lambda_t))
+  } else {
+    lambda_multi = eigenvals[2:(ndim+1)]/(1-eigenvals[2:(ndim+1)])
+    Y = psi[,2:(ndim+1)]*outer(rep(1,n),as.vector(lambda_multi))
   }
-  rep.row<-function(x,n){
-    matrix(rep(x,each=n),nrow=n)
-  }
-  svdA = svd(A,nu=(k+1),nv=(k+1))
-  svdmultiplier = rep.col(svdA$u[,1],(k+1))
-  psi  = (svdA$u)/svdmultiplier # right eigenvectors of Markov matrix
-  phi  = (svdA$u)*svdmultiplier # left  eigenvectors of Markov matrix
-  eigvals = svdA$d
-  #   3-5. compute embedding
-  lambdat = ((svdA$d[2:(k+1)])^timescale)
-  lambdat = rep.row(lambdat,nrow(psi))
-  Y       = (psi[,-1] * lambdat)
+
 
   # 4. output
   result = list()
   result$Y = Y
   trfinfo$algtype   = "nonlinear"
   result$trfinfo = trfinfo
-  result$eigvals = eigvals
+  result$eigvals = eigenvals[2:(ndim+1)]
   return(result)
 }

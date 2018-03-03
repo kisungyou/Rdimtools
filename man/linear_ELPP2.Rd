@@ -29,6 +29,7 @@ a parameter-free philosophy from PFLPP. It further aims to exclude its projectio
 to be uncorrelated in the sense that the scatter matrix is placed in a generalized eigenvalue problem.
 }
 \examples{
+\dontrun{
 ## generate swiss roll data
 X = aux.gensamples(n=200)
 
@@ -42,6 +43,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="PCA")
 plot(out2$Y[,1], out2$Y[,2], main="Parameter-Free LPP")
 plot(out3$Y[,1], out3$Y[,2], main="Enhanced LPP (2013)")
+}
 
 }
 \references{

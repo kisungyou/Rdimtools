@@ -18,6 +18,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll data
 #' X = aux.gensamples(n=200)
 #'
@@ -31,6 +32,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="PCA")
 #' plot(out2$Y[,1], out2$Y[,2], main="Parameter-Free LPP")
 #' plot(out3$Y[,1], out3$Y[,2], main="Enhanced LPP (2013)")
+#' }
 #'
 #' @references
 #' \insertRef{dornaika_enhanced_2013}{Rdimtools}
