@@ -24,6 +24,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 3 types with difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -43,6 +44,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="ELDE::bandwidth=1")
 #' plot(out2$Y[,1], out2$Y[,2], main="ELDE::bandwidth=10")
 #' plot(out3$Y[,1], out3$Y[,2], main="ELDE::bandwidth=100")
+#' }
 #'
 #' @references
 #' \insertRef{dornaika_exponential_2013}{Rdimtools}

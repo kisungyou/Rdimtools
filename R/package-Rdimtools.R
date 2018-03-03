@@ -32,6 +32,7 @@
 #' \code{\link{do.dspp}} \tab S \tab Discriminative Sparsity Preserving Projection \cr
 #' \code{\link{do.elde}} \tab S \tab Exponential Local Discriminant Embedding \cr
 #' \code{\link{do.elpp2}} \tab U \tab Enhanced Locality Preserving Projection (2013) \cr
+#' \code{\link{do.enet}} \tab S \tab Elastic Net Regularization \cr
 #' \code{\link{do.eslpp}} \tab S \tab Extended Supervised Locality Preserving Projection \cr
 #' \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 #' \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr

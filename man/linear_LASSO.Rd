@@ -34,7 +34,9 @@ a named list containing
 LASSO is a popular regularization scheme in linear regression in pursuit of sparsity in coefficient vector
 that has been widely used. The method can be used in feature selection in that given the regularization parameter,
 it first solves the problem and takes indices of estimated coefficients with the largest magnitude as
-meaningful features.
+meaningful features by solving
+\deqn{\textrm{min}_{\beta} ~ \frac{1}{2}\|X\beta-y\|_2^2 + \lambda \|\beta\|_1}
+where \eqn{y} is \code{response} in our method.
 }
 \examples{
 ## generate swiss roll with auxiliary dimensions
