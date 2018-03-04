@@ -600,6 +600,7 @@ aux.shortestpath <- function(dist){
 #' @keywords internal
 aux.MaxMinLandmark <- function(X,npoints,pdflag=FALSE){
   # 5-1. setting
+  npoints = as.integer(npoints)
   if (nrow(X)<=npoints){
     stop("ERROR : npoints should be smaller than the total number of original data points.")
   }

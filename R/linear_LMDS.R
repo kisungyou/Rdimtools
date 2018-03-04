@@ -66,6 +66,7 @@ do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),prepro
   if (!is.element(ltype,c("random","MaxMin"))){
     stop("* do.lmds : 'ltype' is either 'random' or 'MaxMin'.")
   }
+  npoints = as.integer(round(npoints))
   if (!is.numeric(npoints)||(npoints<=ndim)||(npoints>nrow(X)/2)||is.na(npoints)||is.infinite(npoints)){
     stop("* do.lmds : the number of landmark points should be [ndim+1,#(total data points)/2].")
   }

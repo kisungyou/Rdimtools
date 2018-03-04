@@ -77,6 +77,7 @@ do.lisomap <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),
   if (!is.element(ltype,c("random","MaxMin"))){
     stop("* do.lisomap : 'ltype' is either 'random' or 'MaxMin'.")
   }
+  npoints = as.integer(round(npoints))
   if (!is.numeric(npoints)||(npoints<=ndim)||(npoints>(nrow(X)/2+1))||is.na(npoints)||is.infinite(npoints)){
     stop("* do.lisomap : the number of landmark points should be [ndim+1,#(total data points)/2].")
   }
