@@ -22,11 +22,10 @@
 #' ## generate sample data and separate them
 #' X = aux.gensamples(n=500)
 #' set.seed(46556)
-#' idxtest  = sample(1:500,20)        # 20% of data for testing
-#' idxtrain = setdiff(1:500,idxtest)  # 80% of data for training
+#' idxselect  = sample(1:500,20)
 #'
-#' Xold = X[idxtrain,]
-#' Xnew = X[idxtest,]
+#' Xold = X[setdiff(1:500,idxselect),]  # 80% of data for training
+#' Xnew = X[idxselect,]                 # 20% of data for testing
 #'
 #' ## run PCA for train data
 #' training = do.pca(Xold,ndim=2,preprocess="whiten")
