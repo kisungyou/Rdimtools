@@ -2,15 +2,16 @@
 % Please edit documentation in R/auxiliary.R
 \name{aux.preprocess}
 \alias{aux.preprocess}
-\title{Centering, decorrelating, or whitening of the data}
+\title{Preprocessing the data}
 \usage{
-aux.preprocess(data, type = "center")
+aux.preprocess(data, type = c("center", "scale", "cscale", "decorrelate",
+  "whiten"))
 }
 \arguments{
 \item{data}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
-\item{type}{one of "center", "decorrelate", or "whiten". See below for more details.}
+\item{type}{one of \code{"center"}, \code{"scale"}, \code{"cscale"}, \code{"decorrelate"} or \code{"whiten"}.}
 }
 \value{
 named list containing:
@@ -19,34 +20,44 @@ named list containing:
 \item{info}{a list containing \itemize{
 \item \code{type:} name of preprocessing procedure.
 \item \code{mean:} a mean vector of length \eqn{p}.
-\item \code{multiplier:} a \eqn{(p\times p)} matrix for "decorrelate" or "whiten" or 1 for "center".}}
+\item \code{multiplier:} a \eqn{(p\times p)} matrix or 1 for "center".}}
 }
 }
 \description{
-\code{aux.preprocess} can perform one of three popular operations; centering, decorrelating,
- and whitening of data. See below for more details.
+\code{aux.preprocess} can perform one of following operations; \code{"center"}, \code{"scale"},
+\code{"cscale"}, \code{"decorrelate"} and \code{"whiten"}. See below for more details.
 }
 \details{
-\code{"center"} option subtracts mean of each column so that every variable has
-mean 0. After centering, option \code{"decorrelate"} sets the data matrix
-to have diagonal covariance terms only. \code{"whiten"} option sets the sample
-covariance to have all diagonal terms equal to 1, equally weighting each variable.
+@section Operations:
+ We have following operations,
+ \describe{
+ \item{\code{"center"}}{subtracts mean of each column so that every variable has mean \eqn{0}.}
+ \item{\code{"scale"}}{turns each column corresponding to variable have variance \eqn{1}.}
+ \item{\code{"cscale"}}{combines \code{"center"} and \code{"scale"}.}
+ \item{\code{"decorrelate"}}{\code{"center"} and sets its covariance term having diagonal entries only.}
+ \item{\code{"whiten"}}{\code{"decorrelate"} and sets all diagonal elements be \eqn{1}.}
+ }
 }
 \examples{
 \dontrun{
 ## Generate data
 X = aux.gensamples()
 
-## 3 types of preprocessing
+## 5 types of preprocessing
 X_center = aux.preprocess(X)
+X_scale  = aux.preprocess(X,type="scale")
+X_cscale = aux.preprocess(X,type="cscale")
 X_decorr = aux.preprocess(X,type="decorrelate")
 X_whiten = aux.preprocess(X,type="whiten")
 
 ## Check with Covariance matrix
-par(mfrow=c(1,3))
-image(cov(X_center$pX),zlim=c(-50,50)); title("center");
-image(cov(X_decorr$pX),zlim=c(-50,50)); title("decorrelate");
-image(cov(X_whiten$pX),zlim=c(-50,50)); title("whitening")
+par(mfrow=c(2,3))
+image(cov(X)[,3:1],          zlim=c(-5,5)); title("original covariance")
+image(cov(X_center$pX)[,3:1],zlim=c(-5,5)); title("opt::center")
+image(cov(X_scale$pX)[,3:1], zlim=c(-5,5)); title("opt::scale")
+image(cov(X_cscale$pX)[,3:1],zlim=c(-5,5)); title("opt::cscale")
+image(cov(X_decorr$pX)[,3:1],zlim=c(-5,5)); title("opt::decorrelate")
+image(cov(X_whiten$pX)[,3:1],zlim=c(-5,5)); title("opt::whiten")
 }
 
 }

@@ -178,7 +178,7 @@
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm Matrix
 #' @importFrom Rtsne Rtsne
-#' @importFrom stats dist cov rnorm runif kmeans cor var
+#' @importFrom stats dist cov rnorm runif kmeans cor var sd
 #' @importFrom graphics par image plot
 #' @importFrom Rcpp evalCpp
 #' @useDynLib Rdimtools
