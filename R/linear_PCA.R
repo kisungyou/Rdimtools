@@ -14,8 +14,7 @@
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
 #' and \code{TRUE} for correlation matrix.
 #' @param preprocess an option for preprocessing the data. This supports three methods,
-#' where default is "default" and other methods of "decorrelate" and "whiten" are supported.
-#' See also \code{\link{aux.preprocess}} for more details.
+#' where default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param varratio a value in (0,1]. This value is only used when \code{ndim} is
 #' chosen as "auto".
 #'
@@ -53,7 +52,8 @@
 #'
 #' @rdname linear_PCA
 #' @export
-do.pca <- function(X,ndim="auto",cor=FALSE,preprocess=c("center","decorrelate","whiten"),varratio=0.9){
+do.pca <- function(X,ndim="auto",cor=FALSE,
+                   preprocess=c("center","scale","cscale","decorrelate","whiten"),varratio=0.9){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
 
@@ -64,10 +64,9 @@ do.pca <- function(X,ndim="auto",cor=FALSE,preprocess=c("center","decorrelate","
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  tmplist = aux.preprocess(X,type=algpreprocess)
-  pX      = tmplist$pX
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
-  trfinfo$algtype   = "linear"
+  pX      = tmplist$pX
 
   #   2-2. correlation or covariance matrix
   if (cor){

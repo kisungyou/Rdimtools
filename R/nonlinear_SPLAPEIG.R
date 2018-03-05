@@ -11,8 +11,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param beta bandwidth parameter for heat kernel in \eqn{[0,\infty)}.
 #' @param gamma a balancing parameter in \eqn{[0,1]} between within- and between-class information.
 #'
@@ -54,7 +53,7 @@
 #' @rdname nonlinear_SPLAPEIG
 #' @export
 do.splapeig <- function(X, label, ndim=2,
-                        preprocess=c("null","center","whiten","decorrelate"),
+                        preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                         beta=1.0, gamma=0.5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -82,16 +81,9 @@ do.splapeig <- function(X, label, ndim=2,
 
   #------------------------------------------------------------------------
   ## PREPROCESSING
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## MAIN COMUTATION FOR SUPERVISED LAPLACIAN EIGENMAPS

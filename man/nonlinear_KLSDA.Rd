@@ -4,8 +4,8 @@
 \alias{do.klsda}
 \title{Kernel Locality Sensitive Discriminant Analysis}
 \usage{
-do.klsda(X, label, ndim = 2, preprocess = c("center", "whiten",
-  "decorrelate"), alpha = 0.5, k1 = max(ceiling(nrow(X)/10), 2),
+do.klsda(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "whiten", "decorrelate"), alpha = 0.5, k1 = max(ceiling(nrow(X)/10), 2),
   k2 = max(ceiling(nrow(X)/10), 2), t = 1)
 }
 \arguments{
@@ -17,8 +17,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{alpha}{balancing parameter for between- and within-class scatter in \eqn{[0,1]}.}
 

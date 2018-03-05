@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate 2 normal data matrices
 #' mat1 = matrix(rnorm(100*12),nrow=100)+10 # 12-dim normal
 #' mat2 = matrix(rnorm(100*6), nrow=100)-10 # 6-dim normal
@@ -33,6 +34,7 @@
 #' par(mfrow=c(1,2))
 #' plot(output$Y1[,1], output$Y1[,2], main="proj(mat1)")
 #' plot(output$Y2[,1], output$Y2[,2], main="proj(mat2)")
+#' }
 #'
 #' @references
 #' \insertRef{hotelling_relations_1936}{Rdimtools}

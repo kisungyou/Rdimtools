@@ -4,8 +4,8 @@
 \alias{do.lpe}
 \title{Locality Pursuit Embedding}
 \usage{
-do.lpe(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  numk = max(ceiling(nrow(X)/10), 2))
+do.lpe(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), numk = max(ceiling(nrow(X)/10), 2))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -14,8 +14,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{numk}{size of \eqn{k}-nn neighborhood in original dimensional space.}
 }

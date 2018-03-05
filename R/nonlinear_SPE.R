@@ -50,6 +50,8 @@ do.spe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")}
   ## PREPROCESSING
   # 1. data X
   aux.typecheck(X)
+  n = nrow(X)
+  p = ncol(X)
   # 2. ndim
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("* do.spe : 'ndim' is a positive integer in [1,#(covariates)).")
@@ -96,6 +98,8 @@ do.spe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")}
   trfinfo = list()
   trfinfo$type = "null"
   trfinfo$algtype = "nonlinear"
+  trfinfo$mean = rep(0,p)
+  trfinfo$multiplier = 1
 
   result = list()
   result$Y = Y

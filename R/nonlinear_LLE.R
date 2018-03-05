@@ -18,8 +18,7 @@
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform LLE on weighted graph, or \code{FALSE} otherwise.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param regtype \code{TRUE} for automatic regularization parameter selection, \code{FALSE} otherwise as default.
 #' @param regparam regularization parameter.
 #'
@@ -41,15 +40,15 @@
 #' ## 2. constructing 20%-connected graph
 #' output2 <- do.lle(X,ndim=2,type=c("proportion",0.20))
 #'
-#' ## 3. constructing 10%-connected with bigger regularization parameter
+#' ## 3. constructing 50%-connected with bigger regularization parameter
 #' output3 <- do.lle(X,ndim=2,type=c("proportion",0.5),regparam=10)
 #'
 #' ## Visualize three different projections
 #' par(mfrow=c(1,3))
 #' plot(output1$Y[,1],output1$Y[,2],main="5%")
 #' plot(output2$Y[,1],output2$Y[,2],main="10%")
-#' plot(output3$Y[,1],output3$Y[,2],main="10%+Binary")
-#'}
+#' plot(output3$Y[,1],output3$Y[,2],main="50%+Binary")
+#' }
 #'
 #' @seealso \href{https://www.cs.nyu.edu/~roweis/lle/}{Prof.Roweis' website}
 #' @references
@@ -60,7 +59,8 @@
 #' @rdname nonlinear_LLE
 #' @export
 do.lle <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,
-                   preprocess=c("null","center","decorrelate","whiten"),regtype=FALSE, regparam=1.0){
+                   preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
+                   regtype=FALSE, regparam=1.0){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -104,16 +104,9 @@ do.lle <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TR
   #   regparam   : 1 (default)
 
   # 3. process : data preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   n = nrow(pX)
   p = ncol(pX)

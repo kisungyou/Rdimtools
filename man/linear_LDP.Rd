@@ -5,7 +5,8 @@
 \title{Locally Discriminating Projection}
 \usage{
 do.ldp(X, label, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("center", "whiten", "decorrelate"), beta = 10)
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  beta = 10)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -21,8 +22,7 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{beta}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
 }

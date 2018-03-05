@@ -10,8 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param h the number of slices to divide the range of response vector.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param regmethod type of regularization scheme to be used.
 #' @param tau regularization parameter for adjusting rank-deficient scatter matrix.
 #' @param numpc number of principal components to be used in intermediate dimension reduction scheme.
@@ -71,7 +70,8 @@
 #' @author Kisung You
 #' @rdname linear_RSIR
 #' @export
-do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c("center","decorrelate","whiten"),
+do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
+                    preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     regmethod=c("Ridge","Tikhonov","PCA","PCARidge","PCATikhonov"), tau=1.0, numpc=ndim){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -112,10 +112,9 @@ do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. build label matrix
   if (!is.factor(response)){
     label  = as.integer(sir_makelabel(response, h))

@@ -4,9 +4,9 @@
 \alias{do.mfa}
 \title{Marginal Fisher Analysis}
 \usage{
-do.mfa(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), k1 = max(ceiling(nrow(X)/10), 2), k2 = max(ceiling(nrow(X)/10),
-  2))
+do.mfa(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), k1 = max(ceiling(nrow(X)/10), 2),
+  k2 = max(ceiling(nrow(X)/10), 2))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -16,8 +16,7 @@ do.mfa(X, label, ndim = 2, preprocess = c("center", "decorrelate",
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{k1}{the number of same-class neighboring points (homogeneous neighbors).}
 

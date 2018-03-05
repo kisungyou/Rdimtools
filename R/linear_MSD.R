@@ -10,8 +10,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param C nonnegative balancing parameter for intra- and inter-class variance.
 #'
 #' @return a named list containing
@@ -50,7 +49,7 @@
 #' @author Kisung You
 #' @rdname linear_MSD
 #' @export
-do.msd <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate"), C=1.0){
+do.msd <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"), C=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -85,15 +84,11 @@ do.msd <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate
   C = as.double(C)
   if (!check_NumMM(C, 0, 1e+10, compact=TRUE)){stop("* do.msd : 'C' is a nonnegative balancing parameter.")}
 
-
-
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
-
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN PART FOR MSD

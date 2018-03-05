@@ -5,8 +5,9 @@
 \alias{do.sde}
 \title{Maximum Variance Unfolding / Semidefinite Embedding}
 \usage{
-do.mvu(X, ndim = 2, type = c("proportion", 0.1), preprocess = "null",
-  projtype = "spectral")
+do.mvu(X, ndim = 2, type = c("proportion", 0.1), preprocess = c("null",
+  "center", "scale", "cscale", "decorrelate", "whiten"),
+  projtype = c("spectral", "kpca"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
@@ -19,7 +20,7 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{projtype}{type of method for projection; either \code{"spectral"} or \code{"kpca"} used.}
 }

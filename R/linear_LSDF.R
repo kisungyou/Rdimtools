@@ -14,8 +14,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param gamma within-class weight parameter for same-class data.
 #'
 #' @return a named list containing
@@ -62,7 +61,7 @@
 #' @author Kisung You
 #' @export
 do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
-                    preprocess=c("null","center","whiten","decorrelate"), gamma=100){
+                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"), gamma=100){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -100,16 +99,9 @@ do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = X
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",

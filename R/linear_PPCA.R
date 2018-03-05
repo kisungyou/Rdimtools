@@ -10,9 +10,8 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'' (default),``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-#' for more details.
+#' @param preprocess an option for preprocessing the data. This supports three methods.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -45,7 +44,7 @@
 #'
 #' @rdname linear_PPCA
 #' @export
-do.ppca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten")){
+do.ppca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   # 1. data X
@@ -64,10 +63,9 @@ do.ppca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## COMPUTATION
   #   1. Preprocessing the data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   matT    = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. parameter
   d = ncol(matT)
   q = as.integer(ndim)
@@ -85,7 +83,7 @@ do.ppca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y          = matT%*%projection
+  result$Y          = (matT%*%projection)
   result$trfinfo    = trfinfo
   result$projection = projection
   result$mle.sigma2  = mlsig2

@@ -9,8 +9,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param k1 the number of same-class neighboring points (homogeneous neighbors).
 #' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
 #' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
@@ -47,7 +46,7 @@
 #' @author Kisung You
 #' @rdname nonlinear_KMFA
 #' @export
-do.kmfa <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.kmfa <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2), t=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -78,10 +77,9 @@ do.kmfa <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "nonlinear"
   #   2. PCA preprocessing
   eigtest = eigen(cov(pX), only.values=TRUE)
   pcadim  = sum(eigtest$values > 0)

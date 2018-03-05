@@ -25,8 +25,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
@@ -59,7 +58,7 @@
 #' @author Kisung You
 #' @rdname nonlinear_PLP
 #' @export
-do.plp <- function(X,ndim=2,preprocess="null",type=c("proportion",0.20)){
+do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),type=c("proportion",0.20)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<2)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -85,15 +84,15 @@ do.plp <- function(X,ndim=2,preprocess="null",type=c("proportion",0.20)){
 
   # 3. Run
   #   3-1. preprocess
-  if (preprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
+  if (missing(preprocess)){
+    algpreprocess = "null"
   } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
+    algpreprocess = match.arg(preprocess)
   }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
   #   3-2. sample selection : no random sampling : I will use kmeans
   kmeans  = kmeans(pX,m)
   cluster = kmeans$cluster # assignment information
@@ -159,7 +158,6 @@ do.plp <- function(X,ndim=2,preprocess="null",type=c("proportion",0.20)){
   # 4. return output
   result = list()
   result$Y = Youtput
-  trfinfo$algtype = "nonlinear"
   result$trfinfo  = trfinfo
   return(result)
 }

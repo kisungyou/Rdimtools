@@ -14,8 +14,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -48,7 +47,8 @@
 #' @author Kisung You
 #' @rdname nonlinear_DVE
 #' @export
-do.dve <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("null","center","decorrelate","whiten")){
+do.dve <- function(X, ndim=2, type=c("proportion",0.1),
+                   preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -70,16 +70,9 @@ do.dve <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("null","cen
 
   #------------------------------------------------------------------------
   ## COMPUTATION : DATA PREPROCESSING
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X)
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN STOPS FOR DVE

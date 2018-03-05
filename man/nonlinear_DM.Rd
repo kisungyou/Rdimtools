@@ -4,7 +4,8 @@
 \alias{do.dm}
 \title{Diffusion Maps}
 \usage{
-do.dm(X, ndim = 2, preprocess = "null", bandwidth = 1, timescale = 1,
+do.dm(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
+  "decorrelate", "whiten"), bandwidth = 1, timescale = 1,
   multiscale = FALSE)
 }
 \arguments{
@@ -14,8 +15,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of ``center'',``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{bandwidth}{a scaling parameter for diffusion kernel. Default is 1 and should be a nonnegative real number.}
 

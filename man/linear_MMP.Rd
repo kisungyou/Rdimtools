@@ -4,8 +4,9 @@
 \alias{do.mmp}
 \title{Maximum Margin Projection}
 \usage{
-do.mmp(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), numk = max(ceiling(nrow(X)/10), 2), alpha = 0.5, gamma = 50)
+do.mmp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), numk = max(ceiling(nrow(X)/10), 2), alpha = 0.5,
+  gamma = 50)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -15,8 +16,7 @@ do.mmp(X, label, ndim = 2, preprocess = c("center", "decorrelate",
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{numk}{the number of neighboring points.}
 

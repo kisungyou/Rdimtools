@@ -4,9 +4,10 @@
 \alias{do.modp}
 \title{Modified Orthogonal Discriminant Projection}
 \usage{
-do.modp(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), alpha = 0.5, beta = 10)
+do.modp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"), alpha = 0.5,
+  beta = 10)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,8 +18,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and two other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a vector of neighborhood graph construction. Following types are supported;
 \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.

@@ -9,8 +9,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param alpha balancing parameter for between- and within-class scatter in \eqn{[0,1]}.
 #' @param k1 the number of same-class neighboring points (homogeneous neighbors).
 #' @param k2 the number of different-class neighboring points (heterogeneous neighbors).
@@ -47,7 +46,7 @@
 #' @author Kisung You
 #' @rdname nonlinear_KLSDA
 #' @export
-do.klsda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate"),
+do.klsda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"),
                     alpha=0.5, k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2), t=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -95,10 +94,9 @@ do.klsda <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrela
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "nonlinear"
 
   #   2. compute homogeneous (intraclass) and heterogeneous (interclass) neighborhood
   logicalmat = aux.nbdlogical(pX, label, k1, k2)

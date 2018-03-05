@@ -5,8 +5,8 @@
 \title{Locality Preserving Projection}
 \usage{
 do.lpp(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), preprocess = c("center", "whiten",
-  "decorrelate"), t = 1)
+  "intersect", "asymmetric"), preprocess = c("center", "scale", "cscale",
+  "whiten", "decorrelate"), t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -22,8 +22,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}.}
 }
@@ -42,13 +41,13 @@ operator on the graph-approximated data manifold.
 }
 \examples{
 \dontrun{
-## generate data
+## generate twinpeaks data
 X <- aux.gensamples(dname="twinpeaks",n=100)
 
 ## try different kernel bandwidths
 out1 <- do.lpp(X, t=0.1)
-out1 <- do.lpp(X, t=1)
-out1 <- do.lpp(X, t=10)
+out2 <- do.lpp(X, t=1)
+out3 <- do.lpp(X, t=10)
 
 ## Visualize three different projections
 par(mfrow=c(1,3))

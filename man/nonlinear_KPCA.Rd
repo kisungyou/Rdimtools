@@ -4,7 +4,8 @@
 \alias{do.kpca}
 \title{Kernel Principal Component Analysis}
 \usage{
-do.kpca(X, ndim = 2, preprocess = "null", kernel = c("gaussian", 1))
+do.kpca(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
+  "whiten", "decorrelate"), kernel = c("gaussian", 1))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
@@ -12,7 +13,7 @@ do.kpca(X, ndim = 2, preprocess = "null", kernel = c("gaussian", 1))
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{kernel}{a vector containing name of a kernel and corresponding parameters. See also \code{\link{aux.kernelcov}} for complete description of Kernel Trick.}
 }

@@ -5,8 +5,8 @@
 \title{Neighborhood Preserving Embedding}
 \usage{
 do.npe(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = c("null", "center", "whiten", "decorrelate"),
-  regtype = FALSE, regparam = 1)
+  weight = TRUE, preprocess = c("null", "center", "scale", "cscale",
+  "whiten", "decorrelate"), regtype = FALSE, regparam = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -24,8 +24,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{weight}{\code{TRUE} to perform NPE on weighted graph, or \code{FALSE} otherwise.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{regtype}{\code{FALSE} for not applying automatic Tikhonov Regularization,
 or \code{TRUE} otherwise.}
@@ -53,7 +52,7 @@ regularization parameter and put penalty for stable computation. See also
 }
 \examples{
 \dontrun{
-# generate data
+## generate data
 X <- aux.gensamples(n=333)
 
 ## 1. connecting 5\% of data for graph construction.

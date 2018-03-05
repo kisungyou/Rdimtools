@@ -10,8 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param h the number of slices to divide the range of response vector.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -54,7 +53,8 @@
 #' @author Kisung You
 #' @rdname linear_SAVE
 #' @export
-do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c("center","decorrelate","whiten")){
+do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
+                    preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -84,10 +84,9 @@ do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. build label matrix
   if (!is.factor(response)){
     label  = as.integer(sir_makelabel(response, h))

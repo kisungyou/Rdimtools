@@ -4,8 +4,9 @@
 \alias{do.isomap}
 \title{Isometric Feature Mapping}
 \usage{
-do.isomap(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = "center")
+do.isomap(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
+  "intersect", "asymmetric"), weight = TRUE, preprocess = c("center",
+  "scale", "cscale", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -23,8 +24,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{weight}{\code{TRUE} to perform Isomap on weighted graph, or \code{FALSE} otherwise.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing
@@ -39,9 +39,9 @@ by Tenenbaum et al (2000). Its novelty comes from applying classical multidimens
 scaling on nonlinear manifold, which is approximated as a graph.
 }
 \examples{
+\dontrun{
 ## generate data
-## in order to pass CRAN pretest, n is set to be small.
-X <- aux.gensamples(n=28)
+X <- aux.gensamples(n=123)
 
 ## 1. connecting 10\% of data for graph construction.
 output1 <- do.isomap(X,ndim=2,type=c("proportion",0.10))
@@ -54,10 +54,10 @@ output3 <- do.isomap(X,ndim=2,type=c("proportion",0.25),weight=FALSE)
 
 ## Visualize three different projections
 par(mfrow=c(1,3))
-plot(output1$Y[,1],output1$Y[,2],main="5\%")
-plot(output2$Y[,1],output2$Y[,2],main="10\%")
-plot(output3$Y[,1],output3$Y[,2],main="10\%+Binary")
-
+plot(output1$Y[,1],output1$Y[,2],main="10\%")
+plot(output2$Y[,1],output2$Y[,2],main="25\%")
+plot(output3$Y[,1],output3$Y[,2],main="25\%+Binary")
+}
 
 
 }

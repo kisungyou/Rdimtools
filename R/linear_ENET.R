@@ -10,6 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null". See also \code{\link{aux.preprocess}} for more details.
+#' @param ycenter a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.
 #' @param lambda1 \eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.
 #' @param lambda2 \eqn{\ell_2} regularization parameter in \eqn{(0,\infty)}.
 #'
@@ -69,7 +70,8 @@
 #' @rdname linear_ENET
 #' @author Kisung You
 #' @export
-do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"), lambda1=1.0, lambda2=1.0){
+do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
+                    ycenter=FALSE, lambda1=1.0, lambda2=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -101,8 +103,12 @@ do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","c
   tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  if (algpreprocess!="null"){
-    response = (response-mean(response))
+
+  if (!is.logical(ycenter)){
+    stop("* do.enet : 'ycenter' should be a logical variable.")
+  }
+  if (ycenter==TRUE){
+    response = response-mean(response)
   }
 
   #------------------------------------------------------------------------

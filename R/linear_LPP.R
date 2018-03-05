@@ -13,8 +13,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
@@ -26,13 +25,13 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate data
+#' ## generate twinpeaks data
 #' X <- aux.gensamples(dname="twinpeaks",n=100)
 #'
 #' ## try different kernel bandwidths
 #' out1 <- do.lpp(X, t=0.1)
-#' out1 <- do.lpp(X, t=1)
-#' out1 <- do.lpp(X, t=10)
+#' out2 <- do.lpp(X, t=1)
+#' out3 <- do.lpp(X, t=10)
 #'
 #' ## Visualize three different projections
 #' par(mfrow=c(1,3))
@@ -50,7 +49,7 @@
 #' @export
 do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
                    symmetric=c("union","intersect","asymmetric"),
-                   preprocess=c("center","whiten","decorrelate"), t=1.0){
+                   preprocess=c("center","scale","cscale","whiten","decorrelate"), t=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   # 1. typecheck is always first step to perform.
@@ -84,16 +83,10 @@ do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
   if (!check_NumMM(t,.Machine$double.eps,Inf)){stop("* do.lpp : 't' is a bandwidth parameter in (0,infinity).")}
 
   # 3. process : data preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
   # 4. process : neighborhood selection
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

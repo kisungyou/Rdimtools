@@ -4,7 +4,8 @@
 \alias{do.mds}
 \title{(Classical) Multidimensional Scaling}
 \usage{
-do.mds(X, ndim = 2, preprocess = "center")
+do.mds(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -12,9 +13,8 @@ and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-for more details.}
+\item{preprocess}{an option for preprocessing the data. Default is "center".
+See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing
@@ -30,20 +30,23 @@ a named list containing
 \code{\link[stats]{cmdscale}}.
 }
 \examples{
-# generate data
+\dontrun{
+## generate data
 X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
 
 ## 1. projection onto 2 dimension.
-output <- do.mds(X,ndim=2)
-plot(output$Y[,1],output$Y[,2])
+output1 <- do.mds(X,ndim=2)
 
 ## 2. different preprocessing leads to different results
 output2 <- do.mds(X,ndim=2,preprocess="decorrelate")
 output3 <- do.mds(X,ndim=2,preprocess="whiten")
+
+## 3. visualize
 par(mfrow=c(1,3))
-plot(output$Y[,1],output$Y[,2],main="center")
+plot(output1$Y[,1],output1$Y[,2],main="center")
 plot(output2$Y[,1],output2$Y[,2],main="decorrelate")
 plot(output3$Y[,1],output3$Y[,2],main="whiten")
+}
 
 }
 \references{

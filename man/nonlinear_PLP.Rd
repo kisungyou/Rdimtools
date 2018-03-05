@@ -4,7 +4,8 @@
 \alias{do.plp}
 \title{Piecewise Laplacian-based Projection (PLP)}
 \usage{
-do.plp(X, ndim = 2, preprocess = "null", type = c("proportion", 0.2))
+do.plp(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
+  "whiten", "decorrelate"), type = c("proportion", 0.2))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -13,8 +14,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a vector of neighborhood graph construction. Following types are supported;
 \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.

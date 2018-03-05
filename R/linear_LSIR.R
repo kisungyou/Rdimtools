@@ -10,8 +10,8 @@
 #' @param ndim an integer-valued target dimension.
 #' @param h the number of slices to divide the range of response vector.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
+#' @param ycenter a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.
 #' @param numk size of determining neighborhood via \eqn{k}-nearest neighbor selection.
 #' @param tau regularization parameter for adjusting rank-deficient scatter matrix.
 #'
@@ -56,8 +56,9 @@
 #' @author Kisung You
 #' @rdname linear_LSIR
 #' @export
-do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=c("center","decorrelate","whiten"),
-                    numk = max(2, round(nrow(X)/10)), tau=1.0){
+do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
+                    preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                    ycenter=FALSE, numk = max(2, round(nrow(X)/10)), tau=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -93,10 +94,18 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
+  if (!is.logical(ycenter)){
+    stop("* do.lsir : 'ycenter' should be a logical variable.")
+  }
+  if (ycenter==TRUE){
+    response = response-mean(response)
+  }
+
+
   #   2. build label matrix
   if (!is.factor(response)){
     label  = as.integer(sir_makelabel(response, h))
@@ -105,6 +114,7 @@ do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)), preprocess=
   }
   ulabel = unique(label)
   nlabel = length(ulabel)
+
   #   3. compute classwise and overall mean
   class_mean  = array(0,c(nlabel,p))
   class_count = rep(0,nlabel)

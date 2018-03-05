@@ -5,8 +5,8 @@
 \title{Semi-Supervised Adaptive Maximum Margin Criterion}
 \usage{
 do.sammc(X, label, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("center", "decorrelate", "whiten"), a = 1, b = 1,
-  lambda = 1, beta = 1)
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  a = 1, b = 1, lambda = 1, beta = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -22,8 +22,7 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{a}{tuning parameter for between-class weight in \eqn{[0,\infty)}.}
 

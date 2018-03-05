@@ -15,7 +15,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param projtype type of method for projection; either \code{"spectral"} or \code{"kpca"} used.
 #'
 #' @return a named list containing
@@ -52,7 +52,9 @@
 #' @aliases do.sde
 #' @rdname nonlinear_MVU
 #' @export
-do.mvu <- function(X,ndim=2,type=c("proportion",0.1),preprocess="null",projtype="spectral"){
+do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
+                   preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
+                   projtype=c("spectral","kpca")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -68,23 +70,16 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),preprocess="null",projtype=
   nbdtype = type
   nbdsymmetric = "union"
 
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.mvu : 'preprocess' argument is invalid.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
 
   # 3. process : data preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
-
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
   n = nrow(pX)
   p = ncol(pX)
 

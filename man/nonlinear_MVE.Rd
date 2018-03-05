@@ -5,8 +5,8 @@
 \title{Minimum Volume Embedding}
 \usage{
 do.mve(X, ndim = 2, knn = ceiling(nrow(X)/10), kwidth = 1,
-  preprocess = c("null", "center", "whiten", "decorrelate"), tol = 1e-04,
-  maxiter = 1000)
+  preprocess = c("null", "center", "scale", "cscale", "whiten",
+  "decorrelate"), tol = 1e-04, maxiter = 1000)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
@@ -18,8 +18,7 @@ do.mve(X, ndim = 2, knn = ceiling(nrow(X)/10), kwidth = 1,
 \item{kwidth}{bandwidth for Gaussian kernel.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and other options of "center","decorrelate", and "whiten" are supported.
-See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{tol}{stopping criterion for incremental change.}
 

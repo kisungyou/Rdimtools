@@ -11,8 +11,7 @@
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param numk the number of neighboring points for k-nn graph construction.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -51,7 +50,7 @@
 #' @rdname linear_LDE
 #' @export
 do.lde <- function(X, label, ndim=2, t=1.0, numk=max(ceiling(nrow(X)/10),2),
-                   preprocess=c("center","decorrelate","whiten")){
+                   preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -84,10 +83,9 @@ do.lde <- function(X, label, ndim=2, t=1.0, numk=max(ceiling(nrow(X)/10),2),
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   Pre. preprocessing of data matrix
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   1. construct G1 (original G) and G2 (G') for same-class and different-class connectivty
   #   1-1. find k-neighborhood graph

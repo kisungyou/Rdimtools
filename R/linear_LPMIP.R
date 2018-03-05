@@ -13,8 +13,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param sigma bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #' @param alpha balancing parameter between two locality information in \eqn{[0,1]}.
 #'
@@ -46,7 +45,8 @@
 #' @author Kisung You
 #' @rdname linear_LPMIP
 #' @export
-do.lpmip <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","whiten","decorrelate"),
+do.lpmip <- function(X, ndim=2, type=c("proportion",0.1),
+                     preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                      sigma=10, alpha=0.5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -62,7 +62,7 @@ do.lpmip <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center",
   nbdsymmetric = "union"
   #   4. preprocess
   if (missing(preprocess)){
-    algpreprocess = "center"
+    algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
@@ -76,10 +76,9 @@ do.lpmip <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center",
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",

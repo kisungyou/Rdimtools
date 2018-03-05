@@ -4,8 +4,9 @@
 \alias{do.cisomap}
 \title{Conformal Isometric Feature Mapping}
 \usage{
-do.cisomap(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = "center")
+do.cisomap(X, ndim = 2, type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"), weight = TRUE,
+  preprocess = c("center", "scale", "cscale", "whiten", "decorrelate"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -23,8 +24,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{weight}{\code{TRUE} to perform Isomap on weighted graph, or \code{FALSE} otherwise.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

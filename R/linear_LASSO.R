@@ -12,8 +12,8 @@
 #' @param response a length-\eqn{n} vector of response variable.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
+#' @param ycenter a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.
 #' @param lambda sparsity regularization parameter in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
@@ -57,7 +57,8 @@
 #' @rdname linear_LASSO
 #' @author Kisung You
 #' @export
-do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","decorrelate","whiten"), lambda=1.0){
+do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","decorrelate","whiten"),
+                     ycenter=FALSE, lambda=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -84,17 +85,16 @@ do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","decorrel
 
   #------------------------------------------------------------------------
   ## COMPUTATION : DATA PREPROCESSING
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X)
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
+  if (!is.logical(ycenter)){
+    stop("* do.lasso : 'ycenter' should be a logical variable.")
+  }
+  if (ycenter==TRUE){
     response = response-mean(response)
   }
-  trfinfo$algtype = "linear"
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION FOR LASSO

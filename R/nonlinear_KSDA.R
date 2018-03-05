@@ -97,19 +97,20 @@ do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing with re-labeling of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX[labelorder,]
-
-  trfinfo$algtype = "linear"
   label   = label[labelorder]
+
   #   2. neighborhood graph
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
   nbdmask   = nbdstruct$mask
+
   #   3. S : binary adjacency
   S = nbdmask*1.0
   L = diag(rowSums(S))-S
+
   #   4. W : Weight Matrix
   idxmaxlabeled = sum(!is.na(label))
   Wl = sda_build_Wl(label[1:idxmaxlabeled])
@@ -130,8 +131,6 @@ do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=
   pseudoproj = aux.geigen(LHS, RHS, ndim, maximal=TRUE)
   #   3. find projected ones : recovering its order will be performed later.
   Y = K%*%pseudoproj
-
-
 
   #------------------------------------------------------------------------
   ## RETURN

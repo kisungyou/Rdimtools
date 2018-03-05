@@ -14,8 +14,7 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and  other methods "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -50,7 +49,7 @@
 #' @export
 do.lltsa <- function(X, ndim=2, type=c("proportion",0.1),
                      symmetric=c("union","intersect","asymmetric"),
-                     preprocess=c("center","decorrelate","whiten")){
+                     preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -77,10 +76,10 @@ do.lltsa <- function(X, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

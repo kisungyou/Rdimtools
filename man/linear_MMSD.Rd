@@ -4,8 +4,8 @@
 \alias{do.mmsd}
 \title{Multiple Maximum Scatter Difference}
 \usage{
-do.mmsd(X, label, ndim = 2, preprocess = c("center", "whiten",
-  "decorrelate"), C = 1)
+do.mmsd(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "whiten", "decorrelate"), C = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +16,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{C}{nonnegative balancing parameter for intra- and inter-class scatter.}
 }

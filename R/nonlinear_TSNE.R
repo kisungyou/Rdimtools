@@ -16,7 +16,7 @@
 #' @param jitterdecay decay parameter in (0,1). The closer to 0, the faster artificial noise decays.
 #' @param momentum level of acceleration in learning.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param pca whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.
 #' @param pcaratio proportion of variances explained in finding PCA preconditioning. See also \code{\link{do.pca}} for more details.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
@@ -55,7 +55,8 @@
 #' @rdname nonlinear_TSNE
 #' @export
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
-                    jitter=0.3,jitterdecay=0.99,momentum=0.5,preprocess="null",
+                    jitter=0.3,jitterdecay=0.99,momentum=0.5,
+                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE,
                     BarnesHut=FALSE,BHtheta=0.5){
   # 1. typecheck is always first step to perform.
@@ -101,16 +102,10 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
   if (!is.element(preprocess,c("null","center","decorrelate","whiten"))){
     stop("* do.tsne : 'preprocess' should have one of 4 options.")
   }
-  if (preprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  algpreprocess = match.arg(preprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #   2-7. (bool) pca = TRUE/FALSE
   #     If pca = TRUE

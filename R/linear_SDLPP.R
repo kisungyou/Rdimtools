@@ -11,8 +11,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -50,7 +49,7 @@
 #' @rdname linear_SDLPP
 #' @export
 do.sdlpp <- function(X, ndim=2, t = 1.0,
-                     preprocess=c("center","decorrelate","whiten")){
+                     preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -70,10 +69,9 @@ do.sdlpp <- function(X, ndim=2, t = 1.0,
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   1. preprocessing of data matrix
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   2. preliminary computations
   #   2-1. compute D : normalized squared distance

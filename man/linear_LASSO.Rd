@@ -5,7 +5,7 @@
 \title{Least Absolute Shrinkage and Selection Operator}
 \usage{
 do.lasso(X, response, ndim = 2, preprocess = c("null", "center",
-  "decorrelate", "whiten"), lambda = 1)
+  "decorrelate", "whiten"), ycenter = FALSE, lambda = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +16,9 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and other options of "center", "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
+
+\item{ycenter}{a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.}
 
 \item{lambda}{sparsity regularization parameter in \eqn{(0,\infty)}.}
 }

@@ -8,8 +8,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param numk size of \eqn{k}-nn neighborhood in original dimensional space.
 #'
 #' @return a named list containing
@@ -50,7 +49,7 @@
 #' @author Kisung You
 #' @rdname linear_LPE
 #' @export
-do.lpe <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), numk=max(ceiling(nrow(X)/10),2)){
+do.lpe <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"), numk=max(ceiling(nrow(X)/10),2)){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -70,10 +69,10 @@ do.lpe <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), num
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. neighborhood creation
   nbdtype = c("knn",numk)
   nbdsymmetric = "asymmetric"

@@ -12,8 +12,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param a tuning parameter for between-class weight in \eqn{[0,\infty)}.
 #' @param b tuning parameter for within-class weight in \eqn{[0,\infty)}.
 #' @param lambda balance parameter for between-class and within-class scatter matrices in \eqn{(0,\infty)}.
@@ -63,7 +62,7 @@
 #' @rdname linear_SAMMC
 #' @export
 do.sammc  <- function(X, label, ndim=2, type=c("proportion",0.1),
-                      preprocess=c("center","decorrelate","whiten"),
+                      preprocess=c("center","scale","cscale","decorrelate","whiten"),
                       a=1.0, b=1.0, lambda=1.0, beta=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -106,10 +105,9 @@ do.sammc  <- function(X, label, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. non-missing labels
   idxfilled   = which(!is.na(label))
   part_label  = label[idxfilled]

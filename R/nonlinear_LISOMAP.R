@@ -10,9 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param ltype on how to select landmark points, either \code{"random"} or \code{"MaxMin"}.
 #' @param npoints the number of landmark points to be drawn.
-#' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-#' for more details.
+#' @param preprocess an option for preprocessing the data. Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
@@ -26,27 +24,27 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'## generate data
-#'## in order to pass CRAN pretest, n is set to be small.
-#'X <- aux.gensamples(n=28)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' ## in order to pass CRAN pretest, n is set to be small.
+#' X <- aux.gensamples(n=123)
 #'
-#'## 1. use 10/28 data points with quarter-connected graph
-#'output1 <- do.lisomap(X,ndim=2,type=c("proportion",0.25),npoints=10)
+#' ## 1. use 10/28 data points with quarter-connected graph
+#' output1 <- do.lisomap(X,ndim=2,type=c("proportion",0.25),npoints=10)
 #'
-#'## 2. use 10/28 data points with half-connected graph
-#'output2 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=10)
+#' ## 2. use 10/28 data points with half-connected graph
+#' output2 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=10)
 #'
-#'## 3. use 14/28 data points with half-connected graph
-#'output3 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=14)
+#' ## 3. use 14/28 data points with half-connected graph
+#' output3 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=14)
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="5%")
-#'plot(output2$Y[,1],output2$Y[,2],main="10%")
-#'plot(output3$Y[,1],output3$Y[,2],main="50%")
-#'
-#'
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="5%")
+#' plot(output2$Y[,1],output2$Y[,2],main="10%")
+#' plot(output3$Y[,1],output3$Y[,2],main="50%")
+#' }
 #'
 #' @seealso \code{\link{do.isomap}}
 #' @references
@@ -55,8 +53,9 @@
 #' @author Kisung You
 #' @rdname nonlinear_LISOMAP
 #' @export
-do.lisomap <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),
-                       preprocess="center",type=c("proportion",0.1),symmetric="union",weight=TRUE){
+do.lisomap <- function(X,ndim=2,ltype=c("random","MaxMin"),npoints=max(nrow(X)/5,ndim+1),
+                       preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                       type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),weight=TRUE){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -74,34 +73,35 @@ do.lisomap <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),
   #   type       : vector of c("knn",k), c("enn",radius), or c("proportion",ratio)
   #   symmetric  : 'intersect','union', or 'asymmetric'
   #   weight     : TRUE
-  if (!is.element(ltype,c("random","MaxMin"))){
-    stop("* do.lisomap : 'ltype' is either 'random' or 'MaxMin'.")
+  if (missing(ltype)){
+    ltype = "random"
+  } else {
+    ltype = match.arg(ltype)
   }
   npoints = as.integer(round(npoints))
   if (!is.numeric(npoints)||(npoints<=ndim)||(npoints>(nrow(X)/2+1))||is.na(npoints)||is.infinite(npoints)){
     stop("* do.lisomap : the number of landmark points should be [ndim+1,#(total data points)/2].")
   }
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
-    stop("* do.lisomap : 'preprocess' should be one of three values.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   nbdtype = type
-  nbdsymmetric = symmetric
-  if (!is.element(nbdsymmetric,c("union","asymmetric","intersect"))){
-    stop("* do.lisomap : 'symmetric' param is invalid.")
+  if (missing(symmetric)){
+    nbdsymmetric = "union"
+  } else {
+    nbdsymmetric = match.arg(symmetric)
   }
   algweight = weight
   if (!is.logical(algweight)){
     stop("* do.lisomap : 'weight' param should be a logical value.")
   }
 
-
   # 3. Preprocess the data.
-  tmplist = aux.preprocess(X,type="whiten")
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "nonlinear"
   pX      = tmplist$pX
-
 
   # 4. process : neighborhood selection
   nbdstruct = aux.graphnbd(pX,method="euclidean",

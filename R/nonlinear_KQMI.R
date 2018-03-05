@@ -10,8 +10,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
@@ -49,7 +48,7 @@
 #' @author Kisung You
 #' @rdname nonlinear_KQMI
 #' @export
-do.kqmi <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelate"), t=10){
+do.kqmi <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"), t=10){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -89,10 +88,9 @@ do.kqmi <- function(X, label, ndim=2, preprocess=c("center","whiten","decorrelat
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "nonlinear"
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN STEPS FOR Kernel QMI

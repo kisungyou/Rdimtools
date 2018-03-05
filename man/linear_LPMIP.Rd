@@ -4,8 +4,8 @@
 \alias{do.lpmip}
 \title{Locality-Preserved Maximum Information Projection}
 \usage{
-do.lpmip(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("center", "whiten", "decorrelate"), sigma = 10,
+do.lpmip(X, ndim = 2, type = c("proportion", 0.1), preprocess = c("null",
+  "center", "scale", "cscale", "whiten", "decorrelate"), sigma = 10,
   alpha = 0.5)
 }
 \arguments{
@@ -20,8 +20,7 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{sigma}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
 

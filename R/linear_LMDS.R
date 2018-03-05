@@ -10,9 +10,8 @@
 #' @param ndim an integer-valued target dimension.
 #' @param ltype on how to select landmark points, either \code{"random"} or \code{"MaxMin"}.
 #' @param npoints the number of landmark points to be drawn.
-#' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-#' for more details.
+#' @param preprocess an option for preprocessing the data. Default is "center".
+#' See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -21,24 +20,26 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
-#'@examples
-#'# generate data
-#'X <- aux.gensamples(dname="crown")
+#' @examples
+#' \dontrun{
+#' # generate data
+#' X <- aux.gensamples(dname="crown")
 #'
-#'## 1. use 10% of random points
-#'output1 <- do.lmds(X,ndim=2,npoints=round(nrow(X)/10))
+#' ## 1. use 10% of random points
+#' output1 <- do.lmds(X,ndim=2,npoints=round(nrow(X)/10))
 #'
-#'## 2. using MaxMin scheme
-#'output2 <- do.lmds(X,ndim=2,npoints=round(nrow(X)/10),ltype="MaxMin")
+#' ## 2. using MaxMin scheme
+#' output2 <- do.lmds(X,ndim=2,npoints=round(nrow(X)/10),ltype="MaxMin")
 #'
-#'## 3. original mds case
-#'output3 <- do.mds(X,ndim=2)
+#' ## 3. original mds case
+#' output3 <- do.mds(X,ndim=2)
 #'
-#'## Visualization
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output2$Y[,2],main="10% random points")
-#'plot(output2$Y[,1],output2$Y[,2],main="10% MaxMin points")
-#'plot(output3$Y[,1],output3$Y[,2],main="original MDS")
+#' ## Visualization
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output2$Y[,2],main="10% random points")
+#' plot(output2$Y[,1],output2$Y[,2],main="10% MaxMin points")
+#' plot(output3$Y[,1],output3$Y[,2],main="original MDS")
+#' }
 #'
 #' @seealso \code{\link{do.mds}}
 #' @references
@@ -49,7 +50,8 @@
 #' @author Kisung You
 #' @rdname linear_LMDS
 #' @export
-do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),preprocess="center"){
+do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),
+                    preprocess=c("center","cscale","decorrelate","whiten")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -70,14 +72,14 @@ do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),prepro
   if (!is.numeric(npoints)||(npoints<=ndim)||(npoints>nrow(X)/2)||is.na(npoints)||is.infinite(npoints)){
     stop("* do.lmds : the number of landmark points should be [ndim+1,#(total data points)/2].")
   }
-  algpreprocess= preprocess
-  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
-    stop("* do.lmds : 'preprocess' should be one of three values.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   # 3. Preprocess the data.
-  tmplist = aux.preprocess(X,type="whiten")
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "linear"
   pX      = tmplist$pX
 
 

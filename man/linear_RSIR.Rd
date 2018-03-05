@@ -5,8 +5,9 @@
 \title{Regularized Sliced Inverse Regression}
 \usage{
 do.rsir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
-  preprocess = c("center", "decorrelate", "whiten"), regmethod = c("Ridge",
-  "Tikhonov", "PCA", "PCARidge", "PCATikhonov"), tau = 1, numpc = ndim)
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  regmethod = c("Ridge", "Tikhonov", "PCA", "PCARidge", "PCATikhonov"),
+  tau = 1, numpc = ndim)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -19,8 +20,7 @@ and columns represent independent variables.}
 \item{h}{the number of slices to divide the range of response vector.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{regmethod}{type of regularization scheme to be used.}
 

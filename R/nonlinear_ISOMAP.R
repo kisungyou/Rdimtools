@@ -14,8 +14,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform Isomap on weighted graph, or \code{FALSE} otherwise.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -23,26 +22,26 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'## generate data
-#'## in order to pass CRAN pretest, n is set to be small.
-#'X <- aux.gensamples(n=28)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' X <- aux.gensamples(n=123)
 #'
-#'## 1. connecting 10% of data for graph construction.
-#'output1 <- do.isomap(X,ndim=2,type=c("proportion",0.10))
+#' ## 1. connecting 10% of data for graph construction.
+#' output1 <- do.isomap(X,ndim=2,type=c("proportion",0.10))
 #'
-#'## 2. constructing 25%-connected graph
-#'output2 <- do.isomap(X,ndim=2,type=c("proportion",0.25))
+#' ## 2. constructing 25%-connected graph
+#' output2 <- do.isomap(X,ndim=2,type=c("proportion",0.25))
 #'
-#'## 3. constructing 25%-connected with binarization
-#'output3 <- do.isomap(X,ndim=2,type=c("proportion",0.25),weight=FALSE)
+#' ## 3. constructing 25%-connected with binarization
+#' output3 <- do.isomap(X,ndim=2,type=c("proportion",0.25),weight=FALSE)
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="5%")
-#'plot(output2$Y[,1],output2$Y[,2],main="10%")
-#'plot(output3$Y[,1],output3$Y[,2],main="10%+Binary")
-#'
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="10%")
+#' plot(output2$Y[,1],output2$Y[,2],main="25%")
+#' plot(output3$Y[,1],output3$Y[,2],main="25%+Binary")
+#'}
 #'
 #'
 #' @references
@@ -51,7 +50,8 @@
 #' @rdname nonlinear_ISOMAP
 #' @author Kisung You
 #' @export
-do.isomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,preprocess="center"){
+do.isomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
+                      weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -67,23 +67,24 @@ do.isomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight
   #   weight     : TRUE
   #   preprocess : 'center','decorrelate', or 'whiten'
   nbdtype = type
-  nbdsymmetric = symmetric
-  if (!is.element(nbdsymmetric,c("union","intersect","asymmetric"))){
-    stop("* do.isomap : 'symmetric' should have one of three values.")
+  if (missing(symmetric)){
+    nbdsymmetric = "union"
+  } else {
+    nbdsymmetric = match.arg(symmetric)
   }
   algweight = weight
   if (!is.logical(algweight)){
     stop("* do.isomap : 'weight' should be a logical value.")
   }
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
-    stop("* do.isomap : 'preprocess' should be one of three values.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
 
   # 3. process : data preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "nonlinear"
   pX      = tmplist$pX
 
   # 4. process : neighborhood selection

@@ -5,8 +5,8 @@
 \title{Locally Linear Embedding}
 \usage{
 do.lle(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = c("null", "center", "decorrelate", "whiten"),
-  regtype = FALSE, regparam = 1)
+  weight = TRUE, preprocess = c("null", "center", "scale", "cscale",
+  "decorrelate", "whiten"), regtype = FALSE, regparam = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -25,8 +25,7 @@ See also \code{\link{aux.graphnbd}} for more details.}
 \item{weight}{\code{TRUE} to perform LLE on weighted graph, or \code{FALSE} otherwise.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{regtype}{\code{TRUE} for automatic regularization parameter selection, \code{FALSE} otherwise as default.}
 
@@ -58,14 +57,14 @@ output1 <- do.lle(X,ndim=2,type=c("proportion",0.10))
 ## 2. constructing 20\%-connected graph
 output2 <- do.lle(X,ndim=2,type=c("proportion",0.20))
 
-## 3. constructing 10\%-connected with bigger regularization parameter
+## 3. constructing 50\%-connected with bigger regularization parameter
 output3 <- do.lle(X,ndim=2,type=c("proportion",0.5),regparam=10)
 
 ## Visualize three different projections
 par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="5\%")
 plot(output2$Y[,1],output2$Y[,2],main="10\%")
-plot(output3$Y[,1],output3$Y[,2],main="10\%+Binary")
+plot(output3$Y[,1],output3$Y[,2],main="50\%+Binary")
 }
 
 }

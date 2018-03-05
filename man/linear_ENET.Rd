@@ -5,7 +5,8 @@
 \title{Elastic Net Regularization}
 \usage{
 do.enet(X, response, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "decorrelate", "whiten"), lambda1 = 1, lambda2 = 1)
+  "cscale", "decorrelate", "whiten"), ycenter = FALSE, lambda1 = 1,
+  lambda2 = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,6 +18,8 @@ and columns represent independent variables.}
 
 \item{preprocess}{an additional option for preprocessing the data.
 Default is "null". See also \code{\link{aux.preprocess}} for more details.}
+
+\item{ycenter}{a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.}
 
 \item{lambda1}{\eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.}
 

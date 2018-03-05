@@ -4,9 +4,10 @@
 \alias{do.klfda}
 \title{Kernel Local Fisher Discriminant Analysis}
 \usage{
-do.klfda(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), localscaling = TRUE, t = 1)
+do.klfda(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"), localscaling = TRUE,
+  t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,8 +18,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and two other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a vector of neighborhood graph construction. Following types are supported;
 \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.

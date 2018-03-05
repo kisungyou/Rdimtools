@@ -4,9 +4,10 @@
 \alias{do.ree}
 \title{Robust Euclidean Embedding}
 \usage{
-do.ree(X, ndim = 2, W = NA, preprocess = "null", initc = 1,
-  dmethod = c("euclidean", "maximum", "manhattan", "canberra", "binary",
-  "minkowski"), maxiter = 100, abstol = 0.001)
+do.ree(X, ndim = 2, W = NA, preprocess = c("null", "center", "scale",
+  "cscale", "whiten", "decorrelate"), initc = 1, dmethod = c("euclidean",
+  "maximum", "manhattan", "canberra", "binary", "minkowski"), maxiter = 100,
+  abstol = 0.001)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,8 +18,7 @@ and columns represent independent variables.}
 \item{W}{an \eqn{(n\times n)} weight matrix. Default is uniform weight of 1s.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'' and  other methods of ``center'',``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{initc}{initial \code{c} value for subgradient iterating stepsize, \eqn{c/\sqrt{i}}.}
 

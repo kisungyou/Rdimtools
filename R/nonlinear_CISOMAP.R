@@ -14,8 +14,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform Isomap on weighted graph, or \code{FALSE} otherwise.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -51,7 +50,8 @@
 #' @author Kisung You
 #' @rdname nonlinear_CISOMAP
 #' @export
-do.cisomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,preprocess="center"){
+do.cisomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),weight=TRUE,
+                       preprocess=c("center","scale","cscale","whiten","decorrelate")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -67,23 +67,26 @@ do.cisomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weigh
   #   weight     : TRUE
   #   preprocess : 'center','decorrelate', or 'whiten'
   nbdtype = type
-  nbdsymmetric = symmetric
-  if (!is.element(nbdsymmetric,c("union","intersect","asymmetric"))){
-    stop("* do.cisomap : 'symmetric' should have one of three types.")
+  if (missing(symmetric)){
+    nbdsymmetric = "union"
+  } else {
+    nbdsymmetric = match.arg(symmetric)
   }
+
+
   algweight = weight
   if (!is.logical(algweight)){
     stop("* do.cisomap : 'weight' should be a logical variable.")
   }
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("center","decorrelate","whiten"))){
-    stop("* do.cisomap : 'preprocess' should have one of three types.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
 
   # 3. process : data preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "nonlinear"
   pX      = tmplist$pX
 
   # 4. process : neighborhood selection

@@ -4,7 +4,8 @@
 \alias{do.ppca}
 \title{Probabilistic Principal Component Analysis}
 \usage{
-do.ppca(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"))
+do.ppca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -12,9 +13,8 @@ and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'' (default),``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-for more details.}
+\item{preprocess}{an option for preprocessing the data. This supports three methods.
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

@@ -4,8 +4,8 @@
 \alias{do.rndproj}
 \title{Random Projection}
 \usage{
-do.rndproj(X, ndim = 2, preprocess = c("null", "center", "whiten",
-  "decorrelate"), type = c("gaussian", "achlioptas", "sparse"),
+do.rndproj(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
+  "whiten", "decorrelate"), type = c("gaussian", "achlioptas", "sparse"),
   s = max(sqrt(ncol(X)), 3))
 }
 \arguments{
@@ -15,8 +15,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'' and options of  ``center'' , ``decorrelate'' and ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a type of random projection, one of "gaussian","achlioptas" or "sparse".}
 
@@ -56,7 +55,7 @@ for \eqn{s}, any user-supported \eqn{s \ge 3} is allowed.
 }
 \examples{
 \dontrun{
-# generate Swiss Roll data of 2,000 data points.
+## generate Swiss Roll data of 2,000 data points.
 X <- aux.gensamples(n=2000)
 
 ## 1. Gaussian projection

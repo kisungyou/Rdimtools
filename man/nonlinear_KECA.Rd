@@ -4,17 +4,18 @@
 \alias{do.keca}
 \title{Kernel Entropy Component Analysis}
 \usage{
-do.keca(X, ndim = 2, preprocess = "null", kernel = c("gaussian", 1))
+do.keca(X, ndim = 2, kernel = c("gaussian", 1), preprocess = c("null",
+  "center", "scale", "cscale", "whiten", "decorrelate"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
-
 \item{kernel}{a vector containing name of a kernel and corresponding parameters. See also \code{\link{aux.kernelcov}} for complete description of Kernel Trick.}
+
+\item{preprocess}{an additional option for preprocessing the data.
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing
@@ -32,6 +33,7 @@ in accordance with indices of largest Renyi quadratic entropy in which entropy f
 \eqn{j}-th eigenvector of an uncentered kernel matrix \eqn{K}.
 }
 \examples{
+\dontrun{
 ## generate ribbon-shaped data
 ## in order to pass CRAN pretest, n is set to be small.
 X = aux.gensamples(dname="ribbon",n=100)
@@ -50,6 +52,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="Gaussian kernel")
 plot(output2$Y[,1],output2$Y[,2],main="Gaussian, sigma=5")
 plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
+}
 
 }
 \references{

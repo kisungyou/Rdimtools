@@ -8,8 +8,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param initialize \code{"random"} or \code{"pca"}; the former performs
 #' fast random projection (see also \code{\link{do.rndproj}}) and the latter
 #' performs standard PCA (see also \code{\link{do.pca}}).
@@ -45,7 +44,8 @@
 #' @rdname nonlinear_SAMMON
 #' @author Kisung You
 #' @export
-do.sammon <- function(X,ndim=2,preprocess="null",initialize="random"){
+do.sammon <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
+                      initialize=c("random","pca")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -58,26 +58,14 @@ do.sammon <- function(X,ndim=2,preprocess="null",initialize="random"){
   #   preprocess : 'null', 'center','decorrelate', or 'whiten'
   #   initialize : 'random' (default as fast random projection) or 'pca'
 
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.sammon : 'preprocess' argument is invalid.")
-  }
-  initsammon = initialize
-  if (!is.element(initsammon,c("pca","random"))){
-    stop("* do.sammon : 'initialize' supported by either 'pca' or 'random'.")
-  }
+  algpreprocess = match.arg(preprocess)
+  initsammon = match.arg(initialize)
 
   # 3. preprocess
   #   3-1. centering or so
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #   3-2. data reduction
   if (initsammon=="random"){
@@ -92,7 +80,6 @@ do.sammon <- function(X,ndim=2,preprocess="null",initialize="random"){
   tpX = t(pX)
   result = list()
   result$Y = method_sammon(tpX,initY)
-  trfinfo$algtype = "nonlinear"
   result$trfinfo  = trfinfo
   return(result)
 }

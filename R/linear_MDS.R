@@ -7,9 +7,8 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-#' for more details.
+#' @param preprocess an option for preprocessing the data. Default is "center".
+#' See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -19,52 +18,47 @@
 #' }
 #'
 #'
-#'@examples
-#'# generate data
-#'X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
 #'
-#'## 1. projection onto 2 dimension.
-#'output <- do.mds(X,ndim=2)
-#'plot(output$Y[,1],output$Y[,2])
+#' ## 1. projection onto 2 dimension.
+#' output1 <- do.mds(X,ndim=2)
 #'
-#'## 2. different preprocessing leads to different results
-#'output2 <- do.mds(X,ndim=2,preprocess="decorrelate")
-#'output3 <- do.mds(X,ndim=2,preprocess="whiten")
-#'par(mfrow=c(1,3))
-#'plot(output$Y[,1],output$Y[,2],main="center")
-#'plot(output2$Y[,1],output2$Y[,2],main="decorrelate")
-#'plot(output3$Y[,1],output3$Y[,2],main="whiten")
+#' ## 2. different preprocessing leads to different results
+#' output2 <- do.mds(X,ndim=2,preprocess="decorrelate")
+#' output3 <- do.mds(X,ndim=2,preprocess="whiten")
 #'
-#'@references
-#'\insertRef{kruskal_multidimensional_1964}{Rdimtools}
+#' ## 3. visualize
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="center")
+#' plot(output2$Y[,1],output2$Y[,2],main="decorrelate")
+#' plot(output3$Y[,1],output3$Y[,2],main="whiten")
+#' }
+#'
+#' @references
+#' \insertRef{kruskal_multidimensional_1964}{Rdimtools}
 #'
 #' @export
 #' @rdname linear_MDS
 #' @author Kisung You
-do.mds <- function(X,ndim=2,preprocess="center"){
+do.mds <- function(X,ndim=2,preprocess=c("center","scale","cscale","decorrelate","whiten")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
 
   # 2. Setting
   #   2-1. preprocessing : center, decorrelate, or whiten
-  switch(preprocess,
-         center={
-           tmplist = aux.preprocess(X,type="center")
-           tpX     = t(tmplist$pX)
-           trfinfo = tmplist$trfinfo
-         },
-         decorrelate={
-           tmplist = aux.preprocess(X,type="decorrelate")
-           tpX     = t(tmplist$pX)
-           trfinfo = tmplist$trfinfo
-         },
-         whiten={
-           tmplist = aux.preprocess(X,type="whiten")
-           tpX     = t(tmplist$pX)
-           trfinfo = tmplist$trfinfo
-         },
-         stop("* do.mds : invalid preprocessing type. choose one of three or leave it blank.")
-  )
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
+  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  tpX     = t(tmplist$pX)
+
+
   #   2-2. ndim case
   if (!is.numeric(ndim)||(floor(ndim)>nrow(tpX))||(ceiling(ndim)<1)){
     stop("* do.mds : 'ndim' should have an integer value between [1,#(covariates)]")
@@ -72,7 +66,7 @@ do.mds <- function(X,ndim=2,preprocess="center"){
   tgtdim = as.integer(ndim)
 
   # 3. run
-  output = method_mds(tpX);
+  output  = method_mds(tpX);
   eigvals = as.vector(output$eigval)
   eigvecs = as.matrix(output$eigvec)
 

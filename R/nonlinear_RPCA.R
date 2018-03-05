@@ -13,8 +13,7 @@
 #' @param mu an augmented Lagrangian parameter
 #' @param lambda parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other methods of "center","decorrelate" and "whiten" are supported. See also \code{\link{aux.preprocess}} for more details.
-#'
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -55,7 +54,8 @@
 #' @author Kisung You
 #' @rdname nonlinear_RPCA
 #' @export
-do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))), preprocess=c("null","center","decorrelate","whiten")){
+do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))),
+                    preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -74,20 +74,13 @@ do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))), preprocess=c("null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION USING ADMM PACKAGE
-  admmrun = admm.rpca(pX,lambda=lbdval,mu=muval)
+  admmrun = ADMM::admm.rpca(pX,lambda=lbdval,mu=muval)
 
   #------------------------------------------------------------------------
   ## REPORT RESULTS

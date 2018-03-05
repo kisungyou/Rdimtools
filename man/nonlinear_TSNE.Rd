@@ -5,9 +5,10 @@
 \title{t-distributed Stochastic Neighbor Embedding}
 \usage{
 do.tsne(X, ndim = 2, perplexity = 30, eta = 0.05, maxiter = 2000,
-  jitter = 0.3, jitterdecay = 0.99, momentum = 0.5, preprocess = "null",
-  pca = TRUE, pcaratio = 0.9, pcascale = FALSE, symmetric = FALSE,
-  BarnesHut = FALSE, BHtheta = 0.5)
+  jitter = 0.3, jitterdecay = 0.99, momentum = 0.5,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate",
+  "whiten"), pca = TRUE, pcaratio = 0.9, pcascale = FALSE,
+  symmetric = FALSE, BarnesHut = FALSE, BHtheta = 0.5)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
@@ -27,7 +28,7 @@ do.tsne(X, ndim = 2, perplexity = 30, eta = 0.05, maxiter = 2000,
 \item{momentum}{level of acceleration in learning.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{pca}{whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.}
 

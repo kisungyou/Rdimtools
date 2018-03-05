@@ -9,8 +9,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param mu an augmented Lagrangian parameter.
 #' @param rho a regularization parameter for sparsity.
 #' @param abstol absolute tolerance stopping criterion.
@@ -55,7 +54,7 @@
 #' @author Kisung You
 #' @rdname linear_SPCA
 #' @export
-do.spca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.spca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     mu=1.0, rho=1.0, abstol=1e-4, reltol=1e-2, maxiter=1000){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -84,10 +83,9 @@ do.spca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN ITERATIVE STEP

@@ -42,8 +42,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param beta balancing parameter for intra- and inter-class information in \eqn{[0,1]}.
 #'
 #' @return a named list containing
@@ -60,7 +59,7 @@
 #' @rdname linear_SSLDP
 #' @export
 do.ssldp <- function(X, label, ndim=2, type=c("proportion",0.1),
-                     preprocess=c("center","whiten","decorrelate"), beta=0.5){
+                     preprocess=c("center","scale","cscale","whiten","decorrelate"), beta=0.5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -96,10 +95,9 @@ do.ssldp <- function(X, label, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

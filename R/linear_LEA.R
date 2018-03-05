@@ -15,8 +15,7 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -50,7 +49,7 @@
 #' @rdname linear_LEA
 #' @export
 do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
-                   preprocess = c("center","decorrelate","whiten")){
+                   preprocess = c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -73,16 +72,10 @@ do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","int
   #------------------------------------------------------------------------
   ## COMPUTATION Part 1. Preliminary Computations
   #   1. data preprecessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
   #   2. neighborhood type
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

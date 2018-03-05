@@ -8,8 +8,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param numk the number of neighboring points.
 #' @param alpha balancing parameter in \eqn{[0,1]}.
 #' @param gamma weight for same-label data points with large magnitude.
@@ -53,7 +52,7 @@
 #' @author Kisung You
 #' @rdname linear_MMP
 #' @export
-do.mmp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.mmp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    numk=max(ceiling(nrow(X)/10),2), alpha=0.5, gamma=50){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -87,10 +86,10 @@ do.mmp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. perform PCA
   eigtest = eigen(cov(pX), only.values=TRUE)
   pcadim  = sum(eigtest$values > 0)

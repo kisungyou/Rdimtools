@@ -10,8 +10,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param maxiter number of maximum iteraions allowed.
 #' @param reltol stopping criterion for incremental relative error.
@@ -31,7 +30,7 @@
 #' @author Kisung You
 #' @export
 do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
-                     preprocess=c("center","decorrelate","whiten"),
+                     preprocess=c("center","scale","cscale","decorrelate","whiten"),
                      t=1.0, maxiter=1000, reltol=1e-5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -65,14 +64,15 @@ do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
   nbdmask   = nbdstruct$mask
+
   #   3. Dsqmat with kernelization
   Dsqmat = exp(-(as.matrix(dist(pX))^2)/t)
 

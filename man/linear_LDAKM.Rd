@@ -4,8 +4,8 @@
 \alias{do.ldakm}
 \title{Combination of LDA and K-means}
 \usage{
-do.ldakm(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  maxiter = 10, abstol = 0.001)
+do.ldakm(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), maxiter = 10, abstol = 0.001)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -13,8 +13,7 @@ do.ldakm(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{maxiter}{maximum number of iterations allowed.}
 

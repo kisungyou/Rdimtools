@@ -19,8 +19,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform NPE on weighted graph, or \code{FALSE} otherwise.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param regtype \code{FALSE} for not applying automatic Tikhonov Regularization,
 #' or \code{TRUE} otherwise.
 #' @param regparam a positive real number for Regularization. Default value is 1.
@@ -33,25 +32,25 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'\dontrun{
-#'# generate data
-#'X <- aux.gensamples(n=333)
+#' @examples
+#' \dontrun{
+#' ## generate data
+#' X <- aux.gensamples(n=333)
 #'
-#'## 1. connecting 5% of data for graph construction.
-#'output1 <- do.npe(X,ndim=2,type=c("proportion",0.05))
+#' ## 1. connecting 5% of data for graph construction.
+#' output1 <- do.npe(X,ndim=2,type=c("proportion",0.05))
 #'
-#'## 2. constructing 25%-connected graph with regularization parameter
-#'output2 <- do.npe(X,ndim=2,type=c("proportion",0.2),symmetric='intersect',regparam=1.0)
+#' ## 2. constructing 25%-connected graph with regularization parameter
+#' output2 <- do.npe(X,ndim=2,type=c("proportion",0.2),symmetric='intersect',regparam=1.0)
 #'
-#'## 3. constructing half-connected graph with reg parameter = 10.0.
-#'output3 <- do.npe(X,ndim=2,type=c("proportion",0.5),regparam=10.0)
+#' ## 3. constructing half-connected graph with reg parameter = 10.0.
+#' output3 <- do.npe(X,ndim=2,type=c("proportion",0.5),regparam=10.0)
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="5%")
-#'plot(output2$Y[,1],output2$Y[,2],main="25%")
-#'plot(output3$Y[,1],output3$Y[,2],main="50%")
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="5%")
+#' plot(output2$Y[,1],output2$Y[,2],main="25%")
+#' plot(output3$Y[,1],output3$Y[,2],main="50%")
 #'}
 #'
 #' @references
@@ -61,7 +60,8 @@
 #' @rdname linear_NPE
 #' @export
 do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weight=TRUE,
-                   preprocess=c("null","center","whiten","decorrelate"), regtype=FALSE, regparam=1){
+                   preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
+                   regtype=FALSE, regparam=1){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -83,7 +83,7 @@ do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weigh
   nbdsymmetric = symmetric
   algweight = weight
   if (missing(preprocess)){
-    algpreprocess = "center"
+    algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
@@ -97,15 +97,9 @@ do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weigh
   #   regparam   : 1 (default)
 
   # 3. process : data preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   n = nrow(pX)
   p = ncol(pX)

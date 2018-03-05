@@ -4,8 +4,8 @@
 \alias{do.splapeig}
 \title{Supervised Laplacian Eigenmaps}
 \usage{
-do.splapeig(X, label, ndim = 2, preprocess = c("null", "center", "whiten",
-  "decorrelate"), beta = 1, gamma = 0.5)
+do.splapeig(X, label, ndim = 2, preprocess = c("null", "center", "scale",
+  "cscale", "whiten", "decorrelate"), beta = 1, gamma = 0.5)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +16,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{beta}{bandwidth parameter for heat kernel in \eqn{[0,\infty)}.}
 

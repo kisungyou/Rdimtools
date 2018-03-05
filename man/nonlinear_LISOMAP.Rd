@@ -4,9 +4,10 @@
 \alias{do.lisomap}
 \title{Landmark Isometric Feature Mapping}
 \usage{
-do.lisomap(X, ndim = 2, ltype = "random", npoints = max(nrow(X)/5, ndim +
-  1), preprocess = "center", type = c("proportion", 0.1),
-  symmetric = "union", weight = TRUE)
+do.lisomap(X, ndim = 2, ltype = c("random", "MaxMin"),
+  npoints = max(nrow(X)/5, ndim + 1), preprocess = c("center", "scale",
+  "cscale", "decorrelate", "whiten"), type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"), weight = TRUE)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -18,9 +19,7 @@ and columns represent independent variables.}
 
 \item{npoints}{the number of landmark points to be drawn.}
 
-\item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-for more details.}
+\item{preprocess}{an option for preprocessing the data. Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{type}{a vector of neighborhood graph construction. Following types are supported;
 \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
@@ -45,9 +44,10 @@ and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible.
 }
 \examples{
+\dontrun{
 ## generate data
 ## in order to pass CRAN pretest, n is set to be small.
-X <- aux.gensamples(n=28)
+X <- aux.gensamples(n=123)
 
 ## 1. use 10/28 data points with quarter-connected graph
 output1 <- do.lisomap(X,ndim=2,type=c("proportion",0.25),npoints=10)
@@ -63,8 +63,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="5\%")
 plot(output2$Y[,1],output2$Y[,2],main="10\%")
 plot(output3$Y[,1],output3$Y[,2],main="50\%")
-
-
+}
 
 }
 \references{

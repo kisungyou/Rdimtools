@@ -5,7 +5,7 @@
 \title{Robust Principal Component Analysis}
 \usage{
 do.rpca(X, mu = 1, lambda = sqrt(1/(max(dim(X)))), preprocess = c("null",
-  "center", "decorrelate", "whiten"))
+  "center", "scale", "cscale", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}
@@ -15,7 +15,7 @@ do.rpca(X, mu = 1, lambda = sqrt(1/(max(dim(X)))), preprocess = c("null",
 \item{lambda}{parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and other methods of "center","decorrelate" and "whiten" are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

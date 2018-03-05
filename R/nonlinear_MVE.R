@@ -14,8 +14,7 @@
 #' @param knn size of \eqn{k}-nn neighborhood.
 #' @param kwidth bandwidth for Gaussian kernel.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center","decorrelate", and "whiten" are supported.
-#' See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param tol stopping criterion for incremental change.
 #' @param maxiter maximum number of iterations allowed.
 #'
@@ -51,7 +50,7 @@
 #' @rdname nonlinear_MVE
 #' @export
 do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
-                   preprocess=c("null","center","whiten","decorrelate"),
+                   preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                    tol=1e-4, maxiter=1000){
   #------------------------------------------------------------------------
   ## PARAMETER CHECK
@@ -99,16 +98,9 @@ do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. datapreprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
   #   2. form affinity matrix A
   KernelMap = aux.kernelcov(pX,ktype)
   A         = KernelMap$K

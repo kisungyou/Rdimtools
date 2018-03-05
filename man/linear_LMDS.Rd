@@ -5,7 +5,7 @@
 \title{Landmark Multidimensional Scaling}
 \usage{
 do.lmds(X, ndim = 2, ltype = "random", npoints = max(nrow(X)/5, ndim + 1),
-  preprocess = "center")
+  preprocess = c("center", "cscale", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,9 +17,8 @@ and columns represent independent variables.}
 
 \item{npoints}{the number of landmark points to be drawn.}
 
-\item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'',``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
-for more details.}
+\item{preprocess}{an option for preprocessing the data. Default is "center".
+See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing
@@ -36,6 +35,7 @@ and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible.
 }
 \examples{
+\dontrun{
 # generate data
 X <- aux.gensamples(dname="crown")
 
@@ -53,6 +53,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output2$Y[,2],main="10\% random points")
 plot(output2$Y[,1],output2$Y[,2],main="10\% MaxMin points")
 plot(output3$Y[,1],output3$Y[,2],main="original MDS")
+}
 
 }
 \references{

@@ -5,8 +5,8 @@
 \title{Multi-Cluster Feature Selection}
 \usage{
 do.mcfs(X, ndim = 2, type = c("proportion", 0.1), preprocess = c("null",
-  "center", "whiten", "decorrelate"), K = max(round(nrow(X)/5), 2),
-  lambda = 1, t = 10)
+  "center", "scale", "cscale", "whiten", "decorrelate"),
+  K = max(round(nrow(X)/5), 2), lambda = 1, t = 10)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -20,8 +20,7 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and other options of "center", "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{K}{assumed number of clusters in the original dataset.}
 

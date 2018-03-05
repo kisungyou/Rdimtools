@@ -8,8 +8,7 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -37,7 +36,7 @@
 #' @author Kisung You
 #' @rdname linear_PFLPP
 #' @export
-do.pflpp <- function(X, ndim=2, preprocess=c("center","whiten","decorrelate")){
+do.pflpp <- function(X, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -57,14 +56,16 @@ do.pflpp <- function(X, ndim=2, preprocess=c("center","whiten","decorrelate")){
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. pearson correlation among samples
   tmpP = stats::cor(t(pX)); mintmpP = as.double(min(tmpP))
+
   #   3. normalized correlation
   P = (tmpP-mintmpP)/(1-mintmpP)
+
   #   4. mean for each datum
   vecm = rowMeans(P)
 

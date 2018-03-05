@@ -4,7 +4,8 @@
 \alias{do.sammon}
 \title{Sammon Mapping}
 \usage{
-do.sammon(X, ndim = 2, preprocess = "null", initialize = "random")
+do.sammon(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
+  "decorrelate", "whiten"), initialize = c("random", "pca"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -13,8 +14,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{initialize}{\code{"random"} or \code{"pca"}; the former performs
 fast random projection (see also \code{\link{do.rndproj}}) and the latter

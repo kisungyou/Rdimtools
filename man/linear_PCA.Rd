@@ -4,8 +4,8 @@
 \alias{do.pca}
 \title{Principal Component Analysis}
 \usage{
-do.pca(X, ndim = "auto", cor = FALSE, preprocess = c("center",
-  "decorrelate", "whiten"), varratio = 0.9)
+do.pca(X, ndim = "auto", cor = FALSE, preprocess = c("center", "scale",
+  "cscale", "decorrelate", "whiten"), varratio = 0.9)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -17,8 +17,7 @@ and columns represent independent variables.}
 and \code{TRUE} for correlation matrix.}
 
 \item{preprocess}{an option for preprocessing the data. This supports three methods,
-where default is "default" and other methods of "decorrelate" and "whiten" are supported.
-See also \code{\link{aux.preprocess}} for more details.}
+where default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{varratio}{a value in (0,1]. This value is only used when \code{ndim} is
 chosen as "auto".}

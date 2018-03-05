@@ -13,8 +13,7 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param weighted \code{TRUE} for weighted graph laplacian and \code{FALSE} for
 #' combinatorial laplacian where connectivity is represented as 1 or 0 only.
 #' @param kernelscale kernel scale parameter. Default value is 1.0.
@@ -47,7 +46,7 @@
 #' @export
 do.lapeig <- function(X, ndim=2, type=c("proportion",0.1),
                       symmetric=c("union","intersect","asymmetric"),
-                      preprocess=c("null","center","whiten","decorrelate"),
+                      preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                       weighted=TRUE, kernelscale=1.0){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
@@ -89,15 +88,9 @@ do.lapeig <- function(X, ndim=2, type=c("proportion",0.1),
   }
 
   # 3. process : data preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   n = nrow(pX)
   p = ncol(pX)

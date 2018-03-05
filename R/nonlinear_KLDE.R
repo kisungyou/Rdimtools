@@ -12,8 +12,7 @@
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param numk the number of neighboring points for k-nn graph construction.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param ktype a vector containing name of a kernel and corresponding parameters. See also \code{\link{aux.kernelcov}} for complete description of Kernel Trick.
 #' @param kcentering a logical; \code{TRUE} to use centered Kernel matrix, \code{FALSE} otherwise.
 #'
@@ -54,7 +53,7 @@
 #' @rdname nonlinear_KLDE
 #' @export
 do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
-                   preprocess=c("center","decorrelate","whiten"),
+                   preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    ktype=c("gaussian",1.0), kcentering=TRUE){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -88,10 +87,9 @@ do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   Pre. preprocessing of data matrix
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "nonlinear"
 
   #   1. construct G1 (original G) and G2 (G') for same-class and different-class connectivty
   #   1-1. find k-neighborhood graph

@@ -5,8 +5,8 @@
 \title{Kernel Local Discriminant Embedding}
 \usage{
 do.klde(X, label, ndim = 2, t = 1, numk = max(ceiling(nrow(X)/10), 2),
-  preprocess = c("center", "decorrelate", "whiten"), ktype = c("gaussian",
-  1), kcentering = TRUE)
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  ktype = c("gaussian", 1), kcentering = TRUE)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -20,8 +20,7 @@ do.klde(X, label, ndim = 2, t = 1, numk = max(ceiling(nrow(X)/10), 2),
 \item{numk}{the number of neighboring points for k-nn graph construction.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{ktype}{a vector containing name of a kernel and corresponding parameters. See also \code{\link{aux.kernelcov}} for complete description of Kernel Trick.}
 

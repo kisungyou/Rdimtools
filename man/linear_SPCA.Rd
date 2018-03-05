@@ -4,8 +4,9 @@
 \alias{do.spca}
 \title{Sparse Principal Component Analysis}
 \usage{
-do.spca(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  mu = 1, rho = 1, abstol = 1e-04, reltol = 0.01, maxiter = 1000)
+do.spca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), mu = 1, rho = 1, abstol = 1e-04,
+  reltol = 0.01, maxiter = 1000)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -14,8 +15,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{mu}{an augmented Lagrangian parameter.}
 

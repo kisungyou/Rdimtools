@@ -48,7 +48,7 @@
 #' @rdname linear_OLPP
 #' @export
 do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
-                    weight=TRUE,preprocess=c("center","decorrelate","whiten"),t=1.0){
+                    weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten"),t=1.0){
   # Preprocessing : typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -71,16 +71,17 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   if (!is.logical(algweight)){
     stop("* do.olpp : 'weight' should be a logical variable.")
   }
-  algpreprocess = match.arg(preprocess)
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.olpp : 'preprocess' should be one of 4 values.")
+  if (missing(preprocess)){
+    algpreprocess = "center"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   if (!is.numeric(t)||(t<=0)||is.na(t)||is.infinite(t)){
     stop("* do.olpp : 't' is a bandwidth parameter in (0,infinity).")
   }
 
   # Preprocessing 3 : data preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
 

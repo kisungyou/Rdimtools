@@ -9,8 +9,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and two other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
@@ -55,7 +54,7 @@
 #' @author Kisung You
 #' @rdname nonlinear_KLFDA
 #' @export
-do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.klfda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                      type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
                      localscaling=TRUE, t=1.0){
   #------------------------------------------------------------------------
@@ -104,10 +103,9 @@ do.klfda <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whit
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. Preprocessing the data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "nonlinear"
   #   2. neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

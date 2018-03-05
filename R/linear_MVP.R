@@ -11,8 +11,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and two other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -46,7 +45,7 @@
 #' @author Kisung You
 #' @rdname linear_MVP
 #' @export
-do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten")){
+do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -82,14 +81,15 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. perform PCA onto (N-1) dimensional space
   outPCA = do.pca(pX,ndim=(N-1))
   projection_first = outPCA$projection
   ppX = outPCA$Y
+
   #   3. Start of MVP algorithm here.
   #   3-1. Laplacian Part
   S = mvp_S(ppX, label) # S_ij = 1 if Ci != Cj
@@ -110,6 +110,7 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #   3-3. compute M
   Mhalf = diag(n)-W
   M     = (t(Mhalf)%*%Mhalf)
+
   #   4. solve geigen with lowest
   LHS = t(ppX)%*%M%*%ppX
   RHS = t(ppX)%*%L%*%ppX

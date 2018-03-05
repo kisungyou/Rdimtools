@@ -13,8 +13,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and two other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -46,7 +45,7 @@
 #' @author Kisung You
 #' @rdname linear_MMC
 #' @export
-do.mmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten")){
+do.mmc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -78,10 +77,10 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. vector of proportion : pi
   nlabel = length(ulabel) # number of classes
   proportion = rep(0,nlabel)

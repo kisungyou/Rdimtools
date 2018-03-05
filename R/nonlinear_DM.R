@@ -8,8 +8,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of ``center'',``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param bandwidth a scaling parameter for diffusion kernel. Default is 1 and should be a nonnegative real number.
 #' @param timescale a target scale whose value represents behavior of heat kernels at time \emph{t}. Default is 1 and should be a positive real number.
 #' @param multiscale logical; \code{FALSE} is to use the fixed \code{timescale} value, \code{TRUE} to ignore the given value.
@@ -47,9 +46,8 @@
 #' @rdname nonlinear_DM
 #' @author Kisung You
 #' @export
-do.dm <- function(X,ndim=2,preprocess="null",
-                  bandwidth=1.0,timescale=1.0,
-                  multiscale=FALSE){
+do.dm <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
+                  bandwidth=1.0,timescale=1.0,multiscale=FALSE){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   ndim = as.integer(ndim)
@@ -70,8 +68,10 @@ do.dm <- function(X,ndim=2,preprocess="null",
   if (!is.element(preprocess,c("null","whiten","center","decorrelate"))){
     stop("* do.dm : 'preprocess' should have one of 4 values.")
   }
-  if (preprocess=="null"){
-    preprocess = FALSE
+  if (missing(preprocess)){
+    algpreprocess = "null"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   if (!is.numeric(bandwidth)|(bandwidth<0)|is.infinite(bandwidth)){
     stop("* do.dm : 'bandwidth' should be a real number >= 0.")
@@ -86,18 +86,10 @@ do.dm <- function(X,ndim=2,preprocess="null",
     message("* do.dm : when 'multiscale' is TRUE, the given timescale value is ignored.")
   }
 
-
-
   # 3. Preprocess
-  if (preprocess==FALSE){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   # 4. Main Computation : Scheme by Ann B. Lee (http://www.stat.cmu.edu/~annlee/software.htm)
   #   4-1. compute symmetric graph laplacian
@@ -124,7 +116,6 @@ do.dm <- function(X,ndim=2,preprocess="null",
   # 4. output
   result = list()
   result$Y = Y
-  trfinfo$algtype   = "nonlinear"
   result$trfinfo = trfinfo
   result$eigvals = eigenvals[2:(ndim+1)]
   return(result)

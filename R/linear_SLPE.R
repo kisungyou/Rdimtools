@@ -9,8 +9,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -47,7 +46,7 @@
 #' @seealso \code{\link{do.lpe}}
 #' @rdname linear_SLPE
 #' @export
-do.slpe <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten")){
+do.slpe <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -75,10 +74,9 @@ do.slpe <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. re-arranging using labelorder
   opX = pX[labelorder,]
   #   3. PCA preprocessing

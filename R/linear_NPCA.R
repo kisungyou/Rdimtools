@@ -6,8 +6,7 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param maxiter number of maximum iteraions allowed.
 #' @param reltol stopping criterion for incremental relative error.
 #'
@@ -25,7 +24,7 @@
 #' @rdname linear_NPCA
 #' @author Kisung You
 #' @export
-do.npca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.npca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     maxiter=1000, reltol=1e-5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -50,11 +49,9 @@ do.npca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
 
   #------------------------------------------------------------------------
   ## COMPUTATION : DATA PREPROCESSING
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
-
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN PART FOR NONNEGATIVE PCA
   #   1. initialize for U

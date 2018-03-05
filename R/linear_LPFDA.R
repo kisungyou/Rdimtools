@@ -14,8 +14,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing
@@ -54,7 +53,8 @@
 #' @rdname linear_LPFDA
 #' @author Kisung You
 #' @export
-do.lpfda <- function(X, label, ndim=2, type=c("proportion",0.1), preprocess=c("center","whiten","decorrelate"), t=10.0){
+do.lpfda <- function(X, label, ndim=2, type=c("proportion",0.1),
+                     preprocess=c("center","scale","cscale","whiten","decorrelate"), t=10.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -93,10 +93,10 @@ do.lpfda <- function(X, label, ndim=2, type=c("proportion",0.1), preprocess=c("c
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   # 2. process : neighborhood selection
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

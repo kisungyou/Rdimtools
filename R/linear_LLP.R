@@ -16,8 +16,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}.
 #' @param lambda regularization parameter for kernel matrix in \eqn{[0,\infty)}.
 #'
@@ -51,7 +50,7 @@
 #' @rdname linear_LLP
 #' @export
 do.llp <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
-                   preprocess = c("center","decorrelate","whiten"), t=1.0, lambda=1.0){
+                   preprocess = c("center","scale","cscale","decorrelate","whiten"), t=1.0, lambda=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -77,10 +76,10 @@ do.llp <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","int
   #------------------------------------------------------------------------
   ## COMPUTATION PART 1 : PREPROCESSING
   #   1. preprocessing the data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. find neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

@@ -5,8 +5,8 @@
 \title{Laplacian Eigenmaps}
 \usage{
 do.lapeig(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), preprocess = c("null", "center", "whiten",
-  "decorrelate"), weighted = TRUE, kernelscale = 1)
+  "intersect", "asymmetric"), preprocess = c("null", "center", "scale",
+  "cscale", "whiten", "decorrelate"), weighted = TRUE, kernelscale = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -22,8 +22,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{symmetric}{one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{weighted}{\code{TRUE} for weighted graph laplacian and \code{FALSE} for
 combinatorial laplacian where connectivity is represented as 1 or 0 only.}

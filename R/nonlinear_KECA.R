@@ -9,9 +9,9 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'', and other methods of ``decorrelate'',``center'' , and ``whiten'' are supported. See also \code{\link{aux.preprocess}} for more details.
 #' @param kernel a vector containing name of a kernel and corresponding parameters. See also \code{\link{aux.kernelcov}} for complete description of Kernel Trick.
+#' @param preprocess an additional option for preprocessing the data.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -21,6 +21,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate ribbon-shaped data
 #' ## in order to pass CRAN pretest, n is set to be small.
 #' X = aux.gensamples(dname="ribbon",n=100)
@@ -39,6 +40,7 @@
 #' plot(output1$Y[,1],output1$Y[,2],main="Gaussian kernel")
 #' plot(output2$Y[,1],output2$Y[,2],main="Gaussian, sigma=5")
 #' plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
+#' }
 #'
 #' @seealso \code{\link{aux.kernelcov}}
 #' @references
@@ -47,7 +49,8 @@
 #' @author Kisung You
 #' @rdname nonlinear_KECA
 #' @export
-do.keca <- function(X,ndim=2,preprocess="null",kernel=c("gaussian",1.0)){
+do.keca <- function(X,ndim=2,kernel=c("gaussian",1.0),
+                    preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -59,24 +62,18 @@ do.keca <- function(X,ndim=2,preprocess="null",kernel=c("gaussian",1.0)){
   # 2. ... parameters
   #   preprocess : 'null', 'center','decorrelate', or 'whiten'
   #   kernel     : c("kernel name",par1,par2)
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.keca : 'preprocess' argument is invalid.")
+  if (missing(preprocess)){
+    algpreprocess = "null"
+  } else {
+    algpreprocess = match.arg(preprocess)
   }
   ktype = kernel
 
   # 3. preprocess
   #   3-1. centering or so.
-  if (preprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #   3-2. compute K and centered K
   Ks = aux.kernelcov(pX,ktype)

@@ -25,8 +25,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'' and options of  ``center'' , ``decorrelate'' and ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param type a type of random projection, one of "gaussian","achlioptas" or "sparse".
 #' @param s a tuning parameter for determining values in projection matrix. While default
 #' is to use \eqn{max(log \sqrt{p},3)}, it is required for \eqn{s \ge 3}.
@@ -38,25 +37,25 @@
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
 #'
-#'@examples
-#'\dontrun{
-#'# generate Swiss Roll data of 2,000 data points.
-#'X <- aux.gensamples(n=2000)
+#' @examples
+#' \dontrun{
+#' ## generate Swiss Roll data of 2,000 data points.
+#' X <- aux.gensamples(n=2000)
 #'
-#'## 1. Gaussian projection
-#'output1 <- do.rndproj(X,ndim=2)
+#' ## 1. Gaussian projection
+#' output1 <- do.rndproj(X,ndim=2)
 #'
-#'## 2. Achlioptas projection
-#'output2 <- do.rndproj(X,ndim=2,type="achlioptas")
+#' ## 2. Achlioptas projection
+#' output2 <- do.rndproj(X,ndim=2,type="achlioptas")
 #'
-#'## 3. Sparse projection
-#'output3 <- do.rndproj(X,type="sparse",s=5)        ## fulfill condition on s
+#' ## 3. Sparse projection
+#' output3 <- do.rndproj(X,type="sparse",s=5)        ## fulfill condition on s
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="Gaussian")
-#'plot(output2$Y[,1],output2$Y[,2],main="Arclioptas")
-#'plot(output3$Y[,1],output3$Y[,2],main="Sparse")
+#' ## Visualize three different projections
+#' par(mfrow=c(1,3))
+#' plot(output1$Y[,1],output1$Y[,2],main="Gaussian")
+#' plot(output2$Y[,1],output2$Y[,2],main="Arclioptas")
+#' plot(output3$Y[,1],output3$Y[,2],main="Sparse")
 #'}
 #'
 #'@references
@@ -69,7 +68,7 @@
 #'
 #' @rdname linear_RNDPROJ
 #' @export
-do.rndproj <- function(X,ndim=2,preprocess=c("null","center","whiten","decorrelate"),
+do.rndproj <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                        type=c("gaussian","achlioptas","sparse"),s=max(sqrt(ncol(X)),3.0)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
@@ -87,9 +86,9 @@ do.rndproj <- function(X,ndim=2,preprocess=c("null","center","whiten","decorrela
   #   type           : 'gaussian'(default),'achlioptas','sparse'
   #   s for 'sparse' : sqrt(d), d/log(d), or >=3
   if (missing(preprocess)){
-    preprocess = "null"
+    algpreprocess = "null"
   } else {
-    preprocess = match.arg(preprocess)
+    algpreprocess = match.arg(preprocess)
   }
   if (missing(type)){
     rptype = "gaussian"
@@ -111,15 +110,9 @@ do.rndproj <- function(X,ndim=2,preprocess=c("null","center","whiten","decorrela
 
   # 3. Run
   #   3-1. preprocess
-  if (preprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
   #   3-2. main computation : gaussian and nongaussian
   result = list()
   if (typegaussianflag){

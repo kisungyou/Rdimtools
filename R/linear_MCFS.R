@@ -12,8 +12,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param K assumed number of clusters in the original dataset.
 #' @param lambda \eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.
 #' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
@@ -56,7 +55,7 @@
 #' @author Kisung You
 #' @export
 do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
-                    preprocess=c("null","center","whiten","decorrelate"),
+                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                     K=max(round(nrow(X)/5),2), lambda=1.0, t=10.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -74,7 +73,7 @@ do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
   nbdsymmetric = "union"
   #   4. preprocess
   if (missing(preprocess)){
-    algpreprocess = "center"
+    algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
@@ -91,16 +90,10 @@ do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = X
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
   #   2. build neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)

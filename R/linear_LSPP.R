@@ -11,8 +11,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -48,7 +47,7 @@
 #' @author Kisung You
 #' @export
 do.lspp <- function(X, label, ndim=2, t=1.0,
-                    preprocess=c("center","decorrelate","whiten")){
+                    preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -78,10 +77,10 @@ do.lspp <- function(X, label, ndim=2, t=1.0,
   #------------------------------------------------------------------------
   ## PART 1 : Pre-LSPP process
   #   1. data preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. PCA preprocessing : refer to SLPP
   eigtest = eigen(cov(pX), only.values=TRUE)
   pcadim  = sum(eigtest$values > 0)

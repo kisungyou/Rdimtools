@@ -11,8 +11,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param W an \eqn{(n\times n)} weight matrix. Default is uniform weight of 1s.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``null'' and  other methods of ``center'',``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param initc initial \code{c} value for subgradient iterating stepsize, \eqn{c/\sqrt{i}}.
 #' @param dmethod a type of distance measure. See \code{\link[stats]{dist}} for more details.
 #' @param maxiter maximum number of iterations for subgradient descent method.
@@ -24,7 +23,6 @@
 #' \item{niter}{the number of iterations taken til convergence. }
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' }
-#'
 #'
 #' @examples
 #' \dontrun{
@@ -49,9 +47,9 @@
 #' @author Kisung You
 #' @rdname nonlinear_REE
 #' @export
-do.ree <- function(X, ndim=2, W=NA,preprocess="null",initc=1.0,
-                   dmethod=c("euclidean","maximum","manhattan",
-                             "canberra","binary","minkowski"),
+do.ree <- function(X, ndim=2, W=NA,
+                   preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
+                   initc=1.0, dmethod=c("euclidean","maximum","manhattan","canberra","binary","minkowski"),
                    maxiter=100, abstol=1e-3){
   ## PREPROCESSING
   # 1. check X
@@ -73,16 +71,10 @@ do.ree <- function(X, ndim=2, W=NA,preprocess="null",initc=1.0,
   }
   W = W/sum(W)
   # 4. run preprocessing
-  if (preprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X))
-  } else {
-    tmplist = aux.preprocess(X,type=preprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "nonlinear"
+  algpreprocess = match.arg(preprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
   # 5. dmethod
   dmethod = match.arg(dmethod)
   # 6. initc

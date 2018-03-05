@@ -5,8 +5,8 @@
 \title{Local Learning Projections}
 \usage{
 do.llp(X, ndim = 2, type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"), preprocess = c("center", "decorrelate",
-  "whiten"), t = 1, lambda = 1)
+  "intersect", "asymmetric"), preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), t = 1, lambda = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -22,8 +22,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}.}
 

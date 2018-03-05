@@ -4,8 +4,8 @@
 \alias{do.kqmi}
 \title{Kernel Quadratic Mutual Information}
 \usage{
-do.kqmi(X, label, ndim = 2, preprocess = c("center", "whiten",
-  "decorrelate"), t = 10)
+do.kqmi(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "whiten", "decorrelate"), t = 10)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +16,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{t}{bandwidth parameter for heat kernel in \eqn{(0,\infty)}.}
 }

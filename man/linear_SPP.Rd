@@ -4,8 +4,8 @@
 \alias{do.spp}
 \title{Sparsity Preserving Projection}
 \usage{
-do.spp(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  reltol = 1e-04)
+do.spp(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), reltol = 1e-04)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -13,8 +13,7 @@ do.spp(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{reltol}{tolerance level for stable computation of sparse reconstruction weights.}
 }

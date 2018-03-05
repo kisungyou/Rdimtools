@@ -5,8 +5,8 @@
 \title{Localized Sliced Inverse Regression}
 \usage{
 do.lsir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
-  preprocess = c("center", "decorrelate", "whiten"), numk = max(2,
-  round(nrow(X)/10)), tau = 1)
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  ycenter = FALSE, numk = max(2, round(nrow(X)/10)), tau = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -19,8 +19,9 @@ and columns represent independent variables.}
 \item{h}{the number of slices to divide the range of response vector.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
+
+\item{ycenter}{a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.}
 
 \item{numk}{size of determining neighborhood via \eqn{k}-nearest neighbor selection.}
 
