@@ -2,7 +2,7 @@
 % Please edit documentation in R/oos_LINEAR.R
 \name{oos.linear}
 \alias{oos.linear}
-\title{Out-of-sample prediction for linear methods}
+\title{Out-Of-Sample Prediction for Linear Methods}
 \usage{
 oos.linear(Xnew, projection, trfinfo)
 }
@@ -31,8 +31,8 @@ Inputs \code{projection} and \code{trfinfo} should be brought from original mode
 ## generate sample data and separate them
 X = aux.gensamples(n=500)
 set.seed(46556)
-idxtest  = sample(1:500,20)        # 20\% of test  data
-idxtrain = setdiff(1:500,idxtest)  # 80\% of train data
+idxtest  = sample(1:500,20)        # 20\% of data for testing
+idxtrain = setdiff(1:500,idxtest)  # 80\% of data for training
 
 Xtrain = X[idxtrain,]
 Xtest  = X[idxtest,]

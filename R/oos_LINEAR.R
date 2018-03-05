@@ -1,4 +1,4 @@
-#' Out-of-sample prediction for linear methods
+#' Out-Of-Sample Prediction for Linear Methods
 #'
 #' Linear dimensionality reduction methods such as PCA, LPP, or ICA \emph{explicitly} returns a matrix
 #' for mapping or projection. When we have new data, therefore, we can simply use the mapping provided.
@@ -20,8 +20,8 @@
 #' ## generate sample data and separate them
 #' X = aux.gensamples(n=500)
 #' set.seed(46556)
-#' idxtest  = sample(1:500,20)        # 20% of test  data
-#' idxtrain = setdiff(1:500,idxtest)  # 80% of train data
+#' idxtest  = sample(1:500,20)        # 20% of data for testing
+#' idxtrain = setdiff(1:500,idxtest)  # 80% of data for training
 #'
 #' Xtrain = X[idxtrain,]
 #' Xtest  = X[idxtest,]
@@ -71,7 +71,7 @@ oos.linear <- function(Xnew, projection, trfinfo){
   if (!is.list(trfinfo)){
     stop("* oos.linear : 'trfinfo' should be provided a list.")
   }
-  if ((!('algtype'%in%names(trfinfo)))||(!('type'%in%names(trfinfo)))){
+  if ((!('algtype'%in%names(trfinfo)))||(!('type'%in%names(trfinfo)))||(!('mean'%in%names(trfinfo)))||(!('multiplier'%in%names(trfinfo)))){
     stop("* oos.linear : 'trfinfo' is an invalid one.")
   }
   if (trfinfo$algtype!='linear'){

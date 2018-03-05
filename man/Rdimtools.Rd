@@ -161,11 +161,15 @@ FUNCTION \tab ALGORITHM \cr
 
 \section{(3) \code{oos.} family for out-of-sample predictions}{
 
-Only except for \code{oos.linear} where we have explicit mappings from linear dimension reduction methods, all methods
-listed in this section are for out-of-sample prediction on nonlinear mappings.
-\tabular{lcl}{
-FUNCTION \tab LINEARITY \tab ALGORITHM \cr
-\code{\link{oos.linear}} \tab Linear \tab Projection using pre-computed mappings.
+If the original dimension reduction method was \emph{linear}-type, then you could use \code{oos.linear} function.
+\tabular{ll}{
+FUNCTION \tab ALGORITHM \cr
+\code{\link{oos.linear}} \tab Projection using pre-computed mappings.
+}
+Regardless of the types of previous manifold learning methods, belows are general out-of-sample methods.
+\tabular{ll}{
+FUNCTION \tab ALGORITHM \cr
+\code{\link{oos.linproj}} \tab Linear Projection.
 }
 }
 
