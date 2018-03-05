@@ -30,8 +30,9 @@ Inputs \code{projection} and \code{trfinfo} should be brought from original mode
 \dontrun{
 ## generate sample data and separate them
 X = aux.gensamples(n=500)
-idxtest  = sample(1:500,50)
-idxtrain = setdiff(1:500,idxtest)
+set.seed(46556)
+idxtest  = sample(1:500,20)        # 20\% of test  data
+idxtrain = setdiff(1:500,idxtest)  # 80\% of train data
 
 Xtrain = X[idxtrain,]
 Xtest  = X[idxtest,]
@@ -41,12 +42,20 @@ res_train = do.pca(Xtrain,ndim=2,preprocess="whiten")
 
 ## perform OOS.LINEAR on new dataset
 ## note that inputs should be from a given model you trained
-res_test  = oos.linear(Xtest, res_train$projection, res_train$trfinfo)
+model.projection = res_train$projection
+model.trfinfo    = res_train$trfinfo
+res_test  = oos.linear(Xtest, model.projection, model.trfinfo)
 
-## let's compare
-par(mfrow=c(1,2))
-plot(res_train$Y[,1], res_train$Y[,2], main="original PCA")
-plot(res_test$Ynew[,1], res_test$Ynew[,2], main="OOS results")
+## let's compare via visualization
+xx = c(-2,2) # range of axis 1 for compact visualization
+yy = c(-2,2) # range of axis 2 for compact visualization
+mm = "black=train / red=test data" # figure title
+YY = res_test$Ynew  # out-of-sample projection for test data
+
+plot(res_train$Y[,1], res_train$Y[,2], type="p", xlim=xx, ylim=yy,
+main=mm, xlab="axis 1", ylab="axis 2")
+par(new=TRUE)
+plot(YY[,1], YY[,2], type="p", lwd=3, col="red", xlim=xx, ylim=yy, xlab="", ylab="")
 }
 
 }

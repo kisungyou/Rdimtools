@@ -20,6 +20,7 @@
 # 15. aux.traceratio.max   : compute trace ratio problem for maximal basis
 # 16. aux.pinv             : use SVD and NumPy scheme
 # 17. aux.bicgstab         : due to my stupidity, now Rlinsolve can't be used.
+# 18. aux_oosprocess       : data processign for oos prediction
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1467,4 +1468,28 @@ aux.bicgstab <- function(A,B,xinit=NA,reltol=1e-5,maxiter=1000,
     message("* aux.bicgstab : computations finished.")
   }
   return(res)
+}
+
+# 18. aux.oospreprocess ---------------------------------------------------
+#     data processing for out-of-sample prediction
+#' @keywords internal
+#' @noRd
+aux.oospreprocess <- function(data, trfinfo){
+  ## 0. parameter
+  n = nrow(data)
+  p = ncol(data)
+  output = array(0,c(n,p))
+  ## 1. extract mean
+  meanvec = as.vector(trfinfo$mean)
+  for (i in 1:n){
+    output[i,] = (as.vector(data[i,])-meanvec)
+  }
+  ## 2. multiplier
+  multiplier = trfinfo$multiplier
+  if (is.matrix(multiplier)){
+    output = output%*%multiplier
+  } else {
+    output = output*multiplier
+  }
+  return(output)
 }
