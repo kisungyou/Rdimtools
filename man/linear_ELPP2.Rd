@@ -4,7 +4,8 @@
 \alias{do.elpp2}
 \title{Enhanced Locality Preserving Projection (2013)}
 \usage{
-do.elpp2(X, ndim = 2, preprocess = c("center", "whiten", "decorrelate"))
+do.elpp2(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
@@ -12,8 +13,7 @@ do.elpp2(X, ndim = 2, preprocess = c("center", "whiten", "decorrelate"))
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

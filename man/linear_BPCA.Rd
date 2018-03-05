@@ -4,8 +4,8 @@
 \alias{do.bpca}
 \title{Bayesian Principal Component Analysis}
 \usage{
-do.bpca(X, ndim = 2, preprocess = c("center", "decorrelate", "whiten"),
-  reltol = 1e-04, maxiter = 123)
+do.bpca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), reltol = 1e-04, maxiter = 123)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -13,8 +13,7 @@ and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{preprocess}{an option for preprocessing the data. This supports three methods,
-``center'' (default),``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
+\item{preprocess}{an option for preprocessing the data. Default is "center". See also \code{\link{aux.preprocess}}
 for more details.}
 
 \item{reltol}{stopping criterion for iterative update for EM algorithm.}
@@ -44,10 +43,8 @@ corresponding column vector of \code{mp.W} to be selected as potential basis.
 }
 \examples{
 \dontrun{
-## generate data of 2 multivariate normals
-x1 = matrix(rnorm(100),nrow=10)-10
-x2 = matrix(rnorm(100),nrow=10)+10
-X  = rbind(x1,x2)
+## generate swiss roll data
+X = aux.gensamples()
 
 ## Compare PCA and BPCA
 out1  <- do.pca(X, ndim=2, preprocess="center")
@@ -56,7 +53,7 @@ out2  <- do.bpca(X, ndim=2, preprocess="center")
 ## Visualize
 par(mfrow=c(1,2))
 plot(out1$Y[,1], out1$Y[,2], main="PCA")
-plot(out2$Y[,1], out2$Y[,2], main="BPPCA")
+plot(out2$Y[,1], out2$Y[,2], main="BPCA")
 }
 
 }

@@ -5,7 +5,7 @@
 \title{Kernel-Weighted Unsupervised Discriminant Projection}
 \usage{
 do.kudp(X, ndim = 2, type = c("proportion", 0.1), preprocess = c("center",
-  "decorrelate", "whiten"), kbandwidth = 1)
+  "scale", "cscale", "decorrelate", "whiten"), bandwidth = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -19,10 +19,9 @@ Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data poi
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and two other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
-\item{kbandwidth}{bandwidth parameter for heat kernel as the equation above.}
+\item{bandwidth}{bandwidth parameter for heat kernel as the equation above.}
 }
 \value{
 a named list containing
@@ -36,8 +35,8 @@ a named list containing
 \description{
 Kernel-Weighted Unsupervised Discriminant Projection (KUDP) is a generalization of UDP where
 proximity is given by weighted values via heat kernel,
-\deqn{K_{i,j} = \exp(-\|x_i-x_j\|^2/kbandwidth)}
-whence UDP uses binary connectivity. If \code{kbandwidth} is \eqn{+\infty}, it becomes
+\deqn{K_{i,j} = \exp(-\|x_i-x_j\|^2/bandwidth)}
+whence UDP uses binary connectivity. If \code{bandwidth} is \eqn{+\infty}, it becomes
 a standard UDP problem. Like UDP, it also performs PCA preprocessing for rank-deficient case.
 }
 \examples{
@@ -46,9 +45,9 @@ a standard UDP problem. Like UDP, it also performs PCA preprocessing for rank-de
 X = aux.gensamples(n=200)
 
 ## use different kernel bandwidth
-out1 <- do.kudp(X, kbandwidth=0.1)
-out2 <- do.kudp(X, kbandwidth=10)
-out3 <- do.kudp(X, kbandwidth=1000)
+out1 <- do.kudp(X, bandwidth=0.1)
+out2 <- do.kudp(X, bandwidth=10)
+out3 <- do.kudp(X, bandwidth=1000)
 
 ## visualize
 par(mfrow=c(1,3))

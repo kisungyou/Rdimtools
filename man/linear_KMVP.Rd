@@ -4,8 +4,8 @@
 \alias{do.kmvp}
 \title{Kernel-Weighted Maximum Variance Projection}
 \usage{
-do.kmvp(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), kbandwidth = 1)
+do.kmvp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), bandwidth = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,10 +16,9 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and two other options "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
-\item{kbandwidth}{bandwidth parameter for heat kernel as the equation above.}
+\item{bandwidth}{bandwidth parameter for heat kernel as the equation above.}
 }
 \value{
 a named list containing
@@ -35,7 +34,7 @@ Maximum Variance Projection (MVP). Even though its name contains \emph{kernel}, 
 not related to kernel trick well known in the machine learning community. Rather, it
 generalizes the binary penalization on class discrepancy,
 \deqn{S_{ij} = \exp(-\|x_i-x_j\|^2/t) \quad\textrm{if}\quad C_i \ne C_j}
-where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\code{kbandwidth}). \bold{Note} that
+where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\code{bandwidth}). \bold{Note} that
 when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 }
 \examples{
@@ -47,9 +46,9 @@ X  = rbind(x1, x2, x3)
 label = c(rep(1,10), rep(2,10), rep(3,10))
 
 ## perform KMVP with different bandwidths
-out1 = do.kmvp(X, label, kbandwidth=10)
-out2 = do.kmvp(X, label, kbandwidth=100)
-out3 = do.kmvp(X, label, kbandwidth=1000)
+out1 = do.kmvp(X, label, bandwidth=10)
+out2 = do.kmvp(X, label, bandwidth=100)
+out3 = do.kmvp(X, label, bandwidth=1000)
 
 ## visualize
 par(mfrow=c(1,3))

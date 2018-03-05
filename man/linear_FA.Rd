@@ -4,8 +4,8 @@
 \alias{do.fa}
 \title{Exploratory Factor Analysis}
 \usage{
-do.fa(X, ndim = 2, preprocess = "center", maxiter = 1000,
-  tolerance = 1e-06)
+do.fa(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), maxiter = 1000, tolerance = 1e-06)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -14,8 +14,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued number of loading variables, or target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{maxiter}{maximum number of iterations for updating.}
 

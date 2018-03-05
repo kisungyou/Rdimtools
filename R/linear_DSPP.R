@@ -11,8 +11,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param lambda regularization parameter for constructing sparsely weighted network.
 #' @param rho a parameter for balancing the local and global contribution.
 #'
@@ -53,7 +52,7 @@
 #' @author Kisung You
 #' @rdname linear_DSPP
 #' @export
-do.dspp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.dspp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     lambda=1.0, rho=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -89,10 +88,9 @@ do.dspp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
 
   #------------------------------------------------------------------------
   ## COMPUTATION 1. Preliminary Computation
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #------------------------------------------------------------------------
   ## COMPUTATION 2. Three Important Matrices
   #   1. W : adjacency, intrinsic

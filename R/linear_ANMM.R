@@ -11,8 +11,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and three options of "center", "decorrelate", or "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param No neighborhood size for same-class data points; either a constant number or
 #' a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.
 #' @param Ne neighborhood size for different-class data points; either a constant number or
@@ -53,7 +52,7 @@
 #' @author Kisung You
 #' @rdname linear_ANMM
 #' @export
-do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","decorrelate","whiten"),
+do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     No=ceiling(nrow(X)/10), Ne=ceiling(nrow(X)/10)){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -89,16 +88,10 @@ do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","decorrelate"
   #------------------------------------------------------------------------
   ## COMPUTATION
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
   #   2. extract 2 types of neighborhood information
   D = as.matrix(dist(pX, method="euclidean"))
   listNo = anmm_find_No(D, label, vecNo)

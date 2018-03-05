@@ -5,7 +5,7 @@
 \title{Discriminant Neighborhood Embedding}
 \usage{
 do.dne(X, label, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
-  preprocess = c("center", "decorrelate", "whiten"))
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
@@ -17,8 +17,7 @@ do.dne(X, label, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
 \item{numk}{the number of neighboring points for k-nn graph construction.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

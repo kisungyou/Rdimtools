@@ -10,8 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param numk the number of neighboring points for k-nn graph construction.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -43,7 +42,7 @@
 #' @rdname linear_EXTLPP
 #' @export
 do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
-                      preprocess=c("center","decorrelate","whiten")){
+                      preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -63,16 +62,9 @@ do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   1. preprocessing
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X,nrow=nrow(X));
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #   2. K-Means Clustering
   kclust     = stats::kmeans(pX, numk)

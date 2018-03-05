@@ -9,8 +9,7 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param lambda regularization parameter for constructing \eqn{\ell_2} graph.
 #'
 #' @return a named list containing
@@ -41,7 +40,7 @@
 #' @author Kisung You
 #' @rdname linear_CRP
 #' @export
-do.crp <- function(X, ndim=2, preprocess=c("center","whiten","decorrelate"), lambda=1.0){
+do.crp <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"), lambda=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -64,10 +63,9 @@ do.crp <- function(X, ndim=2, preprocess=c("center","whiten","decorrelate"), lam
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing the data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   2. PCA preprocessing
   eigtest = eigen(cov(pX), only.values=TRUE)

@@ -4,8 +4,8 @@
 \alias{do.ammc}
 \title{Adaptive Maximum Margin Criterion}
 \usage{
-do.ammc(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), a = 1, b = 1, lambda = 1)
+do.ammc(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "decorrelate", "whiten"), a = 1, b = 1, lambda = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +16,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center" and other options of "decorrelate" and "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{a}{tuning parameter for between-class weight in \eqn{[0,\infty)}.}
 

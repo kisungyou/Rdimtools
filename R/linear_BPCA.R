@@ -11,8 +11,7 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an option for preprocessing the data. This supports three methods,
-#' ``center'' (default),``decorrelate'', or ``whiten''. See also \code{\link{aux.preprocess}}
+#' @param preprocess an option for preprocessing the data. Default is "center". See also \code{\link{aux.preprocess}}
 #' for more details.
 #' @param reltol stopping criterion for iterative update for EM algorithm.
 #' @param maxiter maximum number of iterations allowed for EM algorithm.
@@ -37,10 +36,8 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate data of 2 multivariate normals
-#' x1 = matrix(rnorm(100),nrow=10)-10
-#' x2 = matrix(rnorm(100),nrow=10)+10
-#' X  = rbind(x1,x2)
+#' ## generate swiss roll data
+#' X = aux.gensamples()
 #'
 #' ## Compare PCA and BPCA
 #' out1  <- do.pca(X, ndim=2, preprocess="center")
@@ -49,12 +46,12 @@
 #' ## Visualize
 #' par(mfrow=c(1,2))
 #' plot(out1$Y[,1], out1$Y[,2], main="PCA")
-#' plot(out2$Y[,1], out2$Y[,2], main="BPPCA")
+#' plot(out2$Y[,1], out2$Y[,2], main="BPCA")
 #' }
 #'
 #' @rdname linear_BPCA
 #' @export
-do.bpca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     reltol=1e-4, maxiter=123){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -85,10 +82,9 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"),
   #------------------------------------------------------------------------
   ## COMPUTATION
   #   1. Preprocessing the data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   2. Run using Rcpp
   rcppbpca = method_bpca(t(pX), reltol, maxiter);

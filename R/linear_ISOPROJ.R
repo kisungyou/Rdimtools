@@ -15,8 +15,7 @@
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -48,7 +47,7 @@
 #' @export
 do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
                        symmetric=c("union","intersect","asymmetric"),
-                       preprocess=c("center","whiten","decorrelate")){
+                       preprocess=c("center","scale","cscale","decorrelate","whiten")){
   ## PREPROCESSING
   # Preprocessing : typecheck is always first step to perform.
   aux.typecheck(X)
@@ -79,9 +78,8 @@ do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
 
   ## COMPUTATION
   #   1. data preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "linear"
   pX      = tmplist$pX
 
   #   2. neighborhood selection

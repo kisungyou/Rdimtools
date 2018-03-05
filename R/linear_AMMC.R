@@ -10,8 +10,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param a tuning parameter for between-class weight in \eqn{[0,\infty)}.
 #' @param b tuning parameter for within-class weight in \eqn{[0,\infty)}.
 #' @param lambda balance parameter for between-class and within-class scatter matrices in \eqn{(0,\infty)}.
@@ -53,7 +52,7 @@
 #' @author Kisung You
 #' @rdname linear_AMMC
 #' @export
-do.ammc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"),
+do.ammc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     a=1.0, b=1.0, lambda=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -94,10 +93,10 @@ do.ammc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. per-class and overall : mean vectors
   meanvectors   = ammc_meanvec(pX, label, ulabel)
   mean_Overall  = meanvectors$overall

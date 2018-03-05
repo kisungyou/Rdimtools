@@ -9,8 +9,7 @@
 #' @param response a length-\eqn{n} vector of response variable.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param lambda1 \eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.
 #' @param lambda2 \eqn{\ell_2} regularization parameter in \eqn{(0,\infty)}.
 #'
@@ -70,7 +69,7 @@
 #' @rdname linear_ENET
 #' @author Kisung You
 #' @export
-do.enet <- function(X, response, ndim=2, preprocess=c("null","center","decorrelate","whiten"), lambda1=1.0, lambda2=1.0){
+do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"), lambda1=1.0, lambda2=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -99,17 +98,12 @@ do.enet <- function(X, response, ndim=2, preprocess=c("null","center","decorrela
 
   #------------------------------------------------------------------------
   ## COMPUTATION : DATA PREPROCESSING
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = as.matrix(X)
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-    response = response-mean(response)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+  if (algpreprocess!="null"){
+    response = (response-mean(response))
   }
-  trfinfo$algtype = "linear"
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION FOR Elastic Net

@@ -4,8 +4,9 @@
 \alias{do.anmm}
 \title{Average Neighborhood Margin Maximization}
 \usage{
-do.anmm(X, label, ndim = 2, preprocess = c("null", "center", "decorrelate",
-  "whiten"), No = ceiling(nrow(X)/10), Ne = ceiling(nrow(X)/10))
+do.anmm(X, label, ndim = 2, preprocess = c("null", "center", "scale",
+  "cscale", "decorrelate", "whiten"), No = ceiling(nrow(X)/10),
+  Ne = ceiling(nrow(X)/10))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -16,8 +17,7 @@ and columns represent independent variables.}
 \item{ndim}{an integer-valued target dimension.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "null" and three options of "center", "decorrelate", or "whiten"
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{No}{neighborhood size for same-class data points; either a constant number or
 a vector of length-\eqn{n} can be provided, as long as the values reside in \eqn{[2,n]}.}

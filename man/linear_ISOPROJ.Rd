@@ -6,7 +6,7 @@
 \usage{
 do.isoproj(X, ndim = 2, type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
-  preprocess = c("center", "whiten", "decorrelate"))
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -22,8 +22,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 \item{symmetric}{one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}. See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-are supported. See also \code{\link{aux.preprocess}} for more details.}
+Default is "center". See also \code{\link{aux.preprocess}} for more details.}
 }
 \value{
 a named list containing

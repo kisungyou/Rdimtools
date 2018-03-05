@@ -9,8 +9,7 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "null" and other options of "center", "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -47,7 +46,7 @@
 #' @rdname linear_FSCORE
 #' @author Kisung You
 #' @export
-do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","whiten","decorrelate")){
+do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -81,16 +80,9 @@ do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","whiten","d
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PREPROCESSING OF THE DATA
-  if (algpreprocess=="null"){
-    trfinfo = list()
-    trfinfo$type = "null"
-    pX = X
-  } else {
-    tmplist = aux.preprocess(X,type=algpreprocess)
-    trfinfo = tmplist$info
-    pX      = tmplist$pX
-  }
-  trfinfo$algtype = "linear"
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION FOR LSDF

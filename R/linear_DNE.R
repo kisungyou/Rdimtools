@@ -10,8 +10,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param numk the number of neighboring points for k-nn graph construction.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
 #' @return a named list containing
 #' \describe{
@@ -49,7 +48,7 @@
 #' @rdname linear_DNE
 #' @export
 do.dne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
-                   preprocess=c("center","decorrelate","whiten")){
+                   preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -75,10 +74,9 @@ do.dne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. neighborhood creation
   nbdtype = c("knn",numk)
   nbdsymmetric = "union"

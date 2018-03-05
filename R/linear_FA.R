@@ -9,8 +9,7 @@
 #' and columns represent independent variables.
 #' @param ndim an integer-valued number of loading variables, or target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is ``center'' and other methods of ``decorrelate'', or ``whiten''
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param maxiter maximum number of iterations for updating.
 #' @param tolerance stopping criterion in a Frobenius norm.
 #'
@@ -49,7 +48,8 @@
 #' @rdname linear_FA
 #' @author Kisung You
 #' @export
-do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-6){
+do.fa <- function(X,ndim=2,preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                  maxiter=1000,tolerance=1e-6){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -62,10 +62,7 @@ do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-6){
   #   maxiter    : 1000 (default) or positive integer
   #   tolerance  : 1e-10 in Frobenius norm (default)
 
-  algpreprocess = preprocess
-  if (!is.element(algpreprocess,c("center","whiten","decorrelate"))){
-    stop("* do.fa : 'preprocess' should be one of three values.")
-  }
+  algpreprocess = match.arg(preprocess)
   if ((maxiter<5)||(!is.numeric(maxiter))||is.na(maxiter)||is.infinite(maxiter)){
     stop("* do.fa : 'maxiter' is invalid, i.e., use a suitable positive integer >= 5.")
   }
@@ -76,9 +73,8 @@ do.fa <- function(X,ndim=2,preprocess="center",maxiter=1000,tolerance=1e-6){
   tolerance = min(tolerance,1e-10)
 
   # 3. preprocessing
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "linear"
   pX      = tmplist$pX
 
   tpX = t(pX)

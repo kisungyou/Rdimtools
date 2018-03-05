@@ -7,8 +7,7 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center" and other options of "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #' @param maxiter maximum number of iterations allowed.
 #' @param abstol stopping criterion for incremental change in projection matrix.
 #'
@@ -43,7 +42,8 @@
 #' @author Kisung You
 #' @rdname linear_ASI
 #' @export
-do.asi <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), maxiter=10, abstol=1e-3){
+do.asi <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                   maxiter=10, abstol=1e-3){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -70,10 +70,9 @@ do.asi <- function(X, ndim=2, preprocess=c("center","decorrelate","whiten"), max
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. preprocessing of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
   #   2. initialize
   Uold = ldakm_PCAbasis(pX, ndim)
   #   3. iterate

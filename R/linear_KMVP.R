@@ -5,7 +5,7 @@
 #' not related to kernel trick well known in the machine learning community. Rather, it
 #' generalizes the binary penalization on class discrepancy,
 #' \deqn{S_{ij} = \exp(-\|x_i-x_j\|^2/t) \quad\textrm{if}\quad C_i \ne C_j}
-#' where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\code{kbandwidth}). \bold{Note} that
+#' where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\code{bandwidth}). \bold{Note} that
 #' when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -13,9 +13,8 @@
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center" and two other options "decorrelate" and "whiten"
-#' are supported. See also \code{\link{aux.preprocess}} for more details.
-#' @param kbandwidth bandwidth parameter for heat kernel as the equation above.
+#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
+#' @param bandwidth bandwidth parameter for heat kernel as the equation above.
 #'
 #' @return a named list containing
 #' \describe{
@@ -33,9 +32,9 @@
 #' label = c(rep(1,10), rep(2,10), rep(3,10))
 #'
 #' ## perform KMVP with different bandwidths
-#' out1 = do.kmvp(X, label, kbandwidth=10)
-#' out2 = do.kmvp(X, label, kbandwidth=100)
-#' out3 = do.kmvp(X, label, kbandwidth=1000)
+#' out1 = do.kmvp(X, label, bandwidth=10)
+#' out2 = do.kmvp(X, label, bandwidth=100)
+#' out3 = do.kmvp(X, label, bandwidth=1000)
 #'
 #' ## visualize
 #' par(mfrow=c(1,3))
@@ -51,8 +50,8 @@
 #' @rdname linear_KMVP
 #' @export
 do.kmvp <- function(X, label, ndim=2,
-                    preprocess=c("center","decorrelate","whiten"),
-                    kbandwidth=1.0){
+                    preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                    bandwidth=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -84,24 +83,25 @@ do.kmvp <- function(X, label, ndim=2,
   } else {
     algpreprocess = match.arg(preprocess)
   }
-  #   5. kbandwidth
-  kbandwidth = as.double(kbandwidth)
-  if (!check_NumMM(kbandwidth,0,1e+10,compact=TRUE)){stop("* do.kmvp : 'kbandwidth' should be a nonnegative real number.")}
+  #   5. bandwidth
+  bandwidth = as.double(bandwidth)
+  if (!check_NumMM(bandwidth,0,1e+10,compact=TRUE)){stop("* do.kmvp : 'bandwidth' should be a nonnegative real number.")}
 
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
   #   1. preprocess of data
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
+
   #   2. perform PCA onto (N-1) dimensional space
   outPCA = do.pca(pX,ndim=(N-1))
   projection_first = aux.adjprojection(outPCA$projection)
   ppX = outPCA$Y
+
   #   3. Start of MVP algorithm here.
   #   3-1. Laplacian Part
-  S = kmvp_S(ppX, label, kbandwidth) # S_ij = 1 if Ci != Cj
+  S = kmvp_S(ppX, label, bandwidth) # S_ij = 1 if Ci != Cj
   D = diag(rowSums(S))
   L = D-S
   #   3-2. LLE approximation part # we need to construct W !!
@@ -119,6 +119,7 @@ do.kmvp <- function(X, label, ndim=2,
   #   3-3. compute M
   Mhalf = diag(n)-W
   M     = (t(Mhalf)%*%Mhalf)
+
   #   4. solve geigen
   LHS = t(ppX)%*%M%*%ppX
   RHS = t(ppX)%*%L%*%ppX
