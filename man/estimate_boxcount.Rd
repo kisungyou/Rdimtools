@@ -62,6 +62,8 @@ plot(log(1/out3$r), log(out3$Nr), main="twinpeaks")
 
 }
 \references{
+\insertRef{hentschel_infinite_1983}{Rdimtools}
+
 \insertRef{ott_chaos_2002}{Rdimtools}
 }
 \seealso{

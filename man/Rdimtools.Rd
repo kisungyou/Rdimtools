@@ -152,11 +152,13 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \section{(2) \code{est.} family for intrinsic dimension estimation algorithms}{
 
 \bold{\code{est.}} family of functions include,
-\tabular{ll}{
-FUNCTION \tab ALGORITHM \cr
-\code{\link{est.boxcount}} \tab Box-Counting Dimension \cr
-\code{\link{est.correlation}} \tab Correlation Dimension
+\tabular{lcl}{
+FUNCTION \tab TYPE \tab ALGORITHM \cr
+\code{\link{est.boxcount}}    \tab G \tab Box-Counting Dimension \cr
+\code{\link{est.correlation}} \tab G \tab Correlation Dimension \cr
+\code{\link{est.pcathr}}      \tab G \tab PCA Thresholding with Accumulated Variance
 }
+where the taxonomy is of \emph{global}(G), \emph{local}(L), and \emph{pointwise}(P).
 }
 
 \section{(3) \code{oos.} family for out-of-sample predictions}{

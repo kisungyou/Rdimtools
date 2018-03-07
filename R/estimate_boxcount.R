@@ -46,6 +46,8 @@
 #' }
 #'
 #' @references
+#' \insertRef{hentschel_infinite_1983}{Rdimtools}
+#'
 #' \insertRef{ott_chaos_2002}{Rdimtools}
 #'
 #' @author Kisung You
