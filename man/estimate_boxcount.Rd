@@ -4,17 +4,18 @@
 \alias{est.boxcount}
 \title{Box-counting dimension}
 \usage{
-est.boxcount(X, nlevel = 50, show = FALSE)
+est.boxcount(X, nlevel = 50, cut = c(0.1, 0.9))
 }
 \arguments{
 \item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations.}
 
 \item{nlevel}{the number of \code{r} (radius) to be tested.}
 
-\item{show}{a logical; \code{FALSE} for not showing visually, \code{TRUE} otherwise.}
+\item{cut}{a vector of ratios for computing estimated dimension in \eqn{(0,1)}.}
 }
 \value{
-a named data frame containing \describe{
+a named list containing containing \describe{
+\item{estdim}{estimated dimension using \code{cut} ratios.}
 \item{r}{a vector of radius used.}
 \item{Nr}{a vector of boxes counted for each corresponding \code{r}.}
 }
@@ -28,10 +29,16 @@ the number of boxes counted to cover a given set for each corresponding \eqn{r}.
 }
 \section{Determining the dimension}{
 
-In this version, no automated method is included due to lots of possibilities for adopting
-any types of change point detection methods. Instead, we recommend using \emph{visual}
-identification by looking at the slope of the linear part in the middle using either
-\code{show=TRUE} flag or plotting as \code{plot(log(1/output$r),log(output$Nr))}.
+Even though we could use arbitrary \code{cut} to compute estimated dimension, it is also possible to
+use visual inspection. According to the theory, if the function returns an \code{output}, we can plot
+\code{plot(log(1/output$r),log(output$Nr))} and use the linear slope in the middle as desired dimension of data.
+}
+
+\section{Automatic choice of \eqn{r}}{
+
+The least value for radius \eqn{r} must have non-degenerate counts, while the maximal value should be the
+maximum distance among all pairs of data points across all coordinates. \code{nlevel} controls the number of interim points
+in a log-equidistant manner.
 }
 
 \examples{
@@ -41,16 +48,21 @@ X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
 X3 = aux.gensamples(dname="twinpeaks")
 
+## compute boxcount dimension
+out1 = est.boxcount(X1)
+out2 = est.boxcount(X2)
+out3 = est.boxcount(X3)
+
 ## visually verify : all should have approximate slope of 2.
 par(mfrow=c(1,3))
-est.boxcount(X1,show=TRUE)
-est.boxcount(X2,show=TRUE)
-est.boxcount(X3,show=TRUE)
+plot(log(1/out1$r), log(out1$Nr), main="swiss roll")
+plot(log(1/out2$r), log(out2$Nr), main="ribbon")
+plot(log(1/out3$r), log(out3$Nr), main="twinpeaks")
 }
 
 }
 \references{
-Ott, E. (1988) \emph{Chaos in Dynamical Systems}. Cambridge University Press.
+\insertRef{ott_chaos_2002}{Rdimtools}
 }
 \seealso{
 \code{\link{est.correlation}}

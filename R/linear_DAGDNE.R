@@ -20,6 +20,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -39,6 +40,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="nbd size=5")
 #' plot(out2$Y[,1], out2$Y[,2], main="nbd size=10")
 #' plot(out3$Y[,1], out3$Y[,2], main="nbd size=25")
+#' }
 #'
 #' @references
 #' \insertRef{ding_double_2015}{Rdimtools}

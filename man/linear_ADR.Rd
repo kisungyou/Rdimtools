@@ -33,6 +33,7 @@ one of remedies for clustering in high dimensional space. Eigenvectors of a betw
 as basis of projection.
 }
 \examples{
+\dontrun{
 ## load iris data
 data(iris)
 X = as.matrix(iris[,1:4])
@@ -47,6 +48,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="ADR::tol=1e-2")
 plot(out2$Y[,1], out2$Y[,2], main="ADR::tol=1e-3")
 plot(out3$Y[,1], out3$Y[,2], main="ADR::tol=1e-4")
+}
 
 }
 \references{

@@ -4,17 +4,18 @@
 \alias{est.correlation}
 \title{Correlation Dimension}
 \usage{
-est.correlation(X, nlevel = 50, show = FALSE)
+est.correlation(X, nlevel = 50, cut = c(0.1, 0.9))
 }
 \arguments{
 \item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations.}
 
 \item{nlevel}{the number of \code{r} (radius) to be tested.}
 
-\item{show}{a logical; \code{FALSE} for not showing visually, \code{TRUE} otherwise.}
+\item{cut}{a vector of ratios for computing estimated dimension in \eqn{(0,1)}.}
 }
 \value{
-a named data frame containing \describe{
+a named list containing containing \describe{
+\item{estdim}{estimated dimension using \code{cut} values.}
 \item{r}{a vector of radius used.}
 \item{Cr}{a vector of \eqn{C(r)} as decribed above.}
 }
@@ -29,28 +30,41 @@ efficient in terms of computation with some robustness contingent on the lack of
 }
 \section{Determining the dimension}{
 
-In this version, no automated method is included due to lots of possibilities for adopting
-any types of change point detection methods. Instead, we recommend using \emph{visual}
-identification by looking at the slope of the linear part in the middle using either
-\code{show=TRUE} flag or plotting as \code{plot(log(output$r),log(output$Cr))}.
+Even though we could use arbitrary \code{cut} to compute estimated dimension, it is also possible to
+use visual inspection. According to the theory, if the function returns an \code{output}, we can plot
+\code{plot(log(output$r), log(output$Cr))} and use the linear slope in the middle as desired dimension of data.
+}
+
+\section{Automatic choice of \eqn{r}}{
+
+The least value for radius \eqn{r} must have non-degenerate counts, while the maximal value should be the
+maximum distance among all pairs of data points across all coordinates. \code{nlevel} controls the number of interim points
+in a log-equidistant manner.
 }
 
 \examples{
+\dontrun{
 ## generate three different dataset
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
 X3 = aux.gensamples(dname="twinpeaks")
 
+## compute
+out1 = est.correlation(X1)
+out2 = est.correlation(X2)
+out3 = est.correlation(X3)
+
 ## visually verify : all should have approximate slope of 2.
 par(mfrow=c(1,3))
-est.correlation(X1,show=TRUE)
-est.correlation(X2,show=TRUE)
-est.correlation(X3,show=TRUE)
+plot(log(out1$r), log(out1$Cr), main="swiss roll")
+plot(log(out2$r), log(out2$Cr), main="ribbon")
+plot(log(out3$r), log(out3$Cr), main="twinpeaks")
+}
 
 
 }
 \references{
-Grassberger, P. and Procaccia, I. (1983) \emph{Measuring the strangeness of strange attractors}. Physica D9:189-208.
+\insertRef{grassberger_measuring_1983}{Rdimtools}
 }
 \seealso{
 \code{\link{est.boxcount}}

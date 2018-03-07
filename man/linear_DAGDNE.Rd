@@ -33,6 +33,7 @@ variant of DNE. As its name suggests, it introduces two adjacency graphs for
 homogeneous and heterogeneous samples accordaing to their labels.
 }
 \examples{
+\dontrun{
 ## generate data of 3 types with clear difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -52,6 +53,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="nbd size=5")
 plot(out2$Y[,1], out2$Y[,2], main="nbd size=10")
 plot(out3$Y[,1], out3$Y[,2], main="nbd size=25")
+}
 
 }
 \references{
