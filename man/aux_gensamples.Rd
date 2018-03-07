@@ -4,12 +4,16 @@
 \alias{aux.gensamples}
 \title{Generate model-based samples}
 \usage{
-aux.gensamples(n = 496, noise = 0.1, dname = "swiss")
+aux.gensamples(n = 496, noise = 0.01, ntwist = 10, dname = c("swiss",
+  "crown", "helix", "saddle", "ribbon", "bswiss", "cswiss", "twinpeaks",
+  "sinusoid"))
 }
 \arguments{
 \item{n}{the number of points to be generated.}
 
 \item{noise}{level of additive white noise.}
+
+\item{ntwist}{number of twists for \code{mobius} method.}
 
 \item{dname}{name of a predefined shape. Should be one of \describe{
 \item{\code{"swiss"}}{swiss roll}
@@ -20,6 +24,8 @@ aux.gensamples(n = 496, noise = 0.1, dname = "swiss")
 \item{\code{"bswiss"}}{broken swiss}
 \item{\code{"cswiss"}}{cut swiss}
 \item{\code{"twinpeaks"}}{two peaks}
+\item{\code{"sinusoid"}}{sinusoid on the circle}
+\item{\code{"mobius"}}{mobius strip embedded in R3}
 }}
 }
 \value{
@@ -30,17 +36,21 @@ It generates samples from predefined 3-d shapes, set by \code{dname} parameter.
 Also incorporated a functionality to add white noise with degree \code{noise}.
 }
 \examples{
-## Generate samples for three different shapes
-d1 = aux.gensamples(dname="twinpeaks",noise=0.01)
-d2 = aux.gensamples(dname="ribbon",noise=0.01)
-d3 = aux.gensamples(dname="crown", noise=0.01)
-
 \dontrun{
-casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks")
-for (i in 1:length(casenames)){
-  data = aux.gensamples(n=sample(1000:2000,1),noise=runif(1)[1],dname=casenames[i])
+casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")
+if (requireNamespace("plot3D", quietly = TRUE)){
+   x11()
+   par(mfrow=c(3,3),pty="s")
+   for (i in 1:length(casenames)){
+      data = aux.gensamples(n=100,noise=runif(1)[1],dname=casenames[i])
+      x = data[,1]
+      y = data[,2]
+      z = data[,3]
+      scatter3D(x,y,z,col="gray",pch=18,main=casenames[i])
+   }
 }
 }
+
 }
 \references{
 \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}

@@ -236,6 +236,7 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #'
 #' @param n the number of points to be generated.
 #' @param noise level of additive white noise.
+#' @param ntwist number of twists for \code{mobius} method.
 #' @param dname name of a predefined shape. Should be one of \describe{
 #' \item{\code{"swiss"}}{swiss roll}
 #' \item{\code{"crown"}}{crown}
@@ -245,34 +246,41 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #' \item{\code{"bswiss"}}{broken swiss}
 #' \item{\code{"cswiss"}}{cut swiss}
 #' \item{\code{"twinpeaks"}}{two peaks}
+#' \item{\code{"sinusoid"}}{sinusoid on the circle}
+#' \item{\code{"mobius"}}{mobius strip embedded in R3}
 #' }
 #' @return an \eqn{(n\times 3)} matrix of generated data by row.
 #' @examples
-#' ## Generate samples for three different shapes
-#' d1 = aux.gensamples(dname="twinpeaks",noise=0.01)
-#' d2 = aux.gensamples(dname="ribbon",noise=0.01)
-#' d3 = aux.gensamples(dname="crown", noise=0.01)
-#'
 #' \dontrun{
-#' casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks")
-#' for (i in 1:length(casenames)){
-#'   data = aux.gensamples(n=sample(1000:2000,1),noise=runif(1)[1],dname=casenames[i])
+#' casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")
+#' if (requireNamespace("plot3D", quietly = TRUE)){
+#'    x11()
+#'    par(mfrow=c(3,3),pty="s")
+#'    for (i in 1:length(casenames)){
+#'       data = aux.gensamples(n=100,noise=runif(1)[1],dname=casenames[i])
+#'       x = data[,1]
+#'       y = data[,2]
+#'       z = data[,3]
+#'       scatter3D(x,y,z,col="gray",pch=18,main=casenames[i])
+#'    }
 #' }
 #' }
+#'
 #' @references
 #' \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
-#'
 #'
 #' @author Kisung You
 #' @rdname aux_gensamples
 #' @export
-aux.gensamples <- function(n=496,noise=0.1,dname="swiss"){
-  params = as.list(environment())
-  dtype = params$dname
-  casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks")
-  if (!is.element(dtype,casenames)){
-    message("function gensamples:: use one of specificed types")
-    stop()
+aux.gensamples <- function(n=496,noise=0.01,ntwist=10,
+                           dname=c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")){
+  #params = as.list(environment())
+  n     = as.integer(n)
+  noise = as.double(noise)
+  dtype = match.arg(dname)
+  ntwist= as.integer(ntwist)
+  if ((ntwist<1)||(is.na(ntwist))||(length(ntwist)>1)||(is.infinite(ntwist))){
+    stop("* aux.gensamples : 'ntwist' should be a positive integer.")
   }
 
   # 2. type branching
@@ -359,6 +367,24 @@ aux.gensamples <- function(n=496,noise=0.1,dname="swiss"){
     hz = tanh(3-6*yi)
 
     highD = cbind(hx,hy,hz)+matrix(rnorm(n*3,sd=noise),c(n,3))
+  } else if (dtype=="sinusoid"){
+    # hein audibert
+    tt = runif(n, min=0, max=(2*3.141592))
+
+    hx = sin(tt)
+    hy = cos(tt)
+    hz = sin(150*tt)/10
+
+    highD = cbind(hx,hy,hz)+matrix(rnorm(n*3,sd=noise),nrow=n)
+  } else if (dtype=="mobius"){
+    u = runif(n,-1,1)
+    v = runif(n,0,2*3.141592)
+
+    hx = (1+(u/2)*cos(ntwist*v/2))*(cos(v))
+    hy = (1+(u/2)*cos(ntwist*v/2))*(sin(v))
+    hz = (u/2)*sin(ntwist*v/2)
+
+    highD = cbind(hx,hy,hz)+matrix(rnorm(n*3,sd=noise),nrow=n)
   }
   return(highD)
 }

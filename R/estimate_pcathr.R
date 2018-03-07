@@ -25,8 +25,12 @@
 #'
 #' ## use PCA thresholding estimation with 95% variance explainability
 #' ## desired return is for dimension 3.
-#' pmessage = paste("* estimated dimension is ",est.pcathr(Y)$estdim, sep="")
+#' output   = est.pcathr(Y)
+#' pmessage = paste("* estimated dimension is ",output$estdim, sep="")
 #' print(pmessage)
+#'
+#' ## use screeplot
+#' plot(output$values, main="scree plot")
 #' }
 #'
 #' @seealso \code{\link{do.pca}}
