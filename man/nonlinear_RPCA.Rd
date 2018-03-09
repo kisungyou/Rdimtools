@@ -32,8 +32,7 @@ solving the following,
 \deqn{\textrm{minimize}\quad \|L\|_* + \lambda \|S\|_1 \quad{s.t.} L+S=X}
 where \eqn{L} is a low-rank matrix, \eqn{S} is a sparse matrix and \eqn{\|\cdot\|_*} denotes nuclear norm, i.e., sum of singular values. Therefore,
 it should be considered as \emph{preprocessing} procedure of denoising. Note that after RPCA is applied, \eqn{L} should be used
-as kind of a new data matrix for any manifold learning scheme to be applied. For more details,
-see \code{\link[ADMM]{admm.rpca}}.
+as kind of a new data matrix for any manifold learning scheme to be applied.
 }
 \examples{
 \dontrun{
@@ -63,9 +62,6 @@ plot(out3$Y[,1], out3$Y[,2], main="RPCA+PCA::lambda=10")
 }
 \references{
 \insertRef{candes_robust_2011}{Rdimtools}
-}
-\seealso{
-\code{\link[ADMM]{admm.rpca}}
 }
 \author{
 Kisung You

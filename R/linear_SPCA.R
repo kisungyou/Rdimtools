@@ -2,8 +2,7 @@
 #'
 #' Sparse PCA (\code{do.spca}) is a variant of PCA in that each loading - or, principal
 #' component - should be sparse. Instead of using generic optimization package,
-#' we opt for formulating a problem as semidefinite relaxation and utilizing ADMM. For more details
-#' of modeling and algorithmic aspects, please see \code{\link[ADMM]{admm.spca}}.
+#' we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
@@ -21,7 +20,7 @@
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{history}{a length-\code{ndim} list where each element is an iteration history. See \code{\link[ADMM]{admm.spca}} for more details.}
+#' \item{history}{a length-\code{ndim} list where each element is an iteration history.}
 #' }
 #'
 #'
@@ -50,7 +49,7 @@
 #'
 #' \insertRef{ma_alternating_2013}{ADMM}
 #'
-#' @seealso \code{\link{do.pca}}, \code{\link[ADMM]{admm.spca}}
+#' @seealso \code{\link{do.pca}}
 #' @author Kisung You
 #' @rdname linear_SPCA
 #' @export
