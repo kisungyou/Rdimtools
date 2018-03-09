@@ -168,8 +168,9 @@ arma::mat method_tsne(arma::mat& P, const int ndim, const double eta,
 Rcpp::List method_eigenmaps(arma::mat& W){
   // 4-1. setting
   const int n = W.n_cols;
-  if (W.n_rows!=n){
-    Rcpp::stop("ERROR : not a symmetric one in size.");
+  const int m = W.n_rows;
+  if (m!=n){
+    Rcpp::stop("ERROR : not a square matrix W.");
   }
 
   // 4-2. compute a normalized graph laplacian
@@ -525,7 +526,7 @@ arma::mat method_spe(arma::mat& R, arma::mat& iX, const int C, const int S,
                      double lambda, double drate, arma::mat matselector){
   // 1. setup
   arma::mat X = iX;
-  const int nrowX = iX.n_rows;
+  // const int nrowX = iX.n_rows; // unused flag
   const double tolerance = 0.00001;
   double denomeps = 0.0000001;
 
@@ -573,8 +574,8 @@ arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
                       double lambda, double drate, arma::mat matselector, const double cutoff){
   // 1. setup
   arma::mat X = iX;
-  const int nrowX = iX.n_rows;
-  const double tolerance = 0.00001;
+  // const int nrowX = iX.n_rows;      // unused flag on windows
+  // const double tolerance = 0.00001; // unused flag
   double denomeps = 0.0000001;
 
   // 2. let's iterate
@@ -640,7 +641,7 @@ arma::mat method_crca_dist(arma::mat RowMat){
 Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double alpha, const int maxiter, const double tolerance, arma::vec& vecselector){
   // 1. get parameters
   const int n = Yinit.n_rows;
-  const int ndim = Yinit.n_cols;
+  // const int ndim = Yinit.n_cols; :: unused flag from windows
 
   // 2. settings
   arma::mat Y = Yinit; // deep copy

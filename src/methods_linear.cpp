@@ -44,7 +44,7 @@ Rcpp::List method_pca(arma::mat& psdX){
 //' @keywords internal
 // [[Rcpp::export]]
 Rcpp::List method_mds(arma::mat& centerX){
-  const int n = centerX.n_cols;
+  // const int n = centerX.n_cols; // unused flag
   // X(centered) = U*S*V.t()
   mat U;
   vec s;
@@ -232,7 +232,7 @@ Rcpp::List method_ica(arma::mat& X, const int C, const int maxiter,
 // [[Rcpp::export]]
 Rcpp::List method_rpgauss(arma::mat& X, const int k){
   // 5-1. setting
-  const int n = X.n_rows;
+  // const int n = X.n_rows; // unused flag
   const int d = X.n_cols;
   mat R(d,k);
   mat G = (randu<mat>(d,k));
@@ -332,7 +332,7 @@ Rcpp::List method_fa(arma::mat& X, const int k, const int maxiter, const double 
 // [[Rcpp::export]]
 Rcpp::List method_npe(arma::mat& X, arma::mat& W){
   // 08-1. basic settings
-  const int n = X.n_rows;
+  // const int n = X.n_rows; // unused flag
   const int m = X.n_cols;
   const int w1 = W.n_rows;
   const int w2 = W.n_cols;
@@ -371,7 +371,7 @@ Rcpp::List method_npe(arma::mat& X, arma::mat& W){
 // [[Rcpp::export]]
 arma::mat method_olpp(arma::mat& X, arma::mat& S, const int ndim){
   // 9-1. basic settings
-  const int n = S.n_cols;
+  // const int n = S.n_cols; // unused flag
   const int p = X.n_rows;
   // 9-2. laplacian
   arma::mat D = arma::diagmat(sum(S,1));
@@ -593,7 +593,7 @@ arma::vec method_kmmcvec(arma::mat& X, arma::mat& partmat, double param){
 double method_lfda_maximaldistance(arma::rowvec& tvec, arma::mat& tmat){
   // 1. get parameter
   const int N = tmat.n_rows;
-  const int p = tvec.n_elem;
+  // const int p = tvec.n_elem; // unused flag
 
   // 2. output : iteratively update
   double output = 0.0;
