@@ -2,8 +2,8 @@
 #'
 #' The simplest way of out-of-sample extension might be linear regression even though the original embedding
 #' is not the linear type by solving
-#' \deqn{\textrm{min}_{\beta} \|Xold \beta - Yold\|_2^2} and use the estimate \eqn{\hat{beta}} to acquire
-#' \deqn{Ynew = Xnew \hat{\beta}}. Due to the choice of original preprocessing, \code{trfinfo} must be brought
+#' \deqn{\textrm{min}_{\beta} \|X_{old} \beta - Y_{old}\|_2^2} and use the estimate \eqn{\hat{beta}} to acquire
+#' \deqn{Y_{new} = X_{new} \hat{\beta}}. Due to the choice of original preprocessing, \code{trfinfo} must be brought
 #' from the original model you trained.
 #'
 #' @param Xold an \eqn{(n\times p)} matrix of data in original high-dimensional space.
