@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data
 #' X <- aux.gensamples(n=28)
 #'
@@ -38,6 +39,7 @@
 #' par(mfrow=c(1,2))
 #' plot(output1$Y[,1],output1$Y[,2],main="10%")
 #' plot(output2$Y[,1],output2$Y[,2],main="25%")
+#' }
 #'
 #' @references
 #' \insertRef{cai_isometric_2007}{Rdimtools}

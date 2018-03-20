@@ -40,6 +40,7 @@ singular value decomposition and guesses intrinsic dimension by the number of po
 from the decomposition of data matrix, it automatically corrects the target dimension accordingly.
 }
 \examples{
+\dontrun{
 ## generate data
 X <- aux.gensamples(n=28)
 
@@ -53,6 +54,7 @@ output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
 par(mfrow=c(1,2))
 plot(output1$Y[,1],output1$Y[,2],main="10\%")
 plot(output2$Y[,1],output2$Y[,2],main="25\%")
+}
 
 }
 \references{
