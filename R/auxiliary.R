@@ -250,21 +250,6 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #' \item{\code{"mobius"}}{mobius strip embedded in R3}
 #' }
 #' @return an \eqn{(n\times 3)} matrix of generated data by row.
-#' @examples
-#' \dontrun{
-#' casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")
-#' if (requireNamespace("plot3D", quietly = TRUE)){
-#'    x11()
-#'    par(mfrow=c(3,3),pty="s")
-#'    for (i in 1:length(casenames)){
-#'       data = aux.gensamples(n=100,noise=runif(1)[1],dname=casenames[i])
-#'       x = data[,1]
-#'       y = data[,2]
-#'       z = data[,3]
-#'       scatter3D(x,y,z,col="gray",pch=18,main=casenames[i])
-#'    }
-#' }
-#' }
 #'
 #' @references
 #' \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}

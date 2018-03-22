@@ -35,23 +35,6 @@ an \eqn{(n\times 3)} matrix of generated data by row.
 It generates samples from predefined 3-d shapes, set by \code{dname} parameter.
 Also incorporated a functionality to add white noise with degree \code{noise}.
 }
-\examples{
-\dontrun{
-casenames = c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")
-if (requireNamespace("plot3D", quietly = TRUE)){
-   x11()
-   par(mfrow=c(3,3),pty="s")
-   for (i in 1:length(casenames)){
-      data = aux.gensamples(n=100,noise=runif(1)[1],dname=casenames[i])
-      x = data[,1]
-      y = data[,2]
-      z = data[,3]
-      scatter3D(x,y,z,col="gray",pch=18,main=casenames[i])
-   }
-}
-}
-
-}
 \references{
 \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
 }
