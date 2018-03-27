@@ -20,4 +20,3 @@ RoxygenNote: 6.0.1
 RdMacros: Rdpack
 URL: http://github.com/kisungyou/Rdimtools
 BugReports: http://github.com/kisungyou/Rdimtools/issues
-Suggests: plot3D
