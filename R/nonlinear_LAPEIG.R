@@ -26,6 +26,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss-roll dataset of size 100
 #' X <- aux.gensamples(n=100)
 #'
@@ -37,6 +38,7 @@
 #' par(mfrow=c(1,2))
 #' plot(out1$Y[,1],out1$Y[,2],main="weighted")
 #' plot(out2$Y[,1],out2$Y[,2],main="combinatorial")
+#' }
 #'
 #' @references
 #' \insertRef{belkin_laplacian_2003}{Rdimtools}

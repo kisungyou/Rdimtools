@@ -4,9 +4,10 @@
 \alias{do.klsda}
 \title{Kernel Locality Sensitive Discriminant Analysis}
 \usage{
-do.klsda(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "whiten", "decorrelate"), alpha = 0.5, k1 = max(ceiling(nrow(X)/10), 2),
-  k2 = max(ceiling(nrow(X)/10), 2), t = 1)
+do.klsda(X, label, ndim = 2, preprocess = c("center", "scale",
+  "cscale", "whiten", "decorrelate"), alpha = 0.5,
+  k1 = max(ceiling(nrow(X)/10), 2), k2 = max(ceiling(nrow(X)/10), 2),
+  t = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

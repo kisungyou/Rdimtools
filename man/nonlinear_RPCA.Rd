@@ -4,8 +4,9 @@
 \alias{do.rpca}
 \title{Robust Principal Component Analysis}
 \usage{
-do.rpca(X, mu = 1, lambda = sqrt(1/(max(dim(X)))), preprocess = c("null",
-  "center", "scale", "cscale", "decorrelate", "whiten"))
+do.rpca(X, mu = 1, lambda = sqrt(1/(max(dim(X)))),
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate",
+  "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

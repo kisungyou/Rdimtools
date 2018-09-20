@@ -4,8 +4,8 @@
 \alias{do.kpca}
 \title{Kernel Principal Component Analysis}
 \usage{
-do.kpca(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "whiten", "decorrelate"), kernel = c("gaussian", 1))
+do.kpca(X, ndim = 2, preprocess = c("null", "center", "scale",
+  "cscale", "whiten", "decorrelate"), kernel = c("gaussian", 1))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

@@ -32,7 +32,7 @@ arma::mat handy_plus(arma::mat& X){
  *    handy_hadamardABCsqrt  : A*sqrt(B/C) in R notation
  */
 // [[Rcpp::export]]
-arma::mat handy_hadamartABC(arma::mat& A, arma::mat& B, arma::mat& C){
+arma::mat handy_hadamardABC(arma::mat& A, arma::mat& B, arma::mat& C){
   const int n = A.n_rows;
   const int p = A.n_cols;
 
@@ -47,7 +47,7 @@ arma::mat handy_hadamartABC(arma::mat& A, arma::mat& B, arma::mat& C){
   return(output);
 }
 // [[Rcpp::export]]
-arma::mat handy_hadamartABCsqrt(arma::mat& A, arma::mat& B, arma::mat& C){
+arma::mat handy_hadamardABCsqrt(arma::mat& A, arma::mat& B, arma::mat& C){
   const int n = A.n_rows;
   const int p = A.n_cols;
 

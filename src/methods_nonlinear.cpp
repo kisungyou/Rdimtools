@@ -691,3 +691,5 @@ Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double a
   return Rcpp::List::create(Rcpp::Named("Y")=Y,
                             Rcpp::Named("niter")=t);
 }
+
+

@@ -6,7 +6,8 @@
 \usage{
 do.lfda(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
   "decorrelate", "whiten"), type = c("proportion", 0.1),
-  symmetric = c("union", "intersect", "asymmetric"), localscaling = TRUE)
+  symmetric = c("union", "intersect", "asymmetric"),
+  localscaling = TRUE)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -32,6 +32,7 @@ Kernel Maximum Margin Criterion (KMMC) is a nonlinear variant of MMC method usin
 For computational simplicity, only the gaussian kernel is used with bandwidth parameter \code{t}.
 }
 \examples{
+\dontrun{
 ## generate 3 different groups of data X and label vector
 x1 = matrix(rnorm(4*10), nrow=10)-20
 x2 = matrix(rnorm(4*10), nrow=10)
@@ -49,6 +50,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="bandwidth=0.1")
 plot(out2$Y[,1], out2$Y[,2], main="bandwidth=1")
 plot(out3$Y[,1], out3$Y[,2], main="bandwidth=10.0")
+}
 
 }
 \references{

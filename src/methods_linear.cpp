@@ -646,7 +646,7 @@ arma::mat method_nnprojmax(arma::mat& C, arma::mat& Uinit, const double tol, con
     term2 = C2*Uold + Uold*Uold.t()*C1*Uold;
 
     // 3-2. update U
-    Unew = handy_hadamartABCsqrt(Uold, term1, term2);
+    Unew = handy_hadamardABCsqrt(Uold, term1, term2);
 
     // 3-3. update incstop
     incstop = arma::norm(Uold-Unew,"fro")/arma::norm(Uold,"fro");
@@ -692,7 +692,7 @@ arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, con
     term2 = C1*Uold + Uold*Uold.t()*C2*Uold;
 
     // 3-2. update U
-    Unew = handy_hadamartABCsqrt(Uold, term1, term2);
+    Unew = handy_hadamardABCsqrt(Uold, term1, term2);
 
     // 3-3. update incstop
     incstop = arma::norm(Uold-Unew,"fro")/arma::norm(Uold,"fro");
@@ -745,7 +745,7 @@ arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit, const double tol, co
     term2 = Yold*M1 + Yold*M2*Yold.t()*Yold;
 
     // 3-2. update U
-    Ynew = handy_hadamartABCsqrt(Yold, term1, term2);
+    Ynew = handy_hadamardABCsqrt(Yold, term1, term2);
 
     // 3-3. update incstop
     incstop = arma::norm(Yold-Ynew,"fro")/arma::norm(Yold,"fro");

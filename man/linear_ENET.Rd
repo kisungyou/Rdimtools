@@ -4,9 +4,9 @@
 \alias{do.enet}
 \title{Elastic Net Regularization}
 \usage{
-do.enet(X, response, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "decorrelate", "whiten"), ycenter = FALSE, lambda1 = 1,
-  lambda2 = 1)
+do.enet(X, response, ndim = 2, preprocess = c("null", "center",
+  "scale", "cscale", "decorrelate", "whiten"), ycenter = FALSE,
+  lambda1 = 1, lambda2 = 1)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

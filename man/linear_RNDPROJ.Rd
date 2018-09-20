@@ -4,9 +4,9 @@
 \alias{do.rndproj}
 \title{Random Projection}
 \usage{
-do.rndproj(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "whiten", "decorrelate"), type = c("gaussian", "achlioptas", "sparse"),
-  s = max(sqrt(ncol(X)), 3))
+do.rndproj(X, ndim = 2, preprocess = c("null", "center", "scale",
+  "cscale", "whiten", "decorrelate"), type = c("gaussian", "achlioptas",
+  "sparse"), s = max(sqrt(ncol(X)), 3))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

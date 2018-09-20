@@ -21,6 +21,7 @@
 # 16. aux.pinv             : use SVD and NumPy scheme
 # 17. aux.bicgstab         : due to my stupidity, now Rlinsolve can't be used.
 # 18. aux_oosprocess       : data processign for oos prediction
+# 19. aux_findmaxidx       : find the row and column index of maximal elements
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1503,4 +1504,17 @@ aux.oospreprocess <- function(data, trfinfo){
     output = output*multiplier
   }
   return(output)
+}
+
+# 19. aux_findmaxidx       : find the row and column index of maxi --------
+#' @keywords internal
+#' @noRd
+aux.findmaxidx <- function(A){
+  # 19. aux_findmaxidx       : find the row and column index of maximal elements
+  output = which(A==max(A), arr.ind=TRUE)
+  if (nrow(output)>1){
+    return(output[1,])
+  } else {
+    return(output)
+  }
 }

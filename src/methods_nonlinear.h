@@ -41,4 +41,5 @@ arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
                       double lambda, double drate, arma::mat matselector, const double cutoff);
 // 11. CRCA : Curvilinear Component Analysis
 Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double alpha, const int maxiter, const double tolerance, arma::vec& vecselector);
+
 #endif

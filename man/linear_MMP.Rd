@@ -5,8 +5,8 @@
 \title{Maximum Margin Projection}
 \usage{
 do.mmp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), numk = max(ceiling(nrow(X)/10), 2), alpha = 0.5,
-  gamma = 50)
+  "decorrelate", "whiten"), numk = max(ceiling(nrow(X)/10), 2),
+  alpha = 0.5, gamma = 50)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

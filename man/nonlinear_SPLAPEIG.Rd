@@ -4,8 +4,8 @@
 \alias{do.splapeig}
 \title{Supervised Laplacian Eigenmaps}
 \usage{
-do.splapeig(X, label, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "whiten", "decorrelate"), beta = 1, gamma = 0.5)
+do.splapeig(X, label, ndim = 2, preprocess = c("null", "center",
+  "scale", "cscale", "whiten", "decorrelate"), beta = 1, gamma = 0.5)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

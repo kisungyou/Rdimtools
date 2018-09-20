@@ -4,8 +4,8 @@
 \alias{do.pflpp}
 \title{Parameter-Free Locality Preserving Projection}
 \usage{
-do.pflpp(X, ndim = 2, preprocess = c("center", "scale", "cscale", "whiten",
-  "decorrelate"))
+do.pflpp(X, ndim = 2, preprocess = c("center", "scale", "cscale",
+  "whiten", "decorrelate"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}
