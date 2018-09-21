@@ -120,6 +120,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.dm}} \tab U \tab Diffusion Maps \cr
 \code{\link{do.dve}} \tab U \tab Distinguishing Variance Embedding \cr
 \code{\link{do.fastmap}} \tab U \tab FastMap \cr
+\code{\link{do.idmap}} \tab U \tab Interactive Document Map \cr
 \code{\link{do.iltsa}} \tab U \tab Improved Local Tangent Space Alignment \cr
 \code{\link{do.isomap}} \tab U \tab Isometric Feature Mapping \cr
 \code{\link{do.ispe}} \tab U \tab Isometric Stochastic Proximity Embedding \cr
@@ -132,12 +133,14 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.kpca}} \tab U \tab Kernel Principal Component Analysis \cr
 \code{\link{do.kqmi}} \tab S \tab Kernel Quadratic Mutual Information \cr
 \code{\link{do.ksda}} \tab SS \tab Kernel Semi-Supervised Discriminant Analysis \cr
+\code{\link{do.lamp}} \tab U \tab Local Affine Multidimensional Scaling \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr
 \code{\link{do.lle}} \tab U \tab Locally Linear Embedding \cr
 \code{\link{do.ltsa}} \tab U \tab Local Tangent Space Alignment \cr
 \code{\link{do.mve}} \tab U \tab Minimum Volume Embedding \cr
 \code{\link{do.mvu}} \tab U \tab Maximum Variance Unfolding / Semidefinite Embedding \cr
+\code{\link{do.nnp}} \tab U \tab Nearest Neighbor Projection \cr
 \code{\link{do.plp}} \tab U \tab Piecewise Laplacian Projection \cr
 \code{\link{do.ree}} \tab U \tab Robust Euclidean Embedding \cr
 \code{\link{do.rpca}}\tab U \tab Robust Principal Component Analysis \cr

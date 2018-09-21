@@ -77,10 +77,7 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
   #   type        : vector of c("knn",k), c("enn",radius), or c("proportion",ratio)
   #                 set default for "proportion" of 20%
 
-  if (!is.element(preprocess,c("null","center","whiten","decorrelate"))){
-    stop("* do.plp : 'preprocess' should have one of 4 values.")
-  }
-  nbdtype = type
+    nbdtype = type
 
   # 3. Run
   #   3-1. preprocess

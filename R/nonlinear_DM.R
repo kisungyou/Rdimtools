@@ -65,9 +65,6 @@ do.dm <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorr
   #   timescale      : 1(default) or a real number >  0
   #   threshold      : 1e-7(default)
 
-  if (!is.element(preprocess,c("null","whiten","center","decorrelate"))){
-    stop("* do.dm : 'preprocess' should have one of 4 values.")
-  }
   if (missing(preprocess)){
     algpreprocess = "null"
   } else {

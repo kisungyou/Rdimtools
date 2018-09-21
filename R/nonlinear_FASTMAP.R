@@ -69,7 +69,7 @@ do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale",
     idb    = maxidx[2]
     # 3-2. precompute some values
     dab2  = (sum(as.vector(pX[ida,]-pX[idb,])^2))
-    if (dab2 > 10*.Machine$double.eps){
+    if (dab2 > 1234*.Machine$double.eps){
       dab   = sqrt(dab2)
       # 3-3. compute coefficient
       for (j in 1:n){
@@ -80,7 +80,8 @@ do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale",
     # 3-4. update D : compute and alter
     for (it1 in 1:n){
       for (it2 in 1:n){
-        Dnew[it1,it2] = sqrt((Dold[it1,it2]^2) - ((output[it1,i]-output[it2,i])^2))
+        theval = sqrt((Dold[it1,it2]^2) - ((output[it1,i]-output[it2,i])^2))
+        Dnew[it1,it2] = theval
       }
     }
     Dold = Dnew
