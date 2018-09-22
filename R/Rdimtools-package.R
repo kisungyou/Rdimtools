@@ -148,6 +148,7 @@
 #' FUNCTION \tab TYPE \tab ALGORITHM \cr
 #' \code{\link{est.boxcount}}    \tab G \tab Box-Counting Dimension \cr
 #' \code{\link{est.correlation}} \tab G \tab Correlation Dimension \cr
+#' \code{\link{est.incisingball}} \tab G \tab Incising Ball \cr
 #' \code{\link{est.pcathr}}      \tab G \tab PCA Thresholding with Accumulated Variance
 #' }
 #' where the taxonomy is of \emph{global}(G), \emph{local}(L), and \emph{pointwise}(P).
@@ -190,8 +191,8 @@
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm Matrix
 #' @importFrom Rtsne Rtsne
-#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx
-#' @importFrom graphics par image plot
+#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coefficients
+#' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp
 #' @useDynLib Rdimtools
 NULL

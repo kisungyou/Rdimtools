@@ -1,4 +1,4 @@
-#' Box-counting dimension
+#' Box-counting Dimension
 #'
 #' Box-counting dimension, also known as Minkowski-Bouligand dimension, is a popular way of figuring out
 #' the fractal dimension of a set in a Euclidean space. Its idea is to measure the number of boxes
@@ -16,7 +16,7 @@
 #' maximum distance among all pairs of data points across all coordinates. \code{nlevel} controls the number of interim points
 #' in a log-equidistant manner.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param nlevel the number of \code{r} (radius) to be tested.
 #' @param cut a vector of ratios for computing estimated dimension in \eqn{(0,1)}.
 #'

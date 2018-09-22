@@ -7,7 +7,7 @@
 est.correlation(X, nlevel = 50, cut = c(0.1, 0.9))
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations.}
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
 
 \item{nlevel}{the number of \code{r} (radius) to be tested.}
 

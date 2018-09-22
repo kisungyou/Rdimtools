@@ -7,7 +7,7 @@
 #' linear submanifold case, the naive selection scheme from this algorithm
 #' lacks flexibility in discovering intrinsic dimension.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param varratio target explainability for accumulated variance in \eqn{(0,1)}.
 #'
 #' @return a named list containing containing \describe{

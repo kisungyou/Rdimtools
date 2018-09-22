@@ -7,7 +7,7 @@
 est.pcathr(X, varratio = 0.95)
 }
 \arguments{
-\item{X}{an \code{(n-by-p)} matrix or data frame whose rows are observations.}
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
 
 \item{varratio}{target explainability for accumulated variance in \eqn{(0,1)}.}
 }

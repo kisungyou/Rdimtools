@@ -17,7 +17,7 @@
 #' maximum distance among all pairs of data points across all coordinates. \code{nlevel} controls the number of interim points
 #' in a log-equidistant manner.
 #'
-#' @param X an \code{(n-by-p)} matrix or data frame whose rows are observations.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param nlevel the number of \code{r} (radius) to be tested.
 #' @param cut a vector of ratios for computing estimated dimension in \eqn{(0,1)}.
 #'

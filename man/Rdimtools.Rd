@@ -159,6 +159,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{est.boxcount}}    \tab G \tab Box-Counting Dimension \cr
 \code{\link{est.correlation}} \tab G \tab Correlation Dimension \cr
+\code{\link{est.incisingball}} \tab G \tab Incising Ball \cr
 \code{\link{est.pcathr}}      \tab G \tab PCA Thresholding with Accumulated Variance
 }
 where the taxonomy is of \emph{global}(G), \emph{local}(L), and \emph{pointwise}(P).
