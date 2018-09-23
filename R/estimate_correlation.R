@@ -102,7 +102,9 @@ est.correlation <- function(X,nlevel=50,cut=c(0.1,0.9)){
   vecCt   = vecCm[idxtrim] # trimmed vecCm
   nnn     = length(vecrt)  # number of saved ones
 
-  estdim   = (log(vecCt[nnn])-log(vecCt[1]))/(log(vecrt[nnn])-log(vecrt[1]))
+
+
+  estdim   = sum(coef(lm(log(vecCt)~log(vecrt)))[2])
 
 
   #   5-3. show and return

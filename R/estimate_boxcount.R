@@ -107,7 +107,7 @@ est.boxcount <- function(X,nlevel=50,cut=c(0.1,0.9)){
   vecrtrim = vecr[idxtrim]
   vecNtrim = vecN[idxtrim]
   nnn      = length(vecrtrim)
-  estdim   = (log(vecNtrim[nnn])-log(vecNtrim[1]))/(log(1/vecrtrim[nnn])-log(1/vecrtrim[1]))
+  estdim   = sum(coef(lm(log(vecNtrim)~log(1/vecrtrim)))[2]) # lm fitting
 
 
   #   5-3. show and return
@@ -140,16 +140,19 @@ approx_boxcount <- function(r, Nr, nlevel){
 #' @keywords internal
 #' @noRd
 fractal_trimmer <- function(counts, cut){
+  cut = sort(cut)
   counts = log(counts)
-  if (min(counts)<=0){
-    data = counts + abs(min(counts))
+  fmin   = min(counts[is.finite(counts)])
+  if (fmin <= 0){
+    data = counts + abs(fmin)
   } else {
     data = counts
   }
 
-  maxvalue = max(data)
+  finite   = which(is.finite(data))
+  maxvalue = max(data[is.finite(data)])
   thr1     = maxvalue*min(cut)
   thr2     = maxvalue*max(cut)
-  idx = intersect(which(data>=thr1), which(data<=thr2))
+  idx = intersect(intersect(which(data>=thr1), which(data<=thr2)), finite)
   return(idx)
 }
