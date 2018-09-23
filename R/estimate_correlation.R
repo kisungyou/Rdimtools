@@ -54,7 +54,6 @@
 #' @seealso \code{\link{est.boxcount}}
 #' @rdname estimate_correlation
 #' @export
-
 est.correlation <- function(X,nlevel=50,cut=c(0.1,0.9)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
