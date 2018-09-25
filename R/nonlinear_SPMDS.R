@@ -185,6 +185,7 @@ do.spmds.approxMDS <- function(D, sample, Phi, lambda, dim_o){
   eigvals = eigQ1$values # adjust for negative ones
   eigvals[(eigvals<=sqrt(.Machine$double.eps))] = sqrt(.Machine$double.eps)
 
-  Q = (1/sqrt(2))*S%*%S2%*%diag(sqrt(eigvals))
+  # Q = (1/sqrt(2))*S%*%S2%*%diag(sqrt(eigvals))
+  Q = S%*%S2%*%diag(sqrt(eigvals))
   return(Q[,1:dim_o])
 }
