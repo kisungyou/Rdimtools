@@ -158,14 +158,15 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \bold{\code{est.}} family of functions include,
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab ALGORITHM \cr
-\code{\link{est.boxcount}}    \tab G \tab Box-Counting Dimension \cr
-\code{\link{est.correlation}} \tab G \tab Correlation Dimension \cr
-\code{\link{est.mle1}}        \tab G \tab MLE using Poisson Process \cr
-\code{\link{est.mle2}}        \tab G \tab MLE using Poisson Process with Bias Correction \cr
+\code{\link{est.boxcount}}      \tab G \tab Box-Counting Dimension \cr
+\code{\link{est.correlation}}   \tab G \tab Correlation Dimension \cr
+\code{\link{est.mle1}}          \tab G \tab MLE using Poisson Process \cr
+\code{\link{est.mle2}}          \tab G \tab MLE using Poisson Process with Bias Correction \cr
 \code{\link{est.nearneighbor1}} \tab G \tab Near-Neighbor Information \cr
 \code{\link{est.nearneighbor2}} \tab G \tab Near-Neighbor Information with Bias Correction \cr
-\code{\link{est.incisingball}} \tab G \tab Incising Ball \cr
-\code{\link{est.pcathr}}      \tab G \tab PCA Thresholding with Accumulated Variance
+\code{\link{est.incisingball}}  \tab G \tab Incising Ball \cr
+\code{\link{est.pcathr}}        \tab G \tab PCA Thresholding with Accumulated Variance \cr
+\code{\link{est.twonn}}         \tab G \tab aaaaaaaaaaaaaaaaaa
 }
 where the taxonomy is of \emph{global}(G), \emph{local}(L), and \emph{pointwise}(P).
 }

@@ -25,6 +25,7 @@
 #' @references
 #' \insertRef{pettis_intrinsic_1979}{Rdimtools}
 #'
+#' @author Kisung You
 #' @export
 est.nearneighbor1 <- function(X, K=max(2,round(ncol(X)/5))){
   ##########################################################################

@@ -35,3 +35,6 @@ sprintf("* est.nearneighbor1 : estimated dimension is \%.2f.",output$estdim)
 \references{
 \insertRef{pettis_intrinsic_1979}{Rdimtools}
 }
+\author{
+Kisung You
+}
