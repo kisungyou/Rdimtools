@@ -139,6 +139,7 @@
 #' \code{\link{do.sne}} \tab U \tab Stochastic Neighbor Embedding \cr
 #' \code{\link{do.spe}} \tab U \tab Stochastic Proximity Embedding \cr
 #' \code{\link{do.splapeig}} \tab S \tab Supervised Laplacian Eigenmaps \cr
+#' \code{\link{do.spmds}} \tab U \tab Spectral Multidimensional Scaling \cr
 #' \code{\link{do.tsne}} \tab U \tab t-distributed Stochastic Neighbor Embedding
 #' }
 #'
