@@ -14,7 +14,7 @@ html_preview: false
 ![](http://cranlogs.r-pkg.org/badges/Rdimtools?color=blue)
 
 Rdimtools is an R package for Dimension Reduction (also known as Manifold Learning) and intrinsic Dimension Estimation methods. 
-The philosophy is simple: the more we have at hands, the better we can sell.
+The philosophy is simple: the more we have at hands, the better we can play.
 
 ## Installation
 
