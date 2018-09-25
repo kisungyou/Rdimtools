@@ -50,7 +50,7 @@ a named list containing
 }
 }
 \description{
-t-distributed Stochastic Neighbor Embedding (t-SNE) is a variant of Stochastic Neighbor Embedding (SNE)
+\eqn{t}-distributed Stochastic Neighbor Embedding (t-SNE) is a variant of Stochastic Neighbor Embedding (SNE)
 that mimicks patterns of probability distributinos over pairs of high-dimensional objects on low-dimesional
 target embedding space by minimizing Kullback-Leibler divergence. While conventional SNE uses gaussian
 distributions to measure similarity, t-SNE, as its name suggests, exploits a heavy-tailed Student t-distribution.
