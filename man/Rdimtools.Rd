@@ -159,16 +159,21 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{est.boxcount}}      \tab G \tab Box-Counting Dimension \cr
+\code{\link{est.clustering}}    \tab G \tab Clustering-based Estimation \cr
 \code{\link{est.correlation}}   \tab G \tab Correlation Dimension \cr
+\code{\link{est.made}}          \tab G/P \tab Manifold-Adaptive Dimension Estimation \cr
 \code{\link{est.mle1}}          \tab G \tab MLE using Poisson Process \cr
 \code{\link{est.mle2}}          \tab G \tab MLE using Poisson Process with Bias Correction \cr
 \code{\link{est.nearneighbor1}} \tab G \tab Near-Neighbor Information \cr
 \code{\link{est.nearneighbor2}} \tab G \tab Near-Neighbor Information with Bias Correction \cr
-\code{\link{est.incisingball}}  \tab G \tab Incising Ball \cr
+\code{\link{est.incisingball}}  \tab G \tab Estimation using Incising Ball \cr
+\code{\link{est.packing}}       \tab G \tab Estimation using Packing Numbers  \cr
 \code{\link{est.pcathr}}        \tab G \tab PCA Thresholding with Accumulated Variance \cr
-\code{\link{est.twonn}}         \tab G \tab aaaaaaaaaaaaaaaaaa
+\code{\link{est.twonn}}         \tab G \tab Minimal Neighborhood Information \cr
+\code{\link{est.Ustat}}         \tab G \tab Convergence Rate of U-statistic
 }
-where the taxonomy is of \emph{global}(G), \emph{local}(L), and \emph{pointwise}(P).
+where the taxonomy is of \emph{global}(G) or \emph{pointwise}(P). \emph{Global} methods return a single estimated dimension
+of the data manifold, whereas \emph{Pointwise} methods return locally estimated intrinsic dimension at each point.
 }
 
 \section{(3) \code{oos.} family for out-of-sample predictions}{

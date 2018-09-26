@@ -4,16 +4,14 @@
 \alias{aux.gensamples}
 \title{Generate model-based samples}
 \usage{
-aux.gensamples(n = 496, noise = 0.01, ntwist = 10,
-  dname = c("swiss", "crown", "helix", "saddle", "ribbon", "bswiss",
-  "cswiss", "twinpeaks", "sinusoid"))
+aux.gensamples(n = 496, noise = 0.01, dname = c("swiss", "crown",
+  "helix", "saddle", "ribbon", "bswiss", "cswiss", "twinpeaks", "sinusoid",
+  "mobius", "R12in72"), ...)
 }
 \arguments{
 \item{n}{the number of points to be generated.}
 
 \item{noise}{level of additive white noise.}
-
-\item{ntwist}{number of twists for \code{mobius} method.}
 
 \item{dname}{name of a predefined shape. Should be one of \describe{
 \item{\code{"swiss"}}{swiss roll}
@@ -25,7 +23,13 @@ aux.gensamples(n = 496, noise = 0.01, ntwist = 10,
 \item{\code{"cswiss"}}{cut swiss}
 \item{\code{"twinpeaks"}}{two peaks}
 \item{\code{"sinusoid"}}{sinusoid on the circle}
-\item{\code{"mobius"}}{mobius strip embedded in R3}
+\item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbb{R}^3}}
+\item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbb{R}^12}}
+}}
+
+\item{...}{extra parameters for the followings #' \tabular{lll}{
+parameter \tab dname \tab description \cr
+\code{ntwist} \tab \code{"mobius"} \tab number of twists
 }}
 }
 \value{
@@ -36,6 +40,8 @@ It generates samples from predefined 3-d shapes, set by \code{dname} parameter.
 Also incorporated a functionality to add white noise with degree \code{noise}.
 }
 \references{
+\insertRef{hein_intrinsic_2005}{Rdimtools}
+
 \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
 }
 \author{

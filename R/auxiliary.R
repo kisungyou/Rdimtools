@@ -20,8 +20,9 @@
 # 15. aux.traceratio.max   : compute trace ratio problem for maximal basis
 # 16. aux.pinv             : use SVD and NumPy scheme
 # 17. aux.bicgstab         : due to my stupidity, now Rlinsolve can't be used.
-# 18. aux_oosprocess       : data processign for oos prediction
-# 19. aux_findmaxidx       : find the row and column index of maximal elements
+# 18. aux.oosprocess       : data processign for oos prediction
+# 19. aux.findmaxidx       : find the row and column index of maximal elements
+# 20. aux.randpartition    : given 1:n, divide it into K random partitions without replacement
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -237,7 +238,7 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #'
 #' @param n the number of points to be generated.
 #' @param noise level of additive white noise.
-#' @param ntwist number of twists for \code{mobius} method.
+#'
 #' @param dname name of a predefined shape. Should be one of \describe{
 #' \item{\code{"swiss"}}{swiss roll}
 #' \item{\code{"crown"}}{crown}
@@ -248,23 +249,40 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #' \item{\code{"cswiss"}}{cut swiss}
 #' \item{\code{"twinpeaks"}}{two peaks}
 #' \item{\code{"sinusoid"}}{sinusoid on the circle}
-#' \item{\code{"mobius"}}{mobius strip embedded in R3}
+#' \item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbb{R}^3}}
+#' \item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbb{R}^12}}
 #' }
+#' @param ... extra parameters for the followings #' \tabular{lll}{
+#' parameter \tab dname \tab description \cr
+#' \code{ntwist} \tab \code{"mobius"} \tab number of twists
+#' }
+#'
 #' @return an \eqn{(n\times 3)} matrix of generated data by row.
 #'
 #' @references
+#' \insertRef{hein_intrinsic_2005}{Rdimtools}
+#'
 #' \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname aux_gensamples
 #' @export
-aux.gensamples <- function(n=496,noise=0.01,ntwist=10,
-                           dname=c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid")){
+aux.gensamples <- function(n=496,noise=0.01,
+                           dname=c("swiss","crown","helix","saddle","ribbon","bswiss","cswiss","twinpeaks","sinusoid",
+                                   "mobius","R12in72"), ...){
   #params = as.list(environment())
   n     = as.integer(n)
   noise = as.double(noise)
-  dtype = match.arg(dname)
-  ntwist= as.integer(ntwist)
+  dtype = (match.arg(dname))
+
+  ## extra parameters
+  extrapar = list(...)
+  #   1. ntwist
+  if ("ntwist" %in% names(extrapar)){
+    ntwist = as.integer(extrapar$ntwist)
+  } else {
+    ntwist= as.integer(10)
+  }
   if ((ntwist<1)||(is.na(ntwist))||(length(ntwist)>1)||(is.infinite(ntwist))){
     stop("* aux.gensamples : 'ntwist' should be a positive integer.")
   }
@@ -371,6 +389,19 @@ aux.gensamples <- function(n=496,noise=0.01,ntwist=10,
     hz = (u/2)*sin(ntwist*v/2)
 
     highD = cbind(hx,hy,hz)+matrix(rnorm(n*3,sd=noise),nrow=n)
+  } else if (dtype=="R12in72"){
+    xi = array(0,c(n,24)) # without noise
+    for (it in 1:n){
+      alpha = runif(12)
+      for (i in 1:11){
+        xi[it,(2*i-1)] = alpha[i+1]*cos(2*pi*alpha[i])
+        xi[it,2*i]     = alpha[i+1]*sin(2*pi*alpha[i])
+      }
+      xi[it,23] = alpha[1]*cos(2*pi*alpha[12])
+      xi[it,24] = alpha[1]*sin(2*pi*alpha[12])
+    }
+
+    highD = cbind(xi,xi,xi) + matrix(rnorm(n*72,sd=noise),nrow=n)
   }
   return(highD)
 }
@@ -1517,4 +1548,26 @@ aux.findmaxidx <- function(A){
   } else {
     return(output)
   }
+}
+
+
+# 20. aux.randpartition ---------------------------------------------------
+#     given 1:n, divide it into K random partitions without replacement
+#' @keywords internal
+#' @noRd
+aux.randpartition <- function(n, K){
+  output = list()
+  if (K==1){
+    output = list()
+    output[[1]] = 1:n
+  } else {
+    listall = 1:n
+    singleK = round(n/K)
+    for (i in 1:(K-1)){
+      output[[i]] = sample(listall, singleK, replace = FALSE)
+      listall = setdiff(listall, output[[i]])
+    }
+    output[[K]] = listall
+  }
+  return(output)
 }
