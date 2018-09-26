@@ -32,6 +32,7 @@ out1 = est.twonn(X1)
 out2 = est.twonn(X2)
 out3 = est.twonn(X3)
 
+## print the results
 sprintf("* est.twonn : estimated dimension for 'swiss'  data is \%.2f.",out1$estdim)
 sprintf("* est.twonn : estimated dimension for 'ribbon' data is \%.2f.",out2$estdim)
 sprintf("* est.twonn : estimated dimension for 'saddle' data is \%.2f.",out3$estdim)
