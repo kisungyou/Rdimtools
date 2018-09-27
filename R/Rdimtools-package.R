@@ -202,7 +202,7 @@
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm Matrix
 #' @importFrom Rtsne Rtsne
-#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile
+#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median
 #' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp
 #' @useDynLib Rdimtools
