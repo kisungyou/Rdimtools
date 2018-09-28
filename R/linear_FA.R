@@ -23,6 +23,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data
 #' X = aux.gensamples(n=496)
 #'
@@ -40,10 +41,10 @@
 #' plot(output1$Y[,1],output1$Y[,2],main="centered")
 #' plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
 #' plot(output3$Y[,1],output3$Y[,2],main="whitened")
+#' }
 #'
 #' @references
 #' \insertRef{spearman_general_1904}{Rdimtools}
-#'
 #'
 #' @rdname linear_FA
 #' @author Kisung You

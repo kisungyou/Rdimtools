@@ -249,8 +249,8 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #' \item{\code{"cswiss"}}{cut swiss}
 #' \item{\code{"twinpeaks"}}{two peaks}
 #' \item{\code{"sinusoid"}}{sinusoid on the circle}
-#' \item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbb{R}^3}}
-#' \item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbb{R}^12}}
+#' \item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbf{R}^3}}
+#' \item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbf{R}^{12}}}
 #' }
 #' @param ... extra parameters for the followings #' \tabular{lll}{
 #' parameter \tab dname \tab description \cr

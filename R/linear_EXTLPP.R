@@ -20,6 +20,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate data
 #' X <- aux.gensamples(n=123)
 #'
@@ -33,6 +34,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="k=5")
 #' plot(out2$Y[,1], out2$Y[,2], main="k=10")
 #' plot(out3$Y[,1], out3$Y[,2], main="k=25")
+#' }
 #'
 #' @references
 #' \insertRef{shikkenawis_improving_2012}{Rdimtools}

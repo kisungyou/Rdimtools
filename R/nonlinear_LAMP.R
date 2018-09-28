@@ -6,7 +6,7 @@
 #' and then locates the rest data using affine mapping. We use \eqn{\sqrt{n}} number
 #' of data as controls and Stochastic Neighborhood Embedding is applied as an
 #' initial projection of control set. Note that this belongs to the method for
-#' visualization so projection onto \eqn{\mathbb{R}^2} is suggested for use.
+#' visualization so projection onto \eqn{\mathbf{R}^2} is suggested for use.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
@@ -117,3 +117,5 @@ do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","wh
   result$trfinfo  = trfinfo
   return(result)
 }
+
+

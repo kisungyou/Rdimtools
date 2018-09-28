@@ -27,9 +27,9 @@
 #' }
 #'
 #'@examples
-#'# generate data
-#'## in order to pass CRAN pretest, n is set to be small.
-#'X <- aux.gensamples(n=28)
+#'\dontrun{
+#'## generate data of 100 observations
+#'X <- aux.gensamples(n=100)
 #'
 #'## 1. use logcosh function for transformation
 #'output1 <- do.ica(X,ndim=2,type="logcosh")
@@ -45,6 +45,7 @@
 #'plot(output1$Y[,1],output1$Y[,2],main="logcosh")
 #'plot(output2$Y[,1],output2$Y[,2],main="exp")
 #'plot(output3$Y[,1],output3$Y[,2],main="poly")
+#'}
 #'
 #' @references
 #' \insertRef{hyvarinen_independent_2001}{Rdimtools}

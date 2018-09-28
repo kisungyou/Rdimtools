@@ -23,8 +23,8 @@ aux.gensamples(n = 496, noise = 0.01, dname = c("swiss", "crown",
 \item{\code{"cswiss"}}{cut swiss}
 \item{\code{"twinpeaks"}}{two peaks}
 \item{\code{"sinusoid"}}{sinusoid on the circle}
-\item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbb{R}^3}}
-\item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbb{R}^12}}
+\item{\code{"mobius"}}{mobius strip embedded in \eqn{\mathbf{R}^3}}
+\item{\code{"R12in72"}}{12-dimensional manifold in \eqn{\mathbf{R}^{12}}}
 }}
 
 \item{...}{extra parameters for the followings #' \tabular{lll}{

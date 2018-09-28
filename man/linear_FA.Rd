@@ -36,6 +36,7 @@ a named list containing
 explains similarities and intrinsic differences between a closely-related method of Principal Component Analysis (PCA).
 }
 \examples{
+\dontrun{
 ## generate data
 X = aux.gensamples(n=496)
 
@@ -53,6 +54,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="centered")
 plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
 plot(output3$Y[,1],output3$Y[,2],main="whitened")
+}
 
 }
 \references{

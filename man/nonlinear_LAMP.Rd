@@ -30,7 +30,7 @@ affine mapping. It first finds a low-dimensional embedding for control points
 and then locates the rest data using affine mapping. We use \eqn{\sqrt{n}} number
 of data as controls and Stochastic Neighborhood Embedding is applied as an
 initial projection of control set. Note that this belongs to the method for
-visualization so projection onto \eqn{\mathbb{R}^2} is suggested for use.
+visualization so projection onto \eqn{\mathbf{R}^2} is suggested for use.
 }
 \examples{
 \dontrun{
