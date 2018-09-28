@@ -137,6 +137,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.lapeig}} \tab U \tab Laplacian Eigenmaps \cr
 \code{\link{do.lisomap}} \tab U \tab Landmark Isometric Feature Mapping \cr
 \code{\link{do.lle}} \tab U \tab Locally Linear Embedding \cr
+\code{\link{do.llle}} \tab U \tab Local Linear Laplacian Eigenmaps \cr
 \code{\link{do.ltsa}} \tab U \tab Local Tangent Space Alignment \cr
 \code{\link{do.mve}} \tab U \tab Minimum Volume Embedding \cr
 \code{\link{do.mvu}} \tab U \tab Maximum Variance Unfolding / Semidefinite Embedding \cr
