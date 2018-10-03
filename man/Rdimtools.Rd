@@ -104,8 +104,10 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.sir}} \tab S \tab Sliced Inverse Regression \cr
 \code{\link{do.slpe}} \tab S \tab Supervised Locality Pursuit Embedding \cr
 \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
+\code{\link{do.spc}}  \tab S \tab Supervised Principal Component Analysis \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
 \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
+\code{\link{do.spufs}} \tab U \tab Structure Preserving Unsupervised Feature Selection \cr
 \code{\link{do.ssldp}} \tab SS \tab Semi-Supervised Locally Discriminant Projection \cr
 \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection \cr
 \code{\link{do.ulda}} \tab S \tab Uncorrelated Linear Discriminant Analysis

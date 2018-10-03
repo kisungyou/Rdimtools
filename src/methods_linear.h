@@ -53,5 +53,6 @@ arma::mat method_nnprojmax(arma::mat& C, arma::mat& Uinit,          // 15. NNPRO
 arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, const int maxiter);
 arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit,         // 16. NNEMBEDMIN
                             const double tol, const int maxiter);
+arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, double epsilon);
 
 #endif

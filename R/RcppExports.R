@@ -160,6 +160,11 @@ method_nnembedmin <- function(M, Yinit, tol, maxiter) {
 }
 
 #' @keywords internal
+method_spufs <- function(X, Ls, alpha, beta, epsilon) {
+    .Call('_Rdimtools_method_spufs', PACKAGE = 'Rdimtools', X, Ls, alpha, beta, epsilon)
+}
+
+#' @keywords internal
 NULL
 
 #' @keywords internal

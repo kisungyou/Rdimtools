@@ -41,6 +41,7 @@ the \emph{locality} concept is brought in that for each slice, only local data p
 are considered in order to discover intrinsic structure of the data.
 }
 \examples{
+\dontrun{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
 n = 123
@@ -66,6 +67,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="LSIR::nbd size=5")
 plot(out2$Y[,1], out2$Y[,2], main="LSIR::nbd size=10")
 plot(out3$Y[,1], out3$Y[,2], main="LSIR::nbd size=25")
+}
 
 }
 \references{

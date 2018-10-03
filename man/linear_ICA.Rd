@@ -44,9 +44,9 @@ the given data \eqn{X}. In order to preserve consistency throughout our package,
 the notation; \eqn{Y} a projected matrix for \eqn{S}, and \code{projection} for unmixing matrix \eqn{W}.
 }
 \examples{
-# generate data
-## in order to pass CRAN pretest, n is set to be small.
-X <- aux.gensamples(n=28)
+\dontrun{
+## generate data of 100 observations
+X <- aux.gensamples(n=100)
 
 ## 1. use logcosh function for transformation
 output1 <- do.ica(X,ndim=2,type="logcosh")
@@ -62,6 +62,7 @@ par(mfrow=c(1,3))
 plot(output1$Y[,1],output1$Y[,2],main="logcosh")
 plot(output2$Y[,1],output2$Y[,2],main="exp")
 plot(output3$Y[,1],output3$Y[,2],main="poly")
+}
 
 }
 \references{

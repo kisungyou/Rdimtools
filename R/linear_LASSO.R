@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -50,6 +51,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="LASSO::lambda=0.1")
 #' plot(out2$Y[,1], out2$Y[,2], main="LASSO::lambda=1")
 #' plot(out3$Y[,1], out3$Y[,2], main="LASSO::lambda=10")
+#' }
 #'
 #' @references
 #' \insertRef{tibshirani_regression_1996}{ADMM}
@@ -57,7 +59,7 @@
 #' @rdname linear_LASSO
 #' @author Kisung You
 #' @export
-do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","decorrelate","whiten"),
+do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                      ycenter=FALSE, lambda=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING

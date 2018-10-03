@@ -33,6 +33,7 @@ at \emph{moderate} distance in that a Z-shaped function is introduced in
 defining similarity derived from Euclidean distance.
 }
 \examples{
+\dontrun{
 ## generate data
 X <- aux.gensamples(n=123)
 
@@ -46,6 +47,7 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="k=5")
 plot(out2$Y[,1], out2$Y[,2], main="k=10")
 plot(out3$Y[,1], out3$Y[,2], main="k=25")
+}
 
 }
 \references{

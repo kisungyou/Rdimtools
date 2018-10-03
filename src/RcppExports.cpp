@@ -438,6 +438,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_spufs
+arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, double epsilon);
+RcppExport SEXP _Rdimtools_method_spufs(SEXP XSEXP, SEXP LsSEXP, SEXP alphaSEXP, SEXP betaSEXP, SEXP epsilonSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Ls(LsSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type beta(betaSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_spufs(X, Ls, alpha, beta, epsilon));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_sne
 arma::mat method_sne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
 RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
@@ -664,6 +679,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_nnprojmax", (DL_FUNC) &_Rdimtools_method_nnprojmax, 4},
     {"_Rdimtools_method_nnprojmin", (DL_FUNC) &_Rdimtools_method_nnprojmin, 4},
     {"_Rdimtools_method_nnembedmin", (DL_FUNC) &_Rdimtools_method_nnembedmin, 4},
+    {"_Rdimtools_method_spufs", (DL_FUNC) &_Rdimtools_method_spufs, 5},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},

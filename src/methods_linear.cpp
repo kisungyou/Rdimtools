@@ -15,6 +15,7 @@
  * 14. LFDA
  * 15. NNPROJMAX & NNPROJMIN
  * 16. NNEMBEDMIN
+ * 17. SPUFS
 */
 
 #include <RcppArmadillo.h>
@@ -763,3 +764,58 @@ arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit, const double tol, co
   // 4. return output
   return(Yold);
 }
+
+/*
+ * 17. SPUFS : return score of weight vectors
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, double epsilon){
+  // basic setup
+  const int n = X.n_rows;
+  const int d = X.n_cols;
+
+  // initialize
+  arma::mat Qold(d,d,fill::eye);
+  arma::mat Qnew(d,d,fill::zeros);
+
+  arma::mat Wold(d,d,fill::eye);
+  arma::mat Wnew(d,d,fill::zeros);
+
+  arma::mat XtX   = X.t()*X;
+  arma::mat LHS1  = (beta*X.t()*Ls*X + XtX); // within LHS, it's fixed.
+  arma::mat RHS   = XtX;
+
+  arma::mat LHS(d,d,fill::zeros);
+  double increment = 100000.0;
+
+  // main iteration : stopping criterion Q
+  arma::colvec wcoli;
+  while (increment > 1e-5){
+    // 1. update W
+    LHS  = LHS1 + alpha*Qold;
+    Wnew = arma::solve(LHS, RHS);
+
+    // 2. update Q
+    for (int i=0;i<d;i++){
+      wcoli     = Wnew.col(i);
+      Qnew(i,i) = 1.0/(2.0*std::sqrt(arma::as_scalar(wcoli.t()*wcoli) + epsilon));
+    }
+
+    // 3. update increment
+    increment = arma::norm(Qold-Qnew);
+
+    // 4. update Qold and Qnew
+    Wold = Wnew;
+    Qold = Qnew;
+  }
+
+  // compute score for each
+  arma::vec output(d,fill::zeros);
+  for (int i=0;i<d;i++){
+    wcoli = Wold.col(i);
+    output(i) = arma::norm(wcoli, 2);
+  }
+  return(output);
+}
+
