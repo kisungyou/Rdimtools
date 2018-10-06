@@ -54,5 +54,6 @@ arma::mat method_nnprojmin(arma::mat& C, arma::mat& Uinit, const double tol, con
 arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit,         // 16. NNEMBEDMIN
                             const double tol, const int maxiter);
 arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, double epsilon);
-
+arma::vec method_lspe(arma::mat X, const int d, double alpha, double beta, arma::mat L);
+arma::vec method_disr(arma::mat& D, double lbd1, double lbd2);
 #endif

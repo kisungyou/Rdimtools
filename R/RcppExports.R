@@ -80,6 +80,9 @@ handy_hadamardABCsqrt <- function(A, B, C) {
 }
 
 #' @keywords internal
+NULL
+
+#' @keywords internal
 method_pca <- function(psdX) {
     .Call('_Rdimtools_method_pca', PACKAGE = 'Rdimtools', psdX)
 }
@@ -162,6 +165,25 @@ method_nnembedmin <- function(M, Yinit, tol, maxiter) {
 #' @keywords internal
 method_spufs <- function(X, Ls, alpha, beta, epsilon) {
     .Call('_Rdimtools_method_spufs', PACKAGE = 'Rdimtools', X, Ls, alpha, beta, epsilon)
+}
+
+#' @keywords internal
+method_lspe <- function(X, d, alpha, beta, L) {
+    .Call('_Rdimtools_method_lspe', PACKAGE = 'Rdimtools', X, d, alpha, beta, L)
+}
+
+method_disr <- function(D, lbd1, lbd2) {
+    .Call('_Rdimtools_method_disr', PACKAGE = 'Rdimtools', D, lbd1, lbd2)
+}
+
+#' @keywords internal
+method_rsr <- function(X, lbd, verysmall) {
+    .Call('_Rdimtools_method_rsr', PACKAGE = 'Rdimtools', X, lbd, verysmall)
+}
+
+#' @keywords internal
+method_nrsr <- function(X, lbd, verysmall, p) {
+    .Call('_Rdimtools_method_nrsr', PACKAGE = 'Rdimtools', X, lbd, verysmall, p)
 }
 
 #' @keywords internal

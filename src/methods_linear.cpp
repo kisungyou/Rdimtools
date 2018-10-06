@@ -16,6 +16,10 @@
  * 15. NNPROJMAX & NNPROJMIN
  * 16. NNEMBEDMIN
  * 17. SPUFS
+ * 18. LSPE
+ * 19. DISR
+ * 20. RSR
+ * 21. NRSR
 */
 
 #include <RcppArmadillo.h>
@@ -819,3 +823,329 @@ arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, do
   return(output);
 }
 
+/*
+ * 18. LSPE : Locality and Similarity Preserving Embedding
+ */
+arma::mat method_lspe_singleA(arma::mat X, const int d, double alpha, arma::mat Sold){
+  const int m = X.n_rows;
+  const int n = X.n_cols;
+
+  // Initialize
+  arma::mat Uold(m,m,fill::eye);
+  arma::mat Unew(m,m,fill::zeros);
+
+  arma::mat A(m,d,fill::zeros);
+  arma::mat P(m,m,fill::zeros);
+  arma::mat S = Sold;
+  arma::mat I(n,n,fill::eye);
+  arma::mat K = (I-S-S.t()+(S.t()*S));
+  arma::mat term1 = (X*K*X.t());
+
+  arma::vec eigval;
+  arma::mat eigvec;
+
+  const int maxiter = 100;
+  int citer = 1;
+  double Uincrement = 1000;
+  while (Uincrement > 1e-6){
+    P = term1 + (alpha*Uold);
+    arma::eig_sym(eigval, eigvec, P);
+    A = eigvec.cols(0,d-1);
+
+    for (int i=0;i<m;i++){
+      Unew(i,i) = 1/(2.0*arma::norm(A.row(i)));
+    }
+
+    Uincrement = arma::norm(Uold-Unew);
+    Uold       = Unew;
+    citer += 1;
+    if (citer >= maxiter){
+      break;
+    }
+  }
+  return(A);
+}
+//' @keywords internal
+// [[Rcpp::export]]
+arma::vec method_lspe(arma::mat X, const int d, double alpha, double beta, arma::mat L){
+  // get parameters
+  const int m = X.n_rows;
+  const int n = X.n_cols;
+
+  // initialize
+  arma::mat A(m,d,fill::zeros);
+  arma::mat Sold(n,n,fill::eye);
+  arma::mat Snew(n,n,fill::zeros);
+  arma::mat D(d,n,fill::zeros);
+  arma::mat DtD(n,n,fill::zeros);
+  arma::mat DLinv(n,n,fill::zeros); // solution of (D^tD+bL)^{-1}
+
+  const int maxiter = 123;
+  int citer = 1;
+  double Sincrement = 10000.00;
+  while (Sincrement>(1e-6)){
+    A = method_lspe_singleA(X,d,alpha,Sold);
+    D    = A.t()*X;
+    DtD  = D.t()*D;
+
+    DLinv = arma::pinv(DtD+(beta*L));
+    Snew  = DtD*DLinv;
+    Sincrement = arma::norm(Snew-Sold,"fro");
+
+    Sold = Snew;
+    citer += 1;
+    if (citer >= maxiter){
+      break;
+    }
+  }
+
+  arma::vec output(m,fill::zeros);
+  for (int i=0;i<m;i++){
+    output(i) = arma::norm(A.row(i),2);
+  }
+  return(output);
+}
+
+/*
+ * 19. DISR : return score of weight vectors
+ */
+//' @keywords internal
+arma::mat disr_lemma1(double lbd, arma::mat Q){
+  const int m = Q.n_rows;
+  const int n = Q.n_cols;
+  double qnorm = 0.0;
+
+  arma::mat Wstar(m,n,fill::zeros);
+  for (int i=0;i<n;i++){
+    qnorm = arma::norm(Q.col(i),2);
+    if (lbd < qnorm){
+      Wstar.col(i) = ((qnorm-lbd)/qnorm)*Q.col(i);
+    }
+  }
+  return(Wstar);
+}
+// [[Rcpp::export]]
+arma::vec method_disr(arma::mat& D, double lbd1, double lbd2){
+  // get parameters
+  const int n = D.n_rows;
+  const int m = D.n_cols;
+
+  // initialize
+  arma::mat Z(m,m,fill::zeros);
+  arma::mat G(m,m,fill::zeros);
+  arma::mat A(m,m,fill::zeros);
+  arma::mat E(n,m,fill::zeros);
+
+  arma::mat Y1(n,m,fill::zeros);
+  arma::mat Y2(m,m,fill::zeros);
+  arma::mat Y3(m,m,fill::zeros);
+
+  double rho    = 1e-6;
+  double gamma  = 1.2;
+  double rhomax = 1e+6;
+  double psi    = 1e-8;
+
+  arma::mat Aterm1;
+  arma::mat Aterm2;
+  arma::mat I(m,m,fill::eye);
+  arma::mat DtD = D.t()*D;
+  arma::mat S   = DtD;
+
+  arma::mat StSinv = arma::inv(S.t() + S);
+  arma::mat sylvA;
+  arma::mat sylvB;
+  arma::mat sylvC;
+  arma::mat onesM(m,m,fill::ones);
+
+
+  int maxiter = 496;
+  int citer   = 0;
+  double stop1 = 0.0;
+  double stop2 = 0.0;
+  double stop3 = 0.0;
+  bool convergeflag = false;
+  while (convergeflag==false){
+    // 1. update Z using Eq (11)
+    Z = disr_lemma1((lbd1/rho), A+(Y2/rho));
+    for (int i=0;i<m;i++){
+      Z(i,i) = 0;
+    }
+    Z.elem(arma::find(Z<0)).fill(0); // find negative-valued entries and fill them with zeros;
+    // 2. update A using Eq (14)
+    Aterm1 = (DtD+(2*I));
+    Aterm2 = (DtD - (D.t()*E) + Z + G + ((1.0/rho)*((D.t()*Y1)-Y2-Y3)));
+    A      = arma::solve(Aterm1,Aterm2);
+    for (int i=0;i<m;i++){
+      A(i,i) = 0;
+    }
+    A.elem(arma::find(A<0)).fill(0);
+    // 3. update E with Eq (16)
+    E = disr_lemma1((1.0/rho), (D-(D*A)+(Y1/rho)));
+    // 4. update G with Eq (19) : be careful to use RcppArmadilo's sylvester equation
+    sylvA = StSinv;
+    sylvB = (lbd2/rho)*onesM;
+    sylvC = -(StSinv*(A+(Y3/rho)));
+    G     = arma::syl(sylvA, sylvB, sylvC);
+    for (int i=0;i<m;i++){
+      G(i,i) = 0;
+    }
+    G.elem(arma::find(G<0)).fill(0);
+    // 5. update Y1, Y2, Y3
+    Y1    = Y1 + rho*(D-(D*A)-E);
+    Y2    = Y2 + rho*(A-Z);
+    Y3    = Y3 + rho*(A-G);
+    // 6. update parameter rho
+    if (rho*gamma < rhomax){
+      rho = rho*gamma;
+    } else {
+      rho = rhomax;
+    }
+    // 7. stopping condition
+    stop1 = arma::norm(D-(D*A)-E,"inf");
+    stop2 = arma::norm(A-Z,"inf");
+    stop3 = arma::norm(A-G,"inf");
+    if ((stop1<psi)&&(stop2<psi)&&(stop3<psi)){
+      convergeflag = true;
+    }
+    citer += 1;
+    if (citer>=maxiter){
+      break;
+    }
+  }
+
+  // now is the time for row-wise score
+  arma::vec score(m,fill::zeros);
+  for (int i=0;i<m;i++){
+    score(i) = arma::norm(A.row(i),2);
+  }
+  return(score);
+}
+
+/*
+ * 20. RSR : return score of weight vectors
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::vec method_rsr(arma::mat X, double lbd, double verysmall){
+  const int n = X.n_rows;       // 1. get parameters
+  const int m = X.n_cols;
+
+  arma::mat GL(n,n,fill::eye);  // 2. initialize as diagonals
+  arma::mat GR(m,m,fill::eye);
+
+  arma::mat Wold(m,m,fill::eye);
+  arma::mat Wnew(m,m,fill::zeros);
+
+  arma::mat term1(m,m,fill::zeros);
+  arma::mat term2(m,m,fill::zeros);
+  arma::mat eyesM(m,m,fill::eye);
+  arma::mat XtGLX(m,m,fill::zeros);
+
+  double Wincrement = 100000.0; // 3. setup for iteration
+  const int maxiter = 496;
+  int citer = 0;
+
+  double invsmall = 1.0/verysmall;
+  arma::mat XW(n,m,fill::zeros);
+  double val1;
+  double val2;
+  while (Wincrement > 1e-6){    // 4. main iteration
+    XtGLX = (X.t()*GL*X);
+    term1 = arma::solve(GR, XtGLX);
+    Wnew  = arma::solve((term1+(lbd*eyesM)),XtGLX);
+
+    XW    = X*Wnew;
+    for (int i=0;i<n;i++){
+      val1 = 2*arma::norm((X.row(i)- XW.row(i)),2);
+      if (val1 < verysmall){
+        GL(i,i) = invsmall;
+      } else {
+        GL(i,i) = 1.0/val1;
+      }
+    }
+    for (int j=0;j<m;j++){
+      val2 = 2*arma::norm(Wnew.row(j),2);
+      if (val2 < verysmall){
+        GR(j,j) = invsmall;
+      } else {
+        GR(j,j) = 1.0/val2;
+      }
+    }
+
+    // update information
+    Wincrement = arma::norm(Wold-Wnew,"fro");
+    Wold       = Wnew;
+    citer      += 1;
+    if (citer >= maxiter){
+      break;
+    }
+  }
+
+  arma::vec score(m,fill::zeros); // 5. compute scores
+  for (int i=0;i<m;i++){
+    score(i) = arma::norm(Wold.row(i),2);
+  }
+  return(score);
+}
+
+
+/*
+ * 21. NRSR : return score of weight vectors
+ */
+//' @keywords internal
+// [[Rcpp::export]]
+arma::vec method_nrsr(arma::mat X, double lbd, double verysmall, double p){
+  const int n = X.n_rows;       // 1. get parameters
+  const int m = X.n_cols;
+
+  arma::mat GL(n,n,fill::eye);  // 2. initialize as diagonals
+  arma::mat GR(m,m,fill::eye);
+
+  arma::mat Wold(m,m,fill::eye);
+  arma::mat Wnew(m,m,fill::zeros);
+
+  arma::mat term1(m,m,fill::zeros);
+  arma::mat term2(m,m,fill::zeros);
+  arma::mat eyesM(m,m,fill::eye);
+  arma::mat XtGLX(m,m,fill::zeros);
+
+  double Wincrement = 100000.0; // 3. setup for iteration
+  const int maxiter = 496;
+  int citer = 0;
+
+  double invsmall = 1.0/verysmall;
+  arma::mat XW(n,m,fill::zeros);
+  double val1;
+  while (Wincrement > 1e-6){    // 4. main iteration
+    XtGLX = (X.t()*GL*X);
+    term1 = arma::solve(GR, XtGLX);
+    Wnew  = arma::solve((term1+(lbd*eyesM)),XtGLX);
+
+    XW    = X*Wnew;
+    for (int i=0;i<n;i++){
+      val1 = 2*arma::norm((X.row(i)- XW.row(i)),2);
+      if (val1 < verysmall){
+        GL(i,i) = invsmall;
+      } else {
+        GL(i,i) = 1.0/val1;
+      }
+    }
+    for (int j=0;j<m;j++){
+      GR(j,j) = (std::pow(arma::norm(Wnew.row(j),2),(p-2.0)))*(p/2.0);
+    }
+
+    // update information
+    Wincrement = arma::norm(Wold-Wnew,"fro");
+    Wold       = Wnew;
+    citer      += 1;
+    if (citer >= maxiter){
+      break;
+    }
+  }
+
+  arma::vec score(m,fill::zeros); // 5. compute scores
+  for (int i=0;i<m;i++){
+    score(i) = arma::norm(Wold.row(i),2);
+  }
+  return(score);
+}
