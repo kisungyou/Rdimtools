@@ -56,4 +56,6 @@ arma::mat method_nnembedmin(arma::mat& M, arma::mat& Yinit,         // 16. NNEMB
 arma::vec method_spufs(arma::mat& X, arma::mat Ls, double alpha, double beta, double epsilon);
 arma::vec method_lspe(arma::mat X, const int d, double alpha, double beta, arma::mat L);
 arma::vec method_disr(arma::mat& D, double lbd1, double lbd2);
+arma::vec method_rsr(arma::mat X, double lbd, double verysmall);
+arma::vec method_nrsr(arma::mat X, double lbd, double verysmall, double p);
 #endif

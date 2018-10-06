@@ -113,6 +113,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
 \code{\link{do.spufs}} \tab U \tab Structure Preserving Unsupervised Feature Selection \cr
 \code{\link{do.ssldp}} \tab SS \tab Semi-Supervised Locally Discriminant Projection \cr
+\code{\link{do.udfs}} \tab U \tab Unsupervised Discriminative Features Selection \cr
 \code{\link{do.udp}} \tab U \tab Unsupervised Discriminant Projection \cr
 \code{\link{do.ulda}} \tab S \tab Uncorrelated Linear Discriminant Analysis
 }
