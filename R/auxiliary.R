@@ -23,6 +23,8 @@
 # 18. aux.oosprocess       : data processign for oos prediction
 # 19. aux.findmaxidx       : find the row and column index of maximal elements
 # 20. aux.randpartition    : given 1:n, divide it into K random partitions without replacement
+# 21. aux.which.mink       : returns index of smallest
+#     aux.which.maxk
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1570,4 +1572,18 @@ aux.randpartition <- function(n, K){
     output[[K]] = listall
   }
   return(output)
+}
+
+
+# 21. aux.which.mink ------------------------------------------------------
+#     aux.which.maxk
+#' @keywords internal
+#' @noRd
+aux.which.mink <- function(x, k=1){
+  return(order(x)[1:k])
+}
+#' @keywords internal
+#' @noRd
+aux.which.maxk <- function(x, k=1){
+  return(order(x,decreasing = TRUE)[1:k])
 }

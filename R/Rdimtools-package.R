@@ -18,9 +18,9 @@
 #'
 #' For \emph{linear} methods, we have
 #' \tabular{lcl}{
-#' FUNCTION \tab TYPE \tab ALGORITHM \cr
+#' FUNCTION \tab TYPE \tab  ALGORITHM \cr
 #' \code{\link{do.adr}} \tab U \tab Adaptive Dimension Reduction \cr
-#' \code{\link{do.ammc}} \tab S \tab Adaptive Maximum Margin Criterion \cr
+#' \code{\link{do.ammc}} \tab S  \tab Adaptive Maximum Margin Criterion \cr
 #' \code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
 #' \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 #' \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
