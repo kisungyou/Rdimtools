@@ -8,7 +8,7 @@ Rdimtools is an R package for Dimension Reduction (also known as Manifold Learni
 
 > **the more we have at hands, the better we can play.**
 
-Current version `0.4.0` provides 118 manifold learning methods and 13 intrinsic dimension estimation methods.
+Current version `0.4.1` provides 125 manifold learning methods and 13 intrinsic dimension estimation methods.
 
 Installation
 ------------
