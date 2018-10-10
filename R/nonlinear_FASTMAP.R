@@ -65,8 +65,8 @@ do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale",
   for (i in 1:k){
     # 3-1. find row and column index for maximal element
     maxidx = aux.findmaxidx(Dold)
-    ida    = maxidx[1]
-    idb    = maxidx[2]
+    ida    = as.integer(maxidx[1])
+    idb    = as.integer(maxidx[2])
     # 3-2. precompute some values
     dab2  = (sum(as.vector(pX[ida,]-pX[idb,])^2))
     if (dab2 > (sqrt(123*.Machine$double.eps))){
