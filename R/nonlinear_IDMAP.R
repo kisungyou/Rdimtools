@@ -89,7 +89,7 @@ do.idmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","w
       idb    = maxidx[2]
       # 3-2. precompute some values
       dab2  = (sum(as.vector(pX[ida,]-pX[idb,])^2))
-      if (dab2 > 1234*.Machine$double.eps){
+      if (dab2 > (sqrt(123*.Machine$double.eps))){
         dab   = sqrt(dab2)
         # 3-3. compute coefficient
         for (j in 1:n){
