@@ -10,7 +10,7 @@ Description: We provide linear and nonlinear dimension reduction techniques.
     Ma and Zhu (2013) <doi:10.1111/j.1751-5823.2012.00182.x> if you are interested in
     statistical approach, or Engel, Huttenberger, and Hamann (2012)
     <doi:10.4230/OASIcs.VLUDS.2011.135> for a broader multi-disciplinary overview.
-License: GPL (>=3)
+License: GPL-3 + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
