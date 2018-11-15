@@ -6,6 +6,170 @@
 
 using namespace Rcpp;
 
+// aux_preprocess
+Rcpp::List aux_preprocess(arma::mat& X, const int flag);
+RcppExport SEXP _Rdimtools_aux_preprocess(SEXP XSEXP, SEXP flagSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const int >::type flag(flagSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_preprocess(X, flag));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_perplexity
+Rcpp::List aux_perplexity(arma::mat& X, const double perplexity);
+RcppExport SEXP _Rdimtools_aux_perplexity(SEXP XSEXP, SEXP perplexitySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const double >::type perplexity(perplexitySEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_perplexity(X, perplexity));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_shortestpath
+Rcpp::NumericMatrix aux_shortestpath(NumericMatrix& wmat);
+RcppExport SEXP _Rdimtools_aux_shortestpath(SEXP wmatSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix& >::type wmat(wmatSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_shortestpath(wmat));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_landmarkMaxMin
+int aux_landmarkMaxMin(arma::mat& pD, arma::vec& plandmark, arma::vec& seqnp);
+RcppExport SEXP _Rdimtools_aux_landmarkMaxMin(SEXP pDSEXP, SEXP plandmarkSEXP, SEXP seqnpSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type pD(pDSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type plandmark(plandmarkSEXP);
+    Rcpp::traits::input_parameter< arma::vec& >::type seqnp(seqnpSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_landmarkMaxMin(pD, plandmark, seqnp));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_kernelcov
+Rcpp::List aux_kernelcov(arma::mat& tX, const int knumber, const double par1, const double par2);
+RcppExport SEXP _Rdimtools_aux_kernelcov(SEXP tXSEXP, SEXP knumberSEXP, SEXP par1SEXP, SEXP par2SEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type tX(tXSEXP);
+    Rcpp::traits::input_parameter< const int >::type knumber(knumberSEXP);
+    Rcpp::traits::input_parameter< const double >::type par1(par1SEXP);
+    Rcpp::traits::input_parameter< const double >::type par2(par2SEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_kernelcov(tX, knumber, par1, par2));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_eigendecomposition
+Rcpp::List aux_eigendecomposition(arma::mat& X);
+RcppExport SEXP _Rdimtools_aux_eigendecomposition(SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_eigendecomposition(X));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_minmax
+arma::mat aux_minmax(arma::mat& X, const double gap);
+RcppExport SEXP _Rdimtools_aux_minmax(SEXP XSEXP, SEXP gapSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< const double >::type gap(gapSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_minmax(X, gap));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_regout
+arma::mat aux_regout(arma::mat& X, arma::rowvec tgt);
+RcppExport SEXP _Rdimtools_aux_regout(SEXP XSEXP, SEXP tgtSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::rowvec >::type tgt(tgtSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_regout(X, tgt));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_scatter
+arma::mat aux_scatter(arma::mat& X, arma::rowvec& mu);
+RcppExport SEXP _Rdimtools_aux_scatter(SEXP XSEXP, SEXP muSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::rowvec& >::type mu(muSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_scatter(X, mu));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_scatter_pairwise
+arma::mat aux_scatter_pairwise(arma::mat& X);
+RcppExport SEXP _Rdimtools_aux_scatter_pairwise(SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_scatter_pairwise(X));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_geigen
+Rcpp::List aux_geigen(arma::mat& A, arma::mat& B);
+RcppExport SEXP _Rdimtools_aux_geigen(SEXP ASEXP, SEXP BSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_geigen(A, B));
+    return rcpp_result_gen;
+END_RCPP
+}
+// single_bicgstab
+Rcpp::List single_bicgstab(const arma::mat& A, const arma::colvec& b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::mat& M);
+RcppExport SEXP _Rdimtools_single_bicgstab(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::colvec& >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const arma::mat& >::type M(MSEXP);
+    rcpp_result_gen = Rcpp::wrap(single_bicgstab(A, b, xinit, reltol, maxiter, M));
+    return rcpp_result_gen;
+END_RCPP
+}
+// single_bicgstab_sparse
+Rcpp::List single_bicgstab_sparse(const arma::sp_mat A, const arma::sp_mat b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::sp_mat M);
+RcppExport SEXP _Rdimtools_single_bicgstab_sparse(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type A(ASEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type b(bSEXP);
+    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
+    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
+    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< const arma::sp_mat >::type M(MSEXP);
+    rcpp_result_gen = Rcpp::wrap(single_bicgstab_sparse(A, b, xinit, reltol, maxiter, M));
+    return rcpp_result_gen;
+END_RCPP
+}
 // methods_boxcount
 arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, const double currentr);
 RcppExport SEXP _Rdimtools_methods_boxcount(SEXP tXSEXP, SEXP IminSEXP, SEXP currentrSEXP) {
@@ -522,170 +686,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// aux_preprocess
-Rcpp::List aux_preprocess(arma::mat& X, const int flag);
-RcppExport SEXP _Rdimtools_aux_preprocess(SEXP XSEXP, SEXP flagSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< const int >::type flag(flagSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_preprocess(X, flag));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_perplexity
-Rcpp::List aux_perplexity(arma::mat& X, const double perplexity);
-RcppExport SEXP _Rdimtools_aux_perplexity(SEXP XSEXP, SEXP perplexitySEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< const double >::type perplexity(perplexitySEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_perplexity(X, perplexity));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_shortestpath
-Rcpp::NumericMatrix aux_shortestpath(NumericMatrix& wmat);
-RcppExport SEXP _Rdimtools_aux_shortestpath(SEXP wmatSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< NumericMatrix& >::type wmat(wmatSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_shortestpath(wmat));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_landmarkMaxMin
-int aux_landmarkMaxMin(arma::mat& pD, arma::vec& plandmark, arma::vec& seqnp);
-RcppExport SEXP _Rdimtools_aux_landmarkMaxMin(SEXP pDSEXP, SEXP plandmarkSEXP, SEXP seqnpSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type pD(pDSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type plandmark(plandmarkSEXP);
-    Rcpp::traits::input_parameter< arma::vec& >::type seqnp(seqnpSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_landmarkMaxMin(pD, plandmark, seqnp));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_kernelcov
-Rcpp::List aux_kernelcov(arma::mat& tX, const int knumber, const double par1, const double par2);
-RcppExport SEXP _Rdimtools_aux_kernelcov(SEXP tXSEXP, SEXP knumberSEXP, SEXP par1SEXP, SEXP par2SEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type tX(tXSEXP);
-    Rcpp::traits::input_parameter< const int >::type knumber(knumberSEXP);
-    Rcpp::traits::input_parameter< const double >::type par1(par1SEXP);
-    Rcpp::traits::input_parameter< const double >::type par2(par2SEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_kernelcov(tX, knumber, par1, par2));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_eigendecomposition
-Rcpp::List aux_eigendecomposition(arma::mat& X);
-RcppExport SEXP _Rdimtools_aux_eigendecomposition(SEXP XSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_eigendecomposition(X));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_minmax
-arma::mat aux_minmax(arma::mat& X, const double gap);
-RcppExport SEXP _Rdimtools_aux_minmax(SEXP XSEXP, SEXP gapSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< const double >::type gap(gapSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_minmax(X, gap));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_regout
-arma::mat aux_regout(arma::mat& X, arma::rowvec tgt);
-RcppExport SEXP _Rdimtools_aux_regout(SEXP XSEXP, SEXP tgtSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::rowvec >::type tgt(tgtSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_regout(X, tgt));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_scatter
-arma::mat aux_scatter(arma::mat& X, arma::rowvec& mu);
-RcppExport SEXP _Rdimtools_aux_scatter(SEXP XSEXP, SEXP muSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::rowvec& >::type mu(muSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_scatter(X, mu));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_scatter_pairwise
-arma::mat aux_scatter_pairwise(arma::mat& X);
-RcppExport SEXP _Rdimtools_aux_scatter_pairwise(SEXP XSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_scatter_pairwise(X));
-    return rcpp_result_gen;
-END_RCPP
-}
-// aux_geigen
-Rcpp::List aux_geigen(arma::mat& A, arma::mat& B);
-RcppExport SEXP _Rdimtools_aux_geigen(SEXP ASEXP, SEXP BSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
-    Rcpp::traits::input_parameter< arma::mat& >::type B(BSEXP);
-    rcpp_result_gen = Rcpp::wrap(aux_geigen(A, B));
-    return rcpp_result_gen;
-END_RCPP
-}
-// single_bicgstab
-Rcpp::List single_bicgstab(const arma::mat& A, const arma::colvec& b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::mat& M);
-RcppExport SEXP _Rdimtools_single_bicgstab(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::mat& >::type A(ASEXP);
-    Rcpp::traits::input_parameter< const arma::colvec& >::type b(bSEXP);
-    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
-    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
-    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< const arma::mat& >::type M(MSEXP);
-    rcpp_result_gen = Rcpp::wrap(single_bicgstab(A, b, xinit, reltol, maxiter, M));
-    return rcpp_result_gen;
-END_RCPP
-}
-// single_bicgstab_sparse
-Rcpp::List single_bicgstab_sparse(const arma::sp_mat A, const arma::sp_mat b, arma::colvec& xinit, const double reltol, const int maxiter, const arma::sp_mat M);
-RcppExport SEXP _Rdimtools_single_bicgstab_sparse(SEXP ASEXP, SEXP bSEXP, SEXP xinitSEXP, SEXP reltolSEXP, SEXP maxiterSEXP, SEXP MSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const arma::sp_mat >::type A(ASEXP);
-    Rcpp::traits::input_parameter< const arma::sp_mat >::type b(bSEXP);
-    Rcpp::traits::input_parameter< arma::colvec& >::type xinit(xinitSEXP);
-    Rcpp::traits::input_parameter< const double >::type reltol(reltolSEXP);
-    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< const arma::sp_mat >::type M(MSEXP);
-    rcpp_result_gen = Rcpp::wrap(single_bicgstab_sparse(A, b, xinit, reltol, maxiter, M));
-    return rcpp_result_gen;
-END_RCPP
-}
 // aux_mimick_geigen
 Rcpp::List aux_mimick_geigen(arma::mat& A, arma::mat& B);
 RcppExport SEXP _Rdimtools_aux_mimick_geigen(SEXP ASEXP, SEXP BSEXP) {
@@ -700,6 +700,19 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
+    {"_Rdimtools_aux_perplexity", (DL_FUNC) &_Rdimtools_aux_perplexity, 2},
+    {"_Rdimtools_aux_shortestpath", (DL_FUNC) &_Rdimtools_aux_shortestpath, 1},
+    {"_Rdimtools_aux_landmarkMaxMin", (DL_FUNC) &_Rdimtools_aux_landmarkMaxMin, 3},
+    {"_Rdimtools_aux_kernelcov", (DL_FUNC) &_Rdimtools_aux_kernelcov, 4},
+    {"_Rdimtools_aux_eigendecomposition", (DL_FUNC) &_Rdimtools_aux_eigendecomposition, 1},
+    {"_Rdimtools_aux_minmax", (DL_FUNC) &_Rdimtools_aux_minmax, 2},
+    {"_Rdimtools_aux_regout", (DL_FUNC) &_Rdimtools_aux_regout, 2},
+    {"_Rdimtools_aux_scatter", (DL_FUNC) &_Rdimtools_aux_scatter, 2},
+    {"_Rdimtools_aux_scatter_pairwise", (DL_FUNC) &_Rdimtools_aux_scatter_pairwise, 1},
+    {"_Rdimtools_aux_geigen", (DL_FUNC) &_Rdimtools_aux_geigen, 2},
+    {"_Rdimtools_single_bicgstab", (DL_FUNC) &_Rdimtools_single_bicgstab, 6},
+    {"_Rdimtools_single_bicgstab_sparse", (DL_FUNC) &_Rdimtools_single_bicgstab_sparse, 6},
     {"_Rdimtools_methods_boxcount", (DL_FUNC) &_Rdimtools_methods_boxcount, 3},
     {"_Rdimtools_aux_numderiv", (DL_FUNC) &_Rdimtools_aux_numderiv, 2},
     {"_Rdimtools_handy_plus", (DL_FUNC) &_Rdimtools_handy_plus, 1},
@@ -738,19 +751,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_spe", (DL_FUNC) &_Rdimtools_method_spe, 7},
     {"_Rdimtools_method_ispe", (DL_FUNC) &_Rdimtools_method_ispe, 8},
     {"_Rdimtools_method_crca", (DL_FUNC) &_Rdimtools_method_crca, 7},
-    {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
-    {"_Rdimtools_aux_perplexity", (DL_FUNC) &_Rdimtools_aux_perplexity, 2},
-    {"_Rdimtools_aux_shortestpath", (DL_FUNC) &_Rdimtools_aux_shortestpath, 1},
-    {"_Rdimtools_aux_landmarkMaxMin", (DL_FUNC) &_Rdimtools_aux_landmarkMaxMin, 3},
-    {"_Rdimtools_aux_kernelcov", (DL_FUNC) &_Rdimtools_aux_kernelcov, 4},
-    {"_Rdimtools_aux_eigendecomposition", (DL_FUNC) &_Rdimtools_aux_eigendecomposition, 1},
-    {"_Rdimtools_aux_minmax", (DL_FUNC) &_Rdimtools_aux_minmax, 2},
-    {"_Rdimtools_aux_regout", (DL_FUNC) &_Rdimtools_aux_regout, 2},
-    {"_Rdimtools_aux_scatter", (DL_FUNC) &_Rdimtools_aux_scatter, 2},
-    {"_Rdimtools_aux_scatter_pairwise", (DL_FUNC) &_Rdimtools_aux_scatter_pairwise, 1},
-    {"_Rdimtools_aux_geigen", (DL_FUNC) &_Rdimtools_aux_geigen, 2},
-    {"_Rdimtools_single_bicgstab", (DL_FUNC) &_Rdimtools_single_bicgstab, 6},
-    {"_Rdimtools_single_bicgstab_sparse", (DL_FUNC) &_Rdimtools_single_bicgstab_sparse, 6},
     {"_Rdimtools_aux_mimick_geigen", (DL_FUNC) &_Rdimtools_aux_mimick_geigen, 2},
     {NULL, NULL, 0}
 };
