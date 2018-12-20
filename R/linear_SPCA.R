@@ -50,7 +50,7 @@
 #' \insertRef{ma_alternating_2013}{ADMM}
 #'
 #' @seealso \code{\link{do.pca}}
-#' @author Kisung You
+#' @author Changhee Suh
 #' @rdname linear_SPCA
 #' @export
 do.spca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),

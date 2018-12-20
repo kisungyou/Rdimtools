@@ -67,5 +67,5 @@ plot(output$Y[,1], output$Y[,2], main="3 groups on 2d plane")
 \insertRef{fukunaga_introduction_1990}{Rdimtools}
 }
 \author{
-Kisung You
+Changhee Suh
 }

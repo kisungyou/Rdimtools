@@ -46,7 +46,7 @@
 #' plot(out3$Y[,1], out3$Y[,2], main="PCA::'whiten'")
 #' }
 #'
-#' @author Kisung You
+#' @author Changhee Suh
 #' @references
 #' \insertRef{pearson_liii._1901}{Rdimtools}
 #'

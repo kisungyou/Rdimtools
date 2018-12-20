@@ -69,5 +69,5 @@ plot(output3$Y[,1],output3$Y[,2],main="poly")
 \insertRef{hyvarinen_independent_2001}{Rdimtools}
 }
 \author{
-Kisung You
+Changhee Suh
 }

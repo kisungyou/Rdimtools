@@ -23,6 +23,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -55,6 +56,7 @@
 #' plot(out4$Y[,1], out4$Y[,2], main="RSIR::PCA+Ridge")
 #' plot(out5$Y[,1], out5$Y[,2], main="RSIR::PCA+Tikhonov")
 #' plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
+#' }
 #'
 #' @references
 #' \insertRef{chiaromonte_dimension_2002}{Rdimtools}
@@ -67,7 +69,7 @@
 #'
 #'
 #' @seealso \code{\link{do.sir}}
-#' @author Kisung You
+#' @author Changhee Suh
 #' @rdname linear_RSIR
 #' @export
 do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),

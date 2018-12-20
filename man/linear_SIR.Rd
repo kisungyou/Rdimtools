@@ -35,6 +35,7 @@ conditional independence after projection is guaranteed. It first divides the ra
 response variable. Projection vectors are extracted where projected data best explains response variable.
 }
 \examples{
+\dontrun{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
 n = 123
@@ -60,11 +61,12 @@ par(mfrow=c(1,3))
 plot(out1$Y[,1], out1$Y[,2], main="SIR::2 slices")
 plot(out2$Y[,1], out2$Y[,2], main="SIR::5 slices")
 plot(out3$Y[,1], out3$Y[,2], main="SIR::10 slices")
+}
 
 }
 \references{
 \insertRef{li_sliced_1991}{Rdimtools}
 }
 \author{
-Kisung You
+Changhee Suh
 }

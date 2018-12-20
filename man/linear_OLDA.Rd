@@ -56,5 +56,5 @@ plot(out2$Y[,1], out2$Y[,2], main="Orthogonal LDA")
 \insertRef{ye_characterization_2005}{Rdimtools}
 }
 \author{
-Kisung You
+Changhee Suh
 }

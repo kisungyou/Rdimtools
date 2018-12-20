@@ -20,6 +20,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -45,12 +46,13 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="SAVE::2 slices")
 #' plot(out2$Y[,1], out2$Y[,2], main="SAVE::5 slices")
 #' plot(out3$Y[,1], out3$Y[,2], main="SAVE::10 slices")
+#' }
 #'
 #' @references
 #' \insertRef{dennis_cook_save:_2000}{Rdimtools}
 #'
 #' @seealso \code{\link{do.sir}}
-#' @author Kisung You
+#' @author Changhee Suh
 #' @rdname linear_SAVE
 #' @export
 do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),

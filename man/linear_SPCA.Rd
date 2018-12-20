@@ -71,5 +71,5 @@ image(t(out3$projection), main="SPCA::rho=100")
 \code{\link{do.pca}}
 }
 \author{
-Kisung You
+Changhee Suh
 }

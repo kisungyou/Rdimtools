@@ -42,6 +42,7 @@ rank deficiency of scatter/covariance matrix. Instead of naive matrix inversion,
 proposed regularization schemes that reflect several ideas from various incumbent methods.
 }
 \examples{
+\dontrun{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
 n = 123
@@ -74,6 +75,7 @@ plot(out3$Y[,1], out3$Y[,2], main="RSIR::PCA")
 plot(out4$Y[,1], out4$Y[,2], main="RSIR::PCA+Ridge")
 plot(out5$Y[,1], out5$Y[,2], main="RSIR::PCA+Tikhonov")
 plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
+}
 
 }
 \references{
@@ -89,5 +91,5 @@ plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
 \code{\link{do.sir}}
 }
 \author{
-Kisung You
+Changhee Suh
 }

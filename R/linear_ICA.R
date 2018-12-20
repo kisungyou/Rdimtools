@@ -50,7 +50,7 @@
 #' @references
 #' \insertRef{hyvarinen_independent_2001}{Rdimtools}
 #'
-#' @author Kisung You
+#' @author Changhee Suh
 #' @rdname linear_ICA
 #' @export
 do.ica <- function(X,ndim=2,type="logcosh",tpar=1,sym=FALSE,tol=1e-6,redundancy=TRUE,maxiter=100){
