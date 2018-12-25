@@ -4,8 +4,7 @@
 #' that mimicks patterns of probability distributinos over pairs of high-dimensional objects on low-dimesional
 #' target embedding space by minimizing Kullback-Leibler divergence. While conventional SNE uses gaussian
 #' distributions to measure similarity, t-SNE, as its name suggests, exploits a heavy-tailed Student t-distribution.
-#' For \code{do.tsne}, we implemented a naive version of t-SNE as well as an interface with Barnes-Hut algorithm,
-#' which takes advantage of speed in sacrifice of accuracy.
+#' For \code{do.tsne}, we implemented a naive version of t-SNE.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
@@ -21,8 +20,6 @@
 #' @param pcaratio proportion of variances explained in finding PCA preconditioning. See also \code{\link{do.pca}} for more details.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
 #' @param symmetric a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.
-#' @param BarnesHut a logical; \code{FALSE} not to use Barnes-Hut heuristic for faster computation, \code{TRUE} otherwise.
-#' @param BHtheta a positive real number for speed/accuracy trade-off in Barnes-Hut computation. See also \code{theta} parameter from \code{\link[Rtsne]{Rtsne}}.
 #'
 #' @return a named list containing
 #' \describe{
@@ -47,7 +44,7 @@
 #' plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=50")
 #' }
 #'
-#' @seealso \code{\link{do.sne}}, \code{\link[Rtsne]{Rtsne}}.
+#' @seealso \code{\link{do.sne}}
 #' @references
 #' \insertRef{van_der_maaten_visualizing_2008}{Rdimtools}
 #'
@@ -57,8 +54,7 @@
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                     jitter=0.3,jitterdecay=0.99,momentum=0.5,
                     preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
-                    pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE,
-                    BarnesHut=FALSE,BHtheta=0.5){
+                    pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   #   1-1. (integer) ndim
@@ -74,7 +70,9 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     message("* do.tsne : a desired perplexity value is in [5,50].")
   }
 
-
+  # obsolete params.
+  BarnesHut=FALSE
+  BHtheta=0.5
   # 2. Input Parameters
   #   2-1. (double) eta = 0.5; learning parameter
   if (!is.numeric(eta)||is.na(eta)||is.infinite(eta)||(eta<=0)){
@@ -140,18 +138,23 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
   BHtheta = as.double(BHtheta)
 
   # 3. Run Main Algorithm
-  if (!BHflag){
-    Perp = aux_perplexity(tpX,perplexity);
-    P = as.matrix(Perp$P)
-    vars = as.vector(Perp$vars)
+  # if (!BHflag){
+  #   Perp = aux_perplexity(tpX,perplexity);
+  #   P = as.matrix(Perp$P)
+  #   vars = as.vector(Perp$vars)
+  #
+  #   Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
+  # } else {
+  #   pX = t(tpX)
+  #   out = Rtsne(pX,dims=ndim,theta=BHtheta,perplexity=perplexity,pca=TRUE,max_iter=maxiter,
+  #               momentum=momentum,eta=eta)
+  #   Y = (out$Y)
+  # }
+  Perp = aux_perplexity(tpX,perplexity);
+  P = as.matrix(Perp$P)
+  vars = as.vector(Perp$vars)
+  Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
 
-    Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
-  } else {
-    pX = t(tpX)
-    out = Rtsne(pX,dims=ndim,theta=BHtheta,perplexity=perplexity,pca=TRUE,max_iter=maxiter,
-                momentum=momentum,eta=eta)
-    Y = (out$Y)
-  }
   # 5. result
   if (any(is.infinite(Y))||any(is.na(Y))){
     message("* do.tsne : t-SNE not successful; having either Inf or NA values.")

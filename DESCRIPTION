@@ -13,7 +13,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
-Imports: Rcpp (>= 0.12.10), ADMM (>= 0.2.2), graphics, stats, Rtsne, Rcsdp, Rdpack, RSpectra, CVXR (>= 0.95), Matrix, utils, RcppDE
+Imports: Rcpp (>= 0.12.10), ADMM (>= 0.2.2), graphics, stats, Rcsdp, Rdpack, RSpectra, CVXR (>= 0.95), Matrix, utils, RcppDE
 LinkingTo: Rcpp, RcppArmadillo
 RoxygenNote: 6.1.1
 RdMacros: Rdpack
