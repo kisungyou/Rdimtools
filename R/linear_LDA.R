@@ -81,8 +81,7 @@ do.lda <- function(X, label, ndim=2){
   }
   ndim = as.integer(ndim)
   if (ndim>=K){
-    warning("* do.lda : by the nature of LDA, target dimension 'ndim' is adjusted to match maximally permissible subspace.")
-    ndim = (K-1)
+    warning("* do.lda : by the nature of LDA, target dimension 'ndim' needs to be adjusted to match maximally permissible subspace.")
   }
   #   4. perform CENTERING
   tmplist = aux.preprocess(X,type="center")
