@@ -84,51 +84,42 @@ do.lda <- function(X, label, ndim=2){
     warning("* do.lda : by the nature of LDA, target dimension 'ndim' needs to be adjusted to match maximally permissible subspace.")
   }
   #   4. perform CENTERING
-  tmplist = aux.preprocess(X,type="center")
+  tmplist = aux.preprocess.hidden(X,type="null",algtype="linear")
   trfinfo = tmplist$info
-  trfinfo$algtype = "linear"
   pX      = tmplist$pX
 
-  ## Main Computation
-  result = list()
-  if (K==2){ ## 2-class
-    idx1  = which(label==ulabel[1])
-    idx2  = which(label==ulabel[2])
-    SW    = lda_outer(pX[idx1,]) + lda_outer(pX[idx2,])
-    mdiff = matrix(colMeans(pX[idx2,])-colMeans(pX[idx1,]))
-    RLIN  = aux.bicgstab(SW, mdiff, verbose=FALSE)
-    w     = aux.adjprojection(as.matrix(RLIN$x))
-    Y     = pX%*%w
-
-    result$Y = Y
-    result$trfinfo = trfinfo
-    result$projection = w
-  } else { ## K-class : maximally, (K-1) dimension possible, you know I'm saying?
-    # 1. compute S_W  : within-group variance for multiclss problem
-    SW = array(0,c(p,p))
-    for (i in 1:K){
-      idxnow = which(label==ulabel[i])
-      SW     = SW + lda_outer(pX[idxnow,])
-    }
-    # 2. compute S_B  : between-group variance for multiclass problem
-    SB = array(0,c(p,p))
-    m  = colMeans(pX)
-    for (i in 1:K){
-      idxnow = which(label==ulabel[i])
-      Nk     = length(idxnow)
-      mdiff  = (colMeans(pX[idxnow,])-m)
-      SB     = SB + Nk*outer(mdiff,mdiff)
-    }
-    RLIN = aux.bicgstab(SW, SB, verbose=FALSE)
-    W    = RLIN$x
-    topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
-    Y    = pX%*%topW
-
-    result$Y = Y
-    result$trfinfo = trfinfo
-    result$projection = topW
+  ################################################################################
+  ## Rewriting LDA
+  # 1. split data into the list
+  datlist = list()
+  for (i in 1:length(ulabel)){
+    datlist[[i]] = pX[which(label==ulabel[i]),]
   }
-  ## Return results
+  # 2. compute two types of scatter matrices
+  #   2-1. error matrix/E/error variance
+  scattermat <- function(x){
+    return(cov(x)*(nrow(x)-1))
+  }
+  matE = array(0,c(p,p))
+  for (i in 1:length(ulabel)){
+    matE = matE + cov(datlist[[i]])*(nrow(datlist[[i]])-1)
+  }
+  matH = array(0,c(p,p))
+  meanlist = lapply(datlist, colMeans)
+  meantott = colMeans(pX)
+  for (i in 1:length(ulabel)){
+    meandiff = as.vector(meanlist[[i]]-meantott)
+    matH = matH + nrow(datlist[[i]])*outer(meandiff,meandiff)
+  }
+
+  W = aux.traceratio(matH, matE, ndim, 1e-6, 123)
+
+  ################################################################################
+  # return results
+  result = list()
+  result$Y = pX%*%W
+  result$trfinfo = trfinfo
+  result$projection = W
   return(result)
 }
 

@@ -25,6 +25,7 @@
 # 20. aux.randpartition    : given 1:n, divide it into K random partitions without replacement
 # 21. aux.which.mink       : returns index of smallest
 #     aux.which.maxk
+# 22. aux.traceratio       : solve trace ratio problem with 2012 Ngo's algorithm
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1586,4 +1587,33 @@ aux.which.mink <- function(x, k=1){
 #' @noRd
 aux.which.maxk <- function(x, k=1){
   return(order(x,decreasing = TRUE)[1:k])
+}
+
+
+# 22. aux.traceratio  : solve trace ratio problem with 2012 Ngo's  --------
+#' @keywords internal
+#' @noRd
+aux.traceratio <- function(A, B, dim, eps, maxiter){
+  ## in the the language
+  n = nrow(A)
+  p = dim
+
+  ## prepare the initializer
+  Vold = qr.Q(qr(matrix(rnorm(n*p),ncol=p)))
+  rhoold = 0
+  for (i in 1:maxiter){
+    Vnew   = RSpectra::eigs(A-rhoold*B,p,which="LR")$vectors
+    rhonew = sum(diag(t(Vnew)%*%A%*%Vnew))/sum(diag(t(Vnew)%*%B%*%Vnew))
+
+    rhoinc = abs(rhonew-rhoold)
+    Vold   = Vnew
+    rhoold = rhonew
+
+    if (rhoinc < eps){
+      break
+    }
+  }
+
+  ## let's try to return !
+  return(Vold)
 }
