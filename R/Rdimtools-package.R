@@ -205,6 +205,7 @@
 #' @import Rdpack
 #' @import CVXR
 #' @import RcppDE
+#' @importFrom geigen geigen
 #' @importFrom utils packageVersion combn
 #' @importFrom RSpectra eigs svds
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca

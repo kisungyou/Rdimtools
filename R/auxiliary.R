@@ -1265,13 +1265,14 @@ aux.nbdlogical <- function(X, label, khomo, khet){
 #' @keywords internal
 #' @noRd
 aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
-  # 1. first, run CPP with RcppArmadillo
-  geigs = aux_geigen(top, bottom)
+  # 1. first, run CPP with RcppArmadillo -> change to 'geigen' package
+  # geigs = aux_geigen(top, bottom) # Armadillo goes Decreasing order
+  geigs = aux_geigen(top, bottom) # geigen goes Increasing order
   maxp  = length(geigs$values)
 
-  # 2. separate values and vectors
-  values  = geigs$values
-  vectors = geigs$vectors
+  # 2. separate values and vectors; change correspondingly
+  values  = geigs$values[maxp:1]
+  vectors = geigs$vectors[,maxp:1]
 
   if (maximal==TRUE){
     partvals = values[1:ndim]
