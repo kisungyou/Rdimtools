@@ -47,6 +47,7 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 \code{\link{do.extlpp}} \tab U \tab Extended Locality Preserving Projection \cr
 \code{\link{do.fa}} \tab U \tab (Exploratory) Factor Analysis  \cr
 \code{\link{do.fscore}} \tab S \tab Fisher Score \cr
+\code{\link{do.fssem}} \tab U \tab Feature Subset Selection using Expectation-Maximization \cr
 \code{\link{do.ica}} \tab U \tab Independent Component Analysis \cr
 \code{\link{do.isoproj}} \tab U \tab Isometric Projection \cr
 \code{\link{do.kmvp}} \tab S \tab Kernel-Weighted Maximum Variance Projection \cr
@@ -121,6 +122,7 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 Also, we have \emph{nonlinear} methods implemented
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab ALGORITHM \cr
+\code{\link{do.cge}} \tab SS \tab Constrained Graph Embedding \cr
 \code{\link{do.cisomap}} \tab U \tab Conformal Isometric Feature Mapping \cr
 \code{\link{do.crca}} \tab U \tab Curvilinear Component Analysis \cr
 \code{\link{do.crda}} \tab U \tab Curvilinear Distance Analysis \cr

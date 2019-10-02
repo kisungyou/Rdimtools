@@ -45,7 +45,7 @@
 #' @references
 #' \insertRef{demartines_curvilinear_1997}{Rdimtools}
 #'
-#' \insertRef{goos_curvilinear_1999}{Rdimtools}
+#' \insertRef{herault_curvilinear_1999}{Rdimtools}
 #'
 #' @seealso \code{\link{do.crda}}
 #' @author Kisung You

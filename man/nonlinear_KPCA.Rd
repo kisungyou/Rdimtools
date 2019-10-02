@@ -54,7 +54,7 @@ plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
 
 }
 \references{
-\insertRef{goos_kernel_1997}{Rdimtools}
+\insertRef{scholkopf_kernel_1997}{Rdimtools}
 }
 \seealso{
 \code{\link{aux.kernelcov}}

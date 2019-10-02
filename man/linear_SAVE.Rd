@@ -70,5 +70,5 @@ plot(out3$Y[,1], out3$Y[,2], main="SAVE::10 slices")
 \code{\link{do.sir}}
 }
 \author{
-Changhee Suh
+Kisung You
 }

@@ -52,7 +52,7 @@
 #' @references
 #' \insertRef{li_sliced_1991}{Rdimtools}
 #'
-#' @author Changhee Suh
+#' @author Kisung You
 #' @rdname linear_SIR
 #' @export
 do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),

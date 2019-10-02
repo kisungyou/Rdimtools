@@ -52,7 +52,7 @@
 #'
 #' \insertRef{fukunaga_introduction_1990}{Rdimtools}
 #'
-#' @author Changhee Suh
+#' @author Kisung You
 #' @rdname linear_LDA
 #' @export
 do.lda <- function(X, label, ndim=2){

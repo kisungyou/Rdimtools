@@ -12,7 +12,7 @@ do.lsdf(X, label, ndim = 2, type = c("proportion", 0.1),
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
-\item{label}{a length-\eqn{n} vector of data class labels.}
+\item{label}{a length-\eqn{n} vector of data class labels. It should contain \code{NA} elements for missing label.}
 
 \item{ndim}{an integer-valued target dimension.}
 

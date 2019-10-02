@@ -7,7 +7,7 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param label a length-\eqn{n} vector of data class labels.
+#' @param label a length-\eqn{n} vector of data class labels. It should contain \code{NA} elements for missing label.
 #' @param ndim an integer-valued target dimension.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
@@ -70,6 +70,9 @@ do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
   p = ncol(X)
   #   2. label : check and return a de-factored vector
   #   For this example, there should be no degenerate class of size 1.
+  if (missing(label)){
+    stop("* Semi-Supervised Learning : 'label' is required. For it not provided, consider using Unsupervised methods.")
+  }
   label  = check_label(label, n)
   ulabel = unique(label)
   if (all(!is.na(ulabel))){

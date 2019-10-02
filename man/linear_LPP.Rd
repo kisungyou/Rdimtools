@@ -23,7 +23,7 @@ among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 See also \code{\link{aux.graphnbd}} for more details.}
 
 \item{preprocess}{an additional option for preprocessing the data.
-Default is "center". See also \code{\link{aux.preprocess}} for more details.}
+Default is \code{"center"}. See also \code{\link{aux.preprocess}} for more details.}
 
 \item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}.}
 }

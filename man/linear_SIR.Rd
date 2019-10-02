@@ -68,5 +68,5 @@ plot(out3$Y[,1], out3$Y[,2], main="SIR::10 slices")
 \insertRef{li_sliced_1991}{Rdimtools}
 }
 \author{
-Changhee Suh
+Kisung You
 }

@@ -69,7 +69,7 @@
 #'
 #'
 #' @seealso \code{\link{do.sir}}
-#' @author Changhee Suh
+#' @author Kisung You
 #' @rdname linear_RSIR
 #' @export
 do.rsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),

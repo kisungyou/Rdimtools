@@ -52,7 +52,7 @@
 #' \insertRef{dennis_cook_save:_2000}{Rdimtools}
 #'
 #' @seealso \code{\link{do.sir}}
-#' @author Changhee Suh
+#' @author Kisung You
 #' @rdname linear_SAVE
 #' @export
 do.save <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),

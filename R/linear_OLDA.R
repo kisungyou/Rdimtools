@@ -42,7 +42,7 @@
 #' \insertRef{ye_characterization_2005}{Rdimtools}
 #'
 #' @rdname linear_OLDA
-#' @author Changhee Suh
+#' @author Kisung You
 #' @export
 do.olda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

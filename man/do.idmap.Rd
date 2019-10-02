@@ -50,7 +50,7 @@ plot(out3$Y[,1], out3$Y[,2], main="IDMAP")
 
 }
 \references{
-\insertRef{erbacher_content-based_2006}{Rdimtools}
+\insertRef{minghim_content-based_2006}{Rdimtools}
 }
 \seealso{
 \code{\link{do.nnp}}, \code{\link{do.fastmap}}

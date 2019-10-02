@@ -59,7 +59,7 @@ plot(out3$Y[,1],out3$Y[,2],main="alpha=10.0")
 \references{
 \insertRef{demartines_curvilinear_1997}{Rdimtools}
 
-\insertRef{goos_curvilinear_1999}{Rdimtools}
+\insertRef{herault_curvilinear_1999}{Rdimtools}
 }
 \seealso{
 \code{\link{do.crda}}

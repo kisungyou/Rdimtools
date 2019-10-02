@@ -13,7 +13,7 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess  an additional option for preprocessing the data.
-#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
+#' Default is \code{"center"}. See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}.
 #'
 #' @return a named list containing

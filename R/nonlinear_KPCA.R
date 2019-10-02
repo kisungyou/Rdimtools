@@ -41,7 +41,7 @@
 #'
 #' @seealso \code{\link{aux.kernelcov}}
 #' @references
-#' \insertRef{goos_kernel_1997}{Rdimtools}
+#' \insertRef{scholkopf_kernel_1997}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KPCA

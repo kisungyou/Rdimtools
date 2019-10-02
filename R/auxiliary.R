@@ -26,6 +26,7 @@
 # 21. aux.which.mink       : returns index of smallest
 #     aux.which.maxk
 # 22. aux.traceratio       : solve trace ratio problem with 2012 Ngo's algorithm
+# 23. aux.2scatter         : compute LDA type within- and between- scatter matrices
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -1267,10 +1268,10 @@ aux.nbdlogical <- function(X, label, khomo, khet){
 aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
   # 1. first, run CPP with RcppArmadillo -> change to 'geigen' package
   # geigs = aux_geigen(top, bottom) # Armadillo goes Decreasing order
-  geigs = aux_geigen(top, bottom) # geigen goes Increasing order
+  geigs = geigen::geigen(top, bottom) # geigen goes Increasing order
   maxp  = length(geigs$values)
 
-  # 2. separate values and vectors; change correspondingly
+  # 2. separate values and vectors; change correspondingly for Decreasing order
   values  = geigs$values[maxp:1]
   vectors = geigs$vectors[,maxp:1]
 
@@ -1617,4 +1618,77 @@ aux.traceratio <- function(A, B, dim, eps, maxiter){
 
   ## let's try to return !
   return(Vold)
+}
+
+
+# 23. aux.2scatter --------------------------------------------------------
+#     data should be provided as a matrix (columns are variables)
+#' @keywords internal
+#' @noRd
+aux.2scatter <- function(pX, label){
+  # 0. extra information
+  if (is.vector(pX)){
+    n = length(pX)
+    p = 1
+  } else {
+    n = nrow(pX)
+    p = ncol(pX)
+  }
+
+
+  # 1. extract label information
+  label   = round(label)
+  ulabel  = unique(label)
+  datlist = list()
+  for (i in 1:length(ulabel)){
+    if (is.vector(pX)){
+      datlist[[i]] = pX[(label==ulabel[i])]
+    } else {
+      datlist[[i]] = pX[(label==ulabel[i]),]
+    }
+  }
+  # 2. compute two types of scatter matrices
+  #   2-1. error matrix/E/error variance
+  scattermat <- function(x){
+    return(cov(x)*(nrow(x)-1))
+  }
+  matE = array(0,c(p,p))
+  for (i in 1:length(ulabel)){
+    if (is.vector(datlist[[i]])){
+      tgt = as.matrix(datlist[[i]])
+    } else {
+      tgt = datlist[[i]]
+    }
+    matE = matE + cov(tgt)*(nrow(tgt)-1)
+  }
+  matH = array(0,c(p,p))
+  if (is.vector(datlist[[1]])){
+    meanlist = lapply(datlist, base::mean)
+  } else {
+    meanlist = lapply(datlist, colMeans)
+  }
+  if (is.vector(pX)){
+    meantott = base::mean(pX)
+  } else {
+    meantott = colMeans(pX)
+  }
+  for (i in 1:length(ulabel)){
+    meandiff = as.vector(meanlist[[i]]-meantott)
+    if (is.vector(datlist[[i]])){
+      matH = matH + length(datlist[[i]])*outer(meandiff,meandiff)
+    } else {
+      matH = matH + nrow(datlist[[i]])*outer(meandiff,meandiff)
+    }
+  }
+
+  output = list()
+  if (is.vector(pX)){
+    output$within = as.double(matE)
+    output$between = as.double(matH)
+  } else {
+    output$within = matE
+    output$between = matH
+  }
+
+  return(output)
 }

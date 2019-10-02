@@ -91,5 +91,5 @@ plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
 \code{\link{do.sir}}
 }
 \author{
-Changhee Suh
+Kisung You
 }

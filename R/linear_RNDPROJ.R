@@ -59,7 +59,7 @@
 #'}
 #'
 #'@references
-#'\insertRef{beals_extensions_1984}{Rdimtools}
+#'\insertRef{johnson_extensions_1984}{Rdimtools}
 #'
 #'\insertRef{achlioptas_database-friendly_2003}{Rdimtools}
 #'
