@@ -4,9 +4,17 @@
 \alias{do.crda}
 \title{Curvilinear Distance Analysis}
 \usage{
-do.crda(X, ndim = 2, type = c("proportion", 0.1),
-  symmetric = "union", weight = TRUE, lambda = 1, alpha = 1,
-  maxiter = 1000, tolerance = 1e-06)
+do.crda(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  symmetric = "union",
+  weight = TRUE,
+  lambda = 1,
+  alpha = 1,
+  maxiter = 1000,
+  tolerance = 1e-06
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,9 +4,12 @@
 \alias{do.keca}
 \title{Kernel Entropy Component Analysis}
 \usage{
-do.keca(X, ndim = 2, kernel = c("gaussian", 1),
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"))
+do.keca(
+  X,
+  ndim = 2,
+  kernel = c("gaussian", 1),
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

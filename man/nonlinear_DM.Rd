@@ -4,9 +4,14 @@
 \alias{do.dm}
 \title{Diffusion Maps}
 \usage{
-do.dm(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "decorrelate", "whiten"), bandwidth = 1, timescale = 1,
-  multiscale = FALSE)
+do.dm(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  bandwidth = 1,
+  timescale = 1,
+  multiscale = FALSE
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,8 +4,11 @@
 \alias{do.lamp}
 \title{Local Affine Multidimensional Projection}
 \usage{
-do.lamp(X, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "whiten", "decorrelate"))
+do.lamp(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

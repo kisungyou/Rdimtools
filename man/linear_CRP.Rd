@@ -4,8 +4,12 @@
 \alias{do.crp}
 \title{Collaborative Representation-based Projection}
 \usage{
-do.crp(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), lambda = 1)
+do.crp(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  lambda = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

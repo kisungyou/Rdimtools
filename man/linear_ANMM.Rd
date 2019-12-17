@@ -4,9 +4,14 @@
 \alias{do.anmm}
 \title{Average Neighborhood Margin Maximization}
 \usage{
-do.anmm(X, label, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "decorrelate", "whiten"), No = ceiling(nrow(X)/10),
-  Ne = ceiling(nrow(X)/10))
+do.anmm(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  No = ceiling(nrow(X)/10),
+  Ne = ceiling(nrow(X)/10)
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

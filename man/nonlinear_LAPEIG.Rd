@@ -4,10 +4,15 @@
 \alias{do.lapeig}
 \title{Laplacian Eigenmaps}
 \usage{
-do.lapeig(X, ndim = 2, type = c("proportion", 0.1),
+do.lapeig(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"), weighted = TRUE, kernelscale = 1)
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  weighted = TRUE,
+  kernelscale = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

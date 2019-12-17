@@ -4,9 +4,14 @@
 \alias{do.ldp}
 \title{Locally Discriminating Projection}
 \usage{
-do.ldp(X, label, ndim = 2, type = c("proportion", 0.1),
+do.ldp(
+  X,
+  label,
+  ndim = 2,
+  type = c("proportion", 0.1),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  beta = 10)
+  beta = 10
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

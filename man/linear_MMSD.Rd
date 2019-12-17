@@ -4,8 +4,13 @@
 \alias{do.mmsd}
 \title{Multiple Maximum Scatter Difference}
 \usage{
-do.mmsd(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "whiten", "decorrelate"), C = 1)
+do.mmsd(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "whiten", "decorrelate"),
+  C = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

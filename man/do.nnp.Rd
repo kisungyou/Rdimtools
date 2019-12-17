@@ -4,8 +4,11 @@
 \alias{do.nnp}
 \title{Nearest Neighbor Projection}
 \usage{
-do.nnp(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "whiten", "decorrelate"))
+do.nnp(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

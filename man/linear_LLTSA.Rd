@@ -4,9 +4,13 @@
 \alias{do.lltsa}
 \title{Linear Local Tangent Space Alignment}
 \usage{
-do.lltsa(X, ndim = 2, type = c("proportion", 0.1),
+do.lltsa(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

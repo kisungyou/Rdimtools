@@ -4,8 +4,15 @@
 \alias{do.ksda}
 \title{Kernel Semi-Supervised Discriminant Analysis}
 \usage{
-do.ksda(X, label, ndim = 2, type = c("proportion", 0.1), alpha = 1,
-  beta = 1, t = 1)
+do.ksda(
+  X,
+  label,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  alpha = 1,
+  beta = 1,
+  t = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

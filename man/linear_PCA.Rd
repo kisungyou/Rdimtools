@@ -4,8 +4,13 @@
 \alias{do.pca}
 \title{Principal Component Analysis}
 \usage{
-do.pca(X, ndim = "auto", cor = FALSE, preprocess = c("center",
-  "scale", "cscale", "decorrelate", "whiten"), varratio = 0.9)
+do.pca(
+  X,
+  ndim = "auto",
+  cor = FALSE,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  varratio = 0.9
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

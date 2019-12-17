@@ -10,14 +10,14 @@
   this.version = packageVersion("Rdimtools")
 
   ## Print on Screen
-  packageStartupMessage("** ---------------------------------------------------- **")
+  packageStartupMessage("** ------------------------------------------------------- **")
   packageStartupMessage("** Rdimtools")
   packageStartupMessage("**  - Dimension Reduction and Estimation Toolbox")
   packageStartupMessage("** Version    : ",this.version,"      (",this.year,")",sep="")
   packageStartupMessage("** Maintainer : Kisung You (kyoustat@gmail.com)")
   packageStartupMessage("**")
   packageStartupMessage("** Please share any bugs or suggestions to the maintainer.")
-  packageStartupMessage("** ---------------------------------------------------- **")
+  packageStartupMessage("** ------------------------------------------------------- **")
 }
 
 .onUnload <- function(libpath) {

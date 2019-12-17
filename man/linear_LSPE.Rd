@@ -4,9 +4,14 @@
 \alias{do.lspe}
 \title{Locality and Similarity Preserving Embedding}
 \usage{
-do.lspe(X, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "whiten", "decorrelate"), alpha = 1, beta = 1,
-  bandwidth = 1)
+do.lspe(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  alpha = 1,
+  beta = 1,
+  bandwidth = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

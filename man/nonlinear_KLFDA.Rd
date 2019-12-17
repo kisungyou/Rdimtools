@@ -4,10 +4,16 @@
 \alias{do.klfda}
 \title{Kernel Local Fisher Discriminant Analysis}
 \usage{
-do.klfda(X, label, ndim = 2, preprocess = c("center", "scale",
-  "cscale", "decorrelate", "whiten"), type = c("proportion", 0.1),
+do.klfda(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
-  localscaling = TRUE, t = 1)
+  localscaling = TRUE,
+  t = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

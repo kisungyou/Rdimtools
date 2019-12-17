@@ -4,9 +4,14 @@
 \alias{do.udfs}
 \title{Unsupervised Discriminative Features Selection}
 \usage{
-do.udfs(X, ndim = 2, lbd = 1, gamma = 1, k = 5,
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"))
+do.udfs(
+  X,
+  ndim = 2,
+  lbd = 1,
+  gamma = 1,
+  k = 5,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

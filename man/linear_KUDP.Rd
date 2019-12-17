@@ -4,9 +4,13 @@
 \alias{do.kudp}
 \title{Kernel-Weighted Unsupervised Discriminant Projection}
 \usage{
-do.kudp(X, ndim = 2, type = c("proportion", 0.1),
+do.kudp(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  bandwidth = 1)
+  bandwidth = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

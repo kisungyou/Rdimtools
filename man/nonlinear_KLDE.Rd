@@ -4,9 +4,16 @@
 \alias{do.klde}
 \title{Kernel Local Discriminant Embedding}
 \usage{
-do.klde(X, label, ndim = 2, t = 1, numk = max(ceiling(nrow(X)/10),
-  2), preprocess = c("center", "scale", "cscale", "decorrelate",
-  "whiten"), ktype = c("gaussian", 1), kcentering = TRUE)
+do.klde(
+  X,
+  label,
+  ndim = 2,
+  t = 1,
+  numk = max(ceiling(nrow(X)/10), 2),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  ktype = c("gaussian", 1),
+  kcentering = TRUE
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

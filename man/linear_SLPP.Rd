@@ -4,8 +4,7 @@
 \alias{do.slpp}
 \title{Supervised Locality Preserving Projection}
 \usage{
-do.slpp(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"))
+do.slpp(X, label, ndim = 2, preprocess = c("center", "decorrelate", "whiten"))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

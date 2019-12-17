@@ -4,10 +4,16 @@
 \alias{do.ree}
 \title{Robust Euclidean Embedding}
 \usage{
-do.ree(X, ndim = 2, W = NA, preprocess = c("null", "center", "scale",
-  "cscale", "whiten", "decorrelate"), initc = 1,
-  dmethod = c("euclidean", "maximum", "manhattan", "canberra", "binary",
-  "minkowski"), maxiter = 100, abstol = 0.001)
+do.ree(
+  X,
+  ndim = 2,
+  W = NA,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  initc = 1,
+  dmethod = c("euclidean", "maximum", "manhattan", "canberra", "binary", "minkowski"),
+  maxiter = 100,
+  abstol = 0.001
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

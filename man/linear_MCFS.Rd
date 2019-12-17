@@ -4,9 +4,15 @@
 \alias{do.mcfs}
 \title{Multi-Cluster Feature Selection}
 \usage{
-do.mcfs(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"), K = max(round(nrow(X)/5), 2), lambda = 1, t = 10)
+do.mcfs(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  K = max(round(nrow(X)/5), 2),
+  lambda = 1,
+  t = 10
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

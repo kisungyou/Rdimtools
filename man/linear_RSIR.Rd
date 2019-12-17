@@ -4,10 +4,16 @@
 \alias{do.rsir}
 \title{Regularized Sliced Inverse Regression}
 \usage{
-do.rsir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
+do.rsir(
+  X,
+  response,
+  ndim = 2,
+  h = max(2, round(nrow(X)/5)),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
   regmethod = c("Ridge", "Tikhonov", "PCA", "PCARidge", "PCATikhonov"),
-  tau = 1, numpc = ndim)
+  tau = 1,
+  numpc = ndim
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

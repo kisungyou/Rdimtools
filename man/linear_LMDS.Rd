@@ -4,8 +4,13 @@
 \alias{do.lmds}
 \title{Landmark Multidimensional Scaling}
 \usage{
-do.lmds(X, ndim = 2, ltype = "random", npoints = max(nrow(X)/5, ndim
-  + 1), preprocess = c("center", "cscale", "decorrelate", "whiten"))
+do.lmds(
+  X,
+  ndim = 2,
+  ltype = "random",
+  npoints = max(nrow(X)/5, ndim + 1),
+  preprocess = c("center", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

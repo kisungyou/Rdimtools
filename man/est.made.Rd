@@ -4,8 +4,12 @@
 \alias{est.made}
 \title{Manifold-Adaptive Dimension Estimation}
 \usage{
-est.made(X, k = round(sqrt(ncol(X))), maxdim = min(ncol(X), 15),
-  combine = c("mean", "median", "vote"))
+est.made(
+  X,
+  k = round(sqrt(ncol(X))),
+  maxdim = min(ncol(X), 15),
+  combine = c("mean", "median", "vote")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

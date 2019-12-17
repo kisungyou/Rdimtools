@@ -4,9 +4,13 @@
 \alias{do.cge}
 \title{Constrained Graph Embedding}
 \usage{
-do.cge(X, label, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"))
+do.cge(
+  X,
+  label,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

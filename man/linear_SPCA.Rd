@@ -4,9 +4,16 @@
 \alias{do.spca}
 \title{Sparse Principal Component Analysis}
 \usage{
-do.spca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), mu = 1, rho = 1, abstol = 1e-04,
-  reltol = 0.01, maxiter = 1000)
+do.spca(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  mu = 1,
+  rho = 1,
+  abstol = 1e-04,
+  reltol = 0.01,
+  maxiter = 1000
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

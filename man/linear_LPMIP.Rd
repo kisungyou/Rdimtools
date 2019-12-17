@@ -4,9 +4,14 @@
 \alias{do.lpmip}
 \title{Locality-Preserved Maximum Information Projection}
 \usage{
-do.lpmip(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"), sigma = 10, alpha = 0.5)
+do.lpmip(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  sigma = 10,
+  alpha = 0.5
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

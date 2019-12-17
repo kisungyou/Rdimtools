@@ -21,10 +21,5 @@ or the development version from github:
 
 ``` r
 ## install.packages("devtools")
-devtools::install_github("kisungyou/Rdimtools")
+devtools::install_github("kyoustat/Rdimtools")
 ```
-
-Code of Conduct
----------------
-
-Please note that this project is released with a [Contributor Code of Conduct](CONDUCT.md). By participating in this project you agree to abide by its terms.

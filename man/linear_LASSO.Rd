@@ -4,9 +4,14 @@
 \alias{do.lasso}
 \title{Least Absolute Shrinkage and Selection Operator}
 \usage{
-do.lasso(X, response, ndim = 2, preprocess = c("null", "center",
-  "scale", "cscale", "whiten", "decorrelate"), ycenter = FALSE,
-  lambda = 1)
+do.lasso(
+  X,
+  response,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  ycenter = FALSE,
+  lambda = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

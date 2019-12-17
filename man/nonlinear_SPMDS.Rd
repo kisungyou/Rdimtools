@@ -4,10 +4,15 @@
 \alias{do.spmds}
 \title{Spectral Multidimensional Scaling}
 \usage{
-do.spmds(X, ndim = 2, neigs = max(2, nrow(X)/10), ratio = 0.1,
-  preprocess = c("null", "center", "scale", "cscale", "decorrelate",
-  "whiten"), type = c("proportion", 0.1), symmetric = c("union",
-  "intersect", "asymmetric"))
+do.spmds(
+  X,
+  ndim = 2,
+  neigs = max(2, nrow(X)/10),
+  ratio = 0.1,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

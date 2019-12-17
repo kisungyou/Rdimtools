@@ -171,7 +171,9 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{est.boxcount}}      \tab G \tab Box-Counting Dimension \cr
 \code{\link{est.clustering}}    \tab G \tab Clustering-based Estimation \cr
 \code{\link{est.correlation}}   \tab G \tab Correlation Dimension \cr
+\code{\link{est.danco}}         \tab G \tab Dimensionality from Angle and Norm Concentration \cr
 \code{\link{est.made}}          \tab G/P \tab Manifold-Adaptive Dimension Estimation \cr
+\code{\link{est.gdistnn}}       \tab G/P \tab Graph Distance based on Manifold Assummption \cr
 \code{\link{est.mle1}}          \tab G \tab MLE using Poisson Process \cr
 \code{\link{est.mle2}}          \tab G \tab MLE using Poisson Process with Bias Correction \cr
 \code{\link{est.nearneighbor1}} \tab G \tab Near-Neighbor Information \cr

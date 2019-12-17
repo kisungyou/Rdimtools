@@ -4,8 +4,13 @@
 \alias{do.sir}
 \title{Sliced Inverse Regression}
 \usage{
-do.sir(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+do.sir(
+  X,
+  response,
+  ndim = 2,
+  h = max(2, round(nrow(X)/5)),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

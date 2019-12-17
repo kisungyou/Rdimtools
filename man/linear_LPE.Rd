@@ -4,8 +4,12 @@
 \alias{do.lpe}
 \title{Locality Pursuit Embedding}
 \usage{
-do.lpe(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), numk = max(ceiling(nrow(X)/10), 2))
+do.lpe(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  numk = max(ceiling(nrow(X)/10), 2)
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,8 +4,15 @@
 \alias{do.spe}
 \title{Stochastic Proximity Embedding}
 \usage{
-do.spe(X, ndim = 2, proximity = function(x) {     dist(x, method =
-  "euclidean") }, C = 50, S = 50, lambda = 1, drate = 0.9)
+do.spe(
+  X,
+  ndim = 2,
+  proximity = function(x) {     dist(x, method = "euclidean") },
+  C = 50,
+  S = 50,
+  lambda = 1,
+  drate = 0.9
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

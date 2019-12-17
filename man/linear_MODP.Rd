@@ -4,10 +4,16 @@
 \alias{do.modp}
 \title{Modified Orthogonal Discriminant Projection}
 \usage{
-do.modp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), type = c("proportion", 0.1),
-  symmetric = c("union", "intersect", "asymmetric"), alpha = 0.5,
-  beta = 10)
+do.modp(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"),
+  alpha = 0.5,
+  beta = 10
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

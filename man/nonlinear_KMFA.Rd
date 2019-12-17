@@ -4,9 +4,15 @@
 \alias{do.kmfa}
 \title{Kernel Marginal Fisher Analysis}
 \usage{
-do.kmfa(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), k1 = max(ceiling(nrow(X)/10), 2),
-  k2 = max(ceiling(nrow(X)/10), 2), t = 1)
+do.kmfa(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  k1 = max(ceiling(nrow(X)/10), 2),
+  k2 = max(ceiling(nrow(X)/10), 2),
+  t = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

@@ -4,8 +4,13 @@
 \alias{do.fa}
 \title{Exploratory Factor Analysis}
 \usage{
-do.fa(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), maxiter = 1000, tolerance = 1e-06)
+do.fa(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  maxiter = 1000,
+  tolerance = 1e-06
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

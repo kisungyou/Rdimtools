@@ -4,11 +4,21 @@
 \alias{do.sne}
 \title{Stochastic Neighbor Embedding}
 \usage{
-do.sne(X, ndim = 2, perplexity = 30, eta = 0.05, maxiter = 2000,
-  jitter = 0.3, jitterdecay = 0.99, momentum = 0.5,
-  preprocess = c("null", "center", "scale", "scale", "decorrelate",
-  "whiten"), pca = TRUE, pcaratio = 0.9, pcascale = FALSE,
-  symmetric = FALSE)
+do.sne(
+  X,
+  ndim = 2,
+  perplexity = 30,
+  eta = 0.05,
+  maxiter = 2000,
+  jitter = 0.3,
+  jitterdecay = 0.99,
+  momentum = 0.5,
+  preprocess = c("null", "center", "scale", "scale", "decorrelate", "whiten"),
+  pca = TRUE,
+  pcaratio = 0.9,
+  pcascale = FALSE,
+  symmetric = FALSE
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

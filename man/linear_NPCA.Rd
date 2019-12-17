@@ -4,8 +4,13 @@
 \alias{do.npca}
 \title{Nonnegative Principal Component Analysis}
 \usage{
-do.npca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), maxiter = 1000, reltol = 1e-05)
+do.npca(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  maxiter = 1000,
+  reltol = 1e-05
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

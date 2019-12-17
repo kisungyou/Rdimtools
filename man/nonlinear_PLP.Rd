@@ -4,8 +4,12 @@
 \alias{do.plp}
 \title{Piecewise Laplacian-based Projection (PLP)}
 \usage{
-do.plp(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "whiten", "decorrelate"), type = c("proportion", 0.2))
+do.plp(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  type = c("proportion", 0.2)
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

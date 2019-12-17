@@ -4,9 +4,16 @@
 \alias{do.lle}
 \title{Locally Linear Embedding}
 \usage{
-do.lle(X, ndim = 2, type = c("proportion", 0.1), symmetric = "union",
-  weight = TRUE, preprocess = c("null", "center", "scale", "cscale",
-  "decorrelate", "whiten"), regtype = FALSE, regparam = 1)
+do.lle(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  symmetric = "union",
+  weight = TRUE,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  regtype = FALSE,
+  regparam = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,10 +4,16 @@
 \alias{do.lisomap}
 \title{Landmark Isometric Feature Mapping}
 \usage{
-do.lisomap(X, ndim = 2, ltype = c("random", "MaxMin"),
-  npoints = max(nrow(X)/5, ndim + 1), preprocess = c("center", "scale",
-  "cscale", "decorrelate", "whiten"), type = c("proportion", 0.1),
-  symmetric = c("union", "intersect", "asymmetric"), weight = TRUE)
+do.lisomap(
+  X,
+  ndim = 2,
+  ltype = c("random", "MaxMin"),
+  npoints = max(nrow(X)/5, ndim + 1),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  type = c("proportion", 0.1),
+  symmetric = c("union", "intersect", "asymmetric"),
+  weight = TRUE
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

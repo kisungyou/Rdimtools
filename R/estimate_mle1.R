@@ -25,9 +25,9 @@
 #' out2 = est.mle1(X2)
 #' out3 = est.mle1(X3)
 #'
-#' sprintf("* est.mle1 : estimated dimension for 'swiss'  data is %.2f.",out1$estdim)
-#' sprintf("* est.mle1 : estimated dimension for 'ribbon' data is %.2f.",out2$estdim)
-#' sprintf("* est.mle1 : estimated dimension for 'saddle' data is %.2f.",out3$estdim)
+#' cat("* est.mle1 : estimated dimension for 'swiss'  data is ",round(out1$estdim,2))
+#' cat("* est.mle1 : estimated dimension for 'ribbon' data is ",round(out2$estdim,2))
+#' cat("* est.mle1 : estimated dimension for 'saddle' data is ",round(out3$estdim,2))
 #' }
 #'
 #' @references

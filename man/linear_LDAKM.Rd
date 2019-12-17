@@ -4,8 +4,13 @@
 \alias{do.ldakm}
 \title{Combination of LDA and K-means}
 \usage{
-do.ldakm(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), maxiter = 10, abstol = 0.001)
+do.ldakm(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  maxiter = 10,
+  abstol = 0.001
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

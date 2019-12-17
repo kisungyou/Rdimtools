@@ -4,8 +4,13 @@
 \alias{do.kmmc}
 \title{Kernel Maximum Margin Criterion}
 \usage{
-do.kmmc(X, label, ndim = 2, preprocess = c("center", "decorrelate",
-  "whiten"), t = 1)
+do.kmmc(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "decorrelate", "whiten"),
+  t = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

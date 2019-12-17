@@ -4,8 +4,13 @@
 \alias{do.msd}
 \title{Maximum Scatter Difference}
 \usage{
-do.msd(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "whiten", "decorrelate"), C = 1)
+do.msd(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "whiten", "decorrelate"),
+  C = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,8 +4,13 @@
 \alias{do.save}
 \title{Sliced Average Variance Estimation}
 \usage{
-do.save(X, response, ndim = 2, h = max(2, round(nrow(X)/5)),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+do.save(
+  X,
+  response,
+  ndim = 2,
+  h = max(2, round(nrow(X)/5)),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

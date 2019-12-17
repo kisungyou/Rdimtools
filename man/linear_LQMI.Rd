@@ -4,8 +4,12 @@
 \alias{do.lqmi}
 \title{Linear Quadratic Mutual Information}
 \usage{
-do.lqmi(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "whiten", "decorrelate"))
+do.lqmi(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "whiten", "decorrelate")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,9 +4,16 @@
 \alias{do.ispe}
 \title{Isometric Stochastic Proximity Embedding}
 \usage{
-do.ispe(X, ndim = 2, proximity = function(x) {     dist(x, method =
-  "euclidean") }, C = 50, S = 50, lambda = 1, drate = 0.9,
-  cutoff = 1)
+do.ispe(
+  X,
+  ndim = 2,
+  proximity = function(x) {     dist(x, method = "euclidean") },
+  C = 50,
+  S = 50,
+  lambda = 1,
+  drate = 0.9,
+  cutoff = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

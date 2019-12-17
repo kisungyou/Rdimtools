@@ -4,8 +4,11 @@
 \alias{do.elpp2}
 \title{Enhanced Locality Preserving Projection (2013)}
 \usage{
-do.elpp2(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"))
+do.elpp2(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

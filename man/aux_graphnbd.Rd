@@ -4,8 +4,13 @@
 \alias{aux.graphnbd}
 \title{Construct Nearest-Neighborhood Graph}
 \usage{
-aux.graphnbd(data, method = "euclidean", type = c("proportion", 0.1),
-  symmetric = "union", pval = 2)
+aux.graphnbd(
+  data,
+  method = "euclidean",
+  type = c("proportion", 0.1),
+  symmetric = "union",
+  pval = 2
+)
 }
 \arguments{
 \item{data}{an \eqn{(n\times p)} data matrix.}

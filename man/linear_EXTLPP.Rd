@@ -4,8 +4,12 @@
 \alias{do.extlpp}
 \title{Extended Locality Preserving Projection}
 \usage{
-do.extlpp(X, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+do.extlpp(
+  X,
+  ndim = 2,
+  numk = max(ceiling(nrow(X)/10), 2),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

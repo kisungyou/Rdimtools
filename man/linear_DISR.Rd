@@ -4,8 +4,13 @@
 \alias{do.disr}
 \title{Diversity-Induced Self-Representation}
 \usage{
-do.disr(X, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "whiten", "decorrelate"), lbd1 = 1, lbd2 = 1)
+do.disr(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  lbd1 = 1,
+  lbd2 = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

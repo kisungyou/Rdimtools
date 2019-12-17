@@ -4,9 +4,14 @@
 \alias{do.nonpp}
 \title{Nonnegative Orthogonal Neighborhood Preserving Projections}
 \usage{
-do.nonpp(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("center", "decorrelate", "whiten"), maxiter = 1000,
-  reltol = 1e-05)
+do.nonpp(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("center", "decorrelate", "whiten"),
+  maxiter = 1000,
+  reltol = 1e-05
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

@@ -15,7 +15,7 @@ LazyData: true
 Depends: R (>= 3.0.0)
 Imports: ADMM (>= 0.2.2), ClusterR, CVXR (>= 0.95), Matrix, Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RSpectra, geigen, graphics, stats, utils
 LinkingTo: Rcpp, RcppArmadillo
-RoxygenNote: 6.1.1
+RoxygenNote: 7.0.2
 RdMacros: Rdpack
 URL: http://github.com/kyoustat/Rdimtools
 BugReports: http://github.com/kyoustat/Rdimtools/issues

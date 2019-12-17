@@ -4,8 +4,13 @@
 \alias{do.bpca}
 \title{Bayesian Principal Component Analysis}
 \usage{
-do.bpca(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), reltol = 1e-04, maxiter = 123)
+do.bpca(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  reltol = 1e-04,
+  maxiter = 123
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

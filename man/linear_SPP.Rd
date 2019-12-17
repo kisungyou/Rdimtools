@@ -4,8 +4,12 @@
 \alias{do.spp}
 \title{Sparsity Preserving Projection}
 \usage{
-do.spp(X, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), reltol = 1e-04)
+do.spp(
+  X,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  reltol = 1e-04
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

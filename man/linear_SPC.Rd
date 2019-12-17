@@ -4,8 +4,13 @@
 \alias{do.spc}
 \title{Supervised Principal Component Analysis}
 \usage{
-do.spc(X, response, ndim = 2, preprocess = c("center", "whiten",
-  "decorrelate"), threshold = 0.1)
+do.spc(
+  X,
+  response,
+  ndim = 2,
+  preprocess = c("center", "whiten", "decorrelate"),
+  threshold = 0.1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

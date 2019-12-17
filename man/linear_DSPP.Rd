@@ -4,8 +4,14 @@
 \alias{do.dspp}
 \title{Discriminative Sparsity Preserving Projection}
 \usage{
-do.dspp(X, label, ndim = 2, preprocess = c("center", "scale", "cscale",
-  "decorrelate", "whiten"), lambda = 1, rho = 1)
+do.dspp(
+  X,
+  label,
+  ndim = 2,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
+  lambda = 1,
+  rho = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

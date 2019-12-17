@@ -4,10 +4,15 @@
 \alias{do.llp}
 \title{Local Learning Projections}
 \usage{
-do.llp(X, ndim = 2, type = c("proportion", 0.1),
+do.llp(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  t = 1, lambda = 1)
+  t = 1,
+  lambda = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations}

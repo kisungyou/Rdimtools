@@ -4,10 +4,14 @@
 \alias{do.iltsa}
 \title{Improved Local Tangent Space Alignment}
 \usage{
-do.iltsa(X, ndim = 2, type = c("proportion", 0.1),
+do.iltsa(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   symmetric = c("union", "intersect", "asymmetric"),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  t = 10)
+  t = 10
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,8 +4,13 @@
 \alias{do.dagdne}
 \title{Double-Adjacency Graphs-based Discriminant Neighborhood Embedding}
 \usage{
-do.dagdne(X, label, ndim = 2, numk = max(ceiling(nrow(X)/10), 2),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+do.dagdne(
+  X,
+  label,
+  ndim = 2,
+  numk = max(ceiling(nrow(X)/10), 2),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

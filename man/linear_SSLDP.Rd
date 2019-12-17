@@ -4,9 +4,14 @@
 \alias{do.ssldp}
 \title{Semi-Supervised Locally Discriminant Projection}
 \usage{
-do.ssldp(X, label, ndim = 2, type = c("proportion", 0.1),
+do.ssldp(
+  X,
+  label,
+  ndim = 2,
+  type = c("proportion", 0.1),
   preprocess = c("center", "scale", "cscale", "whiten", "decorrelate"),
-  beta = 0.5)
+  beta = 0.5
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

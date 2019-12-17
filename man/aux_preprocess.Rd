@@ -4,8 +4,10 @@
 \alias{aux.preprocess}
 \title{Preprocessing the data}
 \usage{
-aux.preprocess(data, type = c("center", "scale", "cscale", "decorrelate",
-  "whiten"))
+aux.preprocess(
+  data,
+  type = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{data}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -4,9 +4,17 @@
 \alias{do.sammc}
 \title{Semi-Supervised Adaptive Maximum Margin Criterion}
 \usage{
-do.sammc(X, label, ndim = 2, type = c("proportion", 0.1),
+do.sammc(
+  X,
+  label,
+  ndim = 2,
+  type = c("proportion", 0.1),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  a = 1, b = 1, lambda = 1, beta = 1)
+  a = 1,
+  b = 1,
+  lambda = 1,
+  beta = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

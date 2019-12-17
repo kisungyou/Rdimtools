@@ -160,7 +160,11 @@
 #' \code{\link{est.boxcount}}      \tab G \tab Box-Counting Dimension \cr
 #' \code{\link{est.clustering}}    \tab G \tab Clustering-based Estimation \cr
 #' \code{\link{est.correlation}}   \tab G \tab Correlation Dimension \cr
+#' \code{\link{est.danco}}         \tab G \tab Dimensionality from Angle and Norm Concentration \cr
 #' \code{\link{est.made}}          \tab G/P \tab Manifold-Adaptive Dimension Estimation \cr
+#' \code{\link{est.gdistnn}}       \tab G/P \tab Graph Distance based on Manifold Assummption \cr
+#' \code{\link{est.mindkl}}        \tab G \tab Minimum Neighbor Distance with Kullback Leibler Divergence \cr
+#' \code{\link{est.mindml}}        \tab G \tab Minimum Neighbor Distance with Maximum Likelihood \cr
 #' \code{\link{est.mle1}}          \tab G \tab MLE using Poisson Process \cr
 #' \code{\link{est.mle2}}          \tab G \tab MLE using Poisson Process with Bias Correction \cr
 #' \code{\link{est.nearneighbor1}} \tab G \tab Near-Neighbor Information \cr
@@ -213,7 +217,7 @@
 #' @importFrom RSpectra eigs svds
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm Matrix
-#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median
+#' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median integrate optimize
 #' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp
 #' @useDynLib Rdimtools

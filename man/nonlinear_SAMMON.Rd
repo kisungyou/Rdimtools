@@ -4,8 +4,12 @@
 \alias{do.sammon}
 \title{Sammon Mapping}
 \usage{
-do.sammon(X, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "decorrelate", "whiten"), initialize = c("random", "pca"))
+do.sammon(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  initialize = c("random", "pca")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

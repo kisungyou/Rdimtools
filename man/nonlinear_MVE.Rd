@@ -4,9 +4,15 @@
 \alias{do.mve}
 \title{Minimum Volume Embedding}
 \usage{
-do.mve(X, ndim = 2, knn = ceiling(nrow(X)/10), kwidth = 1,
-  preprocess = c("null", "center", "scale", "cscale", "whiten",
-  "decorrelate"), tol = 1e-04, maxiter = 1000)
+do.mve(
+  X,
+  ndim = 2,
+  knn = ceiling(nrow(X)/10),
+  kwidth = 1,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  tol = 1e-04,
+  maxiter = 1000
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

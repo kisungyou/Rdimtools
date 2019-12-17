@@ -4,9 +4,14 @@
 \alias{do.llle}
 \title{Local Linear Laplacian Eigenmaps}
 \usage{
-do.llle(X, ndim = 2, preprocess = c("null", "center", "scale",
-  "cscale", "decorrelate", "whiten"), K = round(nrow(X)/2),
-  P = max(round(nrow(X)/4), 2), bandwidth = 0.2)
+do.llle(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  K = round(nrow(X)/2),
+  P = max(round(nrow(X)/4), 2),
+  bandwidth = 0.2
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

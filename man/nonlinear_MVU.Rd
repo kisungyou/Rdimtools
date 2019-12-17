@@ -5,9 +5,13 @@
 \alias{do.sde}
 \title{Maximum Variance Unfolding / Semidefinite Embedding}
 \usage{
-do.mvu(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("null", "center", "scale", "cscale", "decorrelate",
-  "whiten"), projtype = c("spectral", "kpca"))
+do.mvu(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
+  projtype = c("spectral", "kpca")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.}

@@ -4,9 +4,15 @@
 \alias{do.nolpp}
 \title{Nonnegative Orthogonal Locality Preserving Projection}
 \usage{
-do.nolpp(X, ndim = 2, type = c("proportion", 0.1),
+do.nolpp(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
   preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  t = 1, maxiter = 1000, reltol = 1e-05)
+  t = 1,
+  maxiter = 1000,
+  reltol = 1e-05
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}

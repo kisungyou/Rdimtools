@@ -4,8 +4,12 @@
 \alias{do.rsr}
 \title{Regularized Self-Representation}
 \usage{
-do.rsr(X, ndim = 2, preprocess = c("null", "center", "scale", "cscale",
-  "whiten", "decorrelate"), lbd = 1)
+do.rsr(
+  X,
+  ndim = 2,
+  preprocess = c("null", "center", "scale", "cscale", "whiten", "decorrelate"),
+  lbd = 1
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

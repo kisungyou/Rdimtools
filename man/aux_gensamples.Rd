@@ -4,9 +4,13 @@
 \alias{aux.gensamples}
 \title{Generate model-based samples}
 \usage{
-aux.gensamples(n = 496, noise = 0.01, dname = c("swiss", "crown",
-  "helix", "saddle", "ribbon", "bswiss", "cswiss", "twinpeaks", "sinusoid",
-  "mobius", "R12in72"), ...)
+aux.gensamples(
+  n = 496,
+  noise = 0.01,
+  dname = c("swiss", "crown", "helix", "saddle", "ribbon", "bswiss", "cswiss",
+    "twinpeaks", "sinusoid", "mobius", "R12in72"),
+  ...
+)
 }
 \arguments{
 \item{n}{the number of points to be generated.}

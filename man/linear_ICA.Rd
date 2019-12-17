@@ -4,8 +4,16 @@
 \alias{do.ica}
 \title{Independent Component Analysis}
 \usage{
-do.ica(X, ndim = 2, type = "logcosh", tpar = 1, sym = FALSE,
-  tol = 1e-06, redundancy = TRUE, maxiter = 100)
+do.ica(
+  X,
+  ndim = 2,
+  type = "logcosh",
+  tpar = 1,
+  sym = FALSE,
+  tol = 1e-06,
+  redundancy = TRUE,
+  maxiter = 100
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

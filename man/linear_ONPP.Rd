@@ -4,8 +4,12 @@
 \alias{do.onpp}
 \title{Orthogonal Neighborhood Preserving Projections}
 \usage{
-do.onpp(X, ndim = 2, type = c("proportion", 0.1),
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"))
+do.onpp(
+  X,
+  ndim = 2,
+  type = c("proportion", 0.1),
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations

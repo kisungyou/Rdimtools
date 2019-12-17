@@ -4,8 +4,13 @@
 \alias{do.lspp}
 \title{Local Similarity Preserving Projection}
 \usage{
-do.lspp(X, label, ndim = 2, t = 1, preprocess = c("center", "scale",
-  "cscale", "decorrelate", "whiten"))
+do.lspp(
+  X,
+  label,
+  ndim = 2,
+  t = 1,
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
+)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
