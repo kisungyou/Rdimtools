@@ -149,7 +149,11 @@ do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
 #' @noRd
 mve_single_cvxr <- function(A, B, C){
   N = nrow(B)
-  Ktmp = Semidef(N)
+  if (utils::packageVersion("CVXR") < "1.0.0"){
+    Ktmp = Semidef(N)
+  } else {
+    Ktmp = CVXR::Variable(N,N,PSD=TRUE)
+  }
   obj  = Maximize(matrix_trace(Ktmp%*%B))
   constr1 = list(CVXR::sum_entries(Ktmp)==0)
   constr2 = list()

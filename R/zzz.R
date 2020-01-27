@@ -13,6 +13,7 @@
   packageStartupMessage("** ------------------------------------------------------- **")
   packageStartupMessage("** Rdimtools")
   packageStartupMessage("**  - Dimension Reduction and Estimation Toolbox")
+  packageStartupMessage("**")
   packageStartupMessage("** Version    : ",this.version,"      (",this.year,")",sep="")
   packageStartupMessage("** Maintainer : Kisung You (kyoustat@gmail.com)")
   packageStartupMessage("**")
