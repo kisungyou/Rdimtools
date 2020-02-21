@@ -3,30 +3,26 @@
 #' Laplacian Score (LSCORE) is an unsupervised linear feature extraction method. For each
 #' feature/variable, it computes Laplacian score based on an observation that data from the
 #' same class are often close to each other. Its power of locality preserving property is used, and
-#' the algorithm selects variables with largest scores.
+#' the algorithm selects variables with smallest scores.
 #'
 #' @examples
-#' \dontrun{
-#' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=33)-100
-#' dt2  = aux.gensamples(n=33)
-#' dt3  = aux.gensamples(n=33)+100
-#'
-#' ## merge the data and create a label correspondingly
-#' X      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' ## use iris data
+#' ## it is known that feature 3 and 4 are more important.
+#' data(iris)
+#' iris.dat = as.matrix(iris[,1:4])
+#' iris.lab = as.factor(iris[,5])
 #'
 #' ## try different kernel bandwidth
-#' out1 = do.lscore(X, t=0.1)
-#' out2 = do.lscore(X, t=1)
-#' out3 = do.lscore(X, t=10)
+#' out1 = do.lscore(iris.dat, t=0.1)
+#' out2 = do.lscore(iris.dat, t=1)
+#' out3 = do.lscore(iris.dat, t=10)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="bandwidth=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="bandwidth=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="bandwidth=10")
-#' }
+#' opar <- par(mfrow=c(1,3))
+#' plot(out1$Y[,1], out1$Y[,2], col=iris.lab, main="bandwidth=0.1")
+#' plot(out2$Y[,1], out2$Y[,2], col=iris.lab, main="bandwidth=1")
+#' plot(out3$Y[,1], out3$Y[,2], col=iris.lab, main="bandwidth=10")
+#' par(opar)
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
@@ -42,6 +38,7 @@
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{lscore}{a length-\eqn{p} vector of laplacian scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 #' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
@@ -116,8 +113,8 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
     term2 = sum(as.vector(D%*%matfrtilde)*frtilde)
     fscore[j] = term1/term2
   }
-  #   4. select the largest ones
-  idxvec = base::order(fscore, decreasing=TRUE)[1:ndim]
+  #   4. select the smallest ones
+  idxvec = base::order(fscore, decreasing=FALSE)[1:ndim]
   #   5. find the projection matrix
   projection = aux.featureindicator(p,ndim,idxvec)
 
@@ -125,6 +122,7 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
   ## RETURN
   result = list()
   result$Y = pX%*%projection
+  result$lscore  = fscore
   result$featidx = idxvec
   result$trfinfo = trfinfo
   result$projection = projection
