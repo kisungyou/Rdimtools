@@ -27,26 +27,25 @@
 #' \item{mp.W}{an \eqn{(ndim\times ndim-1)} matrix from EM update.}
 #' }
 #'
-#'
 #' @seealso \code{\link{do.pca}}, \code{\link{do.ppca}}
 #' @author Kisung You
 #' @references
 #' \insertRef{bishop_bayesian_1999}{Rdimtools}
 #'
-#'
 #' @examples
 #' \dontrun{
 #' ## generate swiss roll data
-#' X = aux.gensamples()
+#' X = aux.gensamples(n=200)
 #'
 #' ## Compare PCA and BPCA
 #' out1  <- do.pca(X, ndim=2, preprocess="center")
 #' out2  <- do.bpca(X, ndim=2, preprocess="center")
 #'
 #' ## Visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="PCA")
-#' plot(out2$Y[,1], out2$Y[,2], main="BPCA")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, main="PCA")
+#' plot(out2$Y, main="BPCA")
+#' par(opar)
 #' }
 #'
 #' @rdname linear_BPCA

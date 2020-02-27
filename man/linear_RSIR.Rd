@@ -87,7 +87,7 @@ plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
 \references{
 \insertRef{chiaromonte_dimension_2002}{Rdimtools}
 
-\insertRef{zhong_rsir:_2005}{Rdimtools}
+\insertRef{zhong_rsir_2005}{Rdimtools}
 
 \insertRef{bernard-michel_gaussian_2009}{Rdimtools}
 

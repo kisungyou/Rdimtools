@@ -57,10 +57,11 @@ out2 = do.mfa(X, label, k1=10,k2=10)
 out3 = do.mfa(X, label, k1=25,k2=25)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="MFA::nbd size=5")
-plot(out2$Y[,1], out2$Y[,2], main="MFA::nbd size=10")
-plot(out3$Y[,1], out3$Y[,2], main="MFA::nbd size=25")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="MFA::nbd size=5")
+plot(out2$Y, main="MFA::nbd size=10")
+plot(out3$Y, main="MFA::nbd size=25")
+par(opar)
 
 }
 \references{

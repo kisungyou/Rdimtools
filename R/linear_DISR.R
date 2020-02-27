@@ -22,9 +22,10 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' #### generate R12in72 dataset
-#' X = aux.gensamples(dname="R12in72")
+#' ## load iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.factor(iris$Species)
 #'
 #' #### try different lbd combinations
 #' out1 = do.disr(X, lbd1=1, lbd2=1)
@@ -32,13 +33,13 @@
 #' out3 = do.disr(X, lbd1=5, lbd2=1)
 #' out4 = do.disr(X, lbd1=5, lbd2=5)
 #'
-#' #### visualize
-#' par(mfrow=c(2,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="(lbd1,lbd2)=(1,1)")
-#' plot(out2$Y[,1], out2$Y[,2], main="(lbd1,lbd2)=(1,5)")
-#' plot(out3$Y[,1], out3$Y[,2], main="(lbd1,lbd2)=(5,1)")
-#' plot(out4$Y[,1], out4$Y[,2], main="(lbd1,lbd2)=(5,5)")
-#' }
+#' ## visualize
+#' opar <- par(mfrow=c(2,2), no.readonly=TRUE)
+#' plot(out1$Y, main="(lbd1,lbd2)=(1,1)", col=label, pch=19, cex=0.5)
+#' plot(out2$Y, main="(lbd1,lbd2)=(1,5)", col=label,pch=19, cex=0.5)
+#' plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label,pch=19, cex=0.5)
+#' plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label,pch=19, cex=0.5)
+#' par(opar)
 #'
 #' @references
 #' \insertRef{liu_unsupervised_2017}{Rdimtools}

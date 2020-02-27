@@ -48,7 +48,7 @@
 #'
 #' @author Kisung You
 #' @references
-#' \insertRef{pearson_liii._1901}{Rdimtools}
+#' \insertRef{pearson_liii_1901}{Rdimtools}
 #'
 #' @rdname linear_PCA
 #' @export

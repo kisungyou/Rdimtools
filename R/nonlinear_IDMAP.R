@@ -38,7 +38,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{minghim_content-based_2006}{Rdimtools}
+#' \insertRef{minghim_contentbased_2006}{Rdimtools}
 #' @export
 do.idmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), engine=c("NNP","FastMap")){
   ########################################################################

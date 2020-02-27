@@ -36,10 +36,11 @@
 #' outESLPP <- do.eslpp(Y, label)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(outLPP$Y[,1], outLPP$Y[,2], main="LPP")
-#' plot(outSLPP$Y[,1], outSLPP$Y[,2], main="SLPP")
-#' plot(outESLPP$Y[,1], outESLPP$Y[,2], main="ESLPP")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(outLPP$Y,   main="LPP")
+#' plot(outSLPP$Y,  main="SLPP")
+#' plot(outESLPP$Y, main="ESLPP")
+#' par(opar)
 #' }
 #'
 #' @references

@@ -38,9 +38,8 @@ one of remedies for clustering in high dimensional space. Eigenvectors of a with
 as basis of projection.
 }
 \examples{
-\dontrun{
-## generate swiss roll data
-X = aux.gensamples(n=123)
+## generate swiss-roll data
+X = aux.gensamples(n=200)
 
 ## try different tolerance level
 out1 = do.asi(X, abstol=1e-2)
@@ -48,11 +47,11 @@ out2 = do.asi(X, abstol=1e-3)
 out3 = do.asi(X, abstol=1e-4)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="ASI::tol=1e-2")
-plot(out2$Y[,1], out2$Y[,2], main="ASI::tol=1e-3")
-plot(out3$Y[,1], out3$Y[,2], main="ASI::tol=1e-4")
-}
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="ASI::tol=1e-2", pch=19, cex=0.5)
+plot(out2$Y, main="ASI::tol=1e-3", pch=19, cex=0.5)
+plot(out3$Y, main="ASI::tol=1e-4", pch=19, cex=0.5)
+par(opar)
 
 }
 \references{

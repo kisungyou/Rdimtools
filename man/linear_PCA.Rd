@@ -68,7 +68,7 @@ plot(out3$Y[,1], out3$Y[,2], main="PCA::'whiten'")
 
 }
 \references{
-\insertRef{pearson_liii._1901}{Rdimtools}
+\insertRef{pearson_liii_1901}{Rdimtools}
 }
 \author{
 Kisung You

@@ -51,7 +51,7 @@ plot(out3$Y[,1], out3$Y[,2], main="FastMap")
 
 }
 \references{
-\insertRef{faloutsos_fastmap:_1995}{Rdimtools}
+\insertRef{faloutsos_fastmap_1995}{Rdimtools}
 }
 \author{
 Kisung You

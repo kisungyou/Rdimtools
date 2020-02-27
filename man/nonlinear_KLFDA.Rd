@@ -74,7 +74,7 @@ plot(out3$Y[,1], out3$Y[,2], main="bandwidth=10")
 \references{
 \insertRef{sugiyama_local_2006}{Rdimtools}
 
-\insertRef{zelnik-manor_self-tuning_2005}{Rdimtools}
+\insertRef{zelnik-manor_selftuning_2005}{Rdimtools}
 }
 \seealso{
 \code{\link{do.lfda}}

@@ -20,7 +20,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{gunopulos_minimum_2011}{Rdimtools}
+#' \insertRef{lombardi_minimum_2011}{Rdimtools}
 #'
 #' @author Kisung You
 #' @export

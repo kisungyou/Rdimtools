@@ -21,7 +21,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate samples
+#' ## generate samples from swiss roll
 #' X <- aux.gensamples(n=200)
 #'
 #' ## test different regularization parameters
@@ -30,10 +30,11 @@
 #' out3 <- do.crp(X,ndim=2,lambda=10)
 #'
 #' # visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="lambda=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="lambda=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="lambda=10")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="CRP::lambda=0.1")
+#' plot(out2$Y, main="CRP::lambda=1")
+#' plot(out3$Y, main="CRP::lambda=10")
+#' par(opar)
 #' }
 #'
 #' @seealso \code{\link{do.spp}}

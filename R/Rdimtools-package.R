@@ -91,6 +91,7 @@
 #' \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
 #' \code{\link{do.rlda}} \tab S \tab Regularized Linear Discriminant Analysis \cr
 #' \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
+#' \code{\link{do.rpcag}} \tab U \tab Robust Principal Component Analysis via Geometric Median \cr
 #' \code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
 #' \code{\link{do.rsr}} \tab U \tab Regularized Self-Representation \cr
 #' \code{\link{do.sammc}} \tab SS \tab Semi-Supervised Adaptive Maximum Margin Criterion \cr
@@ -211,6 +212,7 @@
 #' @import Rdpack
 #' @import CVXR
 #' @import RcppDE
+#' @importFrom maotai weiszfeld
 #' @importFrom ClusterR Optimal_Clusters_GMM GMM predict_GMM
 #' @importFrom geigen geigen
 #' @importFrom utils packageVersion combn

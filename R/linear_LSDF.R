@@ -48,10 +48,11 @@
 #' out3 = do.lsdf(X, label_missing, type=c("proportion",0.25))
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="1% connectivity")
-#' plot(out2$Y[,1], out2$Y[,2], main="10% connectivity")
-#' plot(out3$Y[,1], out3$Y[,2], main="25% connectivity")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="1% connectivity")
+#' plot(out2$Y, main="10% connectivity")
+#' plot(out3$Y, main="25% connectivity")
+#' par(opar)
 #' }
 #'
 #' @references

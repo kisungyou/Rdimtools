@@ -21,7 +21,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{ceruti_danco:_2014}{Rdimtools}
+#' \insertRef{ceruti_danco_2014}{Rdimtools}
 #'
 #' @export
 est.danco <- function(X, k=5){

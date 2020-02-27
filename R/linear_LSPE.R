@@ -33,10 +33,11 @@
 #' out3 = do.lspe(X, bandwidth=10)
 #'
 #' #### visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="LSPE::bandwidth=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="LSPE::bandwidth=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="LSPE::bandwidth=10")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="LSPE::bandwidth=0.1")
+#' plot(out2$Y, main="LSPE::bandwidth=1")
+#' plot(out3$Y, main="LSPE::bandwidth=10")
+#' par(opar)
 #' }
 #'
 #' @references

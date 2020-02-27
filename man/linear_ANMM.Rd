@@ -46,13 +46,10 @@ same class while pushing neighboring points of different classes far away. It is
 that ANMM does suffer less from small sample size problem, which is bottleneck for LDA.
 }
 \examples{
-\dontrun{
-## generate 3 different groups of data X and label vector
-x1 = matrix(rnorm(4*10), nrow=10)-20
-x2 = matrix(rnorm(4*10), nrow=10)
-x3 = matrix(rnorm(4*10), nrow=10)+20
-X  = rbind(x1, x2, x3)
-label = c(rep(1,10), rep(2,10), rep(3,10))
+## load iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## perform ANMM on different choices of neighborhood size
 out1 = do.anmm(X, label, No=6, Ne=6)
@@ -60,12 +57,11 @@ out2 = do.anmm(X, label, No=2, Ne=10)
 out3 = do.anmm(X, label, No=10,Ne=2)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="(No,Ne)=(6,6)")
-plot(out2$Y[,1], out2$Y[,2], main="(No,Ne)=(2,10)")
-plot(out3$Y[,1], out3$Y[,2], main="(No,Ne)=(10,2)")
-}
-
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="(No,Ne)=(6,6)",  pch=19, cex=0.5, col=label)
+plot(out2$Y, main="(No,Ne)=(2,10)", pch=19, cex=0.5, col=label)
+plot(out3$Y, main="(No,Ne)=(10,2)", pch=19, cex=0.5, col=label)
+par(opar)
 
 }
 \references{

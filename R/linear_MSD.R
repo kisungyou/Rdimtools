@@ -37,10 +37,11 @@
 #' out3 = do.msd(X, label, C=100)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="MSD::C=0.01")
-#' plot(out2$Y[,1], out2$Y[,2], main="MSD::C=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="MSD::C=100")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="MSD::C=0.01")
+#' plot(out2$Y, main="MSD::C=1")
+#' plot(out3$Y, main="MSD::C=100")
+#' par(opar)
 #' }
 #'
 #' @references

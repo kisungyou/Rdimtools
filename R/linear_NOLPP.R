@@ -10,7 +10,7 @@
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #' @param preprocess an additional option for preprocessing the data.
-#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
+#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param t kernel bandwidth in \eqn{(0,\infty)}.
 #' @param maxiter number of maximum iteraions allowed.
 #' @param reltol stopping criterion for incremental relative error.
@@ -22,6 +22,25 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
+#'
+#' @examples
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
+#'
+#' ## use different kernel bandwidths with 20% connectivity
+#' out1 = do.nolpp(X, type=c("proportion",0.2), t=0.01)
+#' out2 = do.nolpp(X, type=c("proportion",0.2), t=0.1)
+#' out3 = do.nolpp(X, type=c("proportion",0.2), t=1)
+#'
+#' ## visualize
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="NOLPP::t=0.01")
+#' plot(out2$Y, col=label, main="NOLPP::t=0.1")
+#' plot(out3$Y, col=label, main="NOLPP::t=1")
+#' par(opar)
+#'
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 #'
@@ -30,7 +49,7 @@
 #' @author Kisung You
 #' @export
 do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
-                     preprocess=c("center","scale","cscale","decorrelate","whiten"),
+                     preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                      t=1.0, maxiter=1000, reltol=1e-5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -48,7 +67,7 @@ do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
   nbdsymmetric = "union"
   #   4. preprocess
   if (missing(preprocess)){
-    algpreprocess = "center"
+    algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
@@ -90,6 +109,13 @@ do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
 
   #   4. solve the minimization problem
   projection = aux.adjprojection(method_nnprojmin(C, Uinit, reltol, maxiter))
+
+  #   5. additional step : NA
+  projection[(is.na(projection))] = 1
+  for (i in 1:ndim){
+    tgt = as.vector(projection[,i])
+    projection[,i] = tgt/sqrt(sum(tgt^2))
+  }
 
 
   #------------------------------------------------------------------------

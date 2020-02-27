@@ -52,7 +52,7 @@ out0 = do.fssem(sel.dat, ndim=2, max.k=3)
 plot(out0$Y[,1], out0$Y[,2], main="small run", col=sel.lab, pch=19)
 
 \dontrun{
-## Out-of-CRAN example; run at your machine !
+## NOT-FOR-CRAN example; run at your machine !
 ## try different maximum number of clusters
 out3 = do.fssem(irismat, ndim=2, max.k=3)
 out6 = do.fssem(irismat, ndim=2, max.k=6)
@@ -60,13 +60,12 @@ out9 = do.fssem(irismat, ndim=2, max.k=9)
 
 ## visualize
 cols = as.factor(iris[,5])
-opar = par(mfrow=c(1,3))
-plot(out3$Y[,1], out3$Y[,2], main="max k=3", col=cols)
-plot(out6$Y[,1], out6$Y[,2], main="max k=6", col=cols)
-plot(out9$Y[,1], out9$Y[,2], main="max k=9", col=cols)
+opar = par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out3$Y, main="max k=3", col=cols)
+plot(out6$Y, main="max k=6", col=cols)
+plot(out9$Y, main="max k=9", col=cols)
 par(opar)
 }
-
 
 }
 \references{

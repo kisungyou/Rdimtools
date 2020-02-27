@@ -38,27 +38,22 @@ variant of DNE. As its name suggests, it introduces two adjacency graphs for
 homogeneous and heterogeneous samples accordaing to their labels.
 }
 \examples{
-\dontrun{
-## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-100
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+100
-
-## merge the data and create a label correspondingly
-Y      = rbind(dt1,dt2,dt3)
-label  = c(rep(1,33), rep(2,33), rep(3,33))
+## load iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## try different numbers for neighborhood size
-out1 = do.dagdne(Y, label, numk=5)
-out2 = do.dagdne(Y, label, numk=10)
-out3 = do.dagdne(Y, label, numk=25)
+out1 = do.dagdne(X, label, numk=5)
+out2 = do.dagdne(X, label, numk=10)
+out3 = do.dagdne(X, label, numk=25)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="nbd size=5")
-plot(out2$Y[,1], out2$Y[,2], main="nbd size=10")
-plot(out3$Y[,1], out3$Y[,2], main="nbd size=25")
-}
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="nbd size=5", col=label, pch=19, cex=0.5)
+plot(out2$Y, main="nbd size=10",col=label, pch=19, cex=0.5)
+plot(out3$Y, main="nbd size=25",col=label, pch=19, cex=0.5)
+par(opar)
 
 }
 \references{

@@ -38,10 +38,11 @@
 #' out3 = do.cnpe(X, type=c("proportion",0.25))
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="CNPE::5% connectivity")
-#' plot(out2$Y[,1], out2$Y[,2], main="CNPE::10% connectivity")
-#' plot(out3$Y[,1], out3$Y[,2], main="CNPE::25% connectivity")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="CNPE::5% connected")
+#' plot(out2$Y, main="CNPE::10% connected")
+#' plot(out3$Y, main="CNPE::25% connected")
+#' par(opar)
 #' }
 #'
 #' @references

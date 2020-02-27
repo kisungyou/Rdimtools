@@ -69,7 +69,7 @@ plot(out3$Y[,1], out3$Y[,2], main="SAVE::10 slices")
 
 }
 \references{
-\insertRef{dennis_cook_save:_2000}{Rdimtools}
+\insertRef{denniscook_method_2000}{Rdimtools}
 }
 \seealso{
 \code{\link{do.sir}}

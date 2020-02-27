@@ -47,7 +47,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{hwann-tzong_chen_local_2005}{Rdimtools}
+#' \insertRef{hwann-tzongchen_local_2005}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLDE

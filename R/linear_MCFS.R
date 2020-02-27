@@ -42,10 +42,11 @@
 #' out3 = do.mcfs(X, lambda=1)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
 #' plot(out1$Y[,1], out1$Y[,2], main="lambda=0.01")
 #' plot(out2$Y[,1], out2$Y[,2], main="lambda=0.1")
 #' plot(out3$Y[,1], out3$Y[,2], main="lambda=1")
+#' par(opar)
 #' }
 #'
 #' @references

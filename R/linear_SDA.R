@@ -52,7 +52,7 @@
 #' plot(out2$Y[,1], out2$Y[,2], main="20% missing labels")
 #'
 #' @references
-#' \insertRef{cai_semi-supervised_2007}{Rdimtools}
+#' \insertRef{cai_semisupervised_2007}{Rdimtools}
 #'
 #' @rdname linear_SDA
 #' @author Kisung You

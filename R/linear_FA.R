@@ -37,10 +37,11 @@
 #' output3 <- do.fa(X,ndim=2,preprocess="whiten")
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="centered")
-#' plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
-#' plot(output3$Y[,1],output3$Y[,2],main="whitened")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, main="FA::centered")
+#' plot(output2$Y, main="FA::decorrelated")
+#' plot(output3$Y, main="FA::whitened")
+#' par(opar)
 #' }
 #'
 #' @references

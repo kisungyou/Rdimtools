@@ -19,9 +19,9 @@
 #'
 #' ## visualize
 #' opar <- par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], col=iris.lab, main="bandwidth=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], col=iris.lab, main="bandwidth=1")
-#' plot(out3$Y[,1], out3$Y[,2], col=iris.lab, main="bandwidth=10")
+#' plot(out1$Y, col=iris.lab, main="bandwidth=0.1")
+#' plot(out2$Y, col=iris.lab, main="bandwidth=1")
+#' plot(out3$Y, col=iris.lab, main="bandwidth=10")
 #' par(opar)
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations

@@ -66,10 +66,11 @@ output2 <- do.ica(X,ndim=2,type="exp")
 output3 <- do.ica(X,ndim=2,type="poly")
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(output1$Y[,1],output1$Y[,2],main="logcosh")
-plot(output2$Y[,1],output2$Y[,2],main="exp")
-plot(output3$Y[,1],output3$Y[,2],main="poly")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(output1$Y, main="ICA::logcosh")
+plot(output2$Y, main="ICA::exp")
+plot(output3$Y, main="ICA::poly")
+par(opar)
 }
 
 }

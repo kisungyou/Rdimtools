@@ -100,6 +100,7 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 \code{\link{do.ppca}} \tab U \tab Probabilistic Principal Component Analysis \cr
 \code{\link{do.rlda}} \tab S \tab Regularized Linear Discriminant Analysis \cr
 \code{\link{do.rndproj}} \tab U \tab Random Projection \cr
+\code{\link{do.rpcag}} \tab U \tab Robust Principal Component Analysis via Geometric Median \cr
 \code{\link{do.rsir}} \tab S \tab Regularized Sliced Inverse Regression \cr
 \code{\link{do.rsr}} \tab U \tab Regularized Self-Representation \cr
 \code{\link{do.sammc}} \tab SS \tab Semi-Supervised Adaptive Maximum Margin Criterion \cr
@@ -174,6 +175,8 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{est.danco}}         \tab G \tab Dimensionality from Angle and Norm Concentration \cr
 \code{\link{est.made}}          \tab G/P \tab Manifold-Adaptive Dimension Estimation \cr
 \code{\link{est.gdistnn}}       \tab G/P \tab Graph Distance based on Manifold Assummption \cr
+\code{\link{est.mindkl}}        \tab G \tab Minimum Neighbor Distance with Kullback Leibler Divergence \cr
+\code{\link{est.mindml}}        \tab G \tab Minimum Neighbor Distance with Maximum Likelihood \cr
 \code{\link{est.mle1}}          \tab G \tab MLE using Poisson Process \cr
 \code{\link{est.mle2}}          \tab G \tab MLE using Poisson Process with Bias Correction \cr
 \code{\link{est.nearneighbor1}} \tab G \tab Near-Neighbor Information \cr

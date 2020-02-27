@@ -55,10 +55,11 @@ out2 <- do.kudp(X, bandwidth=10)
 out3 <- do.kudp(X, bandwidth=1000)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1],out1$Y[,2],main="bandwidth=0.1")
-plot(out2$Y[,1],out2$Y[,2],main="bandwidth=10")
-plot(out3$Y[,1],out3$Y[,2],main="bandwidth=1000")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="bandwidth=0.1")
+plot(out2$Y, main="bandwidth=10")
+plot(out3$Y, main="bandwidth=1000")
+par(opar)
 }
 
 }

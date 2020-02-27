@@ -3,6 +3,7 @@
 ### Changes in version 0.4.3
   * Error fixed in `do.lscore` function (thanks to Jordan Lin).
   * NEW functions are added
+    - `do.rpcag` : Robust PCA via Geometric Median.
     - `do.fssem` : Feature Subset Selection using Expectation-Maximization.
     - `do.cge`   : Constrained Graph Embedding.
   * LDA solves trace ratio problem directly.

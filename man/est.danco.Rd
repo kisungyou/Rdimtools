@@ -29,5 +29,5 @@ sprintf("* est.danco : estimated dimension for 'saddle' data is \%.2f.",out3$est
 
 }
 \references{
-\insertRef{ceruti_danco:_2014}{Rdimtools}
+\insertRef{ceruti_danco_2014}{Rdimtools}
 }

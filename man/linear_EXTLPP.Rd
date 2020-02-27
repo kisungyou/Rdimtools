@@ -47,10 +47,11 @@ out2 <- do.extlpp(X, numk=10)
 out3 <- do.extlpp(X, numk=25)
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="k=5")
-plot(out2$Y[,1], out2$Y[,2], main="k=10")
-plot(out3$Y[,1], out3$Y[,2], main="k=25")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="EXTLPP::k=5")
+plot(out2$Y, main="EXTLPP::k=10")
+plot(out3$Y, main="EXTLPP::k=25")
+par(opar)
 }
 
 }

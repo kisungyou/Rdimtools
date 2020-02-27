@@ -28,23 +28,24 @@
 #'
 #'@examples
 #'\dontrun{
-#'## generate data of 100 observations
-#'X <- aux.gensamples(n=100)
+#' ## generate data of 100 observations
+#' X <- aux.gensamples(n=100)
 #'
-#'## 1. use logcosh function for transformation
-#'output1 <- do.ica(X,ndim=2,type="logcosh")
+#' ## 1. use logcosh function for transformation
+#' output1 <- do.ica(X,ndim=2,type="logcosh")
 #'
-#'## 2. use exponential function for transformation
-#'output2 <- do.ica(X,ndim=2,type="exp")
+#' ## 2. use exponential function for transformation
+#' output2 <- do.ica(X,ndim=2,type="exp")
 #'
-#'## 3. use polynomial function for transformation
-#'output3 <- do.ica(X,ndim=2,type="poly")
+#' ## 3. use polynomial function for transformation
+#' output3 <- do.ica(X,ndim=2,type="poly")
 #'
-#'## Visualize three different projections
-#'par(mfrow=c(1,3))
-#'plot(output1$Y[,1],output1$Y[,2],main="logcosh")
-#'plot(output2$Y[,1],output2$Y[,2],main="exp")
-#'plot(output3$Y[,1],output3$Y[,2],main="poly")
+#' ## Visualize three different projections
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, main="ICA::logcosh")
+#' plot(output2$Y, main="ICA::exp")
+#' plot(output3$Y, main="ICA::poly")
+#' par(opar)
 #'}
 #'
 #' @references

@@ -61,7 +61,7 @@
 #'@references
 #'\insertRef{johnson_extensions_1984}{Rdimtools}
 #'
-#'\insertRef{achlioptas_database-friendly_2003}{Rdimtools}
+#'\insertRef{achlioptas_databasefriendly_2003}{Rdimtools}
 #'
 #'\insertRef{li_very_2006}{Rdimtools}
 #'

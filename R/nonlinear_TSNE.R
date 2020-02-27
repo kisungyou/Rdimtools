@@ -46,7 +46,7 @@
 #'
 #' @seealso \code{\link{do.sne}}
 #' @references
-#' \insertRef{van_der_maaten_visualizing_2008}{Rdimtools}
+#' \insertRef{vandermaaten_visualizing_2008}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_TSNE

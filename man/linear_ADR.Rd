@@ -38,10 +38,10 @@ one of remedies for clustering in high dimensional space. Eigenvectors of a betw
 as basis of projection.
 }
 \examples{
-\dontrun{
 ## load iris data
 data(iris)
-X = as.matrix(iris[,1:4])
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## try different tolerance level
 out1 = do.adr(X, abstol=1e-2)
@@ -49,11 +49,11 @@ out2 = do.adr(X, abstol=1e-3)
 out3 = do.adr(X, abstol=1e-4)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="ADR::tol=1e-2")
-plot(out2$Y[,1], out2$Y[,2], main="ADR::tol=1e-3")
-plot(out3$Y[,1], out3$Y[,2], main="ADR::tol=1e-4")
-}
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="tol=1e-2", col=label, pch=19, cex=0.5)
+plot(out2$Y, main="tol=1e-3", col=label, pch=19, cex=0.5)
+plot(out3$Y, main="tol=1e-4", col=label, pch=19, cex=0.5)
+par(opar)
 
 }
 \references{

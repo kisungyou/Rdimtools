@@ -40,7 +40,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{yang_l21-norm_2011}{Rdimtools}
+#' \insertRef{yang_l2_2011}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname linear_UDFS

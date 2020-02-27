@@ -48,7 +48,7 @@
 #' @references
 #' \insertRef{sugiyama_local_2006}{Rdimtools}
 #'
-#' \insertRef{zelnik-manor_self-tuning_2005}{Rdimtools}
+#' \insertRef{zelnik-manor_selftuning_2005}{Rdimtools}
 #'
 #' @seealso \code{\link{do.lfda}}
 #' @author Kisung You

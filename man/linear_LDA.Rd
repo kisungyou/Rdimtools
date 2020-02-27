@@ -57,7 +57,7 @@ label  = c(rep(1,33), rep(2,33), rep(3,33))
 output = do.lda(Y, label, ndim=2)
 
 ## visualize
-plot(output$Y[,1], output$Y[,2], main="3 groups on 2d plane")
+plot(output$Y, main="3 groups on 2d plane")
 }
 
 }

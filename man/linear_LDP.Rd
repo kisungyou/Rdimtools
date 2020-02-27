@@ -61,10 +61,11 @@ out2 = do.ldp(X, label, type=c("proportion",0.05))
 out3 = do.ldp(X, label, type=c("proportion",0.10))
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="1\% connectivity")
-plot(out2$Y[,1], out2$Y[,2], main="5\% connectivity")
-plot(out3$Y[,1], out3$Y[,2], main="10\% connectivity")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="1\% connectivity")
+plot(out2$Y, col=label, main="5\% connectivity")
+plot(out3$Y, col=label, main="10\% connectivity")
+par(opar)
 
 }
 \references{

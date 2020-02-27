@@ -62,7 +62,7 @@ plot(out3$Y[,1], out3$Y[,2], main="UDFS::k=25")
 
 }
 \references{
-\insertRef{yang_l21-norm_2011}{Rdimtools}
+\insertRef{yang_l2_2011}{Rdimtools}
 }
 \author{
 Kisung You

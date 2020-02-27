@@ -39,7 +39,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{zhu_non-convex_2017}{Rdimtools}
+#' \insertRef{zhu_nonconvex_2017}{Rdimtools}
 #'
 #' @seealso \code{\link{do.rsr}}
 #' @author Kisung You

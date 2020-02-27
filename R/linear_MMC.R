@@ -35,9 +35,10 @@
 #' out2 = do.mmc(X, label, ndim=2, preprocess="decorrelate")
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="centering")
-#' plot(out2$Y[,1], out2$Y[,2], main="decorrelating")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, main="MMC::centering")
+#' plot(out2$Y, main="MMC::decorrelating")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{li_efficient_2006}{Rdimtools}

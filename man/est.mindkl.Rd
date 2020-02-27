@@ -29,7 +29,7 @@ sprintf("* est.mindkl : estimated dimension for 'saddle' data is \%.2f.",out3$es
 
 }
 \references{
-\insertRef{gunopulos_minimum_2011}{Rdimtools}
+\insertRef{lombardi_minimum_2011}{Rdimtools}
 }
 \author{
 Kisung You

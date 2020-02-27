@@ -22,6 +22,24 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
+#' @examples
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
+#'
+#' ## use different levels of connectivity
+#' out1 = do.nonpp(X, type=c("proportion",0.1))
+#' out2 = do.nonpp(X, type=c("proportion",0.2))
+#' out3 = do.nonpp(X, type=c("proportion",0.5))
+#'
+#' ## visualize
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="NONPP::10% connected")
+#' plot(out2$Y, col=label, main="NONPP::20% connected")
+#' plot(out3$Y, col=label, main="NONPP::50% connected")
+#' par(opar)
+#'
 #' @seealso \code{\link{do.onpp}}
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
@@ -30,7 +48,7 @@
 #' @author Kisung You
 #' @export
 do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
-                     preprocess=c("center","decorrelate","whiten"),
+                     preprocess=c("null","center","decorrelate","whiten"),
                      maxiter=1000, reltol=1e-5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -48,7 +66,7 @@ do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
   nbdsymmetric = "union"
   #   4. preprocess
   if (missing(preprocess)){
-    algpreprocess = "center"
+    algpreprocess = "null"
   } else {
     algpreprocess = match.arg(preprocess)
   }
@@ -61,10 +79,9 @@ do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY and LLE step
   #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  tmplist = aux.preprocess(X,type=algpreprocess)
+  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
-  trfinfo$algtype = "linear"
 
   #   2. neighborhood information
   nbdstruct = aux.graphnbd(pX,method="euclidean",
@@ -94,6 +111,12 @@ do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
   Uinit = matrix(runif(p*ndim),nrow=p)
   #   3. compute projection matrix
   projection = aux.adjprojection(method_nnprojmin(C, Uinit, reltol, maxiter))
+  #   4. additional step : NA
+  projection[(is.na(projection))] = 1
+  for (i in 1:ndim){
+    tgt = as.vector(projection[,i])
+    projection[,i] = tgt/sqrt(sum(tgt^2))
+  }
 
   #------------------------------------------------------------------------
   ## RETURN

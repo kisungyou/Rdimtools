@@ -53,10 +53,11 @@ out2 <- do.lltsa(X, type=c("proportion",0.05))
 out3 <- do.lltsa(X, type=c("proportion",0.10))
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(out1$Y[,1],out1$Y[,2],main="LLTSA::1\% connected")
-plot(out2$Y[,1],out2$Y[,2],main="LLTSA::5\% connected")
-plot(out3$Y[,1],out3$Y[,2],main="LLTSA::10\% connected")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="LLTSA::1\% connected")
+plot(out2$Y, main="LLTSA::5\% connected")
+plot(out3$Y, main="LLTSA::10\% connected")
+par(opar)
 }
 
 }

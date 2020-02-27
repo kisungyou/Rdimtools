@@ -59,7 +59,7 @@ plot(out4$Y[,1], out4$Y[,2], main="SDLPP; t=10")
 
 }
 \references{
-\insertRef{yang_sample-dependent_2010}{Rdimtools}
+\insertRef{yang_sampledependent_2010}{Rdimtools}
 }
 \seealso{
 \code{\link{do.lpp}}

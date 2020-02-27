@@ -20,8 +20,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate data
-#' X <- rbind(matrix(rnorm(100),nr=10),matrix(rnorm(100),nr=10)+10)
+#' ## use iris data
+#' data(iris)
+#' X   = as.matrix(iris[,1:4])
+#' lab = as.factor(iris$Species)
 #'
 #' ## 1. projection onto 2 dimension.
 #' output1 <- do.mds(X,ndim=2)
@@ -31,10 +33,11 @@
 #' output3 <- do.mds(X,ndim=2,preprocess="whiten")
 #'
 #' ## 3. visualize
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="center")
-#' plot(output2$Y[,1],output2$Y[,2],main="decorrelate")
-#' plot(output3$Y[,1],output3$Y[,2],main="whiten")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, col=lab, main="MDS::center")
+#' plot(output2$Y, col=lab, main="MDS::decorrelate")
+#' plot(output3$Y, col=lab, main="MDS::whiten")
+#' par(opar)
 #' }
 #'
 #' @references

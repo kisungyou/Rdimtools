@@ -59,7 +59,7 @@ plot(out3$Y[,1], out3$Y[,2], main="NRSR::expl=0.5")
 
 }
 \references{
-\insertRef{zhu_non-convex_2017}{Rdimtools}
+\insertRef{zhu_nonconvex_2017}{Rdimtools}
 }
 \seealso{
 \code{\link{do.rsr}}

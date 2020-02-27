@@ -75,7 +75,7 @@ plot(out3$Y[,1], out3$Y[,2], main="25\% connectivity")
 
 }
 \references{
-\insertRef{zhang_semi-supervised_2011}{Rdimtools}
+\insertRef{zhang_semisupervised_2011}{Rdimtools}
 }
 \author{
 Kisung You

@@ -35,7 +35,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{faloutsos_fastmap:_1995}{Rdimtools}
+#' \insertRef{faloutsos_fastmap_1995}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_FastMap

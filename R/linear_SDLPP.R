@@ -43,7 +43,7 @@
 #'
 #'
 #' @references
-#' \insertRef{yang_sample-dependent_2010}{Rdimtools}
+#' \insertRef{yang_sampledependent_2010}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname linear_SDLPP

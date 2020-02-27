@@ -43,23 +43,22 @@ where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\cod
 when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 }
 \examples{
-## generate 3 different groups of data X and label vector
-x1 = matrix(rnorm(4*10), nrow=10)-20
-x2 = matrix(rnorm(4*10), nrow=10)
-x3 = matrix(rnorm(4*10), nrow=10)+20
-X  = rbind(x1, x2, x3)
-label = c(rep(1,10), rep(2,10), rep(3,10))
+## load iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## perform KMVP with different bandwidths
-out1 = do.kmvp(X, label, bandwidth=10)
-out2 = do.kmvp(X, label, bandwidth=100)
-out3 = do.kmvp(X, label, bandwidth=1000)
+out1 = do.kmvp(X, label, bandwidth=0.1)
+out2 = do.kmvp(X, label, bandwidth=1)
+out3 = do.kmvp(X, label, bandwidth=10)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="bandwidth=1e+1")
-plot(out2$Y[,1], out2$Y[,2], main="bandwidth=1e+2")
-plot(out3$Y[,1], out3$Y[,2], main="bandwidth=1e+3")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="bandwidth=0.1", col=label)
+plot(out2$Y, main="bandwidth=1",   col=label)
+plot(out3$Y, main="bandwidth=10",  col=label)
+par(opar)
 
 }
 \references{

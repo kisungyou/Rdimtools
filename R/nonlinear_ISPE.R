@@ -41,7 +41,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{agrafiotis_self-organizing_2002}{Rdimtools}
+#' \insertRef{agrafiotis_selforganizing_2002}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_ISPE

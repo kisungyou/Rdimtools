@@ -55,9 +55,10 @@ output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.10))
 output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
 
 ## Visualize two different projections
-par(mfrow=c(1,2))
-plot(output1$Y[,1],output1$Y[,2],main="10\%")
-plot(output2$Y[,1],output2$Y[,2],main="25\%")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(output1$Y, main="10\%")
+plot(output2$Y, main="25\%")
+par(opar)
 }
 
 }

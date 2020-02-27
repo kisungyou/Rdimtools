@@ -40,10 +40,11 @@
 #' out3 = do.modp(X, label, beta=100)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="modp::beta=1")
-#' plot(out2$Y[,1], out2$Y[,2], main="modp::beta=10")
-#' plot(out3$Y[,1], out3$Y[,2], main="modp::beta=100")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="MODP::beta=1")
+#' plot(out2$Y, main="MODP::beta=10")
+#' plot(out3$Y, main="MODP::beta=100")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{zhang_modified_2011}{Rdimtools}

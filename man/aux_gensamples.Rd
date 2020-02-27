@@ -46,7 +46,7 @@ Also incorporated a functionality to add white noise with degree \code{noise}.
 \references{
 \insertRef{hein_intrinsic_2005}{Rdimtools}
 
-\insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
+\insertRef{vandermaaten_learning_2009}{Rdimtools}
 }
 \author{
 Kisung You

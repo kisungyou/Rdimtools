@@ -42,12 +42,13 @@
 #' out2 = do.mmp(X, label_missing, numk=10)
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="PCA projection")
-#' plot(out2$Y[,1], out2$Y[,2], main="20% missing labels")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, main="PCA projection")
+#' plot(out2$Y, main="20% missing labels")
+#' par(opar)
 #'
 #' @references
-#' \insertRef{xiaofei_he_learning_2008}{Rdimtools}
+#' \insertRef{xiaofeihe_learning_2008}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname linear_MMP

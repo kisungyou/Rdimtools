@@ -61,15 +61,16 @@ out1 = do.lfda(X, label)
 out2 = do.lfda(X, label, localscaling=FALSE)
 
 ## visualize
-par(mfrow=c(1,2))
-plot(out1$Y[,1], out1$Y[,2], main="binary affinity matrix")
-plot(out2$Y[,1], out2$Y[,2], main="local scaling affinity")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(out1$Y, col=label, main="binary affinity matrix")
+plot(out2$Y, col=label, main="local scaling affinity")
+par(opar)
 
 }
 \references{
 \insertRef{sugiyama_local_2006}{Rdimtools}
 
-\insertRef{zelnik-manor_self-tuning_2005}{Rdimtools}
+\insertRef{zelnik-manor_selftuning_2005}{Rdimtools}
 }
 \author{
 Kisung You

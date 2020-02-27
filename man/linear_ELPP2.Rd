@@ -42,10 +42,11 @@ out2 = do.pflpp(X, ndim=2)
 out3 = do.elpp2(X, ndim=2)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="PCA")
-plot(out2$Y[,1], out2$Y[,2], main="Parameter-Free LPP")
-plot(out3$Y[,1], out3$Y[,2], main="Enhanced LPP (2013)")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="PCA")
+plot(out2$Y, main="Parameter-Free LPP")
+plot(out3$Y, main="Enhanced LPP (2013)")
+par(opar)
 }
 
 }

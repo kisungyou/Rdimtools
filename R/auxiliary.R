@@ -27,6 +27,7 @@
 #     aux.which.maxk
 # 22. aux.traceratio       : solve trace ratio problem with 2012 Ngo's algorithm
 # 23. aux.2scatter         : compute LDA type within- and between- scatter matrices
+# 24. aux.subsetid         : generate 'k' subset id
 
 #  ------------------------------------------------------------------------
 # 0. AUX.TYPECHECK
@@ -266,7 +267,7 @@ aux.preprocess.hidden <- function(data,type=c("null","center","scale","cscale","
 #' @references
 #' \insertRef{hein_intrinsic_2005}{Rdimtools}
 #'
-#' \insertRef{van_der_maaten_dimensionality_2009}{Rdimtools}
+#' \insertRef{vandermaaten_learning_2009}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname aux_gensamples
@@ -1691,4 +1692,12 @@ aux.2scatter <- function(pX, label){
   }
 
   return(output)
+}
+
+
+# 24. aux.subsetid --------------------------------------------------------
+#' @keywords internal
+aux.subsetid <- function(n, k){
+  x = sample(1:n)
+  return(split(x, sort(x%%k)))
 }

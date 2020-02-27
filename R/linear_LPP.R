@@ -24,7 +24,6 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
 #' ## generate twinpeaks data
 #' X <- aux.gensamples(dname="twinpeaks",n=100)
 #'
@@ -34,12 +33,11 @@
 #' out3 <- do.lpp(X, t=10)
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1],out1$Y[,2],main="LPP::bandwidth=0.1")
-#' plot(out2$Y[,1],out2$Y[,2],main="LPP::bandwidth=1")
-#' plot(out3$Y[,1],out3$Y[,2],main="LPP::bandwidth=10")
-#' }
-#'
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="LPP::bandwidth=0.1")
+#' plot(out2$Y, main="LPP::bandwidth=1")
+#' plot(out3$Y, main="LPP::bandwidth=10")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{he_locality_2005}{Rdimtools}
@@ -55,7 +53,7 @@ do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
-    stop("*do.lpp : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.lpp : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   ndim = as.integer(ndim)
 

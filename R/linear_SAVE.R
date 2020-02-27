@@ -49,7 +49,7 @@
 #' }
 #'
 #' @references
-#' \insertRef{dennis_cook_save:_2000}{Rdimtools}
+#' \insertRef{denniscook_method_2000}{Rdimtools}
 #'
 #' @seealso \code{\link{do.sir}}
 #' @author Kisung You

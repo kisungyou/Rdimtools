@@ -45,7 +45,6 @@ it aims at finding a linear approximation to the eigenfunctions of the Laplace-B
 operator on the graph-approximated data manifold.
 }
 \examples{
-\dontrun{
 ## generate twinpeaks data
 X <- aux.gensamples(dname="twinpeaks",n=100)
 
@@ -55,12 +54,11 @@ out2 <- do.lpp(X, t=1)
 out3 <- do.lpp(X, t=10)
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(out1$Y[,1],out1$Y[,2],main="LPP::bandwidth=0.1")
-plot(out2$Y[,1],out2$Y[,2],main="LPP::bandwidth=1")
-plot(out3$Y[,1],out3$Y[,2],main="LPP::bandwidth=10")
-}
-
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="LPP::bandwidth=0.1")
+plot(out2$Y, main="LPP::bandwidth=1")
+plot(out3$Y, main="LPP::bandwidth=10")
+par(opar)
 
 }
 \references{

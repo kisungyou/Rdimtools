@@ -81,7 +81,7 @@ plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=50")
 
 }
 \references{
-\insertRef{van_der_maaten_visualizing_2008}{Rdimtools}
+\insertRef{vandermaaten_visualizing_2008}{Rdimtools}
 }
 \seealso{
 \code{\link{do.sne}}

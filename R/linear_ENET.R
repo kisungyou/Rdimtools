@@ -52,16 +52,17 @@
 #'
 #' ## visualize
 #' ## ( , ) denotes two regularization parameters
-#' par(mfrow=c(3,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="ENET::(0.1,0.1)")
-#' plot(out2$Y[,1], out2$Y[,2], main="ENET::(1,  0.1)")
-#' plot(out3$Y[,1], out3$Y[,2], main="ENET::(10, 0.1)")
-#' plot(out4$Y[,1], out4$Y[,2], main="ENET::(0.1,1)")
-#' plot(out5$Y[,1], out5$Y[,2], main="ENET::(1,  1)")
-#' plot(out6$Y[,1], out6$Y[,2], main="ENET::(10, 1)")
-#' plot(out7$Y[,1], out7$Y[,2], main="ENET::(0.1,10)")
-#' plot(out8$Y[,1], out8$Y[,2], main="ENET::(1,  10)")
-#' plot(out9$Y[,1], out9$Y[,2], main="ENET::(10, 10)")
+#' opar <- par(mfrow=c(3,3), no.readonly=TRUE)
+#' plot(out1$Y, main="ENET::(0.1,0.1)")
+#' plot(out2$Y, main="ENET::(1,  0.1)")
+#' plot(out3$Y, main="ENET::(10, 0.1)")
+#' plot(out4$Y, main="ENET::(0.1,1)")
+#' plot(out5$Y, main="ENET::(1,  1)")
+#' plot(out6$Y, main="ENET::(10, 1)")
+#' plot(out7$Y, main="ENET::(0.1,10)")
+#' plot(out8$Y, main="ENET::(1,  10)")
+#' plot(out9$Y, main="ENET::(10, 10)")
+#' par(opar)
 #' }
 #'
 #' @references

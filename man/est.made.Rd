@@ -50,7 +50,7 @@ sprintf("* est.made : estimated dimension with 'vote'   method is \%d.",out3$est
 
 }
 \references{
-\insertRef{farahmand_manifold-adaptive_2007}{Rdimtools}
+\insertRef{farahmand_manifoldadaptive_2007}{Rdimtools}
 }
 \author{
 Kisung You

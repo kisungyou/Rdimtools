@@ -49,16 +49,17 @@ corresponding column vector of \code{mp.W} to be selected as potential basis.
 \examples{
 \dontrun{
 ## generate swiss roll data
-X = aux.gensamples()
+X = aux.gensamples(n=200)
 
 ## Compare PCA and BPCA
 out1  <- do.pca(X, ndim=2, preprocess="center")
 out2  <- do.bpca(X, ndim=2, preprocess="center")
 
 ## Visualize
-par(mfrow=c(1,2))
-plot(out1$Y[,1], out1$Y[,2], main="PCA")
-plot(out2$Y[,1], out2$Y[,2], main="BPCA")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(out1$Y, main="PCA")
+plot(out2$Y, main="BPCA")
+par(opar)
 }
 
 }
