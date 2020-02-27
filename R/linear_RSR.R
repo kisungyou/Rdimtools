@@ -22,9 +22,10 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' #### generate R12in72 dataset
-#' X = aux.gensamples(n=100, dname="R12in72")
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' #### try different lbd combinations
 #' out1 = do.rsr(X, lbd=0.1)
@@ -32,11 +33,11 @@
 #' out3 = do.rsr(X, lbd=10)
 #'
 #' #### visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="RSR::lbd=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="RSR::lbd=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="RSR::lbd=10")
-#' }
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="RSR::lbd=0.1")
+#' plot(out2$Y, col=label, main="RSR::lbd=1")
+#' plot(out3$Y, col=label, main="RSR::lbd=10")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{zhu_unsupervised_2015}{Rdimtools}

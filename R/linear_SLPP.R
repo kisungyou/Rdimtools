@@ -116,6 +116,7 @@ do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","white
   ## RETURN
   #   1. adjust projection
   projection = (projection_first%*%projection_second)
+  projection = aux.adjprojection(projection)
 
   #   2.
   result = list()

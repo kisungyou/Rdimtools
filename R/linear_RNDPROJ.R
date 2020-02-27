@@ -38,9 +38,10 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' ## generate Swiss Roll data of 2,000 data points.
-#' X <- aux.gensamples(n=2000)
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ## 1. Gaussian projection
 #' output1 <- do.rndproj(X,ndim=2)
@@ -49,14 +50,14 @@
 #' output2 <- do.rndproj(X,ndim=2,type="achlioptas")
 #'
 #' ## 3. Sparse projection
-#' output3 <- do.rndproj(X,type="sparse",s=5)        ## fulfill condition on s
+#' output3 <- do.rndproj(X,type="sparse")
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="Gaussian")
-#' plot(output2$Y[,1],output2$Y[,2],main="Arclioptas")
-#' plot(output3$Y[,1],output3$Y[,2],main="Sparse")
-#'}
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, col=label, main="RNDPROJ::Gaussian")
+#' plot(output2$Y, col=label, main="RNDPROJ::Arclioptas")
+#' plot(output3$Y, col=label, main="RNDPROJ::Sparse")
+#' par(opar)
 #'
 #'@references
 #'\insertRef{johnson_extensions_1984}{Rdimtools}

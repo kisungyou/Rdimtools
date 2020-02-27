@@ -20,23 +20,20 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate data of 2 types with clear difference
-#' diff = 15
-#' dt1  = aux.gensamples(n=123)-diff;
-#' dt2  = aux.gensamples(n=123)+diff;
-#'
-#' ## merge the data and create a label correspondingly
-#' X      = rbind(dt1,dt2)
-#' label  = c(rep(1,123), rep(2,123))
+#' ## load iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.factor(iris$Species)
 #'
 #' ## compare SLPE with SLPP
 #' out1 <- do.slpp(X, label)
 #' out2 <- do.slpe(X, label)
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="SLPP")
-#' plot(out2$Y[,1], out2$Y[,2], main="SLPE")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="SLPP")
+#' plot(out2$Y, col=label, main="SLPE")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -117,11 +114,13 @@ do.slpe <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","de
   #------------------------------------------------------------------------
   ## RETURN
   #   1. throughput projection
-  projection = aux.adjprojection(projection_first%*%projection_second)
+  projection = projection_first%*%projection_second
+  projection = aux.adjprojection(projection)
 
   #   2. report : oh, don't forget to re-ordering the data according to 'rank'
   result = list()
-  result$Y = (pcapX%*%projection_second)[labelrank,]
+  result$Y = (opX%*%projection)[labelorder,]
+  # result$Y = pcppX%*%projection_second
   result$trfinfo = trfinfo
   result$projection = projection
   return(result)

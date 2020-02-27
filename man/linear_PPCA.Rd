@@ -38,17 +38,20 @@ negative values if sample covariance given the data is rank-deficient.
 }
 \examples{
 \dontrun{
-## generate data
-X <- aux.gensamples(n=496)
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 ## Compare PCA and PPCA
 PCA  <- do.pca(X, ndim=2, preprocess="center")
 PPCA <- do.ppca(X, ndim=2, preprocess="center")
 
 ## Visualize
-par(mfrow=c(1,2))
-plot(PCA$Y[,1], PCA$Y[,2], main="PCA")
-plot(PPCA$Y[,1], PPCA$Y[,2], main="PPCA")
+opar <- par(mfrow=c(1,2))
+plot(PCA$Y,  col=label, main="PCA")
+plot(PPCA$Y, col=label, main="PPCA")
+par(opar)
 }
 
 }

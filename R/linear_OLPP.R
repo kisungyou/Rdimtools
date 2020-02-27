@@ -26,8 +26,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate 2 normal groups of data that are far away
-#' X = rbind(matrix(rnorm(200),nrow=20), (matrix(rnorm(200),nrow=20)+10))
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ##  connecting 10% and 25% of data for graph construction each.
 #' output1 <- do.olpp(X,ndim=2,type=c("proportion",0.10))
@@ -35,9 +37,10 @@
 #'
 #' ## Visualize
 #' #  In theory, it should show two separated groups of data
-#' par(mfrow=c(1,2))
-#' plot(output1$Y[,1],output1$Y[,2],main="10% connected")
-#' plot(output2$Y[,1],output2$Y[,2],main="25% connected")
+#' opar <- par(mfrow=c(1,2))
+#' plot(output1$Y, col=label, main="OLPP::10% connected")
+#' plot(output2$Y, col=label, main="OLPP::25% connected")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -87,7 +90,8 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   ## MAIN COMPUTATION
   #   step 1. PCA preprocessing
-  eigtest = eigen(cov(pX), only.values=TRUE)
+  covX    = stats::cov(pX)
+  eigtest = eigen(covX, only.values=TRUE)
   pcadim  = sum(eigtest$values > 0)
 
   if (pcadim <= ndim){

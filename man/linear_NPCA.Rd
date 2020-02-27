@@ -36,6 +36,25 @@ a named list containing
 Nonnegative Principal Component Analysis (NPCA) is a variant of PCA where
 projection vectors - or, basis for learned subspace - contain no negative values.
 }
+\examples{
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
+
+## use different preprocessing
+out1 = do.npca(X, preprocess="center")
+out2 = do.npca(X, preprocess="cscale")
+out3 = do.npca(X, preprocess="whiten")
+
+## visualize
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="NPCA:: center")
+plot(out2$Y, col=label, main="NPCA:: cscale")
+plot(out3$Y, col=label, main="NPCA:: whiten")
+par(opar)
+
+}
 \references{
 \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
 }

@@ -37,14 +37,10 @@ covariance is attained. According to the paper, the median covariance is compute
 under Frobenius norm and projection is extracted from the largest eigenvectors.
 }
 \examples{
-## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=50)-100
-dt2  = aux.gensamples(n=50)
-dt3  = aux.gensamples(n=50)+100
-
-## merge the data and create a label correspondingly
-X      = rbind(dt1,dt2,dt3)
-label  = rep(1:3, each=50)
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 ## try different numbers for subsets
 out1 = do.rpcag(X, ndim=2, k=2)
@@ -53,9 +49,9 @@ out3 = do.rpcag(X, ndim=2, k=10)
 
 ## visualize
 opar <- par(mfrow=c(1,3), no.readonly=TRUE)
-plot(out1$Y[,1], out1$Y[,2], col=label, main="k=2")
-plot(out2$Y[,1], out2$Y[,2], col=label, main="k=5")
-plot(out3$Y[,1], out3$Y[,2], col=label, main="k=10")
+plot(out1$Y, col=label, main="RPCAG::k=2")
+plot(out2$Y, col=label, main="RPCAG::k=5")
+plot(out3$Y, col=label, main="RPCAG::k=10")
 par(opar)
 
 }

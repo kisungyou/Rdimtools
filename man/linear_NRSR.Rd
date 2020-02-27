@@ -51,10 +51,11 @@ out2 = do.nrsr(X, expl=0.1)
 out3 = do.nrsr(X, expl=0.5)
 
 #### visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="NRSR::expl=0.01")
-plot(out2$Y[,1], out2$Y[,2], main="NRSR::expl=0.1")
-plot(out3$Y[,1], out3$Y[,2], main="NRSR::expl=0.5")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="NRSR::expl=0.01")
+plot(out2$Y, main="NRSR::expl=0.1")
+plot(out3$Y, main="NRSR::expl=0.5")
+par(opar)
 }
 
 }

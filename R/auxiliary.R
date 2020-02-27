@@ -1210,16 +1210,17 @@ aux.kernelprojection <- function(KK, ndim){
 aux.adjqr <- function(P){
   p = ncol(P)
   Pid = (t(P)%*%P)
-  if (max(abs(diag(p)-Pid))>1e-18){
-    output = qr.Q(qr(P))
+  dnormval = base::norm(diag(p)-Pid, type = "F")
+  if (dnormval > 1e-10){
+    return(qr.Q(qr(P)))
   } else {
-    output = P
+    return(P)
   }
-  return(output)
 }
 #' @keywords internal
 #' @noRd
 aux.adjprojection <- function(P){
+  PP = aux.adjqr(P)
   n = nrow(P)
   p = ncol(P)
   output = array(0,c(n,p))

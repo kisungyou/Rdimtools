@@ -39,14 +39,10 @@ It constructs a weighted data graph from LLE method. Also, it develops LPP metho
 the structure of local neighborhoods.
 }
 \examples{
-\dontrun{
-## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-50
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+50
-
-## merge the data
-X      = rbind(dt1,dt2,dt3)
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 ## try different numbers for neighborhood size
 out1 = do.onpp(X, type=c("proportion",0.05))
@@ -54,11 +50,11 @@ out2 = do.onpp(X, type=c("proportion",0.1))
 out3 = do.onpp(X, type=c("proportion",0.25))
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="ONPP::5\% connectivity")
-plot(out2$Y[,1], out2$Y[,2], main="ONPP::10\% connectivity")
-plot(out3$Y[,1], out3$Y[,2], main="ONPP::25\% connectivity")
-}
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="ONPP::5\% connectivity")
+plot(out2$Y, col=label, main="ONPP::10\% connectivity")
+plot(out3$Y, col=label, main="ONPP::25\% connectivity")
+par(opar)
 
 }
 \references{

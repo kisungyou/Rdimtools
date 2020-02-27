@@ -74,13 +74,14 @@ out5 = do.rsir(X, y, regmethod="PCATikhonov")
 outsir = do.sir(X, y)
 
 ## visualize
-par(mfrow=c(2,3))
+opar <- par(mfrow=c(2,3), no.readonly=TRUE)
 plot(out1$Y[,1], out1$Y[,2], main="RSIR::Ridge")
 plot(out2$Y[,1], out2$Y[,2], main="RSIR::Tikhonov")
 plot(out3$Y[,1], out3$Y[,2], main="RSIR::PCA")
 plot(out4$Y[,1], out4$Y[,2], main="RSIR::PCA+Ridge")
 plot(out5$Y[,1], out5$Y[,2], main="RSIR::PCA+Tikhonov")
 plot(outsir$Y[,1], outsir$Y[,2], main="standard SIR")
+par(opar)
 }
 
 }

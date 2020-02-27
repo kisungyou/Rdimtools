@@ -48,10 +48,11 @@
 #' out3 = do.sammc(X, label_missing, beta=10)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
 #' plot(out1$Y[,1], out1$Y[,2], main="SAMMC::beta=0.1")
 #' plot(out2$Y[,1], out2$Y[,2], main="SAMMC::beta=1")
 #' plot(out3$Y[,1], out3$Y[,2], main="SAMMC::beta=10")
+#' par(opar)
 #' }
 #'
 #' @references

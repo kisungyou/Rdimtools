@@ -20,27 +20,22 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
-#' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=33)-100
-#' dt2  = aux.gensamples(n=33)
-#' dt3  = aux.gensamples(n=33)+100
-#'
-#' ## merge the data and create a label correspondingly
-#' Y      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ## try different regularization parameters
-#' out1 <- do.rlda(Y, label, alpha=0.1)
-#' out2 <- do.rlda(Y, label, alpha=1)
-#' out3 <- do.rlda(Y, label, alpha=10)
+#' out1 <- do.rlda(X, label, alpha=0.001)
+#' out2 <- do.rlda(X, label, alpha=0.01)
+#' out3 <- do.rlda(X, label, alpha=100)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="alpha=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="alpha=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="alpha=10")
-#' }
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="RLDA::alpha=0.1")
+#' plot(out2$Y, col=label, main="RLDA::alpha=1")
+#' plot(out3$Y, col=label, main="RLDA::alpha=10")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{friedman_regularized_1989}{Rdimtools}
@@ -118,6 +113,7 @@ do.rlda <- function(X, label, ndim=2, alpha=1.0){
   W = aux.bicgstab(RHS, LHS, verbose=FALSE)$x
   #   adjust
   topW = aux.adjprojection(RSpectra::eigs(W, ndim)$vectors)
+  topW = matrix(as.double(topW), nrow=p)
 
   #------------------------------------------------------------------------
   ## RETURN

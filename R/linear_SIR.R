@@ -43,10 +43,11 @@
 #' out3 = do.sir(X, y, h=10)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="SIR::2 slices")
-#' plot(out2$Y[,1], out2$Y[,2], main="SIR::5 slices")
-#' plot(out3$Y[,1], out3$Y[,2], main="SIR::10 slices")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="SIR::2 slices")
+#' plot(out2$Y, main="SIR::5 slices")
+#' plot(out3$Y, main="SIR::10 slices")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -121,6 +122,7 @@ do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
   costInv = aux.bicgstab(mat_Sigma, mat_Gamma, verbose=FALSE)$x
   #   2. find top eigenvectors
   projection = aux.adjprojection(RSpectra::eigs(costInv, ndim)$vectors)
+  projection = matrix(as.double(projection), nrow=p)
 
 
   #------------------------------------------------------------------------

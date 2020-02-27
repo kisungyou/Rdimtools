@@ -62,10 +62,11 @@ out2 = do.sir(X, y, h=5)
 out3 = do.sir(X, y, h=10)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="SIR::2 slices")
-plot(out2$Y[,1], out2$Y[,2], main="SIR::5 slices")
-plot(out3$Y[,1], out3$Y[,2], main="SIR::10 slices")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="SIR::2 slices")
+plot(out2$Y, main="SIR::5 slices")
+plot(out3$Y, main="SIR::10 slices")
+par(opar)
 }
 
 }

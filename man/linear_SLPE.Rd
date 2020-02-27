@@ -37,23 +37,20 @@ its mapping into a low dimensional space.
 }
 \examples{
 \dontrun{
-## generate data of 2 types with clear difference
-diff = 15
-dt1  = aux.gensamples(n=123)-diff;
-dt2  = aux.gensamples(n=123)+diff;
-
-## merge the data and create a label correspondingly
-X      = rbind(dt1,dt2)
-label  = c(rep(1,123), rep(2,123))
+## load iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## compare SLPE with SLPP
 out1 <- do.slpp(X, label)
 out2 <- do.slpe(X, label)
 
 ## visualize
-par(mfrow=c(1,2))
-plot(out1$Y[,1], out1$Y[,2], main="SLPP")
-plot(out2$Y[,1], out2$Y[,2], main="SLPE")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(out1$Y, col=label, main="SLPP")
+plot(out2$Y, col=label, main="SLPE")
+par(opar)
 }
 
 }
