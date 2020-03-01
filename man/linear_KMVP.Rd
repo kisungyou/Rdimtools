@@ -43,6 +43,7 @@ where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\cod
 when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 }
 \examples{
+\dontrun{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -59,6 +60,7 @@ plot(out1$Y, main="bandwidth=0.1", col=label)
 plot(out2$Y, main="bandwidth=1",   col=label)
 plot(out3$Y, main="bandwidth=10",  col=label)
 par(opar)
+}
 
 }
 \references{

@@ -47,19 +47,22 @@ locations correspondingly \code{S} times. After each cycle, learning parameter \
 is multiplied by \code{drate}, becoming smaller in magnitude.
 }
 \examples{
-## generate sample data
-X = aux.gensamples()
+## load iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.factor(iris$Species)
 
 ## compare with mds using 2 distance metrics
-outMDS <- do.mds(X, ndim=2)
+outM <- do.mds(X, ndim=2)
 out1 <- do.spe(X, ndim=2)
 out2 <- do.spe(X, ndim=2, proximity=function(x){dist(x, method="manhattan")})
 
 ## Visualize
-par(mfrow=c(1,3))
-plot(outMDS$Y[,1], outMDS$Y[,2], main="MDS")
-plot(out1$Y[,1], out1$Y[,2], main="SPE with L2 norm")
-plot(out2$Y[,1], out2$Y[,2], main="SPE with L1 norm")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(outM$Y, col=label, main="MDS")
+plot(out1$Y, col=label, main="SPE with L2 norm")
+plot(out2$Y, col=label, main="SPE with L1 norm")
+par(opar)
 
 }
 \references{

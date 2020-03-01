@@ -19,6 +19,8 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param nlevel the number of \code{r} (radius) to be tested.
+#' @param method method to estimate the intrinsic dimension; \code{"lm"} for fitting a linear model for
+#' the entire grid of values, and \code{"cut"} to trim extreme points. \code{"cut"} method is more robust.
 #' @param cut a vector of ratios for computing estimated dimension in \eqn{(0,1)}.
 #'
 #' @return a named list containing containing \describe{
@@ -40,10 +42,11 @@
 #' out3 = est.correlation(X3)
 #'
 #' ## visually verify : all should have approximate slope of 2.
-#' par(mfrow=c(1,3))
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
 #' plot(log(out1$r), log(out1$Cr), main="swiss roll")
 #' plot(log(out2$r), log(out2$Cr), main="ribbon")
 #' plot(log(out3$r), log(out3$Cr), main="twinpeaks")
+#' par(opar)
 #' }
 #'
 #'
@@ -54,7 +57,7 @@
 #' @seealso \code{\link{est.boxcount}}
 #' @rdname estimate_correlation
 #' @export
-est.correlation <- function(X,nlevel=50,cut=c(0.1,0.9)){
+est.correlation <- function(X,nlevel=50,method=c("lm","cut"),cut=c(0.1,0.9)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   X = as.matrix(X)
@@ -93,18 +96,22 @@ est.correlation <- function(X,nlevel=50,cut=c(0.1,0.9)){
   vecCm  = conversion$Cr
 
   #   5-2. estimated dimension
-  if ((!is.vector(cut))||(length(cut)!=2)||(any(cut<=0))||(any(cut>=1))){
-    stop("* est.correlation : 'cut' should be a vector of length 2.")
+  mymethod = match.arg(method)
+  if (all(mymethod=="lm")){
+    estdim = sum(coef(lm(log(vecCm)~log(vecr)))[2])
+  } else {
+    if ((!is.vector(cut))||(length(cut)!=2)||(any(cut<=0))||(any(cut>=1))){
+      stop("* est.correlation : 'cut' should be a vector of length 2.")
+    }
+    idxtrim = fractal_trimmer(vecCm, cut)
+    vecrt   = vecr[idxtrim]  # trimmed vecr
+    vecCt   = vecCm[idxtrim] # trimmed vecCm
+    nnn     = length(vecrt)  # number of saved ones
+
+
+
+    estdim   = sum(coef(lm(log(vecCt)~log(vecrt)))[2])
   }
-  idxtrim = fractal_trimmer(vecCm, cut)
-  vecrt   = vecr[idxtrim]  # trimmed vecr
-  vecCt   = vecCm[idxtrim] # trimmed vecCm
-  nnn     = length(vecrt)  # number of saved ones
-
-
-
-  estdim   = sum(coef(lm(log(vecCt)~log(vecrt)))[2])
-
 
   #   5-3. show and return
   output = list()

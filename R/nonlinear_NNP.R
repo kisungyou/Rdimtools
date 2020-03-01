@@ -20,25 +20,28 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## load iris data
+#' ## use iris data
 #' data(iris)
-#' X <- as.matrix(iris[,1:4])
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ## let's compare with other methods
 #' out1 <- do.nnp(X, ndim=2)      # NNP
 #' out2 <- do.pca(X, ndim=2)      # PCA
 #' out3 <- do.lamp(X, ndim=2)     # LAMP
 #'
-#'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="NNP")
-#' plot(out2$Y[,1], out2$Y[,2], main="PCA")
-#' plot(out3$Y[,1], out3$Y[,2], main="LAMP")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="NNP")
+#' plot(out2$Y, col=label, main="PCA")
+#' plot(out3$Y, col=label, main="LAMP")
+#' par(opar)
 #' }
+#'
 #' @references
 #' \insertRef{tejada_improved_2003}{Rdimtools}
 #'
+#' @rdname nonlinear_NNP
 #' @author Kisung You
 #' @export
 do.nnp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

@@ -33,10 +33,11 @@
 #' out3 <- do.dve(X, type=c("proportion",0.8))
 #'
 #' ## Visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1],out1$Y[,2],main="DVE::20% connected")
-#' plot(out2$Y[,1],out2$Y[,2],main="DVE::50% connected")
-#' plot(out3$Y[,1],out3$Y[,2],main="DVE::80% connected")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="DVE::20% connected")
+#' plot(out2$Y, main="DVE::50% connected")
+#' plot(out3$Y, main="DVE::80% connected")
+#' par(opar)
 #' }
 #'
 #' @references

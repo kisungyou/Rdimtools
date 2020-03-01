@@ -23,7 +23,7 @@ est.made(
 \value{
 a named list containing containing \describe{
 \item{estdim}{estimated global intrinsic dimension.}
-\item{locdim}{a length-\eqn{n} vector estimated dimension at each point.}
+\item{estloc}{a length-\eqn{n} vector estimated dimension at each point.}
 }
 }
 \description{

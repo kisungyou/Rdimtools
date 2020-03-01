@@ -44,8 +44,10 @@ the approximated manifold.
 }
 \examples{
 \dontrun{
-## generate 12-dim data embedded in 72-dim.
-X = aux.gensamples(n=200, dname="R12in72")
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 # see the effect bandwidth
 out1 = do.llle(X, bandwidth=0.1)
@@ -53,10 +55,11 @@ out2 = do.llle(X, bandwidth=0.5)
 out3 = do.llle(X, bandwidth=0.9)
 
 # visualize the results
-par(mfrow=c(1,3))
-plot(out1$Y[,1],out1$Y[,2],main="bandwidth=0.1")
-plot(out2$Y[,1],out2$Y[,2],main="bandwidth=0.5")
-plot(out3$Y[,1],out3$Y[,2],main="bandwidth=0.9")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="bandwidth=0.1")
+plot(out2$Y, col=label, main="bandwidth=0.5")
+plot(out3$Y, col=label, main="bandwidth=0.9")
+par(opar)
 }
 
 }

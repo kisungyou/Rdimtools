@@ -59,10 +59,11 @@ output2 <- do.mvu(X,ndim=2,projtype="kpca")
 output3 <- do.mvu(X,ndim=2,type=c("proportion",0.5))
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(output1$Y[,1],output1$Y[,2],main="standard")
-plot(output2$Y[,1],output2$Y[,2],main="kpca projection")
-plot(output3$Y[,1],output3$Y[,2],main="densely connected graph")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(output1$Y, main="standard")
+plot(output2$Y, main="kpca projection")
+plot(output3$Y, main="densely connected graph")
+par(opar)
 }
 
 }

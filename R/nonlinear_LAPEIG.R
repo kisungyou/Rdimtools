@@ -35,9 +35,10 @@
 #' out2 <- do.lapeig(X,ndim=2,type=c("proportion",0.05),weighted=FALSE) # combinatorial
 #'
 #' ## Visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1],out1$Y[,2],main="weighted")
-#' plot(out2$Y[,1],out2$Y[,2],main="combinatorial")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, main="weighted")
+#' plot(out2$Y, main="combinatorial")
+#' par(opar)
 #' }
 #'
 #' @references

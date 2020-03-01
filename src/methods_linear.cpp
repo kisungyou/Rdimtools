@@ -20,6 +20,7 @@
  * 19. DISR
  * 20. RSR
  * 21. NRSR
+ * 22. CSCORE
 */
 
 #include <RcppArmadillo.h>
@@ -1148,4 +1149,29 @@ arma::vec method_nrsr(arma::mat X, double lbd, double verysmall, double p){
     score(i) = arma::norm(Wold.row(i),2);
   }
   return(score);
+}
+
+/*
+ * 22. CSCORE : compute \sum (f_ri - f_rj)^2
+ */
+// [[Rcpp::export]]
+arma::vec method_scoresum(arma::mat &X, arma::mat &S){
+  // parameter
+  int N = X.n_rows;
+  int P = X.n_cols;
+
+  double tmpval = 0.0;
+  double fdiff  = 0.0;
+  arma::vec output(P,fill::zeros);
+  for (int r=0;r<P;r++){
+    tmpval = 0.0;
+    for (int i=0;i<(N-1);i++){
+      for (int j=(i+1);j<N;j++){
+        fdiff = X(i,r) - X(j,r);
+        tmpval += 2.0*(fdiff*fdiff)*S(i,j);
+      }
+    }
+    output(r) = tmpval;
+  }
+  return(output);
 }

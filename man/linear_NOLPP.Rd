@@ -46,15 +46,16 @@ Nonnegative Orthogonal Locality Preserving Projection (NOLPP) is a variant of OL
 projection vectors - or, basis for learned subspace - contain no negative values.
 }
 \examples{
+\dontrun{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
+X     = as.matrix(iris[,1:4])+50
 label = as.integer(iris$Species)
 
 ## use different kernel bandwidths with 20\% connectivity
-out1 = do.nolpp(X, type=c("proportion",0.2), t=0.01)
-out2 = do.nolpp(X, type=c("proportion",0.2), t=0.1)
-out3 = do.nolpp(X, type=c("proportion",0.2), t=1)
+out1 = do.nolpp(X, type=c("proportion",0.5), t=0.01)
+out2 = do.nolpp(X, type=c("proportion",0.5), t=0.1)
+out3 = do.nolpp(X, type=c("proportion",0.5), t=1)
 
 ## visualize
 opar <- par(mfrow=c(1,3), no.readonly=TRUE)
@@ -62,6 +63,7 @@ plot(out1$Y, col=label, main="NOLPP::t=0.01")
 plot(out2$Y, col=label, main="NOLPP::t=0.1")
 plot(out3$Y, col=label, main="NOLPP::t=1")
 par(opar)
+}
 
 }
 \references{

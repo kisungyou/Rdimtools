@@ -39,10 +39,11 @@
 #' output3 <- do.mvu(X,ndim=2,type=c("proportion",0.5))
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="standard")
-#' plot(output2$Y[,1],output2$Y[,2],main="kpca projection")
-#' plot(output3$Y[,1],output3$Y[,2],main="densely connected graph")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, main="standard")
+#' plot(output2$Y, main="kpca projection")
+#' plot(output3$Y, main="densely connected graph")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -129,14 +130,14 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
   outCSDP = csdp(C,A,b,K,csdp.control(printlevel=0))
   KK      = as.matrix(outCSDP$X[[1]])
 
-  if (projtype=="spectral"){
+  if (all(projtype=="spectral")){
     # 6. Embedding : Spectral Method, directly from K
     KKeigen = eigen(KK)
     eigvals = KKeigen$values
     eigvecs = KKeigen$vectors
 
     tY = (diag(sqrt(eigvals[1:ndim])) %*% t(eigvecs[,1:ndim]))
-  } else if (projtype=="kpca"){
+  } else if (all(projtype=="kpca")){
     # 7. Embedding : Kernel PCA method
     tY = aux.kernelprojection(KK, ndim)
   } else {

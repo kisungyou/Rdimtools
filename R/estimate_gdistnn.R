@@ -1,5 +1,19 @@
 #' Intrinsic Dimension Estimation based on Manifold Assumption and Graph Distance
 #'
+#' As the name suggests, this function assumes that the data is sampled from the manifold in that
+#' graph representing the underlying manifold is first estimated via \eqn{k}-nn. Then graph distance
+#' is employed as an approximation of geodesic distance to locally estimate intrinsic dimension.
+#'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
+#' @param k the neighborhood size used for constructing a graph. We suggest it to be large enough to build a connected graph.
+#' @param k1 local neighborhood parameter (smaller radius) for graph distance.
+#' @param k2 local neighborhood parameter (larger radius)  for graph distance.
+#'
+#' @return a named list containing containing \describe{
+#' \item{estdim}{the global estimated dimension, which is averaged local dimension.}
+#' \item{estloc}{a length-\eqn{n} vector of locally estimated dimension at each point.}
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' ## create 3 datasets of intrinsic dimension 2.
@@ -16,6 +30,16 @@
 #' sprintf("* est.gdistnn : estimated dimension for 'swiss'  data is %.2f.",out1$estdim)
 #' sprintf("* est.gdistnn : estimated dimension for 'ribbon' data is %.2f.",out2$estdim)
 #' sprintf("* est.gdistnn : estimated dimension for 'saddle' data is %.2f.",out3$estdim)
+#'
+#' ## visualize
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' hist(out1$estloc, main="Result-'Swiss'", xlab="local dimension")
+#' abline(v=out1$estdim, lwd=3, col="red")
+#' hist(out2$estloc, main="Result-'Ribbon'", xlab="local dimension")
+#' abline(v=out2$estdim, lwd=3, col="red")
+#' hist(out3$estloc, main="Result-'Saddle'", xlab="local dimension")
+#' abline(v=out2$estdim, lwd=3, col="red")
+#' par(opar)
 #' }
 #'
 #' @references

@@ -26,8 +26,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate swiss roll data
-#' X = aux.gensamples(n=123)
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ## 1. no preprocessing
 #' output1 <- do.ree(X,ndim=2,maxiter=50)
@@ -36,9 +38,10 @@
 #' output2 <- do.ree(X,ndim=2,preprocess="decorrelate",maxiter=50)
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,2))
-#' plot(output1$Y[,1],output1$Y[,2],main="centered")
-#' plot(output2$Y[,1],output2$Y[,2],main="decorrelated")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(output1$Y, col=label, main="centered")
+#' plot(output2$Y, col=label, main="decorrelated")
+#' par(opar)
 #' }
 #'
 #' @references

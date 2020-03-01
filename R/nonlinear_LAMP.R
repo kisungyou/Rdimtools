@@ -31,9 +31,10 @@
 #' out2 <- do.lamp(X, ndim=2)     # LAMP
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="PCA")
-#' plot(out2$Y[,1], out2$Y[,2], main="LAMP")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, main="PCA")
+#' plot(out2$Y, main="LAMP")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -107,7 +108,6 @@ do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","wh
   pY = array(0,c(n,ndim))
   pY[controls,]  = pYcontrol
   pY[-controls,] = pYrest
-
 
   ########################################################################
   ## 5. return output

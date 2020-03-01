@@ -58,11 +58,12 @@ out2 <- do.ispe(X, ndim=2, cutoff=5)
 out3 <- do.ispe(X, ndim=2, cutoff=50)
 
 ## Visualize
-par(mfrow=c(2,2))
+opar <- par(mfrow=c(2,2), no.readonly=TRUE)
 plot(outSPE$Y[,1], outSPE$Y[,2], main="SPE")
 plot(out1$Y[,1], out1$Y[,2], main="ISPE::cutoff=0.5")
 plot(out2$Y[,1], out2$Y[,2], main="ISPE::cutoff=5")
 plot(out3$Y[,1], out3$Y[,2], main="ISPE::cutoff=50")
+par(opar)
 }
 
 }

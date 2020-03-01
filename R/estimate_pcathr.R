@@ -30,7 +30,9 @@
 #' print(pmessage)
 #'
 #' ## use screeplot
+#' opar <- par(no.readonly=TRUE)
 #' plot(output$values, main="scree plot")
+#' par(opar)
 #' }
 #'
 #' @seealso \code{\link{do.pca}}

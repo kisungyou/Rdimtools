@@ -45,8 +45,10 @@ discriminative nature while attaining row-sparsity scores for selecting features
 }
 \examples{
 \dontrun{
-#### generate R12in72 dataset
-X = aux.gensamples(n=50, dname="R12in72")
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 #### try different neighborhood size
 out1 = do.udfs(X, k=5)
@@ -54,10 +56,11 @@ out2 = do.udfs(X, k=10)
 out3 = do.udfs(X, k=25)
 
 #### visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="UDFS::k=5")
-plot(out2$Y[,1], out2$Y[,2], main="UDFS::k=10")
-plot(out3$Y[,1], out3$Y[,2], main="UDFS::k=25")
+opar = par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="UDFS::k=5")
+plot(out2$Y, col=label, main="UDFS::k=10")
+plot(out3$Y, col=label, main="UDFS::k=25")
+par(opar)
 }
 
 }

@@ -186,6 +186,10 @@ method_nrsr <- function(X, lbd, verysmall, p) {
     .Call('_Rdimtools_method_nrsr', PACKAGE = 'Rdimtools', X, lbd, verysmall, p)
 }
 
+method_scoresum <- function(X, S) {
+    .Call('_Rdimtools_method_scoresum', PACKAGE = 'Rdimtools', X, S)
+}
+
 #' @keywords internal
 NULL
 
@@ -247,6 +251,14 @@ method_ispe <- function(R, iX, C, S, lambda, drate, matselector, cutoff) {
 
 method_crca <- function(Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector) {
     .Call('_Rdimtools_method_crca', PACKAGE = 'Rdimtools', Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector)
+}
+
+bmds_compute_SSR <- function(D, Delta) {
+    .Call('_Rdimtools_bmds_compute_SSR', PACKAGE = 'Rdimtools', D, Delta)
+}
+
+main_bmds <- function(D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas) {
+    .Call('_Rdimtools_main_bmds', PACKAGE = 'Rdimtools', D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
 }
 
 aux_mimick_geigen <- function(A, B) {

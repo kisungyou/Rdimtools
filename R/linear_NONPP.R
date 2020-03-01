@@ -23,9 +23,10 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
+#' X     = as.matrix(iris[,1:4])+50
 #' label = as.integer(iris$Species)
 #'
 #' ## use different levels of connectivity
@@ -39,6 +40,7 @@
 #' plot(out2$Y, col=label, main="NONPP::20% connected")
 #' plot(out3$Y, col=label, main="NONPP::50% connected")
 #' par(opar)
+#' }
 #'
 #' @seealso \code{\link{do.onpp}}
 #' @references
@@ -110,13 +112,14 @@ do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
   #   2. initialize for U
   Uinit = matrix(runif(p*ndim),nrow=p)
   #   3. compute projection matrix
-  projection = aux.adjprojection(method_nnprojmin(C, Uinit, reltol, maxiter))
+  projection = method_nnprojmin(C, Uinit, reltol, maxiter)
   #   4. additional step : NA
-  projection[(is.na(projection))] = 1
+  projection[(is.na(projection)||(is.infinite(projection)))] = 1
   for (i in 1:ndim){
     tgt = as.vector(projection[,i])
     projection[,i] = tgt/sqrt(sum(tgt^2))
   }
+  projection = aux.adjprojection(projection)
 
   #------------------------------------------------------------------------
   ## RETURN

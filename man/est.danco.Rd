@@ -6,8 +6,19 @@
 \usage{
 est.danco(X, k = 5)
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
+
+\item{k}{the neighborhood size used for estimating local intrinsic dimension.}
+}
+\value{
+a named list containing containing \describe{
+\item{estdim}{estimated dimension via the method.}
+}
+}
 \description{
-Intrinsic Dimensionality Estimation with DANCo
+DANCo exploits the balanced information of both the normalized nearest neighbor distances
+as well as the angles of data pairs in the neighboring points.
 }
 \examples{
 \dontrun{

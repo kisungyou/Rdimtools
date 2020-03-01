@@ -22,12 +22,12 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
 #' ## Load Iris data and put some noise
 #' data(iris)
 #' noise = 0.2
 #' X = as.matrix(iris[,1:4])
 #' X = X + matrix(noise*rnorm(length(X)), nrow=nrow(X))
+#' label = as.integer(iris$Species)
 #'
 #' ## try different regularization parameters
 #' rpca1 = do.rpca(X, lambda=0.1)
@@ -40,11 +40,11 @@
 #' out3 = do.pca(rpca3$L, ndim=2)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="RPCA+PCA::lambda=0.1")
-#' plot(out2$Y[,1], out2$Y[,2], main="RPCA+PCA::lambda=1")
-#' plot(out3$Y[,1], out3$Y[,2], main="RPCA+PCA::lambda=10")
-#' }
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="RPCA+PCA::lambda=0.1")
+#' plot(out2$Y, col=label, main="RPCA+PCA::lambda=1")
+#' plot(out3$Y, col=label, main="RPCA+PCA::lambda=10")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{candes_robust_2011}{Rdimtools}

@@ -37,6 +37,9 @@
 #' par(opar)
 #' }
 #'
+#' @references
+#' \insertRef{yang_collaborative_2015}{Rdimtools}
+#'
 #' @seealso \code{\link{do.spp}}
 #' @author Kisung You
 #' @rdname linear_CRP

@@ -4,7 +4,6 @@
 #' \code{est.nearneighbor1} estimates the intrinsic dimension based on the
 #' local distance information in an iterative manner.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param K maximum neighborhood size, smaller than \eqn{p}.
 #'

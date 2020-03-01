@@ -37,9 +37,10 @@
 #' outMVE5  <- do.mve(X, ndim=2, knn=5, maxiter=7)
 #'
 #' ## Visualize two comparisons
-#' par(mfrow=c(1,2))
-#' plot(outMVU5$Y[,1], outMVU5$Y[,2],  main="MVU (k=5)")
-#' plot(outMVE5$Y[,1], outMVE5$Y[,2],  main="MVE (k=5)")
+#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(outMVU5$Y,  main="MVU (k=5)")
+#' plot(outMVE5$Y,  main="MVE (k=5)")
+#' par(opar)
 #' }
 #'
 #' @references
@@ -149,11 +150,7 @@ do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
 #' @noRd
 mve_single_cvxr <- function(A, B, C){
   N = nrow(B)
-  if (utils::packageVersion("CVXR") < "1.0.0"){
-    Ktmp = Semidef(N)
-  } else {
-    Ktmp = CVXR::Variable(N,N,PSD=TRUE)
-  }
+  Ktmp = CVXR::Variable(N,N,PSD=TRUE)
   obj  = Maximize(matrix_trace(Ktmp%*%B))
   constr1 = list(CVXR::sum_entries(Ktmp)==0)
   constr2 = list()

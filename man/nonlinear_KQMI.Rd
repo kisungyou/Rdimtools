@@ -54,10 +54,11 @@ out2 = do.kqmi(X, label, t=1)
 out3 = do.kqmi(X, label, t=100)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="KQMI::t=0.01")
-plot(out2$Y[,1], out2$Y[,2], main="KQMI::t=1")
-plot(out3$Y[,1], out3$Y[,2], main="KQMI::t=100")
+opar = par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="KQMI::t=0.01")
+plot(out2$Y, col=label, main="KQMI::t=1")
+plot(out3$Y, col=label, main="KQMI::t=100")
+par(opar)
 }
 
 }

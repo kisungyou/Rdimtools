@@ -58,10 +58,10 @@ out2 = do.cge(X, label_missing, type=c("proportion",0.1))
 out3 = do.cge(X, label_missing, type=c("proportion",0.25))
 
 ## visualize
-opar = par(mfrow=c(1,3), pty="s")
-plot(out1$Y[,1], out1$Y[,2], main="1\% connected", pch=19, col=lcols)
-plot(out2$Y[,1], out2$Y[,2], main="10\% connected", pch=19, col=lcols)
-plot(out3$Y[,1], out3$Y[,2], main="25\% connected", pch=19, col=lcols)
+opar = par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="1\% connected",  pch=19, col=lcols)
+plot(out2$Y, main="10\% connected", pch=19, col=lcols)
+plot(out3$Y, main="25\% connected", pch=19, col=lcols)
 par(opar)
 
 }

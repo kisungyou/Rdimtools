@@ -29,13 +29,15 @@ For \emph{linear} methods, we have
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab  ALGORITHM \cr
 \code{\link{do.adr}} \tab U \tab Adaptive Dimension Reduction \cr
-\code{\link{do.ammc}} \tab S  \tab Adaptive Maximum Margin Criterion \cr
-\code{\link{do.anmm}}\tab S \tab Average Neighborhood Margin Maximization \cr
+\code{\link{do.ammc}} \tab S \tab Adaptive Maximum Margin Criterion \cr
+\code{\link{do.anmm}} \tab S \tab Average Neighborhood Margin Maximization \cr
 \code{\link{do.asi}} \tab U \tab Adaptive Subspace Iteration \cr
 \code{\link{do.bpca}} \tab U \tab Bayesian Principal Component Analysis \cr
 \code{\link{do.cca}} \tab S \tab Canonical Correlation Analysis \cr
 \code{\link{do.cnpe}} \tab U \tab Complete Neighborhood Preserving Embedding \cr
 \code{\link{do.crp}} \tab U \tab Collaborative Representation-based Projection \cr
+\code{\link{do.cscore}} \tab S \tab Constraint Score \cr
+\code{\link{do.cscoreg}} \tab S \tab Constraint Score using Spectral Graph \cr
 \code{\link{do.dagdne}} \tab S \tab Double-Adjacency Graphs-based Discriminant Neighborhood Embedding \cr
 \code{\link{do.dne}} \tab S \tab Discriminant Neighborhood Embedding \cr
 \code{\link{do.disr}} \tab U \tab Diversity-Induced Self-Representation \cr
@@ -73,7 +75,7 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 \code{\link{do.lsdf}} \tab SS \tab Locality Sensitive Discriminant Feature \cr
 \code{\link{do.lsir}} \tab S \tab Localized Sliced Inverse Regression \cr
 \code{\link{do.lspe}} \tab U \tab Locality and Similarity Preserving Embedding \cr
-\code{\link{do.lspp}}\tab S \tab Local Similarity Preserving Projection \cr
+\code{\link{do.lspp}} \tab S \tab Local Similarity Preserving Projection \cr
 \code{\link{do.mcfs}} \tab U \tab Multi-Cluster Feature Selection \cr
 \code{\link{do.mds}} \tab U \tab (Metric) Multidimensional Scaling \cr
 \code{\link{do.mfa}} \tab S \tab Marginal Fisher Analysis \cr
@@ -110,8 +112,10 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 \code{\link{do.sir}} \tab S \tab Sliced Inverse Regression \cr
 \code{\link{do.slpe}} \tab S \tab Supervised Locality Pursuit Embedding \cr
 \code{\link{do.slpp}} \tab S \tab Supervised Locality Preserving Projection \cr
-\code{\link{do.spc}}  \tab S \tab Supervised Principal Component Analysis \cr
+\code{\link{do.spc}} \tab S \tab Supervised Principal Component Analysis \cr
 \code{\link{do.spca}} \tab U \tab Sparse Principal Component Analysis \cr
+\code{\link{do.specs}} \tab S \tab Supervised Spectral Feature Selection \cr
+\code{\link{do.specu}} \tab U \tab Unsupervised Spectral Feature Selection \cr
 \code{\link{do.spp}} \tab U \tab Sparsity Preserving Projection \cr
 \code{\link{do.spufs}} \tab U \tab Structure Preserving Unsupervised Feature Selection \cr
 \code{\link{do.ssldp}} \tab SS \tab Semi-Supervised Locally Discriminant Projection \cr
@@ -123,6 +127,7 @@ FUNCTION \tab TYPE \tab  ALGORITHM \cr
 Also, we have \emph{nonlinear} methods implemented
 \tabular{lcl}{
 FUNCTION \tab TYPE \tab ALGORITHM \cr
+\code{\link{do.bmds}} \tab U \tab Bayesian Multidimensional Scaling \cr
 \code{\link{do.cge}} \tab SS \tab Constrained Graph Embedding \cr
 \code{\link{do.cisomap}} \tab U \tab Conformal Isometric Feature Mapping \cr
 \code{\link{do.crca}} \tab U \tab Curvilinear Component Analysis \cr
@@ -154,7 +159,7 @@ FUNCTION \tab TYPE \tab ALGORITHM \cr
 \code{\link{do.nnp}} \tab U \tab Nearest Neighbor Projection \cr
 \code{\link{do.plp}} \tab U \tab Piecewise Laplacian Projection \cr
 \code{\link{do.ree}} \tab U \tab Robust Euclidean Embedding \cr
-\code{\link{do.rpca}}\tab U \tab Robust Principal Component Analysis \cr
+\code{\link{do.rpca}} \tab U \tab Robust Principal Component Analysis \cr
 \code{\link{do.sammon}} \tab U \tab Sammon Mapping \cr
 \code{\link{do.sne}} \tab U \tab Stochastic Neighbor Embedding \cr
 \code{\link{do.spe}} \tab U \tab Stochastic Proximity Embedding \cr

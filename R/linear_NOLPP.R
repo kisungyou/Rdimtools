@@ -22,17 +22,17 @@
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' }
 #'
-#'
 #' @examples
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
+#' X     = as.matrix(iris[,1:4])+50
 #' label = as.integer(iris$Species)
 #'
 #' ## use different kernel bandwidths with 20% connectivity
-#' out1 = do.nolpp(X, type=c("proportion",0.2), t=0.01)
-#' out2 = do.nolpp(X, type=c("proportion",0.2), t=0.1)
-#' out3 = do.nolpp(X, type=c("proportion",0.2), t=1)
+#' out1 = do.nolpp(X, type=c("proportion",0.5), t=0.01)
+#' out2 = do.nolpp(X, type=c("proportion",0.5), t=0.1)
+#' out3 = do.nolpp(X, type=c("proportion",0.5), t=1)
 #'
 #' ## visualize
 #' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
@@ -40,6 +40,7 @@
 #' plot(out2$Y, col=label, main="NOLPP::t=0.1")
 #' plot(out3$Y, col=label, main="NOLPP::t=1")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zafeiriou_nonnegative_2010}{Rdimtools}
@@ -108,14 +109,13 @@ do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
   Uinit = matrix(runif(p*ndim),nrow=p)
 
   #   4. solve the minimization problem
-  projection = aux.adjprojection(method_nnprojmin(C, Uinit, reltol, maxiter))
-
-  #   5. additional step : NA
-  projection[(is.na(projection))] = 1
+  projection = method_nnprojmin(C, Uinit, reltol, maxiter)
+  projection[(is.na(projection)||(is.infinite(projection)))] = 1
   for (i in 1:ndim){
     tgt = as.vector(projection[,i])
     projection[,i] = tgt/sqrt(sum(tgt^2))
   }
+  projection = aux.adjprojection(projection)
 
 
   #------------------------------------------------------------------------

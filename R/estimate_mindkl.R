@@ -1,5 +1,14 @@
 #' MiNDkl
 #'
+#' It is a minimum neighbor distance estimator of the intrinsic dimension based on Kullback Leibler divergence estimator.
+#'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
+#' @param k the neighborhood size for defining locality.
+#'
+#' @return a named list containing containing \describe{
+#' \item{estdim}{the global estimated dimension.}
+#' }
+#'
 #' @examples
 #' \dontrun{
 #' ## create 3 datasets of intrinsic dimension 2.
@@ -20,6 +29,8 @@
 #'
 #' @references
 #' \insertRef{lombardi_minimum_2011}{Rdimtools}
+#'
+#' @seealso \code{\link{est.mindml}}
 #'
 #' @author Kisung You
 #' @export

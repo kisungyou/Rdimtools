@@ -40,7 +40,9 @@ pmessage = paste("* estimated dimension is ",output$estdim, sep="")
 print(pmessage)
 
 ## use screeplot
+opar <- par(no.readonly=TRUE)
 plot(output$values, main="scree plot")
+par(opar)
 }
 
 }

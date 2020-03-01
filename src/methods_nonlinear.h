@@ -3,10 +3,12 @@
 
 #define ARMA_NO_DEBUG
 
+#include <RcppDist.h>
 #include <RcppArmadillo.h>
 
 using namespace Rcpp;
 using namespace arma;
+using namespace std;
 
 // 1. SNE
 arma::mat method_sne(arma::mat& P, const int ndim, const double eta,
@@ -42,4 +44,15 @@ arma::mat method_ispe(arma::mat& R, arma::mat& iX, const int C, const int S,
 // 11. CRCA : Curvilinear Component Analysis
 Rcpp::List method_crca(arma::mat& Xij, arma::mat& Yinit, double lambda, double alpha, const int maxiter, const double tolerance, arma::vec& vecselector);
 
+// 12. BMDS
+double bmds_compute_SSR(arma::mat &D, arma::mat &Delta);
+double bmds_compute_SSR_xmat(arma::mat &D, arma::mat &Xnew);
+arma::mat bmds_compute_pdmat(arma::mat &X);
+arma::mat bmds_crotX(arma::mat X);
+arma::rowvec bmds_update_xvec(arma::mat D, arma::mat X, int id, double sigma2, double constant, arma::mat Lbdmat);
+double my_invgamma(double alpha, double beta);
+double my_dinvgamma(double x, double alpha, double beta);
+Rcpp::List main_bmds(arma::mat D, arma::mat X0, double sigg0,
+                     double a, double alpha, int maxiter, double constant, bool verbose,
+                     arma::vec betas);
 #endif

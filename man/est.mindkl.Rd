@@ -6,8 +6,18 @@
 \usage{
 est.mindkl(X, k = 5)
 }
+\arguments{
+\item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
+
+\item{k}{the neighborhood size for defining locality.}
+}
+\value{
+a named list containing containing \describe{
+\item{estdim}{the global estimated dimension.}
+}
+}
 \description{
-MiNDkl
+It is a minimum neighbor distance estimator of the intrinsic dimension based on Kullback Leibler divergence estimator.
 }
 \examples{
 \dontrun{
@@ -30,6 +40,9 @@ sprintf("* est.mindkl : estimated dimension for 'saddle' data is \%.2f.",out3$es
 }
 \references{
 \insertRef{lombardi_minimum_2011}{Rdimtools}
+}
+\seealso{
+\code{\link{est.mindml}}
 }
 \author{
 Kisung You

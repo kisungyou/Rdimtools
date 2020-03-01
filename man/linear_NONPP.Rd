@@ -44,9 +44,10 @@ Nonnegative Orthogonal Neighborhood Preserving Projections (NONPP) is a variant 
 projection vectors - or, basis for learned subspace - contain no negative values.
 }
 \examples{
+\dontrun{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
+X     = as.matrix(iris[,1:4])+50
 label = as.integer(iris$Species)
 
 ## use different levels of connectivity
@@ -60,6 +61,7 @@ plot(out1$Y, col=label, main="NONPP::10\% connected")
 plot(out2$Y, col=label, main="NONPP::20\% connected")
 plot(out3$Y, col=label, main="NONPP::50\% connected")
 par(opar)
+}
 
 }
 \references{

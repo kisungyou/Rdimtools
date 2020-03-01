@@ -41,10 +41,9 @@
 #' mm = "black=train / red=test data" # figure title
 #' YY = res_test$Ynew  # out-of-sample projection for test data
 #'
-#' plot(res_train$Y[,1], res_train$Y[,2], type="p", xlim=xx, ylim=yy,
-#' main=mm, xlab="axis 1", ylab="axis 2")
-#' par(new=TRUE)
-#' plot(YY[,1], YY[,2], type="p", lwd=3, col="red", xlim=xx, ylim=yy, xlab="", ylab="")
+#' plot(res_train$Y, type="p", xlim=xx, ylim=yy,
+#'      main=mm, xlab="axis 1", ylab="axis 2")
+#' points(YY[,1], YY[,2], lwd=3, col="red")
 #' }
 #'
 #' @author Kisung You

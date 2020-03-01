@@ -45,9 +45,10 @@ based on their relative importance. The cost function involves two penalties,
 sparsity and preservation of local structure.
 }
 \examples{
-\dontrun{
-#### generate R12in72 dataset
-X = aux.gensamples(dname="R12in72")
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 #### try different bandwidth values
 out1 = do.spufs(X, bandwidth=0.1)
@@ -55,11 +56,11 @@ out2 = do.spufs(X, bandwidth=1)
 out3 = do.spufs(X, bandwidth=10)
 
 #### visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="SPUFS::bandwidth=0.1")
-plot(out2$Y[,1], out2$Y[,2], main="SPUFS::bandwidth=1")
-plot(out3$Y[,1], out3$Y[,2], main="SPUFS::bandwidth=10")
-}
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="SPUFS::bandwidth=0.1")
+plot(out2$Y, col=label, main="SPUFS::bandwidth=1")
+plot(out3$Y, col=label, main="SPUFS::bandwidth=10")
+par(opar)
 
 }
 \references{

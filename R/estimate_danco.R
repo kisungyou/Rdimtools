@@ -1,6 +1,14 @@
 #' Intrinsic Dimensionality Estimation with DANCo
 #'
+#' DANCo exploits the balanced information of both the normalized nearest neighbor distances
+#' as well as the angles of data pairs in the neighboring points.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
+#' @param k the neighborhood size used for estimating local intrinsic dimension.
+#'
+#' @return a named list containing containing \describe{
+#' \item{estdim}{estimated dimension via the method.}
+#' }
 #'
 #' @examples
 #' \dontrun{

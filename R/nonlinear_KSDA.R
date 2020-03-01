@@ -32,7 +32,7 @@
 #' dt3  = aux.gensamples(n=33)+100
 #'
 #' ## merge the data and create a label correspondingly
-#' Y      = rbind(dt1,dt2,dt3)
+#' X      = rbind(dt1,dt2,dt3)
 #' label  = c(rep(1,33), rep(2,33), rep(3,33))
 #'
 #' ## copy a label and let 10% of elements be missing
@@ -42,13 +42,14 @@
 #' label_missing[sample(1:nlabel, nmissing)]=NA
 #'
 #' ## compare true case with missing-label case
-#' out1 = do.ksda(Y, label, beta=0, t=0.1)
-#' out2 = do.ksda(Y, label_missing, beta=0, t=0.1)
+#' out1 = do.ksda(X, label, beta=0, t=0.1)
+#' out2 = do.ksda(X, label_missing, beta=0, t=0.1)
 #'
 #' ## visualize
-#' par(mfrow=c(1,2))
-#' plot(out1$Y[,1], out1$Y[,2], main="true projection")
-#' plot(out2$Y[,1], out2$Y[,2], main="20% missing labels")
+#' opar = par(mfrow=c(1,2), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="true projection")
+#' plot(out2$Y, col=label, main="20% missing labels")
+#' par(opar)
 #'
 #' @references
 #' \insertRef{cai_semisupervised_2007}{Rdimtools}
@@ -138,9 +139,4 @@ do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=
   result$Y = Y[labelrank,]
   result$trfinfo = trfinfo
   return(result)
-
-
-
-
-
 }

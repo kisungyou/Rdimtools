@@ -58,10 +58,11 @@ output2 <- do.cisomap(X,ndim=2)
 output3 <- do.cisomap(X,ndim=2,weight=FALSE)
 
 ## Visualize three different projections
-par(mfrow=c(1,3))
-plot(output1$Y[,1],output1$Y[,2],main="Isomap")
-plot(output2$Y[,1],output2$Y[,2],main="C-Isomap")
-plot(output3$Y[,1],output3$Y[,2],main="Binarized C-Isomap")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(output1$Y, main="Isomap")
+plot(output2$Y, main="C-Isomap")
+plot(output3$Y, main="Binarized C-Isomap")
+par(opar)
 }
 
 }

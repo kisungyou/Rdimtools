@@ -43,10 +43,11 @@ out2 <- do.mds(X, ndim=2)      # Classical MDS
 out3 <- do.fastmap(X, ndim=2)  # FastMap
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="PCA")
-plot(out2$Y[,1], out2$Y[,2], main="MDS")
-plot(out3$Y[,1], out3$Y[,2], main="FastMap")
+opar = par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="PCA")
+plot(out2$Y, main="MDS")
+plot(out3$Y, main="FastMap")
+par(opar)
 }
 
 }

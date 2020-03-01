@@ -508,6 +508,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_scoresum
+arma::vec method_scoresum(arma::mat& X, arma::mat& S);
+RcppExport SEXP _Rdimtools_method_scoresum(SEXP XSEXP, SEXP SSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type S(SSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_scoresum(X, S));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_sne
 arma::mat method_sne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
 RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
@@ -686,6 +698,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// bmds_compute_SSR
+double bmds_compute_SSR(arma::mat& D, arma::mat& Delta);
+RcppExport SEXP _Rdimtools_bmds_compute_SSR(SEXP DSEXP, SEXP DeltaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type D(DSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Delta(DeltaSEXP);
+    rcpp_result_gen = Rcpp::wrap(bmds_compute_SSR(D, Delta));
+    return rcpp_result_gen;
+END_RCPP
+}
+// main_bmds
+Rcpp::List main_bmds(arma::mat D, arma::mat X0, double sigg0, double a, double alpha, int maxiter, double constant, bool verbose, arma::vec betas);
+RcppExport SEXP _Rdimtools_main_bmds(SEXP DSEXP, SEXP X0SEXP, SEXP sigg0SEXP, SEXP aSEXP, SEXP alphaSEXP, SEXP maxiterSEXP, SEXP constantSEXP, SEXP verboseSEXP, SEXP betasSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type D(DSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X0(X0SEXP);
+    Rcpp::traits::input_parameter< double >::type sigg0(sigg0SEXP);
+    Rcpp::traits::input_parameter< double >::type a(aSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type constant(constantSEXP);
+    Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type betas(betasSEXP);
+    rcpp_result_gen = Rcpp::wrap(main_bmds(D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas));
+    return rcpp_result_gen;
+END_RCPP
+}
 // aux_mimick_geigen
 Rcpp::List aux_mimick_geigen(arma::mat& A, arma::mat& B);
 RcppExport SEXP _Rdimtools_aux_mimick_geigen(SEXP ASEXP, SEXP BSEXP) {
@@ -739,6 +782,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_disr", (DL_FUNC) &_Rdimtools_method_disr, 3},
     {"_Rdimtools_method_rsr", (DL_FUNC) &_Rdimtools_method_rsr, 3},
     {"_Rdimtools_method_nrsr", (DL_FUNC) &_Rdimtools_method_nrsr, 4},
+    {"_Rdimtools_method_scoresum", (DL_FUNC) &_Rdimtools_method_scoresum, 2},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},
@@ -751,6 +795,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_spe", (DL_FUNC) &_Rdimtools_method_spe, 7},
     {"_Rdimtools_method_ispe", (DL_FUNC) &_Rdimtools_method_ispe, 8},
     {"_Rdimtools_method_crca", (DL_FUNC) &_Rdimtools_method_crca, 7},
+    {"_Rdimtools_bmds_compute_SSR", (DL_FUNC) &_Rdimtools_bmds_compute_SSR, 2},
+    {"_Rdimtools_main_bmds", (DL_FUNC) &_Rdimtools_main_bmds, 9},
     {"_Rdimtools_aux_mimick_geigen", (DL_FUNC) &_Rdimtools_aux_mimick_geigen, 2},
     {NULL, NULL, 0}
 };

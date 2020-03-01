@@ -40,16 +40,22 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate default dataset
-#' X <- aux.gensamples()
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
-#' ## run 5 times under the same setting
-#' par(mfrow=c(1,5))
-#' for (i in 1:5){
-#'     out = do.plp(X,ndim=2,type=c("proportion",0.2))
-#'     pm  = paste("iteration ",i,sep="")
-#'     plot(out$Y[,1],out$Y[,2],main=pm)
-#' }
+#' ## try with 3 levels of connectivity
+#' out1 = do.plp(X, type=c("proportion", 0.1))
+#' out2 = do.plp(X, type=c("proportion", 0.2))
+#' out3 = do.plp(X, type=c("proportion", 0.5))
+#'
+#' ## visualize
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="PLP::10% connected")
+#' plot(out2$Y, col=label, main="PLP::20% connected")
+#' plot(out3$Y, col=label, main="PLP::50% connected")
+#' par(opar)
 #' }
 #'
 #' @references

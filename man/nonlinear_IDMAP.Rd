@@ -38,7 +38,8 @@ authors asserted to use either \code{NNP} or \code{FastMap} as an engine behind.
 \dontrun{
 ## load iris data
 data(iris)
-X <- as.matrix(iris[,1:4])
+X     <- as.matrix(iris[,1:4])
+label <- as.integer(iris$Species)
 
 ## let's compare with other methods
 out1 <- do.pca(X, ndim=2)
@@ -46,10 +47,11 @@ out2 <- do.sne(X, ndim=2)
 out3 <- do.idmap(X, ndim=2, engine="NNP")
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="PCA")
-plot(out2$Y[,1], out2$Y[,2], main="SNE")
-plot(out3$Y[,1], out3$Y[,2], main="IDMAP")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, col=label, main="PCA")
+plot(out2$Y, col=label, main="SNE")
+plot(out3$Y, col=label, main="IDMAP")
+par(opar)
 }
 
 }

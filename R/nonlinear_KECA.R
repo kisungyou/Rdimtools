@@ -36,10 +36,11 @@
 #' output3 <- do.keca(X,ndim=2,kernel=c("laplacian",1))
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="Gaussian kernel")
-#' plot(output2$Y[,1],output2$Y[,2],main="Gaussian, sigma=5")
-#' plot(output3$Y[,1],output3$Y[,2],main="Laplacian kernel")
+#' opar = par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, main="Gaussian kernel")
+#' plot(output2$Y, main="Gaussian, sigma=5")
+#' plot(output3$Y, main="Laplacian kernel")
+#' par(opar)
 #' }
 #'
 #' @seealso \code{\link{aux.kernelcov}}

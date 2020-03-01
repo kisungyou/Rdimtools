@@ -40,10 +40,11 @@
 #' output3 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=14)
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(output1$Y[,1],output1$Y[,2],main="5%")
-#' plot(output2$Y[,1],output2$Y[,2],main="10%")
-#' plot(output3$Y[,1],output3$Y[,2],main="50%")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(output1$Y, main="5%")
+#' plot(output2$Y, main="10%")
+#' plot(output3$Y, main="50%")
+#' par(opar)
 #' }
 #'
 #' @seealso \code{\link{do.isomap}}

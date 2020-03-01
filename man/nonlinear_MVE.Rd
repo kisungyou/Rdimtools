@@ -60,9 +60,10 @@ outMVU5  <- do.mvu(X, ndim=2, type=c("knn",5), projtype="kpca")
 outMVE5  <- do.mve(X, ndim=2, knn=5, maxiter=7)
 
 ## Visualize two comparisons
-par(mfrow=c(1,2))
-plot(outMVU5$Y[,1], outMVU5$Y[,2],  main="MVU (k=5)")
-plot(outMVE5$Y[,1], outMVE5$Y[,2],  main="MVE (k=5)")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(outMVU5$Y,  main="MVU (k=5)")
+plot(outMVE5$Y,  main="MVE (k=5)")
+par(opar)
 }
 
 }

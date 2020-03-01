@@ -40,10 +40,11 @@
 #' out3 <- do.klde(Y, label, numk=25)
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="k=5")
-#' plot(out2$Y[,1], out2$Y[,2], main="k=10")
-#' plot(out3$Y[,1], out3$Y[,2], main="k=25")
+#' opar = par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, main="k=5")
+#' plot(out2$Y, main="k=10")
+#' plot(out3$Y, main="k=25")
+#' par(opar)
 #' }
 #'
 #' @references

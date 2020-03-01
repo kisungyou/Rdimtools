@@ -29,8 +29,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate swiss roll data
-#' X = aux.gensamples(n=100)
+#' ## load iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.factor(iris$Species)
 #'
 #' ## compare different perplexity
 #' out1 <- do.tsne(X, ndim=2, perplexity=5)
@@ -38,10 +40,11 @@
 #' out3 <- do.tsne(X, ndim=2, perplexity=50)
 #'
 #' ## Visualize three different projections
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=5")
-#' plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=10")
-#' plot(out1$Y[,1], out1$Y[,2], main="tSNE::perplexity=50")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="tSNE::perplexity=5")
+#' plot(out1$Y, col=label, main="tSNE::perplexity=10")
+#' plot(out1$Y, col=label, main="tSNE::perplexity=50")
+#' par(opar)
 #' }
 #'
 #' @seealso \code{\link{do.sne}}

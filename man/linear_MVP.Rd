@@ -38,6 +38,7 @@ the local geometry of the manifold via the following proximity coding,
 where \eqn{C_i} is the label of an \eqn{i}-th data point.
 }
 \examples{
+\dontrun{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -54,6 +55,7 @@ plot(out1$Y, col=label, main="centering")
 plot(out2$Y, col=label, main="decorrelating")
 plot(out3$Y, col=label, main="whitening")
 par(opar)
+}
 
 }
 \references{

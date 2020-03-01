@@ -21,6 +21,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -37,6 +38,7 @@
 #' plot(out2$Y, col=label, main="decorrelating")
 #' plot(out3$Y, col=label, main="whitening")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_maximum_2007}{Rdimtools}

@@ -63,10 +63,11 @@ out2 = do.spc(X, y, threshold=1)
 out3 = do.spc(X, y, threshold=2)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1], out1$Y[,2], main="SPC::threshold=0.5")
-plot(out2$Y[,1], out2$Y[,2], main="SPC::threshold=1")
-plot(out3$Y[,1], out3$Y[,2], main="SPC::threshold=2")
+opar <- par(mfrow=c(1,3))
+plot(out1$Y, main="SPC::threshold=0.5")
+plot(out2$Y, main="SPC::threshold=1")
+plot(out3$Y, main="SPC::threshold=2")
+par(opar)
 }
 
 }

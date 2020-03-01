@@ -52,10 +52,11 @@ out2 <- do.dm(X,bandwidth=100)
 out3 <- do.dm(X,bandwidth=1000)
 
 ## visualize
-par(mfrow=c(1,3))
-plot(out1$Y[,1],out1$Y[,2],main="DM::bandwidth=10")
-plot(out2$Y[,1],out2$Y[,2],main="DM::bandwidth=100")
-plot(out3$Y[,1],out3$Y[,2],main="DM::bandwidth=1000")
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+plot(out1$Y, main="DM::bandwidth=10")
+plot(out2$Y, main="DM::bandwidth=100")
+plot(out3$Y, main="DM::bandwidth=1000")
+par(opar)
 }
 
 }

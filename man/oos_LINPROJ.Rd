@@ -53,9 +53,9 @@ xx = c(-2,2) # range of axis 1 for compact visualization
 yy = c(-2,2) # range of axis 2 for compact visualization
 mm = "black=train / red=test data" # figure title
 
-plot(Yold[,1], Yold[,2], type="p", xlim=xx, ylim=yy, main=mm, xlab="axis 1", ylab="axis 2")
-par(new=TRUE)
-plot(Ynew[,1], Ynew[,2], type="p", lwd=3, col="red", xlim=xx, ylim=yy, xlab="", ylab="")
+## visualize
+plot(Yold, type="p", xlim=xx, ylim=yy, main=mm, xlab="axis 1", ylab="axis 2")
+points(Ynew[,1], Ynew[,2], lwd=3, col="red")
 }
 
 }

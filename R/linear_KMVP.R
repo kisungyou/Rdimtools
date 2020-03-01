@@ -24,6 +24,7 @@
 #' }
 #'
 #' @examples
+#' \dontrun{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -40,6 +41,7 @@
 #' plot(out2$Y, main="bandwidth=1",   col=label)
 #' plot(out3$Y, main="bandwidth=10",  col=label)
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_maximum_2007}{Rdimtools}

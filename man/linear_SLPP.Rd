@@ -32,25 +32,20 @@ if two nodes belong to the same class, it assigns weight of 1, i.e., \eqn{S_{ij}
 \eqn{x_j} have same class labelings.
 }
 \examples{
-\dontrun{
-## generate data of 2 types with clear difference
-diff = 15
-dt1  = aux.gensamples(n=123)-diff;
-dt2  = aux.gensamples(n=123)+diff;
-
-## merge the data and create a label correspondingly
-Y      = rbind(dt1,dt2)
-label  = c(rep(1,123), rep(2,123))
+## use iris data
+data(iris)
+X     = as.matrix(iris[,1:4])
+label = as.integer(iris$Species)
 
 ## compare SLPP with LPP
-outLPP  <- do.lpp(Y)
-outSLPP <- do.slpp(Y, label)
+outLPP  <- do.lpp(X)
+outSLPP <- do.slpp(X, label)
 
 ## visualize
-par(mfrow=c(1,2))
-plot(outLPP$Y[,1], outLPP$Y[,2], main="LPP")
-plot(outSLPP$Y[,1], outSLPP$Y[,2], main="SLPP")
-}
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(outLPP$Y,  col=label, main="LPP")
+plot(outSLPP$Y, col=label, main="SLPP")
+par(opar)
 
 }
 \references{

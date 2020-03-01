@@ -64,9 +64,10 @@ out1 <- do.crda(X,weight=TRUE)
 out2 <- do.crda(X,weight=FALSE)
 
 ## visualize
-par(mfrow=c(1,2))
-plot(out1$Y[,1],out1$Y[,2],main="weighted graph")
-plot(out2$Y[,1],out2$Y[,2],main="binarized graph")
+opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+plot(out1$Y, main="weighted graph")
+plot(out2$Y, main="binarized graph")
+par(opar)
 }
 
 }

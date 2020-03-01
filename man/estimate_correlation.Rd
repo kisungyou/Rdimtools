@@ -4,12 +4,15 @@
 \alias{est.correlation}
 \title{Correlation Dimension}
 \usage{
-est.correlation(X, nlevel = 50, cut = c(0.1, 0.9))
+est.correlation(X, nlevel = 50, method = c("lm", "cut"), cut = c(0.1, 0.9))
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations.}
 
 \item{nlevel}{the number of \code{r} (radius) to be tested.}
+
+\item{method}{method to estimate the intrinsic dimension; \code{"lm"} for fitting a linear model for
+the entire grid of values, and \code{"cut"} to trim extreme points. \code{"cut"} method is more robust.}
 
 \item{cut}{a vector of ratios for computing estimated dimension in \eqn{(0,1)}.}
 }
@@ -55,10 +58,11 @@ out2 = est.correlation(X2)
 out3 = est.correlation(X3)
 
 ## visually verify : all should have approximate slope of 2.
-par(mfrow=c(1,3))
+opar <- par(mfrow=c(1,3), no.readonly=TRUE)
 plot(log(out1$r), log(out1$Cr), main="swiss roll")
 plot(log(out2$r), log(out2$Cr), main="ribbon")
 plot(log(out3$r), log(out3$Cr), main="twinpeaks")
+par(opar)
 }
 
 

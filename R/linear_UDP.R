@@ -26,8 +26,10 @@
 #'
 #' @examples
 #' \dontrun{
-#' ## generate sample data
-#' X = aux.gensamples(n=200)
+#' ## use iris data
+#' data(iris)
+#' X     = as.matrix(iris[,1:4])
+#' label = as.integer(iris$Species)
 #'
 #' ## use different connectivity level
 #' out1 <- do.udp(X, type=c("proportion",0.05))
@@ -35,10 +37,11 @@
 #' out3 <- do.udp(X, type=c("proportion",0.25))
 #'
 #' ## visualize
-#' par(mfrow=c(1,3))
-#' plot(out1$Y[,1],out1$Y[,2],main="connectivity 5%")
-#' plot(out2$Y[,1],out2$Y[,2],main="connectivity 10%")
-#' plot(out3$Y[,1],out3$Y[,2],main="connectivity 25%")
+#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' plot(out1$Y, col=label, main="connectivity 5%")
+#' plot(out2$Y, col=label, main="connectivity 10%")
+#' plot(out3$Y, col=label, main="connectivity 25%")
+#' par(opar)
 #' }
 #'
 #' @author Kisung You

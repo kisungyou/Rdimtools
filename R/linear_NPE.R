@@ -35,7 +35,7 @@
 #' @examples
 #' \dontrun{
 #' ## generate data
-#' X <- aux.gensamples(n=333)
+#' X <- aux.gensamples(n=333) + 50
 #'
 #' ## 1. connecting 5% of data for graph construction.
 #' output1 <- do.npe(X,ndim=2,type=c("proportion",0.05))

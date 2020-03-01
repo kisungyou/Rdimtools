@@ -3,3 +3,4 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
+^list_do\.ods$

@@ -58,4 +58,5 @@ arma::vec method_lspe(arma::mat X, const int d, double alpha, double beta, arma:
 arma::vec method_disr(arma::mat& D, double lbd1, double lbd2);
 arma::vec method_rsr(arma::mat X, double lbd, double verysmall);
 arma::vec method_nrsr(arma::mat X, double lbd, double verysmall, double p);
+arma::vec method_scoresum(arma::mat &X, arma::mat &S);
 #endif
