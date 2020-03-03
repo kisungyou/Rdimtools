@@ -13,7 +13,7 @@ License: GPL-3
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
-Imports: ADMM (>= 0.2.2), ClusterR, CVXR (>= 1.0), Matrix, Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RiemStiefel, RSpectra, geigen, graphics, maotai, stats, utils
+Imports: ADMM (>= 0.2.2), ClusterR, CVXR (>= 1.0), Matrix, Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RSpectra, geigen, graphics, maotai, stats, utils
 LinkingTo: Rcpp, RcppArmadillo, RcppDist
 RoxygenNote: 7.0.2
 RdMacros: Rdpack

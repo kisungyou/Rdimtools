@@ -217,7 +217,6 @@
 #' @import Rdpack
 #' @import CVXR
 #' @import RcppDE
-#' @importFrom RiemStiefel stopt.SA
 #' @importFrom maotai weiszfeld
 #' @importFrom ClusterR Optimal_Clusters_GMM GMM predict_GMM
 #' @importFrom geigen geigen
