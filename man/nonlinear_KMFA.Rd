@@ -44,7 +44,7 @@ For simplicity, we only enabled a heat kernel of a form
 where \eqn{t} is a bandwidth parameter. Note that the method is far sensitive to the choice of \eqn{t}.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 3 types with clear difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -59,7 +59,8 @@ out1 = do.kmfa(X, label, k1=5, k2=5, t=1)
 out2 = do.kmfa(X, label, k1=5, k2=5, t=2)
 
 ## visualize
-opar = par(mfrow=c(1,2), no.readonly=TRUE)
+opar = par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="bandwidth=1")
 plot(out2$Y, main="bandwidth=2")
 par(opar)

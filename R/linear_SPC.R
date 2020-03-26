@@ -22,7 +22,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -44,7 +44,8 @@
 #' out3 = do.spc(X, y, threshold=2)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3))
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="SPC::threshold=0.5")
 #' plot(out2$Y, main="SPC::threshold=1")
 #' plot(out3$Y, main="SPC::threshold=2")

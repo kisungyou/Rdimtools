@@ -21,7 +21,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -33,7 +33,8 @@
 #' out3 = do.mvp(X, label, preprocess="whiten")
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="centering")
 #' plot(out2$Y, col=label, main="decorrelating")
 #' plot(out3$Y, col=label, main="whitening")

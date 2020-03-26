@@ -28,7 +28,8 @@
 #' out2 = do.ulda(X, label)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(out1$Y, col=label, main="LDA")
 #' plot(out2$Y, col=label, main="Uncorrelated LDA")
 #' par(opar)

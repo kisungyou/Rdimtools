@@ -61,7 +61,8 @@ out1 = do.lfda(X, label)
 out2 = do.lfda(X, label, localscaling=FALSE)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, col=label, main="binary affinity matrix")
 plot(out2$Y, col=label, main="local scaling affinity")
 par(opar)

@@ -22,7 +22,7 @@ Based on an assumption of data points being locally uniformly distributed,
 local distance information in an iterative manner.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create an example data with intrinsic dimension 2
 X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 

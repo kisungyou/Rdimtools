@@ -48,7 +48,8 @@ out1 = do.lda(iris.dat, iris.lab)
 out2 = do.fscore(iris.dat, iris.lab)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, col=iris.lab, main="LDA")
 plot(out2$Y, col=iris.lab, main="Fisher Score")
 par(opar)

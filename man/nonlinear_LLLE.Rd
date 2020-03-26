@@ -43,7 +43,7 @@ artificial neighborhood in constructing the adjacency graph for reconstruction o
 the approximated manifold.
 }
 \examples{
-\dontrun{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -55,7 +55,8 @@ out2 = do.llle(X, bandwidth=0.5)
 out3 = do.llle(X, bandwidth=0.9)
 
 # visualize the results
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="bandwidth=0.1")
 plot(out2$Y, col=label, main="bandwidth=0.5")
 plot(out3$Y, col=label, main="bandwidth=0.9")

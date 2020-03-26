@@ -49,7 +49,7 @@ manifold embedded in high-dimensional data space using graph laplacians. This
 is a classic algorithm employing spectral graph theory.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss-roll dataset of size 100
 X <- aux.gensamples(n=100)
 
@@ -58,7 +58,8 @@ out1 <- do.lapeig(X,ndim=2,type=c("proportion",0.05),kernelscale=10) # weighted 
 out2 <- do.lapeig(X,ndim=2,type=c("proportion",0.05),weighted=FALSE) # combinatorial
 
 ## Visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="weighted")
 plot(out2$Y, main="combinatorial")
 par(opar)

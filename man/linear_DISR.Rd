@@ -53,7 +53,8 @@ out3 = do.disr(X, lbd1=5, lbd2=1)
 out4 = do.disr(X, lbd1=5, lbd2=5)
 
 ## visualize
-opar <- par(mfrow=c(2,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(2,2))
 plot(out1$Y, main="(lbd1,lbd2)=(1,1)", col=label, pch=19, cex=0.5)
 plot(out2$Y, main="(lbd1,lbd2)=(1,5)", col=label,pch=19, cex=0.5)
 plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label,pch=19, cex=0.5)

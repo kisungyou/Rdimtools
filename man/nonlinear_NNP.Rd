@@ -34,7 +34,7 @@ We extended the original method to be applied for arbitrarily low-dimensional sp
 we opted for a global optimization method of \emph{Differential Evolution} (\code{\link[RcppDE]{DEoptim}}) within in that it may add computational burden to certain degrees.
 }
 \examples{
-\dontrun{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -46,7 +46,8 @@ out2 <- do.pca(X, ndim=2)      # PCA
 out3 <- do.lamp(X, ndim=2)     # LAMP
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="NNP")
 plot(out2$Y, col=label, main="PCA")
 plot(out3$Y, col=label, main="LAMP")

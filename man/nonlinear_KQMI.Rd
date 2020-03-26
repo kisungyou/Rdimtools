@@ -40,7 +40,7 @@ for class labels not requiring class priors. The method re-states the estimation
 kernel objective in the graph embedding framework.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate 3 different groups of data X and label vector
 x1 = matrix(rnorm(4*10), nrow=10)-20
 x2 = matrix(rnorm(4*10), nrow=10)
@@ -54,7 +54,8 @@ out2 = do.kqmi(X, label, t=1)
 out3 = do.kqmi(X, label, t=100)
 
 ## visualize
-opar = par(mfrow=c(1,3), no.readonly=TRUE)
+opar = par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="KQMI::t=0.01")
 plot(out2$Y, col=label, main="KQMI::t=1")
 plot(out3$Y, col=label, main="KQMI::t=100")

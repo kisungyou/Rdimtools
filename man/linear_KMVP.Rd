@@ -43,7 +43,7 @@ where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\cod
 when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 }
 \examples{
-\dontrun{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -55,7 +55,8 @@ out2 = do.kmvp(X, label, bandwidth=1)
 out3 = do.kmvp(X, label, bandwidth=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="bandwidth=0.1", col=label)
 plot(out2$Y, main="bandwidth=1",   col=label)
 plot(out3$Y, main="bandwidth=10",  col=label)

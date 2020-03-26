@@ -39,7 +39,8 @@ res_opls = do.opls(mat1, mat2, ndim=2)
 res_pls  = do.pls(mat1, mat2, ndim=2)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRU)
+opar <- par(no.readonly=TRU)
+par(mfrow=c(1,2))
 plot(res_opls$Y, main="OPLS result")
 plot(res_pls$Y1, main="PLS result")
 par(opar)

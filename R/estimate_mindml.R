@@ -10,7 +10,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -31,6 +31,8 @@
 #' \insertRef{lombardi_minimum_2011}{Rdimtools}
 #'
 #' @seealso \code{\link{est.mindkl}}
+#'
+#' @rdname estimate_mindml
 #' @author Kisung You
 #' @export
 est.mindml <- function(X, k=5){

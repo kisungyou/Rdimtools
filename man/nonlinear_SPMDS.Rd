@@ -48,7 +48,7 @@ to use subsamples and spectral interpolation of non-reference data enables relat
 efficient computation for large-scale data.
 }
 \examples{
-\dontrun{
+\donttest{
 ## Replicate the numerical example from the paper
 #  Data Preparation
 dim.true  = 3     # true dimension
@@ -65,7 +65,8 @@ out2  = do.spmds(X, neigs=100, type=c("proportion",0.25))
 out3  = do.spmds(X, neigs=100, type=c("proportion",0.50))
 
 # visualize the results
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="10\% neighborhood")
 plot(out2$Y, main="25\% neighborhood")
 plot(out3$Y, main="50\% neighborhood")

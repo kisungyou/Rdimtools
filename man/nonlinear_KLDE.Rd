@@ -48,7 +48,7 @@ often suffers from lacking numerical rank. For such case, our algorithm returns 
 algorithm stops working any further due to its innate limitations of constructing weight matrix.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 2 types with clear difference
 diff = 5
 dt1  = aux.gensamples(n=123)-diff;
@@ -64,7 +64,8 @@ out2 <- do.klde(Y, label, numk=10)
 out3 <- do.klde(Y, label, numk=25)
 
 ## visualize
-opar = par(mfrow=c(1,3), no.readonly=TRUE)
+opar = par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="k=5")
 plot(out2$Y, main="k=10")
 plot(out3$Y, main="k=25")

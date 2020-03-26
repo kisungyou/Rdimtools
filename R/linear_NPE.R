@@ -33,7 +33,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data
 #' X <- aux.gensamples(n=333) + 50
 #'
@@ -47,7 +47,8 @@
 #' output3 <- do.npe(X,ndim=2,type=c("proportion",0.5),regparam=10.0)
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="NPE::5% connected")
 #' plot(output2$Y, main="NPE::25% connected")
 #' plot(output3$Y, main="NPE::50% connected")

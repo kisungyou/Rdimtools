@@ -49,7 +49,7 @@ a multi-cluster assumption, it aims at finding meaningful features using sparse 
 spectral basis using LASSO.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 3 types with clear difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -65,10 +65,11 @@ out2 = do.mcfs(X, lambda=0.1)
 out3 = do.mcfs(X, lambda=1)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
-plot(out1$Y[,1], out1$Y[,2], main="lambda=0.01")
-plot(out2$Y[,1], out2$Y[,2], main="lambda=0.1")
-plot(out3$Y[,1], out3$Y[,2], main="lambda=1")
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
+plot(out1$Y, col=label, main="lambda=0.01")
+plot(out2$Y, col=label, main="lambda=0.1")
+plot(out3$Y, col=label, main="lambda=1")
 par(opar)
 }
 

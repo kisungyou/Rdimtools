@@ -19,7 +19,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate ribbon-shaped data
 #' X = aux.gensamples(dname="ribbon",n=123)
 #'
@@ -33,7 +33,8 @@
 #' output3 <- do.kpca(X,ndim=2,kernel=c("laplacian",1))
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="Gaussian kernel")
 #' plot(output2$Y, main="Gaussian kernel with sigma=5")
 #' plot(output3$Y, main="Laplacian kernel")

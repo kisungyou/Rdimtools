@@ -10,7 +10,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create an example data with intrinsic dimension 2
 #' X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 #'
@@ -22,6 +22,7 @@
 #' @references
 #' \insertRef{fan_intrinsic_2009}{Rdimtools}
 #'
+#' @rdname estimate_incisingball
 #' @author Kisung You
 #' @export
 est.incisingball <- function(X){

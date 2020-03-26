@@ -37,7 +37,7 @@ similar to that of subgradient method in that at each iteration \eqn{t} the grad
 weighted by \eqn{\alpha /t}.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate sample data
 X <- aux.gensamples(n=200)
 
@@ -47,7 +47,8 @@ out2 <- do.crca(X,alpha=5)
 out3 <- do.crca(X,alpha=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="alpha=1.0")
 plot(out2$Y, main="alpha=5.0")
 plot(out3$Y, main="alpha=10.0")

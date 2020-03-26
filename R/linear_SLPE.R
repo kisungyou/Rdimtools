@@ -19,7 +19,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -30,7 +30,8 @@
 #' out2 <- do.slpe(X, label)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(out1$Y, col=label, main="SLPP")
 #' plot(out2$Y, col=label, main="SLPE")
 #' par(opar)

@@ -31,7 +31,8 @@
 #' out3 <- do.rlda(X, label, alpha=100)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="RLDA::alpha=0.1")
 #' plot(out2$Y, col=label, main="RLDA::alpha=1")
 #' plot(out3$Y, col=label, main="RLDA::alpha=10")
@@ -41,7 +42,7 @@
 #' \insertRef{friedman_regularized_1989}{Rdimtools}
 #'
 #' @author Kisung You
-#' @rdname linear_rlda
+#' @rdname linear_RLDA
 #' @export
 do.rlda <- function(X, label, ndim=2, alpha=1.0){
   ## Note : refer to do.klfda

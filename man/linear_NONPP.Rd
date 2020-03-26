@@ -56,7 +56,8 @@ out2 = do.nonpp(X, type=c("proportion",0.2))
 out3 = do.nonpp(X, type=c("proportion",0.5))
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="NONPP::10\% connected")
 plot(out2$Y, col=label, main="NONPP::20\% connected")
 plot(out3$Y, col=label, main="NONPP::50\% connected")

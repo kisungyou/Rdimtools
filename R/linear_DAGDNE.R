@@ -31,7 +31,8 @@
 #' out3 = do.dagdne(X, label, numk=25)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="nbd size=5", col=label, pch=19, cex=0.5)
 #' plot(out2$Y, main="nbd size=10",col=label, pch=19, cex=0.5)
 #' plot(out3$Y, main="nbd size=25",col=label, pch=19, cex=0.5)

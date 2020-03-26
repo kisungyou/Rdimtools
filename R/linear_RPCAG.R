@@ -31,7 +31,8 @@
 #' out3 = do.rpcag(X, ndim=2, k=10)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="RPCAG::k=2")
 #' plot(out2$Y, col=label, main="RPCAG::k=5")
 #' plot(out3$Y, col=label, main="RPCAG::k=10")

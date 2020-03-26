@@ -17,7 +17,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X <- as.matrix(iris[,1:4])
@@ -28,7 +28,8 @@
 #' out3 <- do.fastmap(X, ndim=2)  # FastMap
 #'
 #' ## visualize
-#' opar = par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar = par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="PCA")
 #' plot(out2$Y, main="MDS")
 #' plot(out3$Y, main="FastMap")

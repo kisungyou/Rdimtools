@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data
 #' X <- aux.gensamples(n=28)
 #'
@@ -36,7 +36,8 @@
 #' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
 #'
 #' ## Visualize two different projections
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(output1$Y, main="10%")
 #' plot(output2$Y, main="25%")
 #' par(opar)

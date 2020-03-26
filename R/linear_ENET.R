@@ -23,7 +23,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -52,7 +52,8 @@
 #'
 #' ## visualize
 #' ## ( , ) denotes two regularization parameters
-#' opar <- par(mfrow=c(3,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(3,3))
 #' plot(out1$Y, main="ENET::(0.1,0.1)")
 #' plot(out2$Y, main="ENET::(1,  0.1)")
 #' plot(out3$Y, main="ENET::(10, 0.1)")

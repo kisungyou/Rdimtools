@@ -22,7 +22,7 @@ neighborhood information using \code{\link[stats]{hclust}} by recursively mergin
 over the range of radii.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 'swiss' roll dataset
 X = aux.gensamples(dname="swiss")
 

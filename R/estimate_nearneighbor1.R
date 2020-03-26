@@ -12,7 +12,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create an example data with intrinsic dimension 2
 #' X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 #'
@@ -24,6 +24,7 @@
 #' @references
 #' \insertRef{pettis_intrinsic_1979}{Rdimtools}
 #'
+#' @rdname estimate_nearneighbor1
 #' @author Kisung You
 #' @export
 est.nearneighbor1 <- function(X, K=max(2,round(ncol(X)/5))){

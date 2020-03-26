@@ -21,7 +21,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -43,7 +43,8 @@
 #' out3 = do.sir(X, y, h=10)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="SIR::2 slices")
 #' plot(out2$Y, main="SIR::5 slices")
 #' plot(out3$Y, main="SIR::10 slices")

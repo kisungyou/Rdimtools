@@ -19,7 +19,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' n = 100
 #' theta = runif(n)
@@ -37,7 +37,8 @@
 #' out3 = do.lpe(X, numk=25)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LPE::numk=5")
 #' plot(out2$Y, main="LPE::numk=10")
 #' plot(out3$Y, main="LPE::numk=25")

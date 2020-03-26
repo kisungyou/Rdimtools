@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -37,7 +37,8 @@
 #' out3 <- do.bmds(X, ndim=2, mc.iter=1000)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="BMDS::iter=100",  col=label)
 #' plot(out2$Y, main="BMDS::iter=500",  col=label)
 #' plot(out3$Y, main="BMDS::iter=1000", col=label)

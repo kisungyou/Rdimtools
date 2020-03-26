@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate ribbon-shaped data
 #' ## in order to pass CRAN pretest, n is set to be small.
 #' X = aux.gensamples(dname="ribbon",n=50)
@@ -37,7 +37,8 @@
 #' outMVE5  <- do.mve(X, ndim=2, knn=5, maxiter=7)
 #'
 #' ## Visualize two comparisons
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(outMVU5$Y,  main="MVU (k=5)")
 #' plot(outMVE5$Y,  main="MVE (k=5)")
 #' par(opar)

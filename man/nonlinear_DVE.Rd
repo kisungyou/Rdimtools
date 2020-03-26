@@ -40,7 +40,7 @@ locality-preserving constraint. Instead of defining certain kernel, it applies l
 in that it automatically computes adaptive neighborhood-based kernel bandwidth.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss-roll dataset of size 200
 X <- aux.gensamples(dname="crown",n=200)
 
@@ -50,7 +50,8 @@ out2 <- do.dve(X, type=c("proportion",0.6))
 out3 <- do.dve(X, type=c("proportion",0.8))
 
 ## Visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="DVE::20\% connected")
 plot(out2$Y, main="DVE::50\% connected")
 plot(out3$Y, main="DVE::80\% connected")

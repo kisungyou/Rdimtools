@@ -57,7 +57,8 @@ out3 = do.cscore(iris.dat, iris.lab, score="difference", lambda=0.5)
 out4 = do.cscore(iris.dat, iris.lab, score="difference", lambda=1)
 
 ## visualize
-opar <- par(mfrow=c(2,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(2,2))
 plot(out1$Y, col=iris.lab, main="ratio")
 plot(out2$Y, col=iris.lab, main="diff/lambda=0")
 plot(out3$Y, col=iris.lab, main="diff/lambda=0.5")

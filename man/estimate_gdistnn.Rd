@@ -27,7 +27,7 @@ graph representing the underlying manifold is first estimated via \eqn{k}-nn. Th
 is employed as an approximation of geodesic distance to locally estimate intrinsic dimension.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
@@ -44,7 +44,8 @@ sprintf("* est.gdistnn : estimated dimension for 'ribbon' data is \%.2f.",out2$e
 sprintf("* est.gdistnn : estimated dimension for 'saddle' data is \%.2f.",out3$estdim)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 hist(out1$estloc, main="Result-'Swiss'", xlab="local dimension")
 abline(v=out1$estdim, lwd=3, col="red")
 hist(out2$estloc, main="Result-'Ribbon'", xlab="local dimension")

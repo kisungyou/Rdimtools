@@ -26,7 +26,7 @@ linear submanifold case, the naive selection scheme from this algorithm
 lacks flexibility in discovering intrinsic dimension.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate 3-dimensional normal data
 X = matrix(rnorm(100*3), nrow=100)
 
@@ -41,7 +41,7 @@ print(pmessage)
 
 ## use screeplot
 opar <- par(no.readonly=TRUE)
-plot(output$values, main="scree plot")
+plot(output$values, main="scree plot", type="b")
 par(opar)
 }
 

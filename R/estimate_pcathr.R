@@ -16,7 +16,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate 3-dimensional normal data
 #' X = matrix(rnorm(100*3), nrow=100)
 #'
@@ -31,7 +31,7 @@
 #'
 #' ## use screeplot
 #' opar <- par(no.readonly=TRUE)
-#' plot(output$values, main="scree plot")
+#' plot(output$values, main="scree plot", type="b")
 #' par(opar)
 #' }
 #'

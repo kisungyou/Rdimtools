@@ -20,7 +20,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data of 2 types with clear difference
 #' diff = 15
 #' dt1  = aux.gensamples(n=123)-diff;
@@ -36,7 +36,8 @@
 #' outESLPP <- do.eslpp(Y, label)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(outLPP$Y,   main="LPP")
 #' plot(outSLPP$Y,  main="SLPP")
 #' plot(outESLPP$Y, main="ESLPP")

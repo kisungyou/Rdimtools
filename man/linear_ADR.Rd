@@ -49,7 +49,8 @@ out2 = do.adr(X, abstol=1e-3)
 out3 = do.adr(X, abstol=1e-4)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="tol=1e-2", col=label, pch=19, cex=0.5)
 plot(out2$Y, main="tol=1e-3", col=label, pch=19, cex=0.5)
 plot(out3$Y, main="tol=1e-4", col=label, pch=19, cex=0.5)

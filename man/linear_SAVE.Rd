@@ -39,7 +39,7 @@ It is based on sufficiency principle with respect to central subspace concept un
 linerity and constant covariance conditions. For more details, see the reference paper.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
 n = 123
@@ -61,10 +61,11 @@ out2 = do.save(X, y, h=5)
 out3 = do.save(X, y, h=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
-plot(out1$Y[,1], out1$Y[,2], main="SAVE::2 slices")
-plot(out2$Y[,1], out2$Y[,2], main="SAVE::5 slices")
-plot(out3$Y[,1], out3$Y[,2], main="SAVE::10 slices")
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
+plot(out1$Y, main="SAVE::2 slices")
+plot(out2$Y, main="SAVE::5 slices")
+plot(out3$Y, main="SAVE::10 slices")
 par(opar)
 }
 

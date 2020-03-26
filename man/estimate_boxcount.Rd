@@ -42,7 +42,7 @@ in a log-equidistant manner.
 }
 
 \examples{
-\dontrun{
+\donttest{
 ## generate three different dataset
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
@@ -54,7 +54,8 @@ out2 = est.boxcount(X2)
 out3 = est.boxcount(X3)
 
 ## visually verify : all should have approximate slope of 2.
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(log(1/out1$r), log(out1$Nr), main="swiss roll")
 plot(log(1/out2$r), log(out2$Nr), main="ribbon")
 plot(log(1/out3$r), log(out3$Nr), main="twinpeaks")

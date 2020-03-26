@@ -27,7 +27,7 @@
 #' }
 #'
 #'@examples
-#'\dontrun{
+#'\donttest{
 #' ## generate data of 100 observations
 #' X <- aux.gensamples(n=100)
 #'
@@ -41,7 +41,8 @@
 #' output3 <- do.ica(X,ndim=2,type="poly")
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="ICA::logcosh")
 #' plot(output2$Y, main="ICA::exp")
 #' plot(output3$Y, main="ICA::poly")

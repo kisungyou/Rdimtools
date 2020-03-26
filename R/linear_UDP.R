@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -37,7 +37,8 @@
 #' out3 <- do.udp(X, type=c("proportion",0.25))
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="connectivity 5%")
 #' plot(out2$Y, col=label, main="connectivity 10%")
 #' plot(out3$Y, col=label, main="connectivity 25%")

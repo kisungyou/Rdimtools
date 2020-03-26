@@ -25,7 +25,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate sample data
 #' X <- aux.gensamples(n=200)
 #'
@@ -35,7 +35,8 @@
 #' out3 <- do.crca(X,alpha=10)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="alpha=1.0")
 #' plot(out2$Y, main="alpha=5.0")
 #' plot(out3$Y, main="alpha=10.0")

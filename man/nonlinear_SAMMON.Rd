@@ -37,7 +37,7 @@ dimension reduction techniques that aims to find low-dimensional embedding
 that preserves pairwise distance structure in high-dimensional data space.
 }
 \examples{
-\dontrun{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -48,7 +48,8 @@ out1 = do.sammon(X,ndim=2)                   # random projection
 out2 = do.sammon(X,ndim=2,initialize="pca")  # pca as initialization
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, col=label, main="out1:rndproj")
 plot(out2$Y, col=label, main="out2:pca")
 par(opar)

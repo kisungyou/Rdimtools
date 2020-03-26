@@ -27,7 +27,7 @@ for mapping or projection. When we have new data, therefore, we can simply use t
 Inputs \code{projection} and \code{trfinfo} should be brought from original model you trained.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate sample data and separate them
 X = aux.gensamples(n=500)
 set.seed(46556)
@@ -52,9 +52,11 @@ yy = c(-2,2) # range of axis 2 for compact visualization
 mm = "black=train / red=test data" # figure title
 YY = res_test$Ynew  # out-of-sample projection for test data
 
+opar <- par(no.readonly=TRUE)
 plot(res_train$Y, type="p", xlim=xx, ylim=yy,
      main=mm, xlab="axis 1", ylab="axis 2")
 points(YY[,1], YY[,2], lwd=3, col="red")
+par(opar)
 }
 
 }

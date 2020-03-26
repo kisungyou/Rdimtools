@@ -40,7 +40,7 @@ and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible.
 }
 \examples{
-\dontrun{
+\donttest{
 # generate data
 X <- aux.gensamples(dname="crown")
 
@@ -54,7 +54,8 @@ output2 <- do.lmds(X,ndim=2,npoints=round(nrow(X)/10),ltype="MaxMin")
 output3 <- do.mds(X,ndim=2)
 
 ## Visualization
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(output1$Y, main="10\% random points")
 plot(output2$Y, main="10\% MaxMin points")
 plot(output3$Y, main="original MDS")

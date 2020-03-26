@@ -21,7 +21,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X <- as.matrix(iris[,1:4])
@@ -31,7 +31,8 @@
 #' out2 <- do.lamp(X, ndim=2)     # LAMP
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(out1$Y, main="PCA")
 #' plot(out2$Y, main="LAMP")
 #' par(opar)

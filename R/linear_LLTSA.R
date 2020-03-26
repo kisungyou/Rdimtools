@@ -24,7 +24,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data
 #' X <- aux.gensamples()
 #'
@@ -34,7 +34,8 @@
 #' out3 <- do.lltsa(X, type=c("proportion",0.10))
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LLTSA::1% connected")
 #' plot(out2$Y, main="LLTSA::5% connected")
 #' plot(out3$Y, main="LLTSA::10% connected")

@@ -20,7 +20,7 @@ a named list containing containing \describe{
 It is a minimum neighbor distance estimator of the intrinsic dimension based on Maximum Likelihood principle.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")

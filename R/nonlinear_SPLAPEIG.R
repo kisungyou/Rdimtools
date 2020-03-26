@@ -22,7 +22,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -34,7 +34,8 @@
 #' out3 = do.splapeig(X, label, beta=100, gamma=0.9)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="gamma=0.1")
 #' plot(out2$Y, col=label, main="gamma=0.5")
 #' plot(out3$Y, col=label, main="gamma=0.9")

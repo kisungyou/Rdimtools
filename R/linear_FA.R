@@ -23,7 +23,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data
 #' X = aux.gensamples(n=496)
 #'
@@ -37,7 +37,8 @@
 #' output3 <- do.fa(X,ndim=2,preprocess="whiten")
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="FA::centered")
 #' plot(output2$Y, main="FA::decorrelated")
 #' plot(output3$Y, main="FA::whitened")

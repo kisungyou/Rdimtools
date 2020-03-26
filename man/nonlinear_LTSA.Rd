@@ -44,7 +44,7 @@ a multiple of tangent spaces are gathered to to find an embedding that aligns th
 in target dimensional space.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data
 X <- aux.gensamples(dname="cswiss",n=100)
 
@@ -58,7 +58,8 @@ output2 <- do.ltsa(X,ndim=2,type=c("proportion",0.25))
 output3 <- do.ltsa(X,ndim=2,type=c("proportion",0.50))
 
 ## Visualize three different projections
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(output1$Y, main="10\%")
 plot(output2$Y, main="25\%")
 plot(output3$Y, main="50\%")

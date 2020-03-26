@@ -46,7 +46,7 @@ meaningful features by solving
 where \eqn{y} is \code{response} in our method.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
 n = 123
@@ -68,7 +68,8 @@ out2 = do.lasso(X, y, lambda=1)
 out3 = do.lasso(X, y, lambda=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="LASSO::lambda=0.1")
 plot(out2$Y, main="LASSO::lambda=1")
 plot(out3$Y, main="LASSO::lambda=10")

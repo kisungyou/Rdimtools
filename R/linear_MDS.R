@@ -19,7 +19,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X   = as.matrix(iris[,1:4])
@@ -33,7 +33,8 @@
 #' output3 <- do.mds(X,ndim=2,preprocess="whiten")
 #'
 #' ## 3. visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, col=lab, main="MDS::center")
 #' plot(output2$Y, col=lab, main="MDS::decorrelate")
 #' plot(output3$Y, col=lab, main="MDS::whiten")

@@ -23,7 +23,7 @@ it involves random permutation of the dataset at each iteration, every run might
 different results.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 'swiss' roll dataset
 X = aux.gensamples(dname="swiss")
 

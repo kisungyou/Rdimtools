@@ -30,7 +30,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -44,7 +44,9 @@
 #' output = do.lda(Y, label, ndim=2)
 #'
 #' ## visualize
+#' opar <- par(no.readonly=TRUE)
 #' plot(output$Y, main="3 groups on 2d plane")
+#' par(opar)
 #' }
 #'
 #' @references

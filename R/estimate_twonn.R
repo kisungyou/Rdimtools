@@ -12,7 +12,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -31,6 +31,8 @@
 #'
 #' @references
 #' \insertRef{facco_estimating_2017}{Rdimtools}
+#'
+#' @rdname estimate_twonn
 #' @author Kisung You
 #' @export
 est.twonn <- function(X){

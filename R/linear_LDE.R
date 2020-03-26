@@ -24,7 +24,7 @@
 #' \insertRef{hwann-tzongchen_local_2005}{Rdimtools}
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data of 2 types with clear difference
 #' diff = 15
 #' dt1  = aux.gensamples(n=123)-diff;
@@ -40,7 +40,8 @@
 #' out3 <- do.lde(X, label, numk=25)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="LDE::k=5")
 #' plot(out2$Y, col=label, main="LDE::k=10")
 #' plot(out3$Y, col=label, main="LDE::k=25")

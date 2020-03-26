@@ -29,7 +29,8 @@
 #' out2 = do.lqmi(X, label)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(out1$Y, col=label, main="LDA projection")
 #' plot(out2$Y, col=label, main="LQMI projection")
 #' par(opar)

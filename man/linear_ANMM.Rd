@@ -57,7 +57,8 @@ out2 = do.anmm(X, label, No=2, Ne=10)
 out3 = do.anmm(X, label, No=10,Ne=2)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="(No,Ne)=(6,6)",  pch=19, cex=0.5, col=label)
 plot(out2$Y, main="(No,Ne)=(2,10)", pch=19, cex=0.5, col=label)
 plot(out3$Y, main="(No,Ne)=(10,2)", pch=19, cex=0.5, col=label)

@@ -31,7 +31,8 @@
 #' output = do.pls(mat1, mat2, ndim=2)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(output$Y1, main="proj(mat1)")
 #' plot(output$Y2, main="proj(mat2)")
 #' par(opar)

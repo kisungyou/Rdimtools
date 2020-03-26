@@ -34,7 +34,8 @@
 #' out3 = do.ammc(X, label, lambda=10)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="AMMC::lambda=0.1", pch=19, cex=0.5, col=label)
 #' plot(out2$Y, main="AMMC::lambda=1",   pch=19, cex=0.5, col=label)
 #' plot(out3$Y, main="AMMC::lambda=10",  pch=19, cex=0.5, col=label)

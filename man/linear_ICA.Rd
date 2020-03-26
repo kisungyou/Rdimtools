@@ -52,7 +52,7 @@ the given data \eqn{X}. In order to preserve consistency throughout our package,
 the notation; \eqn{Y} a projected matrix for \eqn{S}, and \code{projection} for unmixing matrix \eqn{W}.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 100 observations
 X <- aux.gensamples(n=100)
 
@@ -66,7 +66,8 @@ output2 <- do.ica(X,ndim=2,type="exp")
 output3 <- do.ica(X,ndim=2,type="poly")
 
 ## Visualize three different projections
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(output1$Y, main="ICA::logcosh")
 plot(output2$Y, main="ICA::exp")
 plot(output3$Y, main="ICA::poly")

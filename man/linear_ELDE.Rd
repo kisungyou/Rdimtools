@@ -46,7 +46,7 @@ framework to transform original data into a new space via distance diffusion map
 similar to kernel-based nonlinear mapping.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 3 types with difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -62,7 +62,8 @@ out2 = do.elde(X, label, t=10)
 out3 = do.elde(X, label, t=100)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="ELDE::bandwidth=1")
 plot(out2$Y, main="ELDE::bandwidth=10")
 plot(out3$Y, main="ELDE::bandwidth=100")

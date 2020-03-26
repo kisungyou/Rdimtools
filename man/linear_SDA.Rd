@@ -56,7 +56,8 @@ out1 = do.sda(X, label)
 out2 = do.sda(X, label_missing)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, col=label, main="true projection")
 plot(out2$Y, col=label, main="20\% missing labels")
 par(opar)

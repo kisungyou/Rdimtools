@@ -39,7 +39,7 @@ It focuses on the information brought by local neighborhood structure and seeks 
 structure, which may contain useful information for revealing discriminative information of the data.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate default dataset
 X <- aux.gensamples()
 
@@ -49,7 +49,8 @@ out2 <- do.lpca(X, ndim=2, type=c("proportion",0.1))
 out3 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
 
 ## Visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="LPCA::1\% connected")
 plot(out2$Y, main="LPCA::10\% connected")
 plot(out3$Y, main="LPCA::25\% connected")

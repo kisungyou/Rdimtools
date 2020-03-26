@@ -30,7 +30,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss-roll data
 #' X = aux.gensamples(n=100)
 #'
@@ -44,7 +44,8 @@
 #' output3 <- do.lle(X,ndim=2,type=c("proportion",0.5),regparam=10)
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="5%")
 #' plot(output2$Y, main="10%")
 #' plot(output3$Y, main="50%+Binary")

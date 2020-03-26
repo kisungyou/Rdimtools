@@ -11,7 +11,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -31,6 +31,7 @@
 #' @references
 #' \insertRef{ceruti_danco_2014}{Rdimtools}
 #'
+#' @rdname estimate_danco
 #' @export
 est.danco <- function(X, k=5){
   ##########################################################################

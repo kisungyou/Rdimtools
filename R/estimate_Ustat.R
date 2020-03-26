@@ -14,7 +14,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -33,6 +33,8 @@
 #'
 #' @references
 #' \insertRef{hein_intrinsic_2005}{Rdimtools}
+#'
+#' @rdname estimate_Ustat
 #' @author Kisung You
 #' @export
 est.Ustat <- function(X, maxdim=min(ncol(X),15)){

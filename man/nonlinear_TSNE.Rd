@@ -63,7 +63,7 @@ distributions to measure similarity, t-SNE, as its name suggests, exploits a hea
 For \code{do.tsne}, we implemented a naive version of t-SNE.
 }
 \examples{
-\dontrun{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -75,7 +75,8 @@ out2 <- do.tsne(X, ndim=2, perplexity=10)
 out3 <- do.tsne(X, ndim=2, perplexity=50)
 
 ## Visualize three different projections
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="tSNE::perplexity=5")
 plot(out1$Y, col=label, main="tSNE::perplexity=10")
 plot(out1$Y, col=label, main="tSNE::perplexity=50")

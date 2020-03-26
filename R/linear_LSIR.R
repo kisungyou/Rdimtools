@@ -23,7 +23,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' n = 123
@@ -45,7 +45,8 @@
 #' out3 = do.lsir(X, y, numk=25)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LSIR::nbd size=5")
 #' plot(out2$Y, main="LSIR::nbd size=10")
 #' plot(out3$Y, main="LSIR::nbd size=25")

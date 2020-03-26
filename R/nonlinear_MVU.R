@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate ribbon-shaped data with the small number of data
 #' X = aux.gensamples(dname="ribbon", n=50)
 #'
@@ -39,7 +39,8 @@
 #' output3 <- do.mvu(X,ndim=2,type=c("proportion",0.5))
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, main="standard")
 #' plot(output2$Y, main="kpca projection")
 #' plot(output3$Y, main="densely connected graph")

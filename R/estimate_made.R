@@ -16,7 +16,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create a data set of intrinsic dimension 2.
 #' X = aux.gensamples(dname="swiss")
 #'
@@ -34,6 +34,7 @@
 #' @references
 #' \insertRef{farahmand_manifoldadaptive_2007}{Rdimtools}
 #'
+#' @rdname estimate_made
 #' @author Kisung You
 #' @export
 est.made <- function(X, k=round(sqrt(ncol(X))), maxdim=min(ncol(X),15), combine=c("mean","median","vote")){

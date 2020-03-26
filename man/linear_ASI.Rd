@@ -47,7 +47,8 @@ out2 = do.asi(X, abstol=1e-3)
 out3 = do.asi(X, abstol=1e-4)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="ASI::tol=1e-2", pch=19, cex=0.5)
 plot(out2$Y, main="ASI::tol=1e-3", pch=19, cex=0.5)
 plot(out3$Y, main="ASI::tol=1e-4", pch=19, cex=0.5)

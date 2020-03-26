@@ -25,7 +25,7 @@
 #'
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate default dataset and make its dimension three-folds.
 #' Xp <- aux.gensamples()
 #' X  <- cbind(Xp,Xp,Xp)
@@ -36,7 +36,8 @@
 #' out3 <- do.spca(X,ndim=2,rho=100)
 #'
 #' ## Visualize principal components as columns in an image
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' image(t(out1$projection), main="SPCA::rho=0.01")
 #' image(t(out2$projection), main="SPCA::rho=1")
 #' image(t(out3$projection), main="SPCA::rho=100")

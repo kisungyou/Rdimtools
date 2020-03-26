@@ -29,7 +29,8 @@
 #' out3 = do.ldakm(X, abstol=1e-4)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LDA-KM::tol=1e-2")
 #' plot(out2$Y, main="LDA-KM::tol=1e-3")
 #' plot(out3$Y, main="LDA-KM::tol=1e-4")

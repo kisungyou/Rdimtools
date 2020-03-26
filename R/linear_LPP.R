@@ -33,7 +33,8 @@
 #' out3 <- do.lpp(X, t=10)
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LPP::bandwidth=0.1")
 #' plot(out2$Y, main="LPP::bandwidth=1")
 #' plot(out3$Y, main="LPP::bandwidth=10")

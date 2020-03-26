@@ -36,7 +36,7 @@ It aims at preserving local structure by solving a variational problem that mode
 the local geometrical structure by the Euclidean distances.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss roll with auxiliary dimensions
 n = 100
 theta = runif(n)
@@ -54,7 +54,8 @@ out2 = do.lpe(X, numk=10)
 out3 = do.lpe(X, numk=25)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="LPE::numk=5")
 plot(out2$Y, main="LPE::numk=10")
 plot(out3$Y, main="LPE::numk=25")

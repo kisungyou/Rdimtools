@@ -13,7 +13,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create an example data with intrinsic dimension 2
 #' X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 #'
@@ -25,6 +25,8 @@
 #' @references
 #' \insertRef{verveer_evaluation_1995}{Rdimtools}
 #'
+#' @rdname estimate_nearneighbor2
+#' @author Kisung You
 #' @export
 est.nearneighbor2 <- function(X, kmin=2, kmax=max(3, round(ncol(X)/2))){
   ##########################################################################

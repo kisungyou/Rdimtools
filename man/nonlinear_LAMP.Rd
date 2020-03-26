@@ -36,7 +36,7 @@ initial projection of control set. Note that this belongs to the method for
 visualization so projection onto \eqn{\mathbf{R}^2} is suggested for use.
 }
 \examples{
-\dontrun{
+\donttest{
 ## load iris data
 data(iris)
 X <- as.matrix(iris[,1:4])
@@ -46,7 +46,8 @@ out1 <- do.pca(X, ndim=2)      # PCA
 out2 <- do.lamp(X, ndim=2)     # LAMP
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="PCA")
 plot(out2$Y, main="LAMP")
 par(opar)

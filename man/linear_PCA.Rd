@@ -58,7 +58,8 @@ out2 <- do.pca(X, ndim=2, preprocess="decorrelate")
 out3 <- do.pca(X, ndim=2, preprocess="whiten")
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="PCA::'center'")
 plot(out2$Y, col=label, main="PCA::'decorrelate'")
 plot(out3$Y, col=label, main="PCA::'whiten'")

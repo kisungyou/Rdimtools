@@ -47,7 +47,7 @@ the margin between data opints from different classes, while labeled ones are us
 the geometrical structure of the data space.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 3 types with clear difference
 dt1  = aux.gensamples(n=33)-100
 dt2  = aux.gensamples(n=33)
@@ -69,7 +69,8 @@ out2 = do.lsdf(X, label_missing, type=c("proportion",0.1))
 out3 = do.lsdf(X, label_missing, type=c("proportion",0.25))
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="1\% connectivity")
 plot(out2$Y, main="10\% connectivity")
 plot(out3$Y, main="25\% connectivity")

@@ -65,7 +65,8 @@ out2 = do.modp(X, label, beta=10)
 out3 = do.modp(X, label, beta=100)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="MODP::beta=1")
 plot(out2$Y, main="MODP::beta=10")
 plot(out3$Y, main="MODP::beta=100")

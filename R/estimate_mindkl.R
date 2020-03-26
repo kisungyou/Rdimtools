@@ -10,7 +10,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -32,6 +32,7 @@
 #'
 #' @seealso \code{\link{est.mindml}}
 #'
+#' @rdname estimate_mindkl
 #' @author Kisung You
 #' @export
 est.mindkl <- function(X, k=5){

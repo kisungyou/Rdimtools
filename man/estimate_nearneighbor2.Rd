@@ -24,7 +24,7 @@ argued that there exists innate bias in the method and proposed a non-iterative 
 to reflect local distance information under a range of neighborhood sizes.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create an example data with intrinsic dimension 2
 X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 
@@ -36,4 +36,7 @@ sprintf("* est.nearneighbor2 : estimated dimension is \%.2f.",output$estdim)
 }
 \references{
 \insertRef{verveer_evaluation_1995}{Rdimtools}
+}
+\author{
+Kisung You
 }

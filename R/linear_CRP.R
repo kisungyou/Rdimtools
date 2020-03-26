@@ -20,7 +20,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate samples from swiss roll
 #' X <- aux.gensamples(n=200)
 #'
@@ -30,7 +30,8 @@
 #' out3 <- do.crp(X,ndim=2,lambda=10)
 #'
 #' # visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="CRP::lambda=0.1")
 #' plot(out2$Y, main="CRP::lambda=1")
 #' plot(out3$Y, main="CRP::lambda=10")

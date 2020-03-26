@@ -62,7 +62,8 @@ out2 = do.odp(X, label, beta=10)
 out3 = do.odp(X, label, beta=100)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="ODP::beta=1")
 plot(out2$Y, col=label, main="ODP::beta=10")
 plot(out3$Y, col=label, main="ODP::beta=100")

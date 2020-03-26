@@ -59,10 +59,11 @@ out2 = do.lsda(X, label, k1=5, k2=5)
 out3 = do.lsda(X, label, k1=10, k2=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
-plot(out1$Y, main="nbd size 2")
-plot(out2$Y, main="nbd size 5")
-plot(out3$Y, main="nbd size 10")
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
+plot(out1$Y, col=label, main="nbd size 2")
+plot(out2$Y, col=label, main="nbd size 5")
+plot(out3$Y, col=label, main="nbd size 10")
 par(opar)
 
 }

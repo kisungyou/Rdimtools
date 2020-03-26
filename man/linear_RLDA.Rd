@@ -43,7 +43,8 @@ out2 <- do.rlda(X, label, alpha=0.01)
 out3 <- do.rlda(X, label, alpha=100)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="RLDA::alpha=0.1")
 plot(out2$Y, col=label, main="RLDA::alpha=1")
 plot(out3$Y, col=label, main="RLDA::alpha=10")

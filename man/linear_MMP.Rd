@@ -65,9 +65,10 @@ out1 = do.pca(X, ndim=2)
 out2 = do.mmp(X, label_missing, numk=10)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
-plot(out1$Y, main="PCA projection")
-plot(out2$Y, main="20\% missing labels")
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
+plot(out1$Y, col=label, main="PCA projection")
+plot(out2$Y, col=label, main="20\% missing labels")
 par(opar)
 
 }

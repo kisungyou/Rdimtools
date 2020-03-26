@@ -60,7 +60,8 @@ out2 = do.klsda(X, label, k1=10, k2=10, t=5)
 out3 = do.klsda(X, label, k1=10, k2=10, t=10)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="bandwidth=1")
 plot(out2$Y, col=label, main="bandwidth=15")
 plot(out3$Y, col=label, main="bandwidth=10")

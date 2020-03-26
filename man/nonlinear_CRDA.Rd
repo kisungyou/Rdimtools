@@ -55,7 +55,7 @@ a constructed graph so that the shortest-path length plays as an approximate geo
 nonlinear manifolds.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate sample data
 X <- aux.gensamples(n=200)
 
@@ -64,7 +64,8 @@ out1 <- do.crda(X,weight=TRUE)
 out2 <- do.crda(X,weight=FALSE)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="weighted graph")
 plot(out2$Y, main="binarized graph")
 par(opar)

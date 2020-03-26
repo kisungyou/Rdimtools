@@ -54,7 +54,8 @@ out1 <- do.pca(Y, ndim=2)
 out2 <- do.slpp(Y, label, ndim=2)
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="PCA")
 plot(out2$Y, main="LSPP")
 par(opar)

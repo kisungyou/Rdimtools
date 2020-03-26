@@ -49,7 +49,8 @@ out2 = do.npca(X, preprocess="cscale")
 out3 = do.npca(X, preprocess="whiten")
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="NPCA:: center")
 plot(out2$Y, col=label, main="NPCA:: cscale")
 plot(out3$Y, col=label, main="NPCA:: whiten")

@@ -25,7 +25,7 @@ a likelihood structure based on modeling local spread of information via Poisson
 to reflect inhomogeneity of distribution across data points.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create example data sets with intrinsic dimension 2
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")

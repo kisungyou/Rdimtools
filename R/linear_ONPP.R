@@ -33,7 +33,8 @@
 #' out3 = do.onpp(X, type=c("proportion",0.25))
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="ONPP::5% connectivity")
 #' plot(out2$Y, col=label, main="ONPP::10% connectivity")
 #' plot(out3$Y, col=label, main="ONPP::25% connectivity")

@@ -12,7 +12,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## create 'swiss' roll dataset
 #' X = aux.gensamples(dname="swiss")
 #'

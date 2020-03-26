@@ -33,7 +33,7 @@ estimate to be independent of assumed dimensionality, authors claim this method 
 \emph{manifold-adaptive}.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create a data set of intrinsic dimension 2.
 X = aux.gensamples(dname="swiss")
 

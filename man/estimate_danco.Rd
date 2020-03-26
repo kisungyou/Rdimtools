@@ -21,7 +21,7 @@ DANCo exploits the balanced information of both the normalized nearest neighbor 
 as well as the angles of data pairs in the neighboring points.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")

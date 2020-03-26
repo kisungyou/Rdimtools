@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate samples
 #' X <- aux.gensamples(n=123)
 #'
@@ -35,7 +35,8 @@
 #' out3 <- do.lea(X, ndim=2)
 #'
 #' ## visual comparison
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LLE")
 #' plot(out2$Y, main="NPE")
 #' plot(out3$Y, main="LEA")

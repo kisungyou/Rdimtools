@@ -21,7 +21,7 @@ is claimed to redue the effects of curvature and density variation across differ
 in an underlying manifold.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")

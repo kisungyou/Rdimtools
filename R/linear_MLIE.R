@@ -21,7 +21,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -37,7 +37,8 @@
 #' out3 = do.mlie(X, label, k1=25,k2=25)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="MLIE::nbd size=5")
 #' plot(out2$Y, main="MLIE::nbd size=10")
 #' plot(out3$Y, main="MLIE::nbd size=25")

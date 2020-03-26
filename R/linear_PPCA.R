@@ -23,7 +23,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -34,7 +34,8 @@
 #' PPCA <- do.ppca(X, ndim=2, preprocess="center")
 #'
 #' ## Visualize
-#' opar <- par(mfrow=c(1,2))
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(PCA$Y,  col=label, main="PCA")
 #' plot(PPCA$Y, col=label, main="PPCA")
 #' par(opar)

@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate 3 different groups of data X and label vector
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
 #' x2 = matrix(rnorm(4*10), nrow=10)
@@ -39,7 +39,8 @@
 #' out3 = do.klfda(X, label, t=10)
 #'
 #' ## visualize
-#' opar = par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar = par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="bandwidth=0.1")
 #' plot(out2$Y, col=label, main="bandwidth=1")
 #' plot(out3$Y, col=label, main="bandwidth=10")

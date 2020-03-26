@@ -35,7 +35,8 @@
 #' out2 <- do.spe(X, ndim=2, proximity=function(x){dist(x, method="manhattan")})
 #'
 #' ## Visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(outM$Y, col=label, main="MDS")
 #' plot(out1$Y, col=label, main="SPE with L2 norm")
 #' plot(out2$Y, col=label, main="SPE with L1 norm")

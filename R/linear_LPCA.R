@@ -22,7 +22,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate default dataset
 #' X <- aux.gensamples()
 #'
@@ -32,7 +32,8 @@
 #' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
 #'
 #' ## Visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, main="LPCA::1% connected")
 #' plot(out2$Y, main="LPCA::10% connected")
 #' plot(out3$Y, main="LPCA::25% connected")

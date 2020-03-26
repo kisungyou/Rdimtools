@@ -53,7 +53,8 @@
 #' output3 <- do.rndproj(X,type="sparse")
 #'
 #' ## Visualize three different projections
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(output1$Y, col=label, main="RNDPROJ::Gaussian")
 #' plot(output2$Y, col=label, main="RNDPROJ::Arclioptas")
 #' plot(output3$Y, col=label, main="RNDPROJ::Sparse")

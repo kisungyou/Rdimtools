@@ -38,7 +38,7 @@ reduction. Their combination, Extended Supervised LPP, is a combination of two a
 it reflects discriminant information with realistic distance measure via Z-score function.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data of 2 types with clear difference
 diff = 15
 dt1  = aux.gensamples(n=123)-diff;
@@ -54,7 +54,8 @@ outSLPP <- do.slpp(Y, label)
 outESLPP <- do.eslpp(Y, label)
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(outLPP$Y,   main="LPP")
 plot(outSLPP$Y,  main="SLPP")
 plot(outESLPP$Y, main="ESLPP")

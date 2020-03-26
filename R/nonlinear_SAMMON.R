@@ -23,7 +23,7 @@
 #' IEEE Transactions on Computers, C-18 5:401-409.
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -34,7 +34,8 @@
 #' out2 = do.sammon(X,ndim=2,initialize="pca")  # pca as initialization
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(out1$Y, col=label, main="out1:rndproj")
 #' plot(out2$Y, col=label, main="out2:pca")
 #' par(opar)

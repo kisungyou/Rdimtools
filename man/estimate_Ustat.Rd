@@ -24,7 +24,7 @@ the scale and influence of extrinsic curvature. The method returns \emph{integer
 estimate in that there is no need for rounding the result for practical usage.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")

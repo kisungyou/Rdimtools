@@ -48,7 +48,7 @@ It adopts PCA as preprocessing step and uses only one eigenvector at each iterat
 it might incur warning messages for solving near-singular system of linear equations.
 }
 \examples{
-\dontrun{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -60,7 +60,8 @@ output2 <- do.olpp(X,ndim=2,type=c("proportion",0.25))
 
 ## Visualize
 #  In theory, it should show two separated groups of data
-opar <- par(mfrow=c(1,2))
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(output1$Y, col=label, main="OLPP::10\% connected")
 plot(output2$Y, col=label, main="OLPP::25\% connected")
 par(opar)

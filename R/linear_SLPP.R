@@ -30,7 +30,8 @@
 #' outSLPP <- do.slpp(X, label)
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(outLPP$Y,  col=label, main="LPP")
 #' plot(outSLPP$Y, col=label, main="SLPP")
 #' par(opar)

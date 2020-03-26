@@ -33,7 +33,8 @@
 #' out3 = do.rsr(X, lbd=10)
 #'
 #' #### visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="RSR::lbd=0.1")
 #' plot(out2$Y, col=label, main="RSR::lbd=1")
 #' plot(out3$Y, col=label, main="RSR::lbd=10")

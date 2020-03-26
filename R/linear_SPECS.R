@@ -33,7 +33,8 @@
 #' out3 = do.specs(iris.dat, iris.lab, ranking="method3")
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=iris.lab, main="SPECS::method1")
 #' plot(out2$Y, col=iris.lab, main="SPECS::method2")
 #' plot(out3$Y, col=iris.lab, main="SPECS::method3")

@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -37,7 +37,8 @@
 #'
 #' ## Visualize
 #' #  In theory, it should show two separated groups of data
-#' opar <- par(mfrow=c(1,2))
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,2))
 #' plot(output1$Y, col=label, main="OLPP::10% connected")
 #' plot(output2$Y, col=label, main="OLPP::25% connected")
 #' par(opar)

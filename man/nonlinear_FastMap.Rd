@@ -32,7 +32,7 @@ it shares similarities with MDS, it is innately a nonlinear method that iterativ
 the projection information using pairwise distance information.
 }
 \examples{
-\dontrun{
+\donttest{
 ## load iris data
 data(iris)
 X <- as.matrix(iris[,1:4])
@@ -43,7 +43,8 @@ out2 <- do.mds(X, ndim=2)      # Classical MDS
 out3 <- do.fastmap(X, ndim=2)  # FastMap
 
 ## visualize
-opar = par(mfrow=c(1,3), no.readonly=TRUE)
+opar = par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="PCA")
 plot(out2$Y, main="MDS")
 plot(out3$Y, main="FastMap")

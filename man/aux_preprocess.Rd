@@ -29,9 +29,8 @@ named list containing:
 \code{aux.preprocess} can perform one of following operations; \code{"center"}, \code{"scale"},
 \code{"cscale"}, \code{"decorrelate"} and \code{"whiten"}. See below for more details.
 }
-\details{
-@section Operations:
- We have following operations,
+\section{Operations}{
+ we have following operations,
  \describe{
  \item{\code{"center"}}{subtracts mean of each column so that every variable has mean \eqn{0}.}
  \item{\code{"scale"}}{turns each column corresponding to variable have variance \eqn{1}.}
@@ -40,6 +39,7 @@ named list containing:
  \item{\code{"whiten"}}{\code{"decorrelate"} and sets all diagonal elements be \eqn{1}.}
  }
 }
+
 \examples{
 \dontrun{
 ## Generate data

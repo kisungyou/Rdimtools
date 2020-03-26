@@ -33,7 +33,7 @@ eigen-decomposition formulation, as the problem dimension matters only up to ori
 For more details, see \href{https://en.wikipedia.org/wiki/Canonical_correlation}{Wikipedia entry} on Canonical Correlation.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate 2 normal data matrices
 mat1 = matrix(rnorm(100*12),nrow=100)+10 # 12-dim normal
 mat2 = matrix(rnorm(100*6), nrow=100)-10 # 6-dim normal
@@ -42,7 +42,8 @@ mat2 = matrix(rnorm(100*6), nrow=100)-10 # 6-dim normal
 output = do.cca(mat1, mat2, ndim=2)
 
 ## visualize
-opar <- par(mfrow=c(1,2))
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(output$Y1, main="proj(mat1)")
 plot(output$Y2, main="proj(mat2)")
 par(opar)

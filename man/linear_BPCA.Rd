@@ -47,7 +47,7 @@ relative weight for each base in that the smaller \eqn{\alpha} value is, the mor
 corresponding column vector of \code{mp.W} to be selected as potential basis.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate swiss roll data
 X = aux.gensamples(n=200)
 
@@ -56,7 +56,8 @@ out1  <- do.pca(X, ndim=2, preprocess="center")
 out2  <- do.bpca(X, ndim=2, preprocess="center")
 
 ## Visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="PCA")
 plot(out2$Y, main="BPCA")
 par(opar)

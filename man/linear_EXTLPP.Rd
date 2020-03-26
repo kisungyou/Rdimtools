@@ -37,7 +37,7 @@ at \emph{moderate} distance in that a Z-shaped function is introduced in
 defining similarity derived from Euclidean distance.
 }
 \examples{
-\dontrun{
+\donttest{
 ## generate data
 X <- aux.gensamples(n=123)
 
@@ -47,7 +47,8 @@ out2 <- do.extlpp(X, numk=10)
 out3 <- do.extlpp(X, numk=25)
 
 ## Visualize three different projections
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, main="EXTLPP::k=5")
 plot(out2$Y, main="EXTLPP::k=10")
 plot(out3$Y, main="EXTLPP::k=25")

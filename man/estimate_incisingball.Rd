@@ -19,7 +19,7 @@ Incising ball methods exploits the exponential relationship of the number of sam
 contained in a ball and the radius of the incising ball.
 }
 \examples{
-\dontrun{
+\donttest{
 ## create an example data with intrinsic dimension 2
 X = cbind(aux.gensamples(dname="swiss"),aux.gensamples(dname="swiss"))
 

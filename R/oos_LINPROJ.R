@@ -18,7 +18,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate sample data and separate them
 #' X = aux.gensamples(n=500)
 #' set.seed(46556)
@@ -42,8 +42,10 @@
 #' mm = "black=train / red=test data" # figure title
 #'
 #' ## visualize
+#' opar <- par(no.readonly=TRUE)
 #' plot(Yold, type="p", xlim=xx, ylim=yy, main=mm, xlab="axis 1", ylab="axis 2")
 #' points(Ynew[,1], Ynew[,2], lwd=3, col="red")
+#' par(opar)
 #' }
 #'
 #' @author Kisung You

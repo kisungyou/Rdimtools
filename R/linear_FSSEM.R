@@ -18,7 +18,9 @@
 #'
 #' ## run and visualize
 #' out0 = do.fssem(sel.dat, ndim=2, max.k=3)
-#' plot(out0$Y[,1], out0$Y[,2], main="small run", col=sel.lab, pch=19)
+#' opar = par(no.readonly=TRUE)
+#' plot(out0$Y, main="small run", col=sel.lab, pch=19)
+#' par(opar)
 #'
 #' \dontrun{
 #' ## NOT-FOR-CRAN example; run at your machine !
@@ -29,7 +31,8 @@
 #'
 #' ## visualize
 #' cols = as.factor(iris[,5])
-#' opar = par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar = par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out3$Y, main="max k=3", col=cols)
 #' plot(out6$Y, main="max k=6", col=cols)
 #' plot(out9$Y, main="max k=9", col=cols)

@@ -21,7 +21,8 @@
 #' out3 = do.ldp(X, label, type=c("proportion",0.10))
 #'
 #' ## visualize
-#' opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+#' opar <- par(no.readonly=TRUE)
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="1% connectivity")
 #' plot(out2$Y, col=label, main="5% connectivity")
 #' plot(out3$Y, col=label, main="10% connectivity")

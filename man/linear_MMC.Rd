@@ -51,7 +51,8 @@ out1 = do.mmc(X, label, ndim=2)
 out2 = do.mmc(X, label, ndim=2, preprocess="decorrelate")
 
 ## visualize
-opar <- par(mfrow=c(1,2), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,2))
 plot(out1$Y, main="MMC::centering")
 plot(out2$Y, main="MMC::decorrelating")
 par(opar)

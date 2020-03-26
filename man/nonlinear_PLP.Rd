@@ -57,7 +57,7 @@ intermittently. Such functionality is, however, sacrificed in this version.
 }
 
 \examples{
-\dontrun{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -69,7 +69,8 @@ out2 = do.plp(X, type=c("proportion", 0.2))
 out3 = do.plp(X, type=c("proportion", 0.5))
 
 ## visualize
-opar <- par(mfrow=c(1,3), no.readonly=TRUE)
+opar <- par(no.readonly=TRUE)
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="PLP::10\% connected")
 plot(out2$Y, col=label, main="PLP::20\% connected")
 plot(out3$Y, col=label, main="PLP::50\% connected")
