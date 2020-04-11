@@ -9,3 +9,4 @@
   * Initialize the following documentation:
     - NEWS for brief record of updates.
     - README for introduction.
+  * Cleared dependencies.

@@ -117,7 +117,9 @@ do.kqmi <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","wh
   #   5. compute optimal projection
   invvecL = 1/vecL
   nogoodL = which(is.na(invvecL)||is.infinite(invvecL))
-  invvecL[nogoodL] = 0
+  if (length(nogoodL)>0){
+    invvecL[nogoodL] = 0
+  }
   invmatL = diag(invvecL)
   matA    = (matP%*%invmatL%*%matB)
   #   6. compute pseudo-projection Astar

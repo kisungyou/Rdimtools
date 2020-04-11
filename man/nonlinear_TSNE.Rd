@@ -17,7 +17,9 @@ do.tsne(
   pca = TRUE,
   pcaratio = 0.9,
   pcascale = FALSE,
-  symmetric = FALSE
+  symmetric = FALSE,
+  BHuse = TRUE,
+  BHtheta = 0.25
 )
 }
 \arguments{
@@ -47,6 +49,10 @@ Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 \item{pcascale}{a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.}
 
 \item{symmetric}{a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.}
+
+\item{BHuse}{a logical; \code{TRUE} to use Barnes-Hut approximation. See \code{\link[Rtsne]{Rtsne}} for more details.}
+
+\item{BHtheta}{speed-accuracy tradeoff. If set as 0.0, it reduces to exact t-SNE.}
 }
 \value{
 a named list containing
@@ -60,7 +66,6 @@ a named list containing
 that mimicks patterns of probability distributinos over pairs of high-dimensional objects on low-dimesional
 target embedding space by minimizing Kullback-Leibler divergence. While conventional SNE uses gaussian
 distributions to measure similarity, t-SNE, as its name suggests, exploits a heavy-tailed Student t-distribution.
-For \code{do.tsne}, we implemented a naive version of t-SNE.
 }
 \examples{
 \donttest{
@@ -72,14 +77,14 @@ label = as.factor(iris$Species)
 ## compare different perplexity
 out1 <- do.tsne(X, ndim=2, perplexity=5)
 out2 <- do.tsne(X, ndim=2, perplexity=10)
-out3 <- do.tsne(X, ndim=2, perplexity=50)
+out3 <- do.tsne(X, ndim=2, perplexity=25)
 
 ## Visualize three different projections
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="tSNE::perplexity=5")
-plot(out1$Y, col=label, main="tSNE::perplexity=10")
-plot(out1$Y, col=label, main="tSNE::perplexity=50")
+plot(out2$Y, col=label, main="tSNE::perplexity=10")
+plot(out3$Y, col=label, main="tSNE::perplexity=25")
 par(opar)
 }
 

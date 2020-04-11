@@ -261,7 +261,3 @@ main_bmds <- function(D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
     .Call('_Rdimtools_main_bmds', PACKAGE = 'Rdimtools', D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
 }
 
-aux_mimick_geigen <- function(A, B) {
-    .Call('_Rdimtools_aux_mimick_geigen', PACKAGE = 'Rdimtools', A, B)
-}
-

@@ -63,7 +63,7 @@ out9 = do.fssem(irismat, ndim=2, max.k=9)
 ## visualize
 cols = as.factor(iris[,5])
 opar = par(no.readonly=TRUE)
-par(mfrow=c(1,3))
+par(mfrow=c(3,1))
 plot(out3$Y, main="max k=3", col=cols)
 plot(out6$Y, main="max k=6", col=cols)
 plot(out9$Y, main="max k=9", col=cols)

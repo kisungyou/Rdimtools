@@ -218,9 +218,7 @@
 #' @import CVXR
 #' @import RcppDE
 #' @importFrom maotai weiszfeld
-#' @importFrom ClusterR Optimal_Clusters_GMM GMM predict_GMM
-#' @importFrom geigen geigen
-#' @importFrom utils packageVersion combn
+#' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom Matrix rankMatrix expm norm Matrix

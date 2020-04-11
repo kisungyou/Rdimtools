@@ -9,12 +9,12 @@ Description: We provide linear and nonlinear dimension reduction techniques.
     Ma and Zhu (2013) <doi:10.1111/j.1751-5823.2012.00182.x> if you are interested in
     statistical approach, or Engel, Huttenberger, and Hamann (2012)
     <doi:10.4230/OASIcs.VLUDS.2011.135> for a broader multi-disciplinary overview.
-License: GPL-3
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Depends: R (>= 3.0.0)
-Imports: ADMM (>= 0.2.2), ClusterR, CVXR (>= 1.0), Matrix, Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RSpectra, geigen, graphics, maotai, stats, utils
-LinkingTo: Rcpp, RcppArmadillo, RcppDist
+Imports: ADMM (>= 0.2.2), CVXR (>= 1.0), Matrix, Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RSpectra, graphics, maotai (>= 0.1.5), stats, utils
+LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
 RoxygenNote: 7.1.0
 RdMacros: Rdpack
 URL: http://github.com/kyoustat/Rdimtools

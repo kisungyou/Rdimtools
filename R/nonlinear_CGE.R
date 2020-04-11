@@ -40,7 +40,7 @@
 #'
 #' ## visualize
 #' opar = par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(3,1))
 #' plot(out1$Y, main="1% connected",  pch=19, col=lcols)
 #' plot(out2$Y, main="10% connected", pch=19, col=lcols)
 #' plot(out3$Y, main="25% connected", pch=19, col=lcols)
@@ -136,7 +136,9 @@ do.cge <- function(X, label, ndim=2, type=c("proportion",0.1),
   glterm = llterm + max(alpha1, alpha2)*diag(nrow(llterm))
   grterm = rrterm + max(alpha1, alpha2)*diag(nrow(rrterm))
 
-  geigs  = geigen::geigen(glterm, grterm) # increasing order
+  gfun  = getFromNamespace("hidden_geigen","maotai")
+  geigs = gfun(glterm, grterm, normalize=TRUE)
+  # geigs  = geigen::geigen(glterm, grterm) # increasing order
   idmin  = max(which.min(geigs$values > 10*.Machine$double.eps), 2)
   Z      = geigs$vectors[,idmin:(idmin+ndim-1)]
 

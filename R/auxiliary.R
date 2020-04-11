@@ -1268,45 +1268,65 @@ aux.nbdlogical <- function(X, label, khomo, khet){
 #' @keywords internal
 #' @noRd
 aux.geigen <- function(top, bottom, ndim, maximal=TRUE){
-  # 1. first, run CPP with RcppArmadillo -> change to 'geigen' package
-  # geigs = aux_geigen(top, bottom) # Armadillo goes Decreasing order
-  geigs = geigen::geigen(top, bottom) # geigen goes Increasing order
-  maxp  = length(geigs$values)
+  # new 1. use 'maotai's mimic function : increasing order as well
+  gfun  = getFromNamespace("hidden_geigen","maotai")
+  geigs = gfun(top, bottom, normalize=TRUE)
+  nobj  = length(geigs$values)
+  ndim  = round(ndim)
 
-  # 2. separate values and vectors; change correspondingly for Decreasing order
-  values  = geigs$values[maxp:1]
-  vectors = geigs$vectors[,maxp:1]
-
-  if (maximal==TRUE){
-    partvals = values[1:ndim]
+  # new 2. separate eigenvectors accordingly to the orders
+  if (maximal){
+    vectors = geigs$vectors[,nobj:(nobj-ndim+1)]
   } else {
-    partvals = values[maxp:(maxp-ndim+1)]
-  }
-  if (all(base::abs(base::Im(partvals))<(100*(.Machine$double.eps)))){
-    values  = base::Re(values)
-    vectors = aux.adjprojection(base::Re(vectors))
-  } else {
-    stop("* aux.geigen : generalized eigenvalue problem returned imaginary eigenvalues.")
+    vectors = geigs$vectors[,1:ndim]
   }
 
-
-  # 3. branching case
-  if (ndim > 1){
-    if (maximal==TRUE){
-      projection = vectors[,1:ndim]
-    } else {
-      projection = vectors[,maxp:(maxp-ndim+1)]
-    }
+  # new 3. return
+  if (ndim==1){
+    return(matrix(vectors, ncol=1))
   } else {
-    if (maximal==TRUE){
-      vecsol = vectors[,1]
-      projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
-    } else {
-      vecsol = vectors[,maxp]
-      projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
-    }
+    return(vectors)
   }
-  return(projection)
+
+  # # 1. first, run CPP with RcppArmadillo -> change to 'geigen' package
+  # # geigs = aux_geigen(top, bottom) # Armadillo goes Decreasing order
+  # geigs = geigen::geigen(top, bottom) # geigen goes Increasing order
+  # maxp  = length(geigs$values)
+  #
+  # # 2. separate values and vectors; change correspondingly for Decreasing order
+  # values  = geigs$values[maxp:1]
+  # vectors = geigs$vectors[,maxp:1]
+  #
+  # if (maximal==TRUE){
+  #   partvals = values[1:ndim]
+  # } else {
+  #   partvals = values[maxp:(maxp-ndim+1)]
+  # }
+  # if (all(base::abs(base::Im(partvals))<(100*(.Machine$double.eps)))){
+  #   values  = base::Re(values)
+  #   vectors = aux.adjprojection(base::Re(vectors))
+  # } else {
+  #   stop("* aux.geigen : generalized eigenvalue problem returned imaginary eigenvalues.")
+  # }
+  #
+  #
+  # # 3. branching case
+  # if (ndim > 1){
+  #   if (maximal==TRUE){
+  #     projection = vectors[,1:ndim]
+  #   } else {
+  #     projection = vectors[,maxp:(maxp-ndim+1)]
+  #   }
+  # } else {
+  #   if (maximal==TRUE){
+  #     vecsol = vectors[,1]
+  #     projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
+  #   } else {
+  #     vecsol = vectors[,maxp]
+  #     projection = matrix(vecsol/sqrt(sum(vecsol*vecsol)))
+  #   }
+  # }
+  # return(projection)
 }
 
 

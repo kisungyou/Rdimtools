@@ -4,7 +4,6 @@
 #' that mimicks patterns of probability distributinos over pairs of high-dimensional objects on low-dimesional
 #' target embedding space by minimizing Kullback-Leibler divergence. While conventional SNE uses gaussian
 #' distributions to measure similarity, t-SNE, as its name suggests, exploits a heavy-tailed Student t-distribution.
-#' For \code{do.tsne}, we implemented a naive version of t-SNE.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
@@ -20,6 +19,8 @@
 #' @param pcaratio proportion of variances explained in finding PCA preconditioning. See also \code{\link{do.pca}} for more details.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
 #' @param symmetric a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.
+#' @param BHuse a logical; \code{TRUE} to use Barnes-Hut approximation. See \code{\link[Rtsne]{Rtsne}} for more details.
+#' @param BHtheta speed-accuracy tradeoff. If set as 0.0, it reduces to exact t-SNE.
 #'
 #' @return a named list containing
 #' \describe{
@@ -37,14 +38,14 @@
 #' ## compare different perplexity
 #' out1 <- do.tsne(X, ndim=2, perplexity=5)
 #' out2 <- do.tsne(X, ndim=2, perplexity=10)
-#' out3 <- do.tsne(X, ndim=2, perplexity=50)
+#' out3 <- do.tsne(X, ndim=2, perplexity=25)
 #'
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="tSNE::perplexity=5")
-#' plot(out1$Y, col=label, main="tSNE::perplexity=10")
-#' plot(out1$Y, col=label, main="tSNE::perplexity=50")
+#' plot(out2$Y, col=label, main="tSNE::perplexity=10")
+#' plot(out3$Y, col=label, main="tSNE::perplexity=25")
 #' par(opar)
 #' }
 #'
@@ -58,7 +59,8 @@
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                     jitter=0.3,jitterdecay=0.99,momentum=0.5,
                     preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
-                    pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE){
+                    pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE,
+                    BHuse=TRUE, BHtheta=0.25){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   #   1-1. (integer) ndim
@@ -75,8 +77,8 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
   }
 
   # obsolete params.
-  BarnesHut=FALSE
-  BHtheta=0.5
+  BarnesHut=as.logical(BHuse)
+  BHtheta=as.double(BHtheta)
   # 2. Input Parameters
   #   2-1. (double) eta = 0.5; learning parameter
   if (!is.numeric(eta)||is.na(eta)||is.infinite(eta)||(eta<=0)){
@@ -142,22 +144,22 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
   BHtheta = as.double(BHtheta)
 
   # 3. Run Main Algorithm
-  # if (!BHflag){
-  #   Perp = aux_perplexity(tpX,perplexity);
-  #   P = as.matrix(Perp$P)
-  #   vars = as.vector(Perp$vars)
-  #
-  #   Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
-  # } else {
-  #   pX = t(tpX)
-  #   out = Rtsne(pX,dims=ndim,theta=BHtheta,perplexity=perplexity,pca=TRUE,max_iter=maxiter,
-  #               momentum=momentum,eta=eta)
-  #   Y = (out$Y)
-  # }
-  Perp = aux_perplexity(tpX,perplexity);
-  P = as.matrix(Perp$P)
-  vars = as.vector(Perp$vars)
-  Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
+  if (!BHflag){
+    Perp = aux_perplexity(tpX,perplexity);
+    P = as.matrix(Perp$P)
+    vars = as.vector(Perp$vars)
+
+    Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
+  } else {
+    pX   = t(tpX)
+    dX   = stats::dist(pX)
+    dfun = utils::getFromNamespace("hidden_tsne","maotai")
+    out  = dfun(dX, ndim=round(ndim),theta=BHtheta,perplexity=perplexity,pca=FALSE,max_iter=maxiter,
+                momentum=momentum,eta=eta)
+    # out = Rtsne(pX,dims=ndim,theta=BHtheta,perplexity=perplexity,pca=TRUE,max_iter=maxiter,
+    #             momentum=momentum,eta=eta)
+    Y = out$embed
+  }
 
   # 5. result
   if (any(is.infinite(Y))||any(is.na(Y))){

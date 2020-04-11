@@ -59,7 +59,7 @@ out3 = do.cge(X, label_missing, type=c("proportion",0.25))
 
 ## visualize
 opar = par(no.readonly=TRUE)
-par(mfrow=c(1,3))
+par(mfrow=c(3,1))
 plot(out1$Y, main="1\% connected",  pch=19, col=lcols)
 plot(out2$Y, main="10\% connected", pch=19, col=lcols)
 plot(out3$Y, main="25\% connected", pch=19, col=lcols)

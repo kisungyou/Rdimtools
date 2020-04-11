@@ -4,3 +4,4 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^list_do\.ods$
+^LICENSE\.md$

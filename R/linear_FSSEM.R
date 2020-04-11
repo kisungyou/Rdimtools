@@ -32,7 +32,7 @@
 #' ## visualize
 #' cols = as.factor(iris[,5])
 #' opar = par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(3,1))
 #' plot(out3$Y, main="max k=3", col=cols)
 #' plot(out6$Y, main="max k=6", col=cols)
 #' plot(out9$Y, main="max k=9", col=cols)
@@ -153,13 +153,18 @@ fssem.single <- function(Xpart, maxk){ # return the optimal value
   if (is.vector(Xpart)){
     Xpart = matrix(Xpart)
   }
-  # 1. fit GMM
-  bicvalues = ClusterR::Optimal_Clusters_GMM(Xpart, maxk, criterion="BIC", verbose=FALSE, plot_data=FALSE)
-  # 2. select out the best
-  koptimal  = which.min(bicvalues)
-  # 3. run GMM
-  emoutput = ClusterR::GMM(Xpart, gaussian_comps = koptimal)
-  # 4. cluster label
-  pr = as.vector(ClusterR::predict_GMM(Xpart, emoutput$centroids, emoutput$covariance_matrices, emoutput$weights)$cluster_labels)
-  return(pr)
+  xdist  = stats::dist(Xpart)
+  myfun  = utils::getFromNamespace("hidden_kmedoids_best","maotai")
+  hey    = myfun(xdist, mink=1, maxk=round(maxk))
+  return(as.vector(hey$label[,hey$opt.k]))
+
+  # # 1. fit GMM
+  # bicvalues = ClusterR::Optimal_Clusters_GMM(Xpart, maxk, criterion="BIC", verbose=FALSE, plot_data=FALSE)
+  # # 2. select out the best
+  # koptimal  = which.min(bicvalues)
+  # # 3. run GMM
+  # emoutput = ClusterR::GMM(Xpart, gaussian_comps = koptimal)
+  # # 4. cluster label
+  # pr = as.vector(ClusterR::predict_GMM(Xpart, emoutput$centroids, emoutput$covariance_matrices, emoutput$weights)$cluster_labels)
+  # return(pr)
 }
