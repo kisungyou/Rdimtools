@@ -40,7 +40,7 @@ for class labels not requiring class priors. The method re-states the estimation
 kernel objective in the graph embedding framework.
 }
 \examples{
-\donttest{
+\dontrun{
 ## generate 3 different groups of data X and label vector
 x1 = matrix(rnorm(4*10), nrow=10)-20
 x2 = matrix(rnorm(4*10), nrow=10)
