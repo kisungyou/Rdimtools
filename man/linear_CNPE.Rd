@@ -56,7 +56,7 @@ out3 = do.cnpe(X, type=c("proportion",0.25))
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(1,3))
+par(mfrow=c(3,1))
 plot(out1$Y, main="CNPE::5\% connected")
 plot(out2$Y, main="CNPE::10\% connected")
 plot(out3$Y, main="CNPE::25\% connected")

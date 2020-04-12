@@ -43,16 +43,16 @@ artificial neighborhood in constructing the adjacency graph for reconstruction o
 the approximated manifold.
 }
 \examples{
-\donttest{
+\dontrun{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
 label = as.integer(iris$Species)
 
 # see the effect bandwidth
-out1 = do.llle(X, bandwidth=0.1)
-out2 = do.llle(X, bandwidth=0.5)
-out3 = do.llle(X, bandwidth=0.9)
+out1 = do.llle(X, bandwidth=0.1, P=20)
+out2 = do.llle(X, bandwidth=0.5, P=20)
+out3 = do.llle(X, bandwidth=0.9, P=20)
 
 # visualize the results
 opar <- par(no.readonly=TRUE)

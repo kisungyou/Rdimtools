@@ -33,8 +33,10 @@ to be uncorrelated in the sense that the scatter matrix is placed in a generaliz
 }
 \examples{
 \donttest{
-## generate swiss roll data
-X = aux.gensamples(n=200)
+## use iris data
+data(iris)
+X   = as.matrix(iris[,1:4])
+lab = as.factor(iris[,5])
 
 ## compare with PCA and PFLPP
 out1 = do.pca(X, ndim=2)
@@ -43,10 +45,10 @@ out3 = do.elpp2(X, ndim=2)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(1,3))
-plot(out1$Y, main="PCA")
-plot(out2$Y, main="Parameter-Free LPP")
-plot(out3$Y, main="Enhanced LPP (2013)")
+par(mfrow=c(3,1))
+plot(out1$Y, col=lab, main="PCA")
+plot(out2$Y, col=lab, main="Parameter-Free LPP")
+plot(out3$Y, col=lab, main="Enhanced LPP (2013)")
 par(opar)
 }
 
