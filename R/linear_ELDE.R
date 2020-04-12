@@ -40,10 +40,10 @@
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
-#' plot(out1$Y, main="ELDE::bandwidth=1")
-#' plot(out2$Y, main="ELDE::bandwidth=10")
-#' plot(out3$Y, main="ELDE::bandwidth=100")
+#' par(mfrow=c(3,1))
+#' plot(out1$Y, col=label, main="ELDE::bandwidth=1")
+#' plot(out2$Y, col=label, main="ELDE::bandwidth=10")
+#' plot(out3$Y, col=label, main="ELDE::bandwidth=100")
 #' par(opar)
 #' }
 #'
@@ -110,12 +110,12 @@ do.elde <- function(X, label, ndim=2, t=1.0, preprocess=c("center","scale","csca
   Sb = t(pX)%*%Lb%*%pX
 
   #   3. scaling of the matrix
-  Sw = Sw/Matrix::norm(Sw,"f")
-  Sb = Sb/Matrix::norm(Sb,"f")
+  Sw = Sw/base::norm(Sw,"F")
+  Sb = Sb/base::norm(Sb,"F")
 
   #   3. matrix exponential
-  expSw = as.matrix(Matrix::expm(Sw))
-  expSb = as.matrix(Matrix::expm(Sb))
+  expSw = aux_expm(Sw) # as.matrix(Matrix::expm(Sw))
+  expSb = aux_expm(Sb) # as.matrix(Matrix::expm(Sb))
 
 
   #   4. compute projection matrix

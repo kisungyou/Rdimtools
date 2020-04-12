@@ -1363,8 +1363,8 @@ aux.traceratio.max <- function(A,B,ndim,tol=1e-10){
   if (nrow(B)!=d){
     stop("* aux.traceratio : B is not matching size of A.")
   }
-  m = as.integer(ndim)
-  r = as.integer(Matrix::rankMatrix(B))
+  m = round(ndim)
+  r = round(aux_rank(B)) # as.integer(Matrix::rankMatrix (B))
 
   # -------------------------------------------------------------
   # MAIN BRANCHING
@@ -1423,22 +1423,32 @@ aux.bicgstab <- function(A,B,xinit=NA,reltol=1e-5,maxiter=1000,
   if (any(is.na(A))||any(is.infinite(A))||any(is.na(B))||any(is.infinite(B))){
     stop("* aux.bicgstab : no NA or Inf values allowed.")
   }
-  sparseformats = c("dgCMatrix","dtCMatrix","dsCMatrix")
-  if ((class(A)%in%sparseformats)||(class(B)%in%sparseformats)||(class(preconditioner)%in%sparseformats)){
-    A = Matrix(A,sparse=TRUE)
-    B = Matrix(B,sparse=TRUE)
-    preconditioner = Matrix(preconditioner,sparse=TRUE)
-    sparseflag = TRUE
+
+  A = matrix(A,nrow=nrow(A))
+  if (is.vector(B)){
+    B = matrix(B,ncol=1)
   } else {
-    A = matrix(A,nrow=nrow(A))
-    if (is.vector(B)){
-      B = matrix(B)
-    } else {
-      B = matrix(B,nrow=nrow(B))
-    }
-    preconditioner = matrix(preconditioner,nrow=nrow(preconditioner))
-    sparseflag = FALSE
+    B = matrix(B,nrow=nrow(B))
   }
+  preconditioner = matrix(preconditioner,nrow=nrow(preconditioner))
+  sparseflag = FALSE
+
+  # sparseformats = c("dgCMatrix","dtCMatrix","dsCMatrix")
+  # if ((class(A)%in%sparseformats)||(class(B)%in%sparseformats)||(class(preconditioner)%in%sparseformats)){
+  #   A = Matrix(A,sparse=TRUE)
+  #   B = Matrix(B,sparse=TRUE)
+  #   preconditioner = Matrix(preconditioner,sparse=TRUE)
+  #   sparseflag = TRUE
+  # } else {
+  #   A = matrix(A,nrow=nrow(A))
+  #   if (is.vector(B)){
+  #     B = matrix(B)
+  #   } else {
+  #     B = matrix(B,nrow=nrow(B))
+  #   }
+  #   preconditioner = matrix(preconditioner,nrow=nrow(preconditioner))
+  #   sparseflag = FALSE
+  # }
   # xinit
   if (is.na(xinit)){
     xinit = matrix(rnorm(ncol(A)))
@@ -1498,13 +1508,14 @@ aux.bicgstab <- function(A,B,xinit=NA,reltol=1e-5,maxiter=1000,
     iter   = array(0,c(1,ncolB))
     errors = list()
     for (i in 1:ncolB){
-      if (!sparseflag){
-        vecB = as.vector(B[,i])
-        tmpres = linsolve.bicgstab.single(A,vecB,xinit,reltol,maxiter,preconditioner)
-      } else {
-        vecB = Matrix(B[,i],sparse=TRUE)
-        tmpres = linsolve.bicgstab.single.sparse(A,vecB,xinit,reltol,maxiter,preconditioner)
-      }
+      vecB = as.vector(B[,i])
+      tmpres = linsolve.bicgstab.single(A,vecB,xinit,reltol,maxiter,preconditioner)
+      # if (!sparseflag){
+      #
+      # } else {
+      #   vecB = Matrix (B[,i],sparse=TRUE)
+      #   tmpres = linsolve.bicgstab.single.sparse(A,vecB,xinit,reltol,maxiter,preconditioner)
+      # }
       x[,i]        = tmpres$x
       iter[i]      = tmpres$iter
       errors[[i]]  = tmpres$errors

@@ -39,7 +39,7 @@
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
+#' par(mfrow=c(3,1))
 #' plot(out1$Y, main="CNPE::5% connected")
 #' plot(out2$Y, main="CNPE::10% connected")
 #' plot(out3$Y, main="CNPE::25% connected")
@@ -104,7 +104,7 @@ do.cnpe <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","
   diagN = diag(n)
   M     = t(diagN-W)%*%(diagN-W)
   St    = (t(pX)%*%M%*%pX) + (t(pX)%*%pX)
-  r     = as.integer(Matrix::rankMatrix(St))
+  r     = round(aux_rank(St)) # as.integer(Matrix::rankMatrix (St))
   if (r < ndim){
     message("* do.cnpe : intrinsic rank of matrix St is smaller than 'ndim'.")
     ndim = r

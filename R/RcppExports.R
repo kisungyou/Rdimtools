@@ -57,6 +57,14 @@ linsolve.bicgstab.single.sparse <- function(A, b, xinit, reltol, maxiter, M) {
     .Call('_Rdimtools_single_bicgstab_sparse', PACKAGE = 'Rdimtools', A, b, xinit, reltol, maxiter, M)
 }
 
+aux_expm <- function(A) {
+    .Call('_Rdimtools_aux_expm', PACKAGE = 'Rdimtools', A)
+}
+
+aux_rank <- function(A) {
+    .Call('_Rdimtools_aux_rank', PACKAGE = 'Rdimtools', A)
+}
+
 #' @keywords internal
 methods_boxcount <- function(tX, Imin, currentr) {
     .Call('_Rdimtools_methods_boxcount', PACKAGE = 'Rdimtools', tX, Imin, currentr)

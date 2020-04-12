@@ -19,13 +19,13 @@ BEGIN_RCPP
 END_RCPP
 }
 // aux_perplexity
-Rcpp::List aux_perplexity(arma::mat& X, const double perplexity);
+Rcpp::List aux_perplexity(arma::mat& X, double perplexity);
 RcppExport SEXP _Rdimtools_aux_perplexity(SEXP XSEXP, SEXP perplexitySEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< const double >::type perplexity(perplexitySEXP);
+    Rcpp::traits::input_parameter< double >::type perplexity(perplexitySEXP);
     rcpp_result_gen = Rcpp::wrap(aux_perplexity(X, perplexity));
     return rcpp_result_gen;
 END_RCPP
@@ -167,6 +167,28 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
     Rcpp::traits::input_parameter< const arma::sp_mat >::type M(MSEXP);
     rcpp_result_gen = Rcpp::wrap(single_bicgstab_sparse(A, b, xinit, reltol, maxiter, M));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_expm
+arma::mat aux_expm(arma::mat& A);
+RcppExport SEXP _Rdimtools_aux_expm(SEXP ASEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_expm(A));
+    return rcpp_result_gen;
+END_RCPP
+}
+// aux_rank
+int aux_rank(arma::mat& A);
+RcppExport SEXP _Rdimtools_aux_rank(SEXP ASEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    rcpp_result_gen = Rcpp::wrap(aux_rank(A));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -744,6 +766,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_geigen", (DL_FUNC) &_Rdimtools_aux_geigen, 2},
     {"_Rdimtools_single_bicgstab", (DL_FUNC) &_Rdimtools_single_bicgstab, 6},
     {"_Rdimtools_single_bicgstab_sparse", (DL_FUNC) &_Rdimtools_single_bicgstab_sparse, 6},
+    {"_Rdimtools_aux_expm", (DL_FUNC) &_Rdimtools_aux_expm, 1},
+    {"_Rdimtools_aux_rank", (DL_FUNC) &_Rdimtools_aux_rank, 1},
     {"_Rdimtools_methods_boxcount", (DL_FUNC) &_Rdimtools_methods_boxcount, 3},
     {"_Rdimtools_aux_numderiv", (DL_FUNC) &_Rdimtools_aux_numderiv, 2},
     {"_Rdimtools_handy_plus", (DL_FUNC) &_Rdimtools_handy_plus, 1},

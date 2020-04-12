@@ -160,7 +160,8 @@ do.cge <- function(X, label, ndim=2, type=c("proportion",0.1),
 #' @noRd
 cge.minimaladd <- function(D0){
   ntgt = nrow(D0)
-  if (as.integer(Matrix::rankMatrix(D0)) >= ntgt){
+  rD0  = round(aux_rank(D0))
+  if (rD0 >= ntgt){
     output = list()
     output$D0 = D0
     output$alpha = 0.0
@@ -171,7 +172,7 @@ cge.minimaladd <- function(D0){
     while (hello){
       nice  = D0 + alpha*diag(ntgt)
       alpha = alpha + 0.1
-      hello = (as.integer(Matrix::rankMatrix(nice)) < ntgt)
+      hello = (round(aux_rank(nice)) < ntgt)
     }
     output = list()
     output$D0 = D0+alpha*diag(ntgt)

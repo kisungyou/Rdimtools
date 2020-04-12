@@ -11,6 +11,7 @@
  *    aux_scatter_pairwise : sum{sum{(x_i-x_j)(x_i-x_j)^T}}
  * 10. aux_geigen : yes, with with decreasing order
  * 11. bicgstab methods
+ * 12. aux_rank & aux_expm
  */
 
 #include <RcppArmadillo.h>
@@ -111,7 +112,7 @@ Rcpp::List aux_preprocess(arma::mat& X, const int flag){
  * 2. aux_perplexity : given target perplexity, compute P
  */
 // [[Rcpp::export]]
-Rcpp::List aux_perplexity(arma::mat& X,const double perplexity){
+Rcpp::List aux_perplexity(arma::mat& X, double perplexity){
   // 2-1. basic settings
   const int d = X.n_rows;
   const int n = X.n_cols;
@@ -848,4 +849,14 @@ Rcpp::List single_bicgstab_sparse(const arma::sp_mat A, const arma::sp_mat b, ar
 }
 
 
-
+/*
+ * 12. aux_rank & aux_expm
+ */
+// [[Rcpp::export]]
+arma::mat aux_expm(arma::mat& A){
+  return(arma::expmat(A));
+}
+// [[Rcpp::export]]
+int aux_rank(arma::mat& A){
+  return(static_cast<int>(arma::accu(arma::rank(A))));
+}

@@ -95,7 +95,7 @@ do.kudp <- function(X, ndim=2, type=c("proportion",0.1),
   # 1. compute St
   tmpSt = kudp_ST(pX)
   # 2. target rank
-  tmpndim = min((max(as.integer(Matrix::rankMatrix(tmpSt)), (ndim+1))), p)
+  tmpndim = min((max(round(aux_rank(tmpSt)), (ndim+1))), p)
   # 3. perform PCA
   if (tmpndim==p){
     proj_first = diag(rep(1,p))
