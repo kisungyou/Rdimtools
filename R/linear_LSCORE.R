@@ -6,6 +6,7 @@
 #' the algorithm selects variables with smallest scores.
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
@@ -24,6 +25,7 @@
 #' plot(out2$Y, col=iris.lab, main="bandwidth=1")
 #' plot(out3$Y, col=iris.lab, main="bandwidth=10")
 #' par(opar)
+#' }
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.

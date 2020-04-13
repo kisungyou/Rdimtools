@@ -26,6 +26,7 @@
 #'
 #' @seealso \code{\link{do.sda}}
 #' @examples
+#' \donttest{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=33)-100
 #' dt2  = aux.gensamples(n=33)
@@ -51,6 +52,7 @@
 #' plot(out1$Y, col=label, main="true projection")
 #' plot(out2$Y, col=label, main="20% missing labels")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{cai_semisupervised_2007}{Rdimtools}

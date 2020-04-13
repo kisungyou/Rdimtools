@@ -24,6 +24,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
@@ -44,6 +45,7 @@
 #' plot(out3$Y, col=iris.lab, main="diff/lambda=0.5")
 #' plot(out4$Y, col=iris.lab, main="diff/lambda=1")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_constraint_2008a}{Rdimtools}

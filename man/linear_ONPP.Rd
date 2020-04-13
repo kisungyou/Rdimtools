@@ -39,6 +39,7 @@ It constructs a weighted data graph from LLE method. Also, it develops LPP metho
 the structure of local neighborhoods.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -56,6 +57,7 @@ plot(out1$Y, col=label, main="ONPP::5\% connectivity")
 plot(out2$Y, col=label, main="ONPP::10\% connectivity")
 plot(out3$Y, col=label, main="ONPP::25\% connectivity")
 par(opar)
+}
 
 }
 \references{

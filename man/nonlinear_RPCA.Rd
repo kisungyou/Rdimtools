@@ -39,6 +39,7 @@ it should be considered as \emph{preprocessing} procedure of denoising. Note tha
 as kind of a new data matrix for any manifold learning scheme to be applied.
 }
 \examples{
+\donttest{
 ## Load Iris data and put some noise
 data(iris)
 noise = 0.2
@@ -63,6 +64,7 @@ plot(out1$Y, col=label, main="RPCA+PCA::lambda=0.1")
 plot(out2$Y, col=label, main="RPCA+PCA::lambda=1")
 plot(out3$Y, col=label, main="RPCA+PCA::lambda=10")
 par(opar)
+}
 
 }
 \references{

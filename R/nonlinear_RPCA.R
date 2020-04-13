@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## Load Iris data and put some noise
 #' data(iris)
 #' noise = 0.2
@@ -46,6 +47,7 @@
 #' plot(out2$Y, col=label, main="RPCA+PCA::lambda=1")
 #' plot(out3$Y, col=label, main="RPCA+PCA::lambda=10")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{candes_robust_2011}{Rdimtools}

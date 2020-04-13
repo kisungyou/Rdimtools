@@ -41,6 +41,7 @@ ranking features by both representativeness and diversity. Self-representation c
 the degree of inter-feature similarity to enhance diversity from the chosen features.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -60,6 +61,7 @@ plot(out2$Y, main="(lbd1,lbd2)=(1,5)", col=label,pch=19, cex=0.5)
 plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label,pch=19, cex=0.5)
 plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label,pch=19, cex=0.5)
 par(opar)
+}
 
 }
 \references{

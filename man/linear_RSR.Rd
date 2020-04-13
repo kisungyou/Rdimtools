@@ -39,6 +39,7 @@ where \eqn{\|W\|_{2,1} = \sum_{i=1}^{m} \|W_{i:} \|_2} is an \eqn{\ell_{2,1}} no
 row-wise sparsity constraint.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -51,11 +52,12 @@ out3 = do.rsr(X, lbd=10)
 
 #### visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(1,3))
+par(mfrow=c(3,1))
 plot(out1$Y, col=label, main="RSR::lbd=0.1")
 plot(out2$Y, col=label, main="RSR::lbd=1")
 plot(out3$Y, col=label, main="RSR::lbd=10")
 par(opar)
+}
 
 }
 \references{

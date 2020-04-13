@@ -40,6 +40,7 @@ Three types of ranking methods that appeared in the paper are available where
 the graph laplacian is built via class label information.
 }
 \examples{
+\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -58,6 +59,7 @@ plot(out1$Y, col=iris.lab, main="SPECS::method1")
 plot(out2$Y, col=iris.lab, main="SPECS::method2")
 plot(out3$Y, col=iris.lab, main="SPECS::method3")
 par(opar)
+}
 
 }
 \references{

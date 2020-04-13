@@ -30,7 +30,6 @@ Canonical Correlation Analysis (CCA) is similar to Partial Least Squares (PLS), 
 on maximizing covariance, CCA maximizes the correlation. This difference sometimes incurs quite distinct results compared to PLS.
 For algorithm aspects, we used recursive gram-schmidt orthogonalization in conjunction with extracting projection vectors under
 eigen-decomposition formulation, as the problem dimension matters only up to original dimensionality.
-For more details, see \href{https://en.wikipedia.org/wiki/Canonical_correlation}{Wikipedia entry} on Canonical Correlation.
 }
 \examples{
 \donttest{

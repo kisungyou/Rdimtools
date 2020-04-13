@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -39,6 +40,7 @@
 #' plot(out2$Y, col=label, main="ONPP::10% connectivity")
 #' plot(out3$Y, col=label, main="ONPP::25% connectivity")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{kokiopoulou_orthogonal_2007}{Rdimtools}

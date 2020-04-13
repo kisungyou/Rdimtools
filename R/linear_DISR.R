@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -41,6 +42,7 @@
 #' plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label,pch=19, cex=0.5)
 #' plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label,pch=19, cex=0.5)
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{liu_unsupervised_2017}{Rdimtools}
