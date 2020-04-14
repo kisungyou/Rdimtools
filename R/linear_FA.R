@@ -1,8 +1,7 @@
 #' Exploratory Factor Analysis
 #'
-#' \code{do.fa} is an optimization-based implementation of a popular technique,
-#' \emph{Exploratory Factor Analysis}. \href{https://en.wikipedia.org/wiki/Factor_analysis#Exploratory_factor_analysis_versus_principal_components_analysis}{This link}
-#' explains similarities and intrinsic differences between a closely-related method of Principal Component Analysis (PCA).
+#' \code{do.fa} is an optimization-based implementation of a popular technique for Exploratory Data Analysis.
+#' It is closely related to principal component analysis.
 #'
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -24,8 +23,10 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate data
-#' X = aux.gensamples(n=496)
+#' ## use iris data
+#' data(iris)
+#' X = as.matrix(iris[,1:4])
+#' lab = as.factor(iris[,5])
 #'
 #' ## 1. use centered data
 #' output1 <- do.fa(X,ndim=2)
@@ -38,10 +39,10 @@
 #'
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,3))
-#' plot(output1$Y, main="FA::centered")
-#' plot(output2$Y, main="FA::decorrelated")
-#' plot(output3$Y, main="FA::whitened")
+#' par(mfrow=c(3,1))
+#' plot(output1$Y, col=lab, main="FA::centered")
+#' plot(output2$Y, col=lab, main="FA::decorrelated")
+#' plot(output3$Y, col=lab, main="FA::whitened")
 #' par(opar)
 #' }
 #'

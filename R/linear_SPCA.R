@@ -49,7 +49,7 @@
 #'
 #' \insertRef{daspremont_direct_2007}{Rdimtools}
 #'
-#' \insertRef{ma_alternating_2013}{ADMM}
+#' \insertRef{ma_alternating_2013}{Rdimtools}
 #'
 #' @seealso \code{\link{do.pca}}
 #' @author Kisung You
