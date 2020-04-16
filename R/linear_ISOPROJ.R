@@ -26,20 +26,22 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate data
-#' X <- aux.gensamples(n=28)
+#' ## use iris data
+#' data(iris)
+#' X   <- as.matrix(iris[,1:4])
+#' lab <- as.factor(iris[,5])
 #'
-#' ## 1. connecting 10% of data for graph construction.
-#' output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.10))
+#' ## 1. connecting 25% of data for graph construction.
+#' output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
 #'
-#' ## 2. constructing 25%-connected graph
-#' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
+#' ## 2. constructing 50%-connected graph
+#' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.50))
 #'
 #' ## Visualize two different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(output1$Y, main="10%")
-#' plot(output2$Y, main="25%")
+#' plot(output1$Y, main="25%", col=lab, pch=19, cex=0.8)
+#' plot(output2$Y, main="50%", col=lab, pch=19, cex=0.8)
 #' par(opar)
 #' }
 #'
@@ -48,7 +50,7 @@
 #'
 #' @rdname linear_ISOPROJ
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
                        symmetric=c("union","intersect","asymmetric"),

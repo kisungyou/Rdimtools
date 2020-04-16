@@ -44,13 +44,13 @@
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, main="PCA")
-#' plot(out2$Y, main="BPCA")
+#' plot(out1$Y, pch=19, cex=0.8, main="PCA")
+#' plot(out2$Y, pch=19, cex=0.8, main="BPCA")
 #' par(opar)
 #' }
 #'
 #' @rdname linear_BPCA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     reltol=1e-4, maxiter=123){

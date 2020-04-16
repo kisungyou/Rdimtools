@@ -48,6 +48,7 @@ in a log-equidistant manner.
 \examples{
 \donttest{
 ## generate three different dataset
+set.seed(1)
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
 X3 = aux.gensamples(dname="twinpeaks")
