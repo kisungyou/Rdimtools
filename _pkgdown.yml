@@ -1,0 +1,49 @@
+# themes: https://bootswatch.com/ {flatly, united}
+# icons:  https://fontawesome.com/
+
+url: https://kyoustat.com/Rdimtools
+
+destination: docs
+
+template:
+  params:
+    bootswatch: flatly
+    ganalytics: UA-163713603-1
+
+navbar:
+  title: "Rdimtools"
+  left:
+    - text: "Functions"
+      href: reference/index.html
+    - text: "News"
+      href: news/index.html
+  right:
+    - icon: fa-twitter
+      href: https://twitter.com/kyoustat
+    - icon: fa-github
+      href: https://github.com/kyoustat/Rdimtools
+    - icon: fa-envelope
+      href: mailto:kyoustat@gmail.com
+
+reference:
+  - title: "(1) Dimension Estimation"
+    desc: >
+      Intrinsic dimension estimation algorithms try to estimate the rank/dimension of low-dimensional
+      structure that is embedded in high-dimensional space.
+    contents:
+      - starts_with("est.")
+  - title: "(2) Dimension Reduction"
+    desc: >
+      Functions below are finding low-dimensional embedding of the observed data
+      according to the principle upon which each method is relied.
+    contents:
+      - starts_with("linear_")
+  - title: "(3) Out-of-sample Prediction"
+    contents:
+      - starts_with("oos.")
+  - title: "(4) Auxiliary Functions"
+    contents:
+      - starts_with("aux.")
+  - title: "Introduction to the package"
+    contents:
+      - starts_with("package")

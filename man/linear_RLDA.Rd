@@ -32,10 +32,11 @@ Regularized Linear Discriminant Analysis (RLDA) adopts such idea to stabilize
 eigendecomposition in LDA formulation.
 }
 \examples{
+\dontrun{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+label = as.factor(iris$Species)
 
 ## try different regularization parameters
 out1 <- do.rlda(X, label, alpha=0.001)
@@ -49,6 +50,7 @@ plot(out1$Y, col=label, main="RLDA::alpha=0.1")
 plot(out2$Y, col=label, main="RLDA::alpha=1")
 plot(out3$Y, col=label, main="RLDA::alpha=10")
 par(opar)
+}
 
 }
 \references{

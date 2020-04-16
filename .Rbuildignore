@@ -5,3 +5,6 @@
 ^\.travis\.yml$
 ^list_do\.ods$
 ^LICENSE\.md$
+^_pkgdown\.yml$
+^docs$
+^pkgdown$

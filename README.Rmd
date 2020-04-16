@@ -7,7 +7,7 @@ html_preview: false
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rdimtools : Dimension Reduction and Estimation Methods
+# Rdimtools <a href='https://kyoustat.com/Rdimtools'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
 [![Travis-CI Build Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://travis-ci.org/kyoustat/Rdimtools)

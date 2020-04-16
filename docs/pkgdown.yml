@@ -1,0 +1,9 @@
+pandoc: 1.19.2.1
+pkgdown: 1.5.1
+pkgdown_sha: ~
+articles: []
+last_built: 2020-04-16T00:45Z
+urls:
+  reference: https://kyoustat.com/Rdimtools/reference
+  article: https://kyoustat.com/Rdimtools/articles
+

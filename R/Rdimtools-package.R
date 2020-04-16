@@ -211,7 +211,7 @@
 #'
 #'
 #' @docType package
-#' @name Rdimtools
+#' @name package-Rdimtools
 #' @aliases Rdimtools-package
 #' @import Rcsdp
 #' @import Rdpack
