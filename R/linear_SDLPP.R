@@ -51,6 +51,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_SDLPP
+#' @concept linear_methods 
 #' @export
 do.sdlpp <- function(X, ndim=2, t = 1.0,
                      preprocess=c("center","scale","cscale","decorrelate","whiten")){

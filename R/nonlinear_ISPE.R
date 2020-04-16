@@ -47,6 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_ISPE
+#' @concept nonlinear_methods 
 #' @export
 do.ispe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")},
                    C = 50, S = 50, lambda = 1, drate=0.9, cutoff = 1.0){

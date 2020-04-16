@@ -47,6 +47,7 @@
 #' @seealso \code{\link{do.rsr}}
 #' @rdname linear_LSPE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.lspe <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                     alpha=1.0, beta=1.0, bandwidth=1.0){

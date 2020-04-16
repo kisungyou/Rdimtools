@@ -50,6 +50,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_REE
+#' @concept nonlinear_methods 
 #' @export
 do.ree <- function(X, ndim=2, W=NA,
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

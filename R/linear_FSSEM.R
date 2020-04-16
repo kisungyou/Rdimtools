@@ -58,6 +58,7 @@
 #'
 #' @rdname linear_FSSEM
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.fssem <- function(X, ndim=2, max.k=10, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

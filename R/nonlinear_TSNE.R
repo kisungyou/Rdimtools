@@ -55,6 +55,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_TSNE
+#' @concept nonlinear_methods 
 #' @export
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                     jitter=0.3,jitterdecay=0.99,momentum=0.5,

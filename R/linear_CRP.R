@@ -44,6 +44,7 @@
 #' @seealso \code{\link{do.spp}}
 #' @author Kisung You
 #' @rdname linear_CRP
+#' @concept linear_methods 
 #' @export
 do.crp <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"), lambda=1.0){
   #------------------------------------------------------------------------

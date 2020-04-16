@@ -54,6 +54,7 @@
 #' @seealso \code{\link{do.pca}}
 #' @author Kisung You
 #' @rdname linear_SPCA
+#' @concept linear_methods 
 #' @export
 do.spca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     mu=1.0, rho=1.0, abstol=1e-4, reltol=1e-2, maxiter=1000){

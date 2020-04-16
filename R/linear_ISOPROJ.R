@@ -48,6 +48,7 @@
 #'
 #' @rdname linear_ISOPROJ
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
                        symmetric=c("union","intersect","asymmetric"),

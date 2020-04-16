@@ -73,3 +73,4 @@ par(opar)
 \references{
 \insertRef{li_supervised_2009}{Rdimtools}
 }
+\concept{linear_methods}

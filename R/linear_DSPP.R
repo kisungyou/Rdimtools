@@ -49,6 +49,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_DSPP
+#' @concept linear_methods 
 #' @export
 do.dspp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     lambda=1.0, rho=1.0){

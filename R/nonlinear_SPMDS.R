@@ -55,6 +55,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_SPMDS
+#' @concept nonlinear_methods 
 #' @export
 do.spmds <- function(X, ndim=2, neigs=max(2,nrow(X)/10), ratio=0.1,
                      preprocess=c("null","center","scale","cscale","decorrelate","whiten"),

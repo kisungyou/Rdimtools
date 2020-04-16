@@ -52,6 +52,7 @@
 #' @seealso \code{\link{do.lpp}}, \code{\link{do.slpp}}, \code{\link{do.extlpp}}
 #' @author Kisung You
 #' @rdname linear_ESLPP
+#' @concept linear_methods 
 #' @export
 do.eslpp <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                       preprocess=c("center","scale","cscale","decorrelate","whiten")){

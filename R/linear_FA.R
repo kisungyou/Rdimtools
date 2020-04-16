@@ -51,6 +51,7 @@
 #'
 #' @rdname linear_FA
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.fa <- function(X,ndim=2,preprocess=c("center","scale","cscale","decorrelate","whiten"),
                   maxiter=1000,tolerance=1e-6){

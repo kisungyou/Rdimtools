@@ -64,6 +64,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_PLP
+#' @concept nonlinear_methods 
 #' @export
 do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),type=c("proportion",0.20)){
   # 1. typecheck is always first step to perform.

@@ -43,6 +43,7 @@
 #' @seealso \code{\link{do.pflpp}}
 #' @author Kisung You
 #' @rdname linear_ELPP2
+#' @concept linear_methods 
 #' @export
 do.elpp2 <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

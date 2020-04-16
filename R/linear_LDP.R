@@ -52,6 +52,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LDP
+#' @concept linear_methods 
 #' @export
 do.ldp <- function(X, label, ndim=2, type=c("proportion",0.1),
                    preprocess=c("center","scale","cscale","decorrelate","whiten"), beta=10.0){

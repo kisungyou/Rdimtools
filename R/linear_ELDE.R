@@ -40,7 +40,7 @@
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(3,1))
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, main="ELDE::bandwidth=1")
 #' plot(out2$Y, col=label, main="ELDE::bandwidth=10")
 #' plot(out3$Y, col=label, main="ELDE::bandwidth=100")
@@ -53,6 +53,7 @@
 #' @seealso \code{\link{do.lde}}
 #' @rdname linear_ELDE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.elde <- function(X, label, ndim=2, t=1.0, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2)){

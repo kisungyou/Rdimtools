@@ -49,6 +49,7 @@
 #' @seealso \code{\link{do.olpp}}
 #' @rdname linear_NOLPP
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
                      preprocess=c("null","center","scale","cscale","decorrelate","whiten"),

@@ -49,7 +49,8 @@
 #' out7 = do.enet(X, y, lambda1=0.1, lambda2=10)
 #' out8 = do.enet(X, y, lambda1=1,   lambda2=10)
 #' out9 = do.enet(X, y, lambda1=10,  lambda2=10)
-#'
+#' }
+#' \dontrun{
 #' ## visualize
 #' ## ( , ) denotes two regularization parameters
 #' opar <- par(no.readonly=TRUE)
@@ -71,6 +72,7 @@
 #'
 #' @rdname linear_ENET
 #' @author Kisung You
+#' @concept linear_methods
 #' @export
 do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     ycenter=FALSE, lambda1=1.0, lambda2=1.0){

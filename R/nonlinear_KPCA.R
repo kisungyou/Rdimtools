@@ -47,6 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KPCA
+#' @concept nonlinear_methods 
 #' @export
 do.kpca <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),kernel=c("gaussian",1.0)){
   # 1. typecheck is always first step to perform.

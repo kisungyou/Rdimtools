@@ -50,6 +50,7 @@
 #' @seealso \code{\link{do.mvp}}
 #' @author Kisung You
 #' @rdname linear_KMVP
+#' @concept linear_methods 
 #' @export
 do.kmvp <- function(X, label, ndim=2,
                     preprocess=c("center","scale","cscale","decorrelate","whiten"),

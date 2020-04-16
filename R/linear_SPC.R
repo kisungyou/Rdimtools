@@ -57,6 +57,7 @@
 #'
 #' @rdname linear_SPC
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.spc <- function(X, response, ndim=2, preprocess=c("center","whiten","decorrelate"), threshold=0.1){
   #------------------------------------------------------------------------

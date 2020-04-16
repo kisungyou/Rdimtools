@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPMIP
+#' @concept linear_methods 
 #' @export
 do.lpmip <- function(X, ndim=2, type=c("proportion",0.1),
                      preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

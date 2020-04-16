@@ -46,6 +46,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MVP
+#' @concept linear_methods 
 #' @export
 do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

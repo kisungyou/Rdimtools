@@ -50,6 +50,7 @@
 #' \insertRef{wu_local_2007}{Rdimtools}
 #'
 #' @rdname linear_LLP
+#' @concept linear_methods 
 #' @export
 do.llp <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
                    preprocess = c("center","scale","cscale","decorrelate","whiten"), t=1.0, lambda=1.0){

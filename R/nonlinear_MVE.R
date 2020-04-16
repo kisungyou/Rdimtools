@@ -50,6 +50,7 @@
 #' @seealso \code{\link{do.mvu}}
 #' @author Kisung You
 #' @rdname nonlinear_MVE
+#' @concept nonlinear_methods 
 #' @export
 do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

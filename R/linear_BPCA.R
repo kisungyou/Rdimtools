@@ -50,6 +50,7 @@
 #' }
 #'
 #' @rdname linear_BPCA
+#' @concept linear_methods 
 #' @export
 do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     reltol=1e-4, maxiter=123){

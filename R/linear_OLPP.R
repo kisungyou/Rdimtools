@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -50,6 +50,7 @@
 #' @seealso \code{\link{do.lpp}}
 #' @author Kisung You
 #' @rdname linear_OLPP
+#' @concept linear_methods 
 #' @export
 do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
                     weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten"),t=1.0){

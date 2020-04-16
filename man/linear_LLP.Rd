@@ -73,3 +73,4 @@ par(opar)
 \references{
 \insertRef{wu_local_2007}{Rdimtools}
 }
+\concept{linear_methods}

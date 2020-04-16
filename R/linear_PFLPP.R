@@ -37,6 +37,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_PFLPP
+#' @concept linear_methods 
 #' @export
 do.pflpp <- function(X, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

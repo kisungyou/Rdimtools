@@ -44,6 +44,7 @@
 #' @seealso \code{\link{do.sne}}
 #' @author Kisung You
 #' @rdname nonlinear_LAMP
+#' @concept nonlinear_methods 
 #' @export
 do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   ########################################################################

@@ -44,6 +44,7 @@
 #' @references
 #' \insertRef{kruskal_multidimensional_1964}{Rdimtools}
 #'
+#' @concept linear_methods 
 #' @export
 #' @rdname linear_MDS
 #' @author Kisung You

@@ -50,6 +50,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MSD
+#' @concept linear_methods 
 #' @export
 do.msd <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"), C=1.0){
   #------------------------------------------------------------------------

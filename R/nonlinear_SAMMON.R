@@ -47,6 +47,7 @@
 #'
 #' @rdname nonlinear_SAMMON
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.sammon <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                       initialize=c("pca","random")){

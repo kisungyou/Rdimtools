@@ -53,6 +53,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MMP
+#' @concept linear_methods 
 #' @export
 do.mmp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    numk=max(ceiling(nrow(X)/10),2), alpha=0.5, gamma=50){

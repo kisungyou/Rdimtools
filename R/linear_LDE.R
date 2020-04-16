@@ -50,6 +50,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LDE
+#' @concept linear_methods 
 #' @export
 do.lde <- function(X, label, ndim=2, t=1.0, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten")){

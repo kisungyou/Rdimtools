@@ -45,6 +45,7 @@ geodesic distance in original data dimension and mimicks the behavior in the tar
 Embedded manifold is approximated by graph construction as of ISOMAP. Since it involves
 singular value decomposition and guesses intrinsic dimension by the number of positive singular values
 from the decomposition of data matrix, it automatically corrects the target dimension accordingly." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -204,17 +205,17 @@ ISBN 978-1-57735-323-2.</p>
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>28</span>)
 
 <span class='co'>## 1. connecting 10% of data for graph construction.</span>
-<span class='no'>output1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.isoproj</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.10</span>))</div><div class='output co'>#&gt; <span class='error'>Error in aux.bicgstab(RHS, LHS, verbose = FALSE): * aux.bicgstab : no NA or Inf values allowed.</span></div><div class='input'>
+<span class='no'>output1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.isoproj</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.10</span>))
+
 <span class='co'>## 2. constructing 25%-connected graph</span>
 <span class='no'>output2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.isoproj</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.25</span>))
 
 <span class='co'>## Visualize two different projections</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"10%"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(output1$Y, main = "10%"): object 'output1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"25%"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div><div class='img'><img src='linear_ISOPROJ-1.png' alt='' width='700' height='433' /></div><div class='input'># }
-
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"10%"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"25%"</span>)</div><div class='img'><img src='linear_ISOPROJ-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

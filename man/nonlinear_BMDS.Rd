@@ -57,16 +57,16 @@ X     = as.matrix(iris[,1:4])
 label = as.factor(iris$Species)
 
 ## try different maximum number of iterations
-out1 <- do.bmds(X, ndim=2, mc.iter=100)
-out2 <- do.bmds(X, ndim=2, mc.iter=500)
-out3 <- do.bmds(X, ndim=2, mc.iter=1000)
+out1 <- do.bmds(X, ndim=2, mc.iter=5)
+out2 <- do.bmds(X, ndim=2, mc.iter=10)
+out3 <- do.bmds(X, ndim=2, mc.iter=50)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="BMDS::iter=100",  col=label)
-plot(out2$Y, main="BMDS::iter=500",  col=label)
-plot(out3$Y, main="BMDS::iter=1000", col=label)
+plot(out1$Y, main="BMDS::iter=5",  col=label)
+plot(out2$Y, main="BMDS::iter=10",  col=label)
+plot(out3$Y, main="BMDS::iter=50", col=label)
 par(opar)
 }
 
@@ -77,3 +77,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{nonlinear_methods}

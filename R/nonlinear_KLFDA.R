@@ -55,6 +55,7 @@
 #' @seealso \code{\link{do.lfda}}
 #' @author Kisung You
 #' @rdname nonlinear_KLFDA
+#' @concept nonlinear_methods 
 #' @export
 do.klfda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                      type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),

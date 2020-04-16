@@ -43,6 +43,7 @@
 #' @seealso \code{\link{do.pls}}
 #' @author Kisung You
 #' @rdname linear_CCA
+#' @concept linear_methods 
 #' @export
 do.cca <- function(data1,data2,ndim=2){
   ## Preprocessing

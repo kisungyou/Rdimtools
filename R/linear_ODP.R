@@ -48,6 +48,7 @@
 #' \insertRef{li_supervised_2009}{Rdimtools}
 #'
 #' @rdname linear_ODP
+#' @concept linear_methods 
 #' @export
 do.odp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),

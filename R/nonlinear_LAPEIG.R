@@ -47,6 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LAPEIG
+#' @concept nonlinear_methods 
 #' @export
 do.lapeig <- function(X, ndim=2, type=c("proportion",0.1),
                       symmetric=c("union","intersect","asymmetric"),

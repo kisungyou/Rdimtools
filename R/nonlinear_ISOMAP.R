@@ -51,6 +51,7 @@
 #'
 #' @rdname nonlinear_ISOMAP
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.isomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
                       weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten")){

@@ -76,3 +76,4 @@ par(opar)
 \references{
 \insertRef{zhang_modified_2011}{Rdimtools}
 }
+\concept{linear_methods}

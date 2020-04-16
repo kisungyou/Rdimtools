@@ -48,6 +48,7 @@
 #' @seealso \code{\link{do.specu}}
 #' @rdname linear_SPECS
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.specs <- function(X, label, ndim=2, ranking=c("method1","method2","method3"),
                      preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

@@ -50,6 +50,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KECA
+#' @concept nonlinear_methods 
 #' @export
 do.keca <- function(X,ndim=2,kernel=c("gaussian",1.0),
                     preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MFA
+#' @concept linear_methods 
 #' @export
 do.mfa <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2)){

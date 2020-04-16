@@ -42,6 +42,7 @@
 #'
 #' @rdname linear_FSCORE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

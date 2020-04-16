@@ -51,6 +51,7 @@
 #'
 #' @rdname linear_CNPE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.cnpe <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

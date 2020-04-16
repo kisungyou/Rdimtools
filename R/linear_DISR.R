@@ -50,6 +50,7 @@
 #' @seealso \code{\link{do.rsr}}
 #' @author Kisung You
 #' @rdname linear_DISR
+#' @concept linear_methods 
 #' @export
 do.disr <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                     lbd1=1.0, lbd2=1.0){

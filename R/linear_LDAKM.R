@@ -41,6 +41,7 @@
 #' @seealso \code{\link{do.asi}}, \code{\link{do.adr}}
 #' @author Kisung You
 #' @rdname linear_LDAKM
+#' @concept linear_methods 
 #' @export
 do.ldakm <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"), maxiter=10, abstol=1e-3){
   #------------------------------------------------------------------------

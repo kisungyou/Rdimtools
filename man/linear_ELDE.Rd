@@ -63,7 +63,7 @@ out3 = do.elde(X, label, t=100)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(3,1))
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="ELDE::bandwidth=1")
 plot(out2$Y, col=label, main="ELDE::bandwidth=10")
 plot(out3$Y, col=label, main="ELDE::bandwidth=100")
@@ -80,3 +80,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{linear_methods}

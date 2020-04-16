@@ -51,6 +51,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LMDS
+#' @concept linear_methods 
 #' @export
 do.lmds <- function(X,ndim=2,ltype="random",npoints=max(nrow(X)/5,ndim+1),
                     preprocess=c("center","cscale","decorrelate","whiten")){

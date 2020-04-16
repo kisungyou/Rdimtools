@@ -48,7 +48,7 @@ It adopts PCA as preprocessing step and uses only one eigenvector at each iterat
 it might incur warning messages for solving near-singular system of linear equations.
 }
 \examples{
-\donttest{
+\dontrun{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -77,3 +77,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{linear_methods}

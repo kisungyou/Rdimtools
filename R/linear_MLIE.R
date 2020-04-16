@@ -50,6 +50,7 @@
 #'
 #' @seealso \code{\link{do.mfa}}
 #' @rdname linear_MLIE
+#' @concept linear_methods 
 #' @export
 do.mlie <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2)){

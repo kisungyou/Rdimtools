@@ -50,6 +50,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPE
+#' @concept linear_methods 
 #' @export
 do.lpe <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"), numk=max(ceiling(nrow(X)/10),2)){
   #------------------------------------------------------------------------

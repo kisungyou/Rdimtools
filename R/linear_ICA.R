@@ -54,6 +54,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_ICA
+#' @concept linear_methods 
 #' @export
 do.ica <- function(X,ndim=2,type="logcosh",tpar=1,sym=FALSE,tol=1e-6,redundancy=TRUE,maxiter=100){
   # For this, prewhitening is default

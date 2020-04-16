@@ -88,3 +88,4 @@ par(opar)
 
 \insertRef{li_very_2006}{Rdimtools}
 }
+\concept{linear_methods}

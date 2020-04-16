@@ -60,6 +60,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_NPE
+#' @concept linear_methods 
 #' @export
 do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weight=TRUE,
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

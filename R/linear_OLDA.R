@@ -39,6 +39,7 @@
 #'
 #' @rdname linear_OLDA
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.olda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

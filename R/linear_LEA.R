@@ -25,7 +25,7 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## generate samples
 #' X <- aux.gensamples(n=123)
 #'
@@ -49,6 +49,7 @@
 #' @seealso \code{\link{do.npe}}
 #' @author Kisung You
 #' @rdname linear_LEA
+#' @concept linear_methods 
 #' @export
 do.lea <- function(X, ndim=2, type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),
                    preprocess = c("center","scale","cscale","decorrelate","whiten")){

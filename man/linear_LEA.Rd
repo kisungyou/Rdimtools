@@ -44,7 +44,7 @@ is removed in order to respect original work. For 1-dimensional projection, whic
 authors provided a detour for rank correcting mechanism but it is omitted for practical reason.
 }
 \examples{
-\donttest{
+\dontrun{
 ## generate samples
 X <- aux.gensamples(n=123)
 
@@ -72,3 +72,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{linear_methods}

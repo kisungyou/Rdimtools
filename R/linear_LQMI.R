@@ -41,6 +41,7 @@
 #' @seealso \code{\link{do.kqmi}}
 #' @author Kisung You
 #' @rdname linear_LQMI
+#' @concept linear_methods 
 #' @export
 do.lqmi  <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

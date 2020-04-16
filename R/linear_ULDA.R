@@ -40,6 +40,7 @@
 #' @seealso \code{\link{do.lda}}
 #' @author Kisung You
 #' @rdname linear_ULDA
+#' @concept linear_methods 
 #' @export
 do.ulda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

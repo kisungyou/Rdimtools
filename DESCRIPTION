@@ -17,5 +17,5 @@ Imports: ADMM (>= 0.2.2), CVXR (>= 1.0), Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpac
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
 RoxygenNote: 7.1.0
 RdMacros: Rdpack
-URL: http://github.com/kyoustat/Rdimtools
+URL: http://kyoustat.com/Rdimtools
 BugReports: http://github.com/kyoustat/Rdimtools/issues

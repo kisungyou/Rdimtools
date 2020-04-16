@@ -43,6 +43,7 @@
 #' @author Kisung You
 #' @seealso \code{\link{do.lpe}}
 #' @rdname linear_SLPE
+#' @concept linear_methods 
 #' @export
 do.slpe <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

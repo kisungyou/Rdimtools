@@ -49,6 +49,7 @@
 #'
 #' @rdname linear_NONPP
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.nonpp <- function(X, ndim=2, type=c("proportion",0.1),
                      preprocess=c("null","center","decorrelate","whiten"),

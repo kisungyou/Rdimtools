@@ -54,6 +54,7 @@
 #'
 #' @rdname linear_LPFDA
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.lpfda <- function(X, label, ndim=2, type=c("proportion",0.1),
                      preprocess=c("center","scale","cscale","whiten","decorrelate"), t=10.0){

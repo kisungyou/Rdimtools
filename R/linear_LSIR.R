@@ -59,6 +59,7 @@
 #' @seealso \code{\link{do.sir}}
 #' @author Kisung You
 #' @rdname linear_LSIR
+#' @concept linear_methods 
 #' @export
 do.lsir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
                     preprocess=c("center","scale","cscale","decorrelate","whiten"),

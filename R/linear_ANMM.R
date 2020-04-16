@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_ANMM
+#' @concept linear_methods
 #' @export
 do.anmm <- function(X, label, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     No=ceiling(nrow(X)/10), Ne=ceiling(nrow(X)/10)){

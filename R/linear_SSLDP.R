@@ -55,6 +55,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_SSLDP
+#' @concept linear_methods 
 #' @export
 do.ssldp <- function(X, label, ndim=2, type=c("proportion",0.1),
                      preprocess=c("center","scale","cscale","whiten","decorrelate"), beta=0.5){

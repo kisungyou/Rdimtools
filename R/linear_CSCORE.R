@@ -50,6 +50,7 @@
 #' @seealso \code{\link{do.cscoreg}}
 #' @rdname linear_CSCORE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.cscore <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5,
                       preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

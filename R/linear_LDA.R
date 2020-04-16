@@ -56,6 +56,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LDA
+#' @concept linear_methods 
 #' @export
 do.lda <- function(X, label, ndim=2){
   ## Preprocessing

@@ -50,6 +50,7 @@
 #' \insertRef{pearson_liii_1901}{Rdimtools}
 #'
 #' @rdname linear_PCA
+#' @concept linear_methods 
 #' @export
 do.pca <- function(X,ndim="auto",cor=FALSE,
                    preprocess=c("center","scale","cscale","decorrelate","whiten"),varratio=0.9){

@@ -43,6 +43,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_RPCAG
+#' @concept linear_methods 
 #' @export
 do.rpcag <- function(X, ndim=2, k=5,
                      preprocess=c("center","scale","cscale","whiten","decorrelate")){

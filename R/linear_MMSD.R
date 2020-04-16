@@ -49,6 +49,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MMSD
+#' @concept linear_methods 
 #' @export
 do.mmsd <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"), C=1.0){
   #------------------------------------------------------------------------

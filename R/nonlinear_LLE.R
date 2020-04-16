@@ -59,6 +59,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LLE
+#' @concept nonlinear_methods 
 #' @export
 do.lle <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,
                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
