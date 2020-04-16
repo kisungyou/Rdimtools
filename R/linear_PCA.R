@@ -3,20 +3,13 @@
 #' \code{do.pca} performs a classical principal component analysis (PCA) using
 #' \code{RcppArmadillo} package for faster and efficient computation.
 #'
-#' A combination of \code{ndim="auto"} and \code{varratio} options is to
-#' automatically decide the target dimension based on cumulative sum of
-#' variance. Measured by summation of top eigenvalues from sample covariance,
-#' we use the minimal summation to be larger than \code{varratio}.
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param ndim an integer-valued target dimension or" "auto" option using \emph{varratio.}
+#' @param ndim an integer-valued target dimension.
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
 #' and \code{TRUE} for correlation matrix.
 #' @param preprocess an option for preprocessing the data. This supports three methods,
 #' where default is "center". See also \code{\link{aux.preprocess}} for more details.
-#' @param varratio a value in (0,1]. This value is only used when \code{ndim} is
-#' chosen as "auto".
 #'
 #' @return a named list containing
 #' \describe{
@@ -50,10 +43,10 @@
 #' \insertRef{pearson_liii_1901}{Rdimtools}
 #'
 #' @rdname linear_PCA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
-do.pca <- function(X,ndim="auto",cor=FALSE,
-                   preprocess=c("center","scale","cscale","decorrelate","whiten"),varratio=0.9){
+do.pca <- function(X,ndim=2,cor=FALSE,
+                   preprocess=c("center","scale","cscale","decorrelate","whiten")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
 
@@ -84,7 +77,8 @@ do.pca <- function(X,ndim="auto",cor=FALSE,
 
 
   # 4. branching
-  if (ndim=="auto"){
+  if (all(ndim=="auto")){
+    varratio = 0.1
     if (!is.numeric(varratio)||(varratio>1)||(varratio<=0)){
       stop("* do.pca : 'varratio' should be in (0,1]")
     }

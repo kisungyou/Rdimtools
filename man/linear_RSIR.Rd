@@ -68,19 +68,13 @@ y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
 ## use default number of slices
 out1 = do.rsir(X, y, regmethod="Ridge")
 out2 = do.rsir(X, y, regmethod="Tikhonov")
-out3 = do.rsir(X, y, regmethod="PCA")
-out4 = do.rsir(X, y, regmethod="PCARidge")
-out5 = do.rsir(X, y, regmethod="PCATikhonov")
 outsir = do.sir(X, y)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(2,3))
+par(mfrow=c(1,3))
 plot(out1$Y,   main="RSIR::Ridge")
 plot(out2$Y,   main="RSIR::Tikhonov")
-plot(out3$Y,   main="RSIR::PCA")
-plot(out4$Y,   main="RSIR::PCA+Ridge")
-plot(out5$Y,   main="RSIR::PCA+Tikhonov")
 plot(outsir$Y, main="standard SIR")
 par(opar)
 }

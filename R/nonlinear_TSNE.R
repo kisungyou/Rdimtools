@@ -16,7 +16,6 @@
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param pca whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.
-#' @param pcaratio proportion of variances explained in finding PCA preconditioning. See also \code{\link{do.pca}} for more details.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
 #' @param symmetric a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.
 #' @param BHuse a logical; \code{TRUE} to use Barnes-Hut approximation. See \code{\link[Rtsne]{Rtsne}} for more details.
@@ -55,14 +54,15 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_TSNE
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                     jitter=0.3,jitterdecay=0.99,momentum=0.5,
                     preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
-                    pca=TRUE,pcaratio=0.90,pcascale=FALSE,symmetric=FALSE,
+                    pca=TRUE,pcascale=FALSE,symmetric=FALSE,
                     BHuse=TRUE, BHtheta=0.25){
   # 1. typecheck is always first step to perform.
+  pcaratio=0.90
   aux.typecheck(X)
   #   1-1. (integer) ndim
   if (!is.numeric(ndim)||(ndim<1)||(ndim>ncol(X))){
@@ -121,7 +121,8 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     stop("* do.tsne : pcascale is either TRUE or FALSE.")
   }
   if (pcaflag){
-    pcaout = do.pca(pX,ndim="auto",cor=scaleflag,preprocess="center",varratio=pcaratio)
+    pcadim = ceiling((ncol(pX) + ndim)/2)
+    pcaout = do.pca(pX,ndim=pcadim,cor=scaleflag,preprocess="center")
     if (ncol(pcaout$Y)<=ndim){
       message("* do.tsne : PCA scaling has gone too far.")
       message("* do.tsne : Pass non-scaled data to t-SNE algortihm.")

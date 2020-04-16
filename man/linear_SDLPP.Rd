@@ -46,17 +46,15 @@ label = as.integer(iris$Species)
 
 ## compare with PCA
 out1 <- do.pca(X,ndim=2)
-out2 <- do.sdlpp(X, t=0.1)
-out3 <- do.sdlpp(X, t=1)
-out4 <- do.sdlpp(X, t=10)
+out2 <- do.sdlpp(X, t=0.01)
+out3 <- do.sdlpp(X, t=10)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(2,2))
+par(mfrow=c(1,3))
 plot(out1$Y, col=label, main="PCA")
-plot(out2$Y, col=label, main="SDLPP::t=0.1")
-plot(out3$Y, col=label, main="SDLPP::t=1")
-plot(out4$Y, col=label, main="SDLPP::t=10")
+plot(out2$Y, col=label, main="SDLPP::t=1")
+plot(out3$Y, col=label, main="SDLPP::t=10")
 par(opar)
 }
 

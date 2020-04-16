@@ -15,7 +15,6 @@ do.tsne(
   momentum = 0.5,
   preprocess = c("null", "center", "scale", "cscale", "decorrelate", "whiten"),
   pca = TRUE,
-  pcaratio = 0.9,
   pcascale = FALSE,
   symmetric = FALSE,
   BHuse = TRUE,
@@ -43,8 +42,6 @@ do.tsne(
 Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
 \item{pca}{whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.}
-
-\item{pcaratio}{proportion of variances explained in finding PCA preconditioning. See also \code{\link{do.pca}} for more details.}
 
 \item{pcascale}{a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.}
 

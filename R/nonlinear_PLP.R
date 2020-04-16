@@ -39,7 +39,7 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -64,7 +64,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_PLP
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),type=c("proportion",0.20)){
   # 1. typecheck is always first step to perform.
@@ -122,18 +122,7 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
 
   #   3-5. Piecewise Laplacian Projection
   Youtput = array(0,c(n,k))
-  #   3-5-extra : pseudoinverse
-  pseudoinv = function(X, tol = sqrt(.Machine$double.eps))
-  {
-    ## Generalized Inverse of a Matrix
-    dnx <- dimnames(X)
-    if(is.null(dnx)) dnx <- vector("list", 2)
-    s <- svd(X)
-    nz <- s$d > tol * s$d[1]
-    structure(
-      if(any(nz)) s$v[, nz] %*% (t(s$u[, nz])/s$d[nz]) else X,
-      dimnames = dnx[2:1])
-  }
+
   for (i in 1:m){
     # 3-5-1. indexing
     idxall = which(cluster==i)
@@ -154,7 +143,7 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
 
     cA = pdataY - matrix(rep(meanA,times=nrow(pdata)),nrow=nrow(pdata),byrow=TRUE)
     cB = pctrl - matrix(rep(meanB,times=nrow(pctrl)),nrow=nrow(pctrl),byrow=TRUE)
-    C = pseudoinv(cA[1:length(idxContrl),]) %*% cB
+    C = aux.pinv(cA[1:length(idxContrl),]) %*% cB
 
     # 3-5-5. assign
     Youtput[idxall,] = (cA %*% C) + matrix(rep(meanB,times=nrow(cA)),nrow=nrow(cA),byrow=TRUE)

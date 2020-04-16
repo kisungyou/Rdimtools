@@ -161,7 +161,6 @@ distributions to measure similarity, t-SNE, as its name suggests, exploits a hea
   <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
   <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
   <span class='kw'>pca</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>pcaratio</span> <span class='kw'>=</span> <span class='fl'>0.9</span>,
   <span class='kw'>pcascale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
   <span class='kw'>BHuse</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
@@ -213,10 +212,6 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
       <td><p>whether to use PCA as preliminary step; <code>TRUE</code> for using it, <code>FALSE</code> otherwise.</p></td>
     </tr>
     <tr>
-      <th>pcaratio</th>
-      <td><p>proportion of variances explained in finding PCA preconditioning. See also <code><a href='linear_PCA.html'>do.pca</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>pcascale</th>
       <td><p>a logical; <code>FALSE</code> for using Covariance, <code>TRUE</code> for using Correlation matrix. See also <code><a href='linear_PCA.html'>do.pca</a></code> for more details.</p></td>
     </tr>
@@ -260,7 +255,10 @@ Maaten L, Hinton G (2008).
 <span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>)
 
 <span class='co'>## compare different perplexity</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>5</span>)</div><div class='output co'>#&gt; <span class='message'>* do.tsne : PCA scaling has gone too far.</span></div><div class='output co'>#&gt; <span class='message'>* do.tsne : Pass non-scaled data to t-SNE algortihm.</span></div><div class='input'><span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>10</span>)</div><div class='output co'>#&gt; <span class='message'>* do.tsne : PCA scaling has gone too far.</span></div><div class='output co'>#&gt; <span class='message'>* do.tsne : Pass non-scaled data to t-SNE algortihm.</span></div><div class='input'><span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>25</span>)</div><div class='output co'>#&gt; <span class='message'>* do.tsne : PCA scaling has gone too far.</span></div><div class='output co'>#&gt; <span class='message'>* do.tsne : Pass non-scaled data to t-SNE algortihm.</span></div><div class='input'>
+<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>10</span>)
+<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.tsne</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>25</span>)
+
 <span class='co'>## Visualize three different projections</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))

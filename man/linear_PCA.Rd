@@ -6,26 +6,22 @@
 \usage{
 do.pca(
   X,
-  ndim = "auto",
+  ndim = 2,
   cor = FALSE,
-  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten"),
-  varratio = 0.9
+  preprocess = c("center", "scale", "cscale", "decorrelate", "whiten")
 )
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
 and columns represent independent variables.}
 
-\item{ndim}{an integer-valued target dimension or" "auto" option using \emph{varratio.}}
+\item{ndim}{an integer-valued target dimension.}
 
 \item{cor}{mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
 and \code{TRUE} for correlation matrix.}
 
 \item{preprocess}{an option for preprocessing the data. This supports three methods,
 where default is "center". See also \code{\link{aux.preprocess}} for more details.}
-
-\item{varratio}{a value in (0,1]. This value is only used when \code{ndim} is
-chosen as "auto".}
 }
 \value{
 a named list containing
@@ -39,12 +35,6 @@ a named list containing
 \description{
 \code{do.pca} performs a classical principal component analysis (PCA) using
 \code{RcppArmadillo} package for faster and efficient computation.
-}
-\details{
-A combination of \code{ndim="auto"} and \code{varratio} options is to
-automatically decide the target dimension based on cumulative sum of
-variance. Measured by summation of top eigenvalues from sample covariance,
-we use the minimal summation to be larger than \code{varratio}.
 }
 \examples{
 ## use iris data

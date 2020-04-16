@@ -40,3 +40,15 @@ for (i in 1:length(Rfiles)){
     xfun::gsub_file(file=Rfiles[i],"@family", "@concept")
   }
 }
+
+
+# Correction 2. figure ----------------------------------------------------
+# mfrow=c(3,1) -> mfrow=c(1,3)
+
+Rfiles = paste0(getwd(),"/R/",list.files("R"))
+for (i in 1:length(Rfiles)){
+  val = grep("mfrow=c(3,1)",readLines(Rfiles[i]))
+  if (length(val)>0){
+    xfun::gsub_file(file=Rfiles[i],"mfrow=c(3,1)", "mfrow=c(1,3)")
+  }
+}
