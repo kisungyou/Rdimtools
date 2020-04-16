@@ -8,6 +8,13 @@
 
 <title>Piecewise Laplacian-based Projection (PLP) — do.plp • Rdimtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -42,6 +49,7 @@
 <meta property="og:title" content="Piecewise Laplacian-based Projection (PLP) — do.plp" />
 <meta property="og:description" content="do.plp is an implementation of Piecewise Laplacian-based Projection (PLP) that
 adopts two-stage reduction scheme with local approximation." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -211,17 +219,17 @@ intermittently. Such functionality is, however, sacrificed in this version.</p>
 <span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/integer.html'>as.integer</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>)
 
 <span class='co'>## try with 3 levels of connectivity</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.plp</span>(<span class='no'>X</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>))</div><div class='output co'>#&gt; <span class='error'>Error in eigvecs[, 2:(ndim + 1)]: subscript out of bounds</span></div><div class='input'><span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.plp</span>(<span class='no'>X</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.2</span>))
+<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.plp</span>(<span class='no'>X</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>))
+<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.plp</span>(<span class='no'>X</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.2</span>))
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.plp</span>(<span class='no'>X</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.5</span>))
 
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::10% connected"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(out1$Y, col = label, main = "PLP::10% connected"): object 'out1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::20% connected"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::50% connected"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div><div class='img'><img src='nonlinear_PLP-1.png' alt='' width='700' height='433' /></div><div class='input'># }
-
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::10% connected"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::20% connected"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLP::50% connected"</span>)</div><div class='img'><img src='nonlinear_PLP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

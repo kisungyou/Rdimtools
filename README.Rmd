@@ -14,7 +14,7 @@ output: github_document
 <!-- badges: end -->
 
 **Rdimtools** is an R package for dimension reduction, manifold learning, and intrnsic dimension estimation methods. We aim at building one of the most comprehensive toolbox available online. Our logo characterizes the foundational nature of dimension reduction framework; we may be 
-blind people wrangling the data to see an [elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant#John_Godfrey_Saxe). 
+blind people wrangling the data to see an [elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant). 
 
 The philosophy is simple, **the more we have at hands, the better we can play**.
 
