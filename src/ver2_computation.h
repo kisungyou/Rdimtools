@@ -15,11 +15,11 @@
  */
 
 // Part 1. Methods Related
-Rcpp::List v2aux_fa(const arma::mat& X, const int k, const int maxiter, const double tolerance);
-arma::mat  v2aux_pca(const arma::mat& X, int ndim);
+Rcpp::List v2aux_fa(arma::mat& X, const int k, const int maxiter, const double tolerance);
+arma::mat  v2aux_pca(arma::mat& X, int ndim);
 
 // Part 2. Generic
-arma::mat  v2aux_pdist(const arma::mat& X);
+arma::mat  v2aux_pdist(arma::mat& X);
 arma::mat  v2aux_adjproj(arma::mat& X);
 
 

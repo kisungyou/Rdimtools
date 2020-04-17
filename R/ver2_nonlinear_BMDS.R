@@ -31,10 +31,10 @@
 #' X     = as.matrix(iris[,1:4])
 #' label = as.factor(iris$Species)
 #'
-#' ## try different maximum number of iterations
-#' out1 <- do.bmds(X, ndim=2, mc.iter=5)
-#' out2 <- do.bmds(X, ndim=2, mc.iter=10)
-#' out3 <- do.bmds(X, ndim=2, mc.iter=50)
+#' ## try different preprocessing
+#' out1 <- do.bmds(X, ndim=2, preprocess="center")
+#' out2 <- do.bmds(X, ndim=2, preprocess="cscale")
+#' out3 <- do.bmds(X, ndim=2, preprocess="decorrelate")
 #'
 #' ## embeddings for each procedure
 #' Y1 <- out1$Y
@@ -57,7 +57,7 @@
 #' @author Kisung You
 #' @concept nonlinear_methods
 #' @export
-do.bmds <- function(X, ndim=2, par.a=5, par.alpha=0.5, par.step=1, mc.iter=8128,
+do.bmds <- function(X, ndim=2, par.a=5, par.alpha=0.5, par.step=1, mc.iter=50,
                     preprocess=c("null","center","scale","cscale","whiten",
                                  "decorrelate"), print.progress = TRUE){
   #------------------------------------------------------------------------

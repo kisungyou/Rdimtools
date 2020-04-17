@@ -7,7 +7,7 @@ using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
-arma::mat v2aux_pca(const arma::mat& X, int ndim){
+arma::mat v2aux_pca(arma::mat& X, int ndim){
   int N = X.n_rows;
   int P = X.n_cols;
 
@@ -25,7 +25,7 @@ arma::mat v2aux_pca(const arma::mat& X, int ndim){
   }
   return(output);
 }
-arma::mat v2aux_pdist(const arma::mat& X){
+arma::mat v2aux_pdist(arma::mat& X){
   int N = X.n_rows;
   int P = X.n_cols;
 
@@ -38,7 +38,7 @@ arma::mat v2aux_pdist(const arma::mat& X){
   }
   return(output);
 }
-Rcpp::List v2aux_fa(const arma::mat& X, const int k, const int maxiter, const double tolerance){
+Rcpp::List v2aux_fa(arma::mat& X, const int k, const int maxiter, const double tolerance){
   // 6-1. basic settings
   const int p = X.n_rows;
   const int n = X.n_cols;
