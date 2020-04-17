@@ -8,7 +8,7 @@ using namespace arma;
 using namespace std;
 
 /*
- * Auxiliary Functions ======================================================
+ * Class Definition =========================================================
  *    ClLLproc
  *
  * Main Functions ===========================================================

@@ -58,7 +58,7 @@ Y3 <- out3$Y
 
 ## visualize three different projections
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(3,1))
+par(mfrow=c(1,3))
 plot(Y1, pch=19, col=lab, main="FA::centered")
 plot(Y2, pch=19, col=lab, main="FA::decorrelated")
 plot(Y3, pch=19, col=lab, main="FA::whitened")

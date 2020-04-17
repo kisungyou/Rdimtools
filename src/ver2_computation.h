@@ -1,5 +1,6 @@
 #ifndef _Rdimtools_VER2_COMPUTATION_H
 #define _Rdimtools_VER2_COMPUTATION_H
+
 #define ARMA_NO_DEBUG
 
 #include <RcppArmadillo.h>
