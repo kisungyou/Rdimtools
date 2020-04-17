@@ -265,67 +265,67 @@ Rcpp::List method_rpgauss(arma::mat& X, const int k){
  * 6. Factor Analysis
  *    Notations are consistent with that of Gharahmani's paper.
  */
-//' @keywords internal
-// [[Rcpp::export]]
-Rcpp::List method_fa(arma::mat& X, const int k, const int maxiter, const double tolerance){
-  // 6-1. basic settings
-  const int p = X.n_rows;
-  const int n = X.n_cols;
 
-  // 6-2. other defined materials
-  mat Ez(k,n);
-  mat beta(k,p);
-  mat LPhi(p,p);
-  mat eyeK(k,k,fill::eye);
-  mat Pinv(p,p,fill::zeros);
-  mat EzzSum(k,k);
-  double inctol = 0;
-
-  // 6-3. initialization
-  mat Lold = randn<mat>(p,k);
-  mat Lnew(p,k,fill::zeros);
-  vec Pold = ones<vec>(p);
-  mat Ptmp(p,p,fill::zeros);
-  vec Pnew(p);
-
-  // 6-4. main iteration
-  for (int it=0;it<maxiter;it++){
-    // 6-4-E1. common again
-    Pinv = diagmat(1/Pold);
-    // 6-4-E2. inverse of LL^T+\Phi : LPhi
-    LPhi = Pinv - Pinv*Lold*solve(eyeK+Lold.t()*Pinv*Lold,Lold.t()*Pinv);
-    // 6-4-E3. beta
-    beta = Lold.t()*LPhi;
-    // 6-4-E4. EZ = [EZ(x1), EZ(x2), ... , EZ(xn)]
-    Ez = beta*X;
-    // 6-4-E5. EZZsum = sum(EZZ(xi))
-    EzzSum = n*(eyeK-beta*Lold) + beta*X*X.t()*beta.t();
-
-    // 6-4-M1. update Lambda : Lnew
-    Lnew = (X*Ez.t())*pinv(EzzSum);
-    // 6-4-M2. update Phi    : Pnew from Ptmp
-    Ptmp = (X - Lnew*Ez)*X.t()/n;
-    Pnew = Ptmp.diag();
-
-    // 6-4-Update
-    inctol = norm(Lnew-Lold,"fro");
-    Lold = Lnew;
-    Pold = Pnew;
-    if (inctol < tolerance){
-      break;
-    }
-  }
-
-  // 6-5. MLE solution for Z
-  mat Z(k,n);
-  Pinv = diagmat(1/Pold);
-  Z = solve(Lold.t()*Pinv*Lold,Lold.t()*sqrt(Pinv)*X);
-
-  // 6-6. return results
-  return Rcpp::List::create(Rcpp::Named("L")=Lold,
-                            Rcpp::Named("Z")=Z,
-                            Rcpp::Named("Pvec")=Pold);
-}
+// // [[Rcpp::export]]
+// Rcpp::List method_fa(arma::mat& X, const int k, const int maxiter, const double tolerance){
+//   // 6-1. basic settings
+//   const int p = X.n_rows;
+//   const int n = X.n_cols;
+//
+//   // 6-2. other defined materials
+//   mat Ez(k,n);
+//   mat beta(k,p);
+//   mat LPhi(p,p);
+//   mat eyeK(k,k,fill::eye);
+//   mat Pinv(p,p,fill::zeros);
+//   mat EzzSum(k,k);
+//   double inctol = 0;
+//
+//   // 6-3. initialization
+//   mat Lold = randn<mat>(p,k);
+//   mat Lnew(p,k,fill::zeros);
+//   vec Pold = ones<vec>(p);
+//   mat Ptmp(p,p,fill::zeros);
+//   vec Pnew(p);
+//
+//   // 6-4. main iteration
+//   for (int it=0;it<maxiter;it++){
+//     // 6-4-E1. common again
+//     Pinv = diagmat(1/Pold);
+//     // 6-4-E2. inverse of LL^T+\Phi : LPhi
+//     LPhi = Pinv - Pinv*Lold*solve(eyeK+Lold.t()*Pinv*Lold,Lold.t()*Pinv);
+//     // 6-4-E3. beta
+//     beta = Lold.t()*LPhi;
+//     // 6-4-E4. EZ = [EZ(x1), EZ(x2), ... , EZ(xn)]
+//     Ez = beta*X;
+//     // 6-4-E5. EZZsum = sum(EZZ(xi))
+//     EzzSum = n*(eyeK-beta*Lold) + beta*X*X.t()*beta.t();
+//
+//     // 6-4-M1. update Lambda : Lnew
+//     Lnew = (X*Ez.t())*pinv(EzzSum);
+//     // 6-4-M2. update Phi    : Pnew from Ptmp
+//     Ptmp = (X - Lnew*Ez)*X.t()/n;
+//     Pnew = Ptmp.diag();
+//
+//     // 6-4-Update
+//     inctol = norm(Lnew-Lold,"fro");
+//     Lold = Lnew;
+//     Pold = Pnew;
+//     if (inctol < tolerance){
+//       break;
+//     }
+//   }
+//
+//   // 6-5. MLE solution for Z
+//   mat Z(k,n);
+//   Pinv = diagmat(1/Pold);
+//   Z = solve(Lold.t()*Pinv*Lold,Lold.t()*sqrt(Pinv)*X);
+//
+//   // 6-6. return results
+//   return Rcpp::List::create(Rcpp::Named("L")=Lold,
+//                             Rcpp::Named("Z")=Z,
+//                             Rcpp::Named("Pvec")=Pold);
+// }
 
 /*
  * 07. Locality Preserving Projections (LPP)

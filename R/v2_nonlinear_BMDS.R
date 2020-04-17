@@ -36,12 +36,17 @@
 #' out2 <- do.bmds(X, ndim=2, mc.iter=10)
 #' out3 <- do.bmds(X, ndim=2, mc.iter=50)
 #'
+#' ## embeddings for each procedure
+#' Y1 <- out1$Y
+#' Y2 <- out2$Y
+#' Y3 <- out3$Y
+#'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="BMDS::iter=5",  col=label)
-#' plot(out2$Y, main="BMDS::iter=10",  col=label)
-#' plot(out3$Y, main="BMDS::iter=50", col=label)
+#' plot(Y1, main="BMDS::iter=5",  col=label, pch=19)
+#' plot(Y2, main="BMDS::iter=10", col=label, pch=19)
+#' plot(Y3, main="BMDS::iter=50", col=label, pch=19)
 #' par(opar)
 #' }
 #'
@@ -56,61 +61,92 @@ do.bmds <- function(X, ndim=2, par.a=5, par.alpha=0.5, par.step=1, mc.iter=8128,
                     preprocess=c("null","center","scale","cscale","whiten",
                                  "decorrelate"), print.progress = TRUE){
   #------------------------------------------------------------------------
-  ## PREPROCESSING
-  #   1. data matrix
-  aux.typecheck(X)
-  n = nrow(X)
-  m = n*(n-1)/2
-  p = ncol(X)
-  #   2. ndim
-  ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){
-    stop("* do.bmds : 'ndim' is a positive integer in [1,#(covariates)].")
-  }
-  #   3. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   5. other parameters
-  verbose = print.progress
+  # Preprocessing
+  if (!is.matrix(X)){stop("* do.bmds : 'X' should be a matrix.")}
+  myndim  = round(ndim)
+  myprep  = ifelse(missing(preprocess), "null", match.arg(preprocess))
+  mya     = as.double(par.a)
+  myalpha = as.double(par.alpha)
+  mystep  = as.double(par.step)
+  myiter  = round(mc.iter)
+  myprint = as.logical(print.progress)
 
   #------------------------------------------------------------------------
-  # Preliminary Computation
-  # 0. transformation
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  # Computation : Let's use "maotai" package
+  # 1. transformation
+  tmplist = aux.preprocess.hidden(X,type=myprep,algtype="nonlinear")
   trfinfo = tmplist$info
   pX      = tmplist$pX
 
-  # 1. apply CMDS for initialization
-  y     = as.matrix(base::scale(do.pca(pX, ndim=ndim)$Y, # (N x ndim) centered
-                                center=TRUE, scale=FALSE))
-  Delta = as.matrix(stats::dist(y))           # (N x N) pairwise distances
-
-  # 2. initialization
-  distX  = as.matrix(stats::dist(pX))
-  eigy   = base::eigen(cov(y))
-  X0     = y%*%eigy$vectors    # (N x ndim) rotated
-  gamma0 = diag(X0)            # variances ?
-  sigg0  = bmds_compute_SSR(distX, Delta)/m; #
-  beta0  = apply(X0,2,var)/2
-
-  # 3. run the main part
-  runcpp <- main_bmds(distX, X0, sigg0, par.a, par.alpha, mc.iter, par.step, verbose, beta0)
-  Xsol   <- runcpp$solX
-
+  # 2. use bmds from "maotai"
+  Xsol    = maotai::bmds(pX, ndim=myndim, par.a=mya, par.alpha = myalpha,
+                         par.step = mystep, mc.iter = myiter,
+                         verbose = myprint)$embed
   #------------------------------------------------------------------------
-  ## RETURN OUTPUT
-
+  # Return
   result = list()
   result$Y = Xsol
   result$trfinfo = trfinfo
   return(result)
+
+#
+#
+#   #------------------------------------------------------------------------
+#   ## PREPROCESSING
+#   #   1. data matrix
+#   aux.typecheck(X)
+#   n = nrow(X)
+#   m = n*(n-1)/2
+#   p = ncol(X)
+#   #   2. ndim
+#   ndim = as.integer(ndim)
+#   if (!check_ndim(ndim,p)){
+#     stop("* do.bmds : 'ndim' is a positive integer in [1,#(covariates)].")
+#   }
+#   #   3. preprocess
+#   if (missing(preprocess)){
+#     algpreprocess = "null"
+#   } else {
+#     algpreprocess = match.arg(preprocess)
+#   }
+#   #   4. preprocess
+#   if (missing(preprocess)){
+#     algpreprocess = "null"
+#   } else {
+#     algpreprocess = match.arg(preprocess)
+#   }
+#   #   5. other parameters
+#   verbose = print.progress
+#
+#   #------------------------------------------------------------------------
+#   # Preliminary Computation
+#   # 0. transformation
+#   tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+#   trfinfo = tmplist$info
+#   pX      = tmplist$pX
+#
+#   # 1. apply CMDS for initialization
+#   y     = as.matrix(base::scale(do.pca(pX, ndim=ndim)$Y, # (N x ndim) centered
+#                                 center=TRUE, scale=FALSE))
+#   Delta = as.matrix(stats::dist(y))           # (N x N) pairwise distances
+#
+#   # 2. initialization
+#   distX  = as.matrix(stats::dist(pX))
+#   eigy   = base::eigen(cov(y))
+#   X0     = y%*%eigy$vectors    # (N x ndim) rotated
+#   gamma0 = diag(X0)            # variances ?
+#   sigg0  = bmds_compute_SSR(distX, Delta)/m; #
+#   beta0  = apply(X0,2,var)/2
+#
+#   # 3. run the main part
+#   runcpp <- main_bmds(distX, X0, sigg0, par.a, par.alpha, mc.iter, par.step, verbose, beta0)
+#   Xsol   <- runcpp$solX
+#
+#   #------------------------------------------------------------------------
+#   ## RETURN OUTPUT
+#
+#   result = list()
+#   result$Y = Xsol
+#   result$trfinfo = trfinfo
+#   return(result)
 }
