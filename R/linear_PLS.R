@@ -46,6 +46,7 @@
 #' @seealso \code{\link{do.cca}}
 #' @author Kisung You
 #' @rdname linear_PLS
+#' @concept linear_methods 
 #' @export
 do.pls <- function(data1,data2,ndim=2){
   ## Preprocessing

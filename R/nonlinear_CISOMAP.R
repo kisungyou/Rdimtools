@@ -51,6 +51,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_CISOMAP
+#' @concept nonlinear_methods 
 #' @export
 do.cisomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),weight=TRUE,
                        preprocess=c("center","scale","cscale","whiten","decorrelate")){

@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LSDA
+#' @concept linear_methods 
 #' @export
 do.lsda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"),
                     alpha=0.5, k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2)){

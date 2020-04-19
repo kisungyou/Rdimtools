@@ -217,14 +217,14 @@
 #' @import Rdpack
 #' @import CVXR
 #' @import RcppDE
-#' @importFrom maotai weiszfeld
+#' @importFrom maotai weiszfeld bmds
 #' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds
 #' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median integrate optimize
 #' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp
-#' @useDynLib Rdimtools
+#' @useDynLib Rdimtools, .registration=TRUE
 NULL
 
 # NOTES

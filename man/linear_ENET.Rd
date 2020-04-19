@@ -72,7 +72,8 @@ out6 = do.enet(X, y, lambda1=10,  lambda2=1)
 out7 = do.enet(X, y, lambda1=0.1, lambda2=10)
 out8 = do.enet(X, y, lambda1=1,   lambda2=10)
 out9 = do.enet(X, y, lambda1=10,  lambda2=10)
-
+}
+\dontrun{
 ## visualize
 ## ( , ) denotes two regularization parameters
 opar <- par(no.readonly=TRUE)
@@ -96,3 +97,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{linear_methods}

@@ -52,6 +52,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LFDA
+#' @concept linear_methods 
 #' @export
 do.lfda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),

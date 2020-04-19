@@ -8,6 +8,13 @@
 
 <title>Regularized Sliced Inverse Regression — do.rsir • Rdimtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -239,19 +246,13 @@ ISSN 0025-5564.</p>
 <span class='co'>## use default number of slices</span>
 <span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"Ridge"</span>)
 <span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"Tikhonov"</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"PCA"</span>)
-<span class='no'>out4</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"PCARidge"</span>)
-<span class='no'>out5</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"PCATikhonov"</span>)
 <span class='no'>outsir</span> <span class='kw'>=</span> <span class='fu'><a href='linear_SIR.html'>do.sir</a></span>(<span class='no'>X</span>, <span class='no'>y</span>)
 
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::Ridge"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::Tikhonov"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::PCA"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out4</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::PCA+Ridge"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out5</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::PCA+Tikhonov"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>outsir</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"standard SIR"</span>)</div><div class='img'><img src='linear_RSIR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='co'># }</span></div></pre>
   </div>

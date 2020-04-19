@@ -45,6 +45,7 @@
 #' @seealso \code{\link{do.pca}}
 #' @rdname linear_NPCA
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.npca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     maxiter=1000, reltol=1e-5){

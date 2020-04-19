@@ -49,6 +49,7 @@
 #' @seealso \code{\link{do.lqmi}}
 #' @author Kisung You
 #' @rdname nonlinear_KQMI
+#' @concept nonlinear_methods 
 #' @export
 do.kqmi <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"), t=10){
   #------------------------------------------------------------------------

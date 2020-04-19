@@ -47,6 +47,7 @@
 #' @seealso \code{\link{do.mmc}}
 #' @author Kisung You
 #' @rdname linear_AMMC
+#' @concept linear_methods 
 #' @export
 do.ammc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     a=1.0, b=1.0, lambda=1.0){

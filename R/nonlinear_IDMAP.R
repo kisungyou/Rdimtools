@@ -43,6 +43,7 @@
 #'
 #' @seealso \code{\link{do.nnp}}, \code{\link{do.fastmap}}
 #' @rdname nonlinear_IDMAP
+#' @concept nonlinear_methods 
 #' @export
 do.idmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), engine=c("NNP","FastMap")){
   ########################################################################

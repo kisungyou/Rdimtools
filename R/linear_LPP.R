@@ -45,6 +45,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPP
+#' @concept linear_methods 
 #' @export
 do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
                    symmetric=c("union","intersect","asymmetric"),

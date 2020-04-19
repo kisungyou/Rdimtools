@@ -53,6 +53,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLDE
+#' @concept nonlinear_methods 
 #' @export
 do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten"),

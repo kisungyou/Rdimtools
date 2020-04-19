@@ -62,6 +62,7 @@
 #' @seealso \code{\link{do.mmc}}, \code{\link{do.ammc}}
 #' @author Kisung You
 #' @rdname linear_SAMMC
+#' @concept linear_methods 
 #' @export
 do.sammc  <- function(X, label, ndim=2, type=c("proportion",0.1),
                       preprocess=c("center","scale","cscale","decorrelate","whiten"),

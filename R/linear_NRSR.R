@@ -48,6 +48,7 @@
 #' @seealso \code{\link{do.rsr}}
 #' @author Kisung You
 #' @rdname linear_NRSR
+#' @concept linear_methods 
 #' @export
 do.nrsr <- function(X, ndim=2, expl=0.5, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), lbd=1.0){
   #------------------------------------------------------------------------

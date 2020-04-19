@@ -52,6 +52,7 @@
 #'
 #' @rdname linear_LSCORE
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
                       preprocess=c("null","center","scale","cscale","whiten","decorrelate"), t=10.0){

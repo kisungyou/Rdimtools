@@ -48,6 +48,7 @@
 #' @seealso \code{\link{do.ltsa}}
 #' @author Kisung You
 #' @rdname linear_LLTSA
+#' @concept linear_methods 
 #' @export
 do.lltsa <- function(X, ndim=2, type=c("proportion",0.1),
                      symmetric=c("union","intersect","asymmetric"),

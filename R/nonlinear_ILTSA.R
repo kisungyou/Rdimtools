@@ -46,6 +46,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_ILTSA
+#' @concept nonlinear_methods 
 #' @export
 do.iltsa <- function(X, ndim=2, type=c("proportion",0.1),
                      symmetric=c("union","intersect","asymmetric"),

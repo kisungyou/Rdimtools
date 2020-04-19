@@ -57,7 +57,7 @@ intermittently. Such functionality is, however, sacrificed in this version.
 }
 
 \examples{
-\donttest{
+\dontrun{
 ## use iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -84,3 +84,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{nonlinear_methods}

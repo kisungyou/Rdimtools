@@ -47,6 +47,7 @@
 #'
 #' @rdname nonlinear_DM
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.dm <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                   bandwidth=1.0,timescale=1.0,multiscale=FALSE){

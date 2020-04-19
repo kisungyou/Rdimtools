@@ -47,6 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLSDA
+#' @concept nonlinear_methods 
 #' @export
 do.klsda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"),
                     alpha=0.5, k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2), t=1.0){

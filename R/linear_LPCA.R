@@ -45,6 +45,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPCA
+#' @concept linear_methods 
 #' @export
 do.lpca <- function(X, ndim=2, type=c("proportion",0.1),
                     preprocess=c("center","scale","cscale","decorrelate","whiten")){

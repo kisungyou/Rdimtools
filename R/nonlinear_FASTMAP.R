@@ -41,6 +41,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_FastMap
+#' @concept nonlinear_methods 
 #' @export
 do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   ########################################################################

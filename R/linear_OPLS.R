@@ -40,6 +40,7 @@
 #' @seealso \code{\link{do.pls}}
 #' @author Kisung You
 #' @rdname linear_OPLS
+#' @concept linear_methods 
 #' @export
 do.opls <- function(data1,data2,ndim=2){
   ## Preprocessing

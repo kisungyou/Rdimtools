@@ -56,6 +56,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_SIR
+#' @concept linear_methods 
 #' @export
 do.sir <- function(X, response, ndim=2, h=max(2, round(nrow(X)/5)),
                    preprocess=c("center","scale","cscale","decorrelate","whiten")){

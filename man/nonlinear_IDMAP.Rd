@@ -62,3 +62,4 @@ par(opar)
 \seealso{
 \code{\link{do.nnp}}, \code{\link{do.fastmap}}
 }
+\concept{nonlinear_methods}

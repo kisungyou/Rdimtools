@@ -8,6 +8,13 @@
 
 <title>Principal Component Analysis — do.pca • Rdimtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -129,7 +136,7 @@ RcppArmadillo package for faster and efficient computation." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Principal Component Analysis</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/linear_PCA.R'><code>R/linear_PCA.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/ver2_linear_PCA.R'><code>R/ver2_linear_PCA.R</code></a></small>
     <div class="hidden name"><code>linear_PCA.Rd</code></div>
     </div>
 
@@ -140,10 +147,9 @@ RcppArmadillo package for faster and efficient computation." />
 
     <pre class="usage"><span class='fu'>do.pca</span>(
   <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='st'>"auto"</span>,
+  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
   <span class='kw'>cor</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
-  <span class='kw'>varratio</span> <span class='kw'>=</span> <span class='fl'>0.9</span>
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -156,7 +162,7 @@ and columns represent independent variables.</p></td>
     </tr>
     <tr>
       <th>ndim</th>
-      <td><p>an integer-valued target dimension or" "auto" option using <em>varratio.</em></p></td>
+      <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
       <th>cor</th>
@@ -166,12 +172,7 @@ and <code>TRUE</code> for correlation matrix.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an option for preprocessing the data. This supports three methods,
-where default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
-      <th>varratio</th>
-      <td><p>a value in (0,1]. This value is only used when <code>ndim</code> is
-chosen as "auto".</p></td>
+where default is <code>"center"</code>. See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
@@ -185,12 +186,6 @@ chosen as "auto".</p></td>
 
 </dl>
 
-    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
-
-    <p>A combination of <code>ndim="auto"</code> and <code>varratio</code> options is to
-automatically decide the target dimension based on cumulative sum of
-variance. Measured by summation of top eigenvalues from sample covariance,
-we use the minimal summation to be larger than <code>varratio</code>.</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Pearson K (1901).
@@ -208,12 +203,17 @@ we use the minimal summation to be larger than <code>varratio</code>.</p>
 <span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.pca</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"decorrelate"</span>)
 <span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.pca</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
 
+<span class='co'>## embeddings for each procedure</span>
+<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>
+<span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>
+<span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
+
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'center'"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'decorrelate'"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'whiten'"</span>)</div><div class='img'><img src='linear_PCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y1</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'center'"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y2</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'decorrelate'"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y3</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA::'whiten'"</span>)</div><div class='img'><img src='linear_PCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

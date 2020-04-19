@@ -43,6 +43,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_DNE
+#' @concept linear_methods 
 #' @export
 do.dne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten")){

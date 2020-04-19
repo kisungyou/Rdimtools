@@ -44,6 +44,7 @@
 #' @seealso \code{\link{do.lpp}}
 #' @author Kisung You
 #' @rdname linear_EXTLPP
+#' @concept linear_methods 
 #' @export
 do.extlpp <- function(X, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                       preprocess=c("center","scale","cscale","decorrelate","whiten")){

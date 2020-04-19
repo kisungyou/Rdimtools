@@ -53,6 +53,7 @@
 #' @author Kisung You
 #' @aliases do.sde
 #' @rdname nonlinear_MVU
+#' @concept nonlinear_methods 
 #' @export
 do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),

@@ -39,16 +39,16 @@
 #' y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
 #'
 #' ## try different threshold values
-#' out1 = do.spc(X, y, threshold=0.5)
-#' out2 = do.spc(X, y, threshold=1)
-#' out3 = do.spc(X, y, threshold=2)
+#' out1 = do.spc(X, y, threshold=2)
+#' out2 = do.spc(X, y, threshold=5)
+#' out3 = do.spc(X, y, threshold=10)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="SPC::threshold=0.5")
-#' plot(out2$Y, main="SPC::threshold=1")
-#' plot(out3$Y, main="SPC::threshold=2")
+#' plot(out1$Y, main="SPC::threshold=2")
+#' plot(out2$Y, main="SPC::threshold=5")
+#' plot(out3$Y, main="SPC::threshold=10")
 #' par(opar)
 #' }
 #'
@@ -57,6 +57,7 @@
 #'
 #' @rdname linear_SPC
 #' @author Kisung You
+#' @concept linear_methods
 #' @export
 do.spc <- function(X, response, ndim=2, preprocess=c("center","whiten","decorrelate"), threshold=0.1){
   #------------------------------------------------------------------------

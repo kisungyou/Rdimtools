@@ -69,6 +69,7 @@
 #'
 #'
 #' @rdname linear_RNDPROJ
+#' @concept linear_methods 
 #' @export
 do.rndproj <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                        type=c("gaussian","achlioptas","sparse"),s=max(sqrt(ncol(X)),3.0)){

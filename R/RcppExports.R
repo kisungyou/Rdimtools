@@ -2,89 +2,89 @@
 # Generator token: 10BE3573-1514-4C36-9D1C-5A225CD40393
 
 aux_preprocess <- function(X, flag) {
-    .Call('_Rdimtools_aux_preprocess', PACKAGE = 'Rdimtools', X, flag)
+    .Call(`_Rdimtools_aux_preprocess`, X, flag)
 }
 
 aux_perplexity <- function(X, perplexity) {
-    .Call('_Rdimtools_aux_perplexity', PACKAGE = 'Rdimtools', X, perplexity)
+    .Call(`_Rdimtools_aux_perplexity`, X, perplexity)
 }
 
 aux_shortestpath <- function(wmat) {
-    .Call('_Rdimtools_aux_shortestpath', PACKAGE = 'Rdimtools', wmat)
+    .Call(`_Rdimtools_aux_shortestpath`, wmat)
 }
 
 aux_landmarkMaxMin <- function(pD, plandmark, seqnp) {
-    .Call('_Rdimtools_aux_landmarkMaxMin', PACKAGE = 'Rdimtools', pD, plandmark, seqnp)
+    .Call(`_Rdimtools_aux_landmarkMaxMin`, pD, plandmark, seqnp)
 }
 
 aux_kernelcov <- function(tX, knumber, par1, par2) {
-    .Call('_Rdimtools_aux_kernelcov', PACKAGE = 'Rdimtools', tX, knumber, par1, par2)
+    .Call(`_Rdimtools_aux_kernelcov`, tX, knumber, par1, par2)
 }
 
 aux_eigendecomposition <- function(X) {
-    .Call('_Rdimtools_aux_eigendecomposition', PACKAGE = 'Rdimtools', X)
+    .Call(`_Rdimtools_aux_eigendecomposition`, X)
 }
 
 aux_minmax <- function(X, gap) {
-    .Call('_Rdimtools_aux_minmax', PACKAGE = 'Rdimtools', X, gap)
+    .Call(`_Rdimtools_aux_minmax`, X, gap)
 }
 
 aux_regout <- function(X, tgt) {
-    .Call('_Rdimtools_aux_regout', PACKAGE = 'Rdimtools', X, tgt)
+    .Call(`_Rdimtools_aux_regout`, X, tgt)
 }
 
 aux_scatter <- function(X, mu) {
-    .Call('_Rdimtools_aux_scatter', PACKAGE = 'Rdimtools', X, mu)
+    .Call(`_Rdimtools_aux_scatter`, X, mu)
 }
 
 aux_scatter_pairwise <- function(X) {
-    .Call('_Rdimtools_aux_scatter_pairwise', PACKAGE = 'Rdimtools', X)
+    .Call(`_Rdimtools_aux_scatter_pairwise`, X)
 }
 
 aux_geigen <- function(A, B) {
-    .Call('_Rdimtools_aux_geigen', PACKAGE = 'Rdimtools', A, B)
+    .Call(`_Rdimtools_aux_geigen`, A, B)
 }
 
 #' @keywords internal
 #' @noRd
 linsolve.bicgstab.single <- function(A, b, xinit, reltol, maxiter, M) {
-    .Call('_Rdimtools_single_bicgstab', PACKAGE = 'Rdimtools', A, b, xinit, reltol, maxiter, M)
+    .Call(`_Rdimtools_single_bicgstab`, A, b, xinit, reltol, maxiter, M)
 }
 
 #' @keywords internal
 #' @noRd
 linsolve.bicgstab.single.sparse <- function(A, b, xinit, reltol, maxiter, M) {
-    .Call('_Rdimtools_single_bicgstab_sparse', PACKAGE = 'Rdimtools', A, b, xinit, reltol, maxiter, M)
+    .Call(`_Rdimtools_single_bicgstab_sparse`, A, b, xinit, reltol, maxiter, M)
 }
 
 aux_expm <- function(A) {
-    .Call('_Rdimtools_aux_expm', PACKAGE = 'Rdimtools', A)
+    .Call(`_Rdimtools_aux_expm`, A)
 }
 
 aux_rank <- function(A) {
-    .Call('_Rdimtools_aux_rank', PACKAGE = 'Rdimtools', A)
+    .Call(`_Rdimtools_aux_rank`, A)
 }
 
 #' @keywords internal
 methods_boxcount <- function(tX, Imin, currentr) {
-    .Call('_Rdimtools_methods_boxcount', PACKAGE = 'Rdimtools', tX, Imin, currentr)
+    .Call(`_Rdimtools_methods_boxcount`, tX, Imin, currentr)
 }
 
 #' @keywords internal
 aux_numderiv <- function(x, y) {
-    .Call('_Rdimtools_aux_numderiv', PACKAGE = 'Rdimtools', x, y)
+    .Call(`_Rdimtools_aux_numderiv`, x, y)
 }
 
 handy_plus <- function(X) {
-    .Call('_Rdimtools_handy_plus', PACKAGE = 'Rdimtools', X)
+    .Call(`_Rdimtools_handy_plus`, X)
 }
 
 handy_hadamardABC <- function(A, B, C) {
-    .Call('_Rdimtools_handy_hadamardABC', PACKAGE = 'Rdimtools', A, B, C)
+    .Call(`_Rdimtools_handy_hadamardABC`, A, B, C)
 }
 
 handy_hadamardABCsqrt <- function(A, B, C) {
-    .Call('_Rdimtools_handy_hadamardABCsqrt', PACKAGE = 'Rdimtools', A, B, C)
+    .Call(`_Rdimtools_handy_hadamardABCsqrt`, A, B, C)
 }
 
 #' @keywords internal
@@ -92,110 +92,105 @@ NULL
 
 #' @keywords internal
 method_pca <- function(psdX) {
-    .Call('_Rdimtools_method_pca', PACKAGE = 'Rdimtools', psdX)
+    .Call(`_Rdimtools_method_pca`, psdX)
 }
 
 #' @keywords internal
 method_mds <- function(centerX) {
-    .Call('_Rdimtools_method_mds', PACKAGE = 'Rdimtools', centerX)
+    .Call(`_Rdimtools_method_mds`, centerX)
 }
 
 #' @keywords internal
 method_mdsD <- function(D) {
-    .Call('_Rdimtools_method_mdsD', PACKAGE = 'Rdimtools', D)
+    .Call(`_Rdimtools_method_mdsD`, D)
 }
 
 #' @keywords internal
 method_ica <- function(X, C, maxiter, tol, tnum, tpar, sym) {
-    .Call('_Rdimtools_method_ica', PACKAGE = 'Rdimtools', X, C, maxiter, tol, tnum, tpar, sym)
+    .Call(`_Rdimtools_method_ica`, X, C, maxiter, tol, tnum, tpar, sym)
 }
 
 #' @keywords internal
 method_rpgauss <- function(X, k) {
-    .Call('_Rdimtools_method_rpgauss', PACKAGE = 'Rdimtools', X, k)
-}
-
-#' @keywords internal
-method_fa <- function(X, k, maxiter, tolerance) {
-    .Call('_Rdimtools_method_fa', PACKAGE = 'Rdimtools', X, k, maxiter, tolerance)
+    .Call(`_Rdimtools_method_rpgauss`, X, k)
 }
 
 #' @keywords internal
 method_npe <- function(X, W) {
-    .Call('_Rdimtools_method_npe', PACKAGE = 'Rdimtools', X, W)
+    .Call(`_Rdimtools_method_npe`, X, W)
 }
 
 #' @keywords internal
 method_olpp <- function(X, S, ndim) {
-    .Call('_Rdimtools_method_olpp', PACKAGE = 'Rdimtools', X, S, ndim)
+    .Call(`_Rdimtools_method_olpp`, X, S, ndim)
 }
 
 #' @keywords internal
 method_bpca <- function(T, reltol, maxiter) {
-    .Call('_Rdimtools_method_bpca', PACKAGE = 'Rdimtools', T, reltol, maxiter)
+    .Call(`_Rdimtools_method_bpca`, T, reltol, maxiter)
 }
 
 #' @keywords internal
 method_trfextlpp <- function(D, a, b) {
-    .Call('_Rdimtools_method_trfextlpp', PACKAGE = 'Rdimtools', D, a, b)
+    .Call(`_Rdimtools_method_trfextlpp`, D, a, b)
 }
 
 #' @keywords internal
 method_lspp_computeW <- function(S, svec) {
-    .Call('_Rdimtools_method_lspp_computeW', PACKAGE = 'Rdimtools', S, svec)
+    .Call(`_Rdimtools_method_lspp_computeW`, S, svec)
 }
 
 #' @keywords internal
 method_kmmcvec <- function(X, partmat, param) {
-    .Call('_Rdimtools_method_kmmcvec', PACKAGE = 'Rdimtools', X, partmat, param)
+    .Call(`_Rdimtools_method_kmmcvec`, X, partmat, param)
 }
 
 #' @keywords internal
 method_lfda_maximaldistance <- function(tvec, tmat) {
-    .Call('_Rdimtools_method_lfda_maximaldistance', PACKAGE = 'Rdimtools', tvec, tmat)
+    .Call(`_Rdimtools_method_lfda_maximaldistance`, tvec, tmat)
 }
 
 #' @keywords internal
 method_nnprojmax <- function(C, Uinit, tol, maxiter) {
-    .Call('_Rdimtools_method_nnprojmax', PACKAGE = 'Rdimtools', C, Uinit, tol, maxiter)
+    .Call(`_Rdimtools_method_nnprojmax`, C, Uinit, tol, maxiter)
 }
 
 #' @keywords internal
 method_nnprojmin <- function(C, Uinit, tol, maxiter) {
-    .Call('_Rdimtools_method_nnprojmin', PACKAGE = 'Rdimtools', C, Uinit, tol, maxiter)
+    .Call(`_Rdimtools_method_nnprojmin`, C, Uinit, tol, maxiter)
 }
 
 #' @keywords internal
 method_nnembedmin <- function(M, Yinit, tol, maxiter) {
-    .Call('_Rdimtools_method_nnembedmin', PACKAGE = 'Rdimtools', M, Yinit, tol, maxiter)
+    .Call(`_Rdimtools_method_nnembedmin`, M, Yinit, tol, maxiter)
 }
 
 #' @keywords internal
 method_spufs <- function(X, Ls, alpha, beta, epsilon) {
-    .Call('_Rdimtools_method_spufs', PACKAGE = 'Rdimtools', X, Ls, alpha, beta, epsilon)
+    .Call(`_Rdimtools_method_spufs`, X, Ls, alpha, beta, epsilon)
 }
 
 #' @keywords internal
 method_lspe <- function(X, d, alpha, beta, L) {
-    .Call('_Rdimtools_method_lspe', PACKAGE = 'Rdimtools', X, d, alpha, beta, L)
+    .Call(`_Rdimtools_method_lspe`, X, d, alpha, beta, L)
 }
 
 method_disr <- function(D, lbd1, lbd2) {
-    .Call('_Rdimtools_method_disr', PACKAGE = 'Rdimtools', D, lbd1, lbd2)
+    .Call(`_Rdimtools_method_disr`, D, lbd1, lbd2)
 }
 
 #' @keywords internal
 method_rsr <- function(X, lbd, verysmall) {
-    .Call('_Rdimtools_method_rsr', PACKAGE = 'Rdimtools', X, lbd, verysmall)
+    .Call(`_Rdimtools_method_rsr`, X, lbd, verysmall)
 }
 
 #' @keywords internal
 method_nrsr <- function(X, lbd, verysmall, p) {
-    .Call('_Rdimtools_method_nrsr', PACKAGE = 'Rdimtools', X, lbd, verysmall, p)
+    .Call(`_Rdimtools_method_nrsr`, X, lbd, verysmall, p)
 }
 
 method_scoresum <- function(X, S) {
-    .Call('_Rdimtools_method_scoresum', PACKAGE = 'Rdimtools', X, S)
+    .Call(`_Rdimtools_method_scoresum`, X, S)
 }
 
 #' @keywords internal
@@ -206,66 +201,74 @@ NULL
 
 #' @keywords internal
 method_sne <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call('_Rdimtools_method_sne', PACKAGE = 'Rdimtools', P, ndim, eta, maxiter, jitter, decay, momentum)
+    .Call(`_Rdimtools_method_sne`, P, ndim, eta, maxiter, jitter, decay, momentum)
 }
 
 #' @keywords internal
 method_snesym <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call('_Rdimtools_method_snesym', PACKAGE = 'Rdimtools', P, ndim, eta, maxiter, jitter, decay, momentum)
+    .Call(`_Rdimtools_method_snesym`, P, ndim, eta, maxiter, jitter, decay, momentum)
 }
 
 #' @keywords internal
 method_tsne <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call('_Rdimtools_method_tsne', PACKAGE = 'Rdimtools', P, ndim, eta, maxiter, jitter, decay, momentum)
+    .Call(`_Rdimtools_method_tsne`, P, ndim, eta, maxiter, jitter, decay, momentum)
 }
 
 #' @keywords internal
 method_eigenmaps <- function(W) {
-    .Call('_Rdimtools_method_eigenmaps', PACKAGE = 'Rdimtools', W)
+    .Call(`_Rdimtools_method_eigenmaps`, W)
 }
 
 #' @keywords internal
 method_sammon <- function(X, Yinit) {
-    .Call('_Rdimtools_method_sammon', PACKAGE = 'Rdimtools', X, Yinit)
+    .Call(`_Rdimtools_method_sammon`, X, Yinit)
 }
 
 #' @keywords internal
 method_lleW <- function(mat_tgt, vec_tgt, regparam) {
-    .Call('_Rdimtools_method_lleW', PACKAGE = 'Rdimtools', mat_tgt, vec_tgt, regparam)
+    .Call(`_Rdimtools_method_lleW`, mat_tgt, vec_tgt, regparam)
 }
 
 #' @keywords internal
 method_lleWauto <- function(mat_tgt, vec_tgt) {
-    .Call('_Rdimtools_method_lleWauto', PACKAGE = 'Rdimtools', mat_tgt, vec_tgt)
+    .Call(`_Rdimtools_method_lleWauto`, mat_tgt, vec_tgt)
 }
 
 #' @keywords internal
 method_lleM <- function(W) {
-    .Call('_Rdimtools_method_lleM', PACKAGE = 'Rdimtools', W)
+    .Call(`_Rdimtools_method_lleM`, W)
 }
 
 #' @keywords internal
 method_ree <- function(B, W, D, initc, abstol, maxiter) {
-    .Call('_Rdimtools_method_ree', PACKAGE = 'Rdimtools', B, W, D, initc, abstol, maxiter)
+    .Call(`_Rdimtools_method_ree`, B, W, D, initc, abstol, maxiter)
 }
 
 method_spe <- function(R, iX, C, S, lambda, drate, matselector) {
-    .Call('_Rdimtools_method_spe', PACKAGE = 'Rdimtools', R, iX, C, S, lambda, drate, matselector)
+    .Call(`_Rdimtools_method_spe`, R, iX, C, S, lambda, drate, matselector)
 }
 
 method_ispe <- function(R, iX, C, S, lambda, drate, matselector, cutoff) {
-    .Call('_Rdimtools_method_ispe', PACKAGE = 'Rdimtools', R, iX, C, S, lambda, drate, matselector, cutoff)
+    .Call(`_Rdimtools_method_ispe`, R, iX, C, S, lambda, drate, matselector, cutoff)
 }
 
 method_crca <- function(Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector) {
-    .Call('_Rdimtools_method_crca', PACKAGE = 'Rdimtools', Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector)
+    .Call(`_Rdimtools_method_crca`, Xij, Yinit, lambda, alpha, maxiter, tolerance, vecselector)
 }
 
 bmds_compute_SSR <- function(D, Delta) {
-    .Call('_Rdimtools_bmds_compute_SSR', PACKAGE = 'Rdimtools', D, Delta)
+    .Call(`_Rdimtools_bmds_compute_SSR`, D, Delta)
 }
 
 main_bmds <- function(D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas) {
-    .Call('_Rdimtools_main_bmds', PACKAGE = 'Rdimtools', D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
+    .Call(`_Rdimtools_main_bmds`, D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
+}
+
+dt_pca <- function(X, ndim, ptype, cor) {
+    .Call(`_Rdimtools_dt_pca`, X, ndim, ptype, cor)
+}
+
+dt_fa <- function(X, ndim, ptype, maxiter, tolerance) {
+    .Call(`_Rdimtools_dt_fa`, X, ndim, ptype, maxiter, tolerance)
 }
 

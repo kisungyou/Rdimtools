@@ -43,8 +43,10 @@
 #' @references
 #' \insertRef{friedman_regularized_1989}{Rdimtools}
 #'
+#'
 #' @author Kisung You
 #' @rdname linear_RLDA
+#' @concept linear_methods 
 #' @export
 do.rlda <- function(X, label, ndim=2, alpha=1.0){
   ## Note : refer to do.klfda

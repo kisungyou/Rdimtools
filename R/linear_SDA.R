@@ -54,6 +54,7 @@
 #'
 #' @rdname linear_SDA
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.sda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1.0){
   #------------------------------------------------------------------------

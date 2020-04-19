@@ -8,6 +8,13 @@
 
 <title>Correlation Dimension — est.correlation • Rdimtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -205,23 +212,23 @@ in a log-equidistant manner.</p>
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate three different dataset</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>1</span>)
 <span class='no'>X1</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"swiss"</span>)
 <span class='no'>X2</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"ribbon"</span>)
 <span class='no'>X3</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"twinpeaks"</span>)
 
 <span class='co'>## compute</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.correlation</span>(<span class='no'>X1</span>)</div><div class='output co'>#&gt; <span class='error'>Error in lm.fit(x, y, offset = offset, singular.ok = singular.ok, ...): NA/NaN/Inf in 'y'</span></div><div class='input'><span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.correlation</span>(<span class='no'>X2</span>)
+<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.correlation</span>(<span class='no'>X1</span>)
+<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.correlation</span>(<span class='no'>X2</span>)
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.correlation</span>(<span class='no'>X3</span>)
 
 <span class='co'>## visually verify : all should have approximate slope of 2.</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out1</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out1</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"swiss roll"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(log(out1$r), log(out1$Cr), main = "swiss roll"): object 'out1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out2</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out2</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ribbon"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out3</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out3</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"twinpeaks"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div><div class='img'><img src='estimate_correlation-1.png' alt='' width='700' height='433' /></div><div class='input'># }
-
-
-</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out1</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out1</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"swiss roll"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out2</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out2</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ribbon"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out3</span>$<span class='no'>r</span>), <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span>(<span class='no'>out3</span>$<span class='no'>Cr</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"twinpeaks"</span>)</div><div class='img'><img src='estimate_correlation-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

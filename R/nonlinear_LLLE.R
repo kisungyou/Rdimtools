@@ -48,6 +48,7 @@
 #' @rdname nonlinear_LLLE
 #' @seealso \code{\link{do.lle}}
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.llle <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     K=round(nrow(X)/2), P=max(round(nrow(X)/4),2), bandwidth=0.2){

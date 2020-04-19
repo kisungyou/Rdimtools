@@ -44,6 +44,7 @@
 #' @seealso \code{\link{do.dne}}
 #' @author Kisung You
 #' @rdname linear_DAGDNE
+#' @concept linear_methods 
 #' @export
 do.dagdne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten")){

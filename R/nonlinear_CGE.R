@@ -51,6 +51,7 @@
 #'
 #' @rdname nonlinear_CGE
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.cge <- function(X, label, ndim=2, type=c("proportion",0.1),
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

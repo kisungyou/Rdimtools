@@ -1,5 +1,6 @@
-# themes: https://bootswatch.com/ {flatly, united}
-# icons:  https://fontawesome.com/
+# themes:  https://bootswatch.com/ {flatly, united}
+# icons:   https://fontawesome.com/
+# pkgdown: https://pkgdown.r-lib.org/reference/index.html
 
 url: https://kyoustat.com/Rdimtools
 
@@ -9,6 +10,9 @@ template:
   params:
     bootswatch: flatly
     ganalytics: UA-163713603-1
+
+home:
+  strip_header: false
 
 navbar:
   title: "Rdimtools"
@@ -35,9 +39,15 @@ reference:
   - title: "(2) Dimension Reduction"
     desc: >
       Functions below are finding low-dimensional embedding of the observed data
-      according to the principle upon which each method is relied.
+      according to the principle upon which each method is relied. Methods can be
+      categorized as **linear** and **nonlinear** methods. The former class of methods explicitly finds
+      a projection matrix while the latter does not.
+  - subtitle: "(2-1) Linear Methods"
     contents:
-      - starts_with("linear_")
+      - has_concept("linear_methods")
+  - subtitle: "(2-2) Nonlinear Methods"
+    contents:
+      - has_concept("nonlinear_methods")
   - title: "(3) Out-of-sample Prediction"
     contents:
       - starts_with("oos.")
@@ -47,3 +57,4 @@ reference:
   - title: "Introduction to the package"
     contents:
       - starts_with("package")
+

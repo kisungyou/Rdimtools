@@ -58,8 +58,8 @@ out2  <- do.bpca(X, ndim=2, preprocess="center")
 ## Visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,2))
-plot(out1$Y, main="PCA")
-plot(out2$Y, main="BPCA")
+plot(out1$Y, pch=19, cex=0.8, main="PCA")
+plot(out2$Y, pch=19, cex=0.8, main="BPCA")
 par(opar)
 }
 
@@ -73,3 +73,4 @@ par(opar)
 \author{
 Kisung You
 }
+\concept{linear_methods}

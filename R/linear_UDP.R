@@ -51,6 +51,7 @@
 #' \insertRef{yang_globally_2007}{Rdimtools}
 #'
 #' @seealso \code{\link{do.lpp}}
+#' @concept linear_methods 
 #' @export
 do.udp <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

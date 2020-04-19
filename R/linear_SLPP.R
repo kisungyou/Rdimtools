@@ -42,6 +42,7 @@
 #' @seealso \code{\link{do.lpp}}
 #' @author Kisung You
 #' @rdname linear_SLPP
+#' @concept linear_methods 
 #' @export
 do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------

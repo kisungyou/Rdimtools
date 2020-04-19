@@ -54,6 +54,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_RPCA
+#' @concept nonlinear_methods 
 #' @export
 do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))),
                     preprocess=c("null","center","scale","cscale","decorrelate","whiten")){

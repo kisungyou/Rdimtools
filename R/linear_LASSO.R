@@ -60,6 +60,7 @@
 #'
 #' @rdname linear_LASSO
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.lasso <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                      ycenter=FALSE, lambda=1.0){

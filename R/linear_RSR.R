@@ -47,6 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_RSR
+#' @concept linear_methods 
 #' @export
 do.rsr <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), lbd=1.0){
   #------------------------------------------------------------------------

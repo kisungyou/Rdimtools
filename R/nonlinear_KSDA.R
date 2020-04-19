@@ -59,6 +59,7 @@
 #'
 #' @rdname nonlinear_KSDA
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.ksda <- function(X, label, ndim=2, type=c("proportion",0.1), alpha=1.0, beta=1.0, t=1.0){
   #------------------------------------------------------------------------

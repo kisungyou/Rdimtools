@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_UDFS
+#' @concept linear_methods 
 #' @export
 do.udfs <- function(X, ndim=2, lbd=1.0, gamma=1.0, k=5,
                     preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

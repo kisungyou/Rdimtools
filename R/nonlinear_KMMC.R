@@ -44,6 +44,7 @@
 #' @author Kisung You
 #' @seealso \code{\link{do.mmc}}
 #' @rdname nonlinear_KMMC
+#' @concept nonlinear_methods 
 #' @export
 do.kmmc <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten"), t=1.0){
   #------------------------------------------------------------------------

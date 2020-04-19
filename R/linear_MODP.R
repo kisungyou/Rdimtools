@@ -51,6 +51,7 @@
 #' \insertRef{zhang_modified_2011}{Rdimtools}
 #'
 #' @rdname linear_MODP
+#' @concept linear_methods 
 #' @export
 do.modp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),

@@ -61,6 +61,7 @@
 #'
 #' @rdname linear_LSDF
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.lsdf <- function(X, label, ndim=2, type=c("proportion",0.1),
                     preprocess=c("null","center","scale","cscale","whiten","decorrelate"), gamma=100){

@@ -47,6 +47,7 @@
 #'
 #' @rdname linear_SPUFS
 #' @author Kisung You
+#' @concept linear_methods 
 #' @export
 do.spufs <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                      alpha=1.0, beta=1.0, bandwidth=1.0){

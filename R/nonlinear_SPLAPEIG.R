@@ -49,6 +49,7 @@
 #' @seealso \code{\link{do.lapeig}}
 #' @author Kisung You
 #' @rdname nonlinear_SPLAPEIG
+#' @concept nonlinear_methods 
 #' @export
 do.splapeig <- function(X, label, ndim=2,
                         preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

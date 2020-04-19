@@ -52,6 +52,7 @@
 #' @seealso \code{\link{do.crda}}
 #' @author Kisung You
 #' @rdname nonlinear_CRCA
+#' @concept nonlinear_methods 
 #' @export
 do.crca <- function(X,ndim=2,lambda=1.0,alpha=1.0,maxiter=1000,tolerance=1e-6){
   #------------------------------------------------------------------------

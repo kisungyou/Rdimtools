@@ -44,6 +44,7 @@
 #'
 #' @rdname nonlinear_NNP
 #' @author Kisung You
+#' @concept nonlinear_methods 
 #' @export
 do.nnp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   ########################################################################

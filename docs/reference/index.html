@@ -8,6 +8,13 @@
 
 <title>Function reference • Rdimtools</title>
 
+<!-- favicons -->
+<link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
+<link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png" />
+<link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png" />
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -256,15 +263,835 @@
       <tr>
         <th colspan="2">
           <h2 id="section--dimension-reduction" class="hasAnchor"><a href="#section--dimension-reduction" class="anchor"></a>(2) Dimension Reduction</h2>
-          <p class="section-desc"><p>Functions below are finding low-dimensional embedding of the observed data according to the principle upon which each method is relied.</p></p>
+          <p class="section-desc"><p>Functions below are finding low-dimensional embedding of the observed data according to the principle upon which each method is relied. Methods can be categorized as <strong>linear</strong> and <strong>nonlinear</strong> methods. The former class of methods explicitly finds a projection matrix while the latter does not.</p></p>
         </th>
       </tr>
       
       
     </tbody><tbody>
       
+      <tr>
+        <th colspan="2">
+          <h3 id="section--linear-methods" class="hasAnchor"><a href="#section--linear-methods" class="anchor"></a>(2-1) Linear Methods</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
       
       
+      <tr>
+        
+        <td>
+          <p><code><a href="linear_ADR.html">do.adr()</a></code> </p>
+        </td>
+        <td><p>Adaptive Dimension Reduction</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_AMMC.html">do.ammc()</a></code> </p>
+        </td>
+        <td><p>Adaptive Maximum Margin Criterion</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ANMM.html">do.anmm()</a></code> </p>
+        </td>
+        <td><p>Average Neighborhood Margin Maximization</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ASI.html">do.asi()</a></code> </p>
+        </td>
+        <td><p>Adaptive Subspace Iteration</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_BPCA.html">do.bpca()</a></code> </p>
+        </td>
+        <td><p>Bayesian Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_CCA.html">do.cca()</a></code> </p>
+        </td>
+        <td><p>Canonical Correlation Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_CNPE.html">do.cnpe()</a></code> </p>
+        </td>
+        <td><p>Complete Neighborhood Preserving Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_CRP.html">do.crp()</a></code> </p>
+        </td>
+        <td><p>Collaborative Representation-based Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_CSCORE.html">do.cscore()</a></code> </p>
+        </td>
+        <td><p>Constraint Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_CSCOREG.html">do.cscoreg()</a></code> </p>
+        </td>
+        <td><p>Constraint Score using Spectral Graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_DAGDNE.html">do.dagdne()</a></code> </p>
+        </td>
+        <td><p>Double-Adjacency Graphs-based Discriminant Neighborhood Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_DISR.html">do.disr()</a></code> </p>
+        </td>
+        <td><p>Diversity-Induced Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_DNE.html">do.dne()</a></code> </p>
+        </td>
+        <td><p>Discriminant Neighborhood Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_DSPP.html">do.dspp()</a></code> </p>
+        </td>
+        <td><p>Discriminative Sparsity Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ELDE.html">do.elde()</a></code> </p>
+        </td>
+        <td><p>Exponential Local Discriminant Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ELPP2.html">do.elpp2()</a></code> </p>
+        </td>
+        <td><p>Enhanced Locality Preserving Projection (2013)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ENET.html">do.enet()</a></code> </p>
+        </td>
+        <td><p>Elastic Net Regularization</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ESLPP.html">do.eslpp()</a></code> </p>
+        </td>
+        <td><p>Extended Supervised Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_EXTLPP.html">do.extlpp()</a></code> </p>
+        </td>
+        <td><p>Extended Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_FA.html">do.fa()</a></code> </p>
+        </td>
+        <td><p>Exploratory Factor Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_FSCORE.html">do.fscore()</a></code> </p>
+        </td>
+        <td><p>Fisher Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_FSSEM.html">do.fssem()</a></code> </p>
+        </td>
+        <td><p>Feature Subset Selection using Expectation-Maximization</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ICA.html">do.ica()</a></code> </p>
+        </td>
+        <td><p>Independent Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ISOPROJ.html">do.isoproj()</a></code> </p>
+        </td>
+        <td><p>Isometric Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_KMVP.html">do.kmvp()</a></code> </p>
+        </td>
+        <td><p>Kernel-Weighted Maximum Variance Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_KUDP.html">do.kudp()</a></code> </p>
+        </td>
+        <td><p>Kernel-Weighted Unsupervised Discriminant Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LASSO.html">do.lasso()</a></code> </p>
+        </td>
+        <td><p>Least Absolute Shrinkage and Selection Operator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LDA.html">do.lda()</a></code> </p>
+        </td>
+        <td><p>Linear Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LDAKM.html">do.ldakm()</a></code> </p>
+        </td>
+        <td><p>Combination of LDA and K-means</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LDE.html">do.lde()</a></code> </p>
+        </td>
+        <td><p>Local Discriminant Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LDP.html">do.ldp()</a></code> </p>
+        </td>
+        <td><p>Locally Discriminating Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LEA.html">do.lea()</a></code> </p>
+        </td>
+        <td><p>Locally Linear Embedded Eigenspace Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LFDA.html">do.lfda()</a></code> </p>
+        </td>
+        <td><p>Local Fisher Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LLP.html">do.llp()</a></code> </p>
+        </td>
+        <td><p>Local Learning Projections</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LLTSA.html">do.lltsa()</a></code> </p>
+        </td>
+        <td><p>Linear Local Tangent Space Alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LMDS.html">do.lmds()</a></code> </p>
+        </td>
+        <td><p>Landmark Multidimensional Scaling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LPCA.html">do.lpca()</a></code> </p>
+        </td>
+        <td><p>Locally Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LPE.html">do.lpe()</a></code> </p>
+        </td>
+        <td><p>Locality Pursuit Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LPFDA.html">do.lpfda()</a></code> </p>
+        </td>
+        <td><p>Locality Preserving Fisher Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LPMIP.html">do.lpmip()</a></code> </p>
+        </td>
+        <td><p>Locality-Preserved Maximum Information Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LPP.html">do.lpp()</a></code> </p>
+        </td>
+        <td><p>Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LQMI.html">do.lqmi()</a></code> </p>
+        </td>
+        <td><p>Linear Quadratic Mutual Information</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSCORE.html">do.lscore()</a></code> </p>
+        </td>
+        <td><p>Laplacian Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSDA.html">do.lsda()</a></code> </p>
+        </td>
+        <td><p>Locality Sensitive Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSDF.html">do.lsdf()</a></code> </p>
+        </td>
+        <td><p>Locality Sensitive Discriminant Feature</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSIR.html">do.lsir()</a></code> </p>
+        </td>
+        <td><p>Localized Sliced Inverse Regression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSPE.html">do.lspe()</a></code> </p>
+        </td>
+        <td><p>Locality and Similarity Preserving Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_LSPP.html">do.lspp()</a></code> </p>
+        </td>
+        <td><p>Local Similarity Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MCFS.html">do.mcfs()</a></code> </p>
+        </td>
+        <td><p>Multi-Cluster Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MDS.html">do.mds()</a></code> </p>
+        </td>
+        <td><p>(Classical) Multidimensional Scaling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MFA.html">do.mfa()</a></code> </p>
+        </td>
+        <td><p>Marginal Fisher Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MLIE.html">do.mlie()</a></code> </p>
+        </td>
+        <td><p>Maximal Local Interclass Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MMC.html">do.mmc()</a></code> </p>
+        </td>
+        <td><p>Maximum Margin Criterion</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MMP.html">do.mmp()</a></code> </p>
+        </td>
+        <td><p>Maximum Margin Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MMSD.html">do.mmsd()</a></code> </p>
+        </td>
+        <td><p>Multiple Maximum Scatter Difference</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MODP.html">do.modp()</a></code> </p>
+        </td>
+        <td><p>Modified Orthogonal Discriminant Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MSD.html">do.msd()</a></code> </p>
+        </td>
+        <td><p>Maximum Scatter Difference</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_MVP.html">do.mvp()</a></code> </p>
+        </td>
+        <td><p>Maximum Variance Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_NOLPP.html">do.nolpp()</a></code> </p>
+        </td>
+        <td><p>Nonnegative Orthogonal Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_NONPP.html">do.nonpp()</a></code> </p>
+        </td>
+        <td><p>Nonnegative Orthogonal Neighborhood Preserving Projections</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_NPCA.html">do.npca()</a></code> </p>
+        </td>
+        <td><p>Nonnegative Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_NPE.html">do.npe()</a></code> </p>
+        </td>
+        <td><p>Neighborhood Preserving Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_NRSR.html">do.nrsr()</a></code> </p>
+        </td>
+        <td><p>Non-convex Regularized Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ODP.html">do.odp()</a></code> </p>
+        </td>
+        <td><p>Orthogonal Discriminant Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_OLDA.html">do.olda()</a></code> </p>
+        </td>
+        <td><p>Orthogonal Linear Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_OLPP.html">do.olpp()</a></code> </p>
+        </td>
+        <td><p>Orthogonal Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ONPP.html">do.onpp()</a></code> </p>
+        </td>
+        <td><p>Orthogonal Neighborhood Preserving Projections</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_OPLS.html">do.opls()</a></code> </p>
+        </td>
+        <td><p>Orthogonal Partial Least Squares</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_PCA.html">do.pca()</a></code> </p>
+        </td>
+        <td><p>Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_PFLPP.html">do.pflpp()</a></code> </p>
+        </td>
+        <td><p>Parameter-Free Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_PLS.html">do.pls()</a></code> </p>
+        </td>
+        <td><p>Partial Least Squares</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_PPCA.html">do.ppca()</a></code> </p>
+        </td>
+        <td><p>Probabilistic Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_RLDA.html">do.rlda()</a></code> </p>
+        </td>
+        <td><p>Regularized Linear Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_RNDPROJ.html">do.rndproj()</a></code> </p>
+        </td>
+        <td><p>Random Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_RPCAG.html">do.rpcag()</a></code> </p>
+        </td>
+        <td><p>Robust Principal Component Analysis via Geometric Median</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_RSIR.html">do.rsir()</a></code> </p>
+        </td>
+        <td><p>Regularized Sliced Inverse Regression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_RSR.html">do.rsr()</a></code> </p>
+        </td>
+        <td><p>Regularized Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SAMMC.html">do.sammc()</a></code> </p>
+        </td>
+        <td><p>Semi-Supervised Adaptive Maximum Margin Criterion</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SAVE.html">do.save()</a></code> </p>
+        </td>
+        <td><p>Sliced Average Variance Estimation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SDA.html">do.sda()</a></code> </p>
+        </td>
+        <td><p>Semi-Supervised Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SDLPP.html">do.sdlpp()</a></code> </p>
+        </td>
+        <td><p>Sample-Dependent Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SIR.html">do.sir()</a></code> </p>
+        </td>
+        <td><p>Sliced Inverse Regression</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SLPE.html">do.slpe()</a></code> </p>
+        </td>
+        <td><p>Supervised Locality Pursuit Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SLPP.html">do.slpp()</a></code> </p>
+        </td>
+        <td><p>Supervised Locality Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPC.html">do.spc()</a></code> </p>
+        </td>
+        <td><p>Supervised Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPCA.html">do.spca()</a></code> </p>
+        </td>
+        <td><p>Sparse Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPECS.html">do.specs()</a></code> </p>
+        </td>
+        <td><p>Supervised Spectral Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPECU.html">do.specu()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Spectral Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPP.html">do.spp()</a></code> </p>
+        </td>
+        <td><p>Sparsity Preserving Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SPUFS.html">do.spufs()</a></code> </p>
+        </td>
+        <td><p>Structure Preserving Unsupervised Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_SSLDP.html">do.ssldp()</a></code> </p>
+        </td>
+        <td><p>Semi-Supervised Locally Discriminant Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_UDFS.html">do.udfs()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Discriminative Features Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_UDP.html">do.udp()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Discriminant Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="linear_ULDA.html">do.ulda()</a></code> </p>
+        </td>
+        <td><p>Uncorrelated Linear Discriminant Analysis</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section--nonlinear-methods" class="hasAnchor"><a href="#section--nonlinear-methods" class="anchor"></a>(2-2) Nonlinear Methods</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="nonlinear_BMDS.html">do.bmds()</a></code> </p>
+        </td>
+        <td><p>Bayesian Multidimensional Scaling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_CGE.html">do.cge()</a></code> </p>
+        </td>
+        <td><p>Constrained Graph Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_CISOMAP.html">do.cisomap()</a></code> </p>
+        </td>
+        <td><p>Conformal Isometric Feature Mapping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_CRCA.html">do.crca()</a></code> </p>
+        </td>
+        <td><p>Curvilinear Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_CRDA.html">do.crda()</a></code> </p>
+        </td>
+        <td><p>Curvilinear Distance Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_DM.html">do.dm()</a></code> </p>
+        </td>
+        <td><p>Diffusion Maps</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_DVE.html">do.dve()</a></code> </p>
+        </td>
+        <td><p>Distinguishing Variance Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_FastMap.html">do.fastmap()</a></code> </p>
+        </td>
+        <td><p>FastMap</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_IDMAP.html">do.idmap()</a></code> </p>
+        </td>
+        <td><p>Interactive Document Map</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_ILTSA.html">do.iltsa()</a></code> </p>
+        </td>
+        <td><p>Improved Local Tangent Space Alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_ISOMAP.html">do.isomap()</a></code> </p>
+        </td>
+        <td><p>Isometric Feature Mapping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_ISPE.html">do.ispe()</a></code> </p>
+        </td>
+        <td><p>Isometric Stochastic Proximity Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KECA.html">do.keca()</a></code> </p>
+        </td>
+        <td><p>Kernel Entropy Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KLDE.html">do.klde()</a></code> </p>
+        </td>
+        <td><p>Kernel Local Discriminant Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KLFDA.html">do.klfda()</a></code> </p>
+        </td>
+        <td><p>Kernel Local Fisher Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KLSDA.html">do.klsda()</a></code> </p>
+        </td>
+        <td><p>Kernel Locality Sensitive Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KMFA.html">do.kmfa()</a></code> </p>
+        </td>
+        <td><p>Kernel Marginal Fisher Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KMMC.html">do.kmmc()</a></code> </p>
+        </td>
+        <td><p>Kernel Maximum Margin Criterion</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KPCA.html">do.kpca()</a></code> </p>
+        </td>
+        <td><p>Kernel Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KQMI.html">do.kqmi()</a></code> </p>
+        </td>
+        <td><p>Kernel Quadratic Mutual Information</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_KSDA.html">do.ksda()</a></code> </p>
+        </td>
+        <td><p>Kernel Semi-Supervised Discriminant Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LAMP.html">do.lamp()</a></code> </p>
+        </td>
+        <td><p>Local Affine Multidimensional Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LAPEIG.html">do.lapeig()</a></code> </p>
+        </td>
+        <td><p>Laplacian Eigenmaps</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LISOMAP.html">do.lisomap()</a></code> </p>
+        </td>
+        <td><p>Landmark Isometric Feature Mapping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LLE.html">do.lle()</a></code> </p>
+        </td>
+        <td><p>Locally Linear Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LLLE.html">do.llle()</a></code> </p>
+        </td>
+        <td><p>Local Linear Laplacian Eigenmaps</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_LTSA.html">do.ltsa()</a></code> </p>
+        </td>
+        <td><p>Local Tangent Space Alignment</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_MVE.html">do.mve()</a></code> </p>
+        </td>
+        <td><p>Minimum Volume Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_MVU.html">do.mvu()</a></code> </p>
+        </td>
+        <td><p>Maximum Variance Unfolding / Semidefinite Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_NNP.html">do.nnp()</a></code> </p>
+        </td>
+        <td><p>Nearest Neighbor Projection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_PLP.html">do.plp()</a></code> </p>
+        </td>
+        <td><p>Piecewise Laplacian-based Projection (PLP)</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_REE.html">do.ree()</a></code> </p>
+        </td>
+        <td><p>Robust Euclidean Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_RPCA.html">do.rpca()</a></code> </p>
+        </td>
+        <td><p>Robust Principal Component Analysis</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_SAMMON.html">do.sammon()</a></code> </p>
+        </td>
+        <td><p>Sammon Mapping</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_SNE.html">do.sne()</a></code> </p>
+        </td>
+        <td><p>Stochastic Neighbor Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_SPE.html">do.spe()</a></code> </p>
+        </td>
+        <td><p>Stochastic Proximity Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_SPLAPEIG.html">do.splapeig()</a></code> </p>
+        </td>
+        <td><p>Supervised Laplacian Eigenmaps</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_SPMDS.html">do.spmds()</a></code> </p>
+        </td>
+        <td><p>Spectral Multidimensional Scaling</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="nonlinear_TSNE.html">do.tsne()</a></code> </p>
+        </td>
+        <td><p>t-distributed Stochastic Neighbor Embedding</p></td>
+      </tr>
     </tbody><tbody>
       <tr>
         <th colspan="2">

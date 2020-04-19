@@ -3,8 +3,11 @@
 ^README\.Rmd$
 ^README-.*\.png$
 ^\.travis\.yml$
-^list_do\.ods$
+^extra_listdo\.ods$
+^extra_replace\.R$
 ^LICENSE\.md$
 ^_pkgdown\.yml$
 ^docs$
 ^pkgdown$
+^\.circleci$
+^\.circleci/config\.yml$

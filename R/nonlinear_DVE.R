@@ -48,6 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_DVE
+#' @concept nonlinear_methods 
 #' @export
 do.dve <- function(X, ndim=2, type=c("proportion",0.1),
                    preprocess=c("null","center","scale","cscale","decorrelate","whiten")){

@@ -44,6 +44,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_SPP
+#' @concept linear_methods 
 #' @export
 do.spp <- function(X, ndim=2, preprocess = c("center","scale","cscale","decorrelate","whiten"), reltol=1e-4){
   #------------------------------------------------------------------------

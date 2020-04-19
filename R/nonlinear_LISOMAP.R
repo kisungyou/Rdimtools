@@ -54,6 +54,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LISOMAP
+#' @concept nonlinear_methods 
 #' @export
 do.lisomap <- function(X,ndim=2,ltype=c("random","MaxMin"),npoints=max(nrow(X)/5,ndim+1),
                        preprocess=c("center","scale","cscale","decorrelate","whiten"),

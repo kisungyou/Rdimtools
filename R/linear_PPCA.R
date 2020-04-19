@@ -47,6 +47,7 @@
 #' \insertRef{tipping_probabilistic_1999}{Rdimtools}
 #'
 #' @rdname linear_PPCA
+#' @concept linear_methods 
 #' @export
 do.ppca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

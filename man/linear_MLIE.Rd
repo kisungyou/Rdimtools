@@ -73,3 +73,4 @@ par(opar)
 \seealso{
 \code{\link{do.mfa}}
 }
+\concept{linear_methods}
