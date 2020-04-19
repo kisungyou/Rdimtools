@@ -115,6 +115,10 @@ method_rpgauss <- function(X, k) {
     .Call(`_Rdimtools_method_rpgauss`, X, k)
 }
 
+method_fa <- function(X, k, maxiter, tolerance) {
+    .Call(`_Rdimtools_method_fa`, X, k, maxiter, tolerance)
+}
+
 #' @keywords internal
 method_npe <- function(X, W) {
     .Call(`_Rdimtools_method_npe`, X, W)
@@ -270,5 +274,29 @@ dt_pca <- function(X, ndim, ptype, cor) {
 
 dt_fa <- function(X, ndim, ptype, maxiter, tolerance) {
     .Call(`_Rdimtools_dt_fa`, X, ndim, ptype, maxiter, tolerance)
+}
+
+dt_spca <- function(X, ndim, ptype, mu, rho, abstol, reltol, maxiter) {
+    .Call(`_Rdimtools_dt_spca`, X, ndim, ptype, mu, rho, abstol, reltol, maxiter)
+}
+
+dt_mds <- function(X, ndim, ptype) {
+    .Call(`_Rdimtools_dt_mds`, X, ndim, ptype)
+}
+
+admm_lasso <- function(A, b, lambda) {
+    .Call(`_Rdimtools_admm_lasso`, A, b, lambda)
+}
+
+dt_lasso <- function(X, ndim, ptype, y, ycenter, lambda) {
+    .Call(`_Rdimtools_dt_lasso`, X, ndim, ptype, y, ycenter, lambda)
+}
+
+dt_enet <- function(X, ndim, ptype, y, ycenter, lambda1, lambda2) {
+    .Call(`_Rdimtools_dt_enet`, X, ndim, ptype, y, ycenter, lambda1, lambda2)
+}
+
+dt_rpca <- function(X, ndim, ptype, mu, lambda) {
+    .Call(`_Rdimtools_dt_rpca`, X, ndim, ptype, mu, lambda)
 }
 

@@ -3,7 +3,7 @@
 #' \code{do.pca} performs a classical principal component analysis (PCA) using
 #' \code{RcppArmadillo} package for faster and efficient computation.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance matrix,
@@ -31,9 +31,7 @@
 #' out3 <- do.pca(X, ndim=2, preprocess="whiten")
 #'
 #' ## embeddings for each procedure
-#' Y1 <- out1$Y
-#' Y2 <- out2$Y
-#' Y3 <- out3$Y
+#' Y1 <- out1$Y; Y2 <- out2$Y; Y3 <- out3$Y
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)

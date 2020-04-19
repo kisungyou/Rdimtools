@@ -49,6 +49,7 @@
 <meta property="og:title" content="Principal Component Analysis — do.pca" />
 <meta property="og:description" content="do.pca performs a classical principal component analysis (PCA) using
 RcppArmadillo package for faster and efficient computation." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -157,7 +158,7 @@ RcppArmadillo package for faster and efficient computation." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations
+      <td><p>an \((n\times p)\) matrix whose rows are observations
 and columns represent independent variables.</p></td>
     </tr>
     <tr>
@@ -204,9 +205,7 @@ where default is <code>"center"</code>. See also <code><a href='aux_preprocess.h
 <span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.pca</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
 
 <span class='co'>## embeddings for each procedure</span>
-<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>
-<span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>
-<span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
+<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>; <span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>; <span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
 
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)

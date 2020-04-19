@@ -50,6 +50,7 @@
 <meta property="og:description" content="do.mds performs a classical Multidimensional Scaling (MDS) using
 Rcpp and RcppArmadillo package to achieve faster performance than
 cmdscale." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -137,7 +138,7 @@ cmdscale." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>(Classical) Multidimensional Scaling</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/linear_MDS.R'><code>R/linear_MDS.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/ver2_linear_MDS.R'><code>R/ver2_linear_MDS.R</code></a></small>
     <div class="hidden name"><code>linear_MDS.Rd</code></div>
     </div>
 
@@ -150,7 +151,7 @@ cmdscale." />
     <pre class="usage"><span class='fu'>do.mds</span>(
   <span class='no'>X</span>,
   <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -158,8 +159,7 @@ cmdscale." />
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations
-and columns represent independent variables.</p></td>
+      <td><p>an \((n\times p)\) matrix whose rows are observations and columns represent independent variables.</p></td>
     </tr>
     <tr>
       <th>ndim</th>
@@ -167,7 +167,7 @@ and columns represent independent variables.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
-      <td><p>an option for preprocessing the data. Default is "center".
+      <td><p>an option for preprocessing the data. Default is <code>"center"</code>.
 See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
@@ -194,19 +194,20 @@ See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more 
 <span class='no'>X</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
 <span class='no'>lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>)
 
-<span class='co'>## 1. projection onto 2 dimension.</span>
-<span class='no'>output1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='co'>## try different preprocessing</span>
+<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"cscale"</span>)
+<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
 
-<span class='co'>## 2. different preprocessing leads to different results</span>
-<span class='no'>output2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"decorrelate"</span>)
-<span class='no'>output3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.mds</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
+<span class='co'>## extract embeddings for each procedure</span>
+<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>; <span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>; <span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
 
-<span class='co'>## 3. visualize</span>
+<span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::center"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::decorrelate"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>output3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::whiten"</span>)</div><div class='img'><img src='linear_MDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y1</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::center"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y2</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::decorrelate"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y3</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MDS::whiten"</span>)</div><div class='img'><img src='linear_MDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

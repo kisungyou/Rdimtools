@@ -37,9 +37,7 @@
 #' out3 <- do.bmds(X, ndim=2, preprocess="decorrelate")
 #'
 #' ## embeddings for each procedure
-#' Y1 <- out1$Y
-#' Y2 <- out2$Y
-#' Y3 <- out3$Y
+#' Y1 <- out1$Y; Y2 <- out2$Y; Y3 <- out3$Y
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)

@@ -51,10 +51,8 @@ out1 <- do.fa(X,ndim=2)
 out2 <- do.fa(X,ndim=2,preprocess="decorrelate")
 out3 <- do.fa(X,ndim=2,preprocess="whiten")
 
-## embeddings for each procedure
-Y1 <- out1$Y
-Y2 <- out2$Y
-Y3 <- out3$Y
+## extract embeddings for each procedure
+Y1 <- out1$Y; Y2 <- out2$Y; Y3 <- out3$Y
 
 ## visualize three different projections
 opar <- par(no.readonly=TRUE)

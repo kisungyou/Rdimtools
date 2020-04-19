@@ -52,6 +52,7 @@ in that a data is sequentially located in the low-dimensional space by maintaini
 the triangular distance spread of target data with its two nearest neighbors in the high-dimensional space.
 We extended the original method to be applied for arbitrarily low-dimensional space. Due the generalization,
 we opted for a global optimization method of Differential Evolution (DEoptim) within in that it may add computational burden to certain degrees." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -200,15 +201,15 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 <span class='co'>## let's compare with other methods</span>
 <span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.nnp</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)      <span class='co'># NNP</span>
 <span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='linear_PCA.html'>do.pca</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)      <span class='co'># PCA</span>
-<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nonlinear_LAMP.html'>do.lamp</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)     <span class='co'># LAMP</span>
-
+<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nonlinear_LAMP.html'>do.lamp</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)     <span class='co'># LAMP</span></div><div class='output co'>#&gt; <span class='error'>Error in svd((t(A) %*% B)): infinite or missing values in 'x'</span></div><div class='input'>
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"NNP"</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LAMP"</span>)</div><div class='img'><img src='nonlinear_NNP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LAMP"</span>)</div><div class='output co'>#&gt; <span class='error'>Error in plot(out3$Y, col = label, main = "LAMP"): object 'out3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div><div class='img'><img src='nonlinear_NNP-1.png' alt='' width='700' height='433' /></div><div class='input'># }
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

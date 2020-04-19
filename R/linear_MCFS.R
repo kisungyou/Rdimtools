@@ -55,7 +55,7 @@
 #'
 #' @rdname linear_MCFS
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
                     preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
@@ -117,9 +117,10 @@ do.mcfs <- function(X, ndim=2, type=c("proportion",0.1),
     # 3-1. take one column vector
     y      = as.vector(Y[,i])
     # 3-2. solve with LASSO; I will do it with mine
-    solved = ADMM::admm.lasso(pX, y, lambda=lambdaval)$x
+    # solved = ADMM ::admm.lasso(pX, y, lambda=lambdaval)$x
     # 3-3. record the solved
-    A[,i]  = as.vector(solved)
+    # A[,i] = as.vector(solved)
+    A[,i] = as.vector(admm_lasso(pX, y, lambdaval))
   }
   #   4. find the solution
   fscore = rep(0,p)

@@ -54,6 +54,7 @@ increasing mc.iter requires much computation. A note on the method is that
 this algorithm does not return an explicit form of projection matrix so it's
 classified in our package as a nonlinear method. Also, automatic dimension selection is not supported
 for simplicity as well as consistency with other methods in the package." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -375,9 +376,7 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 #&gt; ** bmds : iteration 49/50 complete.
 #&gt; ** bmds : iteration 50/50 complete.</div><div class='input'>
 <span class='co'>## embeddings for each procedure</span>
-<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>
-<span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>
-<span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
+<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>; <span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>; <span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
 
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)

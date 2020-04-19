@@ -50,6 +50,7 @@
 <meta property="og:description" content="Sparse PCA (do.spca) is a variant of PCA in that each loading - or, principal
 component - should be sparse. Instead of using generic optimization package,
 we opt for formulating a problem as semidefinite relaxation and utilizing ADMM." />
+<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
 
@@ -137,7 +138,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM."
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sparse Principal Component Analysis</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/linear_SPCA.R'><code>R/linear_SPCA.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/ver2_linear_SPCA.R'><code>R/ver2_linear_SPCA.R</code></a></small>
     <div class="hidden name"><code>linear_SPCA.Rd</code></div>
     </div>
 
@@ -163,7 +164,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.<
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations
+      <td><p>an \((n\times p)\) matrix whose rows are observations
 and columns represent independent variables.</p></td>
     </tr>
     <tr>
@@ -173,7 +174,7 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is <code>"center"</code>. See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>mu</th>
@@ -203,7 +204,6 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are principal components.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
-<dt>history</dt><dd><p>a length-<code>ndim</code> list where each element is an iteration history.</p></dd>
 
 </dl>
 
@@ -224,21 +224,25 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>## generate default dataset and make its dimension three-folds.</span>
-<span class='no'>Xp</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>()
-<span class='no'>X</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>cbind</a></span>(<span class='no'>Xp</span>,<span class='no'>Xp</span>,<span class='no'>Xp</span>)
+<span class='co'>## use iris data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
+<span class='no'>X</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[,<span class='fl'>5</span>])
 
 <span class='co'>## try different regularization parameters for sparsity</span>
 <span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.spca</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>rho</span><span class='kw'>=</span><span class='fl'>0.01</span>)
 <span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.spca</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>rho</span><span class='kw'>=</span><span class='fl'>1</span>)
 <span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.spca</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>rho</span><span class='kw'>=</span><span class='fl'>100</span>)
 
-<span class='co'>## Visualize principal components as columns in an image</span>
+<span class='co'>## embeddings for each procedure</span>
+<span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>; <span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>; <span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
+
+<span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>out1</span>$<span class='no'>projection</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=0.01"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>out2</span>$<span class='no'>projection</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span>(<span class='no'>out3</span>$<span class='no'>projection</span>), <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=100"</span>)</div><div class='img'><img src='linear_SPCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y1</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=0.01"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y2</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=1"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.html'>plot</a></span>(<span class='no'>Y3</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPCA::rho=100"</span>)</div><div class='img'><img src='linear_SPCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

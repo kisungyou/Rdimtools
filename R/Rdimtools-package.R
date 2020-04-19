@@ -207,7 +207,7 @@
 #' \code{\link{aux.preprocess}} \tab performs preprocessing of centering, decorrelating, or whitening \cr
 #' \code{\link{aux.shortestpath}} \tab Floyd-Warshall algorithm (it's \emph{Fast}!) \cr
 #' \code{\link{aux.pkgstat}} \tab reports the number of functions available for each category
-#' }
+# }
 #'
 #'
 #' @docType package
@@ -220,7 +220,6 @@
 #' @importFrom maotai weiszfeld bmds
 #' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds
-#' @importFrom ADMM admm.lasso admm.spca admm.rpca
 #' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median integrate optimize
 #' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp
