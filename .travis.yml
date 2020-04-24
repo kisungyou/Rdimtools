@@ -21,7 +21,6 @@ addons:
 
 r:
   - release
-  - devel
 
 r-packages:
   - CVXR
