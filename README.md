@@ -42,7 +42,7 @@ lab = as.factor(iris[,5])
 # run 3 algorithms mentioned above
 mypca = do.pca(X, ndim=2)
 mylap = do.lscore(X, ndim=2)
-mydfm = do.dm(X, ndim=2, bandwidth=100)
+mydfm = do.dm(X, ndim=2, bandwidth=10)
 
 # visualize
 par(mfrow=c(1,3))
@@ -62,6 +62,7 @@ Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3<
 
 ``` r
 # generate sample data
+set.seed(100)
 roll = aux.gensamples(dname="swiss")
 
 # we will compare 6 methods (out of 17 methods from version 1.0.0)
@@ -88,4 +89,4 @@ We can observe that all 5 methods we tested estimated the intrinsic dimension ar
 Acknowledgements
 ----------------
 
-The logo icon is made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll data is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.
+The logo icon is made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll image is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.
