@@ -30,6 +30,14 @@ or the development version from github:
 devtools::install_github("kyoustat/Rdimtools")
 ```
 
+## Minimal Example : Dimension Reduction
+
+Here is an example of running dimension reduction algorithms (`do.` family) on the famous `iris` dataset.
+
+```{r message=FALSE, warning=FALSE}
+library(Rdimtools)
+```
+
 ## Acknowledgements
 
-The logo icon is made by [Freepik](https://www.flaticon.com/authors/freepik) from [www.flaticon.com](www.flaticon.com).
+The logo icon is made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com).
