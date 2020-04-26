@@ -74,7 +74,8 @@ vecd[4] = est.mle1(roll)$estdim        # MLE with Poisson process
 vecd[5] = est.twonn(roll)$estdim       # minimal neighborhood information
 
 # let's visualize
-plot(1:5, vecd, type="b", ylim=c(1,3), main="true dimension is d=2",
+plot(1:5, vecd, type="b", ylim=c(1.5,2.5), 
+     main="true dimension is d=2",
      xaxt="n",xlab="",ylab="estimated dimension")
 xtick = seq(1,5,by=1)
 axis(side=1, at=xtick, labels = FALSE)
