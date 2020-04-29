@@ -1,6 +1,7 @@
 ---
 title: "Quick Start with Rdimtools"
 author: Kisung You
+date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Quick Start with Rdimtools}

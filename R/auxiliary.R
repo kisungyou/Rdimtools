@@ -702,11 +702,8 @@ aux.graphnbdD <- function(D,type=c("proportion",0.1),symmetric="union",pval=2.0)
 #' @export
 aux.shortestpath <- function(dist){
   # class determination
-  if (class(dist)=="matrix"){
-    distnaive = dist
-  } else if (class(dist)=="dist"){
-    distnaive = as.matrix(dist)
-  } else {
+  distnaive = as.matrix(dist)
+  if ((nrow(distnaive)!=ncol(distnaive))||(!isSymmetric(distnaive))){
     stop("* aux.shortestpath : input 'dist' should be either (n*n) matrix or 'dist' class object.")
   }
   # consider logical input
