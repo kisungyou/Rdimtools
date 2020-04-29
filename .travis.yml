@@ -26,14 +26,22 @@ r-packages:
   - CVXR
   - Rcpp
   - RcppDE
+  - RcppDist
+  - RcppArmadillo
   - Rcsdp
   - Rdpack
   - RSpectra
   - maotai
+  - knitr
+  - rmarkdown
+  - Rdpack
 
 env:
   global:
-    - R_CHECK_ARGS="--no-build-vignettes --no-manual --ignore-vignettes --no-examples"
-    - R_BUILD_ARGS="--no-build-vignettes"
+    - R_CHECK_ARGS="--no-examples --no-manual"
+#env:
+#  global:
+#    - R_CHECK_ARGS="--no-build-vignettes --no-manual --ignore-vignettes --no-examples"
+#    - R_BUILD_ARGS="--no-build-vignettes"
 
 warnings_are_errors: false
