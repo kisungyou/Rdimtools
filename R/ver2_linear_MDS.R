@@ -97,3 +97,9 @@ do.mds <- function(X,ndim=2,preprocess=c("center","cscale","decorrelate","whiten
   # result$projection = solve(LHS,RHS)
   # return(result)
 }
+
+# call for later use ------------------------------------------------------
+#' @keywords internal
+pydo_mds <- function(myX, mydim, myproc){
+  return(do.mds(myX, ndim=mydim, preprocess=myproc))
+}

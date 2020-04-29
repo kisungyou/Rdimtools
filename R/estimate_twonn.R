@@ -40,7 +40,7 @@ est.twonn <- function(X){
   ## Preprocessing and Default Parameter
   aux.typecheck(X)
   n = nrow(X)
-  D = as.matrix(dist(X))
+  D = as.matrix(stats::dist(X))
   diag(D) = Inf
 
   ##########################################################################
@@ -48,7 +48,7 @@ est.twonn <- function(X){
   #   1. compute the ratio
   mu = rep(0,n)
   for (i in 1:n){
-    tgt = sort(as.vector(D[i,]))[1:2]
+    tgt = sort(as.vector(D[i,]), decreasing = FALSE)[1:2]
     mu[i] = tgt[2]/tgt[1]
   }
   #   2. transform
@@ -58,9 +58,13 @@ est.twonn <- function(X){
   x = log(mu.sorted)[1:(n-1)]
   y = -log(1.0-empiF)
 
+  idsave = (!is.infinite(x))
+  x = x[idsave]
+  y = y[idsave]
+
   ##########################################################################
   ## Return the results
   result = list()
-  result$estdim = sum(coefficients(lm(y~x-1))[1])
+  result$estdim = sum(coefficients(stats::lm(y~x-1))[1])
   return(result)
 }

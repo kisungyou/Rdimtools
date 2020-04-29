@@ -122,3 +122,11 @@ do.pca <- function(X,ndim=2,cor=FALSE,
   # result$trfinfo    = trfinfo
   # return(result)
 }
+
+
+
+# call for later use ------------------------------------------------------
+#' @keywords internal
+pydo_pca <- function(myX, mydim, mycor, myproc){
+  return(do.pca(myX, ndim=mydim, cor=mycor, preprocess = myproc))
+}

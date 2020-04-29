@@ -12,7 +12,6 @@ Description: We provide linear and nonlinear dimension reduction techniques.
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-Suggests: knitr, rmarkdown
 Depends: R (>= 3.0.0)
 Imports: CVXR (>= 1.0), Rcpp (>= 0.12.10), RcppDE, Rcsdp, Rdpack, RSpectra, graphics, maotai (>= 0.1.5), stats, utils
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
@@ -20,3 +19,7 @@ RoxygenNote: 7.1.0
 RdMacros: Rdpack
 URL: http://kyoustat.com/Rdimtools
 BugReports: http://github.com/kyoustat/Rdimtools/issues
+Suggests: 
+    knitr,
+    rmarkdown
+VignetteBuilder: knitr
