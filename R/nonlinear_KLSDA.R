@@ -26,20 +26,20 @@
 #' x1 = matrix(rnorm(4*10), nrow=10)-50
 #' x2 = matrix(rnorm(4*10), nrow=10)
 #' x3 = matrix(rnorm(4*10), nrow=10)+50
-#' X  = rbind(x1, x2, x3)
-#' label = c(rep(1,10), rep(2,10), rep(3,10))
+#' X     = rbind(x1, x2, x3)
+#' label = rep(1:3, each=10)
 #'
 #' ## try different kernel bandwidths
-#' out1 = do.klsda(X, label, k1=10, k2=10, t=1)
-#' out2 = do.klsda(X, label, k1=10, k2=10, t=5)
-#' out3 = do.klsda(X, label, k1=10, k2=10, t=10)
+#' out1 = do.klsda(X, label, t=0.1)
+#' out2 = do.klsda(X, label, t=1)
+#' out3 = do.klsda(X, label, t=10)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="bandwidth=1")
-#' plot(out2$Y, col=label, main="bandwidth=15")
-#' plot(out3$Y, col=label, main="bandwidth=10")
+#' plot(out1$Y, col=label, pch=19, main="bandwidth=0.1")
+#' plot(out2$Y, col=label, pch=19, main="bandwidth=1")
+#' plot(out3$Y, col=label, pch=19, main="bandwidth=10")
 #' par(opar)
 #'
 #' @references
@@ -47,7 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLSDA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.klsda <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate"),
                     alpha=0.5, k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2), t=1.0){

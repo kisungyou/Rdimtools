@@ -43,8 +43,12 @@ equivalent representations in low-dimensional space.
 }
 \examples{
 \donttest{
-## generate swiss roll data
-X <- aux.gensamples(n=200)
+## load iris data
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare different bandwidths
 out1 <- do.dm(X,bandwidth=10)
@@ -54,9 +58,9 @@ out3 <- do.dm(X,bandwidth=1000)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="DM::bandwidth=10")
-plot(out2$Y, main="DM::bandwidth=100")
-plot(out3$Y, main="DM::bandwidth=1000")
+plot(out1$Y, pch=19, col=label, main="DM::bandwidth=10")
+plot(out2$Y, pch=19, col=label, main="DM::bandwidth=100")
+plot(out3$Y, pch=19, col=label, main="DM::bandwidth=1000")
 par(opar)
 }
 

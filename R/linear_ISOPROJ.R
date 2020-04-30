@@ -121,7 +121,8 @@ do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
   #   7. generalized eigenvalue problem
   LHS = Xbar%*%rDG%*%t(Xbar)
   RHS = Xbar%*%t(Xbar)
-  SOL = aux.bicgstab(RHS, LHS, verbose=FALSE)
+  # SOL = aux.bicgstab(RHS, LHS, verbose=FALSE)
+  SOL = base::solve(LHS, RHS)
   #   8. eigendecomposition and compute projection matrix A
   if (ndim<3){
     res = base::eigen(SOL$x, ndim)

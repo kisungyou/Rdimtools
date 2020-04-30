@@ -20,7 +20,10 @@
 #' \donttest{
 #' ## load iris data
 #' data(iris)
-#' X <- as.matrix(iris[,1:4])
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## let's compare with other methods
 #' out1 <- do.pca(X, ndim=2)      # PCA
@@ -30,9 +33,9 @@
 #' ## visualize
 #' opar = par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="PCA")
-#' plot(out2$Y, main="MDS")
-#' plot(out3$Y, main="FastMap")
+#' plot(out1$Y, pch=19, col=label, main="PCA")
+#' plot(out2$Y, pch=19, col=label, main="MDS")
+#' plot(out3$Y, pch=19, col=label, main="FastMap")
 #' par(opar)
 #' }
 #'
@@ -41,7 +44,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_FastMap
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   ########################################################################

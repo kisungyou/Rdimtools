@@ -24,7 +24,10 @@
 #' \donttest{
 #' ## load iris data
 #' data(iris)
-#' X <- as.matrix(iris[,1:4])
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## let's compare with PCA
 #' out1 <- do.pca(X, ndim=2)      # PCA
@@ -33,8 +36,8 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, main="PCA")
-#' plot(out2$Y, main="LAMP")
+#' plot(out1$Y, pch=19, col=label, main="PCA")
+#' plot(out2$Y, pch=19, col=label, main="LAMP")
 #' par(opar)
 #' }
 #'
@@ -44,7 +47,7 @@
 #' @seealso \code{\link{do.sne}}
 #' @author Kisung You
 #' @rdname nonlinear_LAMP
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
   ########################################################################

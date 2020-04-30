@@ -31,18 +31,24 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate sample data
-#' X <- aux.gensamples(n=200)
+#' ## load iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
-#' ## weighted versus binary graph construction
-#' out1 <- do.crda(X,weight=TRUE)
-#' out2 <- do.crda(X,weight=FALSE)
+#' ## different settings of connectivity
+#' out1 <- do.crda(X, type=c("proportion",0.10))
+#' out2 <- do.crda(X, type=c("proportion",0.25))
+#' out3 <- do.crda(X, type=c("proportion",0.50))
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(out1$Y, main="weighted graph")
-#' plot(out2$Y, main="binarized graph")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y, col=label, pch=19, main="10% connected")
+#' plot(out2$Y, col=label, pch=19, main="25% connected")
+#' plot(out3$Y, col=label, pch=19, main="50% connected")
 #' par(opar)
 #' }
 #'
@@ -54,7 +60,7 @@
 #' @seealso \code{\link{do.isomap}}, \code{\link{do.crca}}
 #' @author Kisung You
 #' @rdname nonlinear_CRDA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.crda <- function(X,ndim=2,type=c("proportion",0.1),symmetric="union",weight=TRUE,
                     lambda=1.0,alpha=1.0,maxiter=1000,tolerance=1e-6){

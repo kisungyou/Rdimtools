@@ -35,10 +35,12 @@ Uncorrelated LDA (ULDA) is an extension of LDA by using the uncorrelated discrim
 and Kahrunen-Loeve expansion of the basis.
 }
 \examples{
-## use iris data
+## load iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare with LDA
 out1 = do.lda(X, label)
@@ -47,8 +49,8 @@ out2 = do.ulda(X, label)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,2))
-plot(out1$Y, col=label, main="LDA")
-plot(out2$Y, col=label, main="Uncorrelated LDA")
+plot(out1$Y, pch=19, col=label, main="LDA")
+plot(out2$Y, pch=19, col=label, main="Uncorrelated LDA")
 par(opar)
 
 }

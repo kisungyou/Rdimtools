@@ -26,10 +26,12 @@
 #'
 #' @examples
 #' \donttest{
-#' ## use iris data
+#' ## load iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## use different connectivity level
 #' out1 <- do.udp(X, type=c("proportion",0.05))
@@ -39,9 +41,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="connectivity 5%")
-#' plot(out2$Y, col=label, main="connectivity 10%")
-#' plot(out3$Y, col=label, main="connectivity 25%")
+#' plot(out1$Y, col=label, pch=19, main="connectivity 5%")
+#' plot(out2$Y, col=label, pch=19, main="connectivity 10%")
+#' plot(out3$Y, col=label, pch=19, main="connectivity 25%")
 #' par(opar)
 #' }
 #'
@@ -51,7 +53,7 @@
 #' \insertRef{yang_globally_2007}{Rdimtools}
 #'
 #' @seealso \code{\link{do.lpp}}
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.udp <- function(X, ndim=2, type=c("proportion",0.1), preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

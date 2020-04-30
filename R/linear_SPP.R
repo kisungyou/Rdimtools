@@ -21,10 +21,12 @@
 #'
 #' @examples
 #' \donttest{
-#' ## use iris data
+#' ## load iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## test different tolerance levels
 #' out1 <- do.spp(X,ndim=2,reltol=0.001)
@@ -34,9 +36,9 @@
 #' # visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="SPP::reltol=.001")
-#' plot(out2$Y, col=label, main="SPP::reltol=.01")
-#' plot(out3$Y, col=label, main="SPP::reltol=.1")
+#' plot(out1$Y, pch=19, col=label, main="SPP::reltol=.001")
+#' plot(out2$Y, pch=19, col=label, main="SPP::reltol=.01")
+#' plot(out3$Y, pch=19, col=label, main="SPP::reltol=.1")
 #' par(opar)
 #' }
 #' @references
@@ -44,7 +46,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_SPP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.spp <- function(X, ndim=2, preprocess = c("center","scale","cscale","decorrelate","whiten"), reltol=1e-4){
   #------------------------------------------------------------------------

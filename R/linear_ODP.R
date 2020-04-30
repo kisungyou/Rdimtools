@@ -108,7 +108,7 @@ do.odp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
                            type=nbdtype,symmetric=nbdsymmetric)
   nbdmask   = nbdstruct$mask
   #   3. Distance Matrix Squared
-  Dmat2 = (as.matrix(dist(pX))^2)
+  Dmat2 = (as.matrix(stats::dist(pX))^2)
   #   4. Construct W : weight matrix
   W = array(0,c(n,n))
   for (i in 1:(n-1)){

@@ -30,14 +30,14 @@
 #' ## try different numbers for neighborhood size
 #' out1 = do.dagdne(X, label, numk=5)
 #' out2 = do.dagdne(X, label, numk=10)
-#' out3 = do.dagdne(X, label, numk=25)
+#' out3 = do.dagdne(X, label, numk=20)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="nbd size=5", col=label, pch=19, cex=0.5)
-#' plot(out2$Y, main="nbd size=10",col=label, pch=19, cex=0.5)
-#' plot(out3$Y, main="nbd size=25",col=label, pch=19, cex=0.5)
+#' plot(out1$Y, main="nbd size=5", col=label, pch=19)
+#' plot(out2$Y, main="nbd size=10",col=label, pch=19)
+#' plot(out3$Y, main="nbd size=20",col=label, pch=19)
 #' par(opar)
 #'
 #' @references

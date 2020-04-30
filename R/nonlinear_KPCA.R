@@ -20,24 +20,24 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate ribbon-shaped data
-#' X = aux.gensamples(dname="ribbon",n=123)
+#' ## load iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
-#' ## 1. standard KPCA with gaussian kernel
-#' output1 <- do.kpca(X,ndim=2)
+#' ## try out different settings
+#' output1 <- do.kpca(X)                         # default setting
+#' output2 <- do.kpca(X,kernel=c("gaussian",5))  # gaussian kernel with large bandwidth
+#' output3 <- do.kpca(X,kernel=c("laplacian",1)) # laplacian kernel
 #'
-#' ## 2. gaussian kernel with large bandwidth
-#' output2 <- do.kpca(X,ndim=2,kernel=c("gaussian",5))
-#'
-#' ## 3. use laplacian kernel
-#' output3 <- do.kpca(X,ndim=2,kernel=c("laplacian",1))
-#'
-#' ## Visualize three different projections
+#' ## visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, main="Gaussian kernel")
-#' plot(output2$Y, main="Gaussian kernel with sigma=5")
-#' plot(output3$Y, main="Laplacian kernel")
+#' plot(output1$Y, col=label, pch=19, main="Gaussian kernel")
+#' plot(output2$Y, col=label, pch=19, main="Gaussian kernel with sigma=5")
+#' plot(output3$Y, col=label, pch=19, main="Laplacian kernel")
 #' par(opar)
 #' }
 #'
@@ -47,7 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KPCA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.kpca <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),kernel=c("gaussian",1.0)){
   # 1. typecheck is always first step to perform.

@@ -24,20 +24,24 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate ribbon-shaped data
-#' X = aux.gensamples(dname="ribbon", n=200)
+#' ## load iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different bandwidth size
-#' out1 <- do.iltsa(X, t=1)
-#' out2 <- do.iltsa(X, t=100)
-#' out3 <- do.iltsa(X, t=Inf)
+#' out1 <- do.iltsa(X, t=0.01)
+#' out2 <- do.iltsa(X, t=1)
+#' out3 <- do.iltsa(X, t=100)
 #'
 #' ## Visualize two comparisons
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="ILTSA::t=1")
-#' plot(out2$Y, main="ILTSA::t=100")
-#' plot(out3$Y, main="ILTSA::t=Inf")
+#' plot(out1$Y, pch=19, col=label, main="ILTSA::t=0.01")
+#' plot(out2$Y, pch=19, col=label, main="ILTSA::t=1")
+#' plot(out3$Y, pch=19, col=label, main="ILTSA::t=100")
 #' par(opar)
 #' }
 #'
@@ -46,9 +50,9 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_ILTSA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
-do.iltsa <- function(X, ndim=2, type=c("proportion",0.1),
+do.iltsa <- function(X, ndim=2, type=c("proportion",0.25),
                      symmetric=c("union","intersect","asymmetric"),
                      preprocess=c("center","scale","cscale","decorrelate","whiten"),
                      t=10.0){

@@ -1,17 +1,27 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Rdimtools <a href='https://kyoustat.com/Rdimtools'><img src='man/figures/logo.png' align="right" height="139" /></a>
-====================================================================================================================
+
+# Rdimtools <a href='https://kyoustat.com/Rdimtools'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
-[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools) [![Travis-CI Build Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://travis-ci.org/kyoustat/Rdimtools) [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools) <!-- badges: end -->
 
-**Rdimtools** is an R package for dimension reduction, manifold learning, and intrnsic dimension estimation methods. We aim at building one of the most comprehensive toolbox available online. Our logo characterizes the foundational nature of dimension reduction framework; we may be blind people wrangling the data to see an [elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant).
+[![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
+[![Travis-CI Build
+Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://travis-ci.org/kyoustat/Rdimtools)
+[![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
+<!-- badges: end -->
 
-The philosophy is simple, **the more we have at hands, the better we can play**.
+**Rdimtools** is an R package for dimension reduction, manifold
+learning, and intrnsic dimension estimation methods. We aim at building
+one of the most comprehensive toolbox available online. Our logo
+characterizes the foundational nature of dimension reduction framework;
+we may be blind people wrangling the data to see an
+[elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant).
 
-Installation
-------------
+The philosophy is simple, **the more we have at hands, the better we can
+play**.
+
+## Installation
 
 You can install a release version from CRAN:
 
@@ -26,10 +36,13 @@ or the development version from github:
 devtools::install_github("kyoustat/Rdimtools")
 ```
 
-Minimal Example : Dimension Reduction
--------------------------------------
+## Minimal Example : Dimension Reduction
 
-Here is an example of dimension reduction on the famous `iris` dataset. Principal Component Analysis (`do.pca`), Laplacian Score (`do.lscore`), and Diffusion Maps (`do.dm`) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.
+Here is an example of dimension reduction on the famous `iris` dataset.
+Principal Component Analysis (`do.pca`), Laplacian Score (`do.lscore`),
+and Diffusion Maps (`do.dm`) are compared, each from a family of
+algorithms for linear reduction, feature extraction, and nonlinear
+reduction.
 
 ``` r
 # load the library
@@ -53,12 +66,14 @@ plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Map
 
 <img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
 
-Minimal Example : Dimension Estimation
---------------------------------------
+## Minimal Example : Dimension Estimation
 
 ![](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif)
 
-Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3</sup> and one of 11 famous model-based samples from `aux.gensamples()` function. Given the ground truth that *d* = 2, let's apply several methods for intrinsic dimension estimation.
+Swill Roll is a classic example of 2-dimensional manifold embedded in
+\(\mathbb{R}^3\) and one of 11 famous model-based samples from
+`aux.gensamples()` function. Given the ground truth that \(d=2\), let’s
+apply several methods for intrinsic dimension estimation.
 
 ``` r
 # generate sample data
@@ -85,9 +100,16 @@ text(x=xtick,  par("usr")[3],
 
 <img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
 
-We can observe that all 5 methods we tested estimated the intrinsic dimension around *d* = 2. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.
+We can observe that all 5 methods we tested estimated the intrinsic
+dimension around \(d=2\). It should be noted that the estimated
+dimension may not be integer-valued due to characteristics of each
+method.
 
-Acknowledgements
-----------------
+## Acknowledgements
 
-The logo icon is made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll image is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.
+The logo icon is made by
+[Freepik](http://www.flaticon.com/authors/freepik) from
+[www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll
+image is taken from [Dinoj
+Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)’s
+website.

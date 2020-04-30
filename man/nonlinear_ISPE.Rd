@@ -48,8 +48,12 @@ mutually local whose distance should be close to geodesic distance.
 }
 \examples{
 \donttest{
-## generate sample data
-X = aux.gensamples(n=100)
+## load iris data
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare with original SPE
 outSPE <- do.spe(X, ndim=2)
@@ -60,10 +64,10 @@ out3 <- do.ispe(X, ndim=2, cutoff=50)
 ## Visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(2,2))
-plot(outSPE$Y, main="SPE")
-plot(out1$Y,   main="ISPE::cutoff=0.5")
-plot(out2$Y,   main="ISPE::cutoff=5")
-plot(out3$Y,   main="ISPE::cutoff=50")
+plot(outSPE$Y, pch=19, col=label, main="SPE")
+plot(out1$Y,   pch=19, col=label, main="ISPE::cutoff=0.5")
+plot(out2$Y,   pch=19, col=label, main="ISPE::cutoff=5")
+plot(out3$Y,   pch=19, col=label, main="ISPE::cutoff=50")
 par(opar)
 }
 

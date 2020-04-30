@@ -40,10 +40,12 @@ row-wise sparsity constraint.
 }
 \examples{
 \donttest{
-## use iris data
+## load iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 #### try different lbd combinations
 out1 = do.rsr(X, lbd=0.1)
@@ -53,9 +55,9 @@ out3 = do.rsr(X, lbd=10)
 #### visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(3,1))
-plot(out1$Y, col=label, main="RSR::lbd=0.1")
-plot(out2$Y, col=label, main="RSR::lbd=1")
-plot(out3$Y, col=label, main="RSR::lbd=10")
+plot(out1$Y, pch=19, col=label, main="RSR::lbd=0.1")
+plot(out2$Y, pch=19, col=label, main="RSR::lbd=1")
+plot(out3$Y, pch=19, col=label, main="RSR::lbd=10")
 par(opar)
 }
 

@@ -38,9 +38,12 @@ in accordance with indices of largest Renyi quadratic entropy in which entropy f
 }
 \examples{
 \donttest{
-## generate ribbon-shaped data
-## in order to pass CRAN pretest, n is set to be small.
-X = aux.gensamples(dname="ribbon",n=100)
+## load iris data
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## 1. standard KECA with gaussian kernel
 output1 <- do.keca(X,ndim=2)
@@ -54,9 +57,9 @@ output3 <- do.keca(X,ndim=2,kernel=c("laplacian",1))
 ## Visualize three different projections
 opar = par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(output1$Y, main="Gaussian kernel")
-plot(output2$Y, main="Gaussian, sigma=5")
-plot(output3$Y, main="Laplacian kernel")
+plot(output1$Y, pch=19, col=label, main="Gaussian kernel")
+plot(output2$Y, pch=19, col=label, main="Gaussian, sigma=5")
+plot(output3$Y, pch=19, col=label, main="Laplacian kernel")
 par(opar)
 }
 

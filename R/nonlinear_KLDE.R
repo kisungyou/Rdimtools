@@ -27,24 +27,24 @@
 #' \donttest{
 #' ## generate data of 2 types with clear difference
 #' diff = 5
-#' dt1  = aux.gensamples(n=123)-diff;
-#' dt2  = aux.gensamples(n=123)+diff;
+#' dt1  = aux.gensamples(n=50)-diff;
+#' dt2  = aux.gensamples(n=50)+diff;
 #'
 #' ## merge the data and create a label correspondingly
-#' Y      = rbind(dt1,dt2)
-#' label  = c(rep(1,123), rep(2,123))
+#' X      = rbind(dt1,dt2)
+#' label  = rep(1:2, each=50)
 #'
 #' ## try different neighborhood size
-#' out1 <- do.klde(Y, label, kcentering=TRUE, numk=5)
-#' out2 <- do.klde(Y, label, numk=10)
-#' out3 <- do.klde(Y, label, numk=25)
+#' out1 <- do.klde(X, label, numk=5)
+#' out2 <- do.klde(X, label, numk=10)
+#' out3 <- do.klde(X, label, numk=25)
 #'
 #' ## visualize
 #' opar = par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="k=5")
-#' plot(out2$Y, main="k=10")
-#' plot(out3$Y, main="k=25")
+#' plot(out1$Y, col=label, pch=19, main="k=5")
+#' plot(out2$Y, col=label, pch=19, main="k=10")
+#' plot(out3$Y, col=label, pch=19, main="k=25")
 #' par(opar)
 #' }
 #'
@@ -53,7 +53,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KLDE
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.klde <- function(X, label, ndim=2, t = 1.0, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten"),

@@ -28,13 +28,13 @@
 #' X <- aux.gensamples(n=123)
 #'
 #' ## 1. connecting 10% of data for graph construction.
-#' output1 <- do.isomap(X,ndim=2,type=c("proportion",0.10))
+#' output1 <- do.isomap(X,ndim=2,type=c("proportion",0.10),weight=FALSE)
 #'
 #' ## 2. constructing 25%-connected graph
-#' output2 <- do.isomap(X,ndim=2,type=c("proportion",0.25))
+#' output2 <- do.isomap(X,ndim=2,type=c("proportion",0.25),weight=FALSE)
 #'
 #' ## 3. constructing 25%-connected with binarization
-#' output3 <- do.isomap(X,ndim=2,type=c("proportion",0.25),weight=FALSE)
+#' output3 <- do.isomap(X,ndim=2,type=c("proportion",0.50),weight=FALSE)
 #'
 #' ## Visualize three different projections
 #' opar = par(no.readonly=TRUE)
@@ -51,10 +51,10 @@
 #'
 #' @rdname nonlinear_ISOMAP
 #' @author Kisung You
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.isomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
-                      weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten")){
+                      weight=FALSE,preprocess=c("center","scale","cscale","decorrelate","whiten")){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
