@@ -22,13 +22,13 @@
 #'
 #' @examples
 #' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=33)-100
-#' dt2  = aux.gensamples(n=33)
-#' dt3  = aux.gensamples(n=33)+100
+#' dt1  = aux.gensamples(n=20)-100
+#' dt2  = aux.gensamples(n=20)
+#' dt3  = aux.gensamples(n=20)+100
 #'
 #' ## merge the data and create a label correspondingly
 #' X      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' label  = rep(1:3, each=20)
 #'
 #' ## copy a label and let 20% of elements be missing
 #' nlabel = length(label)
@@ -53,7 +53,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MMP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.mmp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    numk=max(ceiling(nrow(X)/10),2), alpha=0.5, gamma=50){

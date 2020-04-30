@@ -25,8 +25,10 @@
 #' \donttest{
 #' ## use iris data
 #' data(iris)
-#' X   = as.matrix(iris[,1:4])
-#' lab = as.factor(iris[,5])
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## try different preprocessing procedure
 #' out1 <- do.fa(X,ndim=2)

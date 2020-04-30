@@ -40,8 +40,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## 1. Gaussian projection
 #' output1 <- do.rndproj(X,ndim=2)
@@ -55,9 +57,9 @@
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, col=label, main="RNDPROJ::Gaussian")
-#' plot(output2$Y, col=label, main="RNDPROJ::Arclioptas")
-#' plot(output3$Y, col=label, main="RNDPROJ::Sparse")
+#' plot(output1$Y, pch=19, col=label, main="RNDPROJ::Gaussian")
+#' plot(output2$Y, pch=19, col=label, main="RNDPROJ::Arclioptas")
+#' plot(output3$Y, pch=19, col=label, main="RNDPROJ::Sparse")
 #' par(opar)
 #'
 #'@references
@@ -69,7 +71,7 @@
 #'
 #'
 #' @rdname linear_RNDPROJ
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.rndproj <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                        type=c("gaussian","achlioptas","sparse"),s=max(sqrt(ncol(X)),3.0)){

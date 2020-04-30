@@ -41,16 +41,16 @@ it reflects discriminant information with realistic distance measure via Z-score
 \donttest{
 ## generate data of 2 types with clear difference
 diff = 15
-dt1  = aux.gensamples(n=123)-diff;
-dt2  = aux.gensamples(n=123)+diff;
+dt1  = aux.gensamples(n=50)-diff;
+dt2  = aux.gensamples(n=50)+diff;
 
 ## merge the data and create a label correspondingly
 Y      = rbind(dt1,dt2)
-label  = c(rep(1,123), rep(2,123))
+label  = rep(1:2, each=50)
 
 ## compare LPP, SLPP and ESLPP
-outLPP  <- do.lpp(Y)
-outSLPP <- do.slpp(Y, label)
+outLPP   <- do.lpp(Y)
+outSLPP  <- do.slpp(Y, label)
 outESLPP <- do.eslpp(Y, label)
 
 ## visualize

@@ -44,8 +44,12 @@ returns an explicit mapping from the high-dimensional space.
 }
 \examples{
 \donttest{
-## generate data
-X <- aux.gensamples()
+## use iris dataset
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+lab   = as.factor(iris[subid,5])
 
 ## try different neighborhood size
 out1 <- do.lltsa(X, type=c("proportion",0.01))
@@ -55,9 +59,9 @@ out3 <- do.lltsa(X, type=c("proportion",0.10))
 ## Visualize three different projections
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="LLTSA::1\% connected")
-plot(out2$Y, main="LLTSA::5\% connected")
-plot(out3$Y, main="LLTSA::10\% connected")
+plot(out1$Y, col=lab, pch=19, main="LLTSA::1\% connected")
+plot(out2$Y, col=lab, pch=19, main="LLTSA::5\% connected")
+plot(out3$Y, col=lab, pch=19, main="LLTSA::10\% connected")
 par(opar)
 }
 

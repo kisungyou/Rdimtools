@@ -31,8 +31,10 @@
 #' \donttest{
 #' ## load iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## compare different perplexity
 #' out1 <- do.tsne(X, ndim=2, perplexity=5)
@@ -42,9 +44,9 @@
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="tSNE::perplexity=5")
-#' plot(out2$Y, col=label, main="tSNE::perplexity=10")
-#' plot(out3$Y, col=label, main="tSNE::perplexity=25")
+#' plot(out1$Y, col=lab, main="tSNE::perplexity=5")
+#' plot(out2$Y, col=lab, main="tSNE::perplexity=10")
+#' plot(out3$Y, col=lab, main="tSNE::perplexity=25")
 #' par(opar)
 #' }
 #'

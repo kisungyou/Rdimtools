@@ -28,8 +28,12 @@
 #'
 #'@examples
 #'\donttest{
-#' ## generate data of 100 observations
-#' X <- aux.gensamples(n=100)
+#' ## use iris dataset
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## 1. use logcosh function for transformation
 #' output1 <- do.ica(X,ndim=2,type="logcosh")
@@ -43,9 +47,9 @@
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, main="ICA::logcosh")
-#' plot(output2$Y, main="ICA::exp")
-#' plot(output3$Y, main="ICA::poly")
+#' plot(output1$Y, col=lab, pch=19, main="ICA::logcosh")
+#' plot(output2$Y, col=lab, pch=19, main="ICA::exp")
+#' plot(output3$Y, col=lab, pch=19, main="ICA::poly")
 #' par(opar)
 #'}
 #'
@@ -54,7 +58,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_ICA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.ica <- function(X,ndim=2,type="logcosh",tpar=1,sym=FALSE,tol=1e-6,redundancy=TRUE,maxiter=100){
   # For this, prewhitening is default

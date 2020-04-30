@@ -23,10 +23,12 @@
 #'
 #' @examples
 #' \donttest{
-#' ## load iris data
+#' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' #### try different lbd combinations
 #' out1 = do.disr(X, lbd1=1, lbd2=1)
@@ -38,9 +40,9 @@
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(2,2))
 #' plot(out1$Y, main="(lbd1,lbd2)=(1,1)", col=label, pch=19, cex=0.5)
-#' plot(out2$Y, main="(lbd1,lbd2)=(1,5)", col=label,pch=19, cex=0.5)
-#' plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label,pch=19, cex=0.5)
-#' plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label,pch=19, cex=0.5)
+#' plot(out2$Y, main="(lbd1,lbd2)=(1,5)", col=label, pch=19, cex=0.5)
+#' plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label, pch=19, cex=0.5)
+#' plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label, pch=19, cex=0.5)
 #' par(opar)
 #' }
 #'
@@ -50,7 +52,7 @@
 #' @seealso \code{\link{do.rsr}}
 #' @author Kisung You
 #' @rdname linear_DISR
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.disr <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                     lbd1=1.0, lbd2=1.0){

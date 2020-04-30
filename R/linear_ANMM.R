@@ -27,8 +27,10 @@
 #' @examples
 #' ## load iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## perform ANMM on different choices of neighborhood size
 #' out1 = do.anmm(X, label, No=6, Ne=6)

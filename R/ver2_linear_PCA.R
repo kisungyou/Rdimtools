@@ -22,8 +22,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## try different preprocessing procedure
 #' out1 <- do.pca(X, ndim=2, preprocess="center")
@@ -36,9 +38,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(Y1, col=label, pch=19, main="PCA::'center'")
-#' plot(Y2, col=label, pch=19, main="PCA::'decorrelate'")
-#' plot(Y3, col=label, pch=19, main="PCA::'whiten'")
+#' plot(Y1, col=lab, pch=19, main="PCA::'center'")
+#' plot(Y2, col=lab, pch=19, main="PCA::'decorrelate'")
+#' plot(Y3, col=lab, pch=19, main="PCA::'whiten'")
 #' par(opar)
 #'
 #' @author Kisung You

@@ -25,8 +25,11 @@
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
-#' iris.dat = as.matrix(iris[,1:4])
-#' iris.lab = as.factor(iris[,5])
+#' set.seed(100)
+#' subid    = sample(1:150,50)
+#' iris.dat = as.matrix(iris[subid,1:4])
+#' iris.lab = as.factor(iris[subid,5])
+#'
 #'
 #' ## try different ranking methods
 #' mysig = 6
@@ -37,9 +40,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=iris.lab, main="SPECU::method1")
-#' plot(out2$Y, col=iris.lab, main="SPECU::method2")
-#' plot(out3$Y, col=iris.lab, main="SPECU::method3")
+#' plot(out1$Y, pch=19, col=iris.lab, main="SPECU::method1")
+#' plot(out2$Y, pch=19, col=iris.lab, main="SPECU::method2")
+#' plot(out3$Y, pch=19, col=iris.lab, main="SPECU::method3")
 #' par(opar)
 #' }
 #'
@@ -49,7 +52,7 @@
 #' @seealso \code{\link{do.specs}}
 #' @rdname linear_SPECU
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.specu <- function(X, ndim=2, sigma=1.0, ranking=c("method1","method2","method3"),
                      preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

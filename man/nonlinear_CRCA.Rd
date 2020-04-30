@@ -38,8 +38,12 @@ weighted by \eqn{\alpha /t}.
 }
 \examples{
 \donttest{
-## generate sample data
-X <- aux.gensamples(n=200)
+## use iris data
+data(iris)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## different initial learning rates
 out1 <- do.crca(X,alpha=1)
@@ -49,9 +53,9 @@ out3 <- do.crca(X,alpha=10)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="alpha=1.0")
-plot(out2$Y, main="alpha=5.0")
-plot(out3$Y, main="alpha=10.0")
+plot(out1$Y, col=label, pch=19, main="alpha=1.0")
+plot(out2$Y, col=label, pch=19, main="alpha=5.0")
+plot(out3$Y, col=label, pch=19, main="alpha=10.0")
 par(opar)
 }
 

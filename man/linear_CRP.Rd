@@ -38,8 +38,12 @@ especially when the dataset is large.
 }
 \examples{
 \donttest{
-## generate samples from swiss roll
-X <- aux.gensamples(n=200)
+## use iris dataset
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+lab   = as.factor(iris[subid,5])
 
 ## test different regularization parameters
 out1 <- do.crp(X,ndim=2,lambda=0.1)
@@ -49,9 +53,9 @@ out3 <- do.crp(X,ndim=2,lambda=10)
 # visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="CRP::lambda=0.1")
-plot(out2$Y, main="CRP::lambda=1")
-plot(out3$Y, main="CRP::lambda=10")
+plot(out1$Y, col=lab, pch=19, main="CRP::lambda=0.1")
+plot(out2$Y, col=lab, pch=19, main="CRP::lambda=1")
+plot(out3$Y, col=lab, pch=19, main="CRP::lambda=10")
 par(opar)
 }
 

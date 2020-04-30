@@ -49,8 +49,10 @@ for approximated nonlinear manifold structure.
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
-iris.dat = as.matrix(iris[,1:4])
-iris.lab = as.factor(iris[,5])
+set.seed(100)
+subid    = sample(1:150,50)
+iris.dat = as.matrix(iris[subid,1:4])
+iris.lab = as.factor(iris[subid,5])
 
 ## try different strategy
 out1 = do.cscoreg(iris.dat, iris.lab, score="ratio")

@@ -25,7 +25,7 @@
 #' data(iris)
 #' X     = as.matrix(iris[,2:4])
 #' label = as.integer(iris[,5])
-#' lcols  = as.factor(label)
+#' lcols = as.factor(label)
 #'
 #' ## copy a label and let 10% of elements be missing
 #' nlabel = length(label)
@@ -51,7 +51,7 @@
 #'
 #' @rdname nonlinear_CGE
 #' @author Kisung You
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.cge <- function(X, label, ndim=2, type=c("proportion",0.1),
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate")){

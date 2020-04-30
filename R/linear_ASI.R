@@ -19,8 +19,12 @@
 #' }
 #'
 #' @examples
-#' ## generate swiss-roll data
-#' X = aux.gensamples(n=200)
+#' ## use iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different tolerance level
 #' out1 = do.asi(X, abstol=1e-2)
@@ -30,9 +34,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="ASI::tol=1e-2", pch=19, cex=0.5)
-#' plot(out2$Y, main="ASI::tol=1e-3", pch=19, cex=0.5)
-#' plot(out3$Y, main="ASI::tol=1e-4", pch=19, cex=0.5)
+#' plot(out1$Y, main="ASI::tol=1e-2", pch=19, col=label)
+#' plot(out2$Y, main="ASI::tol=1e-3", pch=19, col=label)
+#' plot(out3$Y, main="ASI::tol=1e-4", pch=19, col=label)
 #' par(opar)
 #'
 #' @references
@@ -41,7 +45,7 @@
 #' @seealso  \code{\link{do.ldakm}}
 #' @author Kisung You
 #' @rdname linear_ASI
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.asi <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    maxiter=10, abstol=1e-3){

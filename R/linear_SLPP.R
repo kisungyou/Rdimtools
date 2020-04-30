@@ -22,8 +22,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## compare SLPP with LPP
 #' outLPP  <- do.lpp(X)
@@ -32,8 +34,8 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(outLPP$Y,  col=label, main="LPP")
-#' plot(outSLPP$Y, col=label, main="SLPP")
+#' plot(outLPP$Y,  pch=19, col=label, main="LPP")
+#' plot(outSLPP$Y, pch=19, col=label, main="SLPP")
 #' par(opar)
 #'
 #' @references
@@ -42,7 +44,7 @@
 #' @seealso \code{\link{do.lpp}}
 #' @author Kisung You
 #' @rdname linear_SLPP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.slpp <- function(X, label, ndim=2, preprocess=c("center","decorrelate","whiten")){
   #------------------------------------------------------------------------

@@ -28,8 +28,10 @@
 #' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ##  connecting 10% and 25% of data for graph construction each.
 #' output1 <- do.olpp(X,ndim=2,type=c("proportion",0.10))
@@ -39,8 +41,8 @@
 #' #  In theory, it should show two separated groups of data
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(output1$Y, col=label, main="OLPP::10% connected")
-#' plot(output2$Y, col=label, main="OLPP::25% connected")
+#' plot(output1$Y, col=label, pch=19, main="OLPP::10% connected")
+#' plot(output2$Y, col=label, pch=19, main="OLPP::25% connected")
 #' par(opar)
 #' }
 #'
@@ -50,7 +52,7 @@
 #' @seealso \code{\link{do.lpp}}
 #' @author Kisung You
 #' @rdname linear_OLPP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
                     weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten"),t=1.0){

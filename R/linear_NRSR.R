@@ -25,8 +25,10 @@
 #' \donttest{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' #### try different exponents for regularization
 #' out1 = do.nrsr(X, expl=0.01)
@@ -48,7 +50,7 @@
 #' @seealso \code{\link{do.rsr}}
 #' @author Kisung You
 #' @rdname linear_NRSR
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.nrsr <- function(X, ndim=2, expl=0.5, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), lbd=1.0){
   #------------------------------------------------------------------------

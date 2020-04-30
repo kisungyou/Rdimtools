@@ -34,8 +34,10 @@ if two nodes belong to the same class, it assigns weight of 1, i.e., \eqn{S_{ij}
 \examples{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare SLPP with LPP
 outLPP  <- do.lpp(X)
@@ -44,8 +46,8 @@ outSLPP <- do.slpp(X, label)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,2))
-plot(outLPP$Y,  col=label, main="LPP")
-plot(outSLPP$Y, col=label, main="SLPP")
+plot(outLPP$Y,  pch=19, col=label, main="LPP")
+plot(outSLPP$Y, pch=19, col=label, main="SLPP")
 par(opar)
 
 }

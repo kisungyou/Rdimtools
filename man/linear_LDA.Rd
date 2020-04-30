@@ -44,21 +44,19 @@ subspace can only be spanned by at most \code{K-1} orthogonal vectors.
 
 \examples{
 \donttest{
-## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-100
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+100
-
-## merge the data and create a label correspondingly
-Y      = rbind(dt1,dt2,dt3)
-label  = c(rep(1,33), rep(2,33), rep(3,33))
+## use iris dataset
+data(iris)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+lab   = as.factor(iris[subid,5])
 
 ## perform onto 2-dimensional space
-output = do.lda(Y, label, ndim=2)
+output = do.lda(X, lab, ndim=2)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-plot(output$Y, main="3 groups on 2d plane")
+plot(output$Y, col=lab, pch=19, main="3 groups on 2d plane")
 par(opar)
 }
 

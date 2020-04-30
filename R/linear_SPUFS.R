@@ -26,8 +26,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' #### try different bandwidth values
 #' out1 = do.spufs(X, bandwidth=0.1)
@@ -37,9 +39,9 @@
 #' #### visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="SPUFS::bandwidth=0.1")
-#' plot(out2$Y, col=label, main="SPUFS::bandwidth=1")
-#' plot(out3$Y, col=label, main="SPUFS::bandwidth=10")
+#' plot(out1$Y, pch=19, col=label, main="SPUFS::bandwidth=0.1")
+#' plot(out2$Y, pch=19, col=label, main="SPUFS::bandwidth=1")
+#' plot(out3$Y, pch=19, col=label, main="SPUFS::bandwidth=10")
 #' par(opar)
 #'
 #' @references
@@ -47,7 +49,7 @@
 #'
 #' @rdname linear_SPUFS
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.spufs <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
                      alpha=1.0, beta=1.0, bandwidth=1.0){

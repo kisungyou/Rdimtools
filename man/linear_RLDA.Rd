@@ -35,8 +35,10 @@ eigendecomposition in LDA formulation.
 \dontrun{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.factor(iris$Species)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## try different regularization parameters
 out1 <- do.rlda(X, label, alpha=0.001)
@@ -46,9 +48,9 @@ out3 <- do.rlda(X, label, alpha=100)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=label, main="RLDA::alpha=0.1")
-plot(out2$Y, col=label, main="RLDA::alpha=1")
-plot(out3$Y, col=label, main="RLDA::alpha=10")
+plot(out1$Y, pch=19, col=label, main="RLDA::alpha=0.1")
+plot(out2$Y, pch=19, col=label, main="RLDA::alpha=1")
+plot(out3$Y, pch=19, col=label, main="RLDA::alpha=10")
 par(opar)
 }
 

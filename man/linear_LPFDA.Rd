@@ -48,25 +48,25 @@ eigenvalue problem.
 \examples{
 \donttest{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-100
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+100
+dt1  = aux.gensamples(n=20)-100
+dt2  = aux.gensamples(n=20)
+dt3  = aux.gensamples(n=20)+100
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)
-label  = c(rep(1,33), rep(2,33), rep(3,33))
+label  = rep(1:3, each=20)
 
 ## try different proportion of connected edges
-out1 = do.lpfda(X, label, type=c("proportion",0.01))
-out2 = do.lpfda(X, label, type=c("proportion",0.1))
-out3 = do.lpfda(X, label, type=c("proportion",0.25))
+out1 = do.lpfda(X, label, type=c("proportion",0.10))
+out2 = do.lpfda(X, label, type=c("proportion",0.25))
+out3 = do.lpfda(X, label, type=c("proportion",0.50))
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="1\% connectivity")
-plot(out2$Y, main="10\% connectivity")
-plot(out3$Y, main="25\% connectivity")
+plot(out1$Y, pch=19, col=lab, main="10\% connectivity")
+plot(out2$Y, pch=19, col=lab, main="25\% connectivity")
+plot(out3$Y, pch=19, col=lab, main="50\% connectivity")
 par(opar)
 }
 

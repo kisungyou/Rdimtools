@@ -38,8 +38,10 @@ for class labels not requiring class priors. For the KQMI formulation, LQMI is a
 \examples{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare against LDA
 out1 = do.lda(X, label)

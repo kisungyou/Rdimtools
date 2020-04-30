@@ -25,20 +25,22 @@
 #' \donttest{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different numbers for neighborhood size
-#' out1 = do.onpp(X, type=c("proportion",0.05))
-#' out2 = do.onpp(X, type=c("proportion",0.1))
-#' out3 = do.onpp(X, type=c("proportion",0.25))
+#' out1 = do.onpp(X, type=c("proportion",0.10))
+#' out2 = do.onpp(X, type=c("proportion",0.25))
+#' out3 = do.onpp(X, type=c("proportion",0.50))
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="ONPP::5% connectivity")
-#' plot(out2$Y, col=label, main="ONPP::10% connectivity")
-#' plot(out3$Y, col=label, main="ONPP::25% connectivity")
+#' plot(out1$Y, pch=19, col=label, main="ONPP::10% connectivity")
+#' plot(out2$Y, pch=19, col=label, main="ONPP::25% connectivity")
+#' plot(out3$Y, pch=19, col=label, main="ONPP::50% connectivity")
 #' par(opar)
 #' }
 #'
@@ -47,7 +49,7 @@
 #'
 #' @rdname linear_ONPP
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.onpp <- function(X, ndim=2, type=c("proportion",0.1),
                     preprocess=c("center","scale","cscale","decorrelate","whiten")){

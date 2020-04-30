@@ -22,8 +22,10 @@
 #' @examples
 #' ## load iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different numbers for neighborhood size
 #' out1 = do.dagdne(X, label, numk=5)
@@ -44,7 +46,7 @@
 #' @seealso \code{\link{do.dne}}
 #' @author Kisung You
 #' @rdname linear_DAGDNE
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.dagdne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
                    preprocess=c("center","scale","cscale","decorrelate","whiten")){

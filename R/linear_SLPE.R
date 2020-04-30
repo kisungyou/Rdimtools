@@ -20,10 +20,12 @@
 #'
 #' @examples
 #' \donttest{
-#' ## load iris data
+#' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## compare SLPE with SLPP
 #' out1 <- do.slpp(X, label)
@@ -32,8 +34,8 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, col=label, main="SLPP")
-#' plot(out2$Y, col=label, main="SLPE")
+#' plot(out1$Y, pch=19, col=label, main="SLPP")
+#' plot(out2$Y, pch=19, col=label, main="SLPE")
 #' par(opar)
 #' }
 #'
@@ -43,7 +45,7 @@
 #' @author Kisung You
 #' @seealso \code{\link{do.lpe}}
 #' @rdname linear_SLPE
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.slpe <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

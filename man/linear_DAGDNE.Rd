@@ -40,8 +40,10 @@ homogeneous and heterogeneous samples accordaing to their labels.
 \examples{
 ## load iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.factor(iris$Species)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## try different numbers for neighborhood size
 out1 = do.dagdne(X, label, numk=5)

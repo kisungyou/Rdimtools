@@ -47,8 +47,10 @@ projection vectors - or, basis for learned subspace - contain no negative values
 \dontrun{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])+50
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## use different levels of connectivity
 out1 = do.nonpp(X, type=c("proportion",0.1))

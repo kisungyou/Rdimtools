@@ -23,20 +23,24 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate default dataset
-#' X <- aux.gensamples()
+#' ## use iris dataset
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## try different neighborhood size
-#' out1 <- do.lpca(X, ndim=2, type=c("proportion",0.01))
-#' out2 <- do.lpca(X, ndim=2, type=c("proportion",0.1))
-#' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
+#' out1 <- do.lpca(X, ndim=2, type=c("proportion",0.10))
+#' out2 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
+#' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.50))
 #'
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="LPCA::1% connected")
-#' plot(out2$Y, main="LPCA::10% connected")
-#' plot(out3$Y, main="LPCA::25% connected")
+#' plot(out1$Y, pch=19, col=lab, main="LPCA::10% connected")
+#' plot(out2$Y, pch=19, col=lab, main="LPCA::25% connected")
+#' plot(out3$Y, pch=19, col=lab, main="LPCA::50% connected")
 #' par(opar)
 #' }
 #'
@@ -45,7 +49,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPCA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.lpca <- function(X, ndim=2, type=c("proportion",0.1),
                     preprocess=c("center","scale","cscale","decorrelate","whiten")){

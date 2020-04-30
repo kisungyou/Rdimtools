@@ -41,8 +41,10 @@ solely based on data.
 \donttest{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## compare with PCA
 out1 <- do.pca(X,ndim=2)
@@ -52,9 +54,9 @@ out3 <- do.sdlpp(X, t=10)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=label, main="PCA")
-plot(out2$Y, col=label, main="SDLPP::t=1")
-plot(out3$Y, col=label, main="SDLPP::t=10")
+plot(out1$Y, pch=19, col=label, main="PCA")
+plot(out2$Y, pch=19, col=label, main="SDLPP::t=1")
+plot(out3$Y, pch=19, col=label, main="SDLPP::t=10")
 par(opar)
 }
 

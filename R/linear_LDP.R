@@ -7,13 +7,13 @@
 #'
 #' @examples
 #' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=33)-100
-#' dt2  = aux.gensamples(n=33)
-#' dt3  = aux.gensamples(n=33)+100
+#' dt1  = aux.gensamples(n=20)-100
+#' dt2  = aux.gensamples(n=20)
+#' dt3  = aux.gensamples(n=20)+100
 #'
 #' ## merge the data and create a label correspondingly
 #' X      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' label  = rep(1:3, each=20)
 #'
 #' ## try different neighborhood sizes
 #' out1 = do.ldp(X, label, type=c("proportion",0.01))
@@ -52,7 +52,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LDP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.ldp <- function(X, label, ndim=2, type=c("proportion",0.1),
                    preprocess=c("center","scale","cscale","decorrelate","whiten"), beta=10.0){

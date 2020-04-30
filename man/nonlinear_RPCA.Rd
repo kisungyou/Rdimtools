@@ -42,10 +42,12 @@ as kind of a new data matrix for any manifold learning scheme to be applied.
 \donttest{
 ## Load Iris data and put some noise
 data(iris)
+set.seed(100)
+subid = sample(1:150,50)
 noise = 0.2
-X = as.matrix(iris[,1:4])
+X = as.matrix(iris[subid,1:4])
 X = X + matrix(noise*rnorm(length(X)), nrow=nrow(X))
-label = as.integer(iris$Species)
+lab = as.factor(iris[subid,5])
 
 ## try different regularization parameters
 rpca1 = do.rpca(X, lambda=0.1)
@@ -60,9 +62,9 @@ Y3 = do.pca(rpca3$L, ndim=2)$Y
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(Y1, pch=19, col=label, main="RPCA+PCA::lambda=0.1")
-plot(Y2, pch=19, col=label, main="RPCA+PCA::lambda=1")
-plot(Y3, pch=19, col=label, main="RPCA+PCA::lambda=10")
+plot(Y1, pch=19, col=lab, main="RPCA+PCA::lambda=0.1")
+plot(Y2, pch=19, col=lab, main="RPCA+PCA::lambda=1")
+plot(Y3, pch=19, col=lab, main="RPCA+PCA::lambda=10")
 par(opar)
 }
 

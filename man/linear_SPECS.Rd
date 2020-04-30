@@ -44,8 +44,10 @@ the graph laplacian is built via class label information.
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
-iris.dat = as.matrix(iris[,1:4])
-iris.lab = as.factor(iris[,5])
+set.seed(100)
+subid = sample(1:150, 50)
+iris.dat = as.matrix(iris[subid,1:4])
+iris.lab = as.factor(iris[subid,5])
 
 ## try different ranking methods
 out1 = do.specs(iris.dat, iris.lab, ranking="method1")
@@ -55,9 +57,9 @@ out3 = do.specs(iris.dat, iris.lab, ranking="method3")
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=iris.lab, main="SPECS::method1")
-plot(out2$Y, col=iris.lab, main="SPECS::method2")
-plot(out3$Y, col=iris.lab, main="SPECS::method3")
+plot(out1$Y, pch=19, col=iris.lab, main="SPECS::method1")
+plot(out2$Y, pch=19, col=iris.lab, main="SPECS::method2")
+plot(out3$Y, pch=19, col=iris.lab, main="SPECS::method3")
 par(opar)
 }
 

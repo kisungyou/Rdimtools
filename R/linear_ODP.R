@@ -28,8 +28,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different beta (scaling control) parameter
 #' out1 = do.odp(X, label, beta=1)
@@ -39,16 +41,16 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="ODP::beta=1")
-#' plot(out2$Y, col=label, main="ODP::beta=10")
-#' plot(out3$Y, col=label, main="ODP::beta=100")
+#' plot(out1$Y, col=label, pch=19, main="ODP::beta=1")
+#' plot(out2$Y, col=label, pch=19, main="ODP::beta=10")
+#' plot(out3$Y, col=label, pch=19, main="ODP::beta=100")
 #' par(opar)
 #'
 #' @references
 #' \insertRef{li_supervised_2009}{Rdimtools}
 #'
 #' @rdname linear_ODP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.odp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    type=c("proportion",0.1), symmetric=c("union","intersect","asymmetric"),

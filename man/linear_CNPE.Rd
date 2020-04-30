@@ -42,24 +42,25 @@ singular generalized eigensystem computation of NPE into two eigenvalue decompos
 \examples{
 \donttest{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-50
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+50
+dt1  = aux.gensamples(n=20)-50
+dt2  = aux.gensamples(n=20)
+dt3  = aux.gensamples(n=20)+50
+lab  = rep(1:3, each=20)
 
 ## merge the data
 X      = rbind(dt1,dt2,dt3)
 
 ## try different numbers for neighborhood size
-out1 = do.cnpe(X, type=c("proportion",0.05))
-out2 = do.cnpe(X, type=c("proportion",0.1))
-out3 = do.cnpe(X, type=c("proportion",0.25))
+out1 = do.cnpe(X, type=c("proportion",0.10))
+out2 = do.cnpe(X, type=c("proportion",0.25))
+out3 = do.cnpe(X, type=c("proportion",0.50))
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(3,1))
-plot(out1$Y, main="CNPE::5\% connected")
-plot(out2$Y, main="CNPE::10\% connected")
-plot(out3$Y, main="CNPE::25\% connected")
+plot(out1$Y, col=lab, pch=19, main="CNPE::10\% connected")
+plot(out2$Y, col=lab, pch=19, main="CNPE::25\% connected")
+plot(out3$Y, col=lab, pch=19, main="CNPE::50\% connected")
 par(opar)
 }
 

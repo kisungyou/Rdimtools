@@ -45,10 +45,12 @@ from the decomposition of data matrix, it automatically corrects the target dime
 }
 \examples{
 \donttest{
-## use iris data
+## use iris dataset
 data(iris)
-X   <- as.matrix(iris[,1:4])
-lab <- as.factor(iris[,5])
+set.seed(100)
+subid <- sample(1:150, 50)
+X     <- as.matrix(iris[subid,1:4])
+lab   <- as.factor(iris[subid,5])
 
 ## 1. connecting 25\% of data for graph construction.
 output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))

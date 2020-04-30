@@ -45,8 +45,12 @@ authors provided a detour for rank correcting mechanism but it is omitted for pr
 }
 \examples{
 \dontrun{
-## generate samples
-X <- aux.gensamples(n=123)
+## use iris dataset
+data(iris)
+set.seed(100)
+subid <- sample(1:150, 50)
+X     <- as.matrix(iris[subid,1:4])
+lab   <- as.factor(iris[subid,5])
 
 ## compare LEA with LLE and another approximation NPE
 out1 <- do.lle(X, ndim=2)
@@ -56,9 +60,9 @@ out3 <- do.lea(X, ndim=2)
 ## visual comparison
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="LLE")
-plot(out2$Y, main="NPE")
-plot(out3$Y, main="LEA")
+plot(out1$Y, pch=19, col=lab, main="LLE")
+plot(out2$Y, pch=19, col=lab, main="NPE")
+plot(out3$Y, pch=19, col=lab, main="LEA")
 par(opar)
 }
 

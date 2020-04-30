@@ -21,8 +21,10 @@
 #' @examples
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## compare against LDA
 #' out1 = do.lda(X, label)
@@ -41,7 +43,7 @@
 #' @seealso \code{\link{do.kqmi}}
 #' @author Kisung You
 #' @rdname linear_LQMI
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.lqmi  <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

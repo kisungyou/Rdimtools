@@ -56,8 +56,8 @@ the classification ability.
 x1 = matrix(rnorm(4*10), nrow=10)-20
 x2 = matrix(rnorm(4*10), nrow=10)
 x3 = matrix(rnorm(4*10), nrow=10)+20
-X  = rbind(x1, x2, x3)
-label = c(rep(1,10), rep(2,10), rep(3,10))
+X     = rbind(x1, x2, x3)
+label = rep(1:3, each=10)
 
 ## try different beta (scaling control) parameter
 out1 = do.modp(X, label, beta=1)

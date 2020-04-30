@@ -42,7 +42,7 @@ linerity and constant covariance conditions. For more details, see the reference
 \donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
-n = 123
+n = 50
 theta = runif(n)
 h     = runif(n)
 t     = (1+2*theta)*(3*pi/2)

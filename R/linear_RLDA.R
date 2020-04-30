@@ -23,8 +23,10 @@
 #' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## try different regularization parameters
 #' out1 <- do.rlda(X, label, alpha=0.001)
@@ -34,9 +36,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="RLDA::alpha=0.1")
-#' plot(out2$Y, col=label, main="RLDA::alpha=1")
-#' plot(out3$Y, col=label, main="RLDA::alpha=10")
+#' plot(out1$Y, pch=19, col=label, main="RLDA::alpha=0.1")
+#' plot(out2$Y, pch=19, col=label, main="RLDA::alpha=1")
+#' plot(out3$Y, pch=19, col=label, main="RLDA::alpha=10")
 #' par(opar)
 #' }
 #'
@@ -46,7 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_RLDA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.rlda <- function(X, label, ndim=2, alpha=1.0){
   ## Note : refer to do.klfda

@@ -26,8 +26,10 @@
 #' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])+50
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## use different kernel bandwidths with 20% connectivity
 #' out1 = do.nolpp(X, type=c("proportion",0.5), t=0.01)
@@ -49,7 +51,7 @@
 #' @seealso \code{\link{do.olpp}}
 #' @rdname linear_NOLPP
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.nolpp <- function(X, ndim=2, type=c("proportion",0.1),
                      preprocess=c("null","center","scale","cscale","decorrelate","whiten"),

@@ -48,8 +48,10 @@ training samples embedded in MMC framework. With the choice of  \code{a=0}, \cod
 \examples{
 ## load iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.factor(iris$Species)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## try different lambda values
 out1 = do.ammc(X, label, lambda=0.1)

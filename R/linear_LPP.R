@@ -24,8 +24,12 @@
 #' }
 #'
 #' @examples
-#' ## generate twinpeaks data
-#' X <- aux.gensamples(dname="twinpeaks",n=100)
+#' ## use iris dataset
+#' data(iris)
+#' set.seed(100)
+#' subid <- sample(1:150, 50)
+#' X     <- as.matrix(iris[subid,1:4])
+#' lab   <- as.factor(iris[subid,5])
 #'
 #' ## try different kernel bandwidths
 #' out1 <- do.lpp(X, t=0.1)
@@ -35,9 +39,9 @@
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="LPP::bandwidth=0.1")
-#' plot(out2$Y, main="LPP::bandwidth=1")
-#' plot(out3$Y, main="LPP::bandwidth=10")
+#' plot(out1$Y, col=lab, pch=19, main="LPP::bandwidth=0.1")
+#' plot(out2$Y, col=lab, pch=19, main="LPP::bandwidth=1")
+#' plot(out3$Y, col=lab, pch=19, main="LPP::bandwidth=10")
 #' par(opar)
 #'
 #' @references
@@ -45,7 +49,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_LPP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.lpp <- function(X, ndim=2, type=c("proportion",0.1),
                    symmetric=c("union","intersect","asymmetric"),

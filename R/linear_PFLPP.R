@@ -18,8 +18,12 @@
 #' }
 #'
 #' @examples
-#' ## generate swiss roll data
-#' X = aux.gensamples(n=200)
+#' ## use iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## compare with PCA
 #' out1 = do.pca(X, ndim=2)
@@ -28,8 +32,8 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, main="PCA")
-#' plot(out2$Y, main="Parameter-Free LPP")
+#' plot(out1$Y, pch=19, col=label, main="PCA")
+#' plot(out2$Y, pch=19, col=label, main="Parameter-Free LPP")
 #' par(opar)
 #'
 #' @references
@@ -37,7 +41,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_PFLPP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.pflpp <- function(X, ndim=2, preprocess=c("center","scale","cscale","whiten","decorrelate")){
   #------------------------------------------------------------------------

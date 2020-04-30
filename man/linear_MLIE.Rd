@@ -44,13 +44,13 @@ intraclass compactness at the same time. It can be deemed an extended version of
 \examples{
 \donttest{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=33)-100
-dt2  = aux.gensamples(n=33)
-dt3  = aux.gensamples(n=33)+100
+dt1  = aux.gensamples(n=20)-100
+dt2  = aux.gensamples(n=20)
+dt3  = aux.gensamples(n=20)+100
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)
-label  = c(rep(1,33), rep(2,33), rep(3,33))
+label  = rep(1:3, each=20)
 
 ## try different numbers for neighborhood size
 out1 = do.mlie(X, label, k1=5, k2=5)

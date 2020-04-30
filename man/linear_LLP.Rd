@@ -53,7 +53,7 @@ controls possible rank-deficiency of kernel matrix.
 \examples{
 \donttest{
 ## generate data
-X <- aux.gensamples(dname="crown")
+X <- aux.gensamples(n=100, dname="crown")
 
 ## test different lambda - regularization - values
 out1 <- do.llp(X,ndim=2,lambda=0.1)

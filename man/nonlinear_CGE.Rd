@@ -44,7 +44,7 @@ consistent with the labels.
 data(iris)
 X     = as.matrix(iris[,2:4])
 label = as.integer(iris[,5])
-lcols  = as.factor(label)
+lcols = as.factor(label)
 
 ## copy a label and let 10\% of elements be missing
 nlabel = length(label)

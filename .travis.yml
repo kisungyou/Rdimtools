@@ -18,6 +18,11 @@ addons:
       - libx11-dev
       - libglu1-mesa-dev
       - libfreetype6-dev
+      - libgdal-dev 
+      - libgeos-dev 
+      - gdal-bin 
+      - proj-bin
+      - libproj-dev
 
 r:
   - release

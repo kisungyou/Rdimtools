@@ -22,8 +22,10 @@
 #' \dontrun{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])+50
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4]) + 50
+#' label = as.factor(iris[subid,5])
 #'
 #' ## use different preprocessing
 #' out1 = do.npca(X, preprocess="center")
@@ -33,9 +35,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="NPCA:: center")
-#' plot(out2$Y, col=label, main="NPCA:: cscale")
-#' plot(out3$Y, col=label, main="NPCA:: whiten")
+#' plot(out1$Y, pch=19, col=label, main="NPCA:: center")
+#' plot(out2$Y, pch=19, col=label, main="NPCA:: cscale")
+#' plot(out3$Y, pch=19, col=label, main="NPCA:: whiten")
 #' par(opar)
 #' }
 #'
@@ -45,7 +47,7 @@
 #' @seealso \code{\link{do.pca}}
 #' @rdname linear_NPCA
 #' @author Kisung You
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.npca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                     maxiter=1000, reltol=1e-5){

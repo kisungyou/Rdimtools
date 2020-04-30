@@ -24,8 +24,10 @@
 #' \donttest{
 #' ## use iris data
 #' data(iris)
-#' X     = as.matrix(iris[,1:4])
-#' label = as.integer(iris$Species)
+#' set.seed(100)
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
 #' ## perform MVP with different preprocessings
 #' out1 = do.mvp(X, label)
@@ -35,9 +37,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="centering")
-#' plot(out2$Y, col=label, main="decorrelating")
-#' plot(out3$Y, col=label, main="whitening")
+#' plot(out1$Y, col=label, pch=19, main="centering")
+#' plot(out2$Y, col=label, pch=19, main="decorrelating")
+#' plot(out3$Y, col=label, pch=19, main="whitening")
 #' par(opar)
 #' }
 #'
@@ -46,7 +48,7 @@
 #'
 #' @author Kisung You
 #' @rdname linear_MVP
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------

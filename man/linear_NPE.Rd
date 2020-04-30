@@ -59,24 +59,24 @@ regularization parameter and put penalty for stable computation. See also
 }
 \examples{
 \donttest{
-## generate data
-X <- aux.gensamples(n=333) + 50
+## use iris data
+data(iris)
+set.seed(100)
+subid = sample(1:150, 50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
-## 1. connecting 5\% of data for graph construction.
-output1 <- do.npe(X,ndim=2,type=c("proportion",0.05))
+## use different settings for connectivity
+output1 = do.npe(X, ndim=2, type=c("proportion",0.10))
+output2 = do.npe(X, ndim=2, type=c("proportion",0.25))
+output3 = do.npe(X, ndim=2, type=c("proportion",0.50))
 
-## 2. constructing 25\%-connected graph with regularization parameter
-output2 <- do.npe(X,ndim=2,type=c("proportion",0.2),symmetric='intersect',regparam=1.0)
-
-## 3. constructing half-connected graph with reg parameter = 10.0.
-output3 <- do.npe(X,ndim=2,type=c("proportion",0.5),regparam=10.0)
-
-## Visualize three different projections
+## visualize three different projections
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(output1$Y, main="NPE::5\% connected")
-plot(output2$Y, main="NPE::25\% connected")
-plot(output3$Y, main="NPE::50\% connected")
+plot(output1$Y, pch=19, col=label, main="NPE::10\% connected")
+plot(output2$Y, pch=19, col=label, main="NPE::25\% connected")
+plot(output3$Y, pch=19, col=label, main="NPE::50\% connected")
 par(opar)
 }
 
