@@ -13,6 +13,7 @@ addons:
   apt:
     packages:
       - cmake
+      - glpk-utils
       - libmpfr-dev
       - xorg
       - libx11-dev
