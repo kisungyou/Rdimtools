@@ -105,16 +105,16 @@
 <h2 class="hasAnchor">
 <a href="#installation" class="anchor"></a>Installation</h2>
 <p>You can install a release version from CRAN:</p>
-<div class="sourceCode"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"Rdimtools"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"Rdimtools"</span>)</pre></div>
 <p>or the development version from github:</p>
-<div class="sourceCode"><pre class="r"><span class="co">## install.packages("devtools")</span>
+<div class="sourceCode" id="cb2"><pre class="r"><span class="co">## install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"kyoustat/Rdimtools"</span>)</pre></div>
 </div>
 <div id="minimal-example-dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#minimal-example-dimension-reduction" class="anchor"></a>Minimal Example : Dimension Reduction</h2>
 <p>Here is an example of dimension reduction on the famous <code>iris</code> dataset. Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
-<div class="sourceCode"><pre class="r"><span class="co"># load the library</span>
+<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># load the library</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Rdimtools</span>)
 
 <span class="co"># load the data</span>
@@ -138,7 +138,7 @@
 <a href="#minimal-example-dimension-estimation" class="anchor"></a>Minimal Example : Dimension Estimation</h2>
 <p><img src="http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
 <p>Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3</sup> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <em>d</em> = 2, let’s apply several methods for intrinsic dimension estimation.</p>
-<div class="sourceCode"><pre class="r"><span class="co"># generate sample data</span>
+<div class="sourceCode" id="cb4"><pre class="r"><span class="co"># generate sample data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">100</span>)
 <span class="no">roll</span> <span class="kw">=</span> <span class="fu"><a href="reference/aux_gensamples.html">aux.gensamples</a></span>(<span class="kw">dname</span><span class="kw">=</span><span class="st">"swiss"</span>)
 

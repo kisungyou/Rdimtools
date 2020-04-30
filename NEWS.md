@@ -3,6 +3,7 @@
 * README contains minimal examples for both dimension reduction and estimation.
 * Porting to pure C++ implementations started, gaining computational efficiency. 
 * LICENSE is updated for all of its dependencies for better documentation.
+* `do.lmds` function is fixed for its discrepancy in nested structure.
 
 
 # Rdimtools 1.0.1

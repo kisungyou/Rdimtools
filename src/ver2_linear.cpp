@@ -18,6 +18,7 @@ using namespace std;
  *    (04) dt_mds   : MDS
  *    (05) dt_lasso : LASSO
  *    (06) dt_enet  : Elastic Net
+ *    (07) dt_lmds  : Landmark MDS
  */
 
 // Auxiliary Functions ======================================================
@@ -725,5 +726,73 @@ Rcpp::List dt_enet(const arma::mat& X, int ndim, std::string ptype,
       Rcpp::Named("featidx") = idRvec,
       Rcpp::Named("trfinfo") = info,
       Rcpp::Named("projection") = proj
+  ));
+}
+
+
+
+
+
+// 07. LMDS ===================================================================
+// [[Rcpp::export]]
+Rcpp::List dt_lmds(const arma::mat& X, int ndim, std::string ptype, int npts){
+  // preliminary --------------------------------------------------------------
+  // parameters
+  int N = X.n_rows;
+  int P = X.n_cols;
+  if ((ndim < 1)||(ndim >= P)){
+    throw std::invalid_argument("* do.lmds : 'ndim' should be in [1,ncol(X)).");
+  }
+  if ((npts<2)||(npts>N)){
+    throw std::invalid_argument("* do.lmds : the number of landmark points is not valid.");
+  }
+
+  // preprocessing
+  ClLLproc init(ptype);
+  arma::mat premat    = init.MainFunc(X);
+  arma::rowvec mymean = premat.row(0);
+  arma::mat    mymult = premat.rows(1,P);
+  std::string  mytype = init.GetType();
+
+  // data prep
+  arma::mat pX;
+  if (mytype=="null"){
+    pX = X;
+  } else {
+    pX.set_size(N,P);
+    for (int n=0;n<N;n++){
+      pX.row(n) = X.row(n) - mymean;
+    }
+    pX = pX*mymult;
+  }
+
+
+  // main computation ---------------------------------------------------------
+  // 1. random selection
+  arma::uvec idselect = arma::randperm(N,npts);
+  // 2. do the pca
+  arma::mat subX = pX.rows(idselect);
+  arma::mat psdX = arma::cov(subX);
+  arma::vec eigval;
+  arma::mat eigvec;
+  arma::eig_sym(eigval, eigvec, psdX); // ascending order issue
+  arma::vec vars = arma::reverse(eigval.tail(ndim));
+  arma::mat proj = arma::fliplr(eigvec.tail_cols(ndim));
+
+  // 3. computation
+  arma::mat Y = pX*proj;
+
+  // wrap and report ---------------------------------------------------
+  // trfinfo
+  Rcpp::List info = Rcpp::List::create(
+    Rcpp::Named("type")=mytype,
+    Rcpp::Named("mean")=mymean,
+    Rcpp::Named("multiplier")=mymult,
+    Rcpp::Named("algtype")="linear"
+  );
+  return(Rcpp::List::create(
+      Rcpp::Named("Y") = Y,
+      Rcpp::Named("projection") = proj,
+      Rcpp::Named("trfinfo") = info
   ));
 }
