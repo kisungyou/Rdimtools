@@ -33,17 +33,17 @@
 #' X     <- as.matrix(iris[subid,1:4])
 #' lab   <- as.factor(iris[subid,5])
 #'
-#' ## 1. connecting 25% of data for graph construction.
-#' output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.25))
+#' ## try different connectivity levels
+#' output1 <- do.isoproj(X,ndim=2,type=c("proportion",0.50))
+#' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.70))
+#' output3 <- do.isoproj(X,ndim=2,type=c("proportion",0.90))
 #'
-#' ## 2. constructing 50%-connected graph
-#' output2 <- do.isoproj(X,ndim=2,type=c("proportion",0.50))
-#'
-#' ## Visualize two different projections
+#' ## visualize two different projections
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(output1$Y, main="25%", col=lab, pch=19, cex=0.8)
-#' plot(output2$Y, main="50%", col=lab, pch=19, cex=0.8)
+#' par(mfrow=c(1,3))
+#' plot(output1$Y, main="50%", col=lab, pch=19)
+#' plot(output2$Y, main="70%", col=lab, pch=19)
+#' plot(output3$Y, main="90%", col=lab, pch=19)
 #' par(opar)
 #' }
 #'
@@ -121,14 +121,14 @@ do.isoproj <- function(X,ndim=2,type=c("proportion",0.1),
   #   7. generalized eigenvalue problem
   LHS = Xbar%*%rDG%*%t(Xbar)
   RHS = Xbar%*%t(Xbar)
-  # SOL = aux.bicgstab(RHS, LHS, verbose=FALSE)
+  # SOL = aux.bicgstab(RHS, LHS, verbose=FALSE)$x
   SOL = base::solve(LHS, RHS)
   #   8. eigendecomposition and compute projection matrix A
   if (ndim<3){
-    res = base::eigen(SOL$x, ndim)
+    res = base::eigen(SOL, ndim)
     A   = U%*%(res$vectors[,1:ndim])
   } else {
-    res = RSpectra::eigs_sym(SOL$x, ndim, which="LA")
+    res = RSpectra::eigs_sym(SOL, ndim, which="LA")
     A = U%*%(res$vectors)
   }
 
