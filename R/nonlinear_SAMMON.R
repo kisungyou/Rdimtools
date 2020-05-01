@@ -23,7 +23,6 @@
 #' IEEE Transactions on Computers, C-18 5:401-409.
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -36,10 +35,9 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, col=label, main="out1:rndproj")
-#' plot(out2$Y, col=label, main="out2:pca")
+#' plot(out1$Y, pch=19, col=label, main="out1:rndproj")
+#' plot(out2$Y, pch=19, col=label, main="out2:pca")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{sammon_nonlinear_1969}{Rdimtools}
@@ -47,7 +45,7 @@
 #'
 #' @rdname nonlinear_SAMMON
 #' @author Kisung You
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.sammon <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                       initialize=c("pca","random")){

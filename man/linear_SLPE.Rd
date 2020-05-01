@@ -36,7 +36,6 @@ that uses class labels of data points in order to enhance discriminating power i
 its mapping into a low dimensional space.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -54,7 +53,6 @@ par(mfrow=c(1,2))
 plot(out1$Y, pch=19, col=label, main="SLPP")
 plot(out2$Y, pch=19, col=label, main="SLPE")
 par(opar)
-}
 
 }
 \references{

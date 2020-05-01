@@ -21,11 +21,13 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=20)-100
+#' set.seed(100)
+#' diff = 100
+#' dt1  = aux.gensamples(n=20)-diff
 #' dt2  = aux.gensamples(n=20)
-#' dt3  = aux.gensamples(n=20)+100
+#' dt3  = aux.gensamples(n=20)+diff
 #'
 #' ## merge the data and create a label correspondingly
 #' X      = rbind(dt1,dt2,dt3)
@@ -85,9 +87,9 @@ do.mlie <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","de
   pX      = tmplist$pX
 
   #   2. PCA preprocessing
-  eigtest = eigen(cov(pX), only.values=TRUE)
+  eigtest = base::eigen(stats::cov(pX), only.values=TRUE)
   pcadim  = sum(eigtest$values > 0)
-  if (pcadim <= ndim){
+  if (pcadim < ndim){
     warning("* do.mlie : target 'ndim' is larger than intrinsic data dimension achieved from PCA.")
     projection_first = diag(p)
     pcapX = pX

@@ -22,7 +22,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -42,7 +41,6 @@
 #' plot(out2$Y, pch=19, col=label, main="ONPP::25% connectivity")
 #' plot(out3$Y, pch=19, col=label, main="ONPP::50% connectivity")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{kokiopoulou_orthogonal_2007}{Rdimtools}

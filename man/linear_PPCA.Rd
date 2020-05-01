@@ -37,7 +37,6 @@ as it is relevant to the error model. Also, for high-dimensional problem, it is 
 negative values if sample covariance given the data is rank-deficient.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -55,7 +54,6 @@ par(mfrow=c(1,2))
 plot(PCA$Y,  pch=19, col=label, main="PCA")
 plot(PPCA$Y, pch=19, col=label, main="PPCA")
 par(opar)
-}
 
 }
 \references{

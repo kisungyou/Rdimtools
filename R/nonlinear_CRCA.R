@@ -25,7 +25,6 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -45,8 +44,6 @@
 #' plot(out2$Y, col=label, pch=19, main="alpha=5.0")
 #' plot(out3$Y, col=label, pch=19, main="alpha=10.0")
 #' par(opar)
-#' }
-#'
 #'
 #' @references
 #' \insertRef{demartines_curvilinear_1997}{Rdimtools}

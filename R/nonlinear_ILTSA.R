@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -32,18 +31,17 @@
 #' label = as.factor(iris[subid,5])
 #'
 #' ## try different bandwidth size
-#' out1 <- do.iltsa(X, t=0.01)
-#' out2 <- do.iltsa(X, t=1)
+#' out1 <- do.iltsa(X, t=1)
+#' out2 <- do.iltsa(X, t=10)
 #' out3 <- do.iltsa(X, t=100)
 #'
 #' ## Visualize two comparisons
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, pch=19, col=label, main="ILTSA::t=0.01")
-#' plot(out2$Y, pch=19, col=label, main="ILTSA::t=1")
+#' plot(out1$Y, pch=19, col=label, main="ILTSA::t=1")
+#' plot(out2$Y, pch=19, col=label, main="ILTSA::t=10")
 #' plot(out3$Y, pch=19, col=label, main="ILTSA::t=100")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zhang_improved_2011}{Rdimtools}

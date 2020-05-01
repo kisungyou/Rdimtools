@@ -25,8 +25,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data
+#' set.seed(100)
 #' X <- aux.gensamples(dname="cswiss",n=100)
 #'
 #' ## 1. use 10%-connected graph
@@ -45,14 +45,13 @@
 #' plot(output2$Y, main="25%")
 #' plot(output3$Y, main="50%")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zhang_linear_2007}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LTSA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.ltsa <- function(X, ndim=2, type=c("proportion",0.1),
                     symmetric=c("union","intersect","asymmetric"),

@@ -45,7 +45,6 @@ same class are often close to each other. Its power of locality preserving prope
 the algorithm selects variables with smallest scores.
 }
 \examples{
-\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -62,11 +61,10 @@ out3 = do.lscore(iris.dat, t=10)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=iris.lab, main="bandwidth=0.1")
-plot(out2$Y, col=iris.lab, main="bandwidth=1")
-plot(out3$Y, col=iris.lab, main="bandwidth=10")
+plot(out1$Y, pch=19, col=iris.lab, main="bandwidth=0.1")
+plot(out2$Y, pch=19, col=iris.lab, main="bandwidth=1")
+plot(out3$Y, pch=19, col=iris.lab, main="bandwidth=10")
 par(opar)
-}
 
 }
 \references{

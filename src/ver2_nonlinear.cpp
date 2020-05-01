@@ -26,7 +26,7 @@ public:
   };
 
   // ClNLproc : functions
-  arma::mat MainFunc(const arma::mat& X){
+  arma::mat MainFunc(arma::mat& X){
     // prepare : parameter
     int N = X.n_rows;
     int P = X.n_cols;
@@ -225,7 +225,7 @@ Rcpp::List admm_rpca(arma::mat& M, const double tol, const int maxiter,
   return(output);
 }
 // [[Rcpp::export]]
-Rcpp::List dt_rpca(const arma::mat& X, int ndim, std::string ptype, double mu, double lambda){
+Rcpp::List dt_rpca(arma::mat& X, int ndim, std::string ptype, double mu, double lambda){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;

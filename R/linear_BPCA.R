@@ -33,7 +33,7 @@
 #' \insertRef{bishop_bayesian_1999}{Rdimtools}
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -42,8 +42,8 @@
 #' lab   = as.factor(iris[subid,5])
 #'
 #' ## compare PCA and BPCA
-#' out1  <- do.pca(X, ndim=2, preprocess="center")
-#' out2  <- do.bpca(X, ndim=2, preprocess="center")
+#' out1  <- do.pca(X,  ndim=2)
+#' out2  <- do.bpca(X, ndim=2)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
@@ -95,14 +95,13 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrela
   rcppbpca = method_bpca(t(pX), reltol, maxiter);
 
   #   3. we select alpha with smallest values only.
-  smallidx = order(rcppbpca$alpha)[1:ndim]
+  smallidx = order(as.vector(rcppbpca$alpha))[1:ndim]
   #      in that we find projection as required
   mlsig2 = rcppbpca$sig2
   mlW    = rcppbpca$W[,smallidx]
   M = (t(mlW)%*%mlW)+(diag(ncol(mlW))*mlsig2)
   SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
   projection = t(SOL$x)
-
 
   #------------------------------------------------------------------------
   ## RETURN

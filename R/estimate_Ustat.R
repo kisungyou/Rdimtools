@@ -26,9 +26,10 @@
 #' out3 = est.Ustat(X3)
 #'
 #' ## print the results
-#' sprintf("* est.Ustat : estimated dimension for 'swiss'  data is %d.",out1$estdim)
-#' sprintf("* est.Ustat : estimated dimension for 'ribbon' data is %d.",out2$estdim)
-#' sprintf("* est.Ustat : estimated dimension for 'saddle' data is %d.",out3$estdim)
+#' line1 = paste0("* est.Ustat : 'swiss'  gives ",round(out1$estdim,2))
+#' line2 = paste0("* est.Ustat : 'ribbon' gives ",round(out2$estdim,2))
+#' line3 = paste0("* est.Ustat : 'saddle' gives ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
 #' }
 #'
 #' @references

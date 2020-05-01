@@ -47,8 +47,8 @@ the margin between data opints from different classes, while labeled ones are us
 the geometrical structure of the data space.
 }
 \examples{
-\donttest{
 ## generate data of 3 types with clear difference
+set.seed(100)
 dt1  = aux.gensamples(n=20)-50
 dt2  = aux.gensamples(n=20)
 dt3  = aux.gensamples(n=20)+50
@@ -75,7 +75,6 @@ plot(out1$Y, pch=19, col=label, main="10\% connectivity")
 plot(out2$Y, pch=19, col=label, main="25\% connectivity")
 plot(out3$Y, pch=19, col=label, main="50\% connectivity")
 par(opar)
-}
 
 }
 \references{

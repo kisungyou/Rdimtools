@@ -32,7 +32,6 @@ a named list containing
 \code{\link[stats]{cmdscale}}.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -55,7 +54,6 @@ plot(Y1, pch=19, col=lab, main="MDS::center")
 plot(Y2, pch=19, col=lab, main="MDS::decorrelate")
 plot(Y3, pch=19, col=lab, main="MDS::whiten")
 par(opar)
-}
 
 }
 \references{

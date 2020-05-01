@@ -11,13 +11,13 @@ using namespace arma;
  * 1. boxcounting
  *    generate integer-valued data labeling
  */
-//' @keywords internal
 // [[Rcpp::export]]
-arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, const double currentr){
+arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, double currentr){
   // 1-1. basic settings
-  const int d = tX.n_rows;
-  const int n = tX.n_cols;
-  if (d != Imin.n_elem){
+  int d  = tX.n_rows;
+  int n  = tX.n_cols;
+  int dI = Imin.n_elem;
+  if (d != dI){
     Rcpp::stop("ERROR : dimension not matching.");
   }
 
@@ -40,10 +40,9 @@ arma::mat methods_boxcount(arma::mat& tX, arma::vec& Imin, const double currentr
 /*
  * 2. numderiv : use all forward difference except the last one
  */
-//' @keywords internal
 // [[Rcpp::export]]
 arma::vec aux_numderiv(arma::vec& x, arma::vec& y){
-  const int n = x.n_elem;
+  int n = x.n_elem;
   arma::vec deriv(n,fill::zeros);
 
   deriv(n-1) = (y(n-1)-y(n-2))/(x(n-1)-x(n-2));

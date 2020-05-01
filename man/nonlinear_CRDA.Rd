@@ -55,7 +55,6 @@ a constructed graph so that the shortest-path length plays as an approximate geo
 nonlinear manifolds.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -75,7 +74,6 @@ plot(out1$Y, col=label, pch=19, main="10\% connected")
 plot(out2$Y, col=label, pch=19, main="25\% connected")
 plot(out3$Y, col=label, pch=19, main="50\% connected")
 par(opar)
-}
 
 }
 \references{

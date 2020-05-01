@@ -23,9 +23,10 @@
 #' out3 = est.packing(X, eps=0.001)
 #'
 #' ## print the results
-#' sprintf("* est.packing : estimated dimension with eps=0.1   is %.2f.",out1$estdim)
-#' sprintf("* est.packing : estimated dimension with eps=0.01  is %.2f.",out2$estdim)
-#' sprintf("* est.packing : estimated dimension with eps=0.001 is %.2f.",out3$estdim)
+#' line1 = paste0("* est.packing : eps=0.1   gives ",round(out1$estdim,2))
+#' line2 = paste0("* est.packing : eps=0.01  gives ",round(out2$estdim,2))
+#' line3 = paste0("* est.packing : eps=0.001 gives ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
 #' }
 #'
 #' @references

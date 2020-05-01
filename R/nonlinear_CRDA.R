@@ -30,7 +30,6 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -50,7 +49,6 @@
 #' plot(out2$Y, col=label, pch=19, main="25% connected")
 #' plot(out3$Y, col=label, pch=19, main="50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{lee_curvilinear_2002}{Rdimtools}

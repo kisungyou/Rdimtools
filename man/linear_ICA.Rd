@@ -52,7 +52,6 @@ the given data \eqn{X}. In order to preserve consistency throughout our package,
 the notation; \eqn{Y} a projected matrix for \eqn{S}, and \code{projection} for unmixing matrix \eqn{W}.
 }
 \examples{
-\donttest{
 ## use iris dataset
 data(iris)
 set.seed(100)
@@ -76,7 +75,6 @@ plot(output1$Y, col=lab, pch=19, main="ICA::logcosh")
 plot(output2$Y, col=lab, pch=19, main="ICA::exp")
 plot(output3$Y, col=lab, pch=19, main="ICA::poly")
 par(opar)
-}
 
 }
 \references{

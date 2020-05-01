@@ -54,8 +54,8 @@ in that low-dimensional embedding should resemble the connectivity pattern of pa
 optimality criterion suggested by authors.
 }
 \examples{
-\donttest{
 ## generate swiss-roll data
+set.seed(100)
 X = aux.gensamples(n=100)
 
 ## 1. connecting 10\% of data for graph construction.
@@ -74,14 +74,10 @@ plot(output1$Y, main="5\%")
 plot(output2$Y, main="10\%")
 plot(output3$Y, main="50\%+Binary")
 par(opar)
-}
 
 }
 \references{
 \insertRef{roweis_nonlinear_2000}{Rdimtools}
-}
-\seealso{
-\href{https://www.cs.nyu.edu/~roweis/lle/}{Prof.Roweis' website}
 }
 \author{
 Kisung You

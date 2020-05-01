@@ -43,7 +43,6 @@ where \eqn{x_i} is an \eqn{i}-th data point and \eqn{t} a kernel bandwidth (\cod
 when the bandwidth value is too small, it might suffer from numerical instability and rank deficiency due to its formulation.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -63,7 +62,6 @@ plot(out1$Y, main="bandwidth=0.1", col=label, pch=19)
 plot(out2$Y, main="bandwidth=1",   col=label, pch=19)
 plot(out3$Y, main="bandwidth=10",  col=label, pch=19)
 par(opar)
-}
 
 }
 \references{

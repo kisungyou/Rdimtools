@@ -26,15 +26,15 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 3 types with clear difference
+#' set.seed(100)
 #' dt1  = aux.gensamples(n=33)-50
 #' dt2  = aux.gensamples(n=33)
 #' dt3  = aux.gensamples(n=33)+50
 #'
 #' ## merge the data and create a label correspondingly
 #' X      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' label  = rep(1:3, each=33)
 #'
 #' ## copy a label and let 20% of elements be missing
 #' nlabel = length(label)
@@ -50,11 +50,10 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="SAMMC::beta=0.1")
-#' plot(out2$Y, main="SAMMC::beta=1")
-#' plot(out3$Y, main="SAMMC::beta=10")
+#' plot(out1$Y, pch=19, col=label, main="SAMMC::beta=0.1")
+#' plot(out2$Y, pch=19, col=label, main="SAMMC::beta=1")
+#' plot(out3$Y, pch=19, col=label, main="SAMMC::beta=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{lu_adaptive_2011}{Rdimtools}
@@ -62,7 +61,7 @@
 #' @seealso \code{\link{do.mmc}}, \code{\link{do.ammc}}
 #' @author Kisung You
 #' @rdname linear_SAMMC
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.sammc  <- function(X, label, ndim=2, type=c("proportion",0.1),
                       preprocess=c("center","scale","cscale","decorrelate","whiten"),

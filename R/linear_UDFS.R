@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -43,7 +42,6 @@
 #' plot(out2$Y, pch=19, col=label, main="UDFS::k=10")
 #' plot(out3$Y, pch=19, col=label, main="UDFS::k=25")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{yang_l2_2011}{Rdimtools}

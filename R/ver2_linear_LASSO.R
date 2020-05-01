@@ -24,7 +24,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
 #' set.seed(1)
@@ -53,7 +52,6 @@
 #' plot(out2$Y, main="LASSO::lambda=1")
 #' plot(out3$Y, main="LASSO::lambda=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{tibshirani_regression_1996}{Rdimtools}

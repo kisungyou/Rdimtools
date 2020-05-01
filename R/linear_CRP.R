@@ -20,7 +20,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -40,7 +39,6 @@
 #' plot(out2$Y, col=lab, pch=19, main="CRP::lambda=1")
 #' plot(out3$Y, col=lab, pch=19, main="CRP::lambda=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{yang_collaborative_2015}{Rdimtools}

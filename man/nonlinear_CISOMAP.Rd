@@ -44,9 +44,9 @@ preserving full isometry, maintaining infinitestimal angles - conformality - in 
 it alters geodesic distance to reflect scale information.
 }
 \examples{
-\donttest{
 ## generate data
-X <- aux.gensamples(dname="cswiss",n=500)
+set.seed(100)
+X <- aux.gensamples(dname="cswiss",n=100)
 
 ## 1. original Isomap
 output1 <- do.isomap(X,ndim=2)
@@ -64,7 +64,6 @@ plot(output1$Y, main="Isomap")
 plot(output2$Y, main="C-Isomap")
 plot(output3$Y, main="Binarized C-Isomap")
 par(opar)
-}
 
 }
 \references{

@@ -48,10 +48,10 @@ rank deficiency of scatter/covariance matrix. Instead of naive matrix inversion,
 proposed regularization schemes that reflect several ideas from various incumbent methods.
 }
 \examples{
-\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
-n = 50
+set.seed(100)
+n     = 50
 theta = runif(n)
 h     = runif(n)
 t     = (1+2*theta)*(3*pi/2)
@@ -77,7 +77,6 @@ plot(out1$Y,   main="RSIR::Ridge")
 plot(out2$Y,   main="RSIR::Tikhonov")
 plot(outsir$Y, main="standard SIR")
 par(opar)
-}
 
 }
 \references{

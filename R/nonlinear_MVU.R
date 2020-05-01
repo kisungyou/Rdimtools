@@ -25,27 +25,22 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate ribbon-shaped data with the small number of data
+#' set.seed(100)
 #' X = aux.gensamples(dname="ribbon", n=50)
 #'
-#' ## 1. standard MVU
-#' output1 <- do.mvu(X,ndim=2)
+#' ## try different connectivity levels
+#' output1 <- do.mvu(X, type=c("proportion", 0.10))
+#' output2 <- do.mvu(X, type=c("proportion", 0.25))
+#' output3 <- do.mvu(X, type=c("proportion", 0.50))
 #'
-#' ## 2. standard setting with "kpca"-type projection
-#' output2 <- do.mvu(X,ndim=2,projtype="kpca")
-#'
-#' ## 3. standard MVU for densly connected graph
-#' output3 <- do.mvu(X,ndim=2,type=c("proportion",0.5))
-#'
-#' ## Visualize three different projections
+#' ## visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, main="standard")
-#' plot(output2$Y, main="kpca projection")
-#' plot(output3$Y, main="densely connected graph")
+#' plot(output1$Y, main="10% connected")
+#' plot(output2$Y, main="25% connected")
+#' plot(output3$Y, main="50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{weinberger_unsupervised_2006}{Rdimtools}
@@ -53,7 +48,7 @@
 #' @author Kisung You
 #' @aliases do.sde
 #' @rdname nonlinear_MVU
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
@@ -64,6 +59,13 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
     stop("* do.mvu : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   ndim = as.integer(ndim)
+
+  # extra
+  if (missing(projtype)){
+    projtype = "spectral"
+  } else {
+    projtype = match.arg(projtype)
+  }
 
   # 2. ... parameters
   # 2-1. aux.graphnbd

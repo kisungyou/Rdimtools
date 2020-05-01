@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=20)-50
 #' dt2  = aux.gensamples(n=20)
@@ -45,7 +44,6 @@
 #' plot(out2$Y, col=lab, pch=19, main="CNPE::25% connected")
 #' plot(out3$Y, col=lab, pch=19, main="CNPE::50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{wang_complete_2010}{Rdimtools}

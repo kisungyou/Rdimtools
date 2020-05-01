@@ -25,7 +25,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -45,7 +44,6 @@
 #' plot(out2$Y, pch=19, col=lab, main="25% connected")
 #' plot(out3$Y, pch=19, col=lab, main="50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{haixianwang_localitypreserved_2008}{Rdimtools}

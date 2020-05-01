@@ -44,7 +44,6 @@ singular value decomposition and guesses intrinsic dimension by the number of po
 from the decomposition of data matrix, it automatically corrects the target dimension accordingly.
 }
 \examples{
-\donttest{
 ## use iris dataset
 data(iris)
 set.seed(100)
@@ -64,7 +63,6 @@ plot(output1$Y, main="50\%", col=lab, pch=19)
 plot(output2$Y, main="70\%", col=lab, pch=19)
 plot(output3$Y, main="90\%", col=lab, pch=19)
 par(opar)
-}
 
 }
 \references{

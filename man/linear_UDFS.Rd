@@ -44,7 +44,6 @@ could be predicted by a linear classifier and iteratively updates its
 discriminative nature while attaining row-sparsity scores for selecting features.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -64,7 +63,6 @@ plot(out1$Y, pch=19, col=label, main="UDFS::k=5")
 plot(out2$Y, pch=19, col=label, main="UDFS::k=10")
 plot(out3$Y, pch=19, col=label, main="UDFS::k=25")
 par(opar)
-}
 
 }
 \references{

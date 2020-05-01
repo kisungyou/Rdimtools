@@ -33,9 +33,10 @@ out2 = est.twonn(X2)
 out3 = est.twonn(X3)
 
 ## print the results
-sprintf("* est.twonn : estimated dimension for 'swiss'  data is \%.2f.",out1$estdim)
-sprintf("* est.twonn : estimated dimension for 'ribbon' data is \%.2f.",out2$estdim)
-sprintf("* est.twonn : estimated dimension for 'saddle' data is \%.2f.",out3$estdim)
+line1 = paste0("* est.twonn : 'swiss'  gives ",round(out1$estdim,2))
+line2 = paste0("* est.twonn : 'ribbon' gives ",round(out2$estdim,2))
+line3 = paste0("* est.twonn : 'saddle' gives ",round(out3$estdim,2))
+cat(paste0(line1,"\n",line2,"\n",line3))
 }
 
 }

@@ -53,15 +53,15 @@ Semi-Supervised Adaptive Maximum Margin Criterion (SAMMC) is a semi-supervised v
 AMMC by making use of both labeled and unlabeled data.
 }
 \examples{
-\donttest{
 ## generate data of 3 types with clear difference
+set.seed(100)
 dt1  = aux.gensamples(n=33)-50
 dt2  = aux.gensamples(n=33)
 dt3  = aux.gensamples(n=33)+50
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)
-label  = c(rep(1,33), rep(2,33), rep(3,33))
+label  = rep(1:3, each=33)
 
 ## copy a label and let 20\% of elements be missing
 nlabel = length(label)
@@ -77,11 +77,10 @@ out3 = do.sammc(X, label_missing, beta=10)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="SAMMC::beta=0.1")
-plot(out2$Y, main="SAMMC::beta=1")
-plot(out3$Y, main="SAMMC::beta=10")
+plot(out1$Y, pch=19, col=label, main="SAMMC::beta=0.1")
+plot(out2$Y, pch=19, col=label, main="SAMMC::beta=1")
+plot(out3$Y, pch=19, col=label, main="SAMMC::beta=10")
 par(opar)
-}
 
 }
 \references{

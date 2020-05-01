@@ -22,7 +22,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -37,12 +36,11 @@
 #'
 #' #### visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(3,1))
+#' par(mfrow=c(1,3))
 #' plot(out1$Y, pch=19, col=label, main="RSR::lbd=0.1")
 #' plot(out2$Y, pch=19, col=label, main="RSR::lbd=1")
 #' plot(out3$Y, pch=19, col=label, main="RSR::lbd=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zhu_unsupervised_2015}{Rdimtools}

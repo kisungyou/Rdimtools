@@ -48,9 +48,9 @@ we adopted \href{https://CRAN.R-project.org/package=Rcsdp}{Rcsdp} package in tha
 when given large-scale dataset, it may result in extremely deteriorated computational performance.
 }
 \examples{
-\donttest{
 ## generate ribbon-shaped data
 ## in order to pass CRAN pretest, n is set to be small.
+set.seed(100)
 X = aux.gensamples(dname="ribbon",n=50)
 
 ## Compare MVU and MVE
@@ -65,7 +65,6 @@ par(mfrow=c(1,2))
 plot(outMVU5$Y,  main="MVU (k=5)")
 plot(outMVE5$Y,  main="MVE (k=5)")
 par(opar)
-}
 
 }
 \references{

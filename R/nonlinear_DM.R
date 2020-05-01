@@ -22,7 +22,6 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -42,7 +41,6 @@
 #' plot(out2$Y, pch=19, col=label, main="DM::bandwidth=100")
 #' plot(out3$Y, pch=19, col=label, main="DM::bandwidth=1000")
 #' par(opar)
-#' }
 #'
 #'@references
 #'\insertRef{nadler_diffusion_2005}{Rdimtools}

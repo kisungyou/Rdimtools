@@ -26,7 +26,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -46,7 +45,6 @@
 #' plot(out2$Y, col=lab, pch=19, main="bandwidth=10")
 #' plot(out3$Y, col=lab, pch=19, main="bandwidth=1000")
 #' par(opar)
-#' }
 #'
 #' @seealso \code{\link{do.udp}}
 #' @author Kisung You

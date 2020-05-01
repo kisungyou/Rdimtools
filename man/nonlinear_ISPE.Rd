@@ -47,7 +47,6 @@ is only applied to the pair of data points whose original proximity is small eno
 mutually local whose distance should be close to geodesic distance.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -69,7 +68,6 @@ plot(out1$Y,   pch=19, col=label, main="ISPE::cutoff=0.5")
 plot(out2$Y,   pch=19, col=label, main="ISPE::cutoff=5")
 plot(out3$Y,   pch=19, col=label, main="ISPE::cutoff=50")
 par(opar)
-}
 
 }
 \references{

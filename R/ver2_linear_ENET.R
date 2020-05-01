@@ -23,9 +23,9 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
+#' set.seed(100)
 #' n = 123
 #' theta = runif(n)
 #' h     = runif(n)
@@ -54,7 +54,6 @@
 #' plot(Y2, pch=19, main="ENET::lambda1=1")
 #' plot(Y3, pch=19, main="ENET::lambda1=100")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zou_regularization_2005}{Rdimtools}

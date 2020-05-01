@@ -20,7 +20,7 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)

@@ -13,7 +13,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## create example data sets with intrinsic dimension 2
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -24,10 +23,11 @@
 #' out2 = est.mle2(X2)
 #' out3 = est.mle2(X3)
 #'
-#' cat("* est.mle2 : estimated dimension for 'swiss'  data is ",round(out1$estdim,2))
-#' cat("* est.mle2 : estimated dimension for 'ribbon' data is ",round(out2$estdim,2))
-#' cat("* est.mle2 : estimated dimension for 'saddle' data is ",round(out3$estdim,2))
-#' }
+#' line1 = paste0("* est.mle2 : dimension of 'swiss'  data is ",round(out1$estdim,2))
+#' line2 = paste0("* est.mle2 : dimension of 'ribbon' data is ",round(out2$estdim,2))
+#' line3 = paste0("* est.mle2 : dimension of 'saddle' data is ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
+#'
 #' @references
 #' \insertRef{mackay_comments_2005}{Rdimtools}
 #'

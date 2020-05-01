@@ -47,7 +47,7 @@ relative weight for each base in that the smaller \eqn{\alpha} value is, the mor
 corresponding column vector of \code{mp.W} to be selected as potential basis.
 }
 \examples{
-\donttest{
+\dontrun{
 ## use iris dataset
 data(iris)
 set.seed(100)
@@ -56,8 +56,8 @@ X     = as.matrix(iris[subid,1:4])
 lab   = as.factor(iris[subid,5])
 
 ## compare PCA and BPCA
-out1  <- do.pca(X, ndim=2, preprocess="center")
-out2  <- do.bpca(X, ndim=2, preprocess="center")
+out1  <- do.pca(X,  ndim=2)
+out2  <- do.bpca(X, ndim=2)
 
 ## visualize
 opar <- par(no.readonly=TRUE)

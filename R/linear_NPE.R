@@ -33,7 +33,7 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -144,8 +144,7 @@ do.npe <- function(X, ndim=2, type=c("proportion",0.1), symmetric="union" ,weigh
 
   # 6. main computation
   tpX = t(pX)
-  output = method_npe(tpX,W);
-
+  output  = method_npe(tpX,W);
   eigvals = output$eigval
   eigvecs = output$eigvec
 

@@ -42,7 +42,7 @@ penalty graph. It follows an integration of global within-class structure into m
 under exploiting discriminative nature provided from label information.
 }
 \examples{
-\donttest{
+\dontrun{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -58,9 +58,9 @@ out3 <- do.dspp(X, label, ndim=2, rho=1)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="rho=0.01", col=label, pch=19, cex=0.5)
-plot(out2$Y, main="rho=0.1",  col=label, pch=19, cex=0.5)
-plot(out3$Y, main="rho=1",    col=label, pch=19, cex=0.5)
+plot(out1$Y, main="rho=0.01", col=label, pch=19)
+plot(out2$Y, main="rho=0.1",  col=label, pch=19)
+plot(out3$Y, main="rho=1",    col=label, pch=19)
 par(opar)
 }
 

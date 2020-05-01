@@ -42,7 +42,6 @@ It performs PCA as intermittent preprocessing for rank singularity issue. Author
 by Locality Preserving Projection, which minimizes the local scatter only.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -62,7 +61,6 @@ plot(out1$Y, col=label, pch=19, main="connectivity 5\%")
 plot(out2$Y, col=label, pch=19, main="connectivity 10\%")
 plot(out3$Y, col=label, pch=19, main="connectivity 25\%")
 par(opar)
-}
 
 }
 \references{

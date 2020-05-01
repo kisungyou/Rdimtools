@@ -18,11 +18,10 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
-#' subid = sample(1:150,50)
+#' subid = sample(1:150,100)
 #' X     = as.matrix(iris[subid,1:4])
 #' label = as.factor(iris[subid,5])
 #'
@@ -38,7 +37,6 @@
 #' plot(out2$Y, pch=19, col=label, main="bandwidth=1")
 #' plot(out3$Y, pch=19, col=label, main="bandwidth=10.0")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{li_efficient_2006}{Rdimtools}

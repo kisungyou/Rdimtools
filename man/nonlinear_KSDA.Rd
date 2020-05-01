@@ -48,8 +48,8 @@ parameters, \code{alpha}, \code{beta}, and \code{t}. Especially when data
 are well separated in the original space, it may lead to unsatisfactory results.
 }
 \examples{
-\donttest{
 ## generate data of 3 types with clear difference
+set.seed(100)
 dt1  = aux.gensamples(n=20)-100
 dt2  = aux.gensamples(n=20)
 dt3  = aux.gensamples(n=20)+100
@@ -74,7 +74,6 @@ par(mfrow=c(1,2))
 plot(out1$Y, col=label, main="true projection")
 plot(out2$Y, col=label, main="20\% missing labels")
 par(opar)
-}
 
 }
 \references{

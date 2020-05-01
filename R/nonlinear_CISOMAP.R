@@ -24,9 +24,9 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## generate data
-#' X <- aux.gensamples(dname="cswiss",n=500)
+#' set.seed(100)
+#' X <- aux.gensamples(dname="cswiss",n=100)
 #'
 #' ## 1. original Isomap
 #' output1 <- do.isomap(X,ndim=2)
@@ -44,14 +44,13 @@
 #' plot(output2$Y, main="C-Isomap")
 #' plot(output3$Y, main="Binarized C-Isomap")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{silva_global_2003}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_CISOMAP
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.cisomap <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),weight=TRUE,
                        preprocess=c("center","scale","cscale","whiten","decorrelate")){

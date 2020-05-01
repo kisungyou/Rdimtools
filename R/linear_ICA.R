@@ -27,7 +27,6 @@
 #' }
 #'
 #'@examples
-#'\donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -51,7 +50,6 @@
 #' plot(output2$Y, col=lab, pch=19, main="ICA::exp")
 #' plot(output3$Y, col=lab, pch=19, main="ICA::poly")
 #' par(opar)
-#'}
 #'
 #' @references
 #' \insertRef{hyvarinen_independent_2001}{Rdimtools}

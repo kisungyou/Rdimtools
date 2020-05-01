@@ -26,7 +26,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 3 types with clear difference
 #' dt1  = aux.gensamples(n=20)-100
 #' dt2  = aux.gensamples(n=20)
@@ -44,11 +43,10 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="lambda=0.01")
-#' plot(out2$Y, col=label, main="lambda=0.1")
-#' plot(out3$Y, col=label, main="lambda=1")
+#' plot(out1$Y, pch=19, col=label, main="lambda=0.01")
+#' plot(out2$Y, pch=19, col=label, main="lambda=0.1")
+#' plot(out3$Y, pch=19, col=label, main="lambda=1")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{cai_unsupervised_2010}{Rdimtools}

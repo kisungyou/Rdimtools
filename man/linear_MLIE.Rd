@@ -42,11 +42,13 @@ projections that maximize the local interclass scatter and the local
 intraclass compactness at the same time. It can be deemed an extended version of MFA.
 }
 \examples{
-\donttest{
+\dontrun{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=20)-100
+set.seed(100)
+diff = 100
+dt1  = aux.gensamples(n=20)-diff
 dt2  = aux.gensamples(n=20)
-dt3  = aux.gensamples(n=20)+100
+dt3  = aux.gensamples(n=20)+diff
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)

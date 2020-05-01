@@ -25,7 +25,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -45,7 +44,6 @@
 #' plot(out2$Y, col=label, pch=19, main="connectivity 10%")
 #' plot(out3$Y, col=label, pch=19, main="connectivity 25%")
 #' par(opar)
-#' }
 #'
 #' @author Kisung You
 #' @rdname linear_UDP

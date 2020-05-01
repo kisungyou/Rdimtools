@@ -37,7 +37,7 @@ we used \pkg{CVXR} for convenient computation, which may lead to slower executio
 once used for large dataset.
 }
 \examples{
-\donttest{
+\dontrun{
 ## load iris data
 data(iris)
 set.seed(100)

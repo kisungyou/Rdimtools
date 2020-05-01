@@ -16,7 +16,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate 3-dimensional normal data
 #' X = matrix(rnorm(100*3), nrow=100)
 #'
@@ -33,7 +32,6 @@
 #' opar <- par(no.readonly=TRUE)
 #' plot(output$values, main="scree plot", type="b")
 #' par(opar)
-#' }
 #'
 #' @seealso \code{\link{do.pca}}
 #' @rdname estimate_pcathr

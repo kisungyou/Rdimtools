@@ -22,26 +22,23 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
-#' label = as.factor(iris$Species)
+#' label = as.factor(iris[,5])
 #'
-#' ## try different balancing parameters with beta=100
-#' out1 = do.splapeig(X, label, beta=100, gamma=0.1)
-#' out2 = do.splapeig(X, label, beta=100, gamma=0.5)
-#' out3 = do.splapeig(X, label, beta=100, gamma=0.9)
+#' ## try different balancing parameters with beta=50
+#' out1 = do.splapeig(X, label, beta=50, gamma=0.3); Y1=out1$Y
+#' out2 = do.splapeig(X, label, beta=50, gamma=0.6); Y2=out2$Y
+#' out3 = do.splapeig(X, label, beta=50, gamma=0.9); Y3=out3$Y
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, main="gamma=0.1")
-#' plot(out2$Y, col=label, main="gamma=0.5")
-#' plot(out3$Y, col=label, main="gamma=0.9")
+#' plot(Y1, pch=19, col=label, main="gamma=0.3")
+#' plot(Y2, pch=19, col=label, main="gamma=0.6")
+#' plot(Y3, pch=19, col=label, main="gamma=0.9")
 #' par(opar)
-#' }
-#'
 #'
 #' @references
 #' \insertRef{raducanu_supervised_2012}{Rdimtools}
@@ -49,7 +46,7 @@
 #' @seealso \code{\link{do.lapeig}}
 #' @author Kisung You
 #' @rdname nonlinear_SPLAPEIG
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.splapeig <- function(X, label, ndim=2,
                         preprocess=c("null","center","scale","cscale","whiten","decorrelate"),

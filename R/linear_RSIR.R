@@ -23,10 +23,10 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
-#' n = 50
+#' set.seed(100)
+#' n     = 50
 #' theta = runif(n)
 #' h     = runif(n)
 #' t     = (1+2*theta)*(3*pi/2)
@@ -52,7 +52,6 @@
 #' plot(out2$Y,   main="RSIR::Tikhonov")
 #' plot(outsir$Y, main="standard SIR")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{chiaromonte_dimension_2002}{Rdimtools}

@@ -25,7 +25,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -48,7 +47,6 @@
 #' plot(Y2, main="BMDS::iter=10", col=label, pch=19)
 #' plot(Y3, main="BMDS::iter=50", col=label, pch=19)
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{oh_bayesian_2001}{Rdimtools}
@@ -59,7 +57,7 @@
 #' @export
 do.bmds <- function(X, ndim=2, par.a=5, par.alpha=0.5, par.step=1, mc.iter=50,
                     preprocess=c("null","center","scale","cscale","whiten",
-                                 "decorrelate"), print.progress = TRUE){
+                                 "decorrelate"), print.progress = FALSE){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.bmds : 'X' should be a matrix.")}

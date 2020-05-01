@@ -11,7 +11,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -23,10 +22,10 @@
 #' out3 = est.danco(X3, k=10)
 #'
 #' ## print the results
-#' sprintf("* est.danco : estimated dimension for 'swiss'  data is %.2f.",out1$estdim)
-#' sprintf("* est.danco : estimated dimension for 'ribbon' data is %.2f.",out2$estdim)
-#' sprintf("* est.danco : estimated dimension for 'saddle' data is %.2f.",out3$estdim)
-#' }
+#' line1 = paste0("* est.danco : 'swiss'  estiamte is ",round(out1$estdim,2))
+#' line2 = paste0("* est.danco : 'ribbon' estiamte is ",round(out2$estdim,2))
+#' line3 = paste0("* est.danco : 'saddle' estiamte is ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
 #'
 #' @references
 #' \insertRef{ceruti_danco_2014}{Rdimtools}

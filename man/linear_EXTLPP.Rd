@@ -37,8 +37,8 @@ at \emph{moderate} distance in that a Z-shaped function is introduced in
 defining similarity derived from Euclidean distance.
 }
 \examples{
-\donttest{
 ## generate data
+set.seed(100)
 X <- aux.gensamples(n=75)
 
 ## run Extended LPP with different neighborhood graph
@@ -53,7 +53,6 @@ plot(out1$Y, main="EXTLPP::k=5")
 plot(out2$Y, main="EXTLPP::k=10")
 plot(out3$Y, main="EXTLPP::k=25")
 par(opar)
-}
 
 }
 \references{

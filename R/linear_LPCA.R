@@ -22,11 +22,10 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
-#' subid = sample(1:150,50)
+#' subid = sample(1:150,100)
 #' X     = as.matrix(iris[subid,1:4])
 #' lab   = as.factor(iris[subid,5])
 #'
@@ -42,7 +41,6 @@
 #' plot(out2$Y, pch=19, col=lab, main="LPCA::25% connected")
 #' plot(out3$Y, pch=19, col=lab, main="LPCA::50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{yang_locally_2006}{Rdimtools}
@@ -90,7 +88,7 @@ do.lpca <- function(X, ndim=2, type=c("proportion",0.1),
   H = nbdmask*1.0
   H = (H + t(H))/2
   #   2. L for graph laplacian
-  L = diag(rowSums(H))-H
+  L = base::diag(base::rowSums(H))-H
   #   3. spectral decomposition of L
   Pl = lpca_spectralhalf(L)
   #   4. compute R

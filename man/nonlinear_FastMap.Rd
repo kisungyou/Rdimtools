@@ -32,7 +32,7 @@ it shares similarities with MDS, it is innately a nonlinear method that iterativ
 the projection information using pairwise distance information.
 }
 \examples{
-\donttest{
+\dontrun{
 ## load iris data
 data(iris)
 set.seed(100)

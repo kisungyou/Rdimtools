@@ -20,9 +20,9 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
+#' set.seed(100)
 #' n = 50
 #' theta = runif(n)
 #' h     = runif(n)
@@ -48,7 +48,6 @@
 #' plot(out2$Y, main="SAVE::5 slices")
 #' plot(out3$Y, main="SAVE::10 slices")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{denniscook_method_2000}{Rdimtools}

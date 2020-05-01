@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -46,7 +45,6 @@
 #' plot(Y2, col=lab, pch=19, main="SPCA::rho=1")
 #' plot(Y3, col=lab, pch=19, main="SPCA::rho=100")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zou_sparse_2006}{Rdimtools}

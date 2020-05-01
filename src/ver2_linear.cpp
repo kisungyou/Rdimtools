@@ -32,7 +32,7 @@ public:
   };
 
   // ClLLproc : functions
-  arma::mat MainFunc(const arma::mat& X){
+  arma::mat MainFunc(arma::mat& X){
     // prepare : parameter
     int N = X.n_rows;
     int P = X.n_cols;
@@ -101,7 +101,7 @@ public:
 
 // 01. PCA ====================================================================
 // [[Rcpp::export]]
-Rcpp::List dt_pca(const arma::mat& X, int ndim, std::string ptype, bool cor){
+Rcpp::List dt_pca(arma::mat& X, int ndim, std::string ptype, bool cor){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -167,7 +167,7 @@ Rcpp::List dt_pca(const arma::mat& X, int ndim, std::string ptype, bool cor){
 
 // 02. FA =====================================================================
 // [[Rcpp::export]]
-Rcpp::List dt_fa(const arma::mat& X, int ndim, std::string ptype, int maxiter, double tolerance){
+Rcpp::List dt_fa(arma::mat& X, int ndim, std::string ptype, int maxiter, double tolerance){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -251,7 +251,7 @@ arma::mat dt_spca_deflation(arma::mat& Sig, arma::vec& Vec){
 }
 // main function for spca
 // [[Rcpp::export]]
-Rcpp::List dt_spca(const arma::mat& X, int ndim, std::string ptype, double mu, double rho, const double abstol, const double reltol, const int maxiter){
+Rcpp::List dt_spca(arma::mat& X, int ndim, std::string ptype, double mu, double rho, const double abstol, const double reltol, const int maxiter){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -330,7 +330,7 @@ Rcpp::List dt_spca(const arma::mat& X, int ndim, std::string ptype, double mu, d
 
 // 04. MDS ================================================================
 // [[Rcpp::export]]
-Rcpp::List dt_mds(const arma::mat& X, int ndim, std::string ptype){
+Rcpp::List dt_mds(arma::mat& X, int ndim, std::string ptype){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -492,8 +492,8 @@ arma::vec admm_lasso(arma::mat& A, arma::vec& b, double lambda){
   return(x);
 }
 // [[Rcpp::export]]
-Rcpp::List dt_lasso(const arma::mat& X, int ndim, std::string ptype,
-                    const arma::vec& y, bool ycenter, double lambda){
+Rcpp::List dt_lasso(arma::mat& X, int ndim, std::string ptype,
+                    arma::vec& y, bool ycenter, double lambda){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -650,8 +650,8 @@ arma::vec admm_enet(arma::mat& A, arma::vec& b,  double lambda, double alpha, do
   return(x);
 }
 // [[Rcpp::export]]
-Rcpp::List dt_enet(const arma::mat& X, int ndim, std::string ptype,
-                   const arma::vec& y, bool ycenter, double lambda1, double lambda2){
+Rcpp::List dt_enet(arma::mat& X, int ndim, std::string ptype,
+                   arma::vec& y, bool ycenter, double lambda1, double lambda2){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -735,7 +735,7 @@ Rcpp::List dt_enet(const arma::mat& X, int ndim, std::string ptype,
 
 // 07. LMDS ===================================================================
 // [[Rcpp::export]]
-Rcpp::List dt_lmds(const arma::mat& X, int ndim, std::string ptype, int npts){
+Rcpp::List dt_lmds(arma::mat& X, int ndim, std::string ptype, int npts){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;

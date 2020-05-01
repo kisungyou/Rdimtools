@@ -26,33 +26,39 @@
 #' }
 #'
 #' @examples
-#' \donttest{
-#' ## generate swiss-roll dataset of size 100
-#' X <- aux.gensamples(n=100)
+#' ## use iris data
+#' data(iris)
+#' set.seed(100)
+#' subid = sample(1:150,50)
+#' X     = as.matrix(iris[subid,1:4])
+#' lab   = as.factor(iris[subid,5])
 #'
 #' ## two types of graph laplacians using 20% of neighbors
-#' out1 <- do.lapeig(X,ndim=2,type=c("proportion",0.05),kernelscale=10) # weighted version
-#' out2 <- do.lapeig(X,ndim=2,type=c("proportion",0.05),weighted=FALSE) # combinatorial
+#'
+#' ## try different levels of connectivity
+#' out1 <- do.lapeig(X, type=c("proportion",0.10), weighted=FALSE)
+#' out2 <- do.lapeig(X, type=c("proportion",0.20), weighted=FALSE)
+#' out3 <- do.lapeig(X, type=c("proportion",0.50), weighted=FALSE)
 #'
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(out1$Y, main="weighted")
-#' plot(out2$Y, main="combinatorial")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y, pch=19, col=lab, main="10% connected")
+#' plot(out2$Y, pch=19, col=lab, main="20% connected")
+#' plot(out3$Y, pch=19, col=lab, main="50% connected")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{belkin_laplacian_2003}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LAPEIG
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.lapeig <- function(X, ndim=2, type=c("proportion",0.1),
                       symmetric=c("union","intersect","asymmetric"),
                       preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
-                      weighted=TRUE, kernelscale=1.0){
+                      weighted=FALSE, kernelscale=1.0){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   n = nrow(X)

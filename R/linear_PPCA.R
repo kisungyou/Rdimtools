@@ -23,7 +23,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -41,7 +40,6 @@
 #' plot(PCA$Y,  pch=19, col=label, main="PCA")
 #' plot(PPCA$Y, pch=19, col=label, main="PPCA")
 #' par(opar)
-#' }
 #'
 #' @seealso \code{\link{do.pca}}
 #' @author Kisung You

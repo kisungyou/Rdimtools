@@ -20,22 +20,21 @@ a named list containing containing \describe{
 It is a minimum neighbor distance estimator of the intrinsic dimension based on Kullback Leibler divergence estimator.
 }
 \examples{
-\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 X1 = aux.gensamples(dname="swiss")
 X2 = aux.gensamples(dname="ribbon")
 X3 = aux.gensamples(dname="saddle")
 
 ## acquire an estimate for intrinsic dimension
-out1 = est.mindkl(X1, k=10)
-out2 = est.mindkl(X2, k=10)
-out3 = est.mindkl(X3, k=10)
+out1 = est.mindkl(X1, k=5)
+out2 = est.mindkl(X2, k=5)
+out3 = est.mindkl(X3, k=5)
 
 ## print the results
-sprintf("* est.mindkl : estimated dimension for 'swiss'  data is \%.2f.",out1$estdim)
-sprintf("* est.mindkl : estimated dimension for 'ribbon' data is \%.2f.",out2$estdim)
-sprintf("* est.mindkl : estimated dimension for 'saddle' data is \%.2f.",out3$estdim)
-}
+line1 = paste0("* est.mindkl : 'swiss'  estiamte is ",round(out1$estdim,2))
+line2 = paste0("* est.mindkl : 'ribbon' estiamte is ",round(out2$estdim,2))
+line3 = paste0("* est.mindkl : 'saddle' estiamte is ",round(out3$estdim,2))
+cat(paste0(line1,"\n",line2,"\n",line3))
 
 }
 \references{

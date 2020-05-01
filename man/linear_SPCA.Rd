@@ -48,7 +48,6 @@ component - should be sparse. Instead of using generic optimization package,
 we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -71,7 +70,6 @@ plot(Y1, col=lab, pch=19, main="SPCA::rho=0.01")
 plot(Y2, col=lab, pch=19, main="SPCA::rho=1")
 plot(Y3, col=lab, pch=19, main="SPCA::rho=100")
 par(opar)
-}
 
 }
 \references{

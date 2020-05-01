@@ -26,9 +26,10 @@
 #' out3 = est.made(X, combine="vote")
 #'
 #' ## print the results
-#' sprintf("* est.made : estimated dimension with 'mean'   method is %d.",out1$estdim)
-#' sprintf("* est.made : estimated dimension with 'median' method is %d.",out2$estdim)
-#' sprintf("* est.made : estimated dimension with 'vote'   method is %d.",out3$estdim)
+#' line1 = paste0("* est.made : 'mean'   estiamte is ",round(out1$estdim,2))
+#' line2 = paste0("* est.made : 'median' estiamte is ",round(out2$estdim,2))
+#' line3 = paste0("* est.made : 'vote'   estiamte is ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
 #' }
 #'
 #' @references

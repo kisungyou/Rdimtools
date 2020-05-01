@@ -48,10 +48,10 @@ the \emph{locality} concept is brought in that for each slice, only local data p
 are considered in order to discover intrinsic structure of the data.
 }
 \examples{
-\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
-n = 123
+set.seed(100)
+n     = 123
 theta = runif(n)
 h     = runif(n)
 t     = (1+2*theta)*(3*pi/2)
@@ -76,7 +76,6 @@ plot(out1$Y, main="LSIR::nbd size=5")
 plot(out2$Y, main="LSIR::nbd size=10")
 plot(out3$Y, main="LSIR::nbd size=25")
 par(opar)
-}
 
 }
 \references{

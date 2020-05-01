@@ -24,9 +24,9 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 2 types with clear difference
-#' diff = 5
+#' set.seed(100)
+#' diff = 25
 #' dt1  = aux.gensamples(n=50)-diff;
 #' dt2  = aux.gensamples(n=50)+diff;
 #'
@@ -37,16 +37,15 @@
 #' ## try different neighborhood size
 #' out1 <- do.klde(X, label, numk=5)
 #' out2 <- do.klde(X, label, numk=10)
-#' out3 <- do.klde(X, label, numk=25)
+#' out3 <- do.klde(X, label, numk=20)
 #'
 #' ## visualize
 #' opar = par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
 #' plot(out1$Y, col=label, pch=19, main="k=5")
 #' plot(out2$Y, col=label, pch=19, main="k=10")
-#' plot(out3$Y, col=label, pch=19, main="k=25")
+#' plot(out3$Y, col=label, pch=19, main="k=20")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{hwann-tzongchen_local_2005}{Rdimtools}

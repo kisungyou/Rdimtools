@@ -36,9 +36,9 @@ It aims at preserving local structure by solving a variational problem that mode
 the local geometrical structure by the Euclidean distances.
 }
 \examples{
-\donttest{
 ## generate swiss roll with auxiliary dimensions
-n = 100
+set.seed(100)
+n     = 100
 theta = runif(n)
 h     = runif(n)
 t     = (1+2*theta)*(3*pi/2)
@@ -60,7 +60,6 @@ plot(out1$Y, main="LPE::numk=5")
 plot(out2$Y, main="LPE::numk=10")
 plot(out3$Y, main="LPE::numk=25")
 par(opar)
-}
 
 }
 \references{

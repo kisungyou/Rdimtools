@@ -30,7 +30,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -45,7 +44,6 @@
 #' opar <- par(no.readonly=TRUE)
 #' plot(output$Y, col=lab, pch=19, main="3 groups on 2d plane")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{fisher_use_1936}{Rdimtools}

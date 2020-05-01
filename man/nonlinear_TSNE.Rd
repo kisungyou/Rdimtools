@@ -65,7 +65,6 @@ target embedding space by minimizing Kullback-Leibler divergence. While conventi
 distributions to measure similarity, t-SNE, as its name suggests, exploits a heavy-tailed Student t-distribution.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -76,16 +75,15 @@ lab   = as.factor(iris[subid,5])
 ## compare different perplexity
 out1 <- do.tsne(X, ndim=2, perplexity=5)
 out2 <- do.tsne(X, ndim=2, perplexity=10)
-out3 <- do.tsne(X, ndim=2, perplexity=25)
+out3 <- do.tsne(X, ndim=2, perplexity=15)
 
 ## Visualize three different projections
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=lab, main="tSNE::perplexity=5")
-plot(out2$Y, col=lab, main="tSNE::perplexity=10")
-plot(out3$Y, col=lab, main="tSNE::perplexity=25")
+plot(out1$Y, pch=19, col=lab, main="tSNE::perplexity=5")
+plot(out2$Y, pch=19, col=lab, main="tSNE::perplexity=10")
+plot(out3$Y, pch=19, col=lab, main="tSNE::perplexity=15")
 par(opar)
-}
 
 }
 \references{

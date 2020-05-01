@@ -17,7 +17,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -32,12 +31,11 @@
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(3,1))
-#' plot(out1$Y, col=lab, main="PCA")
-#' plot(out2$Y, col=lab, main="Parameter-Free LPP")
-#' plot(out3$Y, col=lab, main="Enhanced LPP (2013)")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y, pch=19, col=lab, main="PCA")
+#' plot(out2$Y, pch=19, col=lab, main="Parameter-Free LPP")
+#' plot(out3$Y, pch=19, col=lab, main="Enhanced LPP (2013)")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{dornaika_enhanced_2013}{Rdimtools}

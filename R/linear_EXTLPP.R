@@ -20,8 +20,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data
+#' set.seed(100)
 #' X <- aux.gensamples(n=75)
 #'
 #' ## run Extended LPP with different neighborhood graph
@@ -36,7 +36,6 @@
 #' plot(out2$Y, main="EXTLPP::k=10")
 #' plot(out3$Y, main="EXTLPP::k=25")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{shikkenawis_improving_2012}{Rdimtools}

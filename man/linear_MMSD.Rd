@@ -39,11 +39,11 @@ It is a variant of MSD in that discriminant vectors are orthonormal. Similar to 
 rank deficiency issue of scatter matrix.
 }
 \examples{
-\donttest{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=20)-100
+set.seed(100)
+dt1  = aux.gensamples(n=20)-50
 dt2  = aux.gensamples(n=20)
-dt3  = aux.gensamples(n=20)+100
+dt3  = aux.gensamples(n=20)+50
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)
@@ -57,11 +57,10 @@ out3 = do.mmsd(X, label, C=100)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, main="MMSD::C=0.01")
-plot(out2$Y, main="MMSD::C=1")
-plot(out3$Y, main="MMSD::C=100")
+plot(out1$Y, pch=19, col=label, main="MMSD::C=0.01")
+plot(out2$Y, pch=19, col=label, main="MMSD::C=1")
+plot(out3$Y, pch=19, col=label, main="MMSD::C=100")
 par(opar)
-}
 
 }
 \references{

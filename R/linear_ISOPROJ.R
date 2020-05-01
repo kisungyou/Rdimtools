@@ -25,7 +25,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -45,7 +44,6 @@
 #' plot(output2$Y, main="70%", col=lab, pch=19)
 #' plot(output3$Y, main="90%", col=lab, pch=19)
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{cai_isometric_2007}{Rdimtools}

@@ -23,8 +23,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' #### generate R12in72 dataset
+#' set.seed(100)
 #' X = aux.gensamples(n=100, dname="R12in72")
 #'
 #' #### try different bandwidth values
@@ -39,7 +39,6 @@
 #' plot(out2$Y, main="LSPE::bandwidth=1")
 #' plot(out3$Y, main="LSPE::bandwidth=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{fang_locality_2014}{Rdimtools}

@@ -40,7 +40,6 @@ a named list containing
 It is closely related to principal component analysis.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -63,7 +62,6 @@ plot(Y1, pch=19, col=lab, main="FA::centered")
 plot(Y2, pch=19, col=lab, main="FA::decorrelated")
 plot(Y3, pch=19, col=lab, main="FA::whitened")
 par(opar)
-}
 
 }
 \references{

@@ -23,8 +23,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data
+#' set.seed(100)
 #' X <- aux.gensamples(n=123)
 #'
 #' ## 1. connecting 10% of data for graph construction.
@@ -43,8 +43,6 @@
 #' plot(output2$Y, main="25%")
 #' plot(output3$Y, main="25%+Binary")
 #' par(opar)
-#'}
-#'
 #'
 #' @references
 #' \insertRef{silva_global_2003}{Rdimtools}

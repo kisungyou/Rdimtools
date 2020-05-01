@@ -48,9 +48,9 @@ often suffers from lacking numerical rank. For such case, our algorithm returns 
 algorithm stops working any further due to its innate limitations of constructing weight matrix.
 }
 \examples{
-\donttest{
 ## generate data of 2 types with clear difference
-diff = 5
+set.seed(100)
+diff = 25
 dt1  = aux.gensamples(n=50)-diff;
 dt2  = aux.gensamples(n=50)+diff;
 
@@ -61,16 +61,15 @@ label  = rep(1:2, each=50)
 ## try different neighborhood size
 out1 <- do.klde(X, label, numk=5)
 out2 <- do.klde(X, label, numk=10)
-out3 <- do.klde(X, label, numk=25)
+out3 <- do.klde(X, label, numk=20)
 
 ## visualize
 opar = par(no.readonly=TRUE)
 par(mfrow=c(1,3))
 plot(out1$Y, col=label, pch=19, main="k=5")
 plot(out2$Y, col=label, pch=19, main="k=10")
-plot(out3$Y, col=label, pch=19, main="k=25")
+plot(out3$Y, col=label, pch=19, main="k=20")
 par(opar)
-}
 
 }
 \references{

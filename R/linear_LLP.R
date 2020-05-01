@@ -28,8 +28,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data
+#' set.seed(100)
 #' X <- aux.gensamples(n=100, dname="crown")
 #'
 #' ## test different lambda - regularization - values
@@ -40,11 +40,10 @@
 #' # visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="lambda = 0.1")
-#' plot(out2$Y, main="lambda = 1")
-#' plot(out3$Y, main="lambda = 10")
+#' plot(out1$Y, pch=19, main="lambda=0.1")
+#' plot(out2$Y, pch=19, main="lambda=1")
+#' plot(out3$Y, pch=19, main="lambda=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{wu_local_2007}{Rdimtools}

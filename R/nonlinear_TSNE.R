@@ -28,7 +28,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -39,16 +38,15 @@
 #' ## compare different perplexity
 #' out1 <- do.tsne(X, ndim=2, perplexity=5)
 #' out2 <- do.tsne(X, ndim=2, perplexity=10)
-#' out3 <- do.tsne(X, ndim=2, perplexity=25)
+#' out3 <- do.tsne(X, ndim=2, perplexity=15)
 #'
 #' ## Visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=lab, main="tSNE::perplexity=5")
-#' plot(out2$Y, col=lab, main="tSNE::perplexity=10")
-#' plot(out3$Y, col=lab, main="tSNE::perplexity=25")
+#' plot(out1$Y, pch=19, col=lab, main="tSNE::perplexity=5")
+#' plot(out2$Y, pch=19, col=lab, main="tSNE::perplexity=10")
+#' plot(out3$Y, pch=19, col=lab, main="tSNE::perplexity=15")
 #' par(opar)
-#' }
 #'
 #' @seealso \code{\link{do.sne}}
 #' @references

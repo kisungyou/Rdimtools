@@ -32,8 +32,8 @@ For algorithm aspects, we used recursive gram-schmidt orthogonalization in conju
 eigen-decomposition formulation, as the problem dimension matters only up to original dimensionality.
 }
 \examples{
-\donttest{
 ## generate 2 normal data matrices
+set.seed(100)
 mat1 = matrix(rnorm(100*12),nrow=100)+10 # 12-dim normal
 mat2 = matrix(rnorm(100*6), nrow=100)-10 # 6-dim normal
 
@@ -46,7 +46,6 @@ par(mfrow=c(1,2))
 plot(output$Y1, main="proj(mat1)")
 plot(output$Y2, main="proj(mat2)")
 par(opar)
-}
 
 }
 \references{

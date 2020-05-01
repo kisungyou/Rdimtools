@@ -22,10 +22,10 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
-#' n = 123
+#' set.seed(100)
+#' n = 100
 #' theta = runif(n)
 #' h     = runif(n)
 #' t     = (1+2*theta)*(3*pi/2)
@@ -50,7 +50,6 @@
 #' plot(out2$Y, main="SPC::threshold=5")
 #' plot(out3$Y, main="SPC::threshold=10")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{bair_prediction_2006}{Rdimtools}

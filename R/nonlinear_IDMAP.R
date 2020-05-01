@@ -18,7 +18,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -38,7 +37,6 @@
 #' plot(out2$Y, pch=19, col=label, main="SNE")
 #' plot(out3$Y, pch=19, col=label, main="IDMAP")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{minghim_contentbased_2006}{Rdimtools}

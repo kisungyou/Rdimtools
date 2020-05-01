@@ -18,7 +18,6 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -41,7 +40,6 @@
 #' plot(Y2, pch=19, col=lab, main="MDS::decorrelate")
 #' plot(Y3, pch=19, col=lab, main="MDS::whiten")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{kruskal_multidimensional_1964}{Rdimtools}

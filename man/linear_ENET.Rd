@@ -46,9 +46,9 @@ Elastic Net is a regularized regression method by solving
 where \eqn{y} iis \code{response} variable in our method. The method can be used in feature selection like LASSO.
 }
 \examples{
-\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
+set.seed(100)
 n = 123
 theta = runif(n)
 h     = runif(n)
@@ -77,7 +77,6 @@ plot(Y1, pch=19, main="ENET::lambda1=0.01")
 plot(Y2, pch=19, main="ENET::lambda1=1")
 plot(Y3, pch=19, main="ENET::lambda1=100")
 par(opar)
-}
 
 }
 \references{

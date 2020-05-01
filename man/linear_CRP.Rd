@@ -37,7 +37,6 @@ Note that though it may be way faster, rank deficiency can pose a great deal of 
 especially when the dataset is large.
 }
 \examples{
-\donttest{
 ## use iris dataset
 data(iris)
 set.seed(100)
@@ -57,7 +56,6 @@ plot(out1$Y, col=lab, pch=19, main="CRP::lambda=0.1")
 plot(out2$Y, col=lab, pch=19, main="CRP::lambda=1")
 plot(out3$Y, col=lab, pch=19, main="CRP::lambda=10")
 par(opar)
-}
 
 }
 \references{

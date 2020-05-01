@@ -20,9 +20,9 @@
 #'
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 2 types with clear difference
-#' diff = 15
+#' set.seed(100)
+#' diff = 50
 #' dt1  = aux.gensamples(n=50)-diff;
 #' dt2  = aux.gensamples(n=50)+diff;
 #'
@@ -38,11 +38,10 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(outLPP$Y,   main="LPP")
-#' plot(outSLPP$Y,  main="SLPP")
-#' plot(outESLPP$Y, main="ESLPP")
+#' plot(outLPP$Y,   col=label, pch=19, main="LPP")
+#' plot(outSLPP$Y,  col=label, pch=19, main="SLPP")
+#' plot(outESLPP$Y, col=label, pch=19, main="ESLPP")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zheng_gabor_2007}{Rdimtools}

@@ -58,7 +58,7 @@ regularization parameter and put penalty for stable computation. See also
 \code{\link{do.lle}} for more details.
 }
 \examples{
-\donttest{
+\dontrun{
 ## use iris data
 data(iris)
 set.seed(100)

@@ -37,7 +37,6 @@ similar to that of subgradient method in that at each iteration \eqn{t} the grad
 weighted by \eqn{\alpha /t}.
 }
 \examples{
-\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -57,8 +56,6 @@ plot(out1$Y, col=label, pch=19, main="alpha=1.0")
 plot(out2$Y, col=label, pch=19, main="alpha=5.0")
 plot(out3$Y, col=label, pch=19, main="alpha=10.0")
 par(opar)
-}
-
 
 }
 \references{

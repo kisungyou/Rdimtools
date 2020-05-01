@@ -24,7 +24,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -44,7 +43,6 @@
 #' plot(out2$Y, main="bandwidth=1",   col=label, pch=19)
 #' plot(out3$Y, main="bandwidth=10",  col=label, pch=19)
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zhang_maximum_2007}{Rdimtools}

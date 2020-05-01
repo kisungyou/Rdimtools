@@ -44,8 +44,8 @@ then mapping the locality structure to reconstruct coefficients such that data s
 Use of \eqn{\ell_{2,1}} norm boosts to impose column-sparsity that enables feature selection procedure.
 }
 \examples{
-\donttest{
 #### generate R12in72 dataset
+set.seed(100)
 X = aux.gensamples(n=100, dname="R12in72")
 
 #### try different bandwidth values
@@ -60,7 +60,6 @@ plot(out1$Y, main="LSPE::bandwidth=0.1")
 plot(out2$Y, main="LSPE::bandwidth=1")
 plot(out3$Y, main="LSPE::bandwidth=10")
 par(opar)
-}
 
 }
 \references{

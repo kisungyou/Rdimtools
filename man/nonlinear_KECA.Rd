@@ -37,7 +37,6 @@ in accordance with indices of largest Renyi quadratic entropy in which entropy f
 \eqn{j}-th eigenvector of an uncentered kernel matrix \eqn{K}.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -61,7 +60,6 @@ plot(output1$Y, pch=19, col=label, main="Gaussian kernel")
 plot(output2$Y, pch=19, col=label, main="Gaussian, sigma=5")
 plot(output3$Y, pch=19, col=label, main="Laplacian kernel")
 par(opar)
-}
 
 }
 \references{

@@ -21,7 +21,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -41,7 +40,6 @@
 #' plot(out2$Y, col=label, pch=19, main="decorrelating")
 #' plot(out3$Y, col=label, pch=19, main="whitening")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{zhang_maximum_2007}{Rdimtools}

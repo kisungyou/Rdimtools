@@ -31,7 +31,12 @@
 #' sprintf("* est.gdistnn : estimated dimension for 'ribbon' data is %.2f.",out2$estdim)
 #' sprintf("* est.gdistnn : estimated dimension for 'saddle' data is %.2f.",out3$estdim)
 #'
-#' ## visualize
+#' line1 = paste0("* est.gdistnn : 'swiss'  estiamte is ",round(out1$estdim,2))
+#' line2 = paste0("* est.gdistnn : 'ribbon' estiamte is ",round(out2$estdim,2))
+#' line3 = paste0("* est.gdistnn : 'saddle' estiamte is ",round(out3$estdim,2))
+#' cat(paste0(line1,"\n",line2,"\n",line3))
+#'
+#' ## compare with local-dimension estimate
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
 #' hist(out1$estloc, main="Result-'Swiss'", xlab="local dimension")

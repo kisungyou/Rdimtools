@@ -36,7 +36,6 @@ a common method of introducing nonlinearity by transforming, usually, covariance
 other gram-type estimate to make it flexible in Reproducing Kernel Hilbert Space.
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -56,7 +55,6 @@ plot(output1$Y, col=label, pch=19, main="Gaussian kernel")
 plot(output2$Y, col=label, pch=19, main="Gaussian kernel with sigma=5")
 plot(output3$Y, col=label, pch=19, main="Laplacian kernel")
 par(opar)
-}
 
 }
 \references{

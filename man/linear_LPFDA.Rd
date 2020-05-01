@@ -46,11 +46,11 @@ is preserved. The algorithm aims at getting a subspace projection matrix by solv
 eigenvalue problem.
 }
 \examples{
-\donttest{
 ## generate data of 3 types with clear difference
-dt1  = aux.gensamples(n=20)-100
+set.seed(100)
+dt1  = aux.gensamples(n=20)-50
 dt2  = aux.gensamples(n=20)
-dt3  = aux.gensamples(n=20)+100
+dt3  = aux.gensamples(n=20)+50
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2,dt3)
@@ -64,11 +64,10 @@ out3 = do.lpfda(X, label, type=c("proportion",0.50))
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, pch=19, col=lab, main="10\% connectivity")
-plot(out2$Y, pch=19, col=lab, main="25\% connectivity")
-plot(out3$Y, pch=19, col=lab, main="50\% connectivity")
+plot(out1$Y, pch=19, col=label, main="10\% connectivity")
+plot(out2$Y, pch=19, col=label, main="25\% connectivity")
+plot(out3$Y, pch=19, col=label, main="50\% connectivity")
 par(opar)
-}
 
 }
 \references{

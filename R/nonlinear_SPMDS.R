@@ -25,9 +25,10 @@
 #' }
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' ## Replicate the numerical example from the paper
 #' #  Data Preparation
+#' set.seed(100)
 #' dim.true  = 3     # true dimension
 #' dim.embed = 100   # embedding space (high-d)
 #' npoints   = 1000  # number of samples to be generated
@@ -37,7 +38,7 @@
 #' X     = coeff%*%v
 #'
 #' # see the effect of neighborhood size
-#' out1  = do.spmds(X, neigs=100, type=c("proportion",0.1))
+#' out1  = do.spmds(X, neigs=100, type=c("proportion",0.10))
 #' out2  = do.spmds(X, neigs=100, type=c("proportion",0.25))
 #' out3  = do.spmds(X, neigs=100, type=c("proportion",0.50))
 #'
@@ -55,7 +56,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_SPMDS
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.spmds <- function(X, ndim=2, neigs=max(2,nrow(X)/10), ratio=0.1,
                      preprocess=c("null","center","scale","cscale","decorrelate","whiten"),

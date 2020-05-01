@@ -21,33 +21,35 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate data of 3 types with clear difference
-#' dt1  = aux.gensamples(n=33)-100
-#' dt2  = aux.gensamples(n=33)
-#' dt3  = aux.gensamples(n=33)+100
+#' set.seed(100)
+#' dt1  = aux.gensamples(n=20)-100
+#' dt2  = aux.gensamples(n=20)
+#' dt3  = aux.gensamples(n=20)+100
 #'
 #' ## merge the data and create a label correspondingly
 #' X      = rbind(dt1,dt2,dt3)
-#' label  = c(rep(1,33), rep(2,33), rep(3,33))
+#' label  = rep(1:3, each=20)
 #'
 #' ## try different numbers for neighborhood size
-#' out1 = do.kmfa(X, label, k1=5, k2=5, t=1)
-#' out2 = do.kmfa(X, label, k1=5, k2=5, t=2)
+#' out1 = do.kmfa(X, label, k1=10, k2=10, t=0.001)
+#' out2 = do.kmfa(X, label, k1=10, k2=10, t=0.01)
+#' out3 = do.kmfa(X, label, k1=10, k2=10, t=0.1)
 #'
 #' ## visualize
 #' opar = par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(out1$Y, main="bandwidth=1")
-#' plot(out2$Y, main="bandwidth=2")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y, pch=19, col=label, main="bandwidth=0.001")
+#' plot(out2$Y, pch=19, col=label, main="bandwidth=0.01")
+#' plot(out3$Y, pch=19, col=label, main="bandwidth=0.1")
 #' par(opar)
-#' }
+#'
 #' @references
 #' \insertRef{yan_graph_2007}{Rdimtools}
 #'
 #' @author Kisung You
 #' @rdname nonlinear_KMFA
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.kmfa <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
                    k1=max(ceiling(nrow(X)/10),2), k2=max(ceiling(nrow(X)/10),2), t=1.0){

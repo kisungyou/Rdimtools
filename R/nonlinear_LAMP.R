@@ -21,7 +21,6 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -39,7 +38,6 @@
 #' plot(out1$Y, pch=19, col=label, main="PCA")
 #' plot(out2$Y, pch=19, col=label, main="LAMP")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{joia_local_2011}{Rdimtools}

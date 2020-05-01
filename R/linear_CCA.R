@@ -21,8 +21,8 @@
 #' }
 #'
 #' @examples
-#' \donttest{
 #' ## generate 2 normal data matrices
+#' set.seed(100)
 #' mat1 = matrix(rnorm(100*12),nrow=100)+10 # 12-dim normal
 #' mat2 = matrix(rnorm(100*6), nrow=100)-10 # 6-dim normal
 #'
@@ -35,7 +35,6 @@
 #' plot(output$Y1, main="proj(mat1)")
 #' plot(output$Y2, main="proj(mat2)")
 #' par(opar)
-#' }
 #'
 #' @references
 #' \insertRef{hotelling_relations_1936}{Rdimtools}
@@ -43,7 +42,7 @@
 #' @seealso \code{\link{do.pls}}
 #' @author Kisung You
 #' @rdname linear_CCA
-#' @concept linear_methods 
+#' @concept linear_methods
 #' @export
 do.cca <- function(data1,data2,ndim=2){
   ## Preprocessing

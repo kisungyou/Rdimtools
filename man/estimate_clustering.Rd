@@ -32,9 +32,10 @@ out2 = est.clustering(X, kmin=25)
 out3 = est.clustering(X, kmin=50)
 
 ## print the results
-sprintf("* est.clustering : estimated dimension with kmin=5  is \%.2f.",out1$estdim)
-sprintf("* est.clustering : estimated dimension with kmin=25 is \%.2f.",out2$estdim)
-sprintf("* est.clustering : estimated dimension with kmin=50 is \%.2f.",out3$estdim)
+line1 = paste0("* est.clustering : kmin=5  gives ",round(out1$estdim,2))
+line2 = paste0("* est.clustering : kmin=25 gives ",round(out2$estdim,2))
+line3 = paste0("* est.clustering : kmin=50 gives ",round(out3$estdim,2))
+cat(paste0(line1,"\n",line2,"\n",line3))
 }
 
 }

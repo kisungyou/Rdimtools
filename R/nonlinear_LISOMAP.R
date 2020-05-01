@@ -25,28 +25,23 @@
 #' }
 #'
 #' @examples
-#' \donttest{
-#' ## generate data
-#' ## in order to pass CRAN pretest, n is set to be small.
-#' X <- aux.gensamples(n=123)
+#' ## use iris data
+#' data(iris)
+#' X   <- as.matrix(iris[,1:4])
+#' lab <- as.factor(iris[,5])
 #'
-#' ## 1. use 10/28 data points with quarter-connected graph
-#' output1 <- do.lisomap(X,ndim=2,type=c("proportion",0.25),npoints=10)
+#' ## use different number of data points as landmarks
+#' output1 <- do.lisomap(X, npoints=10, type=c("proportion",0.25))
+#' output2 <- do.lisomap(X, npoints=25, type=c("proportion",0.25))
+#' output3 <- do.lisomap(X, npoints=50, type=c("proportion",0.25))
 #'
-#' ## 2. use 10/28 data points with half-connected graph
-#' output2 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=10)
-#'
-#' ## 3. use 14/28 data points with half-connected graph
-#' output3 <- do.lisomap(X,ndim=2,type=c("proportion",0.50),npoints=14)
-#'
-#' ## Visualize three different projections
+#' ## visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, main="5%")
-#' plot(output2$Y, main="10%")
-#' plot(output3$Y, main="50%")
+#' plot(output1$Y, pch=19, col=lab, main="10 landmarks")
+#' plot(output2$Y, pch=19, col=lab, main="25 landmarks")
+#' plot(output3$Y, pch=19, col=lab, main="50 landmarks")
 #' par(opar)
-#' }
 #'
 #' @seealso \code{\link{do.isomap}}
 #' @references
@@ -54,7 +49,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_LISOMAP
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.lisomap <- function(X,ndim=2,ltype=c("random","MaxMin"),npoints=max(nrow(X)/5,ndim+1),
                        preprocess=c("center","scale","cscale","decorrelate","whiten"),

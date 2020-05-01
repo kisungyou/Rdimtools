@@ -45,7 +45,6 @@ feature score vectors and selects the indices with smallest values. Graph laplac
 for approximated nonlinear manifold structure.
 }
 \examples{
-\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -63,12 +62,11 @@ out4 = do.cscoreg(iris.dat, iris.lab, score="difference", lambda=1)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(2,2))
-plot(out1$Y, col=iris.lab, main="ratio")
-plot(out2$Y, col=iris.lab, main="diff/lambda=0")
-plot(out3$Y, col=iris.lab, main="diff/lambda=0.5")
-plot(out4$Y, col=iris.lab, main="diff/lambda=1")
+plot(out1$Y, pch=19, col=iris.lab, main="ratio")
+plot(out2$Y, pch=19, col=iris.lab, main="diff/lambda=0")
+plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
+plot(out4$Y, pch=19, col=iris.lab, main="diff/lambda=1")
 par(opar)
-}
 
 }
 \references{

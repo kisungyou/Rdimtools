@@ -39,11 +39,10 @@ It focuses on the information brought by local neighborhood structure and seeks 
 structure, which may contain useful information for revealing discriminative information of the data.
 }
 \examples{
-\donttest{
 ## use iris dataset
 data(iris)
 set.seed(100)
-subid = sample(1:150,50)
+subid = sample(1:150,100)
 X     = as.matrix(iris[subid,1:4])
 lab   = as.factor(iris[subid,5])
 
@@ -59,7 +58,6 @@ plot(out1$Y, pch=19, col=lab, main="LPCA::10\% connected")
 plot(out2$Y, pch=19, col=lab, main="LPCA::25\% connected")
 plot(out3$Y, pch=19, col=lab, main="LPCA::50\% connected")
 par(opar)
-}
 
 }
 \references{

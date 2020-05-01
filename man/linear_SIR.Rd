@@ -40,9 +40,9 @@ conditional independence after projection is guaranteed. It first divides the ra
 response variable. Projection vectors are extracted where projected data best explains response variable.
 }
 \examples{
-\donttest{
 ## generate swiss roll with auxiliary dimensions
 ## it follows reference example from LSIR paper.
+set.seed(100)
 n = 50
 theta = runif(n)
 h     = runif(n)
@@ -68,7 +68,6 @@ plot(out1$Y, main="SIR::2 slices")
 plot(out2$Y, main="SIR::5 slices")
 plot(out3$Y, main="SIR::10 slices")
 par(opar)
-}
 
 }
 \references{

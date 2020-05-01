@@ -44,8 +44,8 @@ by Tenenbaum et al (2000). Its novelty comes from applying classical multidimens
 scaling on nonlinear manifold, which is approximated as a graph.
 }
 \examples{
-\donttest{
 ## generate data
+set.seed(100)
 X <- aux.gensamples(n=123)
 
 ## 1. connecting 10\% of data for graph construction.
@@ -64,8 +64,6 @@ plot(output1$Y, main="10\%")
 plot(output2$Y, main="25\%")
 plot(output3$Y, main="25\%+Binary")
 par(opar)
-}
-
 
 }
 \references{

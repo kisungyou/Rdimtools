@@ -42,15 +42,15 @@ data points maintain their original neighborhood information while
 segregating different-class data distinct from each other.
 }
 \examples{
-\donttest{
 ## generate data of 2 types with clear difference
+set.seed(100)
 diff = 15
 dt1  = aux.gensamples(n=50)-diff;
 dt2  = aux.gensamples(n=50)+diff;
 
 ## merge the data and create a label correspondingly
 X      = rbind(dt1,dt2)
-label  = rep(1:2, 50)
+label  = rep(1:2, each=50)
 
 ## try different neighborhood size
 out1 <- do.lde(X, label, numk=5)
@@ -60,11 +60,10 @@ out3 <- do.lde(X, label, numk=25)
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=label, main="LDE::k=5")
-plot(out2$Y, col=label, main="LDE::k=10")
-plot(out3$Y, col=label, main="LDE::k=25")
+plot(out1$Y, pch=19, col=label, main="LDE::k=5")
+plot(out2$Y, pch=19, col=label, main="LDE::k=10")
+plot(out3$Y, pch=19, col=label, main="LDE::k=25")
 par(opar)
-}
 
 }
 \references{
