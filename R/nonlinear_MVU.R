@@ -27,7 +27,7 @@
 #' @examples
 #' ## generate ribbon-shaped data with the small number of data
 #' set.seed(100)
-#' X = aux.gensamples(dname="ribbon", n=50)
+#' X = aux.gensamples(dname="ribbon", n=25)
 #'
 #' ## try different connectivity levels
 #' output1 <- do.mvu(X, type=c("proportion", 0.10))

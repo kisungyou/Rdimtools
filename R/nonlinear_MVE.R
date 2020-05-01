@@ -28,7 +28,7 @@
 #' ## generate ribbon-shaped data
 #' ## in order to pass CRAN pretest, n is set to be small.
 #' set.seed(100)
-#' X = aux.gensamples(dname="ribbon",n=50)
+#' X = aux.gensamples(dname="ribbon",n=25)
 #'
 #' ## Compare MVU and MVE
 #' #  Note that MVE actually requires much larger number of iterations
