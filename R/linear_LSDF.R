@@ -43,16 +43,16 @@
 #' label_missing[sample(1:nlabel, nmissing)]=NA
 #'
 #' ## try different neighborhood sizes
-#' out1 = do.lsdf(X, label_missing, type=c("proportion",0.01))
-#' out2 = do.lsdf(X, label_missing, type=c("proportion",0.1))
-#' out3 = do.lsdf(X, label_missing, type=c("proportion",0.25))
+#' out1 = do.lsdf(X, label_missing, type=c("proportion",0.10))
+#' out2 = do.lsdf(X, label_missing, type=c("proportion",0.25))
+#' out3 = do.lsdf(X, label_missing, type=c("proportion",0.50))
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, main="1% connectivity")
-#' plot(out2$Y, main="10% connectivity")
-#' plot(out3$Y, main="25% connectivity")
+#' plot(out1$Y, pch=19, col=label, main="10% connectivity")
+#' plot(out2$Y, pch=19, col=label, main="25% connectivity")
+#' plot(out3$Y, pch=19, col=label, main="50% connectivity")
 #' par(opar)
 #' }
 #'

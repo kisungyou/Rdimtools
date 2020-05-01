@@ -56,16 +56,16 @@ X      = rbind(dt1,dt2,dt3)
 label  = rep(1:3, each=20)
 
 ## try different neighborhood sizes
-out1 = do.ldp(X, label, type=c("proportion",0.01))
-out2 = do.ldp(X, label, type=c("proportion",0.05))
-out3 = do.ldp(X, label, type=c("proportion",0.10))
+out1 = do.ldp(X, label, type=c("proportion",0.10))
+out2 = do.ldp(X, label, type=c("proportion",0.25))
+out3 = do.ldp(X, label, type=c("proportion",0.50))
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, col=label, main="1\% connectivity")
-plot(out2$Y, col=label, main="5\% connectivity")
-plot(out3$Y, col=label, main="10\% connectivity")
+plot(out1$Y, col=label, pch=19, main="10\% connectivity")
+plot(out2$Y, col=label, pch=19, main="25\% connectivity")
+plot(out3$Y, col=label, pch=19, main="50\% connectivity")
 par(opar)
 
 }
