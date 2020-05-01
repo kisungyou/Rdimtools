@@ -24,6 +24,10 @@ addons:
       - gdal-bin 
       - proj-bin
       - libproj-dev
+      - cargo
+      - libstd-rust-dev
+      - rust-gdb
+      - rustc
 
 r:
   - release
