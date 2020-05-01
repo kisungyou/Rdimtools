@@ -52,8 +52,10 @@ original semidefinite programming formulation.
 \examples{
 ## use iris data
 data(iris)
-X     = as.matrix(iris[,1:4])
-label = as.integer(iris$Species)
+set.seed(100)
+subid = sample(1:150,50)
+X     = as.matrix(iris[subid,1:4])
+label = as.factor(iris[subid,5])
 
 ## try different distance method
 output1 <- do.ree(X, maxiter=50, dmethod="euclidean")

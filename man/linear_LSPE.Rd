@@ -46,7 +46,7 @@ Use of \eqn{\ell_{2,1}} norm boosts to impose column-sparsity that enables featu
 \examples{
 #### generate R12in72 dataset
 set.seed(100)
-X = aux.gensamples(n=100, dname="R12in72")
+X = aux.gensamples(n=50, dname="R12in72")
 
 #### try different bandwidth values
 out1 = do.lspe(X, bandwidth=0.1)
