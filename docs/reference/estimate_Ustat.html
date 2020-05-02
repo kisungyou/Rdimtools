@@ -106,6 +106,18 @@ estimate in that there is no need for rounding the result for practical usage." 
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -193,7 +205,12 @@ In <em>Proceedings of the 22nd international conference on Machine learning</em>
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.Ustat</span>(<span class='no'>X3</span>)
 
 <span class='co'>## print the results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.Ustat : estimated dimension for 'swiss'  data is %d."</span>,<span class='no'>out1</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.Ustat : estimated dimension for 'swiss'  data is 2."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.Ustat : estimated dimension for 'ribbon' data is %d."</span>,<span class='no'>out2</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.Ustat : estimated dimension for 'ribbon' data is 2."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.Ustat : estimated dimension for 'saddle' data is %d."</span>,<span class='no'>out3</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.Ustat : estimated dimension for 'saddle' data is 2."</div><div class='input'># }
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.Ustat : 'swiss'  gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.Ustat : 'ribbon' gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.Ustat : 'saddle' gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.Ustat : 'swiss'  gives 2
+#&gt; * est.Ustat : 'ribbon' gives 2
+#&gt; * est.Ustat : 'saddle' gives 2</div><div class='input'># }
 
 </div></pre>
   </div>

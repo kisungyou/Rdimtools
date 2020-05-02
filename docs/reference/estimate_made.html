@@ -105,6 +105,18 @@ manifold-adaptive." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -203,7 +215,12 @@ In <em>ICML</em>, volume 227 of <em>ACM International Conference Proceeding Seri
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.made</span>(<span class='no'>X</span>, <span class='kw'>combine</span><span class='kw'>=</span><span class='st'>"vote"</span>)
 
 <span class='co'>## print the results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.made : estimated dimension with 'mean'   method is %d."</span>,<span class='no'>out1</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.made : estimated dimension with 'mean'   method is 2."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.made : estimated dimension with 'median' method is %d."</span>,<span class='no'>out2</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.made : estimated dimension with 'median' method is 2."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.made : estimated dimension with 'vote'   method is %d."</span>,<span class='no'>out3</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.made : estimated dimension with 'vote'   method is 1."</div><div class='input'># }
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.made : 'mean'   estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.made : 'median' estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.made : 'vote'   estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.made : 'mean'   estiamte is 2
+#&gt; * est.made : 'median' estiamte is 2
+#&gt; * est.made : 'vote'   estiamte is 1</div><div class='input'># }
 
 </div></pre>
   </div>

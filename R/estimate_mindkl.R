@@ -10,6 +10,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -25,6 +26,7 @@
 #' line2 = paste0("* est.mindkl : 'ribbon' estiamte is ",round(out2$estdim,2))
 #' line3 = paste0("* est.mindkl : 'saddle' estiamte is ",round(out3$estdim,2))
 #' cat(paste0(line1,"\n",line2,"\n",line3))
+#' }
 #'
 #' @references
 #' \insertRef{lombardi_minimum_2011}{Rdimtools}

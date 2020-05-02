@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate ribbon-shaped data
 #' ## in order to pass CRAN pretest, n is set to be small.
 #' set.seed(100)
@@ -42,6 +43,7 @@
 #' plot(outMVU5$Y,  main="MVU (k=5)")
 #' plot(outMVE5$Y,  main="MVE (k=5)")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{shaw_minimum_2007}{Rdimtools}

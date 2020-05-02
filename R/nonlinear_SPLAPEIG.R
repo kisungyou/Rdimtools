@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -39,6 +40,7 @@
 #' plot(Y2, pch=19, col=label, main="gamma=0.6")
 #' plot(Y3, pch=19, col=label, main="gamma=0.9")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{raducanu_supervised_2012}{Rdimtools}

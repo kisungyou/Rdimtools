@@ -56,6 +56,18 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -92,7 +104,7 @@
       <h1 data-toc-skip>Quick Start with Rdimtools</h1>
                         <h4 class="author">Kisung You</h4>
             
-            <h4 class="date">2020-04-29</h4>
+            <h4 class="date">2020-05-02</h4>
       
       <small class="dont-index">Source: <a href="http://github.com/kyoustat/Rdimtools/blob/master/vignettes/quick-start.Rmd"><code>vignettes/quick-start.Rmd</code></a></small>
       <div class="hidden name"><code>quick-start.Rmd</code></div>
@@ -106,18 +118,18 @@
 <h2 class="hasAnchor">
 <a href="#install-and-load" class="anchor"></a>1. Install and Load</h2>
 <p><strong>Rdimtools</strong> can be installed in two handy options. A release version from CRAN can be installed</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"Rdimtools"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"Rdimtools"</span>)</pre></body></html></div>
 <p>or a development version is available from GitHub with <code>devtools</code> package.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co">## install.packages("devtools")</span>
+<div class="sourceCode" id="cb2"><html><body><pre class="r"><span class="co">## install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"kyoustat/Rdimtools"</span>)</pre></body></html></div>
 <p>Now we are ready to go by loading the library.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Rdimtools</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Rdimtools</span>)</pre></body></html></div>
 </div>
 <div id="dimension-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dimension-estimation" class="anchor"></a>2. Dimension Estimation</h2>
 <p>As of version 0.1.2, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># load the iris data</span>
+<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># load the iris data</span>
 <span class="no">X</span>   <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">iris</span>[,<span class="fl">1</span>:<span class="fl">4</span>])
 <span class="no">lab</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">iris</span>[,<span class="fl">5</span>])
 
@@ -144,7 +156,7 @@
 <h2 class="hasAnchor">
 <a href="#dimension-reduction" class="anchor"></a>3. Dimension Reduction</h2>
 <p>In this section, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
-<div class="sourceCode"><html><body><pre class="r"><span class="co"># run 3 algorithms mentioned above</span>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># run 3 algorithms mentioned above</span>
 <span class="no">mypca</span> <span class="kw">=</span> <span class="fu"><a href="../reference/linear_PCA.html">do.pca</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>)
 <span class="no">mylap</span> <span class="kw">=</span> <span class="fu"><a href="../reference/linear_LSCORE.html">do.lscore</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>)
 <span class="no">mydfm</span> <span class="kw">=</span> <span class="fu"><a href="../reference/nonlinear_DM.html">do.dm</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">bandwidth</span><span class="kw">=</span><span class="fl">10</span>)

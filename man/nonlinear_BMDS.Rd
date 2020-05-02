@@ -50,6 +50,7 @@ classified in our package as a nonlinear method. Also, automatic dimension selec
 for simplicity as well as consistency with other methods in the package.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -72,6 +73,7 @@ plot(Y1, main="BMDS::iter=5",  col=label, pch=19)
 plot(Y2, main="BMDS::iter=10", col=label, pch=19)
 plot(Y3, main="BMDS::iter=50", col=label, pch=19)
 par(opar)
+}
 
 }
 \references{

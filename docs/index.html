@@ -61,6 +61,18 @@
 <li>
   <a href="news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
@@ -137,7 +149,7 @@
 <h2 class="hasAnchor">
 <a href="#minimal-example-dimension-estimation" class="anchor"></a>Minimal Example : Dimension Estimation</h2>
 <p><img src="http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
-<p>Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3</sup> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <em>d</em> = 2, let’s apply several methods for intrinsic dimension estimation.</p>
+<p>Swill Roll is a classic example of 2-dimensional manifold embedded in <span class="math inline">ℝ<sup>3</sup></span> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <span class="math inline"><em>d</em> = 2</span>, let’s apply several methods for intrinsic dimension estimation.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="co"># generate sample data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span>(<span class="fl">100</span>)
 <span class="no">roll</span> <span class="kw">=</span> <span class="fu"><a href="reference/aux_gensamples.html">aux.gensamples</a></span>(<span class="kw">dname</span><span class="kw">=</span><span class="st">"swiss"</span>)
@@ -159,7 +171,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span>(<span class="kw">x</span><span class="kw">=</span><span class="no">xtick</span>,  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="st">"usr"</span>)[<span class="fl">3</span>],
      <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span>), <span class="kw">pos</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">xpd</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <em>d</em> = 2. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
+<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <span class="math inline"><em>d</em> = 2</span>. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
@@ -184,9 +196,8 @@
 <div class="license">
 <h2>License</h2>
 <ul class="list-unstyled">
-<li>
-<a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a>
-</li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 <div class="developers">

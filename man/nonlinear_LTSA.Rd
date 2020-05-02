@@ -44,6 +44,7 @@ a multiple of tangent spaces are gathered to to find an embedding that aligns th
 in target dimensional space.
 }
 \examples{
+\donttest{
 ## generate data
 set.seed(100)
 X <- aux.gensamples(dname="cswiss",n=100)
@@ -64,6 +65,7 @@ plot(output1$Y, main="10\%")
 plot(output2$Y, main="25\%")
 plot(output3$Y, main="50\%")
 par(opar)
+}
 
 }
 \references{

@@ -105,6 +105,18 @@ to reflect inhomogeneity of distribution across data points." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -195,7 +207,13 @@ MIT Press.</p>
 <span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.mle1</span>(<span class='no'>X2</span>)
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.mle1</span>(<span class='no'>X3</span>)
 
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"* est.mle1 : estimated dimension for 'swiss'  data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))</div><div class='output co'>#&gt; * est.mle1 : estimated dimension for 'swiss'  data is  2.14</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"* est.mle1 : estimated dimension for 'ribbon' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))</div><div class='output co'>#&gt; * est.mle1 : estimated dimension for 'ribbon' data is  2.3</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='st'>"* est.mle1 : estimated dimension for 'saddle' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))</div><div class='output co'>#&gt; * est.mle1 : estimated dimension for 'saddle' data is  2.54</div><div class='input'># }
+<span class='co'>## print the estimates</span>
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle1 : 'swiss'  estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle1 : 'ribbon' estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle1 : 'saddle' estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.mle1 : 'swiss'  estiamte is 2.19
+#&gt; * est.mle1 : 'ribbon' estiamte is 2.31
+#&gt; * est.mle1 : 'saddle' estiamte is 2.52</div><div class='input'># }
 
 </div></pre>
   </div>

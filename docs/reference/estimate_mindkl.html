@@ -102,6 +102,18 @@
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -186,12 +198,17 @@ ISBN 978-3-642-23782-9 978-3-642-23783-6, doi: <a href='https://doi.org/10.1007/
 <span class='no'>X3</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"saddle"</span>)
 
 <span class='co'>## acquire an estimate for intrinsic dimension</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X1</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>10</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X2</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>10</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X3</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>10</span>)
+<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X1</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X2</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.mindkl</span>(<span class='no'>X3</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>5</span>)
 
 <span class='co'>## print the results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.mindkl : estimated dimension for 'swiss'  data is %.2f."</span>,<span class='no'>out1</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.mindkl : estimated dimension for 'swiss'  data is 3.00."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.mindkl : estimated dimension for 'ribbon' data is %.2f."</span>,<span class='no'>out2</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.mindkl : estimated dimension for 'ribbon' data is 3.00."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.mindkl : estimated dimension for 'saddle' data is %.2f."</span>,<span class='no'>out3</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.mindkl : estimated dimension for 'saddle' data is 3.00."</div><div class='input'># }
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mindkl : 'swiss'  estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mindkl : 'ribbon' estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mindkl : 'saddle' estiamte is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.mindkl : 'swiss'  estiamte is 3
+#&gt; * est.mindkl : 'ribbon' estiamte is 3
+#&gt; * est.mindkl : 'saddle' estiamte is 3</div><div class='input'># }
 
 </div></pre>
   </div>

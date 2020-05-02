@@ -105,6 +105,18 @@ mutually local whose distance should be close to geodesic distance." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -214,9 +226,12 @@ and columns represent independent variables.</p></td>
 <em>Proceedings of the National Academy of Sciences</em>, <b>99</b>(25), 15869--15872.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>## generate sample data</span>
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>100</span>)
+    <pre class="examples"><div class='input'><span class='co'>## load iris data</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
+<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
+<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
 
 <span class='co'>## compare with original SPE</span>
 <span class='no'>outSPE</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='nonlinear_SPE.html'>do.spe</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
@@ -227,11 +242,10 @@ and columns represent independent variables.</p></td>
 <span class='co'>## Visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outSPE</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPE"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=0.5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=50"</span>)</div><div class='img'><img src='nonlinear_ISPE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outSPE</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPE"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>,   <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=0.5"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>,   <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=5"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>,   <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ISPE::cutoff=50"</span>)</div><div class='img'><img src='nonlinear_ISPE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

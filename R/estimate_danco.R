@@ -11,6 +11,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## create 3 datasets of intrinsic dimension 2.
 #' X1 = aux.gensamples(n=50, dname="swiss")
 #' X2 = aux.gensamples(n=50, dname="ribbon")
@@ -26,6 +27,7 @@
 #' line2 = paste0("* est.danco : 'ribbon' estiamte is ",round(out2$estdim,2))
 #' line3 = paste0("* est.danco : 'saddle' estiamte is ",round(out3$estdim,2))
 #' cat(paste0(line1,"\n",line2,"\n",line3))
+#' }
 #'
 #' @references
 #' \insertRef{ceruti_danco_2014}{Rdimtools}

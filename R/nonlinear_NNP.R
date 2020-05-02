@@ -19,6 +19,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -38,6 +39,7 @@
 #' plot(out2$Y, pch=19, col=label, main="PCA")
 #' plot(out3$Y, pch=19, col=label, main="LAMP")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{tejada_improved_2003}{Rdimtools}

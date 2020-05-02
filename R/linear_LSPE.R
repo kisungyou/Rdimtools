@@ -1,3 +1,4 @@
+
 #' Locality and Similarity Preserving Embedding
 #'
 #' Locality and Similarity Preserving Embedding (LSPE) is a feature selection method based on Neighborhood Preserving Embedding (\code{\link{do.npe}}) and
@@ -23,6 +24,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' #### generate R12in72 dataset
 #' set.seed(100)
 #' X = aux.gensamples(n=50, dname="R12in72")
@@ -39,6 +41,7 @@
 #' plot(out2$Y, main="LSPE::bandwidth=1")
 #' plot(out3$Y, main="LSPE::bandwidth=10")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{fang_locality_2014}{Rdimtools}

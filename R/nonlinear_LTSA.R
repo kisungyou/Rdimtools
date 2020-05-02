@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate data
 #' set.seed(100)
 #' X <- aux.gensamples(dname="cswiss",n=100)
@@ -45,6 +46,7 @@
 #' plot(output2$Y, main="25%")
 #' plot(output3$Y, main="50%")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_linear_2007}{Rdimtools}

@@ -28,6 +28,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -47,6 +48,7 @@
 #' plot(out2$Y, pch=19, col=lab, main="tSNE::perplexity=10")
 #' plot(out3$Y, pch=19, col=lab, main="tSNE::perplexity=15")
 #' par(opar)
+#' }
 #'
 #' @seealso \code{\link{do.sne}}
 #' @references

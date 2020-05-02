@@ -34,6 +34,7 @@ We extended the original method to be applied for arbitrarily low-dimensional sp
 we opted for a global optimization method of \emph{Differential Evolution} (\code{\link[RcppDE]{DEoptim}}) within in that it may add computational burden to certain degrees.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -53,6 +54,7 @@ plot(out1$Y, pch=19, col=label, main="NNP")
 plot(out2$Y, pch=19, col=label, main="PCA")
 plot(out3$Y, pch=19, col=label, main="LAMP")
 par(opar)
+}
 
 }
 \references{

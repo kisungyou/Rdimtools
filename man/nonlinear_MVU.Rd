@@ -45,6 +45,7 @@ since \code{do.mvu} depends on \href{https://CRAN.R-project.org/package=Rcsdp}{R
 efficiency when given a large dataset.
 }
 \examples{
+\donttest{
 ## generate ribbon-shaped data with the small number of data
 set.seed(100)
 X = aux.gensamples(dname="ribbon", n=25)
@@ -61,6 +62,7 @@ plot(output1$Y, main="10\% connected")
 plot(output2$Y, main="25\% connected")
 plot(output3$Y, main="50\% connected")
 par(opar)
+}
 
 }
 \references{

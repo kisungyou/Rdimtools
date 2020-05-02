@@ -108,6 +108,18 @@ for simplicity as well as consistency with other methods in the package." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -164,7 +176,7 @@ for simplicity as well as consistency with other methods in the package.</p>
   <span class='kw'>par.step</span> <span class='kw'>=</span> <span class='fl'>1</span>,
   <span class='kw'>mc.iter</span> <span class='kw'>=</span> <span class='fl'>50</span>,
   <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>),
-  <span class='kw'>print.progress</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
+  <span class='kw'>print.progress</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -223,158 +235,16 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## load iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>$<span class='no'>Species</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
+<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
+<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
 
 <span class='co'>## try different preprocessing</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"center"</span>)</div><div class='output co'>#&gt; ** bmds : iteration 1/50 complete.
-#&gt; ** bmds : iteration 2/50 complete.
-#&gt; ** bmds : iteration 3/50 complete.
-#&gt; ** bmds : iteration 4/50 complete.
-#&gt; ** bmds : iteration 5/50 complete.
-#&gt; ** bmds : iteration 6/50 complete.
-#&gt; ** bmds : iteration 7/50 complete.
-#&gt; ** bmds : iteration 8/50 complete.
-#&gt; ** bmds : iteration 9/50 complete.
-#&gt; ** bmds : iteration 10/50 complete.
-#&gt; ** bmds : iteration 11/50 complete.
-#&gt; ** bmds : iteration 12/50 complete.
-#&gt; ** bmds : iteration 13/50 complete.
-#&gt; ** bmds : iteration 14/50 complete.
-#&gt; ** bmds : iteration 15/50 complete.
-#&gt; ** bmds : iteration 16/50 complete.
-#&gt; ** bmds : iteration 17/50 complete.
-#&gt; ** bmds : iteration 18/50 complete.
-#&gt; ** bmds : iteration 19/50 complete.
-#&gt; ** bmds : iteration 20/50 complete.
-#&gt; ** bmds : iteration 21/50 complete.
-#&gt; ** bmds : iteration 22/50 complete.
-#&gt; ** bmds : iteration 23/50 complete.
-#&gt; ** bmds : iteration 24/50 complete.
-#&gt; ** bmds : iteration 25/50 complete.
-#&gt; ** bmds : iteration 26/50 complete.
-#&gt; ** bmds : iteration 27/50 complete.
-#&gt; ** bmds : iteration 28/50 complete.
-#&gt; ** bmds : iteration 29/50 complete.
-#&gt; ** bmds : iteration 30/50 complete.
-#&gt; ** bmds : iteration 31/50 complete.
-#&gt; ** bmds : iteration 32/50 complete.
-#&gt; ** bmds : iteration 33/50 complete.
-#&gt; ** bmds : iteration 34/50 complete.
-#&gt; ** bmds : iteration 35/50 complete.
-#&gt; ** bmds : iteration 36/50 complete.
-#&gt; ** bmds : iteration 37/50 complete.
-#&gt; ** bmds : iteration 38/50 complete.
-#&gt; ** bmds : iteration 39/50 complete.
-#&gt; ** bmds : iteration 40/50 complete.
-#&gt; ** bmds : iteration 41/50 complete.
-#&gt; ** bmds : iteration 42/50 complete.
-#&gt; ** bmds : iteration 43/50 complete.
-#&gt; ** bmds : iteration 44/50 complete.
-#&gt; ** bmds : iteration 45/50 complete.
-#&gt; ** bmds : iteration 46/50 complete.
-#&gt; ** bmds : iteration 47/50 complete.
-#&gt; ** bmds : iteration 48/50 complete.
-#&gt; ** bmds : iteration 49/50 complete.
-#&gt; ** bmds : iteration 50/50 complete.</div><div class='input'><span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"cscale"</span>)</div><div class='output co'>#&gt; ** bmds : iteration 1/50 complete.
-#&gt; ** bmds : iteration 2/50 complete.
-#&gt; ** bmds : iteration 3/50 complete.
-#&gt; ** bmds : iteration 4/50 complete.
-#&gt; ** bmds : iteration 5/50 complete.
-#&gt; ** bmds : iteration 6/50 complete.
-#&gt; ** bmds : iteration 7/50 complete.
-#&gt; ** bmds : iteration 8/50 complete.
-#&gt; ** bmds : iteration 9/50 complete.
-#&gt; ** bmds : iteration 10/50 complete.
-#&gt; ** bmds : iteration 11/50 complete.
-#&gt; ** bmds : iteration 12/50 complete.
-#&gt; ** bmds : iteration 13/50 complete.
-#&gt; ** bmds : iteration 14/50 complete.
-#&gt; ** bmds : iteration 15/50 complete.
-#&gt; ** bmds : iteration 16/50 complete.
-#&gt; ** bmds : iteration 17/50 complete.
-#&gt; ** bmds : iteration 18/50 complete.
-#&gt; ** bmds : iteration 19/50 complete.
-#&gt; ** bmds : iteration 20/50 complete.
-#&gt; ** bmds : iteration 21/50 complete.
-#&gt; ** bmds : iteration 22/50 complete.
-#&gt; ** bmds : iteration 23/50 complete.
-#&gt; ** bmds : iteration 24/50 complete.
-#&gt; ** bmds : iteration 25/50 complete.
-#&gt; ** bmds : iteration 26/50 complete.
-#&gt; ** bmds : iteration 27/50 complete.
-#&gt; ** bmds : iteration 28/50 complete.
-#&gt; ** bmds : iteration 29/50 complete.
-#&gt; ** bmds : iteration 30/50 complete.
-#&gt; ** bmds : iteration 31/50 complete.
-#&gt; ** bmds : iteration 32/50 complete.
-#&gt; ** bmds : iteration 33/50 complete.
-#&gt; ** bmds : iteration 34/50 complete.
-#&gt; ** bmds : iteration 35/50 complete.
-#&gt; ** bmds : iteration 36/50 complete.
-#&gt; ** bmds : iteration 37/50 complete.
-#&gt; ** bmds : iteration 38/50 complete.
-#&gt; ** bmds : iteration 39/50 complete.
-#&gt; ** bmds : iteration 40/50 complete.
-#&gt; ** bmds : iteration 41/50 complete.
-#&gt; ** bmds : iteration 42/50 complete.
-#&gt; ** bmds : iteration 43/50 complete.
-#&gt; ** bmds : iteration 44/50 complete.
-#&gt; ** bmds : iteration 45/50 complete.
-#&gt; ** bmds : iteration 46/50 complete.
-#&gt; ** bmds : iteration 47/50 complete.
-#&gt; ** bmds : iteration 48/50 complete.
-#&gt; ** bmds : iteration 49/50 complete.
-#&gt; ** bmds : iteration 50/50 complete.</div><div class='input'><span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"decorrelate"</span>)</div><div class='output co'>#&gt; ** bmds : iteration 1/50 complete.
-#&gt; ** bmds : iteration 2/50 complete.
-#&gt; ** bmds : iteration 3/50 complete.
-#&gt; ** bmds : iteration 4/50 complete.
-#&gt; ** bmds : iteration 5/50 complete.
-#&gt; ** bmds : iteration 6/50 complete.
-#&gt; ** bmds : iteration 7/50 complete.
-#&gt; ** bmds : iteration 8/50 complete.
-#&gt; ** bmds : iteration 9/50 complete.
-#&gt; ** bmds : iteration 10/50 complete.
-#&gt; ** bmds : iteration 11/50 complete.
-#&gt; ** bmds : iteration 12/50 complete.
-#&gt; ** bmds : iteration 13/50 complete.
-#&gt; ** bmds : iteration 14/50 complete.
-#&gt; ** bmds : iteration 15/50 complete.
-#&gt; ** bmds : iteration 16/50 complete.
-#&gt; ** bmds : iteration 17/50 complete.
-#&gt; ** bmds : iteration 18/50 complete.
-#&gt; ** bmds : iteration 19/50 complete.
-#&gt; ** bmds : iteration 20/50 complete.
-#&gt; ** bmds : iteration 21/50 complete.
-#&gt; ** bmds : iteration 22/50 complete.
-#&gt; ** bmds : iteration 23/50 complete.
-#&gt; ** bmds : iteration 24/50 complete.
-#&gt; ** bmds : iteration 25/50 complete.
-#&gt; ** bmds : iteration 26/50 complete.
-#&gt; ** bmds : iteration 27/50 complete.
-#&gt; ** bmds : iteration 28/50 complete.
-#&gt; ** bmds : iteration 29/50 complete.
-#&gt; ** bmds : iteration 30/50 complete.
-#&gt; ** bmds : iteration 31/50 complete.
-#&gt; ** bmds : iteration 32/50 complete.
-#&gt; ** bmds : iteration 33/50 complete.
-#&gt; ** bmds : iteration 34/50 complete.
-#&gt; ** bmds : iteration 35/50 complete.
-#&gt; ** bmds : iteration 36/50 complete.
-#&gt; ** bmds : iteration 37/50 complete.
-#&gt; ** bmds : iteration 38/50 complete.
-#&gt; ** bmds : iteration 39/50 complete.
-#&gt; ** bmds : iteration 40/50 complete.
-#&gt; ** bmds : iteration 41/50 complete.
-#&gt; ** bmds : iteration 42/50 complete.
-#&gt; ** bmds : iteration 43/50 complete.
-#&gt; ** bmds : iteration 44/50 complete.
-#&gt; ** bmds : iteration 45/50 complete.
-#&gt; ** bmds : iteration 46/50 complete.
-#&gt; ** bmds : iteration 47/50 complete.
-#&gt; ** bmds : iteration 48/50 complete.
-#&gt; ** bmds : iteration 49/50 complete.
-#&gt; ** bmds : iteration 50/50 complete.</div><div class='input'>
+<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"center"</span>)
+<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"cscale"</span>)
+<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.bmds</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"decorrelate"</span>)
+
 <span class='co'>## embeddings for each procedure</span>
 <span class='no'>Y1</span> <span class='kw'>&lt;-</span> <span class='no'>out1</span>$<span class='no'>Y</span>; <span class='no'>Y2</span> <span class='kw'>&lt;-</span> <span class='no'>out2</span>$<span class='no'>Y</span>; <span class='no'>Y3</span> <span class='kw'>&lt;-</span> <span class='no'>out3</span>$<span class='no'>Y</span>
 

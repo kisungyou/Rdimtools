@@ -43,6 +43,7 @@ matrices for each information and solves generalized eigenvalue problem. This al
 may be quite sensitive in the choice of \code{beta} value.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -60,6 +61,7 @@ plot(Y1, pch=19, col=label, main="gamma=0.3")
 plot(Y2, pch=19, col=label, main="gamma=0.6")
 plot(Y3, pch=19, col=label, main="gamma=0.9")
 par(opar)
+}
 
 }
 \references{

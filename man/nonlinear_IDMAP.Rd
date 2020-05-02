@@ -35,6 +35,7 @@ similar documents in the same neighborhood. After defining pairwise distance wit
 authors asserted to use either \code{NNP} or \code{FastMap} as an engine behind.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -54,6 +55,7 @@ plot(out1$Y, pch=19, col=lab, main="PCA")
 plot(out2$Y, pch=19, col=lab, main="LDA")
 plot(out3$Y, pch=19, col=lab, main="IDMAP")
 par(opar)
+}
 
 }
 \references{

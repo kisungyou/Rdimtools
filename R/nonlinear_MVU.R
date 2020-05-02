@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate ribbon-shaped data with the small number of data
 #' set.seed(100)
 #' X = aux.gensamples(dname="ribbon", n=25)
@@ -41,6 +42,7 @@
 #' plot(output2$Y, main="25% connected")
 #' plot(output3$Y, main="50% connected")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{weinberger_unsupervised_2006}{Rdimtools}

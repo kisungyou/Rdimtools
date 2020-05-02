@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -47,6 +48,7 @@
 #' plot(Y2, main="BMDS::iter=10", col=label, pch=19)
 #' plot(Y3, main="BMDS::iter=50", col=label, pch=19)
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{oh_bayesian_2001}{Rdimtools}

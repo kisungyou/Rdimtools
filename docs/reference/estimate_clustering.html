@@ -104,6 +104,18 @@ over the range of radii." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -187,7 +199,12 @@ In <em>2012 IEEE Statistical Signal Processing Workshop (SSP)</em>, 760--763.</p
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.clustering</span>(<span class='no'>X</span>, <span class='kw'>kmin</span><span class='kw'>=</span><span class='fl'>50</span>)
 
 <span class='co'>## print the results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.clustering : estimated dimension with kmin=5  is %.2f."</span>,<span class='no'>out1</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.clustering : estimated dimension with kmin=5  is 1.60."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.clustering : estimated dimension with kmin=25 is %.2f."</span>,<span class='no'>out2</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.clustering : estimated dimension with kmin=25 is 1.95."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.clustering : estimated dimension with kmin=50 is %.2f."</span>,<span class='no'>out3</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.clustering : estimated dimension with kmin=50 is 2.10."</div><div class='input'># }
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=5  gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=25 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=50 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.clustering : kmin=5  gives 1.6
+#&gt; * est.clustering : kmin=25 gives 1.95
+#&gt; * est.clustering : kmin=50 gives 2.1</div><div class='input'># }
 
 </div></pre>
   </div>

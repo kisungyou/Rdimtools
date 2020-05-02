@@ -105,6 +105,18 @@ different results." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -189,7 +201,12 @@ In <em>Proceedings of the 15th International Conference on Neural Information Pr
 <span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.packing</span>(<span class='no'>X</span>, <span class='kw'>eps</span><span class='kw'>=</span><span class='fl'>0.001</span>)
 
 <span class='co'>## print the results</span>
-<span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.packing : estimated dimension with eps=0.1   is %.2f."</span>,<span class='no'>out1</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.packing : estimated dimension with eps=0.1   is 2.17."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.packing : estimated dimension with eps=0.01  is %.2f."</span>,<span class='no'>out2</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.packing : estimated dimension with eps=0.01  is 1.66."</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/sprintf.html'>sprintf</a></span>(<span class='st'>"* est.packing : estimated dimension with eps=0.001 is %.2f."</span>,<span class='no'>out3</span>$<span class='no'>estdim</span>)</div><div class='output co'>#&gt; [1] "* est.packing : estimated dimension with eps=0.001 is 2.03."</div><div class='input'># }
+<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.packing : eps=0.1   gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.packing : eps=0.01  gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.packing : eps=0.001 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.packing : eps=0.1   gives 1.72
+#&gt; * est.packing : eps=0.01  gives 1.62
+#&gt; * est.packing : eps=0.001 gives 2.34</div><div class='input'># }
 
 </div></pre>
   </div>

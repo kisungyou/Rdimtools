@@ -26,6 +26,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -45,6 +46,7 @@
 #' plot(out2$Y, pch=19, col=label, main="perplexity=25")
 #' plot(out3$Y, pch=19, col=label, main="perplexity=50")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{hinton_stochastic_2003}{Rdimtools}

@@ -14,6 +14,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## create example data sets with intrinsic dimension 2
 #' X1 = aux.gensamples(dname="swiss")
 #' X2 = aux.gensamples(dname="ribbon")
@@ -29,6 +30,7 @@
 #' line2 = paste0("* est.mle1 : 'ribbon' estiamte is ",round(out2$estdim,2))
 #' line3 = paste0("* est.mle1 : 'saddle' estiamte is ",round(out3$estdim,2))
 #' cat(paste0(line1,"\n",line2,"\n",line3))
+#' }
 #'
 #' @references
 #' \insertRef{levina_maximum_2005}{Rdimtools}

@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate 3 different groups of data X and label vector
 #' set.seed(100)
 #' x1 = matrix(rnorm(4*10), nrow=10)-20
@@ -45,6 +46,7 @@
 #' plot(out2$Y, pch=19, col=label, main="bandwidth=1")
 #' plot(out3$Y, pch=19, col=label, main="bandwidth=10")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{sugiyama_local_2006}{Rdimtools}

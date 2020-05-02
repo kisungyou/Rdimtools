@@ -105,6 +105,18 @@ efficient computation for large-scale data." />
 <li>
   <a href="../news/index.html">News</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+    <li>
+      <a href="../articles/quick-start.html">Quick Start with Rdimtools</a>
+    </li>
+  </ul>
+</li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
@@ -213,9 +225,10 @@ among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</
 <em>Proceedings of the National Academy of Sciences</em>, <b>110</b>(45), 18052--18057.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
 <span class='co'>## Replicate the numerical example from the paper</span>
 <span class='co'>#  Data Preparation</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
 <span class='no'>dim.true</span>  <span class='kw'>=</span> <span class='fl'>3</span>     <span class='co'># true dimension</span>
 <span class='no'>dim.embed</span> <span class='kw'>=</span> <span class='fl'>100</span>   <span class='co'># embedding space (high-d)</span>
 <span class='no'>npoints</span>   <span class='kw'>=</span> <span class='fl'>1000</span>  <span class='co'># number of samples to be generated</span>
@@ -225,7 +238,7 @@ among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</
 <span class='no'>X</span>     <span class='kw'>=</span> <span class='no'>coeff</span><span class='kw'>%*%</span><span class='no'>v</span>
 
 <span class='co'># see the effect of neighborhood size</span>
-<span class='no'>out1</span>  <span class='kw'>=</span> <span class='fu'>do.spmds</span>(<span class='no'>X</span>, <span class='kw'>neigs</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.1</span>))
+<span class='no'>out1</span>  <span class='kw'>=</span> <span class='fu'>do.spmds</span>(<span class='no'>X</span>, <span class='kw'>neigs</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.10</span>))
 <span class='no'>out2</span>  <span class='kw'>=</span> <span class='fu'>do.spmds</span>(<span class='no'>X</span>, <span class='kw'>neigs</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.25</span>))
 <span class='no'>out3</span>  <span class='kw'>=</span> <span class='fu'>do.spmds</span>(<span class='no'>X</span>, <span class='kw'>neigs</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.50</span>))
 
@@ -234,8 +247,9 @@ among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"10% neighborhood"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"25% neighborhood"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"50% neighborhood"</span>)</div><div class='img'><img src='nonlinear_SPMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"50% neighborhood"</span>)
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+}</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

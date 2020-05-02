@@ -19,6 +19,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' set.seed(100)
 #' n     = 100
@@ -43,6 +44,7 @@
 #' plot(out2$Y, main="LPE::numk=10")
 #' plot(out3$Y, main="LPE::numk=25")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{min_locality_2004}{Rdimtools}
