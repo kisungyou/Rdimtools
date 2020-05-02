@@ -12,9 +12,9 @@
 #'
 #' @examples
 #' ## create 3 datasets of intrinsic dimension 2.
-#' X1 = aux.gensamples(dname="swiss")
-#' X2 = aux.gensamples(dname="ribbon")
-#' X3 = aux.gensamples(dname="saddle")
+#' X1 = aux.gensamples(n=50, dname="swiss")
+#' X2 = aux.gensamples(n=50, dname="ribbon")
+#' X3 = aux.gensamples(n=50, dname="saddle")
 #'
 #' ## acquire an estimate for intrinsic dimension
 #' out1 = est.danco(X1, k=10)
