@@ -30,16 +30,16 @@
 #' lab   = as.factor(iris[subid,5])
 #'
 #' ## try different neighborhood size
-#' out1 <- do.lpca(X, ndim=2, type=c("proportion",0.10))
-#' out2 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
-#' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.50))
+#' out1 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
+#' out2 <- do.lpca(X, ndim=2, type=c("proportion",0.50))
+#' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.75))
 #'
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, pch=19, col=lab, main="LPCA::10% connected")
-#' plot(out2$Y, pch=19, col=lab, main="LPCA::25% connected")
-#' plot(out3$Y, pch=19, col=lab, main="LPCA::50% connected")
+#' plot(out1$Y, pch=19, col=lab, main="LPCA::25% connected")
+#' plot(out2$Y, pch=19, col=lab, main="LPCA::50% connected")
+#' plot(out3$Y, pch=19, col=lab, main="LPCA::75% connected")
 #' par(opar)
 #'
 #' @references
