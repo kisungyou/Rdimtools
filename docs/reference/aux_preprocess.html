@@ -149,7 +149,7 @@
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Preprocessing the data</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/auxiliary.R'><code>R/auxiliary.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/auxiliary_preprocess.R'><code>R/auxiliary_preprocess.R</code></a></small>
     <div class="hidden name"><code>aux_preprocess.Rd</code></div>
     </div>
 
@@ -202,9 +202,10 @@ and columns represent independent variables.</p></td>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> (<span class='fl'>FALSE</span>) {
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## Generate data</span>
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>()
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
+<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>200</span>)
 
 <span class='co'>## 5 types of preprocessing</span>
 <span class='no'>X_center</span> <span class='kw'>=</span> <span class='fu'>aux.preprocess</span>(<span class='no'>X</span>)
@@ -212,16 +213,7 @@ and columns represent independent variables.</p></td>
 <span class='no'>X_cscale</span> <span class='kw'>=</span> <span class='fu'>aux.preprocess</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"cscale"</span>)
 <span class='no'>X_decorr</span> <span class='kw'>=</span> <span class='fu'>aux.preprocess</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"decorrelate"</span>)
 <span class='no'>X_whiten</span> <span class='kw'>=</span> <span class='fu'>aux.preprocess</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
-
-<span class='co'>## Check with Covariance matrix</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>],          <span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"original covariance"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X_center</span>$<span class='no'>pX</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>],<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"opt::center"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X_scale</span>$<span class='no'>pX</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>], <span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"opt::scale"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X_cscale</span>$<span class='no'>pX</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>],<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"opt::cscale"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X_decorr</span>$<span class='no'>pX</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>],<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"opt::decorrelate"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/cor.html'>cov</a></span>(<span class='no'>X_whiten</span>$<span class='no'>pX</span>)[,<span class='fl'>3</span>:<span class='fl'>1</span>],<span class='kw'>zlim</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>5</span>,<span class='fl'>5</span>)); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"opt::whiten"</span>)
-}</div></pre>
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

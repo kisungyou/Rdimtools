@@ -35,9 +35,10 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## Generate data
-#' X = aux.gensamples()
+#' set.seed(100)
+#' X = aux.gensamples(n=100)
 #'
 #' ## Test three different types of neighborhood connectivity
 #' nn1 = aux.graphnbd(X,type=c("knn",20))         # knn with k=20

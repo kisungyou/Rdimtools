@@ -21,9 +21,9 @@
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' image(W1); title("from binarized")
-#' image(W2); title("from Euclidean distance")
+#' par(mfrow=c(1,2), pty="s")
+#' image(W1, main="from binarized")
+#' image(W2, main="from Euclidean distance")
 #' par(opar)
 #' }
 #'

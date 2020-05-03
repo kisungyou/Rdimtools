@@ -47,7 +47,7 @@
 
 
 <meta property="og:title" content="Generate model-based samples — aux.gensamples" />
-<meta property="og:description" content="It generates samples from predefined 3-d shapes, set by dname parameter.
+<meta property="og:description" content="It generates samples from predefined shapes, set by dname parameter.
 Also incorporated a functionality to add white noise with degree noise." />
 <meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
@@ -149,12 +149,12 @@ Also incorporated a functionality to add white noise with degree noise." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Generate model-based samples</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/auxiliary.R'><code>R/auxiliary.R</code></a></small>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/auxiliary_gensamples.R'><code>R/auxiliary_gensamples.R</code></a></small>
     <div class="hidden name"><code>aux_gensamples.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>It generates samples from predefined 3-d shapes, set by <code>dname</code> parameter.
+    <p>It generates samples from predefined shapes, set by <code>dname</code> parameter.
 Also incorporated a functionality to add white noise with degree <code>noise</code>.</p>
     </div>
 
@@ -206,7 +206,7 @@ Also incorporated a functionality to add white noise with degree <code>noise</co
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>an \((n\times 3)\) matrix of generated data by row.</p>
+    <p>an \((n\times p)\) matrix of generated data by row. For all methods other than <code>"R12in72"</code>, it returns a matrix with \(p=3\).</p>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hein M, Audibert J (2005).
@@ -217,6 +217,14 @@ Maaten L (2009).
 &#8220;Learning a parametric embedding by preserving local structure.&#8221;
 <em>Proceedings of AI-STATS</em>.</p>
 
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## generating toy example datasets</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
+<span class='no'>dat.swiss</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"swiss"</span>)
+<span class='no'>dat.crown</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"crown"</span>)
+<span class='no'>dat.helix</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"helix"</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

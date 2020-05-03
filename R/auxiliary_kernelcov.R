@@ -75,7 +75,7 @@
 #' }
 #'
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' ## generate a toy data
 #' set.seed(100)
 #' X = aux.gensamples(n=100)
