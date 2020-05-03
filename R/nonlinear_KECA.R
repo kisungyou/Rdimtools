@@ -21,6 +21,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -44,6 +45,7 @@
 #' plot(output2$Y, pch=19, col=label, main="Gaussian, sigma=5")
 #' plot(output3$Y, pch=19, col=label, main="Laplacian kernel")
 #' par(opar)
+#' }
 #'
 #' @seealso \code{\link{aux.kernelcov}}
 #' @references

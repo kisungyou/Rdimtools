@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -43,6 +44,7 @@
 #' plot(out3$Y, main="(lbd1,lbd2)=(5,1)", col=label, pch=19)
 #' plot(out4$Y, main="(lbd1,lbd2)=(5,5)", col=label, pch=19)
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{liu_unsupervised_2017}{Rdimtools}

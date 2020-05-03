@@ -42,6 +42,7 @@ data space using Diffusion Maps (DM). It exploits diffusion process and distance
 equivalent representations in low-dimensional space.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -61,6 +62,7 @@ plot(out1$Y, pch=19, col=label, main="DM::bandwidth=10")
 plot(out2$Y, pch=19, col=label, main="DM::bandwidth=100")
 plot(out3$Y, pch=19, col=label, main="DM::bandwidth=1000")
 par(opar)
+}
 
 }
 \references{

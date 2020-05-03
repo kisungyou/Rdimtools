@@ -40,6 +40,7 @@ rank deficiency. Instead of applying PCA as a preprocessing step, Complete NPE (
 singular generalized eigensystem computation of NPE into two eigenvalue decomposition problems.
 }
 \examples{
+\donttest{
 ## generate data of 3 types with clear difference
 dt1  = aux.gensamples(n=20)-50
 dt2  = aux.gensamples(n=20)
@@ -56,11 +57,12 @@ out3 = do.cnpe(X, type=c("proportion",0.50))
 
 ## visualize
 opar <- par(no.readonly=TRUE)
-par(mfrow=c(3,1))
+par(mfrow=c(1,3))
 plot(out1$Y, col=lab, pch=19, main="CNPE::10\% connected")
 plot(out2$Y, col=lab, pch=19, main="CNPE::25\% connected")
 plot(out3$Y, col=lab, pch=19, main="CNPE::50\% connected")
 par(opar)
+}
 
 }
 \references{

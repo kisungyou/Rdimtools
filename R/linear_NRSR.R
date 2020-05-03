@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -41,6 +42,7 @@
 #' plot(out2$Y, pch=19, col=label, main="NRSR::expl=0.1")
 #' plot(out3$Y, pch=19, col=label, main="NRSR::expl=0.5")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhu_nonconvex_2017}{Rdimtools}

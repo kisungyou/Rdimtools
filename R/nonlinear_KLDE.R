@@ -24,6 +24,7 @@
 #'
 #'
 #' @examples
+#' \donttest{
 #' ## generate data of 2 types with clear difference
 #' set.seed(100)
 #' diff = 25
@@ -46,6 +47,7 @@
 #' plot(out2$Y, col=label, pch=19, main="k=10")
 #' plot(out3$Y, col=label, pch=19, main="k=20")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{hwann-tzongchen_local_2005}{Rdimtools}

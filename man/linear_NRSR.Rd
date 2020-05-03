@@ -41,6 +41,7 @@ extension aims at achieving higher-level of sparsity using arbitrarily chosen \e
 \eqn{l\in (0,1)} and this exploits Iteratively Reweighted Least Squares (IRLS) algorithm for computation.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -60,6 +61,7 @@ plot(out1$Y, pch=19, col=label, main="NRSR::expl=0.01")
 plot(out2$Y, pch=19, col=label, main="NRSR::expl=0.1")
 plot(out3$Y, pch=19, col=label, main="NRSR::expl=0.5")
 par(opar)
+}
 
 }
 \references{

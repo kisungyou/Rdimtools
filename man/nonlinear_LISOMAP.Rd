@@ -50,6 +50,7 @@ and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 X   <- as.matrix(iris[,1:4])
@@ -67,6 +68,7 @@ plot(output1$Y, pch=19, col=lab, main="10 landmarks")
 plot(output2$Y, pch=19, col=lab, main="25 landmarks")
 plot(output3$Y, pch=19, col=lab, main="50 landmarks")
 par(opar)
+}
 
 }
 \references{

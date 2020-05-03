@@ -49,14 +49,13 @@ manifold embedded in high-dimensional data space using graph laplacians. This
 is a classic algorithm employing spectral graph theory.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
 subid = sample(1:150,50)
 X     = as.matrix(iris[subid,1:4])
 lab   = as.factor(iris[subid,5])
-
-## two types of graph laplacians using 20\% of neighbors
 
 ## try different levels of connectivity
 out1 <- do.lapeig(X, type=c("proportion",0.10), weighted=FALSE)
@@ -70,6 +69,7 @@ plot(out1$Y, pch=19, col=lab, main="10\% connected")
 plot(out2$Y, pch=19, col=lab, main="20\% connected")
 plot(out3$Y, pch=19, col=lab, main="50\% connected")
 par(opar)
+}
 
 }
 \references{

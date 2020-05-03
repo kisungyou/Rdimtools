@@ -54,6 +54,7 @@ in that low-dimensional embedding should resemble the connectivity pattern of pa
 optimality criterion suggested by authors.
 }
 \examples{
+\donttest{
 ## generate swiss-roll data
 set.seed(100)
 X = aux.gensamples(n=100)
@@ -74,6 +75,7 @@ plot(output1$Y, main="5\%")
 plot(output2$Y, main="10\%")
 plot(output3$Y, main="50\%+Binary")
 par(opar)
+}
 
 }
 \references{

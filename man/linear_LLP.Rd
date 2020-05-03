@@ -51,6 +51,7 @@ a gaussian kernel as suggested from the original paper. The parameter \code{lamb
 controls possible rank-deficiency of kernel matrix.
 }
 \examples{
+\donttest{
 ## generate data
 set.seed(100)
 X <- aux.gensamples(n=100, dname="crown")
@@ -67,6 +68,7 @@ plot(out1$Y, pch=19, main="lambda=0.1")
 plot(out2$Y, pch=19, main="lambda=1")
 plot(out3$Y, pch=19, main="lambda=10")
 par(opar)
+}
 
 }
 \references{

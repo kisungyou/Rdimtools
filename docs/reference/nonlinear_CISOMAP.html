@@ -219,7 +219,8 @@ In Becker S, Thrun S, Obermayer K (eds.), <em>Advances in Neural Information Pro
 MIT Press.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## generate data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## generate data</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
 <span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"cswiss"</span>,<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>100</span>)
 
@@ -237,7 +238,8 @@ MIT Press.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Isomap"</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"C-Isomap"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Binarized C-Isomap"</span>)</div><div class='img'><img src='nonlinear_CISOMAP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"Binarized C-Isomap"</span>)</div><div class='img'><img src='nonlinear_CISOMAP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

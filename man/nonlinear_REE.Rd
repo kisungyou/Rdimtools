@@ -50,6 +50,7 @@ paper introduced a subgradient algorithm to overcome memory-intensive nature of
 original semidefinite programming formulation.
 }
 \examples{
+\donttest{
 ## use iris data
 data(iris)
 set.seed(100)
@@ -69,6 +70,7 @@ plot(output1$Y, col=label, pch=19, main="dmethod-euclidean")
 plot(output2$Y, col=label, pch=19, main="dmethod-maximum")
 plot(output3$Y, col=label, pch=19, main="dmethod-canberra")
 par(opar)
+}
 
 }
 \references{

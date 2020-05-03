@@ -23,6 +23,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate data
 #' set.seed(100)
 #' X <- aux.gensamples(n=123)
@@ -43,6 +44,7 @@
 #' plot(output2$Y, main="25%")
 #' plot(output3$Y, main="25%+Binary")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{silva_global_2003}{Rdimtools}

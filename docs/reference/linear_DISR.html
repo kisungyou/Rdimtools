@@ -217,7 +217,8 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
     <div class='dont-index'><p><code><a href='linear_RSR.html'>do.rsr</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## use iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## use iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
 <span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>, <span class='fl'>50</span>)
@@ -236,7 +237,8 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(1,1)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(1,5)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(5,1)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out4</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(5,5)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)</div><div class='img'><img src='linear_DISR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out4</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(5,5)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)</div><div class='img'><img src='linear_DISR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

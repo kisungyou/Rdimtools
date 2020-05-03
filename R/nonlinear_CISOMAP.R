@@ -24,6 +24,7 @@
 #'
 #'
 #' @examples
+#' \donttest{
 #' ## generate data
 #' set.seed(100)
 #' X <- aux.gensamples(dname="cswiss",n=100)
@@ -44,6 +45,7 @@
 #' plot(output2$Y, main="C-Isomap")
 #' plot(output3$Y, main="Binarized C-Isomap")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{silva_global_2003}{Rdimtools}

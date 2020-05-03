@@ -40,6 +40,7 @@ Three types of ranking methods that appeared in the paper are available where
 the graph laplacian is built via RBF kernel.
 }
 \examples{
+\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -62,6 +63,7 @@ plot(out1$Y, pch=19, col=iris.lab, main="SPECU::method1")
 plot(out2$Y, pch=19, col=iris.lab, main="SPECU::method2")
 plot(out3$Y, pch=19, col=iris.lab, main="SPECU::method3")
 par(opar)
+}
 
 }
 \references{

@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' X   <- as.matrix(iris[,1:4])
@@ -42,6 +43,7 @@
 #' plot(output2$Y, pch=19, col=lab, main="25 landmarks")
 #' plot(output3$Y, pch=19, col=lab, main="50 landmarks")
 #' par(opar)
+#' }
 #'
 #' @seealso \code{\link{do.isomap}}
 #' @references

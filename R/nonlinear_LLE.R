@@ -30,6 +30,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate swiss-roll data
 #' set.seed(100)
 #' X = aux.gensamples(n=100)
@@ -50,6 +51,7 @@
 #' plot(output2$Y, main="10%")
 #' plot(output3$Y, main="50%+Binary")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{roweis_nonlinear_2000}{Rdimtools}

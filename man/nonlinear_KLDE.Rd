@@ -48,6 +48,7 @@ often suffers from lacking numerical rank. For such case, our algorithm returns 
 algorithm stops working any further due to its innate limitations of constructing weight matrix.
 }
 \examples{
+\donttest{
 ## generate data of 2 types with clear difference
 set.seed(100)
 diff = 25
@@ -70,6 +71,7 @@ plot(out1$Y, col=label, pch=19, main="k=5")
 plot(out2$Y, col=label, pch=19, main="k=10")
 plot(out3$Y, col=label, pch=19, main="k=20")
 par(opar)
+}
 
 }
 \references{

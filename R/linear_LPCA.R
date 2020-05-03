@@ -22,6 +22,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris dataset
 #' data(iris)
 #' set.seed(100)
@@ -41,6 +42,7 @@
 #' plot(out2$Y, pch=19, col=lab, main="LPCA::50% connected")
 #' plot(out3$Y, pch=19, col=lab, main="LPCA::75% connected")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{yang_locally_2006}{Rdimtools}

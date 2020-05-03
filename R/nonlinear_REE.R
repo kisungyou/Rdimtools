@@ -25,6 +25,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -44,6 +45,7 @@
 #' plot(output2$Y, col=label, pch=19, main="dmethod-maximum")
 #' plot(output3$Y, col=label, pch=19, main="dmethod-canberra")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{cayton_robust_2006}{Rdimtools}

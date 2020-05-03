@@ -44,6 +44,7 @@ Improved LTSA (ILTSA) provides a remedy that can efficiently recover the geometr
 structure of data manifolds even when data are sparse or non-uniformly distributed.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -63,6 +64,7 @@ plot(out1$Y, pch=19, col=label, main="ILTSA::t=1")
 plot(out2$Y, pch=19, col=label, main="ILTSA::t=10")
 plot(out3$Y, pch=19, col=label, main="ILTSA::t=100")
 par(opar)
+}
 
 }
 \references{
