@@ -1,3 +1,7 @@
+# Rdimtools 1.0.3
+
+* Fixed memory leaks in `do.sne` and `do.tsne`.
+
 # Rdimtools 1.0.2
 
 * README contains minimal examples for both dimension reduction and estimation.

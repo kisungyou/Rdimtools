@@ -1,4 +1,4 @@
-#' Locally Principal Component Analysis
+#' Locally Principal Component Analysis by Yang et al. (2006)
 #'
 #' Locally Principal Component Analysis (LPCA) is an unsupervised linear dimension reduction method.
 #' It focuses on the information brought by local neighborhood structure and seeks the corresponding
@@ -31,16 +31,16 @@
 #' lab   = as.factor(iris[subid,5])
 #'
 #' ## try different neighborhood size
-#' out1 <- do.lpca(X, ndim=2, type=c("proportion",0.25))
-#' out2 <- do.lpca(X, ndim=2, type=c("proportion",0.50))
-#' out3 <- do.lpca(X, ndim=2, type=c("proportion",0.75))
+#' out1 <- do.lpca2006(X, ndim=2, type=c("proportion",0.25))
+#' out2 <- do.lpca2006(X, ndim=2, type=c("proportion",0.50))
+#' out3 <- do.lpca2006(X, ndim=2, type=c("proportion",0.75))
 #'
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, pch=19, col=lab, main="LPCA::25% connected")
-#' plot(out2$Y, pch=19, col=lab, main="LPCA::50% connected")
-#' plot(out3$Y, pch=19, col=lab, main="LPCA::75% connected")
+#' plot(out1$Y, pch=19, col=lab, main="LPCA2006::25% connected")
+#' plot(out2$Y, pch=19, col=lab, main="LPCA2006::50% connected")
+#' plot(out3$Y, pch=19, col=lab, main="LPCA2006::75% connected")
 #' par(opar)
 #' }
 #'
@@ -48,10 +48,10 @@
 #' \insertRef{yang_locally_2006}{Rdimtools}
 #'
 #' @author Kisung You
-#' @rdname linear_LPCA
+#' @rdname linear_LPCA2006
 #' @concept linear_methods
 #' @export
-do.lpca <- function(X, ndim=2, type=c("proportion",0.1),
+do.lpca2006 <- function(X, ndim=2, type=c("proportion",0.1),
                     preprocess=c("center","scale","cscale","decorrelate","whiten")){
   #------------------------------------------------------------------------
   ## PREPROCESSING
@@ -61,7 +61,7 @@ do.lpca <- function(X, ndim=2, type=c("proportion",0.1),
   p = ncol(X)
   #   2. ndim
   ndim = as.integer(ndim)
-  if (!check_ndim(ndim,p)){stop("* do.lpca : 'ndim' is a positive integer in [1,#(covariates)).")}
+  if (!check_ndim(ndim,p)){stop("* do.lpca2006 : 'ndim' is a positive integer in [1,#(covariates)).")}
   #   3. neighborhood information : asymmetric
   nbdtype = type
   nbdsymmetric = "asymmetric"

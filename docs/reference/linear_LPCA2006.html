@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Local Affine Multidimensional Projection — do.lamp • Rdimtools</title>
+<title>Locally Principal Component Analysis by Yang et al. (2006) — do.lpca2006 • Rdimtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,14 +46,10 @@
 
 
 
-<meta property="og:title" content="Local Affine Multidimensional Projection — do.lamp" />
-<meta property="og:description" content="Local Affine Mulditimensional Projection (LAMP) can be considered as
-a nonlinear method even though each datam is projected using locally estimated
-affine mapping. It first finds a low-dimensional embedding for control points
-and then locates the rest data using affine mapping. We use \(\sqrt{n}\) number
-of data as controls and Stochastic Neighborhood Embedding is applied as an
-initial projection of control set. Note that this belongs to the method for
-visualization so projection onto \(\mathbf{R}^2\) is suggested for use." />
+<meta property="og:title" content="Locally Principal Component Analysis by Yang et al. (2006) — do.lpca2006" />
+<meta property="og:description" content="Locally Principal Component Analysis (LPCA) is an unsupervised linear dimension reduction method.
+It focuses on the information brought by local neighborhood structure and seeks the corresponding
+structure, which may contain useful information for revealing discriminative information of the data." />
 <meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
@@ -153,25 +149,22 @@ visualization so projection onto \(\mathbf{R}^2\) is suggested for use." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Local Affine Multidimensional Projection</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/nonlinear_LAMP.R'><code>R/nonlinear_LAMP.R</code></a></small>
-    <div class="hidden name"><code>nonlinear_LAMP.Rd</code></div>
+    <h1>Locally Principal Component Analysis by Yang et al. (2006)</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/linear_LPCA2006.R'><code>R/linear_LPCA2006.R</code></a></small>
+    <div class="hidden name"><code>linear_LPCA2006.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Local Affine Mulditimensional Projection (<em>LAMP</em>) can be considered as
-a nonlinear method even though each datam is projected using locally estimated
-affine mapping. It first finds a low-dimensional embedding for control points
-and then locates the rest data using affine mapping. We use \(\sqrt{n}\) number
-of data as controls and Stochastic Neighborhood Embedding is applied as an
-initial projection of control set. Note that this belongs to the method for
-visualization so projection onto \(\mathbf{R}^2\) is suggested for use.</p>
+    <p>Locally Principal Component Analysis (LPCA) is an unsupervised linear dimension reduction method.
+It focuses on the information brought by local neighborhood structure and seeks the corresponding
+structure, which may contain useful information for revealing discriminative information of the data.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.lamp</span>(
+    <pre class="usage"><span class='fu'>do.lpca2006</span>(
   <span class='no'>X</span>,
   <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>)
+  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>),
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -187,9 +180,16 @@ and columns represent independent variables.</p></td>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
+      <th>type</th>
+      <td><p>a vector of neighborhood graph construction. Following types are supported;
+<code><a href='https://rdrr.io/r/base/c.html'>c("knn",k)</a></code>, <code><a href='https://rdrr.io/r/base/c.html'>c("enn",radius)</a></code>, and <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",ratio)</a></code>.
+Default is <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",0.1)</a></code>, connecting about 1/10 of nearest data points
+among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+    </tr>
+    <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
@@ -198,35 +198,37 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
     <p>a named list containing</p><dl'>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
+<dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Joia P, Paulovich FV, Coimbra D, Cuminato JA, Nonato LG (2011).
-&#8220;Local Affine Multidimensional Projection.&#8221;
-<em>IEEE Transactions on Visualization and Computer Graphics</em>, <b>17</b>(12), 2563--2571.</p>
-    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
-
-    <div class='dont-index'><p><code><a href='nonlinear_SNE.html'>do.sne</a></code></p></div>
+    <p>Yang J, Zhang D, Yang J (2006).
+&#8220;Locally principal component learning for face representation and recognition.&#8221;
+<em>Neurocomputing</em>, <b>69</b>(13-15), 1697--1701.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## use iris dataset</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
+<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>100</span>)
 <span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
+<span class='no'>lab</span>   <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
 
-<span class='co'>## let's compare with PCA</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='linear_PCA.html'>do.pca</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)      <span class='co'># PCA</span>
-<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.lamp</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)     <span class='co'># LAMP</span>
+<span class='co'>## try different neighborhood size</span>
+<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.lpca2006</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.25</span>))
+<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.lpca2006</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.50</span>))
+<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.lpca2006</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.75</span>))
 
-<span class='co'>## visualize</span>
+<span class='co'>## Visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PCA"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LAMP"</span>)</div><div class='img'><img src='nonlinear_LAMP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LPCA2006::25% connected"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LPCA2006::50% connected"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LPCA2006::75% connected"</span>)</div><div class='img'><img src='linear_LPCA2006-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

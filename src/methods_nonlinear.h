@@ -4,24 +4,23 @@
 #define ARMA_NO_DEBUG
 
 #include <RcppDist.h>
-#include <RcppArmadillo.h>
 
 using namespace Rcpp;
 using namespace arma;
 using namespace std;
 
 // 1. SNE
-arma::mat method_sne(arma::mat& P, const int ndim, const double eta,
-                     const int maxiter, double jitter, double decay,
-                     const double momentum);
+arma::mat method_sne(arma::mat& P, int ndim0, double eta0,
+                     int maxiter0, double jitter0, double decay0,
+                     double momentum0);
 // 2. Symmetric SNE
-arma::mat method_snesym(arma::mat& P, const int ndim, const double eta,
-                     const int maxiter, double jitter, double decay,
-                     const double momentum);
+arma::mat method_snesym(arma::mat& P, int ndim0, double eta0,
+                        int maxiter0, double jitter0, double decay0,
+                        double momentum0);
 // 3. t-SNE
-arma::mat method_tsne(arma::mat& P, const int ndim, const double eta,
-                        const int maxiter, double jitter, double decay,
-                        const double momentum);
+arma::mat method_tsne(arma::mat& P, int ndim0, double eta0,
+                      int maxiter0, double jitter0, double decay0,
+                      double momentum0);
 // 4. Eigenmaps
 Rcpp::List method_eigenmaps(arma::mat& W);
 // 5. Sammon Mapping

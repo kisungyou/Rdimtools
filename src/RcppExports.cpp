@@ -543,53 +543,53 @@ BEGIN_RCPP
 END_RCPP
 }
 // method_sne
-arma::mat method_sne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
-RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
+arma::mat method_sne(arma::mat& P, int ndim0, double eta0, int maxiter0, double jitter0, double decay0, double momentum0);
+RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndim0SEXP, SEXP eta0SEXP, SEXP maxiter0SEXP, SEXP jitter0SEXP, SEXP decay0SEXP, SEXP momentum0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type P(PSEXP);
-    Rcpp::traits::input_parameter< const int >::type ndim(ndimSEXP);
-    Rcpp::traits::input_parameter< const double >::type eta(etaSEXP);
-    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< double >::type jitter(jitterSEXP);
-    Rcpp::traits::input_parameter< double >::type decay(decaySEXP);
-    Rcpp::traits::input_parameter< const double >::type momentum(momentumSEXP);
-    rcpp_result_gen = Rcpp::wrap(method_sne(P, ndim, eta, maxiter, jitter, decay, momentum));
+    Rcpp::traits::input_parameter< int >::type ndim0(ndim0SEXP);
+    Rcpp::traits::input_parameter< double >::type eta0(eta0SEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter0(maxiter0SEXP);
+    Rcpp::traits::input_parameter< double >::type jitter0(jitter0SEXP);
+    Rcpp::traits::input_parameter< double >::type decay0(decay0SEXP);
+    Rcpp::traits::input_parameter< double >::type momentum0(momentum0SEXP);
+    rcpp_result_gen = Rcpp::wrap(method_sne(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0));
     return rcpp_result_gen;
 END_RCPP
 }
 // method_snesym
-arma::mat method_snesym(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
-RcppExport SEXP _Rdimtools_method_snesym(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
+arma::mat method_snesym(arma::mat& P, int ndim0, double eta0, int maxiter0, double jitter0, double decay0, double momentum0);
+RcppExport SEXP _Rdimtools_method_snesym(SEXP PSEXP, SEXP ndim0SEXP, SEXP eta0SEXP, SEXP maxiter0SEXP, SEXP jitter0SEXP, SEXP decay0SEXP, SEXP momentum0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type P(PSEXP);
-    Rcpp::traits::input_parameter< const int >::type ndim(ndimSEXP);
-    Rcpp::traits::input_parameter< const double >::type eta(etaSEXP);
-    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< double >::type jitter(jitterSEXP);
-    Rcpp::traits::input_parameter< double >::type decay(decaySEXP);
-    Rcpp::traits::input_parameter< const double >::type momentum(momentumSEXP);
-    rcpp_result_gen = Rcpp::wrap(method_snesym(P, ndim, eta, maxiter, jitter, decay, momentum));
+    Rcpp::traits::input_parameter< int >::type ndim0(ndim0SEXP);
+    Rcpp::traits::input_parameter< double >::type eta0(eta0SEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter0(maxiter0SEXP);
+    Rcpp::traits::input_parameter< double >::type jitter0(jitter0SEXP);
+    Rcpp::traits::input_parameter< double >::type decay0(decay0SEXP);
+    Rcpp::traits::input_parameter< double >::type momentum0(momentum0SEXP);
+    rcpp_result_gen = Rcpp::wrap(method_snesym(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0));
     return rcpp_result_gen;
 END_RCPP
 }
 // method_tsne
-arma::mat method_tsne(arma::mat& P, const int ndim, const double eta, const int maxiter, double jitter, double decay, const double momentum);
-RcppExport SEXP _Rdimtools_method_tsne(SEXP PSEXP, SEXP ndimSEXP, SEXP etaSEXP, SEXP maxiterSEXP, SEXP jitterSEXP, SEXP decaySEXP, SEXP momentumSEXP) {
+arma::mat method_tsne(arma::mat& P, int ndim0, double eta0, int maxiter0, double jitter0, double decay0, double momentum0);
+RcppExport SEXP _Rdimtools_method_tsne(SEXP PSEXP, SEXP ndim0SEXP, SEXP eta0SEXP, SEXP maxiter0SEXP, SEXP jitter0SEXP, SEXP decay0SEXP, SEXP momentum0SEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< arma::mat& >::type P(PSEXP);
-    Rcpp::traits::input_parameter< const int >::type ndim(ndimSEXP);
-    Rcpp::traits::input_parameter< const double >::type eta(etaSEXP);
-    Rcpp::traits::input_parameter< const int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< double >::type jitter(jitterSEXP);
-    Rcpp::traits::input_parameter< double >::type decay(decaySEXP);
-    Rcpp::traits::input_parameter< const double >::type momentum(momentumSEXP);
-    rcpp_result_gen = Rcpp::wrap(method_tsne(P, ndim, eta, maxiter, jitter, decay, momentum));
+    Rcpp::traits::input_parameter< int >::type ndim0(ndim0SEXP);
+    Rcpp::traits::input_parameter< double >::type eta0(eta0SEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter0(maxiter0SEXP);
+    Rcpp::traits::input_parameter< double >::type jitter0(jitter0SEXP);
+    Rcpp::traits::input_parameter< double >::type decay0(decay0SEXP);
+    Rcpp::traits::input_parameter< double >::type momentum0(momentum0SEXP);
+    rcpp_result_gen = Rcpp::wrap(method_tsne(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0));
     return rcpp_result_gen;
 END_RCPP
 }

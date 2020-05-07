@@ -195,53 +195,38 @@ method_scoresum <- function(X, S) {
     .Call(`_Rdimtools_method_scoresum`, X, S)
 }
 
-#' @keywords internal
-NULL
-
-#' @keywords internal
-NULL
-
-#' @keywords internal
-method_sne <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call(`_Rdimtools_method_sne`, P, ndim, eta, maxiter, jitter, decay, momentum)
+method_sne <- function(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0) {
+    .Call(`_Rdimtools_method_sne`, P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0)
 }
 
-#' @keywords internal
-method_snesym <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call(`_Rdimtools_method_snesym`, P, ndim, eta, maxiter, jitter, decay, momentum)
+method_snesym <- function(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0) {
+    .Call(`_Rdimtools_method_snesym`, P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0)
 }
 
-#' @keywords internal
-method_tsne <- function(P, ndim, eta, maxiter, jitter, decay, momentum) {
-    .Call(`_Rdimtools_method_tsne`, P, ndim, eta, maxiter, jitter, decay, momentum)
+method_tsne <- function(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0) {
+    .Call(`_Rdimtools_method_tsne`, P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0)
 }
 
-#' @keywords internal
 method_eigenmaps <- function(W) {
     .Call(`_Rdimtools_method_eigenmaps`, W)
 }
 
-#' @keywords internal
 method_sammon <- function(X, Yinit) {
     .Call(`_Rdimtools_method_sammon`, X, Yinit)
 }
 
-#' @keywords internal
 method_lleW <- function(mat_tgt, vec_tgt, regparam) {
     .Call(`_Rdimtools_method_lleW`, mat_tgt, vec_tgt, regparam)
 }
 
-#' @keywords internal
 method_lleWauto <- function(mat_tgt, vec_tgt) {
     .Call(`_Rdimtools_method_lleWauto`, mat_tgt, vec_tgt)
 }
 
-#' @keywords internal
 method_lleM <- function(W) {
     .Call(`_Rdimtools_method_lleM`, W)
 }
 
-#' @keywords internal
 method_ree <- function(B, W, D, initc, abstol, maxiter) {
     .Call(`_Rdimtools_method_ree`, B, W, D, initc, abstol, maxiter)
 }

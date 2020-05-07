@@ -59,7 +59,6 @@ description in high-dimensional - possible, nonlinear - subspace on low-dimensio
 \code{do.sne} fully adopts algorithm details in an original paper by Hinton and Roweis (2002).
 }
 \examples{
-\donttest{
 ## load iris data
 data(iris)
 set.seed(100)
@@ -79,7 +78,6 @@ plot(out1$Y, pch=19, col=label, main="perplexity=5")
 plot(out2$Y, pch=19, col=label, main="perplexity=25")
 plot(out3$Y, pch=19, col=label, main="perplexity=50")
 par(opar)
-}
 
 }
 \references{

@@ -1,5 +1,4 @@
 #include <RcppDist.h>
-#include <RcppArmadillo.h>
 #include "methods_nonlinear.h"
 
 // [[Rcpp::depends(RcppArmadillo, RcppDist)]]
@@ -11,22 +10,23 @@ using namespace std;
 // subroutines
 //    1. Compute Q for Low-Dimensional Values
 arma::mat computeQ(arma::mat& Y){
-  const int n = Y.n_cols;
-  mat Q(n,n);
+  int n = Y.n_cols;
+  double cdenom = 0.0;
+  arma::mat Q(n,n,fill::zeros);
   for (int i=0;i<n;i++){
-    double cdenom = 0;
+    cdenom = 0;
     for (int k=0;k<n;k++){
       if (i==k){
         cdenom += 0;
       } else{
-        cdenom += std::exp(static_cast<float>(-pow(arma::norm(Y.col(i)-Y.col(k)),2)));
+        cdenom += std::exp(static_cast<float>(-pow(arma::norm(Y.col(i)-Y.col(k)),2.0)));
       }
     }
     for (int j=0;j<n;j++){
       if (i==j){
         Q(i,j) = 0;
       } else {
-        Q(i,j) = std::exp(static_cast<float>(-pow(norm(Y.col(i)-Y.col(j)),2)))/cdenom;
+        Q(i,j) = std::exp(static_cast<float>(-pow(norm(Y.col(i)-Y.col(j)),2.0)))/cdenom;
       }
     }
   }
@@ -34,31 +34,41 @@ arma::mat computeQ(arma::mat& Y){
 }
 
 // 1. SNE : Stochastic Neighbor Embedding
-//' @keywords internal
 // [[Rcpp::export]]
-arma::mat method_sne(arma::mat& P, const int ndim, const double eta,
-                     const int maxiter, double jitter, double decay,
-                     const double momentum){
-  // 1-1. Initialize
-  const int n = P.n_cols;
-  mat Y = 0.0001*randn<mat>(ndim,n);
-  mat dC(ndim,n);
-  mat y_incs(ndim,n);
-  mat mask = (1e-10)*ones<mat>(n,n);
-  P = arma::max(mask,P);
+arma::mat method_sne(arma::mat& P, int ndim0, double eta0,
+                     int maxiter0, double jitter0, double decay0,
+                     double momentum0){
+  // all parameters
+  int ndim = ndim0;
+  int maxiter = maxiter0;
 
+  double eta = eta0;
+  double jitter = jitter0;
+  double decay  = decay0;
+  double momentum = momentum0;
+
+  // 1-1. Initialize
+  int n = P.n_cols;
+  arma::mat Y = arma::mat(ndim,n,fill::randn)*0.0001;
+  arma::mat dC(ndim,n,fill::zeros);
+  arma::mat y_incs(ndim,n,fill::zeros);
+  arma::mat mask = (1e-10)*arma::ones<arma::mat>(n,n);
+
+  // P = arma::max(mask,P);
+  arma::mat myP(n,n,fill::zeros);
+  myP = arma::max(mask, P);
 
   // 1-2. Main Iteration
-  mat Q(n,n);
-  mat PQ(n,n);
+  arma::mat Q(n,n,fill::zeros);
+  arma::mat PQ(n,n,fill::zeros);
   for (int it=0;it<maxiter;it++){
-    dC.zeros();
+    dC.fill(0.0);
     Q = computeQ(Y);
     Q = arma::max(mask,Q);
     for (int i=0;i<n;i++){
       for (int j=0;j<n;j++){
         if (j!=i){
-          dC.col(i) += 2*(P(j,i)+P(i,j)-Q(i,j)-Q(j,i))*(Y.col(i)-Y.col(j));
+          dC.col(i) += 2.0*(myP(j,i)+myP(i,j)-Q(i,j)-Q(j,i))*(Y.col(i)-Y.col(j));
         }
       }
     }
@@ -66,7 +76,7 @@ arma::mat method_sne(arma::mat& P, const int ndim, const double eta,
     Y += y_incs;
     mat JitMat = jitter*randn<mat>(ndim,n);
     Y += JitMat;
-    vec MeanY = mean(Y,1);
+    vec MeanY = arma::mean(Y,1);
     for (int i=0;i<n;i++){
       Y.col(i) -= MeanY;
     }
@@ -77,24 +87,40 @@ arma::mat method_sne(arma::mat& P, const int ndim, const double eta,
 
 
 // 2. Symmetric SNE : Stochastic Neighbor Embedding
-//' @keywords internal
 // [[Rcpp::export]]
-arma::mat method_snesym(arma::mat& P, const int ndim, const double eta,
-                     const int maxiter, double jitter, double decay,
-                     const double momentum){
+arma::mat method_snesym(arma::mat& P, int ndim0, double eta0,
+                     int maxiter0, double jitter0, double decay0,
+                     double momentum0){
+  // all parameters
+  int ndim = ndim0;
+  int maxiter = maxiter0;
+
+  double eta = eta0;
+  double jitter = jitter0;
+  double decay  = decay0;
+  double momentum = momentum0;
+
+
   // (1) Initialize
-  const int n = P.n_cols;
-  mat Y = 0.0001*randn<mat>(ndim,n);
-  mat dC(ndim,n);
-  mat y_incs(ndim,n);
-  mat mask = (1e-10)*ones<mat>(n,n);
-  P = (P+P.t());
-  P /= (2*n);
-  P = arma::max(mask,P);
+  int n = P.n_cols;
+  arma::mat Y = 0.0001*randn<arma::mat>(ndim,n);
+  arma::mat dC(ndim,n,fill::zeros);
+  arma::mat y_incs(ndim,n);
+  arma::mat mask = (1e-10)*ones<mat>(n,n);
+  // myP = arma::max(mask, myP);
+
+  arma::mat myP = (P + P.t())/(2.0*static_cast<double>(n));
+  myP = arma::max(mask, myP);
+
+  // arma::uvec myPsmall = arma::find(myP < 1e-10);
+  // myP(myPsmall) = 1e-10;
+  // P = (P+P.t());
+  // P /= (2*n);
+  // P = arma::max(mask,P);
 
   // (2) Main Iteration
-  mat Q(n,n);
-  mat PQ(n,n);
+  arma::mat Q(n,n);
+  arma::mat PQ(n,n);
   for (int it=0;it<maxiter;it++){
     dC.zeros();
     Q = computeQ(Y);
@@ -103,7 +129,7 @@ arma::mat method_snesym(arma::mat& P, const int ndim, const double eta,
     for (int i=0;i<n;i++){
       for (int j=0;j<n;j++){
         if (j!=i){
-          dC.col(i) += 4*(P(i,j)-Q(i,j))*(Y.col(i)-Y.col(j));
+          dC.col(i) += 4.0*(myP(i,j)-Q(i,j))*(Y.col(i)-Y.col(j));
         }
       }
     }
@@ -111,7 +137,7 @@ arma::mat method_snesym(arma::mat& P, const int ndim, const double eta,
     Y += y_incs;
     mat JitMat = jitter*randn<mat>(ndim,n);
     Y += JitMat;
-    vec MeanY = mean(Y,1);
+    arma::vec MeanY = mean(Y,1);
     for (int i=0;i<n;i++){
       Y.col(i) -= MeanY;
     }
@@ -121,24 +147,40 @@ arma::mat method_snesym(arma::mat& P, const int ndim, const double eta,
 }
 
 // 3. tSNE : t-Stochastic Neighbor Embedding
-//' @keywords internal
 // [[Rcpp::export]]
-arma::mat method_tsne(arma::mat& P, const int ndim, const double eta,
-                        const int maxiter, double jitter, double decay,
-                        const double momentum){
+arma::mat method_tsne(arma::mat& P, int ndim0, double eta0,
+                        int maxiter0, double jitter0, double decay0,
+                        double momentum0){
+  // all parameters
+  int ndim = ndim0;
+  int maxiter = maxiter0;
+
+  double eta = eta0;
+  double jitter = jitter0;
+  double decay  = decay0;
+  double momentum = momentum0;
+
   // 3-1. Initialize
-  const int n = P.n_cols;
-  mat Y = 0.0001*randn<mat>(ndim,n);
-  mat dC(ndim,n);
-  mat y_incs(ndim,n);
-  mat mask = (1e-10)*ones<mat>(n,n);
-  P = (P+P.t());
-  P /= (2*n);
-  P = arma::max(mask,P);
+  int n = P.n_cols;
+  arma::mat Y = 0.0001*randn<mat>(ndim,n);
+  arma::mat dC(ndim,n);
+  arma::mat y_incs(ndim,n);
+  arma::mat mask = (1e-10)*ones<mat>(n,n);
+
+  arma::mat myP = (P + P.t())/(2.0*static_cast<double>(n));
+  myP = arma::max(mask, myP);
+  // myP /= (2.0*static_cast<double>(n));
+  // arma::uvec myPsmall = arma::find(myP < 1e-10);
+  // myP(myPsmall) = 1e-10;
+
+
+  // P = (P+P.t());
+  // P /= (2*n);
+  // P = arma::max(mask,P);
 
   // 3-2. Main Iteration
-  mat Q(n,n);
-  mat PQ(n,n);
+  arma::mat Q(n,n,arma::fill::zeros);
+  arma::mat PQ(n,n,arma::fill::zeros);
   for (int it=0;it<maxiter;it++){
     dC.zeros();
     Q = computeQ(Y);
@@ -147,7 +189,7 @@ arma::mat method_tsne(arma::mat& P, const int ndim, const double eta,
     for (int i=0;i<n;i++){
       for (int j=0;j<n;j++){
         if (j!=i){
-          dC.col(i) += 4*(P(i,j)-Q(i,j))*(Y.col(i)-Y.col(j))/(1+pow(norm(Y.col(i)-Y.col(j),2),2));
+          dC.col(i) += 4*(myP(i,j)-Q(i,j))*(Y.col(i)-Y.col(j))/(1+pow(norm(Y.col(i)-Y.col(j),2),2));
         }
       }
     }
@@ -165,7 +207,6 @@ arma::mat method_tsne(arma::mat& P, const int ndim, const double eta,
 }
 
 // 4. eigenmaps : given weight matrix, compute various embeddings
-//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::List method_eigenmaps(arma::mat& W){
   // 4-1. setting
@@ -194,7 +235,6 @@ Rcpp::List method_eigenmaps(arma::mat& W){
 // 5. sammon : sammon mapping updates
 // X     : (p-by-n) for armadillo convenience
 // Yinit : (n-by-d)
-//' @keywords internal
 // [[Rcpp::export]]
 arma::mat method_sammon(arma::mat& X, arma::mat& Yinit){
   // 5-1. basic settings
@@ -280,7 +320,6 @@ arma::mat method_sammon(arma::mat& X, arma::mat& Yinit){
 
 
 // 6. lleW : compute weight matrix W
-//' @keywords internal
 // [[Rcpp::export]]
 arma::vec method_lleW(arma::mat& mat_tgt, arma::vec& vec_tgt, const double regparam){
   // 6-1. basic settings
@@ -326,7 +365,6 @@ arma::vec method_lleW(arma::mat& mat_tgt, arma::vec& vec_tgt, const double regpa
 }
 
 // 7. lleWauto : compute weight matrix W with automatic regularization
-//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::List method_lleWauto(arma::mat& mat_tgt, arma::vec& vec_tgt){
   // 7-1. basic settings
@@ -391,7 +429,6 @@ Rcpp::List method_lleWauto(arma::mat& mat_tgt, arma::vec& vec_tgt){
 
 
 // 8. lleM : main 2 for computing low-D embedding
-//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::List method_lleM(arma::mat& W){
   const int n = W.n_cols;
@@ -408,7 +445,6 @@ Rcpp::List method_lleM(arma::mat& W){
 
 
 // 9. REE : Robust Euclidean Embedding
-//' @keywords internal
 arma::mat method_ree_subgradient(arma::mat B, arma::mat W, arma::mat D){
   const int n = B.n_cols;
   arma::mat GB(n,n,fill::zeros);
@@ -449,7 +485,6 @@ arma::mat method_ree_subgradient(arma::mat B, arma::mat W, arma::mat D){
   return(GB);
 }
 
-//' @keywords internal
 double method_ree_cost(arma::mat W, arma::mat D, arma::mat B){
   const int n = W.n_cols;
   double score = 0.0;
@@ -465,7 +500,6 @@ double method_ree_cost(arma::mat W, arma::mat D, arma::mat B){
   return(score);
 }
 
-//' @keywords internal
 // [[Rcpp::export]]
 Rcpp::List method_ree(arma::mat& B, arma::mat& W, arma::mat& D, const double initc,
                       const double abstol, const int maxiter){
