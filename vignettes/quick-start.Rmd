@@ -1,10 +1,13 @@
 ---
-title: "Quick Start with Rdimtools"
+title: "Quick Start with **Rdimtools** Package"
 author: Kisung You
-date: "`r Sys.Date()`"
+#date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
+#output:
+  #pdf_document:
+   # fig_caption: true
 vignette: >
-  %\VignetteIndexEntry{Quick Start with Rdimtools}
+  %\VignetteIndexEntry{Quick Start with Rdimtools Package}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
