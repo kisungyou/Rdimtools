@@ -6,7 +6,6 @@
 using namespace Rcpp;
 using namespace arma;
 
-
 /*
  * 1. boxcounting
  *    generate integer-valued data labeling

@@ -542,6 +542,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// method_lsls
+arma::mat method_lsls(arma::mat& X, arma::imat& nbd);
+RcppExport SEXP _Rdimtools_method_lsls(SEXP XSEXP, SEXP nbdSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::imat& >::type nbd(nbdSEXP);
+    rcpp_result_gen = Rcpp::wrap(method_lsls(X, nbd));
+    return rcpp_result_gen;
+END_RCPP
+}
 // method_sne
 arma::mat method_sne(arma::mat& P, int ndim0, double eta0, int maxiter0, double jitter0, double decay0, double momentum0);
 RcppExport SEXP _Rdimtools_method_sne(SEXP PSEXP, SEXP ndim0SEXP, SEXP eta0SEXP, SEXP maxiter0SEXP, SEXP jitter0SEXP, SEXP decay0SEXP, SEXP momentum0SEXP) {
@@ -930,6 +942,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_rsr", (DL_FUNC) &_Rdimtools_method_rsr, 3},
     {"_Rdimtools_method_nrsr", (DL_FUNC) &_Rdimtools_method_nrsr, 4},
     {"_Rdimtools_method_scoresum", (DL_FUNC) &_Rdimtools_method_scoresum, 2},
+    {"_Rdimtools_method_lsls", (DL_FUNC) &_Rdimtools_method_lsls, 2},
     {"_Rdimtools_method_sne", (DL_FUNC) &_Rdimtools_method_sne, 7},
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},

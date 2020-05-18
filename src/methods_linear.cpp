@@ -1175,3 +1175,32 @@ arma::vec method_scoresum(arma::mat &X, arma::mat &S){
   }
   return(output);
 }
+
+/*
+ * 23. LSLS : Compute weight matrix given k-nearest neighbor information
+ */
+// [[Rcpp::export]]
+arma::mat method_lsls(arma::mat& X, arma::imat& nbd){
+  // parameter
+  int N = nbd.n_rows;
+  int K = nbd.n_cols;
+
+  // compute weight with 'norm_dot' function
+  double absdot = 0.0;
+  arma::mat output(N,N,fill::zeros);
+  int idi = 0;
+  int idj = 0;
+  for (int n=0;n<N;n++){
+    idi = n;
+    for (int k=0;k<K;k++){
+      idj    = nbd(n,k)-1;
+      absdot = arma::norm_dot(X.row(idi), X.row(idj));
+      if (absdot < 0){
+        absdot *= -1.0;
+      }
+      output(idi,idj) = absdot;
+      output(idj,idi) = absdot;
+    }
+  }
+  return(output);
+}

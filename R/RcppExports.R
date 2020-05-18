@@ -195,6 +195,10 @@ method_scoresum <- function(X, S) {
     .Call(`_Rdimtools_method_scoresum`, X, S)
 }
 
+method_lsls <- function(X, nbd) {
+    .Call(`_Rdimtools_method_lsls`, X, nbd)
+}
+
 method_sne <- function(P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0) {
     .Call(`_Rdimtools_method_sne`, P, ndim0, eta0, maxiter0, jitter0, decay0, momentum0)
 }

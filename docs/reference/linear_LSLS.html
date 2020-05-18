@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Stochastic Neighbor Embedding — do.sne • Rdimtools</title>
+<title>Locality Sensitive Laplacian Score — do.lsls • Rdimtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,10 +46,11 @@
 
 
 
-<meta property="og:title" content="Stochastic Neighbor Embedding — do.sne" />
-<meta property="og:description" content="Stochastic Neighbor Embedding (SNE) is a probabilistic approach to mimick distributional
-description in high-dimensional - possible, nonlinear - subspace on low-dimensional target space.
-do.sne fully adopts algorithm details in an original paper by Hinton and Roweis (2002)." />
+<meta property="og:title" content="Locality Sensitive Laplacian Score — do.lsls" />
+<meta property="og:description" content="Locality Sensitive Laplacian Score (LSLS) is a supervised linear feature extraction method that combines
+a feature selection framework of laplacian score where the graph laplacian is adjusted as in the
+scheme of LSDA. The adjustment is taken via decomposed affinity matrices which are separately constructed
+using the provided class label information." />
 <meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
@@ -149,30 +150,25 @@ do.sne fully adopts algorithm details in an original paper by Hinton and Roweis 
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Stochastic Neighbor Embedding</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/nonlinear_SNE.R'><code>R/nonlinear_SNE.R</code></a></small>
-    <div class="hidden name"><code>nonlinear_SNE.Rd</code></div>
+    <h1>Locality Sensitive Laplacian Score</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/linear_LSLS.R'><code>R/linear_LSLS.R</code></a></small>
+    <div class="hidden name"><code>linear_LSLS.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Stochastic Neighbor Embedding (SNE) is a probabilistic approach to mimick distributional
-description in high-dimensional - possible, nonlinear - subspace on low-dimensional target space.
-<code>do.sne</code> fully adopts algorithm details in an original paper by Hinton and Roweis (2002).</p>
+    <p>Locality Sensitive Laplacian Score (LSLS) is a supervised linear feature extraction method that combines
+a feature selection framework of laplacian score where the graph laplacian is adjusted as in the
+scheme of LSDA. The adjustment is taken via decomposed affinity matrices which are separately constructed
+using the provided class label information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.sne</span>(
+    <pre class="usage"><span class='fu'>do.lsls</span>(
   <span class='no'>X</span>,
+  <span class='no'>label</span>,
   <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>perplexity</span> <span class='kw'>=</span> <span class='fl'>30</span>,
-  <span class='kw'>eta</span> <span class='kw'>=</span> <span class='fl'>0.05</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>2000</span>,
-  <span class='kw'>jitter</span> <span class='kw'>=</span> <span class='fl'>0.3</span>,
-  <span class='kw'>jitterdecay</span> <span class='kw'>=</span> <span class='fl'>0.99</span>,
-  <span class='kw'>momentum</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"scale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
-  <span class='kw'>pca</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>,
-  <span class='kw'>pcascale</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>,
-  <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
+  <span class='kw'>k</span> <span class='kw'>=</span> <span class='fl'>5</span>,
+  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
 )</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -180,52 +176,29 @@ description in high-dimensional - possible, nonlinear - subspace on low-dimensio
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations and columns represent independent variables.</p></td>
+      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations
+and columns represent independent variables.</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>a length-\(n\) vector of data class labels.</p></td>
     </tr>
     <tr>
       <th>ndim</th>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>perplexity</th>
-      <td><p>desired level of perplexity; ranging [5,50].</p></td>
+      <th>alpha</th>
+      <td><p>a weight factor; should be a real number in \([0,1]\).</p></td>
     </tr>
     <tr>
-      <th>eta</th>
-      <td><p>learning parameter.</p></td>
-    </tr>
-    <tr>
-      <th>maxiter</th>
-      <td><p>maximum number of iterations.</p></td>
-    </tr>
-    <tr>
-      <th>jitter</th>
-      <td><p>level of white noise added at the beginning.</p></td>
-    </tr>
-    <tr>
-      <th>jitterdecay</th>
-      <td><p>decay parameter in \((0,1)\). The closer to 0, the faster artificial noise decays.</p></td>
-    </tr>
-    <tr>
-      <th>momentum</th>
-      <td><p>level of acceleration in learning.</p></td>
+      <th>k</th>
+      <td><p>an integer; the size of a neighborhood.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
 Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
-      <th>pca</th>
-      <td><p>whether to use PCA as preliminary step; <code>TRUE</code> for using it, <code>FALSE</code> otherwise.</p></td>
-    </tr>
-    <tr>
-      <th>pcascale</th>
-      <td><p>a logical; <code>FALSE</code> for using Covariance, <code>TRUE</code> for using Correlation matrix. See also <code><a href='linear_PCA.html'>do.pca</a></code> for more details.</p></td>
-    </tr>
-    <tr>
-      <th>symmetric</th>
-      <td><p>a logical; <code>FALSE</code> to solve it naively, and <code>TRUE</code> to adopt symmetrization scheme.</p></td>
     </tr>
     </table>
 
@@ -233,39 +206,42 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 
     <p>a named list containing</p><dl'>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
+<dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
-<dt>vars</dt><dd><p>a vector containing betas used in perplexity matching.</p></dd>
+<dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Hinton GE, Roweis ST (2003).
-&#8220;Stochastic Neighbor Embedding.&#8221;
-In Becker S, Thrun S, Obermayer K (eds.), <em>Advances in Neural Information Processing Systems 15</em>, 857--864.
-MIT Press.
-<a href='http://papers.nips.cc/paper/2276-stochastic-neighbor-embedding.pdf'>http://papers.nips.cc/paper/2276-stochastic-neighbor-embedding.pdf</a>.</p>
+    <p>Liao B, Jiang Y, Liang W, Zhu W, Cai L, Cao Z (2014).
+&#8220;Gene Selection Using Locality Sensitive Laplacian Score.&#8221;
+<em>IEEE/ACM Transactions on Computational Biology and Bioinformatics</em>, <b>11</b>(6), 1146--1156.</p>
+    <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
+
+    <div class='dont-index'><p><code><a href='linear_LSDA.html'>do.lsda</a></code>, <code><a href='linear_LSCORE.html'>do.lscore</a></code></p></div>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>## load iris data</span>
+<span class='co'>## use iris data</span>
+<span class='co'>## it is known that feature 3 and 4 are more important.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
+<span class='no'>subid</span>    <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
+<span class='no'>iris.dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>iris.lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
 
-<span class='co'>## try different perplexity values</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.sne</span>(<span class='no'>X</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.sne</span>(<span class='no'>X</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>25</span>)
-<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.sne</span>(<span class='no'>X</span>, <span class='kw'>perplexity</span><span class='kw'>=</span><span class='fl'>50</span>)
+<span class='co'>## compare different neighborhood sizes</span>
+<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.lsls</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>3</span>)
+<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.lsls</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>6</span>)
+<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.lsls</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>k</span><span class='kw'>=</span><span class='fl'>9</span>)
 
-<span class='co'>## Visualize two comparisons</span>
+<span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"perplexity=5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"perplexity=25"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"perplexity=50"</span>)</div><div class='img'><img src='nonlinear_SNE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LSLS::k=3"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LSLS::k=6"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LSLS::k=9"</span>)</div><div class='img'><img src='linear_LSLS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

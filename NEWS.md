@@ -1,6 +1,7 @@
 # Rdimtools 1.0.3
 
 * Fixed memory leaks in `do.sne` and `do.tsne`.
+* `do.lsls` added as a supervised feature selection method.
 
 # Rdimtools 1.0.2
 
