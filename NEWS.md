@@ -1,3 +1,8 @@
+# Rdimtools 1.0.4
+
+* Two methods for supervised feature selection `do.wdfs` and `do.uwdfs` are added.
+* `README` now shows numbers of currently available functions for DR and IDE.
+
 # Rdimtools 1.0.3
 
 * Fixed memory leaks in `do.sne` and `do.tsne`.

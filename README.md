@@ -11,15 +11,22 @@ Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://tra
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
 
-**Rdimtools** is an R package for dimension reduction, manifold
-learning, and intrnsic dimension estimation methods. We aim at building
-one of the most comprehensive toolbox available online. Our logo
-characterizes the foundational nature of dimension reduction framework;
-we may be blind people wrangling the data to see an
-[elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant).
+**Rdimtools** is an R package for dimension reduction (DR) - including
+feature selection and manifold learning - and intrnsic dimension
+estimation (IDE) methods. We aim at building one of the *most
+comprehensive* toolbox available online, where current version delivers
+136 DR algorithms and 17 IDE methods.
 
 The philosophy is simple, **the more we have at hands, the better we can
 play**.
+
+## Elephant
+
+Our logo characterizes the foundational nature of multivariate data
+analysis; we may be blind people wrangling the data to see an
+[elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant) to
+grasp an idea of what the data looks like with partial information from
+each algorithm.
 
 ## Installation
 
@@ -64,7 +71,7 @@ plot(mylap$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Laplacian Sco
 plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Maps")
 ```
 
-<img src="man/figures/README-unnamed-chunk-1-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
 
 ## Minimal Example : Dimension Estimation
 
@@ -98,7 +105,7 @@ text(x=xtick,  par("usr")[3],
      labels = c("Ustat","correlation","made","mle1","twonn"), pos=1, xpd = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
 We can observe that all 5 methods we tested estimated the intrinsic
 dimension around \(d=2\). It should be noted that the estimated

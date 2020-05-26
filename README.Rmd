@@ -24,10 +24,22 @@ knitr::opts_chunk$set(
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
 
-**Rdimtools** is an R package for dimension reduction, manifold learning, and intrnsic dimension estimation methods. We aim at building one of the most comprehensive toolbox available online. Our logo characterizes the foundational nature of dimension reduction framework; we may be 
-blind people wrangling the data to see an [elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant). 
+```{r echo=FALSE, include=FALSE}
+library(Rdimtools)
+ndo  = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "do."))))
+nest = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "est."))))
+```
+
+
+**Rdimtools** is an R package for dimension reduction (DR) - including feature selection and manifold learning - and intrnsic dimension estimation (IDE) methods. We aim at building one of the *most comprehensive* toolbox available online, where current version delivers `r ndo` DR algorithms and `r nest` IDE methods. 
 
 The philosophy is simple, **the more we have at hands, the better we can play**.
+
+
+## Elephant
+
+Our logo characterizes the foundational nature of multivariate data analysis; we may be blind people wrangling the data to see an [elephant](https://en.wikipedia.org/wiki/Blind_men_and_an_elephant) to grasp an idea of what the data looks like with partial information from each algorithm.
+
 
 ## Installation
 

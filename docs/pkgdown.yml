@@ -3,7 +3,7 @@ pkgdown: 1.5.1
 pkgdown_sha: ~
 articles:
   quick-start: quick-start.html
-last_built: 2020-05-18T17:47Z
+last_built: 2020-05-26T04:11Z
 urls:
   reference: https://kyoustat.com/Rdimtools/reference
   article: https://kyoustat.com/Rdimtools/articles

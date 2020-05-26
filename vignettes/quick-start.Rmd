@@ -39,9 +39,16 @@ Now we are ready to go by loading the library.
 library(Rdimtools)
 ```
 
-## 2. Dimension Estimation
+## 2. Intrinsic Dimension Estimation
 
-As of version 0.1.2, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods' performance.
+
+```{r echo=FALSE, include=FALSE}
+vernow = utils::packageVersion("Rdimtools")
+ndo    = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "do."))))
+nest   = (sum(unlist(lapply(ls("package:Rdimtools"), startsWith, "est."))))
+```
+
+As of current release version `r vernow`, there are `r nest` intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods' performance.
 
 
 ```{r message=FALSE, warning=FALSE, fig.align='center', fig.width=7, fig.height=3}
@@ -71,7 +78,7 @@ As the true dimension is not known for a given dataset, different methods bring 
 
 ## 3. Dimension Reduction
 
-In this section, we compare Principal Component Analysis (`do.pca`), Laplacian Score (`do.lscore`), and Diffusion Maps (`do.dm`) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.
+Currently, **Rdimtools** (ver `r vernow`) delivers `r ndo` dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (`do.pca`), Laplacian Score (`do.lscore`), and Diffusion Maps (`do.dm`) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.
 
 ```{r message=FALSE, warning=FALSE, fig.align='center', fig.width=7}
 # run 3 algorithms mentioned above
