@@ -1,6 +1,23 @@
 #' Mutual Information for Selecting Features
 #'
+#' MIFS is a supervised feature selection that iteratively increases the subset of variables by choosing maximally informative feature based on the mutual information.
 #'
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' and columns represent independent variables.
+#' @param label a length-\eqn{n} vector of class labels.
+#' @param ndim an integer-valued target dimension.
+#' @param beta penalty for relative importance of mutual information between the candidate and already-chosen features in iterations. Author proposes to use a value in \eqn{(0.5,1)}.
+#' @param discretize the method for each variable to be discretized. The paper proposes \code{"default"} method to use 10 bins while \code{"histogram"} uses automatic discretization via Sturges' method.
+#' @param preprocess an additional option for preprocessing the data. Default is "null". See also \code{\link{aux.preprocess}} for more details.
+#'
+#'
+#' @return a named list containing
+#' \describe{
+#' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
+#' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' }
 #'
 #' @examples
 #' \donttest{
@@ -11,9 +28,9 @@
 #' iris.lab = as.factor(iris[,5])
 #'
 #' ## try different beta values
-#' out1 = do.mifs(iris.dat, iris.lab, discretize="histogram", beta=0.5)
-#' out2 = do.mifs(iris.dat, iris.lab, discretize="histogram", beta=0.75)
-#' out3 = do.mifs(iris.dat, iris.lab, discretize="histogram", beta=1)
+#' out1 = do.mifs(iris.dat, iris.lab, beta=0.5)
+#' out2 = do.mifs(iris.dat, iris.lab, beta=0.75)
+#' out3 = do.mifs(iris.dat, iris.lab, beta=1)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
@@ -23,6 +40,10 @@
 #' plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
 #' par(opar)
 #' }
+#'
+#'
+#' @references
+#' \insertRef{battiti_using_1994}{Rdimtools}
 #'
 #' @rdname feature_MIFS
 #' @author Kisung You
@@ -51,13 +72,13 @@ do.mifs <- function(X, label, ndim=2, beta=0.75, discretize=c("default","histogr
   }
   #   5. other parameters
   if (missing(discretize)){
-    mydisc = "histogram"
+    mydisc = "default"
   } else {
     mydisc = match.arg(discretize)
   }
   mybeta = as.double(beta)
   if ((mybeta < 0.5)||(mybeta > 1)){
-    warning("* do.mifs : 'beta' is suggested to be in (0.5,1) from the author.")
+    message("* do.mifs : 'beta' is suggested to be in (0.5,1) from the author.")
   }
 
   #------------------------------------------------------------------------
@@ -72,7 +93,6 @@ do.mifs <- function(X, label, ndim=2, beta=0.75, discretize=c("default","histogr
   } else {
     labX = base::apply(pX, 2, mifs_hist)
   }
-  print(labX)
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION

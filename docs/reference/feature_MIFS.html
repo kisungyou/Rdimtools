@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Unsupervised Graph-based Feature Selection — do.ugfs • Rdimtools</title>
+<title>Mutual Information for Selecting Features — do.mifs • Rdimtools</title>
 
 <!-- favicons -->
 <link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png">
@@ -46,9 +46,8 @@
 
 
 
-<meta property="og:title" content="Unsupervised Graph-based Feature Selection — do.ugfs" />
-<meta property="og:description" content="UGFS is an unsupervised feature selection method with two parameters nbdk and varthr that it constructs
-an affinity graph using local variance computation and scores variables based on PageRank algorithm." />
+<meta property="og:title" content="Mutual Information for Selecting Features — do.mifs" />
+<meta property="og:description" content="MIFS is a supervised feature selection that iteratively increases the subset of variables by choosing maximally informative feature based on the mutual information." />
 <meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
 
 
@@ -148,21 +147,21 @@ an affinity graph using local variance computation and scores variables based on
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Unsupervised Graph-based Feature Selection</h1>
-    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/feature_UGFS.R'><code>R/feature_UGFS.R</code></a></small>
-    <div class="hidden name"><code>feature_UGFS.Rd</code></div>
+    <h1>Mutual Information for Selecting Features</h1>
+    <small class="dont-index">Source: <a href='http://github.com/kyoustat/Rdimtools/blob/master/R/feature_MIFS.R'><code>R/feature_MIFS.R</code></a></small>
+    <div class="hidden name"><code>feature_MIFS.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>UGFS is an unsupervised feature selection method with two parameters <code>nbdk</code> and <code>varthr</code> that it constructs
-an affinity graph using local variance computation and scores variables based on PageRank algorithm.</p>
+    <p>MIFS is a supervised feature selection that iteratively increases the subset of variables by choosing maximally informative feature based on the mutual information.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.ugfs</span>(
+    <pre class="usage"><span class='fu'>do.mifs</span>(
   <span class='no'>X</span>,
+  <span class='no'>label</span>,
   <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>nbdk</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>varthr</span> <span class='kw'>=</span> <span class='fl'>2</span>,
+  <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>0.75</span>,
+  <span class='kw'>discretize</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"default"</span>, <span class='st'>"histogram"</span>),
   <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>)
 )</pre>
 
@@ -171,19 +170,24 @@ an affinity graph using local variance computation and scores variables based on
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>X</th>
-      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations and columns represent independent variables.</p></td>
+      <td><p>an \((n\times p)\) matrix or data frame whose rows are observations
+and columns represent independent variables.</p></td>
+    </tr>
+    <tr>
+      <th>label</th>
+      <td><p>a length-\(n\) vector of class labels.</p></td>
     </tr>
     <tr>
       <th>ndim</th>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>nbdk</th>
-      <td><p>the size of neighborhood for local variance computation.</p></td>
+      <th>beta</th>
+      <td><p>penalty for relative importance of mutual information between the candidate and already-chosen features in iterations. Author proposes to use a value in \((0.5,1)\).</p></td>
     </tr>
     <tr>
-      <th>varthr</th>
-      <td><p>threshold value for affinity graph construction. If too small so that the graph of variables is not constructed, it returns an error.</p></td>
+      <th>discretize</th>
+      <td><p>the method for each variable to be discretized. The paper proposes <code>"default"</code> method to use 10 bins while <code>"histogram"</code> uses automatic discretization via Sturges' method.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
@@ -195,7 +199,6 @@ an affinity graph using local variance computation and scores variables based on
 
     <p>a named list containing</p><dl'>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>prscore</dt><dd><p>a length-\(p\) vector of score computed from PageRank algorithm. Indices with largest values are selected.</p></dd>
 <dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
@@ -204,10 +207,10 @@ an affinity graph using local variance computation and scores variables based on
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Henni K, Mezghani N, Gouin-Vallerand C (2018).
-&#8220;Unsupervised graph-based feature selection via subspace and pagerank centrality.&#8221;
-<em>Expert Systems with Applications</em>, <b>114</b>, 46--53.
-ISSN 09574174, doi: <a href='https://doi.org/10.1016/j.eswa.2018.07.029'>10.1016/j.eswa.2018.07.029</a>
+    <p>Battiti R (1994).
+&#8220;Using mutual information for selecting features in supervised neural net learning.&#8221;
+<em>IEEE Transactions on Neural Networks</em>, <b>5</b>(4), 537--550.
+ISSN 10459227, doi: <a href='https://doi.org/10.1109/72.298224'>10.1109/72.298224</a>
 .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
@@ -215,17 +218,20 @@ ISSN 09574174, doi: <a href='https://doi.org/10.1016/j.eswa.2018.07.029'>10.1016
 <span class='co'>## use iris data</span>
 <span class='co'>## it is known that feature 3 and 4 are more important.</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='no'>iris.dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>iris.lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[,<span class='fl'>5</span>])
+<span class='no'>iris.dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
+<span class='no'>iris.lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[,<span class='fl'>5</span>])
 
-<span class='co'>## try multiple thresholding values</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>5.0</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>9.5</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'>
+<span class='co'>## try different beta values</span>
+<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.mifs</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0.5</span>)
+<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.mifs</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0.75</span>)
+<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.mifs</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>1</span>)
+
 <span class='co'>## visualize</span>
 <span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=0.1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=10"</span>)</div><div class='img'><img src='feature_UGFS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ratio"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"diff/lambda=0"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"diff/lambda=0.5"</span>)</div><div class='img'><img src='feature_MIFS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
 <span class='co'># }</span></div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
