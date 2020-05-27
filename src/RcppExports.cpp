@@ -763,6 +763,17 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// v2aux_pagerank
+arma::vec v2aux_pagerank(arma::mat& A);
+RcppExport SEXP _Rdimtools_v2aux_pagerank(SEXP ASEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type A(ASEXP);
+    rcpp_result_gen = Rcpp::wrap(v2aux_pagerank(A));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dt_pca
 Rcpp::List dt_pca(arma::mat& X, int ndim, std::string ptype, bool cor);
 RcppExport SEXP _Rdimtools_dt_pca(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP corSEXP) {
@@ -957,6 +968,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_crca", (DL_FUNC) &_Rdimtools_method_crca, 7},
     {"_Rdimtools_bmds_compute_SSR", (DL_FUNC) &_Rdimtools_bmds_compute_SSR, 2},
     {"_Rdimtools_main_bmds", (DL_FUNC) &_Rdimtools_main_bmds, 9},
+    {"_Rdimtools_v2aux_pagerank", (DL_FUNC) &_Rdimtools_v2aux_pagerank, 1},
     {"_Rdimtools_dt_pca", (DL_FUNC) &_Rdimtools_dt_pca, 4},
     {"_Rdimtools_dt_fa", (DL_FUNC) &_Rdimtools_dt_fa, 5},
     {"_Rdimtools_dt_spca", (DL_FUNC) &_Rdimtools_dt_spca, 8},

@@ -275,8 +275,8 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section--dimension-reduction" class="hasAnchor"><a href="#section--dimension-reduction" class="anchor"></a>(2) Dimension Reduction</h2>
-          <p class="section-desc"><p>Functions below are finding low-dimensional embedding of the observed data according to the principle upon which each method is relied. Methods can be categorized as <strong>linear</strong> and <strong>nonlinear</strong> methods. The former class of methods explicitly finds a projection matrix while the latter does not.</p></p>
+          <h2 id="section--linear-embedding" class="hasAnchor"><a href="#section--linear-embedding" class="anchor"></a>(2) Linear Embedding</h2>
+          <p class="section-desc"><p>Although all linear methods are designed to find explicit projection matrix for embedding, we divide this part into two categories; <strong>feature selection</strong> to select a subset of variables to extract information at their own best measurements, and <strong>dimension reduction</strong> type to denote the rest.</p></p>
         </th>
       </tr>
       
@@ -285,7 +285,140 @@
       
       <tr>
         <th colspan="2">
-          <h3 id="section--linear-methods" class="hasAnchor"><a href="#section--linear-methods" class="anchor"></a>(2-1) Linear Methods</h3>
+          <h3 id="section--feature-selection" class="hasAnchor"><a href="#section--feature-selection" class="anchor"></a>(2-1) Feature Selection</h3>
+          <p class="section-desc"></p>
+        </th>
+      </tr>
+      
+    </tbody><tbody>
+      
+      
+      <tr>
+        
+        <td>
+          <p><code><a href="feature_CSCORE.html">do.cscore()</a></code> </p>
+        </td>
+        <td><p>Constraint Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_CSCOREG.html">do.cscoreg()</a></code> </p>
+        </td>
+        <td><p>Constraint Score using Spectral Graph</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_DISR.html">do.disr()</a></code> </p>
+        </td>
+        <td><p>Diversity-Induced Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_ENET.html">do.enet()</a></code> </p>
+        </td>
+        <td><p>Elastic Net Regularization</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_FSCORE.html">do.fscore()</a></code> </p>
+        </td>
+        <td><p>Fisher Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_LASSO.html">do.lasso()</a></code> </p>
+        </td>
+        <td><p>Least Absolute Shrinkage and Selection Operator</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_LSCORE.html">do.lscore()</a></code> </p>
+        </td>
+        <td><p>Laplacian Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_LSDF.html">do.lsdf()</a></code> </p>
+        </td>
+        <td><p>Locality Sensitive Discriminant Feature</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_LSLS.html">do.lsls()</a></code> </p>
+        </td>
+        <td><p>Locality Sensitive Laplacian Score</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_LSPE.html">do.lspe()</a></code> </p>
+        </td>
+        <td><p>Locality and Similarity Preserving Embedding</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_MCFS.html">do.mcfs()</a></code> </p>
+        </td>
+        <td><p>Multi-Cluster Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_NRSR.html">do.nrsr()</a></code> </p>
+        </td>
+        <td><p>Non-convex Regularized Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_RSR.html">do.rsr()</a></code> </p>
+        </td>
+        <td><p>Regularized Self-Representation</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_SPECS.html">do.specs()</a></code> </p>
+        </td>
+        <td><p>Supervised Spectral Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_SPECU.html">do.specu()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Spectral Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_SPUFS.html">do.spufs()</a></code> </p>
+        </td>
+        <td><p>Structure Preserving Unsupervised Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_UDFS.html">do.udfs()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Discriminative Features Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_UGFS.html">do.ugfs()</a></code> </p>
+        </td>
+        <td><p>Unsupervised Graph-based Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_UWDFS.html">do.uwdfs()</a></code> </p>
+        </td>
+        <td><p>Uncorrelated Worst-Case Discriminative Feature Selection</p></td>
+      </tr><tr>
+        
+        <td>
+          <p><code><a href="feature_WDFS.html">do.wdfs()</a></code> </p>
+        </td>
+        <td><p>Worst-Case Discriminative Feature Selection</p></td>
+      </tr>
+    </tbody><tbody>
+      
+      <tr>
+        <th colspan="2">
+          <h3 id="section--linear-projection" class="hasAnchor"><a href="#section--linear-projection" class="anchor"></a>(2-2) Linear Projection</h3>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -344,27 +477,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_CSCORE.html">do.cscore()</a></code> </p>
-        </td>
-        <td><p>Constraint Score</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_CSCOREG.html">do.cscoreg()</a></code> </p>
-        </td>
-        <td><p>Constraint Score using Spectral Graph</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_DAGDNE.html">do.dagdne()</a></code> </p>
         </td>
         <td><p>Double-Adjacency Graphs-based Discriminant Neighborhood Embedding</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_DISR.html">do.disr()</a></code> </p>
-        </td>
-        <td><p>Diversity-Induced Self-Representation</p></td>
       </tr><tr>
         
         <td>
@@ -392,12 +507,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_ENET.html">do.enet()</a></code> </p>
-        </td>
-        <td><p>Elastic Net Regularization</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_ESLPP.html">do.eslpp()</a></code> </p>
         </td>
         <td><p>Extended Supervised Locality Preserving Projection</p></td>
@@ -413,12 +522,6 @@
           <p><code><a href="linear_FA.html">do.fa()</a></code> </p>
         </td>
         <td><p>Exploratory Factor Analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_FSCORE.html">do.fscore()</a></code> </p>
-        </td>
-        <td><p>Fisher Score</p></td>
       </tr><tr>
         
         <td>
@@ -449,12 +552,6 @@
           <p><code><a href="linear_KUDP.html">do.kudp()</a></code> </p>
         </td>
         <td><p>Kernel-Weighted Unsupervised Discriminant Projection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_LASSO.html">do.lasso()</a></code> </p>
-        </td>
-        <td><p>Least Absolute Shrinkage and Selection Operator</p></td>
       </tr><tr>
         
         <td>
@@ -548,21 +645,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_LSCORE.html">do.lscore()</a></code> </p>
-        </td>
-        <td><p>Laplacian Score</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_LSDA.html">do.lsda()</a></code> </p>
         </td>
         <td><p>Locality Sensitive Discriminant Analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_LSDF.html">do.lsdf()</a></code> </p>
-        </td>
-        <td><p>Locality Sensitive Discriminant Feature</p></td>
       </tr><tr>
         
         <td>
@@ -572,27 +657,9 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_LSLS.html">do.lsls()</a></code> </p>
-        </td>
-        <td><p>Locality Sensitive Laplacian Score</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_LSPE.html">do.lspe()</a></code> </p>
-        </td>
-        <td><p>Locality and Similarity Preserving Embedding</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_LSPP.html">do.lspp()</a></code> </p>
         </td>
         <td><p>Local Similarity Preserving Projection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_MCFS.html">do.mcfs()</a></code> </p>
-        </td>
-        <td><p>Multi-Cluster Feature Selection</p></td>
       </tr><tr>
         
         <td>
@@ -674,12 +741,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_NRSR.html">do.nrsr()</a></code> </p>
-        </td>
-        <td><p>Non-convex Regularized Self-Representation</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_ODP.html">do.odp()</a></code> </p>
         </td>
         <td><p>Orthogonal Discriminant Projection</p></td>
@@ -758,12 +819,6 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_RSR.html">do.rsr()</a></code> </p>
-        </td>
-        <td><p>Regularized Self-Representation</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_SAMMC.html">do.sammc()</a></code> </p>
         </td>
         <td><p>Semi-Supervised Adaptive Maximum Margin Criterion</p></td>
@@ -818,39 +873,15 @@
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_SPECS.html">do.specs()</a></code> </p>
-        </td>
-        <td><p>Supervised Spectral Feature Selection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_SPECU.html">do.specu()</a></code> </p>
-        </td>
-        <td><p>Unsupervised Spectral Feature Selection</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_SPP.html">do.spp()</a></code> </p>
         </td>
         <td><p>Sparsity Preserving Projection</p></td>
       </tr><tr>
         
         <td>
-          <p><code><a href="linear_SPUFS.html">do.spufs()</a></code> </p>
-        </td>
-        <td><p>Structure Preserving Unsupervised Feature Selection</p></td>
-      </tr><tr>
-        
-        <td>
           <p><code><a href="linear_SSLDP.html">do.ssldp()</a></code> </p>
         </td>
         <td><p>Semi-Supervised Locally Discriminant Projection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_UDFS.html">do.udfs()</a></code> </p>
-        </td>
-        <td><p>Unsupervised Discriminative Features Selection</p></td>
       </tr><tr>
         
         <td>
@@ -863,27 +894,15 @@
           <p><code><a href="linear_ULDA.html">do.ulda()</a></code> </p>
         </td>
         <td><p>Uncorrelated Linear Discriminant Analysis</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_UWDFS.html">do.uwdfs()</a></code> </p>
-        </td>
-        <td><p>Uncorrelated Worst-Case Discriminative Feature Selection</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="linear_WDFS.html">do.wdfs()</a></code> </p>
-        </td>
-        <td><p>Worst-Case Discriminative Feature Selection</p></td>
       </tr>
     </tbody><tbody>
-      
       <tr>
         <th colspan="2">
-          <h3 id="section--nonlinear-methods" class="hasAnchor"><a href="#section--nonlinear-methods" class="anchor"></a>(2-2) Nonlinear Methods</h3>
+          <h2 id="section--nonlinear-embedding" class="hasAnchor"><a href="#section--nonlinear-embedding" class="anchor"></a>(3) Nonlinear Embedding</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
+      
       
     </tbody><tbody>
       
@@ -1126,7 +1145,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section--out-of-sample-prediction" class="hasAnchor"><a href="#section--out-of-sample-prediction" class="anchor"></a>(3) Out-of-sample Prediction</h2>
+          <h2 id="section--out-of-sample-prediction" class="hasAnchor"><a href="#section--out-of-sample-prediction" class="anchor"></a>(4) Out-of-sample Prediction</h2>
           <p class="section-desc"></p>
         </th>
       </tr>
@@ -1151,7 +1170,7 @@
     </tbody><tbody>
       <tr>
         <th colspan="2">
-          <h2 id="section--auxiliary-functions" class="hasAnchor"><a href="#section--auxiliary-functions" class="anchor"></a>(4) Auxiliary Functions</h2>
+          <h2 id="section--auxiliary-functions" class="hasAnchor"><a href="#section--auxiliary-functions" class="anchor"></a>(5) Auxiliary Functions</h2>
           <p class="section-desc"></p>
         </th>
       </tr>

@@ -40,22 +40,24 @@ reference:
       structure that is embedded in high-dimensional space.
     contents:
       - starts_with("est.")
-  - title: "(2) Dimension Reduction"
+  - title: "(2) Linear Embedding"
     desc: >
-      Functions below are finding low-dimensional embedding of the observed data
-      according to the principle upon which each method is relied. Methods can be
-      categorized as **linear** and **nonlinear** methods. The former class of methods explicitly finds
-      a projection matrix while the latter does not.
-  - subtitle: "(2-1) Linear Methods"
+      Although all linear methods are designed to find explicit projection matrix for embedding,
+      we divide this part into two categories; **feature selection** to select a subset of variables
+      to extract information at their own best measurements, and **dimension reduction** type to denote the rest.
+  - subtitle: "(2-1) Feature Selection"
+    contents:
+      - has_concept("feature_methods")
+  - subtitle: "(2-2) Linear Projection"
     contents:
       - has_concept("linear_methods")
-  - subtitle: "(2-2) Nonlinear Methods"
+  - title: "(3) Nonlinear Embedding"
     contents:
       - has_concept("nonlinear_methods")
-  - title: "(3) Out-of-sample Prediction"
+  - title: "(4) Out-of-sample Prediction"
     contents:
       - starts_with("oos.")
-  - title: "(4) Auxiliary Functions"
+  - title: "(5) Auxiliary Functions"
     contents:
       - starts_with("aux.")
   - title: "Introduction to the package"

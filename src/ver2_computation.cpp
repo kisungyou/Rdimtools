@@ -267,3 +267,46 @@ arma::mat v2aux_fid2proj(int p, int ndim, arma::uvec idxvec){
   }
   return(output);
 }
+// [[Rcpp::export]]
+arma::vec v2aux_pagerank(arma::mat& A){
+  // parameters
+  int N = A.n_rows;
+  double NN = static_cast<double>(N);
+  double d  = 0.85; // standard choice
+
+  int maxiter = 100;
+  double thr  = 0.001;
+
+  // prepare
+  arma::vec sumA = arma::sum(A,1);
+  arma::vec Kvec(N,fill::zeros);
+  for (int n=0;n<N;n++){
+    if (sumA(n) > 0){
+      Kvec(n) = 1.0/sumA(n);
+    }
+  }
+  arma::mat Kinv = arma::diagmat(Kvec);
+  arma::mat M    = arma::trans(Kinv*A);
+
+  // iterate
+  arma::vec scterm(N,fill::zeros);
+  arma::vec Rold(N,fill::zeros);
+  arma::vec Rnew(N,fill::zeros);
+  for (int n=0;n<N;n++){
+    Rold(n)   = 1.0/NN;
+    scterm(n) = ((1.0-d)/NN);
+  }
+  double Rinc = 0.0;
+  for (int it=0;it<maxiter;it++){
+    // update
+    Rnew = d*M*Rold + scterm;
+    Rinc = arma::norm(Rnew-Rold,2);
+    Rold = Rnew;
+    if ((Rinc < thr)&&(it>5)){
+      break;
+    }
+  }
+
+  // return
+  return(Rold);
+}

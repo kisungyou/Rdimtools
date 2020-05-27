@@ -16,6 +16,7 @@
  *    v2aux_solproj  : solve linear system and return projection with QR
  *    v2aux_knn      : return the index of k-nearest neighbors
  *    v2aux_fid2proj : replicate 'aux.featureindicator' function
+ *    v2aux_pagerank : page rank algorithm
  */
 
 // Part 1. Methods Related
@@ -29,5 +30,6 @@ arma::mat  v2aux_adjproj(arma::mat& X);
 arma::mat  v2aux_solproj(arma::mat& LHS, arma::mat& RHS);
 arma::umat v2aux_knn(arma::mat& X, int k);
 arma::mat  v2aux_fid2proj(int p, int ndim, arma::uvec idxvec);
+arma::vec  v2aux_pagerank(arma::mat& A);
 
 #endif

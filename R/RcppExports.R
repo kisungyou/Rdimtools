@@ -255,6 +255,10 @@ main_bmds <- function(D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
     .Call(`_Rdimtools_main_bmds`, D, X0, sigg0, a, alpha, maxiter, constant, verbose, betas)
 }
 
+v2aux_pagerank <- function(A) {
+    .Call(`_Rdimtools_v2aux_pagerank`, A)
+}
+
 dt_pca <- function(X, ndim, ptype, cor) {
     .Call(`_Rdimtools_dt_pca`, X, ndim, ptype, cor)
 }

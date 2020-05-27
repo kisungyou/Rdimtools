@@ -124,10 +124,10 @@
 <p>Now we are ready to go by loading the library.</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Rdimtools</span>)</pre></body></html></div>
 </div>
-<div id="dimension-estimation" class="section level2">
+<div id="intrinsic-dimension-estimation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#dimension-estimation" class="anchor"></a>2. Dimension Estimation</h2>
-<p>As of version 0.1.2, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
+<a href="#intrinsic-dimension-estimation" class="anchor"></a>2. Intrinsic Dimension Estimation</h2>
+<p>As of current release version 1.0.4, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="co"># load the iris data</span>
 <span class="no">X</span>   <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">iris</span>[,<span class="fl">1</span>:<span class="fl">4</span>])
 <span class="no">lab</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span>(<span class="no">iris</span>[,<span class="fl">5</span>])
@@ -148,16 +148,16 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span>(<span class="kw">side</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">at</span><span class="kw">=</span><span class="no">xtick</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="fl">FALSE</span>)
 <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span>(<span class="kw">x</span><span class="kw">=</span><span class="no">xtick</span>,  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span>(<span class="st">"usr"</span>)[<span class="fl">3</span>],
      <span class="kw">labels</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span>), <span class="kw">pos</span><span class="kw">=</span><span class="fl">1</span>, <span class="kw">xpd</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<p><img src="quick-start_files/figure-html/unnamed-chunk-4-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="quick-start_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>As the true dimension is not known for a given dataset, different methods bring about heterogeneous estimates. That’s why we deliver 17 methods at an unprecedented scale to provide a broader basis for your decision.</p>
 </div>
 <div id="dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dimension-reduction" class="anchor"></a>3. Dimension Reduction</h2>
-<p>In this section, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
+<p>Currently, <strong>Rdimtools</strong> (ver 1.0.4) delivers 137 dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="co"># run 3 algorithms mentioned above</span>
 <span class="no">mypca</span> <span class="kw">=</span> <span class="fu"><a href="../reference/linear_PCA.html">do.pca</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>)
-<span class="no">mylap</span> <span class="kw">=</span> <span class="fu"><a href="../reference/linear_LSCORE.html">do.lscore</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>)
+<span class="no">mylap</span> <span class="kw">=</span> <span class="fu"><a href="../reference/feature_LSCORE.html">do.lscore</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>)
 <span class="no">mydfm</span> <span class="kw">=</span> <span class="fu"><a href="../reference/nonlinear_DM.html">do.dm</a></span>(<span class="no">X</span>, <span class="kw">ndim</span><span class="kw">=</span><span class="fl">2</span>, <span class="kw">bandwidth</span><span class="kw">=</span><span class="fl">10</span>)
 
 <span class="co"># extract embeddings from each method</span>
@@ -170,7 +170,7 @@
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">Y1</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">19</span>, <span class="kw">col</span><span class="kw">=</span><span class="no">lab</span>, <span class="kw">xlab</span><span class="kw">=</span><span class="st">"axis 1"</span>, <span class="kw">ylab</span><span class="kw">=</span><span class="st">"axis 2"</span>, <span class="kw">main</span><span class="kw">=</span><span class="st">"PCA"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">Y2</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">19</span>, <span class="kw">col</span><span class="kw">=</span><span class="no">lab</span>, <span class="kw">xlab</span><span class="kw">=</span><span class="st">"axis 1"</span>, <span class="kw">ylab</span><span class="kw">=</span><span class="st">"axis 2"</span>, <span class="kw">main</span><span class="kw">=</span><span class="st">"Laplacian Score"</span>)
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">Y3</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">19</span>, <span class="kw">col</span><span class="kw">=</span><span class="no">lab</span>, <span class="kw">xlab</span><span class="kw">=</span><span class="st">"axis 1"</span>, <span class="kw">ylab</span><span class="kw">=</span><span class="st">"axis 2"</span>, <span class="kw">main</span><span class="kw">=</span><span class="st">"Diffusion Maps"</span>)</pre></body></html></div>
-<p><img src="quick-start_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
+<p><img src="quick-start_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>As the figure above shows, in general, different algorithms show heterogeneous nature of the data. We hope <strong>Rdimtools</strong>, with 133 dimension reduction methods as of version 0.1.2, be a valuable toolset to help practitioners and scientists discover many facets of the data.</p>
 </div>
   </div>

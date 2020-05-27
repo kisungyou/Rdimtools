@@ -73,6 +73,66 @@
     <loc>https://kyoustat.com/Rdimtools/reference/estimate_twonn.html</loc>
   </url>
   <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_CSCORE.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_CSCOREG.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_DISR.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_ENET.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_FSCORE.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_LASSO.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_LSCORE.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_LSDF.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_LSLS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_LSPE.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_MCFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_NRSR.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_RSR.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_SPECS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_SPECU.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_SPUFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_UDFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_UGFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_UWDFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/feature_WDFS.html</loc>
+  </url>
+  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_ADR.html</loc>
   </url>
   <url>
@@ -97,16 +157,7 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_CRP.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_CSCORE.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_CSCOREG.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_DAGDNE.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_DISR.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_DNE.html</loc>
@@ -121,9 +172,6 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_ELPP2.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_ENET.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_ESLPP.html</loc>
   </url>
   <url>
@@ -131,9 +179,6 @@
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_FA.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_FSCORE.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_FSSEM.html</loc>
@@ -149,9 +194,6 @@
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_KUDP.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_LASSO.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_LDA.html</loc>
@@ -199,28 +241,13 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_LQMI.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_LSCORE.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_LSDA.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_LSDF.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_LSIR.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_LSLS.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_LSPE.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_LSPP.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_MCFS.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_MDS.html</loc>
@@ -262,9 +289,6 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_NPE.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_NRSR.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_ODP.html</loc>
   </url>
   <url>
@@ -304,9 +328,6 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_RSIR.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_RSR.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_SAMMC.html</loc>
   </url>
   <url>
@@ -334,34 +355,16 @@
     <loc>https://kyoustat.com/Rdimtools/reference/linear_SPCA.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_SPECS.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_SPECU.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_SPP.html</loc>
   </url>
   <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_SPUFS.html</loc>
-  </url>
-  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_SSLDP.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_UDFS.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_UDP.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/linear_ULDA.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_UWDFS.html</loc>
-  </url>
-  <url>
-    <loc>https://kyoustat.com/Rdimtools/reference/linear_WDFS.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_BMDS.html</loc>
