@@ -12,6 +12,7 @@
 #' @import CVXR
 #' @import RcppDE
 #' @import maotai
+#' @importFrom mclustcomp mclustcomp
 #' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds
 #' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median integrate optimize

@@ -34,7 +34,8 @@ a named list containing
 }
 }
 \description{
-Unsupervised Graph-based Feature Selection
+UGFS is an unsupervised feature selection method with two parameters \code{nbdk} and \code{varthr} that it constructs
+an affinity graph using local variance computation and scores variables based on PageRank algorithm.
 }
 \examples{
 \donttest{
@@ -58,6 +59,9 @@ plot(out3$Y, pch=19, col=iris.lab, main="bandwidth=10")
 par(opar)
 }
 
+}
+\references{
+\insertRef{henni_unsupervised_2018}{Rdimtools}
 }
 \author{
 Kisung You
