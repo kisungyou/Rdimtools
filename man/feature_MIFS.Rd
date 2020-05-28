@@ -48,16 +48,16 @@ iris.dat = as.matrix(iris[,1:4])
 iris.lab = as.factor(iris[,5])
 
 ## try different beta values
-out1 = do.mifs(iris.dat, iris.lab, beta=0.5)
-out2 = do.mifs(iris.dat, iris.lab, beta=0.75)
+out1 = do.mifs(iris.dat, iris.lab, beta=0)
+out2 = do.mifs(iris.dat, iris.lab, beta=0.5)
 out3 = do.mifs(iris.dat, iris.lab, beta=1)
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(out1$Y, pch=19, col=iris.lab, main="ratio")
-plot(out2$Y, pch=19, col=iris.lab, main="diff/lambda=0")
-plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
+plot(out1$Y, pch=19, col=iris.lab, main="beta=0")
+plot(out2$Y, pch=19, col=iris.lab, main="beta=0.5")
+plot(out3$Y, pch=19, col=iris.lab, main="beta=1")
 par(opar)
 }
 

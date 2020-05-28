@@ -10,7 +10,6 @@
 #' @param discretize the method for each variable to be discretized. The paper proposes \code{"default"} method to use 10 bins while \code{"histogram"} uses automatic discretization via Sturges' method.
 #' @param preprocess an additional option for preprocessing the data. Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
-#'
 #' @return a named list containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
@@ -28,16 +27,16 @@
 #' iris.lab = as.factor(iris[,5])
 #'
 #' ## try different beta values
-#' out1 = do.mifs(iris.dat, iris.lab, beta=0.5)
-#' out2 = do.mifs(iris.dat, iris.lab, beta=0.75)
+#' out1 = do.mifs(iris.dat, iris.lab, beta=0)
+#' out2 = do.mifs(iris.dat, iris.lab, beta=0.5)
 #' out3 = do.mifs(iris.dat, iris.lab, beta=1)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, pch=19, col=iris.lab, main="ratio")
-#' plot(out2$Y, pch=19, col=iris.lab, main="diff/lambda=0")
-#' plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
+#' plot(out1$Y, pch=19, col=iris.lab, main="beta=0")
+#' plot(out2$Y, pch=19, col=iris.lab, main="beta=0.5")
+#' plot(out3$Y, pch=19, col=iris.lab, main="beta=1")
 #' par(opar)
 #' }
 #'
@@ -77,9 +76,9 @@ do.mifs <- function(X, label, ndim=2, beta=0.75, discretize=c("default","histogr
     mydisc = match.arg(discretize)
   }
   mybeta = as.double(beta)
-  if ((mybeta < 0.5)||(mybeta > 1)){
-    message("* do.mifs : 'beta' is suggested to be in (0.5,1) from the author.")
-  }
+  # if ((mybeta < 0.5)||(mybeta > 1)){
+  #   message("* do.mifs : 'beta' is suggested to be in (0.5,1) from the author.")
+  # }
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY

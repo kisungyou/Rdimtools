@@ -1,6 +1,6 @@
 # Rdimtools 1.0.4
 
-* Methods for supervised feature selection `do.wdfs`, `do.uwdfs`, and `do.mifs` are added.
+* Methods for feature selection `do.wdfs`, `do.uwdfs`, `do.procrustes`, and `do.mifs` are added.
 * `README` now shows numbers of currently available functions for DR and IDE.
 
 # Rdimtools 1.0.3

@@ -15,7 +15,7 @@ Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://tra
 feature selection and manifold learning - and intrnsic dimension
 estimation (IDE) methods. We aim at building one of the *most
 comprehensive* toolbox available online, where current version delivers
-138 DR algorithms and 17 IDE methods.
+139 DR algorithms and 17 IDE methods.
 
 The philosophy is simple, **the more we have at hands, the better we can
 play**.
