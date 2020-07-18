@@ -102,9 +102,9 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rdimtools" class="section level1">
+<div id="rdimtools-" class="section level1">
 <div class="page-header"><h1 class="hasAnchor">
-<a href="#rdimtools" class="anchor"></a>Rdimtools <a href="https://kyoustat.com/Rdimtools"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a href="#rdimtools-" class="anchor"></a>Rdimtools <a href="https://kyoustat.com/Rdimtools"><img src="reference/figures/logo.png" align="right" height="139"></a>
 </h1></div>
 <!-- badges: start -->
 
@@ -124,9 +124,9 @@
 <div class="sourceCode" id="cb2"><pre class="r"><span class="co">## install.packages("devtools")</span>
 <span class="kw pkg">devtools</span><span class="kw ns">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span>(<span class="st">"kyoustat/Rdimtools"</span>)</pre></div>
 </div>
-<div id="minimal-example-dimension-reduction" class="section level2">
+<div id="minimal-example--dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minimal-example-dimension-reduction" class="anchor"></a>Minimal Example : Dimension Reduction</h2>
+<a href="#minimal-example--dimension-reduction" class="anchor"></a>Minimal Example : Dimension Reduction</h2>
 <p>Here is an example of dimension reduction on the famous <code>iris</code> dataset. Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
 <div class="sourceCode" id="cb3"><pre class="r"><span class="co"># load the library</span>
 <span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Rdimtools</span>)
@@ -147,9 +147,9 @@
 <span class="fu"><a href="https://rdrr.io/r/base/plot.html">plot</a></span>(<span class="no">mydfm</span>$<span class="no">Y</span>, <span class="kw">pch</span><span class="kw">=</span><span class="fl">19</span>, <span class="kw">col</span><span class="kw">=</span><span class="no">lab</span>, <span class="kw">xlab</span><span class="kw">=</span><span class="st">"axis 1"</span>, <span class="kw">ylab</span><span class="kw">=</span><span class="st">"axis 2"</span>, <span class="kw">main</span><span class="kw">=</span><span class="st">"Diffusion Maps"</span>)</pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="minimal-example-dimension-estimation" class="section level2">
+<div id="minimal-example--dimension-estimation" class="section level2">
 <h2 class="hasAnchor">
-<a href="#minimal-example-dimension-estimation" class="anchor"></a>Minimal Example : Dimension Estimation</h2>
+<a href="#minimal-example--dimension-estimation" class="anchor"></a>Minimal Example : Dimension Estimation</h2>
 <p><img src="http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
 <p>Swill Roll is a classic example of 2-dimensional manifold embedded in <span class="math inline">ℝ<sup>3</sup></span> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <span class="math inline"><em>d</em> = 2</span>, let’s apply several methods for intrinsic dimension estimation.</p>
 <div class="sourceCode" id="cb4"><pre class="r"><span class="co"># generate sample data</span>

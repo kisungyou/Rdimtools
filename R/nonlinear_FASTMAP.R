@@ -1,8 +1,8 @@
 #' FastMap
 #'
 #' \code{do.fastmap} is an implementation of \emph{FastMap} algorithm. Though
-#' it shares similarities with MDS, it is innately a nonlinear method that iteratively updates
-#' the projection information using pairwise distance information.
+#' it shares similarities with MDS, it is innately a nonlinear method that makes an iterative update
+#' for the projection information using pairwise distance information.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
@@ -55,7 +55,7 @@ do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale",
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.fastmap : 'ndim' is a positive integer in [1,#(covariates)).")}
   algpreprocess = match.arg(preprocess)
-  k = ndim
+  k = round(ndim)
 
   ########################################################################
   ## 2. Preprocessing
@@ -86,7 +86,7 @@ do.fastmap <- function(X, ndim=2, preprocess=c("null","center","scale","cscale",
     # 3-4. update D : compute and alter
     for (it1 in 1:n){
       for (it2 in 1:n){
-        theval = sqrt((Dold[it1,it2]^2) - ((output[it1,i]-output[it2,i])^2))
+        theval = sqrt(abs((Dold[it1,it2]^2) - ((output[it1,i]-output[it2,i])^2)))
         Dnew[it1,it2] = theval
       }
     }

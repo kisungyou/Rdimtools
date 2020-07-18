@@ -1,5 +1,7 @@
 ---
 title: "Quick Start with **Rdimtools** Package"
+# in order to solve discrepancy in the title, do
+# > options(rmarkdown.html_vignette.check_title = FALSE)
 author: Kisung You
 #date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
@@ -98,4 +100,4 @@ plot(Y2, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Laplacian Score")
 plot(Y3, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Maps")
 ```
 
-As the figure above shows, in general, different algorithms show heterogeneous nature of the data. We hope **Rdimtools**, with 133 dimension reduction methods as of version 0.1.2, be a valuable toolset to help practitioners and scientists discover many facets of the data.
+As the figure above shows, in general, different algorithms show heterogeneous nature of the data. We hope **Rdimtools** be a valuable toolset to help practitioners and scientists discover many facets of the data.

@@ -28,8 +28,8 @@ a named list containing
 }
 \description{
 \code{do.fastmap} is an implementation of \emph{FastMap} algorithm. Though
-it shares similarities with MDS, it is innately a nonlinear method that iteratively updates
-the projection information using pairwise distance information.
+it shares similarities with MDS, it is innately a nonlinear method that makes an iterative update
+for the projection information using pairwise distance information.
 }
 \examples{
 \dontrun{
