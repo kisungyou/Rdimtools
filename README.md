@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rdimtools <a href='https://kyoustat.com/Rdimtools'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# Rdimtools <a href='https://kyoustat.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
@@ -115,8 +115,8 @@ method.
 ## Acknowledgements
 
 The logo icon is made by
-[Freepik](http://www.flaticon.com/authors/freepik) from
-[www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll
+[Freepik](https://www.flaticon.com/authors/freepik/) from
+[www.flaticon.com](https://www.flaticon.com/).The rotating Swiss Roll
 image is taken from [Dinoj
 Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)’s
 website.

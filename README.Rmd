@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 
 
-# Rdimtools <a href='https://kyoustat.com/Rdimtools'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# Rdimtools <a href='https://kyoustat.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
@@ -113,4 +113,4 @@ We can observe that all 5 methods we tested estimated the intrinsic dimension ar
 
 ## Acknowledgements
 
-The logo icon is made by [Freepik](http://www.flaticon.com/authors/freepik) from [www.flaticon.com](http://www.flaticon.com).The rotating Swiss Roll image is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.
+The logo icon is made by [Freepik](https://www.flaticon.com/authors/freepik/) from [www.flaticon.com](https://www.flaticon.com/).The rotating Swiss Roll image is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.

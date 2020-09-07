@@ -14,8 +14,8 @@ Imports: CVXR (>= 1.0), Rcpp (>= 0.12.15), RcppDE, Rcsdp, Rdpack, RSpectra, grap
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
 RoxygenNote: 7.1.1
 RdMacros: Rdpack
-URL: http://kyoustat.com/Rdimtools
-BugReports: http://github.com/kyoustat/Rdimtools/issues
+URL: http://kyoustat.com/Rdimtools/
+BugReports: https://github.com/kyoustat/Rdimtools/issues
 Suggests: 
     knitr,
     rmarkdown
