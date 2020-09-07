@@ -2,7 +2,7 @@
 #'
 #' \pkg{Rdimtools} is an R suite of a number of dimension reduction and estimation methods
 #' implemented using \pkg{RcppArmadillo} for efficient computations. Please see the reference
-#' from the \href{http://kyoustat.com/Rdimtools}{package webpage}.
+#' from the \href{http://kyoustat.com/Rdimtools/}{package webpage}.
 #'
 #' @docType package
 #' @name package-Rdimtools
