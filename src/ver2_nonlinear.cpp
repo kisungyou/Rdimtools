@@ -444,7 +444,7 @@ arma::mat dt_phate_mmds(arma::mat D, int ndim, int maxiter, double abstol){
 }
 
 // [[Rcpp::export]]
-Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alpha, std::string dtype, int maxiter, double abstol){
+Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alpha, std::string dtype, int maxiter, double abstol, bool smacof){
   // preliminary --------------------------------------------------------------
   // parameters
   int N = X.n_rows;
@@ -504,18 +504,32 @@ Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alp
   }
   // 6. compute potential distance
   arma::mat PotDist(N,N,fill::zeros);
+  arma::rowvec PTi(N,fill::zeros);
+  arma::rowvec PTj(N,fill::zeros);
   for (i=0; i<(N-1); i++){
+    PTi = PT.row(i)/arma::accu(PT.row(i));
     for (j=(i+1); j<N; j++){
+      PTj = PT.row(j)/arma::accu(PT.row(j));
       if (dtype=="log"){
-        PotDist(i,j) = arma::norm(arma::log(PT.row(i)) - arma::log(PT.row(j)), 2);
-      } else if (dtype=="sqrt"){
-        PotDist(i,j) = arma::norm(arma::sqrt(PT.row(i)) - arma::sqrt(PT.row(j)), 2);
+        PotDist(i,j) = arma::norm(arma::log(PTi)-arma::log(PTj), 2);
+      } else if (dtype=="sqrt"){ // Riemannian failed
+        PotDist(i,j) = arma::norm(arma::sqrt(PTi)-arma::sqrt(PTj),2);
+      } else {
+        PotDist(i,j) = arma::norm(PTi-PTj,2);
       }
       PotDist(j,i) = PotDist(i,j);
     }
   }
-  // 7. apply MDS - classical, not metric here since gradient descent is not available..
-  arma::mat embed = dt_phate_mmds(PotDist, ndim, maxiter, abstol);
+  PotDist *= (arma::accu(D)/(static_cast<double>(N*N)*PotDist.max())); // arbitrary normalization for numerical reason
+
+  // 7. apply MDS - either Classical or Metric
+  arma::mat embed(N,ndim,fill::zeros);
+  if (smacof==true){
+    embed = dt_phate_mmds(PotDist, ndim, maxiter, abstol);
+  } else {
+    embed = dt_phate_cmds(PotDist, ndim);
+  }
+
 
   // wrap and report ---------------------------------------------------
   // trfinfo
@@ -570,6 +584,8 @@ Rcpp::List dt_mmds(arma::mat& X, int ndim, std::string ptype,int maxiter, double
   }
   // compute
   arma::mat embed = dt_phate_mmds(D, ndim, maxiter, abstol);
+
+
   // wrap and report ---------------------------------------------------
   // trfinfo
   Rcpp::List info = Rcpp::List::create(

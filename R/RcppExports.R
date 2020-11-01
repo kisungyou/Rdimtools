@@ -295,8 +295,8 @@ dt_rpca <- function(X, ndim, ptype, mu, lambda) {
     .Call(`_Rdimtools_dt_rpca`, X, ndim, ptype, mu, lambda)
 }
 
-dt_phate <- function(X, ndim, ptype, k, alpha, dtype, maxiter, abstol) {
-    .Call(`_Rdimtools_dt_phate`, X, ndim, ptype, k, alpha, dtype, maxiter, abstol)
+dt_phate <- function(X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof) {
+    .Call(`_Rdimtools_dt_phate`, X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof)
 }
 
 dt_mmds <- function(X, ndim, ptype, maxiter, abstol) {

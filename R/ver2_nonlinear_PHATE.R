@@ -9,6 +9,7 @@
 #' @param k size of nearest neighborhood (default: 5).
 #' @param alpha decay parameter for Gaussian kernel exponent (default: 10).
 #' @param dtype type of potential distance transformation; \code{"log"} or \code{"sqrt"}.
+#' @param smacof a logical; \code{TRUE} to use SMACOF for Metric MDS (default), or \code{FALSE} to use Classical MDS.
 #' @param maxiter maximum number of iterations for metric MDS updates (default: 100).
 #' @param abstol stopping criterion for metric MDS iterations (default: 1e-6).
 #'
@@ -34,8 +35,8 @@
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
 #' plot(pca2d$Y, col=lab, pch=19, main="PCA")
-#' plot(phlog$Y, col=lab, pch=19, main="'log' distance")
-#' plot(phsqt$Y, col=lab, pch=19, main="'sqrt' distance")
+#' plot(phlog$Y, col=lab, pch=19, main="log potential")
+#' plot(phsqt$Y, col=lab, pch=19, main="sqrt potential")
 #' par(opar)
 #' }
 #'
@@ -45,7 +46,7 @@
 #' @rdname nonlinear_PHATE
 #' @concept nonlinear_methods
 #' @export
-do.phate <- function(X, ndim=2, k=5, alpha=10, dtype=c("log","sqrt"), maxiter=100, abstol=1e-6){
+do.phate <- function(X, ndim=2, k=5, alpha=10, dtype=c("log","sqrt"), smacof=TRUE, maxiter=100, abstol=1e-6){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.phate : 'X' should be a matrix.")}
@@ -56,11 +57,12 @@ do.phate <- function(X, ndim=2, k=5, alpha=10, dtype=c("log","sqrt"), maxiter=10
   mydtype = match.arg(tolower(dtype),c("log","sqrt"))
   myiter  = max(50, round(maxiter))
   myeps   = max(as.double(abstol), 100*.Machine$double.eps)
+  smacof  = as.logical(smacof)
 
 
   #------------------------------------------------------------------------
   # Version 2 update
-  output = dt_phate(X, myndim, myprep, myk, myalpha, mydtype, myiter, myeps)
+  output = dt_phate(X, myndim, myprep, myk, myalpha, mydtype, myiter, myeps, smacof)
   return(output)
 }
 

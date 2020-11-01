@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
       </span>
     </div>
 
@@ -131,7 +131,7 @@
 <div id="intrinsic-dimension-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intrinsic-dimension-estimation" class="anchor"></a>2. Intrinsic Dimension Estimation</h2>
-<p>As of current release version 1.0.4, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
+<p>As of current release version 1.0.5, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit">
 <span class="co"># load the iris data</span>
 <span class="va">X</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>
@@ -159,7 +159,7 @@
 <div id="dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dimension-reduction" class="anchor"></a>3. Dimension Reduction</h2>
-<p>Currently, <strong>Rdimtools</strong> (ver 1.0.4) delivers 141 dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
+<p>Currently, <strong>Rdimtools</strong> (ver 1.0.5) delivers 141 dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit">
 <span class="co"># run 3 algorithms mentioned above</span>
 <span class="va">mypca</span> <span class="op">=</span> <span class="fu"><a href="../reference/do.pca.html">do.pca</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span><span class="op">)</span>

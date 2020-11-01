@@ -92,7 +92,7 @@ distances after initializing the low-dimensional configuration via classical MDS
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
       </span>
     </div>
 
@@ -180,6 +180,11 @@ distances after initializing the low-dimensional configuration via classical MDS
       <td><p>an integer-valued target dimension (default: 2).</p></td>
     </tr>
     <tr>
+      <th>preprocess</th>
+      <td><p>an option for preprocessing the data. Default is <code>"null"</code>.
+See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+    </tr>
+    <tr>
       <th>maxiter</th>
       <td><p>maximum number of iterations for metric MDS updates (default: 100).</p></td>
     </tr>
@@ -208,7 +213,8 @@ Springer New York, New York, NY.
 ISBN 978-1-4419-2046-1 978-0-387-28981-6.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## load iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 <span class='va'>lab</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
@@ -225,6 +231,7 @@ ISBN 978-1-4419-2046-1 978-0-387-28981-6.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>cmd2d</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"Classical MDS"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>mmd2d</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"Metric MDS"</span><span class='op'>)</span>
 </div><div class='img'><img src='nonlinear_MMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
 
 </div></pre>
   </div>

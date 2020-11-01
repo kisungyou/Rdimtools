@@ -92,7 +92,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.4</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
       </span>
     </div>
 
@@ -150,7 +150,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Potential of Heat Diffusion for Affinity-based Transition Embedding</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/nonlinear_PHATE.R'><code>R/nonlinear_PHATE.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/ver2_nonlinear_PHATE.R'><code>R/ver2_nonlinear_PHATE.R</code></a></small>
     <div class="hidden name"><code>nonlinear_PHATE.Rd</code></div>
     </div>
 
@@ -166,6 +166,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
   k <span class='op'>=</span> <span class='fl'>5</span>,
   alpha <span class='op'>=</span> <span class='fl'>10</span>,
   dtype <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"log"</span>, <span class='st'>"sqrt"</span><span class='op'>)</span>,
+  smacof <span class='op'>=</span> <span class='cn'>TRUE</span>,
   maxiter <span class='op'>=</span> <span class='fl'>100</span>,
   abstol <span class='op'>=</span> <span class='fl'>1e-06</span>
 <span class='op'>)</span></pre>
@@ -194,6 +195,10 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
       <td><p>type of potential distance transformation; <code>"log"</code> or <code>"sqrt"</code>.</p></td>
     </tr>
     <tr>
+      <th>smacof</th>
+      <td><p>a logical; <code>TRUE</code> to use SMACOF for Metric MDS (default), or <code>FALSE</code> to use Classical MDS.</p></td>
+    </tr>
+    <tr>
       <th>maxiter</th>
       <td><p>maximum number of iterations for metric MDS updates (default: 100).</p></td>
     </tr>
@@ -220,7 +225,8 @@ doi: <a href='https://doi.org/10.1038/s41587-019-0336-3'>10.1038/s41587-019-0336
 .</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## load iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 <span class='va'>lab</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
@@ -234,9 +240,10 @@ doi: <a href='https://doi.org/10.1038/s41587-019-0336-3'>10.1038/s41587-019-0336
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>pca2d</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"PCA"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>phlog</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"'log' distance"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>phsqt</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"'sqrt' distance"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>phlog</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"log potential"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>phsqt</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"sqrt potential"</span><span class='op'>)</span>
 </div><div class='img'><img src='nonlinear_PHATE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
 
 </div></pre>
   </div>
