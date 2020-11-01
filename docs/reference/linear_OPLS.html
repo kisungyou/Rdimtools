@@ -164,7 +164,7 @@ variance of input - covariance of <code>data1</code> and relates it under cross-
 OPLS only returns projection information of <code>data1</code>, just like any other unsupervised methods in our package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.opls</span>(<span class='no'>data1</span>, <span class='no'>data2</span>, <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>)</pre>
+    <pre class="usage"><span class='fu'>do.opls</span><span class='op'>(</span><span class='va'>data1</span>, <span class='va'>data2</span>, ndim <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +185,7 @@ OPLS only returns projection information of <code>data1</code>, just like any ot
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix of projected observations from <code>data1</code>.</p></dd>
 <dt>projection</dt><dd><p>an \((N\times ndim)\) whose columns are loadings for <code>data1</code>.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction for <code>data1</code>.</p></dd>
@@ -195,27 +195,33 @@ OPLS only returns projection information of <code>data1</code>, just like any ot
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Barker M, Rayens W (2003).
-&#8220;Partial least squares for discrimination.&#8221;
-<em>Journal of Chemometrics</em>, <b>17</b>(3), 166--173.</p>
+    <p>Barker M, Rayens W (2003-mar).
+&#8220;Partial Least Squares for Discrimination.&#8221;
+<em>Journal of Chemometrics</em>, <b>17</b>, 166--173.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='linear_PLS.html'>do.pls</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.pls.html'>do.pls</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## generate 2 normal data matrices</span>
-<span class='no'>mat1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>*<span class='fl'>12</span>),<span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>100</span>)+<span class='fl'>10</span> <span class='co'># 12-dim normal</span>
-<span class='no'>mat2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span>(<span class='fl'>100</span>*<span class='fl'>6</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='fl'>100</span>)-<span class='fl'>10</span> <span class='co'># 6-dim normal</span>
+<span class='va'>mat1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>*</span><span class='fl'>12</span><span class='op'>)</span>,nrow<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>10</span> <span class='co'># 12-dim normal</span>
+<span class='va'>mat2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Normal.html'>rnorm</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>*</span><span class='fl'>6</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>10</span> <span class='co'># 6-dim normal</span>
 
 <span class='co'>## compare OPLS and PLS</span>
-<span class='no'>res_opls</span> <span class='kw'>=</span> <span class='fu'>do.opls</span>(<span class='no'>mat1</span>, <span class='no'>mat2</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>res_pls</span>  <span class='kw'>=</span> <span class='fu'><a href='linear_PLS.html'>do.pls</a></span>(<span class='no'>mat1</span>, <span class='no'>mat2</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='va'>res_opls</span> <span class='op'>=</span> <span class='fu'>do.opls</span><span class='op'>(</span><span class='va'>mat1</span>, <span class='va'>mat2</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>res_pls</span>  <span class='op'>=</span> <span class='fu'><a href='do.pls.html'>do.pls</a></span><span class='op'>(</span><span class='va'>mat1</span>, <span class='va'>mat2</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>res_opls</span>$<span class='no'>Y</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"OPLS result"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>res_pls</span>$<span class='no'>Y1</span>, <span class='kw'>cex</span><span class='kw'>=</span><span class='fl'>0.5</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"PLS result"</span>)</div><div class='img'><img src='linear_OPLS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res_opls</span><span class='op'>$</span><span class='va'>Y</span>, cex<span class='op'>=</span><span class='fl'>0.5</span>, main<span class='op'>=</span><span class='st'>"OPLS result"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res_pls</span><span class='op'>$</span><span class='va'>Y1</span>, cex<span class='op'>=</span><span class='fl'>0.5</span>, main<span class='op'>=</span><span class='st'>"PLS result"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_OPLS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -231,7 +237,7 @@ OPLS only returns projection information of <code>data1</code>, just like any ot
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

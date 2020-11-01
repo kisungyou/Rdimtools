@@ -12,7 +12,10 @@ using namespace std;
 *    ClNLproc
 *
 * Main Functions ===========================================================
-*    (01) dt_rpca : RPCA
+*    (01) dt_rpca   : RPCA
+*    (02) dt_sammon : sammon mapping
+*    (03) dt_phate  : PHATE by Smita Krishnaswamy
+*    (04) dt_mmds   : metric MDS
 */
 
 // Auxiliary Functions ======================================================
@@ -279,6 +282,304 @@ Rcpp::List dt_rpca(arma::mat& X, int ndim, std::string ptype, double mu, double 
   return(Rcpp::List::create(
       Rcpp::Named("L") = L,
       Rcpp::Named("S") = S,
+      Rcpp::Named("trfinfo") = info
+  ));
+}
+
+// (02) dt_sammon : sammon mapping =============================================
+
+
+// (03) dt_phate ===============================================================
+double dt_phate_entropy(arma::vec eigvals, int p){
+  double threshold  = arma::datum::eps*100;
+  arma::vec eigp    = arma::pow(eigvals, static_cast<double>(p));
+  arma::vec normvec = eigp/arma::accu(eigp);
+
+  double output = 0.0;
+  double tgt    = 0.0;
+  for (int i=0; i<eigvals.n_elem; i++){
+    tgt = normvec(i);
+    if (tgt > threshold){
+      output += -tgt*std::log(tgt);
+    }
+  }
+  return(output);
+}
+double dt_phate_regression(arma::vec x, arma::vec y){
+  int N = x.n_elem;
+  double xbar = arma::as_scalar(arma::mean(x));
+  double ybar = arma::as_scalar(arma::mean(y));
+
+  double beta1 = arma::dot(x-xbar, y-ybar);
+  double beta2 = arma::accu(arma::pow(x-xbar, 2.0));
+
+  double hat_beta  = beta1/beta2;
+  double hat_alpha = ybar - hat_beta*xbar;
+
+  double tgt = 0.0;
+  double mse = 0.0;
+  for (int n=0; n<N; n++){
+    tgt  = (y(n) - (hat_alpha + hat_beta*x(n)));
+    mse += tgt*tgt;
+  }
+  return(mse);
+}
+int dt_phate_linfits(arma::vec entropy){
+  int N = entropy.n_elem;
+  arma::vec mse(N,fill::zeros);
+  mse(0)   = arma::datum::inf;
+  mse(N-1) = arma::datum::inf;
+
+  arma::vec vecx = arma::regspace<arma::vec>(1, 1, N);
+
+  arma::vec vecx1(2,fill::zeros);
+  arma::vec vecy1(2,fill::zeros);
+  arma::vec vecx2(2,fill::zeros);
+  arma::vec vecy2(2,fill::zeros);
+
+  for (int i=1; i<(N-1); i++){
+    // first fit
+    vecx1.reset(); vecx1 = vecx.head(i+1);
+    vecy1.reset(); vecy1 = entropy.head(i+1);
+
+    // second fit
+    vecx2.reset(); vecx2 = vecx.tail(N-(i+1));
+    vecy2.reset(); vecy2 = entropy.tail(N-(i+1));
+
+    // sum of two mse
+    mse(i) = dt_phate_regression(vecx1,vecy1) + dt_phate_regression(vecx2,vecy2);
+  }
+  int idmin = mse.index_min();
+  return(idmin + 1); // return the times
+}
+arma::mat dt_phate_cmds(arma::mat pdist, int ndim){
+  int N = pdist.n_rows;
+  arma::mat D2 = arma::pow(pdist, 2.0);
+  arma::mat J  = arma::eye<arma::mat>(N,N) - (arma::ones<arma::mat>(N,N)/(static_cast<double>(N)));
+  arma::mat B  = -0.5*J*D2*J;
+
+  arma::vec eigval;
+  arma::mat eigvec;
+
+  arma::eig_sym(eigval, eigvec, B);
+  arma::mat Y = eigvec.tail_cols(ndim)*arma::diagmat(arma::sqrt(eigval.tail(ndim)));
+  return(Y);
+}
+arma::mat dt_phate_mmds(arma::mat D, int ndim, int maxiter, double abstol){
+  // initialization with CMDS
+  int N = D.n_rows;
+  arma::mat D2 = arma::pow(D, 2.0);
+  arma::mat J  = arma::eye<arma::mat>(N,N) - (arma::ones<arma::mat>(N,N)/(static_cast<double>(N)));
+  arma::mat B  = -0.5*J*D2*J;  arma::vec eigval;  arma::mat eigvec;
+  arma::eig_sym(eigval, eigvec, B);
+
+  arma::mat old_X = eigvec.tail_cols(ndim)*arma::diagmat(arma::sqrt(eigval.tail(ndim)));
+  arma::mat old_D(N,N,fill::zeros);
+  for (int i=0; i<(N-1); i++){
+    for (int j=(i+1); j<N; j++){
+      old_D(i,j) = arma::norm(old_X.row(i)-old_X.row(j),2);
+      old_D(j,i) = old_D(i,j);
+    }
+  }
+
+  arma::mat new_X(N,ndim,fill::zeros);
+  arma::mat new_D(N,N,fill::zeros);
+  double old_cost = 0.0;
+  for (int i=0; i<(N-1); i++){
+    for (int j=(i+1); j<N; j++){
+      old_cost += std::pow(D(i,j)-old_D(i,j), 2.0);
+    }
+  }
+  double new_cost = 0.0;
+
+  arma::mat BZ(N,N,fill::zeros);
+  double dijZ   = 0.0;
+  double epsthr = 100*arma::datum::eps;
+  double inctol = 0.0;
+  double diagsum = 0.0;
+
+  for (int it=0; it<maxiter; it++){
+    // compute updater B(Z); (Borg p155); Z=old_X
+    BZ.fill(0.0);
+    // off-diagonal first
+    for (int i=0; i<(N-1); i++){
+      for (int j=(i+1); j<N; j++){
+        // dijZ = arma::norm(old_X.row(i)-old_X.row(j),2);
+        dijZ = old_D(i,j);
+        if (dijZ > epsthr){
+          BZ(i,j) = -D(i,j)/dijZ;
+          BZ(j,i) = BZ(i,j);
+        }
+      }
+    }
+    // diagonal part
+    for (int i=0; i<N; i++){
+      diagsum = -arma::accu(BZ.row(i));
+      BZ(i,i) = diagsum;
+    }
+    // updater
+    new_X    = (BZ*old_X)/(static_cast<double>(N));
+    new_D.fill(0.0);
+    for (int i=0; i<(N-1); i++){
+      for (int j=(i+1); j<N; j++){
+        new_D(i,j) = arma::norm(new_X.row(i)-new_X.row(j),2);
+        new_D(j,i) = new_D(i,j);
+      }
+    }
+    new_cost = 0.0;
+    for (int i=0; i<(N-1); i++){
+      for (int j=(i+1); j<N; j++){
+        new_cost += std::pow(D(i,j)-new_D(i,j), 2.0);
+      }
+    }
+
+    inctol   = old_cost - new_cost;
+    old_X    = new_X;
+    old_cost = new_cost;
+    if (inctol < abstol){
+      break;
+    }
+  }
+  return(old_X);
+}
+
+// [[Rcpp::export]]
+Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alpha, std::string dtype, int maxiter, double abstol){
+  // preliminary --------------------------------------------------------------
+  // parameters
+  int N = X.n_rows;
+  if ((ndim < 1)||(ndim >= X.n_cols)){
+    throw std::invalid_argument("* do.phate : 'ndim' should be in [1,ncol(X)).");
+  }
+  // preprocessing
+  ClNLproc init(ptype);
+  arma::mat premat    = init.MainFunc(X);
+  arma::rowvec mymean = premat.row(0);
+  arma::mat    mymult = premat.rows(1,X.n_cols);
+  std::string  mytype = init.GetType();
+
+  // computation ---------------------------------------------------------------
+  int i, j;
+  // 1. pairwise distance computation
+  arma::mat D(N,N,fill::zeros);
+  for (i=0; i<(N-1); i++){
+    for (j=(i+1); j<N; j++){
+      D(i,j) = arma::norm(X.row(i)-X.row(j),2);
+      D(j,i) = D(i,j);
+    }
+  }
+  // 2. nearest distances
+  arma::vec tgt(N,fill::zeros);
+  arma::vec ND(N,fill::zeros);
+  for (i=0; i<N; i++){
+    tgt   = arma::sort(D.col(i),"ascend");
+    ND(i) = tgt(k+1);
+  }
+  // 3. compute kernel matrix, rowsum, and markov transition matrix
+  arma::mat K(N,N,fill::ones);
+  for (i=0; i<(N-1); i++){
+    for (j=(i+1); j<N; j++){
+      K(i,j) = 0.5*(std::exp(-std::pow((D(i,j)/ND(i)), alpha)) + std::exp(-std::pow((D(i,j)/ND(j)), alpha)));
+      K(j,i) = K(i,j);
+    }
+  }
+  arma::vec Ksum = arma::sum(K, 1);
+  arma::mat P = arma::diagmat(1.0/Ksum)*K;
+  arma::mat A = arma::diagmat(1.0/arma::sqrt(Ksum))*K*arma::diagmat(1.0/arma::sqrt(Ksum));
+
+  // 4. compute von-neumann entropy for best time-marching step
+  arma::vec eigvals = arma::eig_sym(A);
+  arma::vec  vec_entropy(200, fill::zeros);
+  for (i=0; i<200; i++){
+    vec_entropy(i) = dt_phate_entropy(eigvals, (i+1));
+  }
+  int times = dt_phate_linfits(vec_entropy);
+
+  // 5. time marching
+  arma::mat PT = P;
+  if (times > 1){
+    for (int tt=0; tt<(times-1); tt++){
+      PT = PT*P;
+    }
+  }
+  // 6. compute potential distance
+  arma::mat PotDist(N,N,fill::zeros);
+  for (i=0; i<(N-1); i++){
+    for (j=(i+1); j<N; j++){
+      if (dtype=="log"){
+        PotDist(i,j) = arma::norm(arma::log(PT.row(i)) - arma::log(PT.row(j)), 2);
+      } else if (dtype=="sqrt"){
+        PotDist(i,j) = arma::norm(arma::sqrt(PT.row(i)) - arma::sqrt(PT.row(j)), 2);
+      }
+      PotDist(j,i) = PotDist(i,j);
+    }
+  }
+  // 7. apply MDS - classical, not metric here since gradient descent is not available..
+  arma::mat embed = dt_phate_mmds(PotDist, ndim, maxiter, abstol);
+
+  // wrap and report ---------------------------------------------------
+  // trfinfo
+  Rcpp::List info = Rcpp::List::create(
+    Rcpp::Named("type")=mytype,
+    Rcpp::Named("mean")=mymean,
+    Rcpp::Named("multiplier")=mymult,
+    Rcpp::Named("algtype")="nonlinear"
+  );
+  return(Rcpp::List::create(
+      Rcpp::Named("Y") = embed,
+      Rcpp::Named("trfinfo") = info
+  ));
+}
+
+// (04) dt_mmds   : metric MDS -------------------------------------------------
+// [[Rcpp::export]]
+Rcpp::List dt_mmds(arma::mat& X, int ndim, std::string ptype,int maxiter, double abstol){
+  // preliminary --------------------------------------------------------------
+  // parameters
+  int N = X.n_rows;
+  int P = X.n_cols;
+  if ((ndim < 1)||(ndim >= X.n_cols)){
+    throw std::invalid_argument("* do.mmds : 'ndim' should be in [1,ncol(X)).");
+  }
+  // preprocessing
+  ClNLproc init(ptype);
+  arma::mat premat    = init.MainFunc(X);
+  arma::rowvec mymean = premat.row(0);
+  arma::mat    mymult = premat.rows(1,X.n_cols);
+  std::string  mytype = init.GetType();
+
+  // computation ---------------------------------------------------------------
+  // data prep
+  arma::mat pX;
+  if (mytype=="null"){
+    pX = X;
+  } else {
+    pX.set_size(N,P);
+    for (int n=0;n<N;n++){
+      pX.row(n) = X.row(n) - mymean;
+    }
+    pX = pX*mymult;
+  }
+  // distance computation
+  arma::mat D(N,N,fill::zeros);
+  for (int i=0; i<(N-1); i++){
+    for (int j=(i+1); j<N; j++){
+      D(i,j) = arma::norm(pX.row(i)-pX.row(j),2);
+      D(j,i) = D(i,j);
+    }
+  }
+  // compute
+  arma::mat embed = dt_phate_mmds(D, ndim, maxiter, abstol);
+  // wrap and report ---------------------------------------------------
+  // trfinfo
+  Rcpp::List info = Rcpp::List::create(
+    Rcpp::Named("type")=mytype,
+    Rcpp::Named("mean")=mymean,
+    Rcpp::Named("multiplier")=mymult,
+    Rcpp::Named("algtype")="nonlinear"
+  );
+  return(Rcpp::List::create(
+      Rcpp::Named("Y") = embed,
       Rcpp::Named("trfinfo") = info
   ));
 }

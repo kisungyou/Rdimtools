@@ -158,21 +158,21 @@ are well separated in the original space, it may lead to unsatisfactory results.
 
     <div class="ref-description">
     <p>Kernel Semi-Supervised Discriminant Analysis (KSDA) is a nonlinear variant of
-SDA (<code><a href='linear_SDA.html'>do.sda</a></code>). For simplicity, we enabled heat/gaussian kernel only.
+SDA (<code><a href='do.sda.html'>do.sda</a></code>). For simplicity, we enabled heat/gaussian kernel only.
 Note that this method is <em>quite</em> sensitive to choices of
 parameters, <code>alpha</code>, <code>beta</code>, and <code>t</code>. Especially when data
 are well separated in the original space, it may lead to unsatisfactory results.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.ksda</span>(
-  <span class='no'>X</span>,
-  <span class='no'>label</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>),
-  <span class='kw'>alpha</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>beta</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>t</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.ksda</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>label</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.1</span><span class='op'>)</span>,
+  alpha <span class='op'>=</span> <span class='fl'>1</span>,
+  beta <span class='op'>=</span> <span class='fl'>1</span>,
+  t <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -195,7 +195,7 @@ and columns represent independent variables.</p></td>
       <td><p>a vector of neighborhood graph construction. Following types are supported;
 <code><a href='https://rdrr.io/r/base/c.html'>c("knn",k)</a></code>, <code><a href='https://rdrr.io/r/base/c.html'>c("enn",radius)</a></code>, and <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",ratio)</a></code>.
 Default is <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",0.1)</a></code>, connecting about 1/10 of nearest data points
-among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+among all data points. See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>alpha</th>
@@ -213,7 +213,7 @@ among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 
@@ -222,37 +222,44 @@ among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Cai D, He X, Han J (2007).
-&#8220;Semi-supervised Discriminant Analysis.&#8221;
+&#8220;Semi-Supervised Discriminant Analysis.&#8221;
 In <em>2007 IEEE 11th International Conference on Computer Vision</em>, 1--7.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='linear_SDA.html'>do.sda</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.sda.html'>do.sda</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## generate data of 3 types with clear difference</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>dt1</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>20</span>)-<span class='fl'>100</span>
-<span class='no'>dt2</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>20</span>)
-<span class='no'>dt3</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>20</span>)+<span class='fl'>100</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>dt1</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>-</span><span class='fl'>100</span>
+<span class='va'>dt2</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
+<span class='va'>dt3</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span><span class='op'>+</span><span class='fl'>100</span>
 
 <span class='co'>## merge the data and create a label correspondingly</span>
-<span class='no'>X</span>      <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>dt1</span>,<span class='no'>dt2</span>,<span class='no'>dt3</span>)
-<span class='no'>label</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>3</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='va'>X</span>      <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>dt1</span>,<span class='va'>dt2</span>,<span class='va'>dt3</span><span class='op'>)</span>
+<span class='va'>label</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, each<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
 
 <span class='co'>## copy a label and let 10% of elements be missing</span>
-<span class='no'>nlabel</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span>(<span class='no'>label</span>)
-<span class='no'>nmissing</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>nlabel</span>*<span class='fl'>0.10</span>)
-<span class='no'>label_missing</span> <span class='kw'>=</span> <span class='no'>label</span>
-<span class='no'>label_missing</span>[<span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='no'>nlabel</span>, <span class='no'>nmissing</span>)]<span class='kw'>=</span><span class='fl'>NA</span>
+<span class='va'>nlabel</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/length.html'>length</a></span><span class='op'>(</span><span class='va'>label</span><span class='op'>)</span>
+<span class='va'>nmissing</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>nlabel</span><span class='op'>*</span><span class='fl'>0.10</span><span class='op'>)</span>
+<span class='va'>label_missing</span> <span class='op'>=</span> <span class='va'>label</span>
+<span class='va'>label_missing</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='va'>nlabel</span>, <span class='va'>nmissing</span><span class='op'>)</span><span class='op'>]</span><span class='op'>=</span><span class='cn'>NA</span>
 
 <span class='co'>## compare true case with missing-label case</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.ksda</span>(<span class='no'>X</span>, <span class='no'>label</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>t</span><span class='kw'>=</span><span class='fl'>0.1</span>)</div><div class='output co'>#&gt; <span class='message'>* Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.</span></div><div class='input'><span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.ksda</span>(<span class='no'>X</span>, <span class='no'>label_missing</span>, <span class='kw'>beta</span><span class='kw'>=</span><span class='fl'>0</span>, <span class='kw'>t</span><span class='kw'>=</span><span class='fl'>0.1</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.ksda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, beta<span class='op'>=</span><span class='fl'>0</span>, t<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='message'>* Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.</span></div><div class='input'><span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.ksda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label_missing</span>, beta<span class='op'>=</span><span class='fl'>0</span>, t<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"true projection"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"20% missing labels"</span>)</div><div class='img'><img src='nonlinear_KSDA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"true projection"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"20% missing labels"</span><span class='op'>)</span>
+</div><div class='img'><img src='nonlinear_KSDA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -268,7 +275,7 @@ In <em>2007 IEEE 11th International Conference on Computer Vision</em>, 1--7.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -166,15 +166,15 @@ a gaussian kernel as suggested from the original paper. The parameter <code>lamb
 controls possible rank-deficiency of kernel matrix.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.llp</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>),
-  <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"union"</span>, <span class='st'>"intersect"</span>, <span class='st'>"asymmetric"</span>),
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
-  <span class='kw'>t</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.llp</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.1</span><span class='op'>)</span>,
+  symmetric <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"union"</span>, <span class='st'>"intersect"</span>, <span class='st'>"asymmetric"</span><span class='op'>)</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
+  t <span class='op'>=</span> <span class='fl'>1</span>,
+  lambda <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -192,17 +192,17 @@ controls possible rank-deficiency of kernel matrix.</p>
       <td><p>a vector of neighborhood graph construction. Following types are supported;
 <code><a href='https://rdrr.io/r/base/c.html'>c("knn",k)</a></code>, <code><a href='https://rdrr.io/r/base/c.html'>c("enn",radius)</a></code>, and <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",ratio)</a></code>.
 Default is <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",0.1)</a></code>, connecting about 1/10 of nearest data points
-among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+among all data points. See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>symmetric</th>
       <td><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>.
-See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>t</th>
@@ -216,7 +216,7 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
@@ -226,27 +226,30 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Wu M, Yu K, Yu S, Schölkopf B (2007).
-&#8220;Local learning projections.&#8221;
-In <em>Proceedings of the 24th international conference on Machine learning</em>, 1039--1046.</p>
+&#8220;Local Learning Projections.&#8221;
+In <em>Proceedings of the 24th International Conference on Machine Learning</em>, 1039--1046.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>X</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>100</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"crown"</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>&lt;-</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>100</span>, dname<span class='op'>=</span><span class='st'>"crown"</span><span class='op'>)</span>
 
 <span class='co'>## test different lambda - regularization - values</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.llp</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>0.1</span>)
-<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.llp</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.llp</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>10</span>)
+<span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'>do.llp</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,lambda<span class='op'>=</span><span class='fl'>0.1</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.llp</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,lambda<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.llp</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,lambda<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'># visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"lambda=0.1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"lambda=1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"lambda=10"</span>)</div><div class='img'><img src='linear_LLP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"lambda=0.1"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"lambda=1"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"lambda=10"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_LLP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -262,7 +265,7 @@ In <em>Proceedings of the 24th international conference on Machine learning</em>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

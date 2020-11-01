@@ -155,12 +155,12 @@ all data points is taken to be a harmonic manner." />
     </div>
 
     <div class="ref-description">
-    <p>Authors argue that the approach proposed in <code><a href='estimate_mle1.html'>est.mle1</a></code> is
+    <p>Authors argue that the approach proposed in <code><a href='est.mle1.html'>est.mle1</a></code> is
 empirically bias-prone in that the averaging of sample statistics over
 all data points is taken to be a harmonic manner.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>est.mle2</span>(<span class='no'>X</span>, <span class='kw'>k1</span> <span class='kw'>=</span> <span class='fl'>10</span>, <span class='kw'>k2</span> <span class='kw'>=</span> <span class='fl'>20</span>)</pre>
+    <pre class="usage"><span class='fu'>est.mle2</span><span class='op'>(</span><span class='va'>X</span>, k1 <span class='op'>=</span> <span class='fl'>10</span>, k2 <span class='op'>=</span> <span class='fl'>20</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,35 +181,39 @@ all data points is taken to be a harmonic manner.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing containing</p><dl'>
+    <p>a named list containing containing</p><dl>
 <dt>estdim</dt><dd><p>estimated intrinsic dimension.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>MacKay D, Ghahramani Z (2005).
+    <p>MacKay DJC, Ghahramani Z (2005-jan).
 &#8220;Comments on 'Maximum Likelihood Estimation of Intrinsic Dimension' by E. Levina and P. Bickel (2004).&#8221;
 <a href='http://www.inference.org.uk/mackay/dimension/'>http://www.inference.org.uk/mackay/dimension/</a>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## create example data sets with intrinsic dimension 2</span>
-<span class='no'>X1</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"swiss"</span>)
-<span class='no'>X2</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"ribbon"</span>)
-<span class='no'>X3</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"saddle"</span>)
+<span class='va'>X1</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"swiss"</span><span class='op'>)</span>
+<span class='va'>X2</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"ribbon"</span><span class='op'>)</span>
+<span class='va'>X3</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"saddle"</span><span class='op'>)</span>
 
 <span class='co'>## acquire an estimate for intrinsic dimension</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.mle2</span>(<span class='no'>X1</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.mle2</span>(<span class='no'>X2</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.mle2</span>(<span class='no'>X3</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>est.mle2</span><span class='op'>(</span><span class='va'>X1</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>est.mle2</span><span class='op'>(</span><span class='va'>X2</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>est.mle2</span><span class='op'>(</span><span class='va'>X3</span><span class='op'>)</span>
 
-<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle2 : dimension of 'swiss'  data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle2 : dimension of 'ribbon' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.mle2 : dimension of 'saddle' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.mle2 : dimension of 'swiss'  data is 1.99
+<span class='va'>line1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.mle2 : dimension of 'swiss'  data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>line2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.mle2 : dimension of 'ribbon' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>line3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.mle2 : dimension of 'saddle' data is "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>line1</span>,<span class='st'>"\n"</span>,<span class='va'>line2</span>,<span class='st'>"\n"</span>,<span class='va'>line3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; * est.mle2 : dimension of 'swiss'  data is 1.99
 #&gt; * est.mle2 : dimension of 'ribbon' data is 2
-#&gt; * est.mle2 : dimension of 'saddle' data is 2.19</div><div class='input'># }
+#&gt; * est.mle2 : dimension of 'saddle' data is 2.19</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
@@ -227,7 +231,7 @@ all data points is taken to be a harmonic manner.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

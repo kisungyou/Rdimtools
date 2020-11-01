@@ -5,6 +5,7 @@
 #' from the \href{http://kyoustat.com/Rdimtools/}{package webpage}.
 #'
 #' @docType package
+#' @noRd
 #' @name package-Rdimtools
 #' @aliases Rdimtools-package
 #' @import Rcsdp
@@ -12,6 +13,7 @@
 #' @import CVXR
 #' @import RcppDE
 #' @import maotai
+#' @import ManifoldOptim
 #' @importFrom mclustcomp mclustcomp
 #' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds

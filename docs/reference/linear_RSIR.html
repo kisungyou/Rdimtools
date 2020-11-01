@@ -160,16 +160,16 @@ rank deficiency of scatter/covariance matrix. Instead of naive matrix inversion,
 proposed regularization schemes that reflect several ideas from various incumbent methods.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.rsir</span>(
-  <span class='no'>X</span>,
-  <span class='no'>response</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>h</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>X</span>)/<span class='fl'>5</span>)),
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
-  <span class='kw'>regmethod</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"Ridge"</span>, <span class='st'>"Tikhonov"</span>, <span class='st'>"PCA"</span>, <span class='st'>"PCARidge"</span>, <span class='st'>"PCATikhonov"</span>),
-  <span class='kw'>tau</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>numpc</span> <span class='kw'>=</span> <span class='no'>ndim</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.rsir</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>response</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  h <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fl'>2</span>, <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>5</span><span class='op'>)</span><span class='op'>)</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
+  regmethod <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"Ridge"</span>, <span class='st'>"Tikhonov"</span>, <span class='st'>"PCA"</span>, <span class='st'>"PCARidge"</span>, <span class='st'>"PCATikhonov"</span><span class='op'>)</span>,
+  tau <span class='op'>=</span> <span class='fl'>1</span>,
+  numpc <span class='op'>=</span> <span class='va'>ndim</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -194,7 +194,7 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>regmethod</th>
@@ -212,7 +212,7 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
@@ -222,51 +222,56 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Chiaromonte F, Martinelli J (2002).
-&#8220;Dimension reduction strategies for analyzing global gene expression data with a response.&#8221;
-<em>Mathematical Biosciences</em>, <b>176</b>(1), 123 -- 144.
-ISSN 0025-5564.</p>
-<p>Zhong W, Zeng P, Ma P, Liu JS, Zhu Y (2005).
-&#8220;RSIR: regularized sliced inverse regression for motif discovery.&#8221;
-<em>Bioinformatics</em>, <b>21</b>(22), 4169--4175.</p>
-<p>Bernard-Michel C, Gardes L, Girard S (2009).
+&#8220;Dimension Reduction Strategies for Analyzing Global Gene Expression Data with a Response.&#8221;
+<em>Mathematical Biosciences</em>, <b>176</b>, 123--144.</p>
+<p>Zhong W, Zeng P, Ma P, Liu JS, Zhu Y (2005-nov).
+&#8220;RSIR: Regularized Sliced Inverse Regression for Motif Discovery.&#8221;
+<em>Bioinformatics</em>, <b>21</b>, 4169--4175.</p>
+<p>Bernard-Michel C, Gardes L, Girard S (2009-mar).
 &#8220;Gaussian Regularized Sliced Inverse Regression.&#8221;
-<em>Statistics and Computing</em>, <b>19</b>(1), 85--98.</p>
-<p>Bernard-Michel C, Douté S, Fauvel M, Gardes L, Girard S (2009).
-&#8220;Retrieval of Mars surface physical properties from OMEGA hyperspectral images using regularized sliced inverse regression.&#8221;
-<em>Journal of Geophysical Research</em>, <b>114</b>(E6).</p>
+<em>Statistics and Computing</em>, <b>19</b>, 85--98.</p>
+<p>Bernard-Michel C, Douté S, Fauvel M, Gardes L, Girard S (2009-jun).
+&#8220;Retrieval of Mars Surface Physical Properties from OMEGA Hyperspectral Images Using Regularized Sliced Inverse Regression.&#8221;
+<em>Journal of Geophysical Research</em>, <b>114</b>.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='linear_SIR.html'>do.sir</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.sir.html'>do.sir</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## generate swiss roll with auxiliary dimensions</span>
 <span class='co'>## it follows reference example from LSIR paper.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>n</span>     <span class='kw'>=</span> <span class='fl'>50</span>
-<span class='no'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)
-<span class='no'>h</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)
-<span class='no'>t</span>     <span class='kw'>=</span> (<span class='fl'>1</span>+<span class='fl'>2</span>*<span class='no'>theta</span>)*(<span class='fl'>3</span>*<span class='no'>pi</span>/<span class='fl'>2</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>n</span>,<span class='fl'>10</span>))
-<span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>t</span>*<span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span>(<span class='no'>t</span>)
-<span class='no'>X</span>[,<span class='fl'>2</span>] <span class='kw'>=</span> <span class='fl'>21</span>*<span class='no'>h</span>
-<span class='no'>X</span>[,<span class='fl'>3</span>] <span class='kw'>=</span> <span class='no'>t</span>*<span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>t</span>)
-<span class='no'>X</span>[,<span class='fl'>4</span>:<span class='fl'>10</span>] <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>7</span>*<span class='no'>n</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>n</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>n</span>     <span class='op'>=</span> <span class='fl'>50</span>
+<span class='va'>theta</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
+<span class='va'>h</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
+<span class='va'>t</span>     <span class='op'>=</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>n</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span> <span class='op'>=</span> <span class='va'>t</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>t</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>21</span><span class='op'>*</span><span class='va'>h</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>3</span><span class='op'>]</span> <span class='op'>=</span> <span class='va'>t</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>t</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>7</span><span class='op'>*</span><span class='va'>n</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='va'>n</span><span class='op'>)</span>
 
 <span class='co'>## corresponding response vector</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='fl'>5</span>*<span class='no'>pi</span>*<span class='no'>theta</span>)+(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)*<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fl'>0.1</span>))
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>*</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>+</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## try with different regularization methods</span>
 <span class='co'>## use default number of slices</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"Ridge"</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.rsir</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>regmethod</span><span class='kw'>=</span><span class='st'>"Tikhonov"</span>)
-<span class='no'>outsir</span> <span class='kw'>=</span> <span class='fu'><a href='linear_SIR.html'>do.sir</a></span>(<span class='no'>X</span>, <span class='no'>y</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.rsir</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, regmethod<span class='op'>=</span><span class='st'>"Ridge"</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.rsir</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, regmethod<span class='op'>=</span><span class='st'>"Tikhonov"</span><span class='op'>)</span>
+<span class='va'>outsir</span> <span class='op'>=</span> <span class='fu'><a href='do.sir.html'>do.sir</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::Ridge"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>,   <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RSIR::Tikhonov"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outsir</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"standard SIR"</span>)</div><div class='img'><img src='linear_RSIR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>,   main<span class='op'>=</span><span class='st'>"RSIR::Ridge"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>,   main<span class='op'>=</span><span class='st'>"RSIR::Tikhonov"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outsir</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"standard SIR"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_RSIR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -282,7 +287,7 @@ ISSN 0025-5564.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

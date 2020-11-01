@@ -166,7 +166,7 @@ a set of transformed values \(\phi(x_i),i=1,2,\dots,n\) are not centered after t
 Since some kernels require parameters - up to 2, its usage will be listed in arguments section.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aux.kernelcov</span>(<span class='no'>X</span>, <span class='no'>ktype</span>)</pre>
+    <pre class="usage"><span class='fu'>aux.kernelcov</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>ktype</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,7 +178,7 @@ Since some kernels require parameters - up to 2, its usage will be listed in arg
     <tr>
       <th>ktype</th>
       <td><p>a vector containing the type of kernel and parameters involved. Below the usage is
-consistent with description</p><dl'>
+consistent with description</p><dl>
 <dt>linear</dt><dd><p><code><a href='https://rdrr.io/r/base/c.html'>c("linear",c)</a></code></p></dd>
 <dt>polynomial</dt><dd><p><code><a href='https://rdrr.io/r/base/c.html'>c("polynomial",c,d)</a></code></p></dd>
 <dt>gaussian</dt><dd><p><code><a href='https://rdrr.io/r/base/c.html'>c("gaussian",c)</a></code></p></dd>
@@ -206,7 +206,7 @@ consistent with description</p><dl'>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>K</dt><dd><p>a \((p\times p)\) kernelizd gram matrix.</p></dd>
 <dt>Kcenter</dt><dd><p>a \((p\times p)\) centered version of <code>K</code>.</p></dd>
 
@@ -214,7 +214,7 @@ consistent with description</p><dl'>
 
     <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>There are 20 kernels supported. Belows are the kernels when given two vectors \(x,y\), \(K(x,y)\)</p><dl'>
+    <p>There are 20 kernels supported. Belows are the kernels when given two vectors \(x,y\), \(K(x,y)\)</p><dl>
 <dt>linear</dt><dd><p>\(=&lt;x,y&gt;+c\)</p></dd>
 <dt>polynomial</dt><dd><p>\(=(&lt;x,y&gt;+c)^d\)</p></dd>
 <dt>gaussian</dt><dd><p>\(=exp(-c\|x-y\|^2)\), \(c&gt;0\)</p></dd>
@@ -253,25 +253,32 @@ consistent with description</p><dl'>
 
     <p>Hofmann, T., Scholkopf, B., and Smola, A.J. (2008) <em>Kernel methods in
 machine learning</em>. arXiv:math/0701907.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate a toy data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>100</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
 
 <span class='co'>## compute a few kernels</span>
-<span class='no'>Klin</span> <span class='kw'>=</span> <span class='fu'>aux.kernelcov</span>(<span class='no'>X</span>, <span class='kw'>ktype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"linear"</span>,<span class='fl'>0</span>))
-<span class='no'>Kgau</span> <span class='kw'>=</span> <span class='fu'>aux.kernelcov</span>(<span class='no'>X</span>, <span class='kw'>ktype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gaussian"</span>,<span class='fl'>1</span>))
-<span class='no'>Klap</span> <span class='kw'>=</span> <span class='fu'>aux.kernelcov</span>(<span class='no'>X</span>, <span class='kw'>ktype</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"laplacian"</span>,<span class='fl'>1</span>))
+<span class='va'>Klin</span> <span class='op'>=</span> <span class='fu'>aux.kernelcov</span><span class='op'>(</span><span class='va'>X</span>, ktype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"linear"</span>,<span class='fl'>0</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>Kgau</span> <span class='op'>=</span> <span class='fu'>aux.kernelcov</span><span class='op'>(</span><span class='va'>X</span>, ktype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gaussian"</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>Klap</span> <span class='op'>=</span> <span class='fu'>aux.kernelcov</span><span class='op'>(</span><span class='va'>X</span>, ktype<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"laplacian"</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>), <span class='kw'>pty</span><span class='kw'>=</span><span class='st'>"s"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>Klin</span>$<span class='no'>K</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"kernel=linear"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>Kgau</span>$<span class='no'>K</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"kernel=gaussian"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>Klap</span>$<span class='no'>K</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"kernel=laplacian"</span>)</div><div class='img'><img src='aux_kernelcov-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span>, pty<span class='op'>=</span><span class='st'>"s"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>Klin</span><span class='op'>$</span><span class='va'>K</span>, main<span class='op'>=</span><span class='st'>"kernel=linear"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>Kgau</span><span class='op'>$</span><span class='va'>K</span>, main<span class='op'>=</span><span class='st'>"kernel=gaussian"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>Klap</span><span class='op'>$</span><span class='va'>K</span>, main<span class='op'>=</span><span class='st'>"kernel=laplacian"</span><span class='op'>)</span>
+</div><div class='img'><img src='aux_kernelcov-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -287,7 +294,7 @@ machine learning</em>. arXiv:math/0701907.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

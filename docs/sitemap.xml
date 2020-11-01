@@ -454,6 +454,9 @@
     <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_LTSA.html</loc>
   </url>
   <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_MMDS.html</loc>
+  </url>
+  <url>
     <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_MVE.html</loc>
   </url>
   <url>
@@ -461,6 +464,9 @@
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_NNP.html</loc>
+  </url>
+  <url>
+    <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_PHATE.html</loc>
   </url>
   <url>
     <loc>https://kyoustat.com/Rdimtools/reference/nonlinear_PLP.html</loc>

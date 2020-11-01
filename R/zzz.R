@@ -16,7 +16,7 @@
   packageStartupMessage("**")
   packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
   packageStartupMessage("** Maintainer : Kisung You  (kyoustat@gmail.com)")
-  packageStartupMessage("** Website    : kyoustat.com/Rdimtools")
+  packageStartupMessage("** Website    : https://kyoustat.com/Rdimtools/")
   packageStartupMessage("**")
   packageStartupMessage("** Please share any bugs or suggestions to the maintainer.")
   packageStartupMessage("** ------------------------------------------------------- **")

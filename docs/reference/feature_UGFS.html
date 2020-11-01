@@ -158,13 +158,13 @@ an affinity graph using local variance computation and scores variables based on
 an affinity graph using local variance computation and scores variables based on PageRank algorithm.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.ugfs</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>nbdk</span> <span class='kw'>=</span> <span class='fl'>5</span>,
-  <span class='kw'>varthr</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>do.ugfs</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  nbdk <span class='op'>=</span> <span class='fl'>5</span>,
+  varthr <span class='op'>=</span> <span class='fl'>2</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,13 +187,13 @@ an affinity graph using local variance computation and scores variables based on
     </tr>
     <tr>
       <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data. Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+      <td><p>an additional option for preprocessing the data. Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>prscore</dt><dd><p>a length-\(p\) vector of score computed from PageRank algorithm. Indices with largest values are selected.</p></dd>
 <dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
@@ -204,29 +204,38 @@ an affinity graph using local variance computation and scores variables based on
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Henni K, Mezghani N, Gouin-Vallerand C (2018).
-&#8220;Unsupervised graph-based feature selection via subspace and pagerank centrality.&#8221;
+    <p>Henni K, Mezghani N, Gouin-Vallerand C (2018-dec).
+&#8220;Unsupervised Graph-Based Feature Selection via Subspace and Pagerank Centrality.&#8221;
 <em>Expert Systems with Applications</em>, <b>114</b>, 46--53.
-ISSN 09574174, doi: <a href='https://doi.org/10.1016/j.eswa.2018.07.029'>10.1016/j.eswa.2018.07.029</a>
+doi: <a href='https://doi.org/10.1016/j.eswa.2018.07.029'>10.1016/j.eswa.2018.07.029</a>
 .</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## use iris data</span>
 <span class='co'>## it is known that feature 3 and 4 are more important.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='no'>iris.dat</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>iris.lab</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[,<span class='fl'>5</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='va'>iris.dat</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>iris.lab</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>## try multiple thresholding values</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>0.5</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>5.0</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.ugfs</span>(<span class='no'>iris.dat</span>, <span class='kw'>nbdk</span><span class='kw'>=</span><span class='fl'>10</span>, <span class='kw'>varthr</span><span class='kw'>=</span><span class='fl'>9.5</span>)</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'>
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.ugfs</span><span class='op'>(</span><span class='va'>iris.dat</span>, nbdk<span class='op'>=</span><span class='fl'>10</span>, varthr<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.ugfs</span><span class='op'>(</span><span class='va'>iris.dat</span>, nbdk<span class='op'>=</span><span class='fl'>10</span>, varthr<span class='op'>=</span><span class='fl'>5.0</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'><span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.ugfs</span><span class='op'>(</span><span class='va'>iris.dat</span>, nbdk<span class='op'>=</span><span class='fl'>10</span>, varthr<span class='op'>=</span><span class='fl'>9.5</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; [1] "* do.ugfs : range of variances is [0.14,12.92]."</div><div class='input'>
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=0.1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"bandwidth=10"</span>)</div><div class='img'><img src='feature_UGFS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"bandwidth=0.1"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"bandwidth=1"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"bandwidth=10"</span><span class='op'>)</span>
+</div><div class='img'><img src='feature_UGFS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -242,7 +251,7 @@ ISSN 09574174, doi: <a href='https://doi.org/10.1016/j.eswa.2018.07.029'>10.1016
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

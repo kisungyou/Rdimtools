@@ -909,6 +909,39 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dt_phate
+Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alpha, std::string dtype, int maxiter, double abstol);
+RcppExport SEXP _Rdimtools_dt_phate(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP kSEXP, SEXP alphaSEXP, SEXP dtypeSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type ptype(ptypeSEXP);
+    Rcpp::traits::input_parameter< int >::type k(kSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< std::string >::type dtype(dtypeSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(dt_phate(X, ndim, ptype, k, alpha, dtype, maxiter, abstol));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dt_mmds
+Rcpp::List dt_mmds(arma::mat& X, int ndim, std::string ptype, int maxiter, double abstol);
+RcppExport SEXP _Rdimtools_dt_mmds(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type ptype(ptypeSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(dt_mmds(X, ndim, ptype, maxiter, abstol));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_aux_preprocess", (DL_FUNC) &_Rdimtools_aux_preprocess, 2},
@@ -978,6 +1011,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_dt_enet", (DL_FUNC) &_Rdimtools_dt_enet, 7},
     {"_Rdimtools_dt_lmds", (DL_FUNC) &_Rdimtools_dt_lmds, 4},
     {"_Rdimtools_dt_rpca", (DL_FUNC) &_Rdimtools_dt_rpca, 5},
+    {"_Rdimtools_dt_phate", (DL_FUNC) &_Rdimtools_dt_phate, 8},
+    {"_Rdimtools_dt_mmds", (DL_FUNC) &_Rdimtools_dt_mmds, 5},
     {NULL, NULL, 0}
 };
 

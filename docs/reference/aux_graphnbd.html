@@ -162,13 +162,13 @@ graph should be constructed. Finally, <code>symmetric</code> parameter controls 
 nearest neighborhood graph should be symmetrized.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aux.graphnbd</span>(
-  <span class='no'>data</span>,
-  <span class='kw'>method</span> <span class='kw'>=</span> <span class='st'>"euclidean"</span>,
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>, <span class='fl'>0.1</span>),
-  <span class='kw'>symmetric</span> <span class='kw'>=</span> <span class='st'>"union"</span>,
-  <span class='kw'>pval</span> <span class='kw'>=</span> <span class='fl'>2</span>
-)</pre>
+    <pre class="usage"><span class='fu'>aux.graphnbd</span><span class='op'>(</span>
+  <span class='va'>data</span>,
+  method <span class='op'>=</span> <span class='st'>"euclidean"</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.1</span><span class='op'>)</span>,
+  symmetric <span class='op'>=</span> <span class='st'>"union"</span>,
+  pval <span class='op'>=</span> <span class='fl'>2</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -183,7 +183,7 @@ nearest neighborhood graph should be symmetrized.</p>
     </tr>
     <tr>
       <th>type</th>
-      <td><p>a defining pattern of neighborhood criterion. One of</p><dl'>
+      <td><p>a defining pattern of neighborhood criterion. One of</p><dl>
 <dt>c("knn", k)</dt><dd><p>knn with <code>k</code> a positive integer.</p></dd>
 <dt>c("enn", radius)</dt><dd><p>enn with a positive radius.</p></dd>
 <dt>c("proportion", ratio)</dt><dd><p>takes an <code>ratio</code> in (0,1) portion of edges to be connected.</p></dd>
@@ -202,7 +202,7 @@ nearest neighborhood graph should be symmetrized.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>mask</dt><dd><p>a binary matrix of indicating existence of an edge for each element.</p></dd>
 <dt>dist</dt><dd><p>corresponding distance matrix. <code>-Inf</code> is returned for non-connecting edges.</p></dd>
 
@@ -226,25 +226,31 @@ NN search, however, does not necessarily guarantee if symmetric connectivity
 would appear or not. There are two easy options for symmetrization;
 <code>intersect</code> for connecting two nodes if both of them are
 nearest neighbors of each other and <code>union</code> for only either of them to be present.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## Generate data</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>100</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
 
 <span class='co'>## Test three different types of neighborhood connectivity</span>
-<span class='no'>nn1</span> <span class='kw'>=</span> <span class='fu'>aux.graphnbd</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"knn"</span>,<span class='fl'>20</span>))         <span class='co'># knn with k=20</span>
-<span class='no'>nn2</span> <span class='kw'>=</span> <span class='fu'>aux.graphnbd</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"enn"</span>,<span class='fl'>1</span>))          <span class='co'># enn with radius = 1</span>
-<span class='no'>nn3</span> <span class='kw'>=</span> <span class='fu'>aux.graphnbd</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"proportion"</span>,<span class='fl'>0.4</span>)) <span class='co'># connecting 40% of edges</span>
+<span class='va'>nn1</span> <span class='op'>=</span> <span class='fu'>aux.graphnbd</span><span class='op'>(</span><span class='va'>X</span>,type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"knn"</span>,<span class='fl'>20</span><span class='op'>)</span><span class='op'>)</span>         <span class='co'># knn with k=20</span>
+<span class='va'>nn2</span> <span class='op'>=</span> <span class='fu'>aux.graphnbd</span><span class='op'>(</span><span class='va'>X</span>,type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"enn"</span>,<span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span>          <span class='co'># enn with radius = 1</span>
+<span class='va'>nn3</span> <span class='op'>=</span> <span class='fu'>aux.graphnbd</span><span class='op'>(</span><span class='va'>X</span>,type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.4</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># connecting 40% of edges</span>
 
 <span class='co'>## Visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>), <span class='kw'>pty</span><span class='kw'>=</span><span class='st'>"s"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>nn1</span>$<span class='no'>mask</span>); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"knn with k=20"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>nn2</span>$<span class='no'>mask</span>); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"enn with radius=1"</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span>(<span class='no'>nn3</span>$<span class='no'>mask</span>); <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span>(<span class='st'>"proportion of ratio=0.4"</span>)</div><div class='img'><img src='aux_graphnbd-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span>, pty<span class='op'>=</span><span class='st'>"s"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>nn1</span><span class='op'>$</span><span class='va'>mask</span><span class='op'>)</span>; <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>"knn with k=20"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>nn2</span><span class='op'>$</span><span class='va'>mask</span><span class='op'>)</span>; <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>"enn with radius=1"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='va'>nn3</span><span class='op'>$</span><span class='va'>mask</span><span class='op'>)</span>; <span class='fu'><a href='https://rdrr.io/r/graphics/title.html'>title</a></span><span class='op'>(</span><span class='st'>"proportion of ratio=0.4"</span><span class='op'>)</span>
+</div><div class='img'><img src='aux_graphnbd-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +266,7 @@ nearest neighbors of each other and <code>union</code> for only either of them t
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

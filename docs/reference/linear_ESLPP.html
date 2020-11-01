@@ -160,13 +160,13 @@ reduction. Their combination, Extended Supervised LPP, is a combination of two a
 it reflects discriminant information with realistic distance measure via Z-score function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.eslpp</span>(
-  <span class='no'>X</span>,
-  <span class='no'>label</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>numk</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>X</span>)/<span class='fl'>10</span>), <span class='fl'>2</span>),
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>do.eslpp</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>label</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  numk <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -190,13 +190,13 @@ it reflects discriminant information with realistic distance measure via Z-score
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
@@ -205,38 +205,44 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Zheng Z, Yang F, Tan W, Jia J, Yang J (2007).
-&#8220;Gabor feature-based face recognition using supervised locality preserving projection.&#8221;
-<em>Signal Processing</em>, <b>87</b>(10), 2473--2483.</p>
-<p>Shikkenawis G, Mitra SK (2012).
-&#8220;Improving the Locality Preserving Projection for dimensionality reduction.&#8221;
+    <p>Zheng Z, Yang F, Tan W, Jia J, Yang J (2007-oct).
+&#8220;Gabor Feature-Based Face Recognition Using Supervised Locality Preserving Projection.&#8221;
+<em>Signal Processing</em>, <b>87</b>, 2473--2483.</p>
+<p>Shikkenawis G, Mitra SK (2012-nov).
+&#8220;Improving the Locality Preserving Projection for Dimensionality Reduction.&#8221;
 In <em>2012 Third International Conference on Emerging Applications of Information Technology</em>, 161--164.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='linear_LPP.html'>do.lpp</a></code>, <code><a href='linear_SLPP.html'>do.slpp</a></code>, <code><a href='linear_EXTLPP.html'>do.extlpp</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.lpp.html'>do.lpp</a></code>, <code><a href='do.slpp.html'>do.slpp</a></code>, <code><a href='do.extlpp.html'>do.extlpp</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## generate data of 2 types with clear difference</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>diff</span> <span class='kw'>=</span> <span class='fl'>50</span>
-<span class='no'>dt1</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)-<span class='no'>diff</span>;
-<span class='no'>dt2</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)+<span class='no'>diff</span>;
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>diff</span> <span class='op'>=</span> <span class='fl'>50</span>
+<span class='va'>dt1</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>-</span><span class='va'>diff</span>;
+<span class='va'>dt2</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>+</span><span class='va'>diff</span>;
 
 <span class='co'>## merge the data and create a label correspondingly</span>
-<span class='no'>Y</span>      <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>dt1</span>,<span class='no'>dt2</span>)
-<span class='no'>label</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>50</span>)
+<span class='va'>Y</span>      <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>dt1</span>,<span class='va'>dt2</span><span class='op'>)</span>
+<span class='va'>label</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
 
 <span class='co'>## compare LPP, SLPP and ESLPP</span>
-<span class='no'>outLPP</span>   <span class='kw'>&lt;-</span> <span class='fu'><a href='linear_LPP.html'>do.lpp</a></span>(<span class='no'>Y</span>)
-<span class='no'>outSLPP</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='linear_SLPP.html'>do.slpp</a></span>(<span class='no'>Y</span>, <span class='no'>label</span>)
-<span class='no'>outESLPP</span> <span class='kw'>&lt;-</span> <span class='fu'>do.eslpp</span>(<span class='no'>Y</span>, <span class='no'>label</span>)
+<span class='va'>outLPP</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='do.lpp.html'>do.lpp</a></span><span class='op'>(</span><span class='va'>Y</span><span class='op'>)</span>
+<span class='va'>outSLPP</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.slpp.html'>do.slpp</a></span><span class='op'>(</span><span class='va'>Y</span>, <span class='va'>label</span><span class='op'>)</span>
+<span class='va'>outESLPP</span> <span class='op'>&lt;-</span> <span class='fu'>do.eslpp</span><span class='op'>(</span><span class='va'>Y</span>, <span class='va'>label</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outLPP</span>$<span class='no'>Y</span>,   <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"LPP"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outSLPP</span>$<span class='no'>Y</span>,  <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SLPP"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outESLPP</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ESLPP"</span>)</div><div class='img'><img src='linear_ESLPP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outLPP</span><span class='op'>$</span><span class='va'>Y</span>,   col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"LPP"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outSLPP</span><span class='op'>$</span><span class='va'>Y</span>,  col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SLPP"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outESLPP</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"ESLPP"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_ESLPP-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -252,7 +258,7 @@ In <em>2012 Third International Conference on Emerging Applications of Informati
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

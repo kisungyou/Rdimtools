@@ -164,16 +164,16 @@ often suffers from lacking numerical rank. For such case, our algorithm returns 
 algorithm stops working any further due to its innate limitations of constructing weight matrix.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.klde</span>(
-  <span class='no'>X</span>,
-  <span class='no'>label</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>t</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>numk</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>X</span>)/<span class='fl'>10</span>), <span class='fl'>2</span>),
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span>),
-  <span class='kw'>ktype</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gaussian"</span>, <span class='fl'>1</span>),
-  <span class='kw'>kcentering</span> <span class='kw'>=</span> <span class='fl'>TRUE</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.klde</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>label</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  t <span class='op'>=</span> <span class='fl'>1</span>,
+  numk <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
+  ktype <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gaussian"</span>, <span class='fl'>1</span><span class='op'>)</span>,
+  kcentering <span class='op'>=</span> <span class='cn'>TRUE</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -201,11 +201,11 @@ algorithm stops working any further due to its innate limitations of constructin
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>ktype</th>
-      <td><p>a vector containing name of a kernel and corresponding parameters. See also <code><a href='aux_kernelcov.html'>aux.kernelcov</a></code> for complete description of Kernel Trick.</p></td>
+      <td><p>a vector containing name of a kernel and corresponding parameters. See also <code><a href='aux.kernelcov.html'>aux.kernelcov</a></code> for complete description of Kernel Trick.</p></td>
     </tr>
     <tr>
       <th>kcentering</th>
@@ -215,7 +215,7 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 
@@ -226,31 +226,37 @@ Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess
     <p>Hwann-Tzong Chen, Huang-Wei Chang, Tyng-Luh Liu (2005).
 &#8220;Local Discriminant Embedding and Its Variants.&#8221;
 In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Recognition</em>, volume 2, 846--853.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate data of 2 types with clear difference</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>diff</span> <span class='kw'>=</span> <span class='fl'>25</span>
-<span class='no'>dt1</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)-<span class='no'>diff</span>;
-<span class='no'>dt2</span>  <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>50</span>)+<span class='no'>diff</span>;
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>diff</span> <span class='op'>=</span> <span class='fl'>25</span>
+<span class='va'>dt1</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>-</span><span class='va'>diff</span>;
+<span class='va'>dt2</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>+</span><span class='va'>diff</span>;
 
 <span class='co'>## merge the data and create a label correspondingly</span>
-<span class='no'>X</span>      <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span>(<span class='no'>dt1</span>,<span class='no'>dt2</span>)
-<span class='no'>label</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span>(<span class='fl'>1</span>:<span class='fl'>2</span>, <span class='kw'>each</span><span class='kw'>=</span><span class='fl'>50</span>)
+<span class='va'>X</span>      <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>dt1</span>,<span class='va'>dt2</span><span class='op'>)</span>
+<span class='va'>label</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
 
 <span class='co'>## try different neighborhood size</span>
-<span class='no'>out1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.klde</span>(<span class='no'>X</span>, <span class='no'>label</span>, <span class='kw'>numk</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>out2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.klde</span>(<span class='no'>X</span>, <span class='no'>label</span>, <span class='kw'>numk</span><span class='kw'>=</span><span class='fl'>10</span>)
-<span class='no'>out3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.klde</span>(<span class='no'>X</span>, <span class='no'>label</span>, <span class='kw'>numk</span><span class='kw'>=</span><span class='fl'>20</span>)
+<span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'>do.klde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.klde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.klde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>20</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"k=5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"k=10"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"k=20"</span>)</div><div class='img'><img src='nonlinear_KLDE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"k=5"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"k=10"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"k=20"</span><span class='op'>)</span>
+</div><div class='img'><img src='nonlinear_KLDE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -266,7 +272,7 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

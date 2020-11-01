@@ -170,15 +170,15 @@ we adopted <a href='https://CRAN.R-project.org/package=Rcsdp'>Rcsdp</a> package 
 when given large-scale dataset, it may result in extremely deteriorated computational performance.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.mve</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>knn</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>X</span>)/<span class='fl'>10</span>),
-  <span class='kw'>kwidth</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>),
-  <span class='kw'>tol</span> <span class='kw'>=</span> <span class='fl'>1e-04</span>,
-  <span class='kw'>maxiter</span> <span class='kw'>=</span> <span class='fl'>1000</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.mve</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  knn <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span>,
+  kwidth <span class='op'>=</span> <span class='fl'>1</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
+  tol <span class='op'>=</span> <span class='fl'>1e-04</span>,
+  maxiter <span class='op'>=</span> <span class='fl'>1000</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -202,7 +202,7 @@ when given large-scale dataset, it may result in extremely deteriorated computat
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>tol</th>
@@ -216,7 +216,7 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 
@@ -224,32 +224,38 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Shaw B, Jebara T (2007).
+    <p>Shaw B, Jebara T (2007-mar).
 &#8220;Minimum Volume Embedding.&#8221;
-In Meila M, Shen X (eds.), <em>Proceedings of the Eleventh International Conference on Artificial Intelligence and Statistics March 21-24, 2007, San Juan, Puerto Rico</em>, volume 2 of JMLR: W\&amp;CP, 460--467.</p>
+In <em>Proceedings of the Eleventh International Conference on Artificial Intelligence and Statistics March 21-24, 2007, San Juan, Puerto Rico</em>, volume 2 of JMLR: W\&amp;CP, 460--467.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='nonlinear_MVU.html'>do.mvu</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.mvu.html'>do.mvu</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate ribbon-shaped data</span>
 <span class='co'>## in order to pass CRAN pretest, n is set to be small.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"ribbon"</span>,<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>25</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"ribbon"</span>,n<span class='op'>=</span><span class='fl'>25</span><span class='op'>)</span>
 
 <span class='co'>## Compare MVU and MVE</span>
 <span class='co'>#  Note that MVE actually requires much larger number of iterations</span>
 <span class='co'>#  Here, due to CRAN limit, it was set as 7.</span>
-<span class='no'>outMVU5</span>  <span class='kw'>&lt;-</span> <span class='fu'><a href='nonlinear_MVU.html'>do.mvu</a></span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"knn"</span>,<span class='fl'>5</span>), <span class='kw'>projtype</span><span class='kw'>=</span><span class='st'>"kpca"</span>)
-<span class='no'>outMVE5</span>  <span class='kw'>&lt;-</span> <span class='fu'>do.mve</span>(<span class='no'>X</span>, <span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>, <span class='kw'>knn</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>maxiter</span><span class='kw'>=</span><span class='fl'>7</span>)
+<span class='va'>outMVU5</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.mvu.html'>do.mvu</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"knn"</span>,<span class='fl'>5</span><span class='op'>)</span>, projtype<span class='op'>=</span><span class='st'>"kpca"</span><span class='op'>)</span>
+<span class='va'>outMVE5</span>  <span class='op'>&lt;-</span> <span class='fu'>do.mve</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, knn<span class='op'>=</span><span class='fl'>5</span>, maxiter<span class='op'>=</span><span class='fl'>7</span><span class='op'>)</span>
 
 <span class='co'>## Visualize two comparisons</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outMVU5</span>$<span class='no'>Y</span>,  <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MVU (k=5)"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>outMVE5</span>$<span class='no'>Y</span>,  <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"MVE (k=5)"</span>)</div><div class='img'><img src='nonlinear_MVE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outMVU5</span><span class='op'>$</span><span class='va'>Y</span>,  main<span class='op'>=</span><span class='st'>"MVU (k=5)"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>outMVE5</span><span class='op'>$</span><span class='va'>Y</span>,  main<span class='op'>=</span><span class='st'>"MVE (k=5)"</span><span class='op'>)</span>
+</div><div class='img'><img src='nonlinear_MVE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -265,7 +271,7 @@ In Meila M, Shen X (eds.), <em>Proceedings of the Eleventh International Confere
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

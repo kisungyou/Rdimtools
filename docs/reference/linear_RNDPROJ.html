@@ -158,13 +158,13 @@ random projection technique, featured by the celebrated Johnson–Lindenstrauss 
 random projection technique, featured by the celebrated Johnson–Lindenstrauss lemma.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.rndproj</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>),
-  <span class='kw'>type</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"gaussian"</span>, <span class='st'>"achlioptas"</span>, <span class='st'>"sparse"</span>),
-  <span class='kw'>s</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span>(<span class='no'>X</span>)), <span class='fl'>3</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>do.rndproj</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
+  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"gaussian"</span>, <span class='st'>"achlioptas"</span>, <span class='st'>"sparse"</span><span class='op'>)</span>,
+  s <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>ncol</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span>, <span class='fl'>3</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -181,7 +181,7 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>type</th>
@@ -196,7 +196,7 @@ is to use \(max(log \sqrt{p},3)\), it is required for \(s \ge 3\).</p></td>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
 <dt>epsilon</dt><dd><p>an estimated error \(\epsilon\) in accordance with JL lemma.</p></dd>
@@ -224,41 +224,45 @@ for \(s\), any user-supported \(s \ge 3\) is allowed.</p></li>
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Johnson WB, Lindenstrauss J (1984).
-&#8220;Extensions of Lipschitz mappings into a Hilbert space.&#8221;
-In Beals R, Beck A, Bellow A, Hajian A (eds.), <em>Contemporary Mathematics</em>, volume 26, 189--206.
-American Mathematical Society, Providence, Rhode Island.
+&#8220;Extensions of Lipschitz Mappings into a Hilbert Space.&#8221;
+In <em>Contemporary Mathematics</em>, volume 26, 189--206.
+American Mathematical Society.
 ISBN 978-0-8218-5030-5 978-0-8218-7611-4, doi: <a href='https://doi.org/10.1090/conm/026/737400'>10.1090/conm/026/737400</a>
 .</p>
-<p>Achlioptas D (2003).
-&#8220;Database-friendly random projections: Johnson-Lindenstrauss with binary coins.&#8221;
-<em>Journal of Computer and System Sciences</em>, <b>66</b>(4), 671--687.</p>
+<p>Achlioptas D (2003-jun).
+&#8220;Database-Friendly Random Projections: Johnson-Lindenstrauss with Binary Coins.&#8221;
+<em>Journal of Computer and System Sciences</em>, <b>66</b>, 671--687.</p>
 <p>Li P, Hastie TJ, Church KW (2006).
 &#8220;Very Sparse Random Projections.&#8221;
-In <em>Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining</em>,  KDD '06, 287--296.</p>
+In <em>Proceedings of the 12th ACM SIGKDD International Conference on Knowledge Discovery and Data Mining
+KDD '06</em>, 287--296.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## use iris data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>, <span class='fl'>50</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>subid</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>label</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>## 1. Gaussian projection</span>
-<span class='no'>output1</span> <span class='kw'>&lt;-</span> <span class='fu'>do.rndproj</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>)
+<span class='va'>output1</span> <span class='op'>&lt;-</span> <span class='fu'>do.rndproj</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## 2. Achlioptas projection</span>
-<span class='no'>output2</span> <span class='kw'>&lt;-</span> <span class='fu'>do.rndproj</span>(<span class='no'>X</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"achlioptas"</span>)
+<span class='va'>output2</span> <span class='op'>&lt;-</span> <span class='fu'>do.rndproj</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,type<span class='op'>=</span><span class='st'>"achlioptas"</span><span class='op'>)</span>
 
 <span class='co'>## 3. Sparse projection</span>
-<span class='no'>output3</span> <span class='kw'>&lt;-</span> <span class='fu'>do.rndproj</span>(<span class='no'>X</span>,<span class='kw'>type</span><span class='kw'>=</span><span class='st'>"sparse"</span>)
+<span class='va'>output3</span> <span class='op'>&lt;-</span> <span class='fu'>do.rndproj</span><span class='op'>(</span><span class='va'>X</span>,type<span class='op'>=</span><span class='st'>"sparse"</span><span class='op'>)</span>
 
 <span class='co'>## Visualize three different projections</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RNDPROJ::Gaussian"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RNDPROJ::Arclioptas"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>output3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"RNDPROJ::Sparse"</span>)</div><div class='img'><img src='linear_RNDPROJ-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>output1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"RNDPROJ::Gaussian"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>output2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"RNDPROJ::Arclioptas"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>output3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"RNDPROJ::Sparse"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_RNDPROJ-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -274,7 +278,7 @@ In <em>Proceedings of the 12th ACM SIGKDD International Conference on Knowledge 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

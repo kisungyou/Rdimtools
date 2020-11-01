@@ -164,14 +164,14 @@ feature score vectors and selects the indices with smallest values. Graph laplac
 for approximated nonlinear manifold structure.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.cscoreg</span>(
-  <span class='no'>X</span>,
-  <span class='no'>label</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>score</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"ratio"</span>, <span class='st'>"difference"</span>),
-  <span class='kw'>lambda</span> <span class='kw'>=</span> <span class='fl'>0.5</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>)
-)</pre>
+    <pre class="usage"><span class='fu'>do.cscoreg</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>label</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  score <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"ratio"</span>, <span class='st'>"difference"</span><span class='op'>)</span>,
+  lambda <span class='op'>=</span> <span class='fl'>0.5</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -199,13 +199,13 @@ and columns represent independent variables.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data. Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+      <td><p>an additional option for preprocessing the data. Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>cscore</dt><dd><p>a length-\(p\) vector of constraint scores. Indices with smallest values are selected.</p></dd>
 <dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
@@ -216,35 +216,41 @@ and columns represent independent variables.</p></td>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Zhang D, Chen S, Zhou Z (2008).
-&#8220;Constraint Score: A new filter method for feature selection with pairwise constraints.&#8221;
-<em>Pattern Recognition</em>, <b>41</b>(5), 1440--1451.</p>
+    <p>Zhang D, Chen S, Zhou Z (2008-may).
+&#8220;Constraint Score: A New Filter Method for Feature Selection with Pairwise Constraints.&#8221;
+<em>Pattern Recognition</em>, <b>41</b>, 1440--1451.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='feature_CSCORE.html'>do.cscore</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.cscore.html'>do.cscore</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## use iris data</span>
 <span class='co'>## it is known that feature 3 and 4 are more important.</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>subid</span>    <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>,<span class='fl'>50</span>)
-<span class='no'>iris.dat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>iris.lab</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>subid</span>    <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>,<span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>iris.dat</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>iris.lab</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>## try different strategy</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.cscoreg</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='st'>"ratio"</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.cscoreg</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='st'>"difference"</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>0</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.cscoreg</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='st'>"difference"</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>0.5</span>)
-<span class='no'>out4</span> <span class='kw'>=</span> <span class='fu'>do.cscoreg</span>(<span class='no'>iris.dat</span>, <span class='no'>iris.lab</span>, <span class='kw'>score</span><span class='kw'>=</span><span class='st'>"difference"</span>, <span class='kw'>lambda</span><span class='kw'>=</span><span class='fl'>1</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.cscoreg</span><span class='op'>(</span><span class='va'>iris.dat</span>, <span class='va'>iris.lab</span>, score<span class='op'>=</span><span class='st'>"ratio"</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.cscoreg</span><span class='op'>(</span><span class='va'>iris.dat</span>, <span class='va'>iris.lab</span>, score<span class='op'>=</span><span class='st'>"difference"</span>, lambda<span class='op'>=</span><span class='fl'>0</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.cscoreg</span><span class='op'>(</span><span class='va'>iris.dat</span>, <span class='va'>iris.lab</span>, score<span class='op'>=</span><span class='st'>"difference"</span>, lambda<span class='op'>=</span><span class='fl'>0.5</span><span class='op'>)</span>
+<span class='va'>out4</span> <span class='op'>=</span> <span class='fu'>do.cscoreg</span><span class='op'>(</span><span class='va'>iris.dat</span>, <span class='va'>iris.lab</span>, score<span class='op'>=</span><span class='st'>"difference"</span>, lambda<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"ratio"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"diff/lambda=0"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"diff/lambda=0.5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out4</span>$<span class='no'>Y</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>iris.lab</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"diff/lambda=1"</span>)</div><div class='img'><img src='feature_CSCOREG-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"ratio"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"diff/lambda=0"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"diff/lambda=0.5"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out4</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>iris.lab</span>, main<span class='op'>=</span><span class='st'>"diff/lambda=1"</span><span class='op'>)</span>
+</div><div class='img'><img src='feature_CSCOREG-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,7 +266,7 @@ and columns represent independent variables.</p></td>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

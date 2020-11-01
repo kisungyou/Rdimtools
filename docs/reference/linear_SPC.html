@@ -157,20 +157,20 @@ regular PCA is applied for dimension reduction." />
     </div>
 
     <div class="ref-description">
-    <p>Unlike original principal component analysis (<code><a href='linear_PCA.html'>do.pca</a></code>), this algorithm implements
+    <p>Unlike original principal component analysis (<code><a href='do.pca.html'>do.pca</a></code>), this algorithm implements
 a supervised version using response information for feature selection. For each feature/column,
 its normalized association with <code>response</code> variable is computed and the features with
 large magnitude beyond <code>threshold</code> are selected. From the selected submatrix,
 regular PCA is applied for dimension reduction.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.spc</span>(
-  <span class='no'>X</span>,
-  <span class='no'>response</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"center"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>),
-  <span class='kw'>threshold</span> <span class='kw'>=</span> <span class='fl'>0.1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.spc</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  <span class='va'>response</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
+  threshold <span class='op'>=</span> <span class='fl'>0.1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -191,7 +191,7 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is <code>center</code>. See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is <code>center</code>. See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>threshold</th>
@@ -201,7 +201,7 @@ Default is <code>center</code>. See also <code><a href='aux_preprocess.html'>aux
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
@@ -210,38 +210,44 @@ Default is <code>center</code>. See also <code><a href='aux_preprocess.html'>aux
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Bair E, Hastie T, Paul D, Tibshirani R (2006).
+    <p>Bair E, Hastie T, Paul D, Tibshirani R (2006-mar).
 &#8220;Prediction by Supervised Principal Components.&#8221;
-<em>Journal of the American Statistical Association</em>, <b>101</b>(473), 119--137.</p>
+<em>Journal of the American Statistical Association</em>, <b>101</b>, 119--137.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'>## generate swiss roll with auxiliary dimensions</span>
 <span class='co'>## it follows reference example from LSIR paper.</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>n</span> <span class='kw'>=</span> <span class='fl'>100</span>
-<span class='no'>theta</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)
-<span class='no'>h</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)
-<span class='no'>t</span>     <span class='kw'>=</span> (<span class='fl'>1</span>+<span class='fl'>2</span>*<span class='no'>theta</span>)*(<span class='fl'>3</span>*<span class='no'>pi</span>/<span class='fl'>2</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span>(<span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='no'>n</span>,<span class='fl'>10</span>))
-<span class='no'>X</span>[,<span class='fl'>1</span>] <span class='kw'>=</span> <span class='no'>t</span>*<span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span>(<span class='no'>t</span>)
-<span class='no'>X</span>[,<span class='fl'>2</span>] <span class='kw'>=</span> <span class='fl'>21</span>*<span class='no'>h</span>
-<span class='no'>X</span>[,<span class='fl'>3</span>] <span class='kw'>=</span> <span class='no'>t</span>*<span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='no'>t</span>)
-<span class='no'>X</span>[,<span class='fl'>4</span>:<span class='fl'>10</span>] <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span>(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='fl'>7</span>*<span class='no'>n</span>), <span class='kw'>nrow</span><span class='kw'>=</span><span class='no'>n</span>)
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>n</span> <span class='op'>=</span> <span class='fl'>100</span>
+<span class='va'>theta</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
+<span class='va'>h</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span>
+<span class='va'>t</span>     <span class='op'>=</span> <span class='op'>(</span><span class='fl'>1</span><span class='op'>+</span><span class='fl'>2</span><span class='op'>*</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>*</span><span class='op'>(</span><span class='fl'>3</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>/</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/array.html'>array</a></span><span class='op'>(</span><span class='fl'>0</span>,<span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='va'>n</span>,<span class='fl'>10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span> <span class='op'>=</span> <span class='va'>t</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>cos</a></span><span class='op'>(</span><span class='va'>t</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span> <span class='op'>=</span> <span class='fl'>21</span><span class='op'>*</span><span class='va'>h</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>3</span><span class='op'>]</span> <span class='op'>=</span> <span class='va'>t</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='va'>t</span><span class='op'>)</span>
+<span class='va'>X</span><span class='op'>[</span>,<span class='fl'>4</span><span class='op'>:</span><span class='fl'>10</span><span class='op'>]</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='fl'>7</span><span class='op'>*</span><span class='va'>n</span><span class='op'>)</span>, nrow<span class='op'>=</span><span class='va'>n</span><span class='op'>)</span>
 
 <span class='co'>## corresponding response vector</span>
-<span class='no'>y</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span>(<span class='fl'>5</span>*<span class='no'>pi</span>*<span class='no'>theta</span>)+(<span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span>(<span class='no'>n</span>)*<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fl'>0.1</span>))
+<span class='va'>y</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Trig.html'>sin</a></span><span class='op'>(</span><span class='fl'>5</span><span class='op'>*</span><span class='va'>pi</span><span class='op'>*</span><span class='va'>theta</span><span class='op'>)</span><span class='op'>+</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/stats/Uniform.html'>runif</a></span><span class='op'>(</span><span class='va'>n</span><span class='op'>)</span><span class='op'>*</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fl'>0.1</span><span class='op'>)</span><span class='op'>)</span>
 
 <span class='co'>## try different threshold values</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.spc</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>threshold</span><span class='kw'>=</span><span class='fl'>2</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.spc</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>threshold</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.spc</span>(<span class='no'>X</span>, <span class='no'>y</span>, <span class='kw'>threshold</span><span class='kw'>=</span><span class='fl'>10</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.spc</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, threshold<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.spc</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, threshold<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.spc</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>y</span>, threshold<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>1</span>,<span class='fl'>3</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPC::threshold=2"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPC::threshold=5"</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"SPC::threshold=10"</span>)</div><div class='img'><img src='linear_SPC-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)</div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"SPC::threshold=2"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"SPC::threshold=5"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"SPC::threshold=10"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_SPC-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -257,7 +263,7 @@ Default is <code>center</code>. See also <code><a href='aux_preprocess.html'>aux
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

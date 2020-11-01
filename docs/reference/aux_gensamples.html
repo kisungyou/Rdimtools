@@ -158,13 +158,13 @@ Also incorporated a functionality to add white noise with degree noise." />
 Also incorporated a functionality to add white noise with degree <code>noise</code>.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aux.gensamples</span>(
-  <span class='kw'>n</span> <span class='kw'>=</span> <span class='fl'>496</span>,
-  <span class='kw'>noise</span> <span class='kw'>=</span> <span class='fl'>0.01</span>,
-  <span class='kw'>dname</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"swiss"</span>, <span class='st'>"crown"</span>, <span class='st'>"helix"</span>, <span class='st'>"saddle"</span>, <span class='st'>"ribbon"</span>, <span class='st'>"bswiss"</span>, <span class='st'>"cswiss"</span>,
-    <span class='st'>"twinpeaks"</span>, <span class='st'>"sinusoid"</span>, <span class='st'>"mobius"</span>, <span class='st'>"R12in72"</span>),
-  <span class='no'>...</span>
-)</pre>
+    <pre class="usage"><span class='fu'>aux.gensamples</span><span class='op'>(</span>
+  n <span class='op'>=</span> <span class='fl'>496</span>,
+  noise <span class='op'>=</span> <span class='fl'>0.01</span>,
+  dname <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"swiss"</span>, <span class='st'>"crown"</span>, <span class='st'>"helix"</span>, <span class='st'>"saddle"</span>, <span class='st'>"ribbon"</span>, <span class='st'>"bswiss"</span>, <span class='st'>"cswiss"</span>,
+    <span class='st'>"twinpeaks"</span>, <span class='st'>"sinusoid"</span>, <span class='st'>"mobius"</span>, <span class='st'>"R12in72"</span><span class='op'>)</span>,
+  <span class='va'>...</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -179,7 +179,7 @@ Also incorporated a functionality to add white noise with degree <code>noise</co
     </tr>
     <tr>
       <th>dname</th>
-      <td><p>name of a predefined shape. Should be one of</p><dl'>
+      <td><p>name of a predefined shape. Should be one of</p><dl>
 <dt><code>"swiss"</code></dt><dd><p>swiss roll</p></dd>
 <dt><code>"crown"</code></dt><dd><p>crown</p></dd>
 <dt><code>"helix"</code></dt><dd><p>helix</p></dd>
@@ -210,21 +210,25 @@ Also incorporated a functionality to add white noise with degree <code>noise</co
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
     <p>Hein M, Audibert J (2005).
-&#8220;Intrinsic dimensionality estimation of submanifolds in R \(^{\textrm{d}}\)\$.&#8221;
-In <em>Proceedings of the 22nd international conference on Machine learning</em>, 289--296.</p>
-<p>van der
-Maaten L (2009).
-&#8220;Learning a parametric embedding by preserving local structure.&#8221;
+&#8220;Intrinsic Dimensionality Estimation of Submanifolds in \$R\^d\$.&#8221;
+In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 289--296.</p>
+<p>van der Maaten L (2009).
+&#8220;Learning a Parametric Embedding by Preserving Local Structure.&#8221;
 <em>Proceedings of AI-STATS</em>.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generating toy example datasets</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>dat.swiss</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"swiss"</span>)
-<span class='no'>dat.crown</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"crown"</span>)
-<span class='no'>dat.helix</span> <span class='kw'>=</span> <span class='fu'>aux.gensamples</span>(<span class='fl'>50</span>, <span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"helix"</span>)
-<span class='co'># }</span></div></pre>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>dat.swiss</span> <span class='op'>=</span> <span class='fu'>aux.gensamples</span><span class='op'>(</span><span class='fl'>50</span>, dname<span class='op'>=</span><span class='st'>"swiss"</span><span class='op'>)</span>
+<span class='va'>dat.crown</span> <span class='op'>=</span> <span class='fu'>aux.gensamples</span><span class='op'>(</span><span class='fl'>50</span>, dname<span class='op'>=</span><span class='st'>"crown"</span><span class='op'>)</span>
+<span class='va'>dat.helix</span> <span class='op'>=</span> <span class='fu'>aux.gensamples</span><span class='op'>(</span><span class='fl'>50</span>, dname<span class='op'>=</span><span class='st'>"helix"</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -240,7 +244,7 @@ Maaten L (2009).
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

@@ -160,7 +160,7 @@ for mapping or projection. When we have new data, therefore, we can simply use t
 Inputs <code>projection</code> and <code>trfinfo</code> should be brought from original model you trained.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>oos.linear</span>(<span class='no'>Xnew</span>, <span class='no'>projection</span>, <span class='no'>trfinfo</span>)</pre>
+    <pre class="usage"><span class='fu'>oos.linear</span><span class='op'>(</span><span class='va'>Xnew</span>, <span class='va'>projection</span>, <span class='va'>trfinfo</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,48 +177,55 @@ it will be considered as an \((1\times p)\) matrix with single observation.</p><
     <tr>
       <th>trfinfo</th>
       <td><p>a list containing transformation information generated from manifold learning algorithms.
-See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Ynew</dt><dd><p>an \((m\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 </dl>
 
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate sample data and separate them</span>
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>n</span><span class='kw'>=</span><span class='fl'>500</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>46556</span>)
-<span class='no'>idxtest</span>  <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>500</span>,<span class='fl'>20</span>)        <span class='co'># 20% of data for testing</span>
-<span class='no'>idxtrain</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span>(<span class='fl'>1</span>:<span class='fl'>500</span>,<span class='no'>idxtest</span>)  <span class='co'># 80% of data for training</span>
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>500</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>46556</span><span class='op'>)</span>
+<span class='va'>idxtest</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>,<span class='fl'>20</span><span class='op'>)</span>        <span class='co'># 20% of data for testing</span>
+<span class='va'>idxtrain</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>,<span class='va'>idxtest</span><span class='op'>)</span>  <span class='co'># 80% of data for training</span>
 
-<span class='no'>Xtrain</span> <span class='kw'>=</span> <span class='no'>X</span>[<span class='no'>idxtrain</span>,]
-<span class='no'>Xtest</span>  <span class='kw'>=</span> <span class='no'>X</span>[<span class='no'>idxtest</span>,]
+<span class='va'>Xtrain</span> <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='va'>idxtrain</span>,<span class='op'>]</span>
+<span class='va'>Xtest</span>  <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='va'>idxtest</span>,<span class='op'>]</span>
 
 <span class='co'>## run PCA for train data</span>
-<span class='no'>res_train</span> <span class='kw'>=</span> <span class='fu'><a href='linear_PCA.html'>do.pca</a></span>(<span class='no'>Xtrain</span>,<span class='kw'>ndim</span><span class='kw'>=</span><span class='fl'>2</span>,<span class='kw'>preprocess</span><span class='kw'>=</span><span class='st'>"whiten"</span>)
+<span class='va'>res_train</span> <span class='op'>=</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>Xtrain</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,preprocess<span class='op'>=</span><span class='st'>"whiten"</span><span class='op'>)</span>
 
 <span class='co'>## perform OOS.LINEAR on new dataset</span>
 <span class='co'>## note that inputs should be from a given model you trained</span>
-<span class='no'>model.projection</span> <span class='kw'>=</span> <span class='no'>res_train</span>$<span class='no'>projection</span>
-<span class='no'>model.trfinfo</span>    <span class='kw'>=</span> <span class='no'>res_train</span>$<span class='no'>trfinfo</span>
-<span class='no'>res_test</span>  <span class='kw'>=</span> <span class='fu'>oos.linear</span>(<span class='no'>Xtest</span>, <span class='no'>model.projection</span>, <span class='no'>model.trfinfo</span>)
+<span class='va'>model.projection</span> <span class='op'>=</span> <span class='va'>res_train</span><span class='op'>$</span><span class='va'>projection</span>
+<span class='va'>model.trfinfo</span>    <span class='op'>=</span> <span class='va'>res_train</span><span class='op'>$</span><span class='va'>trfinfo</span>
+<span class='va'>res_test</span>  <span class='op'>=</span> <span class='fu'>oos.linear</span><span class='op'>(</span><span class='va'>Xtest</span>, <span class='va'>model.projection</span>, <span class='va'>model.trfinfo</span><span class='op'>)</span>
 
 <span class='co'>## let's compare via visualization</span>
-<span class='no'>xx</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>) <span class='co'># range of axis 1 for compact visualization</span>
-<span class='no'>yy</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(-<span class='fl'>2</span>,<span class='fl'>2</span>) <span class='co'># range of axis 2 for compact visualization</span>
-<span class='no'>mm</span> <span class='kw'>=</span> <span class='st'>"black=train / red=test data"</span> <span class='co'># figure title</span>
-<span class='no'>YY</span> <span class='kw'>=</span> <span class='no'>res_test</span>$<span class='no'>Ynew</span>  <span class='co'># out-of-sample projection for test data</span>
+<span class='va'>xx</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span> <span class='co'># range of axis 1 for compact visualization</span>
+<span class='va'>yy</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span> <span class='co'># range of axis 2 for compact visualization</span>
+<span class='va'>mm</span> <span class='op'>=</span> <span class='st'>"black=train / red=test data"</span> <span class='co'># figure title</span>
+<span class='va'>YY</span> <span class='op'>=</span> <span class='va'>res_test</span><span class='op'>$</span><span class='va'>Ynew</span>  <span class='co'># out-of-sample projection for test data</span>
 
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>res_train</span>$<span class='no'>Y</span>, <span class='kw'>type</span><span class='kw'>=</span><span class='st'>"p"</span>, <span class='kw'>xlim</span><span class='kw'>=</span><span class='no'>xx</span>, <span class='kw'>ylim</span><span class='kw'>=</span><span class='no'>yy</span>,
-     <span class='kw'>main</span><span class='kw'>=</span><span class='no'>mm</span>, <span class='kw'>xlab</span><span class='kw'>=</span><span class='st'>"axis 1"</span>, <span class='kw'>ylab</span><span class='kw'>=</span><span class='st'>"axis 2"</span>)</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span>(<span class='no'>YY</span>[,<span class='fl'>1</span>], <span class='no'>YY</span>[,<span class='fl'>2</span>], <span class='kw'>lwd</span><span class='kw'>=</span><span class='fl'>3</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='st'>"red"</span>)</div><div class='img'><img src='oos_LINEAR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>res_train</span><span class='op'>$</span><span class='va'>Y</span>, type<span class='op'>=</span><span class='st'>"p"</span>, xlim<span class='op'>=</span><span class='va'>xx</span>, ylim<span class='op'>=</span><span class='va'>yy</span>,
+     main<span class='op'>=</span><span class='va'>mm</span>, xlab<span class='op'>=</span><span class='st'>"axis 1"</span>, ylab<span class='op'>=</span><span class='st'>"axis 2"</span><span class='op'>)</span>
+</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span><span class='op'>(</span><span class='va'>YY</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span>, <span class='va'>YY</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span>, lwd<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span>
+</div><div class='img'><img src='oos_LINEAR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -234,7 +241,7 @@ See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more 
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

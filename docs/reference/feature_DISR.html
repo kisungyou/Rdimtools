@@ -162,13 +162,13 @@ ranking features by both representativeness and diversity. Self-representation c
 the degree of inter-feature similarity to enhance diversity from the chosen features.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.disr</span>(
-  <span class='no'>X</span>,
-  <span class='kw'>ndim</span> <span class='kw'>=</span> <span class='fl'>2</span>,
-  <span class='kw'>preprocess</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span>),
-  <span class='kw'>lbd1</span> <span class='kw'>=</span> <span class='fl'>1</span>,
-  <span class='kw'>lbd2</span> <span class='kw'>=</span> <span class='fl'>1</span>
-)</pre>
+    <pre class="usage"><span class='fu'>do.disr</span><span class='op'>(</span>
+  <span class='va'>X</span>,
+  ndim <span class='op'>=</span> <span class='fl'>2</span>,
+  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
+  lbd1 <span class='op'>=</span> <span class='fl'>1</span>,
+  lbd2 <span class='op'>=</span> <span class='fl'>1</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,7 +185,7 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>lbd1</th>
@@ -199,7 +199,7 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl'>
+    <p>a named list containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
 <dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
@@ -209,36 +209,42 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Liu Y, Liu K, Zhang C, Wang J, Wang X (2017).
-&#8220;Unsupervised feature selection via Diversity-induced Self-representation.&#8221;
+    <p>Liu Y, Liu K, Zhang C, Wang J, Wang X (2017-jan).
+&#8220;Unsupervised Feature Selection via Diversity-Induced Self-Representation.&#8221;
 <em>Neurocomputing</em>, <b>219</b>, 350--363.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='feature_RSR.html'>do.rsr</a></code></p></div>
+    <div class='dont-index'><p><code><a href='do.rsr.html'>do.rsr</a></code></p></div>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## use iris data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span>(<span class='no'>iris</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span>(<span class='fl'>100</span>)
-<span class='no'>subid</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span>(<span class='fl'>1</span>:<span class='fl'>150</span>, <span class='fl'>50</span>)
-<span class='no'>X</span>     <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>1</span>:<span class='fl'>4</span>])
-<span class='no'>label</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span>(<span class='no'>iris</span>[<span class='no'>subid</span>,<span class='fl'>5</span>])
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
+<span class='va'>subid</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>50</span><span class='op'>)</span>
+<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>label</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>#### try different lbd combinations</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>do.disr</span>(<span class='no'>X</span>, <span class='kw'>lbd1</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>lbd2</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>do.disr</span>(<span class='no'>X</span>, <span class='kw'>lbd1</span><span class='kw'>=</span><span class='fl'>1</span>, <span class='kw'>lbd2</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>do.disr</span>(<span class='no'>X</span>, <span class='kw'>lbd1</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>lbd2</span><span class='kw'>=</span><span class='fl'>1</span>)
-<span class='no'>out4</span> <span class='kw'>=</span> <span class='fu'>do.disr</span>(<span class='no'>X</span>, <span class='kw'>lbd1</span><span class='kw'>=</span><span class='fl'>5</span>, <span class='kw'>lbd2</span><span class='kw'>=</span><span class='fl'>5</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.disr</span><span class='op'>(</span><span class='va'>X</span>, lbd1<span class='op'>=</span><span class='fl'>1</span>, lbd2<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.disr</span><span class='op'>(</span><span class='va'>X</span>, lbd1<span class='op'>=</span><span class='fl'>1</span>, lbd2<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.disr</span><span class='op'>(</span><span class='va'>X</span>, lbd1<span class='op'>=</span><span class='fl'>5</span>, lbd2<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+<span class='va'>out4</span> <span class='op'>=</span> <span class='fu'>do.disr</span><span class='op'>(</span><span class='va'>X</span>, lbd1<span class='op'>=</span><span class='fl'>5</span>, lbd2<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
-<span class='no'>opar</span> <span class='kw'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>no.readonly</span><span class='kw'>=</span><span class='fl'>TRUE</span>)
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='kw'>mfrow</span><span class='kw'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span>(<span class='fl'>2</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out1</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(1,1)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out2</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(1,5)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out3</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(5,1)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)
-<span class='fu'><a href='https://rdrr.io/r/base/plot.html'>plot</a></span>(<span class='no'>out4</span>$<span class='no'>Y</span>, <span class='kw'>main</span><span class='kw'>=</span><span class='st'>"(lbd1,lbd2)=(5,5)"</span>, <span class='kw'>col</span><span class='kw'>=</span><span class='no'>label</span>, <span class='kw'>pch</span><span class='kw'>=</span><span class='fl'>19</span>)</div><div class='img'><img src='feature_DISR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span>(<span class='no'>opar</span>)
-<span class='co'># }</span></div></pre>
+<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"(lbd1,lbd2)=(1,1)"</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"(lbd1,lbd2)=(1,5)"</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"(lbd1,lbd2)=(5,1)"</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out4</span><span class='op'>$</span><span class='va'>Y</span>, main<span class='op'>=</span><span class='st'>"(lbd1,lbd2)=(5,5)"</span>, col<span class='op'>=</span><span class='va'>label</span>, pch<span class='op'>=</span><span class='fl'>19</span><span class='op'>)</span>
+</div><div class='img'><img src='feature_DISR-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -254,7 +260,7 @@ Default is "null". See also <code><a href='aux_preprocess.html'>aux.preprocess</
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>

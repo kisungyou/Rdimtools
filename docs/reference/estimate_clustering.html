@@ -160,7 +160,7 @@ neighborhood information using <code><a href='https://rdrr.io/r/stats/hclust.htm
 over the range of radii.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>est.clustering</span>(<span class='no'>X</span>, <span class='kw'>kmin</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span>(<span class='no'>X</span>))))</pre>
+    <pre class="usage"><span class='fu'>est.clustering</span><span class='op'>(</span><span class='va'>X</span>, kmin <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/MathFun.html'>sqrt</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -177,34 +177,38 @@ over the range of radii.</p>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing containing</p><dl'>
+    <p>a named list containing containing</p><dl>
 <dt>estdim</dt><dd><p>estimated intrinsic dimension.</p></dd>
 
 </dl>
 
     <h2 class="hasAnchor" id="references"><a class="anchor" href="#references"></a>References</h2>
 
-    <p>Eriksson B, Crovella M (2012).
-&#8220;Estimating intrinsic dimension via clustering.&#8221;
+    <p>Eriksson B, Crovella M (2012-aug).
+&#8220;Estimating Intrinsic Dimension via Clustering.&#8221;
 In <em>2012 IEEE Statistical Signal Processing Workshop (SSP)</em>, 760--763.</p>
+    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+
+    <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## create 'swiss' roll dataset</span>
-<span class='no'>X</span> <span class='kw'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span>(<span class='kw'>dname</span><span class='kw'>=</span><span class='st'>"swiss"</span>)
+<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"swiss"</span><span class='op'>)</span>
 
 <span class='co'>## try different k values</span>
-<span class='no'>out1</span> <span class='kw'>=</span> <span class='fu'>est.clustering</span>(<span class='no'>X</span>, <span class='kw'>kmin</span><span class='kw'>=</span><span class='fl'>5</span>)
-<span class='no'>out2</span> <span class='kw'>=</span> <span class='fu'>est.clustering</span>(<span class='no'>X</span>, <span class='kw'>kmin</span><span class='kw'>=</span><span class='fl'>25</span>)
-<span class='no'>out3</span> <span class='kw'>=</span> <span class='fu'>est.clustering</span>(<span class='no'>X</span>, <span class='kw'>kmin</span><span class='kw'>=</span><span class='fl'>50</span>)
+<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>est.clustering</span><span class='op'>(</span><span class='va'>X</span>, kmin<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
+<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>est.clustering</span><span class='op'>(</span><span class='va'>X</span>, kmin<span class='op'>=</span><span class='fl'>25</span><span class='op'>)</span>
+<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>est.clustering</span><span class='op'>(</span><span class='va'>X</span>, kmin<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
 
 <span class='co'>## print the results</span>
-<span class='no'>line1</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=5  gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out1</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='no'>line2</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=25 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out2</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='no'>line3</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='st'>"* est.clustering : kmin=50 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span>(<span class='no'>out3</span>$<span class='no'>estdim</span>,<span class='fl'>2</span>))
-<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span>(<span class='no'>line1</span>,<span class='st'>"\n"</span>,<span class='no'>line2</span>,<span class='st'>"\n"</span>,<span class='no'>line3</span>))</div><div class='output co'>#&gt; * est.clustering : kmin=5  gives 1.65
+<span class='va'>line1</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.clustering : kmin=5  gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>line2</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.clustering : kmin=25 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>line3</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='st'>"* est.clustering : kmin=50 gives "</span>,<span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>estdim</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/base/cat.html'>cat</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/paste.html'>paste0</a></span><span class='op'>(</span><span class='va'>line1</span>,<span class='st'>"\n"</span>,<span class='va'>line2</span>,<span class='st'>"\n"</span>,<span class='va'>line3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; * est.clustering : kmin=5  gives 1.65
 #&gt; * est.clustering : kmin=25 gives 2.01
-#&gt; * est.clustering : kmin=50 gives 2.21</div><div class='input'># }
+#&gt; * est.clustering : kmin=50 gives 2.21</div><div class='input'><span class='co'># }</span>
 
 </div></pre>
   </div>
@@ -222,7 +226,7 @@ In <em>2012 IEEE Statistical Signal Processing Workshop (SSP)</em>, 760--763.</p
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
 </div>
 
       </footer>
