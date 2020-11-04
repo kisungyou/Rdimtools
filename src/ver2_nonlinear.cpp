@@ -452,15 +452,18 @@ Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alp
     throw std::invalid_argument("* do.phate : 'ndim' should be in [1,ncol(X)).");
   }
   // preprocessing
-  ClNLproc init(ptype);
-  arma::mat premat    = init.MainFunc(X);
-  arma::rowvec mymean = premat.row(0);
-  arma::mat    mymult = premat.rows(1,X.n_cols);
-  std::string  mytype = init.GetType();
+  // ClNLproc init(ptype);
+  // arma::mat premat    = init.MainFunc(X);
+  // arma::rowvec mymean = premat.row(0);
+  // arma::mat    mymult = premat.rows(1,X.n_cols);
+  // std::string  mytype = init.GetType();
+  arma::rowvec mymean(X.n_cols, fill::zeros);
+  arma::mat mymult(X.n_cols, X.n_cols, fill::eye);
+  std::string mytype = "null";
 
   // computation ---------------------------------------------------------------
   int i, j;
-  // 1. pairwise distance computation
+  // 1. pairwise distance computation : these are modified by nbdist
   arma::mat D(N,N,fill::zeros);
   for (i=0; i<(N-1); i++){
     for (j=(i+1); j<N; j++){
@@ -502,14 +505,17 @@ Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alp
       PT = PT*P;
     }
   }
+  for (i=0; i<N; i++){
+    PT.row(i) /= arma::accu(PT.row(i));
+  }
   // 6. compute potential distance
   arma::mat PotDist(N,N,fill::zeros);
   arma::rowvec PTi(N,fill::zeros);
   arma::rowvec PTj(N,fill::zeros);
   for (i=0; i<(N-1); i++){
-    PTi = PT.row(i)/arma::accu(PT.row(i));
+    PTi = PT.row(i);
     for (j=(i+1); j<N; j++){
-      PTj = PT.row(j)/arma::accu(PT.row(j));
+      PTj = PT.row(j);
       if (dtype=="log"){
         PotDist(i,j) = arma::norm(arma::log(PTi)-arma::log(PTj), 2);
       } else if (dtype=="sqrt"){ // Riemannian failed
@@ -520,7 +526,7 @@ Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alp
       PotDist(j,i) = PotDist(i,j);
     }
   }
-  PotDist *= (arma::accu(D)/(static_cast<double>(N*N)*PotDist.max())); // arbitrary normalization for numerical reason
+  PotDist *= arma::accu(D)/(static_cast<double>(N*N)*PotDist.max()); // arbitrary normalization for numerical reason
 
   // 7. apply MDS - either Classical or Metric
   arma::mat embed(N,ndim,fill::zeros);

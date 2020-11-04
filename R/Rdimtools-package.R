@@ -14,6 +14,7 @@
 #' @import RcppDE
 #' @import maotai
 #' @import ManifoldOptim
+#' @importFrom nabor knn
 #' @importFrom mclustcomp mclustcomp
 #' @importFrom utils packageVersion combn getFromNamespace
 #' @importFrom RSpectra eigs svds

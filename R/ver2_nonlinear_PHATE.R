@@ -61,32 +61,9 @@ do.phate <- function(X, ndim=2, k=5, alpha=10, dtype=c("log","sqrt"), smacof=TRU
 
 
   #------------------------------------------------------------------------
-  # Version 2 update
+  # Version 2 update - tried knn approximate search but somehow failed for symmetry
+  # nbx    = nabor::knn(X, k=(myk+1))
+  # nbdist = as.vector(nbx$nn.dists[,(myk+1)])
   output = dt_phate(X, myndim, myprep, myk, myalpha, mydtype, myiter, myeps, smacof)
   return(output)
 }
-
-# vecnorm <- function(x){
-#   return(sqrt(sum(x^2)))
-# }
-
-# X = as.matrix(iris[sample(1:150, 30),1:4])
-# D = as.matrix(dist(X))
-# K    = exp(-D^2)
-# Ksum = rowSums(K)
-#
-# P = diag(1/Ksum)%*%K
-# A = diag(1/sqrt(Ksum))%*%K%*%diag(1/sqrt(Ksum))
-#
-# eigA = eigen(A)$values
-#
-# A2 = A%*%A
-# A3 = A2%*%A
-# A4 = A3%*%A
-# A5 = A4%*%A
-#
-# vecnorm(eigen(A2)$values - eigA^2)
-# vecnorm(eigen(A3)$values - eigA^3)
-# vecnorm(eigen(A4)$values - eigA^4)
-# vecnorm(eigen(A5)$values - eigA^5)
-
