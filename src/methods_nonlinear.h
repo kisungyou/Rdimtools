@@ -23,8 +23,7 @@ arma::mat method_tsne(arma::mat& P, int ndim0, double eta0,
                       double momentum0);
 // 4. Eigenmaps
 Rcpp::List method_eigenmaps(arma::mat& W);
-// 5. Sammon Mapping
-arma::mat method_sammon(arma::mat& X, arma::mat& init);
+// 5. Sammon Mapping - use MASS
 // 6. LLE
 arma::vec method_lleW(arma::mat& mat_tgt, arma::vec& vec_tgt, const double regparam);
 // 7. LLE with automatic choice

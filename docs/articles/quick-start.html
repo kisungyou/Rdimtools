@@ -44,7 +44,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
       </span>
     </div>
 
@@ -72,19 +72,19 @@
 <ul class="nav navbar-nav navbar-right">
 <li>
   <a href="https://twitter.com/kyoustat">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kyoustat/Rdimtools">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kyoustat@gmail.com">
-    <span class="fa fa-envelope"></span>
+    <span class="fas fa-envelope"></span>
      
   </a>
 </li>
@@ -98,8 +98,7 @@
 
       
 
-      </header><script src="quick-start_files/accessible-code-block-0.0.1/empty-anchor.js"></script><link href="quick-start_files/anchor-sections-1.0/anchor-sections.css" rel="stylesheet">
-<script src="quick-start_files/anchor-sections-1.0/anchor-sections.js"></script><div class="row">
+      </header><script src="quick-start_files/header-attrs-2.7/header-attrs.js"></script><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Quick Start with Rdimtools Package</h1>
@@ -118,22 +117,22 @@
 <h2 class="hasAnchor">
 <a href="#install-and-load" class="anchor"></a>1. Install and Load</h2>
 <p><strong>Rdimtools</strong> can be installed in two handy options. A release version from CRAN can be installed</p>
-<div class="sourceCode" id="cb1"><pre class="downlit">
-<span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rdimtools"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"Rdimtools"</span><span class="op">)</span></code></pre></div>
 <p>or a development version is available from GitHub with <code>devtools</code> package.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit">
-<span class="co">## install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"kyoustat/Rdimtools"</span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co">## install.packages("devtools")</span>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html">install_github</a></span><span class="op">(</span><span class="st">"kyoustat/Rdimtools"</span><span class="op">)</span></code></pre></div>
 <p>Now we are ready to go by loading the library.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit">
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://kyoustat.com/Rdimtools/">Rdimtools</a></span><span class="op">)</span></pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="http://kyoustat.com/Rdimtools/">Rdimtools</a></span><span class="op">)</span></code></pre></div>
 </div>
 <div id="intrinsic-dimension-estimation" class="section level2">
 <h2 class="hasAnchor">
 <a href="#intrinsic-dimension-estimation" class="anchor"></a>2. Intrinsic Dimension Estimation</h2>
-<p>As of current release version 1.0.5, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit">
-<span class="co"># load the iris data</span>
+<p>As of current release version 1.0.6, there are 17 intrinsic dimension estimation (IDE) algorithms. In the following example, we will only show 5 methods’ performance.</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># load the iris data</span>
 <span class="va">X</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span>
 <span class="va">lab</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span>
 
@@ -152,16 +151,16 @@
 <span class="va">xtick</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">5</span>,by<span class="op">=</span><span class="fl">1</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/axis.html">axis</a></span><span class="op">(</span>side<span class="op">=</span><span class="fl">1</span>, at<span class="op">=</span><span class="va">xtick</span>, labels <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xtick</span>,  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, 
-     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span><span class="op">)</span>, pos<span class="op">=</span><span class="fl">1</span>, xpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></pre></div>
+     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span><span class="op">)</span>, pos<span class="op">=</span><span class="fl">1</span>, xpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="quick-start_files/figure-html/unnamed-chunk-5-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>As the true dimension is not known for a given dataset, different methods bring about heterogeneous estimates. That’s why we deliver 17 methods at an unprecedented scale to provide a broader basis for your decision.</p>
 </div>
 <div id="dimension-reduction" class="section level2">
 <h2 class="hasAnchor">
 <a href="#dimension-reduction" class="anchor"></a>3. Dimension Reduction</h2>
-<p>Currently, <strong>Rdimtools</strong> (ver 1.0.5) delivers 141 dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit">
-<span class="co"># run 3 algorithms mentioned above</span>
+<p>Currently, <strong>Rdimtools</strong> (ver 1.0.6) delivers 141 dimension reduction/feature selection/manifold learning algorithms. Among a myriad of methods, we compare Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># run 3 algorithms mentioned above</span>
 <span class="va">mypca</span> <span class="op">=</span> <span class="fu"><a href="../reference/do.pca.html">do.pca</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">mylap</span> <span class="op">=</span> <span class="fu"><a href="../reference/do.lscore.html">do.lscore</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span><span class="op">)</span>
 <span class="va">mydfm</span> <span class="op">=</span> <span class="fu"><a href="../reference/do.dm.html">do.dm</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span>, bandwidth<span class="op">=</span><span class="fl">10</span><span class="op">)</span>
@@ -175,7 +174,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y1</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, xlab<span class="op">=</span><span class="st">"axis 1"</span>, ylab<span class="op">=</span><span class="st">"axis 2"</span>, main<span class="op">=</span><span class="st">"PCA"</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y2</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, xlab<span class="op">=</span><span class="st">"axis 1"</span>, ylab<span class="op">=</span><span class="st">"axis 2"</span>, main<span class="op">=</span><span class="st">"Laplacian Score"</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y3</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, xlab<span class="op">=</span><span class="st">"axis 1"</span>, ylab<span class="op">=</span><span class="st">"axis 2"</span>, main<span class="op">=</span><span class="st">"Diffusion Maps"</span><span class="op">)</span></pre></div>
+<span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html">plot</a></span><span class="op">(</span><span class="va">Y3</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, xlab<span class="op">=</span><span class="st">"axis 1"</span>, ylab<span class="op">=</span><span class="st">"axis 2"</span>, main<span class="op">=</span><span class="st">"Diffusion Maps"</span><span class="op">)</span></code></pre></div>
 <p><img src="quick-start_files/figure-html/unnamed-chunk-6-1.png" width="672" style="display: block; margin: auto;"></p>
 <p>As the figure above shows, in general, different algorithms show heterogeneous nature of the data. We hope <strong>Rdimtools</strong> be a valuable toolset to help practitioners and scientists discover many facets of the data.</p>
 </div>

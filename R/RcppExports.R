@@ -215,10 +215,6 @@ method_eigenmaps <- function(W) {
     .Call(`_Rdimtools_method_eigenmaps`, W)
 }
 
-method_sammon <- function(X, Yinit) {
-    .Call(`_Rdimtools_method_sammon`, X, Yinit)
-}
-
 method_lleW <- function(mat_tgt, vec_tgt, regparam) {
     .Call(`_Rdimtools_method_lleW`, mat_tgt, vec_tgt, regparam)
 }

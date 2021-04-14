@@ -9,7 +9,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null". See also \code{\link{aux.preprocess}} for more details.
-#' @param initialize \code{"random"} or \code{"pca"}; the former performs
+#' @param initialize \code{"random"} or \code{"pca"}; theｐ former performs
 #' fast random projection (see also \code{\link{do.rndproj}}) and the latter
 #' performs standard PCA (see also \code{\link{do.pca}}).
 #'
@@ -23,6 +23,7 @@
 #' IEEE Transactions on Computers, C-18 5:401-409.
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -38,10 +39,10 @@
 #' plot(out1$Y, pch=19, col=label, main="out1:rndproj")
 #' plot(out2$Y, pch=19, col=label, main="out2:pca")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{sammon_nonlinear_1969}{Rdimtools}
-#'
 #'
 #' @rdname nonlinear_SAMMON
 #' @author Kisung You
@@ -80,9 +81,15 @@ do.sammon <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","de
   }
 
   # 4. main computation
-  tpX = t(pX)
-  result = list()
-  result$Y = method_sammon(tpX,initY)
-  result$trfinfo  = trfinfo
+  dX = stats::dist(pX)
+  if (any(as.vector(dX) <= 0)){
+    result = list()
+    result$Y = initY
+    result$trfinfo  = trfinfo
+  } else {
+    result = list()
+    result$Y = MASS::sammon(dX, y=initY, k=ndim, trace=FALSE)$points
+    result$trfinfo  = trfinfo
+  }
   return(result)
 }

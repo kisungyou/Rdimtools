@@ -20,7 +20,7 @@ and columns represent independent variables.}
 \item{preprocess}{an additional option for preprocessing the data.
 Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
-\item{initialize}{\code{"random"} or \code{"pca"}; the former performs
+\item{initialize}{\code{"random"} or \code{"pca"}; theｐ former performs
 fast random projection (see also \code{\link{do.rndproj}}) and the latter
 performs standard PCA (see also \code{\link{do.pca}}).}
 }
@@ -37,6 +37,7 @@ dimension reduction techniques that aims to find low-dimensional embedding
 that preserves pairwise distance structure in high-dimensional data space.
 }
 \examples{
+\donttest{
 ## load iris data
 data(iris)
 X     = as.matrix(iris[,1:4])
@@ -52,6 +53,7 @@ par(mfrow=c(1,2))
 plot(out1$Y, pch=19, col=label, main="out1:rndproj")
 plot(out2$Y, pch=19, col=label, main="out2:pca")
 par(opar)
+}
 
 }
 \references{

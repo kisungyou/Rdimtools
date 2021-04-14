@@ -13,7 +13,6 @@ using namespace std;
 *
 * Main Functions ===========================================================
 *    (01) dt_rpca   : RPCA
-*    (02) dt_sammon : sammon mapping
 *    (03) dt_phate  : PHATE by Smita Krishnaswamy
 *    (04) dt_mmds   : metric MDS
 */
@@ -286,7 +285,7 @@ Rcpp::List dt_rpca(arma::mat& X, int ndim, std::string ptype, double mu, double 
   ));
 }
 
-// (02) dt_sammon : sammon mapping =============================================
+
 
 
 // (03) dt_phate ===============================================================

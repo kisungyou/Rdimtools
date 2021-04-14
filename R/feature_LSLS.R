@@ -101,8 +101,8 @@ do.lsls <- function(X, label, ndim=2, alpha=0.5, k=5, preprocess=c("null","cente
   pX      = tmplist$pX
 
   ## STEP 2. NEIGHBORHOOD INFORMATION
-  nbdfunc = utils::getFromNamespace("hidden_knn","maotai")
-  nbdinfo = nbdfunc(pX, nnbd=(myk+1))$nn.idx[,2:(myk+1)]
+  nbdobj  = RANN::nn2(pX, k=(myk+1))
+  nbdinfo = nbdobj$nn.idx[,2:(myk+1)]
 
   ## STEP 3. COMPUTE W, Wb, and Ww
   #  3-1. masking

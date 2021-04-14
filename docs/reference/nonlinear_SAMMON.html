@@ -92,7 +92,7 @@ that preserves pairwise distance structure in high-dimensional data space." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.5</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
       </span>
     </div>
 
@@ -120,19 +120,19 @@ that preserves pairwise distance structure in high-dimensional data space." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kyoustat">
-    <span class="fa fa-twitter"></span>
+    <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kyoustat/Rdimtools">
-    <span class="fa fa-github"></span>
+    <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kyoustat@gmail.com">
-    <span class="fa fa-envelope"></span>
+    <span class="fas fa-envelope"></span>
      
   </a>
 </li>
@@ -186,7 +186,7 @@ Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</
     </tr>
     <tr>
       <th>initialize</th>
-      <td><p><code>"random"</code> or <code>"pca"</code>; the former performs
+      <td><p><code>"random"</code> or <code>"pca"</code>; theｐ former performs
 fast random projection (see also <code><a href='do.rndproj.html'>do.rndproj</a></code>) and the latter
 performs standard PCA (see also <code><a href='do.pca.html'>do.pca</a></code>).</p></td>
     </tr>
@@ -204,15 +204,16 @@ performs standard PCA (see also <code><a href='do.pca.html'>do.pca</a></code>).<
 
     <p>Sammon, J.W. (1969) <em>A Nonlinear Mapping for Data Structure Analysis</em>.
 IEEE Transactions on Computers, C-18 5:401-409.</p>
-<p>Sammon JW (1969-may).
+<p>Sammon JW (1969).
 &#8220;A Nonlinear Mapping for Data Structure Analysis.&#8221;
-<em>IEEE Transactions on Computers</em>, <b>C-18</b>, 401--409.</p>
+<em>IEEE Transactions on Computers</em>, <b>C-18</b>(5), 401--409.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## load iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## load iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
 <span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 <span class='va'>label</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>$</span><span class='va'>Species</span><span class='op'>)</span>
@@ -227,6 +228,7 @@ IEEE Transactions on Computers, C-18 5:401-409.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"out1:rndproj"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"out2:pca"</span><span class='op'>)</span>
 </div><div class='img'><img src='nonlinear_SAMMON-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
 
 </div></pre>
   </div>

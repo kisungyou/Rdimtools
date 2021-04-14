@@ -76,8 +76,7 @@ do.ugfs <- function(X, ndim=2, nbdk=5, varthr=2.0, preprocess=c("null","center",
   trfinfo = tmplist$info
   pX      = tmplist$pX
   #  Nearest-neighbor
-  getnbd  = utils::getFromNamespace("hidden_knn","maotai")
-  knnnbd  = getnbd(pX, nnbd=(myk+1))
+  knnnbd  = RANN::nn2(pX, k=(myk+1))
 
   #------------------------------------------------------------------------
   ## COMPUTATION : Main

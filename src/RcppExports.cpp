@@ -616,18 +616,6 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// method_sammon
-arma::mat method_sammon(arma::mat& X, arma::mat& Yinit);
-RcppExport SEXP _Rdimtools_method_sammon(SEXP XSEXP, SEXP YinitSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< arma::mat& >::type Yinit(YinitSEXP);
-    rcpp_result_gen = Rcpp::wrap(method_sammon(X, Yinit));
-    return rcpp_result_gen;
-END_RCPP
-}
 // method_lleW
 arma::vec method_lleW(arma::mat& mat_tgt, arma::vec& vec_tgt, const double regparam);
 RcppExport SEXP _Rdimtools_method_lleW(SEXP mat_tgtSEXP, SEXP vec_tgtSEXP, SEXP regparamSEXP) {
@@ -992,7 +980,6 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_method_snesym", (DL_FUNC) &_Rdimtools_method_snesym, 7},
     {"_Rdimtools_method_tsne", (DL_FUNC) &_Rdimtools_method_tsne, 7},
     {"_Rdimtools_method_eigenmaps", (DL_FUNC) &_Rdimtools_method_eigenmaps, 1},
-    {"_Rdimtools_method_sammon", (DL_FUNC) &_Rdimtools_method_sammon, 2},
     {"_Rdimtools_method_lleW", (DL_FUNC) &_Rdimtools_method_lleW, 3},
     {"_Rdimtools_method_lleWauto", (DL_FUNC) &_Rdimtools_method_lleWauto, 2},
     {"_Rdimtools_method_lleM", (DL_FUNC) &_Rdimtools_method_lleM, 1},

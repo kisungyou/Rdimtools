@@ -1,3 +1,7 @@
+# Rdimtools 1.0.6
+
+* Replaced nearest neighbor library.
+
 # Rdimtools 1.0.5
 
 * Methods added; `do.mmds()`, `do.phate()`.
