@@ -27,3 +27,7 @@ NULL
 
 # NOTES
 # 1. reference travis builder : https://github.com/mlr-org/mlr/blob/master/.travis.yml
+# pack <- "Rdimtools"
+# path <- find.package(pack)
+# system(paste(shQuote(file.path(R.home("bin"), "R")),
+#              "CMD", "Rd2pdf", shQuote(path)))

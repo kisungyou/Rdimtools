@@ -9,7 +9,7 @@
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null". See also \code{\link{aux.preprocess}} for more details.
-#' @param initialize \code{"random"} or \code{"pca"}; theｐ former performs
+#' @param initialize \code{"random"} or \code{"pca"}; the former performs
 #' fast random projection (see also \code{\link{do.rndproj}}) and the latter
 #' performs standard PCA (see also \code{\link{do.pca}}).
 #'

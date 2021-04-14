@@ -20,7 +20,7 @@ and columns represent independent variables.}
 \item{preprocess}{an additional option for preprocessing the data.
 Default is "null". See also \code{\link{aux.preprocess}} for more details.}
 
-\item{initialize}{\code{"random"} or \code{"pca"}; theｐ former performs
+\item{initialize}{\code{"random"} or \code{"pca"}; the former performs
 fast random projection (see also \code{\link{do.rndproj}}) and the latter
 performs standard PCA (see also \code{\link{do.pca}}).}
 }
