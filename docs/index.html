@@ -154,7 +154,7 @@
 <h2 class="hasAnchor">
 <a href="#minimal-example--dimension-estimation" class="anchor"></a>Minimal Example : Dimension Estimation</h2>
 <p><img src="http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
-<p>Swill Roll is a classic example of 2-dimensional manifold embedded in <span class="math inline">ℝ<sup>3</sup></span> and one of 11 famous model-based samples from <code><a href="reference/aux.gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <span class="math inline"><em>d</em> = 2</span>, let’s apply several methods for intrinsic dimension estimation.</p>
+<p>Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3</sup> and one of 11 famous model-based samples from <code><a href="reference/aux.gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <em>d</em> = 2, let’s apply several methods for intrinsic dimension estimation.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># generate sample data</span>
 <span class="fu"><a href="https://rdrr.io/r/base/Random.html">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>
@@ -177,7 +177,7 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/text.html">text</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xtick</span>,  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, 
      labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span><span class="op">)</span>, pos<span class="op">=</span><span class="fl">1</span>, xpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <span class="math inline"><em>d</em> = 2</span>. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
+<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <em>d</em> = 2. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
 </div>
 <div id="acknowledgements" class="section level2">
 <h2 class="hasAnchor">
