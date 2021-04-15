@@ -60,3 +60,6 @@ reference:
   - title: "(5) Auxiliary Functions"
     contents:
       - starts_with("aux.")
+  - title: "(6) Data"
+    contents:
+      - has_concept("data")
