@@ -13,7 +13,6 @@
 #' @import CVXR
 #' @import RcppDE
 #' @import maotai
-#' @import ManifoldOptim
 #' @importFrom RANN nn2
 #' @importFrom MASS sammon
 #' @importFrom mclustcomp mclustcomp
