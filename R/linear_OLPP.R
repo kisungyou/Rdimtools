@@ -61,7 +61,8 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("*do.olpp : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  ndim = as.integer(ndim)
+  ndim   = as.integer(ndim)
+  pcadim = ndim + 1
 
   # Preprocessing 2 : parameters
   # 2-1. aux.graphnbd
@@ -94,15 +95,15 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   ## MAIN COMPUTATION
   #   step 1. PCA preprocessing
-  covX    = stats::cov(pX)
-  eigtest = eigen(covX, only.values=TRUE)
-  pcadim  = sum(eigtest$values > 0)
-
-  if (pcadim <= ndim){
-    warning("* do.olpp : target 'ndim' is larger than intrinsic data dimension achieved from PCA.")
-    output = do.pca(X, ndim=pcadim,preprocess=algpreprocess)
-    return(output)
-  }
+  # covX    = stats::cov(pX)
+  # eigtest = eigen(covX, only.values=TRUE)
+  # pcadim  = max(sum(eigtest$values > 0), ndim+1)
+  #
+  # if (pcadim <= ndim){
+  #   warning("* do.olpp : target 'ndim' is larger than intrinsic data dimension achieved from PCA.")
+  #   output = do.pca(X, ndim=pcadim,preprocess=algpreprocess)
+  #   return(output)
+  # }
 
   pXpca = do.pca(pX, ndim=pcadim, preprocess="center")
   Xpca  = pXpca$Y

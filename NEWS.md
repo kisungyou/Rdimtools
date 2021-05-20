@@ -1,3 +1,7 @@
+# Rdimtools 1.0.7
+
+* Fixed an error in `do.olpp()` thanks to Nicholas Spyrison.
+
 # Rdimtools 1.0.6
 
 * Replaced nearest neighbor library.
