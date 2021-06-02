@@ -3,7 +3,7 @@
 \docType{data}
 \name{iris}
 \alias{iris}
-\title{'Iris' data}
+\title{Load Iris data}
 \format{
 a data.frame containing\describe{
 \item{Sepal.Length}{sepal length}

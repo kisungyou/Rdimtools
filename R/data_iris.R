@@ -1,4 +1,4 @@
-#' 'Iris' data
+#' Load Iris data
 #'
 #' This is the identical dataset as original \code{iris} data where numeric values of
 #' \code{Sepal.Length}, \code{Sepal.Width}, \code{Petal.Length}, \code{Petal.Width}
