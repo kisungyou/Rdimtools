@@ -6,24 +6,23 @@
 #' feature score vectors and selects the indices with smallest values. Graph laplacian is constructed
 #' for approximated nonlinear manifold structure.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
+#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param score type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} and \code{"difference"} method. See the paper from the reference for more details.
 #' @param lambda a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method.
-#' @param preprocess an additional option for preprocessing the data. Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{cscore}{a length-\eqn{p} vector of constraint scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
@@ -46,6 +45,7 @@
 #' plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
 #' plot(out4$Y, pch=19, col=iris.lab, main="diff/lambda=1")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_constraint_2008a}{Rdimtools}
@@ -55,8 +55,7 @@
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5,
-                       preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
+do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -70,21 +69,8 @@ do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0
   if (!check_ndim(ndim,n)){
     stop("* do.cscoreg : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   5. other parameters
   myscore = match.arg(score)
   mylbd   = as.double(lambda)
-
-  #------------------------------------------------------------------------
-  ## COMPUTATION : PRELIMINARY
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN
@@ -96,8 +82,8 @@ do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0
   Lm = diag(base::rowSums(matSM)) - matSM
   Lc = diag(base::rowSums(matSC)) - matSC
   #   3. compute two vectors
-  vecM = cscoreg_vec(pX, Lm)
-  vecC = cscoreg_vec(pX, Lc)
+  vecM = cscoreg_vec(X, Lm)
+  vecC = cscoreg_vec(X, Lc)
   #   4. compute score according to the score type
   if (all(myscore=="ratio")){
     rankvec = vecM/vecC
@@ -112,12 +98,12 @@ do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pX%*%projection
+  result$Y = X%*%projection
   result$cscore  = rankvec
   result$featidx = idxvec
-  result$trfinfo = trfinfo
   result$projection = projection
-  return(result)
+  result$algorithm = "linear:cscoreg"
+  return(structure(result, class="Rdimtools"))
 }
 
 # auxiliary function ------------------------------------------------------

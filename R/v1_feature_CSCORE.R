@@ -5,21 +5,20 @@
 #' construct a feature score for both constraints. It takes ratio or difference of
 #' feature score vectors and selects the indices with smallest values.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of class labels.
 #' @param ndim an integer-valued target dimension.
 #' @param score type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} and \code{"difference"} method. See the paper from the reference for more details.
 #' @param lambda a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method.
-#' @param preprocess an additional option for preprocessing the data. Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{cscore}{a length-\eqn{p} vector of constraint scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -27,10 +26,8 @@
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
-#' set.seed(100)
-#' subid = sample(1:150,50)
-#' iris.dat = as.matrix(iris[subid,1:4])
-#' iris.lab = as.factor(iris[subid,5])
+#' iris.dat = as.matrix(iris[,1:4])
+#' iris.lab = as.factor(iris[,5])
 #'
 #' ## try different strategy
 #' out1 = do.cscore(iris.dat, iris.lab, score="ratio")
@@ -56,66 +53,59 @@
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.cscore <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5,
-                      preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
+do.cscore <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5){
   #------------------------------------------------------------------------
-  ## PREPROCESSING
-  #   1. data matrix
-  aux.typecheck(X)
-  m = nrow(X)
-  n = ncol(X)
-  #   2. label vector
-  label  = check_label(label, m)
-  #   3. ndim
-  ndim = round(ndim)
+  # BASIC
+  if (!is.matrix(X)){
+    stop("* do.fa : 'X' should be a matrix.")
+  }
+  m     = nrow(X)
+  n     = ncol(X)
+  ndim  = min(max(1, round(ndim)), ncol(X)-1)
   if (!check_ndim(ndim,n)){
     stop("* do.cscore : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   5. other parameters
+  label   = as.integer(check_label(label, m))
   myscore = match.arg(score)
   mylbd   = as.double(lambda)
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : PRELIMINARY
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  ## COMPUTATION
+  output = dt_cscore(X, ndim, label, myscore, mylbd)
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : MAIN
-  #   1. compute SM and SC matrix
-  cmats = cscore_Smatrix(label)
-  matSC = cmats$SC
-  matSM = cmats$SM
-  #   2. compute elementary vectors
-  vecM = method_scoresum(pX, matSM)
-  vecC = method_scoresum(pX, matSC)
-  #   3. compute score according to the score type
-  if (all(myscore=="ratio")){
-    rankvec = vecM/vecC
-  } else {
-    rankvec = vecM - mylbd*vecC
-  }
-  #   4. select the smallest ones
-  idxvec = base::order(rankvec, decreasing=FALSE)[1:ndim]
-  #   5. find the projection matrix
-  projection = aux.featureindicator(n,ndim,idxvec)
+  ## WRAP AND RETURN
+  output$cscore  = as.vector(output$cscore)
+  output$featidx = round(as.vector(output$featidx))
+  return(structure(output, class="Rdimtools"))
 
-  #------------------------------------------------------------------------
-  ## RETURN
-  result = list()
-  result$Y = pX%*%projection
-  result$cscore  = rankvec
-  result$featidx = idxvec
-  result$trfinfo = trfinfo
-  result$projection = projection
-  return(result)
+  # #   1. compute SM and SC matrix
+  # cmats = cscore_Smatrix(label)
+  # matSC = cmats$SC
+  # matSM = cmats$SM
+  # #   2. compute elementary vectors
+  # vecM = method_scoresum(pX, matSM)
+  # vecC = method_scoresum(pX, matSC)
+  # #   3. compute score according to the score type
+  # if (all(myscore=="ratio")){
+  #   rankvec = vecM/vecC
+  # } else {
+  #   rankvec = vecM - mylbd*vecC
+  # }
+  # #   4. select the smallest ones
+  # idxvec = base::order(rankvec, decreasing=FALSE)[1:ndim]
+  # #   5. find the projection matrix
+  # projection = aux.featureindicator(n,ndim,idxvec)
+
+  # #------------------------------------------------------------------------
+  # ## RETURN
+  # result = list()
+  # result$Y = pX%*%projection
+  # result$cscore  = rankvec
+  # result$featidx = idxvec
+  # result$trfinfo = trfinfo
+  # result$projection = projection
+  # return(result)
 }
 
 

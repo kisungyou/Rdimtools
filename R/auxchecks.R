@@ -47,7 +47,7 @@ check_label <- function(label, n){
     stop("* Supervised Learning : 'label' is required to be a vector of class labels.")
   }
   # 2. de-factoring the label
-  label  = as.numeric(as.factor(label))
+  label  = as.integer(as.factor(label))
   ulabel = unique(label)
   K      = length(ulabel)
   if (K==1){

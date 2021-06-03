@@ -255,36 +255,44 @@ v2aux_pagerank <- function(A) {
     .Call(`_Rdimtools_v2aux_pagerank`, A)
 }
 
-dt_pca <- function(X, ndim, ptype, cor) {
-    .Call(`_Rdimtools_dt_pca`, X, ndim, ptype, cor)
-}
-
-dt_fa <- function(X, ndim, ptype, maxiter, tolerance) {
-    .Call(`_Rdimtools_dt_fa`, X, ndim, ptype, maxiter, tolerance)
-}
-
-dt_spca <- function(X, ndim, ptype, mu, rho, abstol, reltol, maxiter) {
-    .Call(`_Rdimtools_dt_spca`, X, ndim, ptype, mu, rho, abstol, reltol, maxiter)
-}
-
-dt_mds <- function(X, ndim, ptype) {
-    .Call(`_Rdimtools_dt_mds`, X, ndim, ptype)
+dt_cscore <- function(X, ndim, label, myscore, mylbd) {
+    .Call(`_Rdimtools_dt_cscore`, X, ndim, label, myscore, mylbd)
 }
 
 admm_lasso <- function(A, b, lambda) {
     .Call(`_Rdimtools_admm_lasso`, A, b, lambda)
 }
 
-dt_lasso <- function(X, ndim, ptype, y, ycenter, lambda) {
-    .Call(`_Rdimtools_dt_lasso`, X, ndim, ptype, y, ycenter, lambda)
+dt_lasso <- function(X, ndim, y, lambda) {
+    .Call(`_Rdimtools_dt_lasso`, X, ndim, y, lambda)
 }
 
-dt_enet <- function(X, ndim, ptype, y, ycenter, lambda1, lambda2) {
-    .Call(`_Rdimtools_dt_enet`, X, ndim, ptype, y, ycenter, lambda1, lambda2)
+dt_enet <- function(X, ndim, y, lambda1, lambda2) {
+    .Call(`_Rdimtools_dt_enet`, X, ndim, y, lambda1, lambda2)
 }
 
-dt_lmds <- function(X, ndim, ptype, npts) {
-    .Call(`_Rdimtools_dt_lmds`, X, ndim, ptype, npts)
+dt_pca <- function(X, ndim, cor) {
+    .Call(`_Rdimtools_dt_pca`, X, ndim, cor)
+}
+
+dt_mds <- function(X, ndim) {
+    .Call(`_Rdimtools_dt_mds`, X, ndim)
+}
+
+dt_fa <- function(X, ndim, maxiter, tolerance) {
+    .Call(`_Rdimtools_dt_fa`, X, ndim, maxiter, tolerance)
+}
+
+dt_lmds <- function(X, ndim, npts) {
+    .Call(`_Rdimtools_dt_lmds`, X, ndim, npts)
+}
+
+dt_spca <- function(X, ndim, mu, rho, abstol, reltol, maxiter) {
+    .Call(`_Rdimtools_dt_spca`, X, ndim, mu, rho, abstol, reltol, maxiter)
+}
+
+dt_mmds <- function(X, ndim, maxiter, abstol) {
+    .Call(`_Rdimtools_dt_mmds`, X, ndim, maxiter, abstol)
 }
 
 dt_rpca <- function(X, ndim, ptype, mu, lambda) {
@@ -293,9 +301,5 @@ dt_rpca <- function(X, ndim, ptype, mu, lambda) {
 
 dt_phate <- function(X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof) {
     .Call(`_Rdimtools_dt_phate`, X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof)
-}
-
-dt_mmds <- function(X, ndim, ptype, maxiter, abstol) {
-    .Call(`_Rdimtools_dt_mmds`, X, ndim, ptype, maxiter, abstol)
 }
 

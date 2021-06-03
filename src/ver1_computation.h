@@ -1,5 +1,5 @@
-#ifndef _Rdimtools_VER2_COMPUTATION_H
-#define _Rdimtools_VER2_COMPUTATION_H
+#ifndef _Rdimtools_VER1_COMPUTATION_H
+#define _Rdimtools_VER1_COMPUTATION_H
 
 #define ARMA_NO_DEBUG
 
@@ -22,7 +22,7 @@
 // Part 1. Methods Related
 Rcpp::List v2aux_fa(arma::mat& X, const int k, const int maxiter, const double tolerance);
 arma::mat  v2aux_pca(arma::mat& X, int ndim);
-arma::mat v2aux_spca(arma::mat& Sigma, const double reltol, const double abstol, const int maxiter, double mu, double rho);
+arma::mat  v2aux_spca(arma::mat& Sigma, const double reltol, const double abstol, const int maxiter, double mu, double rho);
 
 // Part 2. Generic
 arma::mat  v2aux_pdist(arma::mat& X);

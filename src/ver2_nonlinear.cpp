@@ -1,5 +1,5 @@
 #include <RcppArmadillo.h>
-#include "ver2_computation.h"
+#include "ver1_computation.h"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -550,57 +550,3 @@ Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alp
   ));
 }
 
-// (04) dt_mmds   : metric MDS -------------------------------------------------
-// [[Rcpp::export]]
-Rcpp::List dt_mmds(arma::mat& X, int ndim, std::string ptype,int maxiter, double abstol){
-  // preliminary --------------------------------------------------------------
-  // parameters
-  int N = X.n_rows;
-  int P = X.n_cols;
-  if ((ndim < 1)||(ndim >= X.n_cols)){
-    throw std::invalid_argument("* do.mmds : 'ndim' should be in [1,ncol(X)).");
-  }
-  // preprocessing
-  ClNLproc init(ptype);
-  arma::mat premat    = init.MainFunc(X);
-  arma::rowvec mymean = premat.row(0);
-  arma::mat    mymult = premat.rows(1,X.n_cols);
-  std::string  mytype = init.GetType();
-
-  // computation ---------------------------------------------------------------
-  // data prep
-  arma::mat pX;
-  if (mytype=="null"){
-    pX = X;
-  } else {
-    pX.set_size(N,P);
-    for (int n=0;n<N;n++){
-      pX.row(n) = X.row(n) - mymean;
-    }
-    pX = pX*mymult;
-  }
-  // distance computation
-  arma::mat D(N,N,fill::zeros);
-  for (int i=0; i<(N-1); i++){
-    for (int j=(i+1); j<N; j++){
-      D(i,j) = arma::norm(pX.row(i)-pX.row(j),2);
-      D(j,i) = D(i,j);
-    }
-  }
-  // compute
-  arma::mat embed = dt_phate_mmds(D, ndim, maxiter, abstol);
-
-
-  // wrap and report ---------------------------------------------------
-  // trfinfo
-  Rcpp::List info = Rcpp::List::create(
-    Rcpp::Named("type")=mytype,
-    Rcpp::Named("mean")=mymean,
-    Rcpp::Named("multiplier")=mymult,
-    Rcpp::Named("algtype")="nonlinear"
-  );
-  return(Rcpp::List::create(
-      Rcpp::Named("Y") = embed,
-      Rcpp::Named("trfinfo") = info
-  ));
-}

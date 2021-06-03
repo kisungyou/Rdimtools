@@ -63,7 +63,7 @@ LogicalMatrix isweird(NumericMatrix x){
  */
 // [[Rcpp::export]]
 Rcpp::List aux_preprocess(arma::mat& X, const int flag){
-  const int p = X.n_rows;
+  // const int p = X.n_rows;
   const int n = X.n_cols;
   arma::vec Xmean = mean(X,1);
 
@@ -114,7 +114,7 @@ Rcpp::List aux_preprocess(arma::mat& X, const int flag){
 // [[Rcpp::export]]
 Rcpp::List aux_perplexity(arma::mat& X, double perplexity){
   // 2-1. basic settings
-  const int d = X.n_rows;
+  // const int d = X.n_rows;
   const int n = X.n_cols;
   const double tol = 1e-5;
   const double logU= log2(perplexity);
@@ -508,7 +508,7 @@ Rcpp::List aux_eigendecomposition(arma::mat& X){
 // [[Rcpp::export]]
 arma::mat aux_minmax(arma::mat& X, const double gap){
   // 7-1. basic setting
-  const int n = X.n_rows;
+  // const int n = X.n_rows;
   const int d = X.n_cols;
   mat output(2,d,fill::zeros);
 

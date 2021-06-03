@@ -8,15 +8,13 @@
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -35,8 +33,8 @@
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,2))
-#' plot(out1$Y, col=iris.lab, main="LDA")
-#' plot(out2$Y, col=iris.lab, main="Fisher Score")
+#' plot(out1$Y, pch=19, col=iris.lab, main="LDA")
+#' plot(out2$Y, pch=19, col=iris.lab, main="Fisher Score")
 #' par(opar)
 #'
 #' @references
@@ -46,7 +44,7 @@
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
+do.fscore <- function(X, label, ndim=2){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -71,25 +69,13 @@ do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","scale","cs
   if (!check_ndim(ndim,p)){
     stop("* do.fscore : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-
-  #------------------------------------------------------------------------
-  ## COMPUTATION : PREPROCESSING OF THE DATA
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION FOR LSDF
   #   1. compute Fisher score for each feature
   fscore = rep(0,p)
   for (i in 1:p){
-    vecfr     = as.vector(pX[,i])
+    vecfr     = as.vector(X[,i])
     fscore[i] = fscore_single(vecfr, label, ulabel, C)
   }
   #   2. select the largest ones
@@ -100,11 +86,11 @@ do.fscore <- function(X, label, ndim=2, preprocess=c("null","center","scale","cs
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pX%*%projection
+  result$Y = X%*%projection
   result$featidx = idxvec
-  result$trfinfo = trfinfo
   result$projection = projection
-  return(result)
+  result$algorithm = "linear:fscore"
+  return(structure(result, class="Rdimtools"))
 }
 
 

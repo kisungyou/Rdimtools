@@ -17,33 +17,36 @@
 #' \eqn{S_B}, between-group variance, has maximum rank of \code{K-1}. Therefore, the maximal
 #' subspace can only be spanned by at most \code{K-1} orthogonal vectors.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris dataset
 #' data(iris)
-#' set.seed(100)
-#' subid = sample(1:150,50)
-#' X     = as.matrix(iris[subid,1:4])
-#' lab   = as.factor(iris[subid,5])
+#' X     = as.matrix(iris[,1:4])
+#' lab   = as.factor(iris[,5])
 #'
-#' ## perform onto 2-dimensional space
-#' output = do.lda(X, lab, ndim=2)
+#' ## compare with PCA
+#' outLDA = do.lda(X, lab, ndim=2)
+#' outPCA = do.pca(X, ndim=2)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' plot(output$Y, col=lab, pch=19, main="3 groups on 2d plane")
+#' par(mfrow=c(1,2))
+#' plot(outLDA$Y, col=lab, pch=19, main="LDA")
+#' plot(outPCA$Y, col=lab, pch=19, main="PCA")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{fisher_use_1936}{Rdimtools}
@@ -55,12 +58,16 @@
 #' @concept linear_methods
 #' @export
 do.lda <- function(X, label, ndim=2){
-  ## Preprocessing
-  #   1. data matrix
-  aux.typecheck(X)
+  #------------------------------------------------------------------------
+  ## BASIC
+  #  data
+  if (!is.matrix(X)){
+    stop("* do.lda : 'X' should be a matrix.")
+  }
   n = nrow(X)
   p = ncol(X)
-  #   2. label vector
+
+  #  label
   label  = check_label(label, n)
   ulabel = unique(label)
   K      = length(ulabel)
@@ -74,25 +81,21 @@ do.lda <- function(X, label, ndim=2){
     stop("* Supervised Learning : any element of 'label' as NA or Inf will simply be considered as a class, not missing entries.")
   }
 
-  #   3. ndim
+  #  ndim
   if (!check_ndim(ndim,p)){
-    stop("* do.lda : 'ndim' is a positive integer in [1,#(covariates)].")
+    stop("* do.lda : 'ndim' should be a positive integer in [1,#(covariates)].")
   }
   ndim = as.integer(ndim)
   if (ndim>=K){
     warning("* do.lda : by the nature of LDA, target dimension 'ndim' needs to be adjusted to match maximally permissible subspace.")
   }
-  #   4. perform CENTERING
-  tmplist = aux.preprocess.hidden(X,type="null",algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
 
-  ################################################################################
+  #------------------------------------------------------------------------
   ## Rewriting LDA
   # 1. split data into the list
   datlist = list()
   for (i in 1:length(ulabel)){
-    datlist[[i]] = pX[which(label==ulabel[i]),]
+    datlist[[i]] = X[which(label==ulabel[i]),]
   }
   # 2. compute two types of scatter matrices
   #   2-1. error matrix/E/error variance
@@ -105,7 +108,7 @@ do.lda <- function(X, label, ndim=2){
   }
   matH = array(0,c(p,p))
   meanlist = lapply(datlist, colMeans)
-  meantott = colMeans(pX)
+  meantott = colMeans(X)
   for (i in 1:length(ulabel)){
     meandiff = as.vector(meanlist[[i]]-meantott)
     matH = matH + nrow(datlist[[i]])*outer(meandiff,meandiff)
@@ -113,24 +116,24 @@ do.lda <- function(X, label, ndim=2){
 
   W = aux.traceratio(matH, matE, ndim, 1e-6, 123)
 
-  ################################################################################
+  #------------------------------------------------------------------------
   # return results
   result = list()
-  result$Y = pX%*%W
-  result$trfinfo = trfinfo
+  result$Y = X%*%W
   result$projection = W
-  return(result)
+  result$algorithm  = "linear:lda"
+  return(structure(result, class="Rdimtools"))
 }
 
-
-## sum of outer products to calculate S_B and S_W
-#' @keywords internal
-#' @noRd
-lda_outer <- function(X){
-  p = ncol(X)
-  output = array(0,c(p,p))
-  for (i in 1:nrow(X)){
-    output = output + outer(X[i,],X[i,])
-  }
-  return(output)
-}
+#'
+#' ## sum of outer products to calculate S_B and S_W
+#' #' @keywords internal
+#' #' @noRd
+#' lda_outer <- function(X){
+#'   p = ncol(X)
+#'   output = array(0,c(p,p))
+#'   for (i in 1:nrow(X)){
+#'     output = output + outer(X[i,],X[i,])
+#'   }
+#'   return(output)
+#' }

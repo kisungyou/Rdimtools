@@ -3,19 +3,17 @@
 #' \code{do.procrustes} selects a set of features that best aligns PCA's coordinates in the embedded low dimension.
 #' It iteratively selects each variable that minimizes Procrustes distance between configurations.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
 #' @param intdim intrinsic dimension of PCA to be applied. It should be smaller than \code{ndim}.
 #' @param cor mode of eigendecomposition. \code{FALSE} for decomposing covariance, and \code{TRUE} for correlation matrix in PCA.
-#' @param preprocess an additional option for preprocessing the data. Default is \code{"center"}. See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -47,27 +45,20 @@
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE,
-                          preprocess=c("center","scale","cscale","whiten","decorrelate")){
+do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE){
   #------------------------------------------------------------------------
-  ## PREPROCESSING
-  #   1. data matrix
-  aux.typecheck(X)
-  n = nrow(X)
-  p = ncol(X)
-  #   2. label vector : not used
-  #   3. ndim
-  ndim = round(ndim)
+  ## Basic
+  if (!is.matrix(X)){
+    stop("* do.procrustes : 'X' should be a matrix.")
+  }
+  ndim = min(max(1, round(ndim)), ncol(X)-1)
+  n    = nrow(X)
+  p    = ncol(X)
   if (!check_ndim(ndim,p)){
     stop("* do.procrustes : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   5. other parameters
+
+  ## Others
   intdim = round(intdim)
   if (intdim >= ndim){
     stop("* do.procrustes : intrinsic dimension parameter 'intdim' should be smaller than 'dim'.")
@@ -76,12 +67,7 @@ do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE,
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  myprep  = "center"
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX                          # (n x p)
-  pY      = dt_pca(pX, intdim, myprep, mycor)$Y  # (n x k)
-  pY      = matrix(base::scale(pY, center=TRUE, scale=FALSE), ncol=intdim)
+  pY = as.matrix(dt_pca(X, intdim, mycor)$Y)
 
   #------------------------------------------------------------------------
   ## COMPUTATION : ITERATIVE SELECTION
@@ -94,8 +80,8 @@ do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE,
     can.n    = length(idcan)
     can.cost = rep(0,can.n)
     for (i in 1:can.n){
-      tilX = pX[,setdiff(idall, c(idsel, idcan[i]))]
-      tilZ = dt_pca(tilX, intdim, myprep, mycor)$Y
+      tilX = X[,setdiff(idall, c(idsel, idcan[i]))]
+      tilZ = dt_pca(tilX, intdim, mycor)$Y
       tilZ = matrix(base::scale(tilZ, center=TRUE, scale=FALSE), ncol=intdim)
       can.cost[i] = procrustes_cost(pY, tilZ, intdim)
     }
@@ -113,11 +99,11 @@ do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE,
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pX%*%projection
+  result$Y = X%*%projection
   result$featidx = idxvec
-  result$trfinfo = trfinfo
   result$projection = projection
-  return(result)
+  result$algorithm  = "feature:procrustes"
+  return(structure(result, class="Rdimtools"))
 }
 
 

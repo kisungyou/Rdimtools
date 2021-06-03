@@ -7,19 +7,20 @@
 #' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is \code{"center"}. See also \code{\link{aux.preprocess}} for more details.
 #' @param mu an augmented Lagrangian parameter.
 #' @param rho a regularization parameter for sparsity.
-#' @param abstol absolute tolerance stopping criterion.
-#' @param reltol relative tolerance stopping criterion.
-#' @param maxiter maximum number of iterations.
+#' @param ... extra parameters including \describe{
+#' \item{maxiter}{maximum number of iterations (default: 100).}
+#' \item{abstol}{absolute tolerance stopping criterion (default: 1e-8).}
+#' \item{reltol}{relative tolerance stopping criterion (default: 1e-4).}
+#' \item{tolerance}{stopping criterion in a Frobenius norm .}
+#' }
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -58,24 +59,39 @@
 #' @rdname linear_SPCA
 #' @concept linear_methods
 #' @export
-do.spca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
-                    mu=1.0, rho=1.0, abstol=1e-4, reltol=1e-2, maxiter=1000){
+do.spca <- function(X, ndim=2, mu=1.0, rho=1.0, ...){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.spca : 'X' should be a matrix.")}
   myprep = ifelse(missing(preprocess), "center", match.arg(preprocess))
-  myndim = round(ndim)
+  myndim = min(max(1, round(ndim)), ncol(X)-1)
+  mymu   = as.double(mu)
+  myrho  = as.double(rho)
 
-  mymu     = as.double(mu)
-  myrho    = as.double(rho)
-  myabstol = as.double(abstol)
-  myreltol = as.double(reltol)
-  myiter   = round(maxiter)
+  # Extra parameters
+  params  = list(...)
+  pnames  = names(params)
+
+  if ("abstol"%in%pnames){
+    myabstol = max(.Machine$double.eps, as.double(params$abstol))
+  } else {
+    myabstol = 10^{-4}
+  }
+  if ("reltol"%in%pnames){
+    myreltol = max(.Machine$double.eps, as.double(params$reltol))
+  } else {
+    myreltol = 10^{-2}
+  }
+  if ("maxiter"%in%pnames){
+    myiter = max(5, round(params$maxiter))
+  } else {
+    myiter = 100
+  }
 
   #------------------------------------------------------------------------
   # Version 2 update
-  output = dt_spca(X, myndim, myprep, mymu, myrho, myabstol, myreltol, myiter)
-  return(output)
+  output = dt_spca(X, myndim, mymu, myrho, myabstol, myreltol, myiter)
+  return(structure(output, class="Rdimtools"))
 
 #
 #   #------------------------------------------------------------------------

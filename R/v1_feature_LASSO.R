@@ -1,31 +1,30 @@
-#' Elastic Net Regularization
+#' Least Absolute Shrinkage and Selection Operator
 #'
-#' Elastic Net is a regularized regression method by solving
-#' \deqn{\textrm{min}_{\beta} ~ \frac{1}{2}\|X\beta-y\|_2^2 + \lambda_1 \|\beta \|_1 + \lambda_2 \|\beta \|_2^2}
-#' where \eqn{y} iis \code{response} variable in our method. The method can be used in feature selection like LASSO.
+#' LASSO is a popular regularization scheme in linear regression in pursuit of sparsity in coefficient vector
+#' that has been widely used. The method can be used in feature selection in that given the regularization parameter,
+#' it first solves the problem and takes indices of estimated coefficients with the largest magnitude as
+#' meaningful features by solving
+#' \deqn{\textrm{min}_{\beta} ~ \frac{1}{2}\|X\beta-y\|_2^2 + \lambda \|\beta\|_1}
+#' where \eqn{y} is \code{response} in our method.
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
-#' and columns represent independent variables.
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations and columns represent independent variables.
 #' @param response a length-\eqn{n} vector of response variable.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
-#' @param ycenter a logical; \code{TRUE} to center the response variable, \code{FALSE} otherwise.
-#' @param lambda1 \eqn{\ell_1} regularization parameter in \eqn{(0,\infty)}.
-#' @param lambda2 \eqn{\ell_2} regularization parameter in \eqn{(0,\infty)}.
+#' @param lambda sparsity regularization parameter in \eqn{(0,\infty)}.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## generate swiss roll with auxiliary dimensions
 #' ## it follows reference example from LSIR paper.
-#' set.seed(100)
+#' set.seed(1)
 #' n = 123
 #' theta = runif(n)
 #' h     = runif(n)
@@ -40,51 +39,40 @@
 #' y = sin(5*pi*theta)+(runif(n)*sqrt(0.1))
 #'
 #' ## try different regularization parameters
-#' out1 = do.enet(X, y, lambda1=0.01)
-#' out2 = do.enet(X, y, lambda1=1)
-#' out3 = do.enet(X, y, lambda1=100)
-#'
-#' ## extract embeddings
-#' Y1 = out1$Y; Y2 = out2$Y; Y3 = out3$Y
+#' out1 = do.lasso(X, y, lambda=0.1)
+#' out2 = do.lasso(X, y, lambda=1)
+#' out3 = do.lasso(X, y, lambda=10)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(Y1, pch=19, main="ENET::lambda1=0.01")
-#' plot(Y2, pch=19, main="ENET::lambda1=1")
-#' plot(Y3, pch=19, main="ENET::lambda1=100")
+#' plot(out1$Y, main="LASSO::lambda=0.1")
+#' plot(out2$Y, main="LASSO::lambda=1")
+#' plot(out3$Y, main="LASSO::lambda=10")
 #' par(opar)
+#' }
 #'
 #' @references
-#' \insertRef{zou_regularization_2005}{Rdimtools}
+#' \insertRef{tibshirani_regression_1996}{Rdimtools}
 #'
-#' @rdname feature_ENET
+#' @rdname feature_LASSO
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
-                    ycenter=FALSE, lambda1=1.0, lambda2=1.0){
+do.lasso <- function(X, response, ndim=2, lambda=1.0){
   #------------------------------------------------------------------------
   # Preprocessing
-  if (!is.matrix(X)){stop("* do.enet : 'X' should be a matrix.")}
-  myndim = round(ndim)
-  myprep = ifelse(missing(preprocess), "null", match.arg(preprocess))
-
+  if (!is.matrix(X)){stop("* do.lasso : 'X' should be a matrix.")}
+  myndim = min(max(1, round(ndim)), ncol(X)-1)
   myresp = as.vector(response)
-  mybool = as.logical(ycenter)
-  mylbd1 = as.double(lambda1)
-  mylbd2 = as.double(lambda2)
+  mylbd  = as.double(lambda)
 
   #------------------------------------------------------------------------
-  # Version 2 update
-  output = dt_enet(X, myndim, myprep,
-                   myresp, mybool, mylbd1, mylbd2)
+  # Compute, Wrap, and Return
+  output = dt_lasso(X, myndim, myresp, mylbd)
   output$featidx = as.vector(output$featidx)
-  return(output)
+  return(structure(output, class="Rdimtools"))
 
-
-#
-#
 #   #------------------------------------------------------------------------
 #   ## PREPROCESSING
 #   #   1. data matrix
@@ -94,11 +82,11 @@ do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","c
 #   #   2. response
 #   response = as.double(response)
 #   if ((any(is.infinite(response)))||(!is.vector(response))||(any(is.na(response)))){
-#     stop("* do.enet : 'response' should be a vector containing no NA values.")
+#     stop("* do.lasso : 'response' should be a vector containing no NA values.")
 #   }
 #   #   3. ndim
 #   ndim = as.integer(ndim)
-#   if (!check_ndim(ndim,p)){stop("* do.enet : 'ndim' is a positive integer in [1,#(covariates)).")}
+#   if (!check_ndim(ndim,p)){stop("* do.lasso : 'ndim' is a positive integer in [1,#(covariates)).")}
 #   #   4. preprocess
 #   if (missing(preprocess)){
 #     algpreprocess = "null"
@@ -106,10 +94,8 @@ do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","c
 #     algpreprocess = match.arg(preprocess)
 #   }
 #   #   5. lambda
-#   lambdaval1 = as.double(lambda1)
-#   lambdaval2 = as.double(lambda2)
-#   if (!check_NumMM(lambdaval1,0,1e+10,compact=FALSE)){stop("* do.enet : 'lambda1' should be a nonnegative real number.")}
-#   if (!check_NumMM(lambdaval1,0,1e+10,compact=FALSE)){stop("* do.enet : 'lambda1' should be a nonnegative real number.")}
+#   lambdaval = as.double(lambda)
+#   if (!check_NumMM(lambdaval,0,1e+10,compact=FALSE)){stop("* do.lasso : 'lambda' should be a nonnegative real number.")}
 #
 #   #------------------------------------------------------------------------
 #   ## COMPUTATION : DATA PREPROCESSING
@@ -118,18 +104,18 @@ do.enet <- function(X, response, ndim=2, preprocess=c("null","center","scale","c
 #   pX      = tmplist$pX
 #
 #   if (!is.logical(ycenter)){
-#     stop("* do.enet : 'ycenter' should be a logical variable.")
+#     stop("* do.lasso : 'ycenter' should be a logical variable.")
 #   }
 #   if (ycenter==TRUE){
 #     response = response-mean(response)
 #   }
 #
 #   #------------------------------------------------------------------------
-#   ## COMPUTATION : MAIN COMPUTATION FOR Elastic Net
-#   #   1. run ENET
-#   runENET   = ADMM::admm.enet(pX, response, lambda1=lambdaval1, lambda2=lambdaval2)
+#   ## COMPUTATION : MAIN COMPUTATION FOR LASSO
+#   #   1. run LASSO
+#   runLASSO   = ADMM ::admm.lasso(pX, response, lambda=lambdaval)
 #   #   2. take the score
-#   lscore     = abs(as.vector(runENET$x))
+#   lscore     = abs(as.vector(runLASSO$x))
 #   #   3. select the largest ones in magnitude
 #   idxvec     = base::order(lscore, decreasing=TRUE)[1:ndim]
 #   #   4. find the projection matrix

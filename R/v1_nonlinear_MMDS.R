@@ -6,16 +6,17 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension (default: 2).
-#' @param maxiter maximum number of iterations for metric MDS updates (default: 100).
-#' @param abstol stopping criterion for metric MDS iterations (default: 1e-6).
-#' @param preprocess an option for preprocessing the data. Default is \code{"null"}.
-#' See also \code{\link{aux.preprocess}} for more details.
+#' @param ... extra parameters including \describe{
+#' \item{maxiter}{maximum number of iterations for metric MDS updates (default: 100).}
+#' \item{abstol}{stopping criterion for metric MDS iterations (default: 1e-8).}
+#' }
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
+#'
 #'
 #' @examples
 #' \donttest{
@@ -46,19 +47,29 @@
 #' @rdname nonlinear_MMDS
 #' @concept nonlinear_methods
 #' @export
-do.mmds <- function(X,ndim=2,
-                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
-                    maxiter=100, abstol=1e-6){
+do.mmds <- function(X, ndim=2, ...){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.mmds : 'X' should be a matrix.")}
-  myndim = round(ndim)
-  myprep = ifelse(missing(preprocess), "null", match.arg(preprocess))
-  myiter  = max(50, round(maxiter))
-  myeps   = max(as.double(abstol), 100*.Machine$double.eps)
+  myndim = min(max(1, round(ndim)), ncol(X)-1)
+
+  # Extra parameters
+  params  = list(...)
+  pnames  = names(params)
+
+  if ("abstol"%in%pnames){
+    myeps = max(.Machine$double.eps, as.double(params$abstol))
+  } else {
+    myeps = 1e-8
+  }
+  if ("maxiter"%in%pnames){
+    myiter = max(5, round(params$maxiter))
+  } else {
+    myiter = 100
+  }
 
   #------------------------------------------------------------------------
   # Version 2 update
-  output = dt_mmds(X, myndim, myprep, myiter, myeps)
-  return(output)
+  output = dt_mmds(X, myndim, myiter, myeps)
+  return(structure(output, class="Rdimtools"))
 }
