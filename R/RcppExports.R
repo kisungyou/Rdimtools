@@ -295,6 +295,10 @@ dt_mmds <- function(X, ndim, maxiter, abstol) {
     .Call(`_Rdimtools_dt_mmds`, X, ndim, maxiter, abstol)
 }
 
+oos_linproj <- function(Xold, Yold, Xnew) {
+    .Call(`_Rdimtools_oos_linproj`, Xold, Yold, Xnew)
+}
+
 dt_rpca <- function(X, ndim, ptype, mu, lambda) {
     .Call(`_Rdimtools_dt_rpca`, X, ndim, ptype, mu, lambda)
 }

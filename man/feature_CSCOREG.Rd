@@ -35,6 +35,7 @@ feature score vectors and selects the indices with smallest values. Graph laplac
 for approximated nonlinear manifold structure.
 }
 \examples{
+\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -57,6 +58,7 @@ plot(out2$Y, pch=19, col=iris.lab, main="diff/lambda=0")
 plot(out3$Y, pch=19, col=iris.lab, main="diff/lambda=0.5")
 plot(out4$Y, pch=19, col=iris.lab, main="diff/lambda=1")
 par(opar)
+}
 
 }
 \references{

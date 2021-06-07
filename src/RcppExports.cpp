@@ -902,6 +902,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// oos_linproj
+arma::mat oos_linproj(arma::mat& Xold, arma::mat& Yold, arma::mat& Xnew);
+RcppExport SEXP _Rdimtools_oos_linproj(SEXP XoldSEXP, SEXP YoldSEXP, SEXP XnewSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type Xold(XoldSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Yold(YoldSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Xnew(XnewSEXP);
+    rcpp_result_gen = Rcpp::wrap(oos_linproj(Xold, Yold, Xnew));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dt_rpca
 Rcpp::List dt_rpca(arma::mat& X, int ndim, std::string ptype, double mu, double lambda);
 RcppExport SEXP _Rdimtools_dt_rpca(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP muSEXP, SEXP lambdaSEXP) {
@@ -1005,6 +1018,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_dt_lmds", (DL_FUNC) &_Rdimtools_dt_lmds, 3},
     {"_Rdimtools_dt_spca", (DL_FUNC) &_Rdimtools_dt_spca, 7},
     {"_Rdimtools_dt_mmds", (DL_FUNC) &_Rdimtools_dt_mmds, 4},
+    {"_Rdimtools_oos_linproj", (DL_FUNC) &_Rdimtools_oos_linproj, 3},
     {"_Rdimtools_dt_rpca", (DL_FUNC) &_Rdimtools_dt_rpca, 5},
     {"_Rdimtools_dt_phate", (DL_FUNC) &_Rdimtools_dt_phate, 9},
     {NULL, NULL, 0}
