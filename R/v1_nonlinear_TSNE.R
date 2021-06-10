@@ -13,18 +13,16 @@
 #' @param jitter level of white noise added at the beginning.
 #' @param jitterdecay decay parameter in (0,1). The closer to 0, the faster artificial noise decays.
 #' @param momentum level of acceleration in learning.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param pca whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
 #' @param symmetric a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.
 #' @param BHuse a logical; \code{TRUE} to use Barnes-Hut approximation. See \code{\link[Rtsne]{Rtsne}} for more details.
 #' @param BHtheta speed-accuracy tradeoff. If set as 0.0, it reduces to exact t-SNE.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -60,7 +58,6 @@
 #' @export
 do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                     jitter=0.3,jitterdecay=0.99,momentum=0.5,
-                    preprocess=c("null","center","scale","cscale","decorrelate","whiten"),
                     pca=TRUE,pcascale=FALSE,symmetric=FALSE,
                     BHuse=TRUE, BHtheta=0.25){
   # 1. typecheck is always first step to perform.
@@ -106,10 +103,10 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     stop("* do.tsne : 'momentum' should be a positive real number.")
   }
   #   2-6. (char) preprocess = 'center'
-  algpreprocess = match.arg(preprocess)
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # algpreprocess = match.arg(preprocess)
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   2-7. (bool) pca = TRUE/FALSE
   #     If pca = TRUE
@@ -123,17 +120,17 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     stop("* do.tsne : pcascale is either TRUE or FALSE.")
   }
   if (pcaflag){
-    pcadim = ceiling((ncol(pX) + ndim)/2)
-    pcaout = do.pca(pX,ndim=pcadim,cor=scaleflag,preprocess="center")
+    pcadim = ceiling((ncol(X) + ndim)/2)
+    pcaout = do.pca(X,ndim=pcadim,cor=scaleflag)
     if (ncol(pcaout$Y)<=ndim){
       message("* do.tsne : PCA scaling has gone too far.")
       message("* do.tsne : Pass non-scaled data to t-SNE algortihm.")
-      tpX = t(pX)
+      tpX = t(X)
     } else {
       tpX = t(pcaout$Y)
     }
   } else {
-    tpX = t(pX)
+    tpX = t(X)
   }
 
   #   2-8. (bool) BarnesHut : TRUE/FALSE
@@ -156,7 +153,7 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     Y = t(as.matrix(method_tsne(P,ndim,eta,maxiter,jitter,decay,momentum)))
   } else {
     pX   = t(tpX)
-    dX   = stats::dist(pX)
+    dX   = stats::dist(X)
     dfun = utils::getFromNamespace("hidden_tsne","maotai")
     out  = dfun(dX, ndim=round(ndim),theta=BHtheta,perplexity=perplexity,pca=FALSE,max_iter=maxiter,
                 momentum=momentum,eta=eta)
@@ -167,13 +164,10 @@ do.tsne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
 
   # 5. result
   if (any(is.infinite(Y))||any(is.na(Y))){
-    message("* do.tsne : t-SNE not successful; having either Inf or NA values.")
-    result = NA
-    return(result)
-  } else {
-    result = list()
-    result$Y = Y
-    result$trfinfo = trfinfo
+    stop("* do.tsne : t-SNE not successful; having either Inf or NA values.")
   }
-  return(result)
+  result = list()
+  result$Y = Y
+  result$algorithm = "nonlinear:TSNE"
+  return(structure(result, class="Rdimtools"))
 }

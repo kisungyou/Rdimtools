@@ -50,7 +50,7 @@
 <meta property="og:description" content="Multiple Maximum Scatter Difference (MMSD) is a supervised linear dimension reduction method.
 It is a variant of MSD in that discriminant vectors are orthonormal. Similar to MSD, it also does not suffer from
 rank deficiency issue of scatter matrix." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -92,7 +92,7 @@ rank deficiency issue of scatter matrix." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -119,19 +119,19 @@ rank deficiency issue of scatter matrix." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -150,7 +150,7 @@ rank deficiency issue of scatter matrix." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Multiple Maximum Scatter Difference</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/linear_MMSD.R'><code>R/linear_MMSD.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/linear_MMSD.R'><code>R/linear_MMSD.R</code></a></small>
     <div class="hidden name"><code>linear_MMSD.Rd</code></div>
     </div>
 
@@ -226,16 +226,16 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
 
 <span class='co'>## try different balancing parameter</span>
 <span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.mmsd</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, C<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.mmsd</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, C<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.mmsd</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, C<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'><span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.mmsd</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, C<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'><span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.mmsd</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, C<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'>
 <span class='co'>## visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"MMSD::C=0.01"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"MMSD::C=1"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"MMSD::C=100"</span><span class='op'>)</span>
-</div><div class='img'><img src='linear_MMSD-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out1$Y, pch = 19, col = label, main = "MMSD::C=0.01"): object 'out1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"MMSD::C=1"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out2$Y, pch = 19, col = label, main = "MMSD::C=1"): object 'out2' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"MMSD::C=100"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out3$Y, pch = 19, col = label, main = "MMSD::C=100"): object 'out3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
 
 </div></pre>
   </div>

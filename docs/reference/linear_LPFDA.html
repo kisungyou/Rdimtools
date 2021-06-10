@@ -51,7 +51,7 @@
 It can also be seemed as an improved version of LDA where the locality structure of the data
 is preserved. The algorithm aims at getting a subspace projection matrix by solving a generalized
 eigenvalue problem." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -93,7 +93,7 @@ eigenvalue problem." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -120,19 +120,19 @@ eigenvalue problem." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -151,7 +151,7 @@ eigenvalue problem." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Locality Preserving Fisher Discriminant Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/linear_LPFDA.R'><code>R/linear_LPFDA.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/linear_LPFDA.R'><code>R/linear_LPFDA.R</code></a></small>
     <div class="hidden name"><code>linear_LPFDA.Rd</code></div>
     </div>
 
@@ -236,16 +236,16 @@ In Huang D, Jo K, Lee H, Kang H, Bevilacqua V (eds.), <em>Emerging Intelligent C
 
 <span class='co'>## try different proportion of connected edges</span>
 <span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>do.lpfda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.10</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.lpfda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.lpfda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.50</span><span class='op'>)</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'><span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>do.lpfda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'><span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>do.lpfda</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, type<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>,<span class='fl'>0.50</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in lda_outer(pX[idxnow, ]): could not find function "lda_outer"</span></div><div class='input'>
 <span class='co'>## visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"10% connectivity"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"25% connectivity"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"50% connectivity"</span><span class='op'>)</span>
-</div><div class='img'><img src='linear_LPFDA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out1$Y, pch = 19, col = label, main = "10% connectivity"): object 'out1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"25% connectivity"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out2$Y, pch = 19, col = label, main = "25% connectivity"): object 'out2' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"50% connectivity"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(out3$Y, pch = 19, col = label, main = "50% connectivity"): object 'out3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
 
 </div></pre>
   </div>

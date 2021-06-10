@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# Rdimtools <a href='https://kyoustat.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# Rdimtools <a href='https://kisungyou.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 
 [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
 [![Travis-CI Build
-Status](https://travis-ci.org/kyoustat/Rdimtools.svg?branch=master)](https://travis-ci.org/kyoustat/Rdimtools)
+Status](https://travis-ci.org/kisungyou/Rdimtools.svg?branch=master)](https://travis-ci.org/kisungyou/Rdimtools)
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
 
@@ -40,7 +40,7 @@ or the development version from github:
 
 ``` r
 ## install.packages("devtools")
-devtools::install_github("kyoustat/Rdimtools")
+devtools::install_github("kisungyou/Rdimtools")
 ```
 
 ## Minimal Example : Dimension Reduction

@@ -12,17 +12,15 @@
 #' @param jitter level of white noise added at the beginning.
 #' @param jitterdecay decay parameter in \eqn{(0,1)}. The closer to 0, the faster artificial noise decays.
 #' @param momentum level of acceleration in learning.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param pca whether to use PCA as preliminary step; \code{TRUE} for using it, \code{FALSE} otherwise.
 #' @param pcascale a logical; \code{FALSE} for using Covariance, \code{TRUE} for using Correlation matrix. See also \code{\link{do.pca}} for more details.
 #' @param symmetric a logical; \code{FALSE} to solve it naively, and \code{TRUE} to adopt symmetrization scheme.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{vars}{a vector containing betas used in perplexity matching.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -57,7 +55,6 @@
 #' @export
 do.sne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
                    jitter=0.3,jitterdecay=0.99,momentum=0.5,
-                   preprocess=c("null","center","scale","scale","decorrelate","whiten"),
                    pca=TRUE,pcascale=FALSE,symmetric=FALSE){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
@@ -99,10 +96,11 @@ do.sne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
     stop("* do.sne : 'momentum' should be a positive real number.")
   }
 
-  algpreprocess = match.arg(preprocess)
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # algpreprocess = match.arg(preprocess)
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
+  pX = X
 
   #   2-7. (bool) pca = TRUE/FALSE
   #     If pca = TRUE
@@ -117,7 +115,7 @@ do.sne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
   }
   if (pcaflag){
     pcadim = ceiling((ncol(pX) + ndim)/2)
-    pcaout = do.pca(pX,ndim=pcadim,cor=scaleflag,preprocess="center")
+    pcaout = dt_pca(pX, pcadim, scaleflag)
     if (ncol(pcaout$Y)<=ndim){
       message("* do.sne : PCA scaling has gone too far.")
       message("* do.sne : Pass non-scaled data to SNE algortihm.")
@@ -145,14 +143,11 @@ do.sne <- function(X,ndim=2,perplexity=30,eta=0.05,maxiter=2000,
 
   # 5. result
   if (any(is.infinite(Y))||any(is.na(Y))){
-    message("* do.tsne : t-SNE not successful; having either Inf or NA values.")
-    result = NA
-    return(result)
-  } else {
-    result = list()
-    result$Y = Y
-    result$trfinfo = trfinfo
-    result$vars    = vars
+    stop("* do.tsne : t-SNE not successful; having either Inf or NA values.")
   }
-  return(result)
+  result = list()
+  result$Y = Y
+  result$vars      = vars
+  result$algorithm = "nonlinear:SNE"
+  return(structure(result, class="Rdimtools"))
 }

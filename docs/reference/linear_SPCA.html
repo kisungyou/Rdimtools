@@ -50,7 +50,7 @@
 <meta property="og:description" content="Sparse PCA (do.spca) is a variant of PCA in that each loading - or, principal
 component - should be sparse. Instead of using generic optimization package,
 we opt for formulating a problem as semidefinite relaxation and utilizing ADMM." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -92,7 +92,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -119,19 +119,19 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM."
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -150,7 +150,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM."
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Sparse Principal Component Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/ver2_linear_SPCA.R'><code>R/ver2_linear_SPCA.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_linear_SPCA.R'><code>R/v1_linear_SPCA.R</code></a></small>
     <div class="hidden name"><code>linear_SPCA.Rd</code></div>
     </div>
 
@@ -160,16 +160,7 @@ component - should be sparse. Instead of using generic optimization package,
 we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.spca</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
-  mu <span class='op'>=</span> <span class='fl'>1</span>,
-  rho <span class='op'>=</span> <span class='fl'>1</span>,
-  abstol <span class='op'>=</span> <span class='fl'>1e-04</span>,
-  reltol <span class='op'>=</span> <span class='fl'>0.01</span>,
-  maxiter <span class='op'>=</span> <span class='fl'>1000</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, mu <span class='op'>=</span> <span class='fl'>1</span>, rho <span class='op'>=</span> <span class='fl'>1</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,11 +175,6 @@ and columns represent independent variables.</p></td>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data.
-Default is <code>"center"</code>. See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>mu</th>
       <td><p>an augmented Lagrangian parameter.</p></td>
     </tr>
@@ -197,25 +183,23 @@ Default is <code>"center"</code>. See also <code><a href='aux.preprocess.html'>a
       <td><p>a regularization parameter for sparsity.</p></td>
     </tr>
     <tr>
-      <th>abstol</th>
-      <td><p>absolute tolerance stopping criterion.</p></td>
-    </tr>
-    <tr>
-      <th>reltol</th>
-      <td><p>relative tolerance stopping criterion.</p></td>
-    </tr>
-    <tr>
-      <th>maxiter</th>
-      <td><p>maximum number of iterations.</p></td>
+      <th>...</th>
+      <td><p>extra parameters including</p><dl>
+<dt>maxiter</dt><dd><p>maximum number of iterations (default: 100).</p></dd>
+<dt>abstol</dt><dd><p>absolute tolerance stopping criterion (default: 1e-8).</p></dd>
+<dt>reltol</dt><dd><p>relative tolerance stopping criterion (default: 1e-4).</p></dd>
+<dt>tolerance</dt><dd><p>stopping criterion in a Frobenius norm .</p></dd>
+
+</dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are principal components.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 
@@ -247,19 +231,19 @@ Default is <code>"center"</code>. See also <code><a href='aux.preprocess.html'>a
 
 <span class='co'>## try different regularization parameters for sparsity</span>
 <span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,rho<span class='op'>=</span><span class='fl'>0.01</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,rho<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,rho<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
-
+</div><div class='output co'>#&gt; <span class='error'>Error in missing(preprocess): 'missing' can only be used for arguments</span></div><div class='input'><span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,rho<span class='op'>=</span><span class='fl'>1</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in missing(preprocess): 'missing' can only be used for arguments</span></div><div class='input'><span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.spca</span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,rho<span class='op'>=</span><span class='fl'>100</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in missing(preprocess): 'missing' can only be used for arguments</span></div><div class='input'>
 <span class='co'>## embeddings for each procedure</span>
 <span class='va'>Y1</span> <span class='op'>&lt;-</span> <span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>; <span class='va'>Y2</span> <span class='op'>&lt;-</span> <span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>; <span class='va'>Y3</span> <span class='op'>&lt;-</span> <span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>
-
+</div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'out1' not found</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'out2' not found</span></div><div class='output co'>#&gt; <span class='error'>Error in eval(expr, envir, enclos): object 'out3' not found</span></div><div class='input'>
 <span class='co'>## visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Y1</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SPCA::rho=0.01"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Y2</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SPCA::rho=1"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Y3</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SPCA::rho=100"</span><span class='op'>)</span>
-</div><div class='img'><img src='linear_SPCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(Y1, col = lab, pch = 19, main = "SPCA::rho=0.01"): object 'Y1' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Y2</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SPCA::rho=1"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(Y2, col = lab, pch = 19, main = "SPCA::rho=1"): object 'Y2' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Y3</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, main<span class='op'>=</span><span class='st'>"SPCA::rho=100"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in plot(Y3, col = lab, pch = 19, main = "SPCA::rho=100"): object 'Y3' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
 
 </div></pre>
   </div>

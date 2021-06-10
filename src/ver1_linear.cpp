@@ -47,7 +47,7 @@ Rcpp::List dt_pca(arma::mat& X, int ndim, bool cor){
       Rcpp::Named("Y") = Y,
       Rcpp::Named("vars") = vars,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:pca"
+      Rcpp::Named("algorithm") = "linear:PCA"
   ));
 }
 
@@ -78,7 +78,7 @@ Rcpp::List dt_mds(arma::mat& X, int ndim){
   return(Rcpp::List::create(
       Rcpp::Named("Y") = Y,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:mds"
+      Rcpp::Named("algorithm") = "linear:MDS"
   ));
 }
 
@@ -114,7 +114,7 @@ Rcpp::List dt_fa(arma::mat& X, int ndim, int maxiter, double tolerance){
       Rcpp::Named("noise")   = outP,
       Rcpp::Named("projection") = proj,
       Rcpp::Named("loadings")   = outL,
-      Rcpp::Named("algorithm") = "linear:fa"
+      Rcpp::Named("algorithm") = "linear:FA"
   ));
 }
 
@@ -151,7 +151,7 @@ Rcpp::List dt_lmds(arma::mat& X, int ndim, int npts){
   return(Rcpp::List::create(
       Rcpp::Named("Y") = Y,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:lmds"
+      Rcpp::Named("algorithm") = "linear:LMDS"
   ));
 }
 
@@ -217,7 +217,7 @@ Rcpp::List dt_spca(arma::mat& X, int ndim, double mu, double rho, const double a
   return(Rcpp::List::create(
       Rcpp::Named("Y") = Y,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:spca"
+      Rcpp::Named("algorithm") = "linear:SPCA"
   ));
 }
 

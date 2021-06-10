@@ -2,7 +2,7 @@
 # icons:   https://fontawesome.com/
 # pkgdown: https://pkgdown.r-lib.org/reference/index.html
 
-url: https://kyoustat.com/Rdimtools
+url: https://kisungyou.com/Rdimtools
 
 destination: docs
 
@@ -27,11 +27,11 @@ navbar:
           href: articles/quick-start.html
   right:
     - icon: fa-twitter
-      href: https://twitter.com/kyoustat
+      href: https://twitter.com/kisung_you
     - icon: fa-github
-      href: https://github.com/kyoustat/Rdimtools
+      href: https://github.com/kisungyou/Rdimtools
     - icon: fa-envelope
-      href: mailto:kyoustat@gmail.com
+      href: mailto:kisungyou@outlook.com
 
 reference:
   - title: "(1) Dimension Estimation"

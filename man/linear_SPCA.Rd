@@ -20,7 +20,6 @@ and columns represent independent variables.}
 \item{maxiter}{maximum number of iterations (default: 100).}
 \item{abstol}{absolute tolerance stopping criterion (default: 1e-8).}
 \item{reltol}{relative tolerance stopping criterion (default: 1e-4).}
-\item{tolerance}{stopping criterion in a Frobenius norm .}
 }}
 }
 \value{
@@ -37,8 +36,9 @@ component - should be sparse. Instead of using generic optimization package,
 we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.
 }
 \examples{
+\donttest{
 ## use iris data
-data(iris)
+data(iris, package="Rdimtools")
 set.seed(100)
 subid = sample(1:150,50)
 X     = as.matrix(iris[subid,1:4])
@@ -49,16 +49,14 @@ out1 <- do.spca(X,ndim=2,rho=0.01)
 out2 <- do.spca(X,ndim=2,rho=1)
 out3 <- do.spca(X,ndim=2,rho=100)
 
-## embeddings for each procedure
-Y1 <- out1$Y; Y2 <- out2$Y; Y3 <- out3$Y
-
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(Y1, col=lab, pch=19, main="SPCA::rho=0.01")
-plot(Y2, col=lab, pch=19, main="SPCA::rho=1")
-plot(Y3, col=lab, pch=19, main="SPCA::rho=100")
+plot(out1$Y, col=lab, pch=19, main="SPCA::rho=0.01")
+plot(out2$Y, col=lab, pch=19, main="SPCA::rho=1")
+plot(out3$Y, col=lab, pch=19, main="SPCA::rho=100")
 par(opar)
+}
 
 }
 \references{

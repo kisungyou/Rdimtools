@@ -2,7 +2,7 @@ Package: Rdimtools
 Type: Package
 Title: Dimension Reduction and Estimation Methods
 Version: 1.0.8
-Authors@R: c(person("Kisung", "You", role = c("aut", "cre"), email = "kyoustat@gmail.com",comment=c(ORCID="0000-0002-8584-459X")), person("Changhee","Suh",role=c("ctb"),email="cs19bc@my.fsu.edu"))
+Authors@R: c(person("Kisung", "You", role = c("aut", "cre"), email = "kisungyou@outlook.com",comment=c(ORCID="0000-0002-8584-459X")), person("Changhee","Suh",role=c("ctb"),email="cs19bc@my.fsu.edu"))
 Description: We provide linear and nonlinear dimension reduction techniques.
 	Intrinsic dimension estimation methods for exploratory analysis are also provided.
 	For more details on the package, see the paper by You (2020) <arXiv:2005.11107>.
@@ -14,8 +14,8 @@ Imports: CVXR (>= 1.0), MASS, RANN, Rcpp (>= 0.12.15), RcppDE, Rcsdp, Rdpack, RS
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
 RoxygenNote: 7.1.1
 RdMacros: Rdpack
-URL: http://kyoustat.com/Rdimtools/
-BugReports: https://github.com/kyoustat/Rdimtools/issues
+URL: http://kisungyou.com/Rdimtools/
+BugReports: https://github.com/kisungyou/Rdimtools/issues
 Suggests: 
     knitr,
     rmarkdown

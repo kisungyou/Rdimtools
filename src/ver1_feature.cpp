@@ -97,7 +97,7 @@ Rcpp::List dt_cscore(arma::mat& X, int ndim, arma::uvec& label, std::string mysc
       Rcpp::Named("cscore") = rankvec,
       Rcpp::Named("featidx") = idxvec+1,
       Rcpp::Named("projection") = projection,
-      Rcpp::Named("algorithm") = "linear:cscore"
+      Rcpp::Named("algorithm") = "linear:CSCORE"
   ));
 }
 
@@ -239,7 +239,7 @@ Rcpp::List dt_lasso(arma::mat& X, int ndim, arma::vec& y, double lambda){
       Rcpp::Named("Y") = Y,
       Rcpp::Named("featidx") = idRvec,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:lasso"
+      Rcpp::Named("algorithm") = "linear:LASSO"
   ));
 }
 
@@ -376,7 +376,7 @@ Rcpp::List dt_enet(arma::mat& X, int ndim, arma::vec& y, double lambda1, double 
       Rcpp::Named("Y") = Y,
       Rcpp::Named("featidx") = idRvec,
       Rcpp::Named("projection") = proj,
-      Rcpp::Named("algorithm") = "linear:enet"
+      Rcpp::Named("algorithm") = "linear:ENET"
   ));
 }
 

@@ -10,19 +10,18 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an option for preprocessing the data. This supports three methods.
-#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
 #' \item{mle.sigma2}{MLE for \eqn{\sigma^2}.}
 #' \item{mle.W}{MLE of a \eqn{(p\times ndim)} mapping from latent to observation in column major.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -31,8 +30,8 @@
 #' label = as.factor(iris[subid,5])
 #'
 #' ## Compare PCA and PPCA
-#' PCA  <- do.pca(X, ndim=2, preprocess="center")
-#' PPCA <- do.ppca(X, ndim=2, preprocess="center")
+#' PCA  <- do.pca(X, ndim=2)
+#' PPCA <- do.ppca(X, ndim=2)
 #'
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
@@ -40,6 +39,7 @@
 #' plot(PCA$Y,  pch=19, col=label, main="PCA")
 #' plot(PPCA$Y, pch=19, col=label, main="PPCA")
 #' par(opar)
+#' }
 #'
 #' @seealso \code{\link{do.pca}}
 #' @author Kisung You
@@ -49,7 +49,7 @@
 #' @rdname linear_PPCA
 #' @concept linear_methods
 #' @export
-do.ppca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
+do.ppca <- function(X, ndim=2){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   # 1. data X
@@ -58,24 +58,24 @@ do.ppca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrela
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("*do.pca : 'ndim' is a positive integer in [1,#(covariates)).")
   }
-  # 3. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
+  # # 3. preprocess
+  # if (missing(preprocess)){
+  #   algpreprocess = "center"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
 
   #------------------------------------------------------------------------
   ## COMPUTATION
-  #   1. Preprocessing the data
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  matT    = tmplist$pX
+  # #   1. Preprocessing the data
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # matT    = tmplist$pX
   #   2. parameter
-  d = ncol(matT)
+  d = ncol(X)
   q = as.integer(ndim)
   #   3. sample covariance and eigendecomposition
-  S    = cov(matT)
+  S    = stats::cov(X)
   eigS = base::eigen(S, TRUE)
   #   4. ML estimates
   mlsig2 = (sum(eigS$values[(q+1):d]))/(d-q)
@@ -88,12 +88,12 @@ do.ppca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrela
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y          = (matT%*%projection)
-  result$trfinfo    = trfinfo
+  result$Y          = (X%*%projection)
   result$projection = projection
   result$mle.sigma2  = mlsig2
   result$mle.W       = mlW
-  return(result)
+  result$algorithm   = "linear:PPCA"
+  return(structure(result, class="Rdimtools"))
 }
 
 

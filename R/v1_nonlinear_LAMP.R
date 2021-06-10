@@ -1,7 +1,7 @@
 #' Local Affine Multidimensional Projection
 #'
 #' Local Affine Mulditimensional Projection (\emph{LAMP}) can be considered as
-#' a nonlinear method even though each datam is projected using locally estimated
+#' a nonlinear method even though each datum is projected using locally estimated
 #' affine mapping. It first finds a low-dimensional embedding for control points
 #' and then locates the rest data using affine mapping. We use \eqn{\sqrt{n}} number
 #' of data as controls and Stochastic Neighborhood Embedding is applied as an
@@ -11,16 +11,15 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' set.seed(100)
@@ -38,6 +37,7 @@
 #' plot(out1$Y, pch=19, col=label, main="PCA")
 #' plot(out2$Y, pch=19, col=label, main="LAMP")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{joia_local_2011}{Rdimtools}
@@ -47,7 +47,7 @@
 #' @rdname nonlinear_LAMP
 #' @concept nonlinear_methods
 #' @export
-do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate")){
+do.lamp <- function(X, ndim=2){
   ########################################################################
   ## 1. Type Checking
   aux.typecheck(X)
@@ -55,23 +55,23 @@ do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","wh
   p = ncol(X)
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.lamp : 'ndim' is a positive integer in [1,#(covariates)).")}
-  algpreprocess = match.arg(preprocess)
+  # algpreprocess = match.arg(preprocess)
 
   controls = sort(sample(1:n, round(sqrt(n)), replace=FALSE))
   ncontrol = length(controls)
 
   ########################################################################
   ## 2. Preprocessing
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
-  pXcontrol = pX[controls,]
-  pXrest    = pX[-controls,]
+  pXcontrol = X[controls,]
+  pXrest    = X[-controls,]
 
   ########################################################################
   ## 3. Preliminary Computation
-  pYcontrol = suppressMessages(do.sne(pXcontrol, ndim=ndim, preprocess="null")$Y)
+  pYcontrol = suppressMessages(do.sne(pXcontrol, ndim=ndim)$Y)
   pYrest    = array(0,c(n-ncontrol, ndim))
 
   ########################################################################
@@ -116,9 +116,8 @@ do.lamp <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","wh
   ## 5. return output
   result = list()
   result$Y = pY
-  trfinfo$algtype = "nonlinear"
-  result$trfinfo  = trfinfo
-  return(result)
+  result$algorithm = "nonlinear:LAMP"
+  return(structure(result, class="Rdimtools"))
 }
 
 

@@ -11,19 +11,22 @@
 #' @param X an \eqn{(n\times p)} matrix or whose rows are observations and columns represent independent variables.
 #' @param mu an augmented Lagrangian parameter
 #' @param lambda parameter for the sparsity term \eqn{\|S\|_1}. Default value is given accordingly to the referred paper.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.
+#' @param ... extra parameters including \describe{
+#' \item{maxiter}{maximum number of iterations (default: 100).}
+#' \item{abstol}{absolute tolerance stopping criterion (default: 1e-8).}
+#' }
 #'
 #' @return a named list containing
 #' \describe{
 #' \item{L}{an \eqn{(n\times p)} low-rank matrix.}
 #' \item{S}{an \eqn{(n\times p)} sparse matrix.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
-#' ## Load Iris data and put some noise
-#' data(iris)
+#' \donttest{
+#' ## load iris data and add some noise
+#' data(iris, package="Rdimtools")
 #' set.seed(100)
 #' subid = sample(1:150,50)
 #' noise = 0.2
@@ -48,6 +51,7 @@
 #' plot(Y2, pch=19, col=lab, main="RPCA+PCA::lambda=1")
 #' plot(Y3, pch=19, col=lab, main="RPCA+PCA::lambda=10")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{candes_robust_2011}{Rdimtools}
@@ -56,21 +60,33 @@
 #' @rdname nonlinear_RPCA
 #' @concept nonlinear_methods
 #' @export
-do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))),
-                    preprocess=c("null","center","scale","cscale","decorrelate","whiten")){
+do.rpca <- function(X, mu=1.0, lambda=sqrt(1/(max(dim(X)))), ...){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.rpca : 'X' should be a matrix.")}
-  myprep = ifelse(missing(preprocess), "null", match.arg(preprocess))
+  # myprep = ifelse(missing(preprocess), "null", match.arg(preprocess))
+  mymu  = max(as.double(mu), sqrt(.Machine$double.eps))
+  mylbd = max(as.double(lambda), sqrt(.Machine$double.eps))
 
-  mymu  = as.double(mu)
-  mylbd = as.double(lambda)
+  # Extra parameters
+  params  = list(...)
+  pnames  = names(params)
+
+  if ("abstol"%in%pnames){
+    myabstol = max(.Machine$double.eps, as.double(params$abstol))
+  } else {
+    myabstol = 10^(-8)
+  }
+  if ("maxiter"%in%pnames){
+    myiter = max(5, round(params$maxiter))
+  } else {
+    myiter = 100
+  }
 
   #------------------------------------------------------------------------
-  # Version 2 update
-  output = dt_rpca(X, 1, myprep, mymu, mylbd)
+  # Version 1 Update
+  output = dt_rpca(X, mymu, mylbd, myiter, myabstol)
   return(output)
-
 
   # #------------------------------------------------------------------------
   # ## PREPROCESSING

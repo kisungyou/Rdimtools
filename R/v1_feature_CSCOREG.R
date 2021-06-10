@@ -102,7 +102,7 @@ do.cscoreg <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0
   result$cscore  = rankvec
   result$featidx = idxvec
   result$projection = projection
-  result$algorithm = "linear:cscoreg"
+  result$algorithm = "linear:CSCOREG"
   return(structure(result, class="Rdimtools"))
 }
 

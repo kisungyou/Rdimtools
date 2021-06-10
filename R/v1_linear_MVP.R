@@ -10,17 +10,16 @@
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' data(iris)
 #' set.seed(100)
@@ -28,18 +27,19 @@
 #' X     = as.matrix(iris[subid,1:4])
 #' label = as.factor(iris[subid,5])
 #'
-#' ## perform MVP with different preprocessings
-#' out1 = do.mvp(X, label)
-#' out2 = do.mvp(X, label, preprocess="decorrelate")
-#' out3 = do.mvp(X, label, preprocess="whiten")
+#' ## perform MVP and compare with others
+#' outMVP = do.mvp(X, label)
+#' outPCA = do.pca(X)
+#' outLDA = do.lda(X, label)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(out1$Y, col=label, pch=19, main="centering")
-#' plot(out2$Y, col=label, pch=19, main="decorrelating")
-#' plot(out3$Y, col=label, pch=19, main="whitening")
+#' plot(outMVP$Y, col=label, pch=19, main="MVP")
+#' plot(outPCA$Y, col=label, pch=19, main="PCA")
+#' plot(outLDA$Y, col=label, pch=19, main="LDA")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zhang_maximum_2007}{Rdimtools}
@@ -48,7 +48,7 @@
 #' @rdname linear_MVP
 #' @concept linear_methods
 #' @export
-do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
+do.mvp <- function(X, label, ndim=2){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -74,22 +74,22 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
   if (ndim>=N){
     stop("* do.mvp : the method requires {ndim <= N-1}, where N is the number of classes.")
   }
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
+  # #   4. preprocess
+  # if (missing(preprocess)){
+  #   algpreprocess = "center"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
 
   #------------------------------------------------------------------------
   ## MAIN COMPUTATION
-  #   1. preprocess of data
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # #   1. preprocess of data
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   2. perform PCA onto (N-1) dimensional space
-  outPCA = do.pca(pX,ndim=(N-1))
+  outPCA = dt_pca(X, N-1, FALSE)
   projection_first = outPCA$projection
   ppX = outPCA$Y
 
@@ -123,10 +123,10 @@ do.mvp <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
   result = list()
-  result$Y = pX%*%projection_all
-  result$trfinfo = trfinfo
+  result$Y = X%*%projection_all
   result$projection = projection_all
-  return(result)
+  result$algorithm  = "linear:MVP"
+  return(structure(result, class="Rdimtools"))
 }
 
 

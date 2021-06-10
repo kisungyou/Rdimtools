@@ -102,7 +102,7 @@ do.procrustes <- function(X, ndim=2, intdim=(ndim-1), cor=TRUE){
   result$Y = X%*%projection
   result$featidx = idxvec
   result$projection = projection
-  result$algorithm  = "feature:procrustes"
+  result$algorithm  = "feature:PROCRUSTES"
   return(structure(result, class="Rdimtools"))
 }
 

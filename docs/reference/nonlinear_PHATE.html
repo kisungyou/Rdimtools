@@ -50,7 +50,7 @@
 <meta property="og:description" content="PHATE is a nonlinear method that is specifically targeted at visualizing
 high-dimensional data by embedding it on 2- or 3-dimensional space. We offer
 a native implementation of PHATE solely in R/C++ without interface to python module." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -92,7 +92,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -119,19 +119,19 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -150,7 +150,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Potential of Heat Diffusion for Affinity-based Transition Embedding</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/ver2_nonlinear_PHATE.R'><code>R/ver2_nonlinear_PHATE.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/ver2_nonlinear_PHATE.R'><code>R/ver2_nonlinear_PHATE.R</code></a></small>
     <div class="hidden name"><code>nonlinear_PHATE.Rd</code></div>
     </div>
 
@@ -222,7 +222,7 @@ a native implementation of PHATE solely in R/C++ without interface to python mod
 &#8220;Visualizing Structure and Transitions in High-Dimensional Biological Data.&#8221;
 <em>Nature Biotechnology</em>, <b>37</b>(12), 1482--1492.
 ISSN 1087-0156, 1546-1696, doi: <a href='https://doi.org/10.1038/s41587-019-0336-3'>10.1038/s41587-019-0336-3</a>
-, <a href='https://doi.org/10.1038/s41587-019-0336-3'>https://doi.org/10.1038/s41587-019-0336-3</a>.</p>
+.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
@@ -234,7 +234,7 @@ ISSN 1087-0156, 1546-1696, doi: <a href='https://doi.org/10.1038/s41587-019-0336
 <span class='co'>## compare two potential distances with PCA</span>
 <span class='va'>pca2d</span> <span class='op'>&lt;-</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 <span class='va'>phlog</span> <span class='op'>&lt;-</span> <span class='fu'>do.phate</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, dtype<span class='op'>=</span><span class='st'>"log"</span><span class='op'>)</span>
-<span class='va'>phsqt</span> <span class='op'>&lt;-</span> <span class='fu'>do.phate</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, dtype<span class='op'>=</span><span class='st'>"sqrt"</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='warning'>Warning: * do.phate : numerical underflow triggered by 'log' distance. Automatically change to 'sqrt' distance.</span></div><div class='input'><span class='va'>phsqt</span> <span class='op'>&lt;-</span> <span class='fu'>do.phate</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, dtype<span class='op'>=</span><span class='st'>"sqrt"</span><span class='op'>)</span>
 
 <span class='co'>## Visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>

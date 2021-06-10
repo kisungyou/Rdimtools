@@ -50,9 +50,8 @@
 <meta property="og:description" content="The simplest way of out-of-sample extension might be linear regression even though the original embedding
 is not the linear type by solving
 $$\textrm{min}_{\beta} \|X_{old} \beta - Y_{old}\|_2^2$$ and use the estimate \(\hat{beta}\) to acquire
-$$Y_{new} = X_{new} \hat{\beta}$$. Due to the choice of original preprocessing, trfinfo must be brought
-from the original model you trained." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+$$Y_{new} = X_{new} \hat{\beta}$$." />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -94,7 +93,7 @@ from the original model you trained." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -121,19 +120,19 @@ from the original model you trained." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -152,7 +151,7 @@ from the original model you trained." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>OOS : Linear Projection</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/oos_LINPROJ.R'><code>R/oos_LINPROJ.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/oos_LINPROJ.R'><code>R/oos_LINPROJ.R</code></a></small>
     <div class="hidden name"><code>oos_LINPROJ.Rd</code></div>
     </div>
 
@@ -160,11 +159,10 @@ from the original model you trained." />
     <p>The simplest way of out-of-sample extension might be linear regression even though the original embedding
 is not the linear type by solving
 $$\textrm{min}_{\beta} \|X_{old} \beta - Y_{old}\|_2^2$$ and use the estimate \(\hat{beta}\) to acquire
-$$Y_{new} = X_{new} \hat{\beta}$$. Due to the choice of original preprocessing, <code>trfinfo</code> must be brought
-from the original model you trained.</p>
+$$Y_{new} = X_{new} \hat{\beta}$$.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>oos.linproj</span><span class='op'>(</span><span class='va'>Xold</span>, <span class='va'>Yold</span>, <span class='va'>trfinfo</span>, <span class='va'>Xnew</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>oos.linproj</span><span class='op'>(</span><span class='va'>Xold</span>, <span class='va'>Yold</span>, <span class='va'>Xnew</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,11 +176,6 @@ from the original model you trained.</p>
       <td><p>an \((n\times ndim)\) matrix of data in reduced-dimensional space.</p></td>
     </tr>
     <tr>
-      <th>trfinfo</th>
-      <td><p>a list containing transformation information generated from manifold learning algorithms.
-See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>Xnew</th>
       <td><p>an \((m\times p)\) matrix for out-of-sample extension.</p></td>
     </tr>
@@ -190,11 +183,7 @@ See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more 
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
-<dt>Ynew</dt><dd><p>an \((m\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-
-</dl>
-
+    <p>an \((m\times ndim)\) matrix whose rows are embedded observations.</p>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Kisung You</p>
@@ -202,31 +191,28 @@ See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
     <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
 <span class='co'>## generate sample data and separate them</span>
-<span class='va'>X</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>500</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>46556</span><span class='op'>)</span>
-<span class='va'>idxselect</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>,<span class='fl'>20</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span>, package<span class='op'>=</span><span class='st'>"Rdimtools"</span><span class='op'>)</span>
+<span class='va'>X</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>lab</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/vector.html'>as.vector</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>ids</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>30</span><span class='op'>)</span>
 
-<span class='va'>Xold</span> <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>500</span>,<span class='va'>idxselect</span><span class='op'>)</span>,<span class='op'>]</span>  <span class='co'># 80% of data for training</span>
-<span class='va'>Xnew</span> <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='va'>idxselect</span>,<span class='op'>]</span>                 <span class='co'># 20% of data for testing</span>
+<span class='va'>Xold</span> <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='fu'><a href='https://rdrr.io/r/base/sets.html'>setdiff</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>,<span class='va'>ids</span><span class='op'>)</span>,<span class='op'>]</span>  <span class='co'># 80% of data for training</span>
+<span class='va'>Xnew</span> <span class='op'>=</span> <span class='va'>X</span><span class='op'>[</span><span class='va'>ids</span>,<span class='op'>]</span>                 <span class='co'># 20% of data for testing</span>
 
-<span class='co'>## run PCA for train data</span>
-<span class='va'>training</span> <span class='op'>=</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>Xold</span>,ndim<span class='op'>=</span><span class='fl'>2</span>,preprocess<span class='op'>=</span><span class='st'>"whiten"</span><span class='op'>)</span>
-<span class='va'>Yold</span>     <span class='op'>=</span> <span class='va'>training</span><span class='op'>$</span><span class='va'>Y</span>       <span class='co'># embedded data points</span>
-<span class='va'>oldinfo</span>  <span class='op'>=</span> <span class='va'>training</span><span class='op'>$</span><span class='va'>trfinfo</span> <span class='co'># preprocessing information</span>
+<span class='co'>## run PCA for train data &amp; use the info for prediction</span>
+<span class='va'>training</span> <span class='op'>=</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>Xold</span>,ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>Yold</span>     <span class='op'>=</span> <span class='va'>training</span><span class='op'>$</span><span class='va'>Y</span>
+<span class='va'>Ynew</span>     <span class='op'>=</span> <span class='va'>Xnew</span><span class='op'>%*%</span><span class='va'>training</span><span class='op'>$</span><span class='va'>projection</span>
+<span class='va'>Yplab</span>    <span class='op'>=</span> <span class='va'>lab</span><span class='op'>[</span><span class='va'>ids</span><span class='op'>]</span>
 
-<span class='co'>## perform out-of-sample extension</span>
-<span class='va'>output</span>  <span class='op'>=</span> <span class='fu'>oos.linproj</span><span class='op'>(</span><span class='va'>Xold</span>, <span class='va'>Yold</span>, <span class='va'>oldinfo</span>, <span class='va'>Xnew</span><span class='op'>)</span>
-<span class='va'>Ynew</span>    <span class='op'>=</span> <span class='va'>output</span><span class='op'>$</span><span class='va'>Ynew</span>
-
-<span class='co'>## let's compare via visualization</span>
-<span class='va'>xx</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span> <span class='co'># range of axis 1 for compact visualization</span>
-<span class='va'>yy</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='op'>-</span><span class='fl'>2</span>,<span class='fl'>2</span><span class='op'>)</span> <span class='co'># range of axis 2 for compact visualization</span>
-<span class='va'>mm</span> <span class='op'>=</span> <span class='st'>"black=train / red=test data"</span> <span class='co'># figure title</span>
+<span class='co'>## perform out-of-sample prediction</span>
+<span class='va'>Yoos</span>  <span class='op'>=</span> <span class='fu'>oos.linproj</span><span class='op'>(</span><span class='va'>Xold</span>, <span class='va'>Yold</span>, <span class='va'>Xnew</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Yold</span>, type<span class='op'>=</span><span class='st'>"p"</span>, xlim<span class='op'>=</span><span class='va'>xx</span>, ylim<span class='op'>=</span><span class='va'>yy</span>, main<span class='op'>=</span><span class='va'>mm</span>, xlab<span class='op'>=</span><span class='st'>"axis 1"</span>, ylab<span class='op'>=</span><span class='st'>"axis 2"</span><span class='op'>)</span>
-</div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/points.html'>points</a></span><span class='op'>(</span><span class='va'>Ynew</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>]</span>, <span class='va'>Ynew</span><span class='op'>[</span>,<span class='fl'>2</span><span class='op'>]</span>, lwd<span class='op'>=</span><span class='fl'>3</span>, col<span class='op'>=</span><span class='st'>"red"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Ynew</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>Yplab</span>, main<span class='op'>=</span><span class='st'>"true prediction"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>Yoos</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>Yplab</span>, main<span class='op'>=</span><span class='st'>"OOS prediction"</span><span class='op'>)</span>
 </div><div class='img'><img src='oos_LINPROJ-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
 <span class='co'># }</span>
 

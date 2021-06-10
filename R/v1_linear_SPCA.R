@@ -13,7 +13,6 @@
 #' \item{maxiter}{maximum number of iterations (default: 100).}
 #' \item{abstol}{absolute tolerance stopping criterion (default: 1e-8).}
 #' \item{reltol}{relative tolerance stopping criterion (default: 1e-4).}
-#' \item{tolerance}{stopping criterion in a Frobenius norm .}
 #' }
 #'
 #' @return a named \code{Rdimtools} S3 object containing
@@ -24,8 +23,9 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
-#' data(iris)
+#' data(iris, package="Rdimtools")
 #' set.seed(100)
 #' subid = sample(1:150,50)
 #' X     = as.matrix(iris[subid,1:4])
@@ -36,16 +36,14 @@
 #' out2 <- do.spca(X,ndim=2,rho=1)
 #' out3 <- do.spca(X,ndim=2,rho=100)
 #'
-#' ## embeddings for each procedure
-#' Y1 <- out1$Y; Y2 <- out2$Y; Y3 <- out3$Y
-#'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(Y1, col=lab, pch=19, main="SPCA::rho=0.01")
-#' plot(Y2, col=lab, pch=19, main="SPCA::rho=1")
-#' plot(Y3, col=lab, pch=19, main="SPCA::rho=100")
+#' plot(out1$Y, col=lab, pch=19, main="SPCA::rho=0.01")
+#' plot(out2$Y, col=lab, pch=19, main="SPCA::rho=1")
+#' plot(out3$Y, col=lab, pch=19, main="SPCA::rho=100")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{zou_sparse_2006}{Rdimtools}
@@ -63,7 +61,6 @@ do.spca <- function(X, ndim=2, mu=1.0, rho=1.0, ...){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.spca : 'X' should be a matrix.")}
-  myprep = ifelse(missing(preprocess), "center", match.arg(preprocess))
   myndim = min(max(1, round(ndim)), ncol(X)-1)
   mymu   = as.double(mu)
   myrho  = as.double(rho)
@@ -75,12 +72,12 @@ do.spca <- function(X, ndim=2, mu=1.0, rho=1.0, ...){
   if ("abstol"%in%pnames){
     myabstol = max(.Machine$double.eps, as.double(params$abstol))
   } else {
-    myabstol = 10^{-4}
+    myabstol = 10^(-8)
   }
   if ("reltol"%in%pnames){
     myreltol = max(.Machine$double.eps, as.double(params$reltol))
   } else {
-    myreltol = 10^{-2}
+    myreltol = 10^(-4)
   }
   if ("maxiter"%in%pnames){
     myiter = max(5, round(params$maxiter))

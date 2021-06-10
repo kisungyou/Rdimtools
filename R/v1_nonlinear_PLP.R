@@ -20,23 +20,20 @@
 #' \emph{User Interruption} : PLP is actually an interactive algorithm that a user should be able to intervene
 #' intermittently. Such functionality is, however, sacrificed in this version.
 #'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param type a vector of neighborhood graph construction. Following types are supported;
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
 #'
-#'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
+#'
 #'
 #' @examples
 #' \dontrun{
@@ -66,7 +63,7 @@
 #' @rdname nonlinear_PLP
 #' @concept nonlinear_methods
 #' @export
-do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","whiten","decorrelate"),type=c("proportion",0.20)){
+do.plp <- function(X, ndim=2, type=c("proportion",0.20)){
   # 1. typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<2)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -85,21 +82,21 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
   #   type        : vector of c("knn",k), c("enn",radius), or c("proportion",ratio)
   #                 set default for "proportion" of 20%
 
-    nbdtype = type
+  nbdtype = type
 
-  # 3. Run
-  #   3-1. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # # 3. Run
+  # #   3-1. preprocess
+  # if (missing(preprocess)){
+  #   algpreprocess = "null"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="nonlinear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   3-2. sample selection : no random sampling : I will use kmeans
-  kmeans  = kmeans(pX,m)
+  kmeans  = kmeans(X,m)
   cluster = kmeans$cluster # assignment information
 
   #   3-3. control points
@@ -109,15 +106,15 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
   for (i in 1:m){
     idxi = which(cluster==i)
     samplevec = sample(idxi,round(sqrt(length(idxi))))
-    CP = rbind(CP,pX[samplevec,])
+    CP = rbind(CP,X[samplevec,])
     CPvec = c(CPvec,rep(i,times=round(sqrt(length(idxi)))))
     CPidx = c(CPidx,samplevec)
   }
   CP = CP[-1,]
 
   #   3-4. dimension reduction : MDS
-  outputMDS = do.mds(CP,ndim=k,preprocess="center")
-  Ytmp  = aux.preprocess(outputMDS$Y,type="center")
+  outputMDS = dt_mds(CP, k) # do.mds(CP,ndim=k,preprocess="center")
+  Ytmp      = aux.preprocess(outputMDS$Y,type="center")
   Ycontrol  = Ytmp$pX
 
   #   3-5. Piecewise Laplacian Projection
@@ -130,7 +127,7 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
     idxOthers   = setdiff(idxall,idxContrl)
 
     # 3-5-2. partial data
-    pdata = rbind(pX[idxContrl,],pX[idxOthers,]) # <- this needs to be LEigen into k dims
+    pdata = rbind(X[idxContrl,],X[idxOthers,]) # <- this needs to be LEigen into k dims
     pctrl = Ycontrol[which(CPvec==i),]
 
     # 3-5-3. apply Laplacian Eigenmaps
@@ -152,6 +149,6 @@ do.plp <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","white
   # 4. return output
   result = list()
   result$Y = Youtput
-  result$trfinfo  = trfinfo
-  return(result)
+  result$algorithm = "nonlinear:PLP"
+  return(structure(result, class="Rdimtools"))
 }

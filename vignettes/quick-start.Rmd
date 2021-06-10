@@ -33,7 +33,7 @@ install.packages("Rdimtools")
 or a development version is available from GitHub with `devtools` package.
 ```{r eval=FALSE}
 ## install.packages("devtools")
-devtools::install_github("kyoustat/Rdimtools")
+devtools::install_github("kisungyou/Rdimtools")
 ```
 
 Now we are ready to go by loading the library.

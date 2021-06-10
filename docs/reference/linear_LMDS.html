@@ -51,7 +51,7 @@
 it first finds a low-dimensional embedding using a small portion of given dataset
 and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -93,7 +93,7 @@ all the other data points to landmark points as possible." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -120,19 +120,19 @@ all the other data points to landmark points as possible." />
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -151,7 +151,7 @@ all the other data points to landmark points as possible." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Landmark Multidimensional Scaling</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/ver2_linear_LMDS.R'><code>R/ver2_linear_LMDS.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_linear_LMDS.R'><code>R/v1_linear_LMDS.R</code></a></small>
     <div class="hidden name"><code>linear_LMDS.Rd</code></div>
     </div>
 
@@ -162,12 +162,7 @@ and graft the others in a manner to preserve as much pairwise distance from
 all the other data points to landmark points as possible.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.lmds</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  npoints <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>5</span>, <span class='va'>ndim</span> <span class='op'>+</span> <span class='fl'>1</span><span class='op'>)</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.lmds</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, npoints <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>5</span>, <span class='va'>ndim</span> <span class='op'>+</span> <span class='fl'>1</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -185,19 +180,14 @@ and columns represent independent variables.</p></td>
       <th>npoints</th>
       <td><p>the number of landmark points to be drawn.</p></td>
     </tr>
-    <tr>
-      <th>preprocess</th>
-      <td><p>an option for preprocessing the data. Default is <code>"center"</code>.
-See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 
@@ -218,17 +208,16 @@ MIT Press, Cambridge, MA.</p>
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## use iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## use iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>subid</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>,<span class='fl'>50</span><span class='op'>)</span>
-<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
-<span class='va'>lab</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
+<span class='va'>lab</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>## use 10% and 25% of the data and compare with full MDS</span>
-<span class='va'>output1</span> <span class='op'>&lt;-</span> <span class='fu'>do.lmds</span><span class='op'>(</span><span class='va'>X</span>,npoints<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>0.10</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>output2</span> <span class='op'>&lt;-</span> <span class='fu'>do.lmds</span><span class='op'>(</span><span class='va'>X</span>,npoints<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span>
-<span class='va'>output3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='do.mds.html'>do.mds</a></span><span class='op'>(</span><span class='va'>X</span>,ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>output1</span> <span class='op'>&lt;-</span> <span class='fu'>do.lmds</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, npoints<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>0.10</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>output2</span> <span class='op'>&lt;-</span> <span class='fu'>do.lmds</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, npoints<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>round</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>*</span><span class='fl'>0.25</span><span class='op'>)</span><span class='op'>)</span>
+<span class='va'>output3</span> <span class='op'>&lt;-</span> <span class='fu'><a href='do.mds.html'>do.mds</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## vsualization</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
@@ -237,6 +226,7 @@ MIT Press, Cambridge, MA.</p>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>output2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"25% random points"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>output3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"original MDS"</span><span class='op'>)</span>
 </div><div class='img'><img src='linear_LMDS-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
 
 </div></pre>
   </div>

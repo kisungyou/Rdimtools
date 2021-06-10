@@ -121,19 +121,18 @@ do.lda <- function(X, label, ndim=2){
   result = list()
   result$Y = X%*%W
   result$projection = W
-  result$algorithm  = "linear:lda"
+  result$algorithm  = "linear:LDA"
   return(structure(result, class="Rdimtools"))
 }
 
-#'
-#' ## sum of outer products to calculate S_B and S_W
-#' #' @keywords internal
-#' #' @noRd
-#' lda_outer <- function(X){
-#'   p = ncol(X)
-#'   output = array(0,c(p,p))
-#'   for (i in 1:nrow(X)){
-#'     output = output + outer(X[i,],X[i,])
-#'   }
-#'   return(output)
-#' }
+## sum of outer products to calculate S_B and S_W
+#' @keywords internal
+#' @noRd
+lda_outer <- function(X){
+  p = ncol(X)
+  output = array(0,c(p,p))
+  for (i in 1:nrow(X)){
+    output = output + outer(X[i,],X[i,])
+  }
+  return(output)
+}

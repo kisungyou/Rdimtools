@@ -8,38 +8,39 @@
 #' total scatter, \eqn{S_t = S_b + S_w}.
 #'
 #'
-#' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
+#' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "center". See also \code{\link{aux.preprocess}} for more details.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
-#' ## generate 3 different groups of data X and label vector
-#' x1 = matrix(rnorm(4*10), nrow=10)-20
-#' x2 = matrix(rnorm(4*10), nrow=10)
-#' x3 = matrix(rnorm(4*10), nrow=10)+20
-#' X     = rbind(x1, x2, x3)
-#' label = rep(1:3, each=10)
+#' \donttest{
+#' ## use iris data
+#' data(iris, package="Rdimtools")
+#' subid = sample(1:150, 50)
+#' X     = as.matrix(iris[subid,1:4])
+#' label = as.factor(iris[subid,5])
 #'
-#' ## perform MVP with different preprocessings
-#' out1 = do.mmc(X, label, ndim=2)
-#' out2 = do.mmc(X, label, ndim=2, preprocess="decorrelate")
+#' ## compare MMC with other methods
+#' outMMC = do.mmc(X, label)
+#' outMVP = do.mvp(X, label)
+#' outPCA = do.pca(X)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(out1$Y, main="MMC::centering")
-#' plot(out2$Y, main="MMC::decorrelating")
+#' par(mfrow=c(1,3))
+#' plot(outMMC$Y, pch=19, col=label, main="MMC")
+#' plot(outMVP$Y, pch=19, col=label, main="MVP")
+#' plot(outPCA$Y, pch=19, col=label, main="PCA")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{li_efficient_2006}{Rdimtools}
@@ -48,7 +49,7 @@
 #' @rdname linear_MMC
 #' @concept linear_methods
 #' @export
-do.mmc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten")){
+do.mmc <- function(X, label, ndim=2){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -71,18 +72,18 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
   #   3. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.mmc : 'ndim' is a positive integer in [1,#(covariates)).")}
-  #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
+  # #   4. preprocess
+  # if (missing(preprocess)){
+  #   algpreprocess = "center"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  #   1. preprocess of data
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # #   1. preprocess of data
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   2. vector of proportion : pi
   nlabel = length(ulabel) # number of classes
@@ -94,14 +95,14 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
   mean_PerClass = array(0,c(nlabel,p))
   for (i in 1:nlabel){
     idxlabel = which(label==ulabel[i])
-    mean_PerClass[i,] = as.vector(colMeans(pX[idxlabel,]) )
+    mean_PerClass[i,] = as.vector(colMeans(X[idxlabel,]) )
   }
-  mean_Overall = as.vector(colMeans(pX))
+  mean_Overall = as.vector(colMeans(X))
   #   4. per-class and overall : scatter
   scatter_PerClass = list()
   for (i in 1:nlabel){
     idxlabel = which(label==ulabel[i])
-    scatter_PerClass[[i]] = mmc_scatter(pX[idxlabel,])
+    scatter_PerClass[[i]] = mmc_scatter(X[idxlabel,])
   }
   #   5. compute Sw
   Sw = array(0,c(p,p))
@@ -122,10 +123,10 @@ do.mmc <- function(X, label, ndim=2, preprocess=c("center","scale","cscale","dec
   #------------------------------------------------------------------------
   ## RETURN THE RESULTS
   result = list()
-  result$Y = pX%*%projection
-  result$trfinfo = trfinfo
+  result$Y = X%*%projection
   result$projection = projection
-  return(result)
+  result$algorithm  = "linear:MMC"
+  return(structure(result, class="Rdimtools"))
 }
 
 

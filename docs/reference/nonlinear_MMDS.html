@@ -50,7 +50,7 @@
 <meta property="og:description" content="Metric MDS is a nonlinear method that is solved iteratively. We adopt a
 well-known SMACOF algorithm for updates with uniform weights over all pairwise
 distances after initializing the low-dimensional configuration via classical MDS." />
-<meta property="og:image" content="https://kyoustat.com/Rdimtools/logo.png" />
+<meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png" />
 
 
 
@@ -92,7 +92,7 @@ distances after initializing the low-dimensional configuration via classical MDS
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.6</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
       </span>
     </div>
 
@@ -119,19 +119,19 @@ distances after initializing the low-dimensional configuration via classical MDS
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li>
-  <a href="https://twitter.com/kyoustat">
+  <a href="https://twitter.com/kisung_you">
     <span class="fas fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kyoustat/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools">
     <span class="fas fa-github"></span>
      
   </a>
 </li>
 <li>
-  <a href="../mailto:kyoustat@gmail.com">
+  <a href="../mailto:kisungyou@outlook.com">
     <span class="fas fa-envelope"></span>
      
   </a>
@@ -150,7 +150,7 @@ distances after initializing the low-dimensional configuration via classical MDS
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Metric Multidimensional Scaling</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kyoustat/Rdimtools/blob/master/R/ver2_nonlinear_MMDS.R'><code>R/ver2_nonlinear_MMDS.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_nonlinear_MMDS.R'><code>R/v1_nonlinear_MMDS.R</code></a></small>
     <div class="hidden name"><code>nonlinear_MMDS.Rd</code></div>
     </div>
 
@@ -160,13 +160,7 @@ well-known SMACOF algorithm for updates with uniform weights over all pairwise
 distances after initializing the low-dimensional configuration via classical MDS.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.mmds</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
-  maxiter <span class='op'>=</span> <span class='fl'>100</span>,
-  abstol <span class='op'>=</span> <span class='fl'>1e-06</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.mmds</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -180,25 +174,20 @@ distances after initializing the low-dimensional configuration via classical MDS
       <td><p>an integer-valued target dimension (default: 2).</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an option for preprocessing the data. Default is <code>"null"</code>.
-See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
-      <th>maxiter</th>
-      <td><p>maximum number of iterations for metric MDS updates (default: 100).</p></td>
-    </tr>
-    <tr>
-      <th>abstol</th>
-      <td><p>stopping criterion for metric MDS iterations (default: 1e-6).</p></td>
+      <th>...</th>
+      <td><p>extra parameters including</p><dl>
+<dt>maxiter</dt><dd><p>maximum number of iterations for metric MDS updates (default: 100).</p></dd>
+<dt>abstol</dt><dd><p>stopping criterion for metric MDS iterations (default: 1e-8).</p></dd>
+
+</dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 

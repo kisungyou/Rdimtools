@@ -295,15 +295,15 @@ dt_mmds <- function(X, ndim, maxiter, abstol) {
     .Call(`_Rdimtools_dt_mmds`, X, ndim, maxiter, abstol)
 }
 
+dt_phate_partial <- function(P, ndim, dtype, maxiter, abstol, smacof) {
+    .Call(`_Rdimtools_dt_phate_partial`, P, ndim, dtype, maxiter, abstol, smacof)
+}
+
+dt_rpca <- function(X, mu, lambda, maxiter, abstol) {
+    .Call(`_Rdimtools_dt_rpca`, X, mu, lambda, maxiter, abstol)
+}
+
 oos_linproj <- function(Xold, Yold, Xnew) {
     .Call(`_Rdimtools_oos_linproj`, Xold, Yold, Xnew)
-}
-
-dt_rpca <- function(X, ndim, ptype, mu, lambda) {
-    .Call(`_Rdimtools_dt_rpca`, X, ndim, ptype, mu, lambda)
-}
-
-dt_phate <- function(X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof) {
-    .Call(`_Rdimtools_dt_phate`, X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof)
 }
 

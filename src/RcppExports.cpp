@@ -902,6 +902,37 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// dt_phate_partial
+Rcpp::List dt_phate_partial(arma::mat& P, int ndim, std::string dtype, int maxiter, double abstol, bool smacof);
+RcppExport SEXP _Rdimtools_dt_phate_partial(SEXP PSEXP, SEXP ndimSEXP, SEXP dtypeSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP smacofSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type P(PSEXP);
+    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
+    Rcpp::traits::input_parameter< std::string >::type dtype(dtypeSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    Rcpp::traits::input_parameter< bool >::type smacof(smacofSEXP);
+    rcpp_result_gen = Rcpp::wrap(dt_phate_partial(P, ndim, dtype, maxiter, abstol, smacof));
+    return rcpp_result_gen;
+END_RCPP
+}
+// dt_rpca
+Rcpp::List dt_rpca(arma::mat& X, double mu, double lambda, int maxiter, double abstol);
+RcppExport SEXP _Rdimtools_dt_rpca(SEXP XSEXP, SEXP muSEXP, SEXP lambdaSEXP, SEXP maxiterSEXP, SEXP abstolSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
+    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
+    rcpp_result_gen = Rcpp::wrap(dt_rpca(X, mu, lambda, maxiter, abstol));
+    return rcpp_result_gen;
+END_RCPP
+}
 // oos_linproj
 arma::mat oos_linproj(arma::mat& Xold, arma::mat& Yold, arma::mat& Xnew);
 RcppExport SEXP _Rdimtools_oos_linproj(SEXP XoldSEXP, SEXP YoldSEXP, SEXP XnewSEXP) {
@@ -912,40 +943,6 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< arma::mat& >::type Yold(YoldSEXP);
     Rcpp::traits::input_parameter< arma::mat& >::type Xnew(XnewSEXP);
     rcpp_result_gen = Rcpp::wrap(oos_linproj(Xold, Yold, Xnew));
-    return rcpp_result_gen;
-END_RCPP
-}
-// dt_rpca
-Rcpp::List dt_rpca(arma::mat& X, int ndim, std::string ptype, double mu, double lambda);
-RcppExport SEXP _Rdimtools_dt_rpca(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP muSEXP, SEXP lambdaSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
-    Rcpp::traits::input_parameter< std::string >::type ptype(ptypeSEXP);
-    Rcpp::traits::input_parameter< double >::type mu(muSEXP);
-    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
-    rcpp_result_gen = Rcpp::wrap(dt_rpca(X, ndim, ptype, mu, lambda));
-    return rcpp_result_gen;
-END_RCPP
-}
-// dt_phate
-Rcpp::List dt_phate(arma::mat& X, int ndim, std::string ptype, int k, double alpha, std::string dtype, int maxiter, double abstol, bool smacof);
-RcppExport SEXP _Rdimtools_dt_phate(SEXP XSEXP, SEXP ndimSEXP, SEXP ptypeSEXP, SEXP kSEXP, SEXP alphaSEXP, SEXP dtypeSEXP, SEXP maxiterSEXP, SEXP abstolSEXP, SEXP smacofSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
-    Rcpp::traits::input_parameter< int >::type ndim(ndimSEXP);
-    Rcpp::traits::input_parameter< std::string >::type ptype(ptypeSEXP);
-    Rcpp::traits::input_parameter< int >::type k(kSEXP);
-    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
-    Rcpp::traits::input_parameter< std::string >::type dtype(dtypeSEXP);
-    Rcpp::traits::input_parameter< int >::type maxiter(maxiterSEXP);
-    Rcpp::traits::input_parameter< double >::type abstol(abstolSEXP);
-    Rcpp::traits::input_parameter< bool >::type smacof(smacofSEXP);
-    rcpp_result_gen = Rcpp::wrap(dt_phate(X, ndim, ptype, k, alpha, dtype, maxiter, abstol, smacof));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -1018,9 +1015,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_dt_lmds", (DL_FUNC) &_Rdimtools_dt_lmds, 3},
     {"_Rdimtools_dt_spca", (DL_FUNC) &_Rdimtools_dt_spca, 7},
     {"_Rdimtools_dt_mmds", (DL_FUNC) &_Rdimtools_dt_mmds, 4},
-    {"_Rdimtools_oos_linproj", (DL_FUNC) &_Rdimtools_oos_linproj, 3},
+    {"_Rdimtools_dt_phate_partial", (DL_FUNC) &_Rdimtools_dt_phate_partial, 6},
     {"_Rdimtools_dt_rpca", (DL_FUNC) &_Rdimtools_dt_rpca, 5},
-    {"_Rdimtools_dt_phate", (DL_FUNC) &_Rdimtools_dt_phate, 9},
+    {"_Rdimtools_oos_linproj", (DL_FUNC) &_Rdimtools_oos_linproj, 3},
     {NULL, NULL, 0}
 };
 

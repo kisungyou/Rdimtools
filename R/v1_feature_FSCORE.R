@@ -89,7 +89,7 @@ do.fscore <- function(X, label, ndim=2){
   result$Y = X%*%projection
   result$featidx = idxvec
   result$projection = projection
-  result$algorithm = "linear:fscore"
+  result$algorithm = "linear:FSCORE"
   return(structure(result, class="Rdimtools"))
 }
 

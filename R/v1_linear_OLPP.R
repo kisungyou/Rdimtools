@@ -14,14 +14,14 @@
 #' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
 #' @param weight \code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.
-#' @param preprocess an additional option for preprocessing the data. See \code{\link{aux.preprocess}} for details.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}
 #'
-#' @return a named list containing
+#'
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -55,7 +55,7 @@
 #' @concept linear_methods
 #' @export
 do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
-                    weight=TRUE,preprocess=c("center","scale","cscale","decorrelate","whiten"),t=1.0){
+                    weight=TRUE,t=1.0){
   # Preprocessing : typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
@@ -79,19 +79,20 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   if (!is.logical(algweight)){
     stop("* do.olpp : 'weight' should be a logical variable.")
   }
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
+  # if (missing(preprocess)){
+  #   algpreprocess = "center"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
   if (!is.numeric(t)||(t<=0)||is.na(t)||is.infinite(t)){
     stop("* do.olpp : 't' is a bandwidth parameter in (0,infinity).")
   }
 
   # Preprocessing 3 : data preprocessing
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
+  pX = X
 
   ## MAIN COMPUTATION
   #   step 1. PCA preprocessing
@@ -105,7 +106,7 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   #   return(output)
   # }
 
-  pXpca = do.pca(pX, ndim=pcadim, preprocess="center")
+  pXpca = dt_pca(X, pcadim, FALSE)
   Xpca  = pXpca$Y
   Wpca  = aux.adjprojection(pXpca$projection)
 
@@ -134,7 +135,6 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   result = list()
   result$Y = pX%*%proj_all
   result$projection = proj_all
-  trfinfo$algtype = "linear"
-  result$trfinfo = trfinfo
-  return(result)
+  result$algorithm  = "linear:OLPP"
+  return(structure(result, class="Rdimtools"))
 }
