@@ -151,7 +151,7 @@ it might incur warning messages for solving near-singular system of linear equat
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Orthogonal Locality Preserving Projection</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/linear_OLPP.R'><code>R/linear_OLPP.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_linear_OLPP.R'><code>R/v1_linear_OLPP.R</code></a></small>
     <div class="hidden name"><code>linear_OLPP.Rd</code></div>
     </div>
 
@@ -168,7 +168,6 @@ it might incur warning messages for solving near-singular system of linear equat
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.1</span><span class='op'>)</span>,
   symmetric <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"union"</span>, <span class='st'>"intersect"</span>, <span class='st'>"asymmetric"</span><span class='op'>)</span>,
   weight <span class='op'>=</span> <span class='cn'>TRUE</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
   t <span class='op'>=</span> <span class='fl'>1</span>
 <span class='op'>)</span></pre>
 
@@ -200,10 +199,6 @@ See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more deta
       <td><p><code>TRUE</code> to perform LPP on weighted graph, or <code>FALSE</code> otherwise.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data. See <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for details.</p></td>
-    </tr>
-    <tr>
       <th>t</th>
       <td><p>bandwidth for heat kernel in \((0,\infty)\)</p></td>
     </tr>
@@ -211,10 +206,10 @@ See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more deta
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 

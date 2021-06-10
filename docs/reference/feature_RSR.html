@@ -152,7 +152,7 @@ row-wise sparsity constraint." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Regularized Self-Representation</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/feature_RSR.R'><code>R/feature_RSR.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_feature_RSR.R'><code>R/v1_feature_RSR.R</code></a></small>
     <div class="hidden name"><code>feature_RSR.Rd</code></div>
     </div>
 
@@ -164,12 +164,7 @@ where \(\|W\|_{2,1} = \sum_{i=1}^{m} \|W_{i:} \|_2\) is an \(\ell_{2,1}\) norm t
 row-wise sparsity constraint.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.rsr</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
-  lbd <span class='op'>=</span> <span class='fl'>1</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.rsr</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, lbd <span class='op'>=</span> <span class='fl'>1</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -184,11 +179,6 @@ and columns represent independent variables.</p></td>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>lbd</th>
       <td><p>nonnegative number to control the degree of self-representation by imposing row-sparsity.</p></td>
     </tr>
@@ -196,11 +186,11 @@ Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 <dt>featidx</dt><dd><p>a length-\(ndim\) vector of indices with highest scores.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 

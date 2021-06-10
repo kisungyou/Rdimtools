@@ -20,7 +20,7 @@ a named \code{Rdimtools} S3 object containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{vars}{a vector containing variances of projected data onto principal components.}
-\item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{algorithm}{name of the algorithm.}
 }
 }

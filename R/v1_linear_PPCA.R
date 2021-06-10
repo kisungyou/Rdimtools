@@ -14,7 +14,7 @@
 #' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{mle.sigma2}{MLE for \eqn{\sigma^2}.}
 #' \item{mle.W}{MLE of a \eqn{(p\times ndim)} mapping from latent to observation in column major.}
 #' \item{algorithm}{name of the algorithm.}
@@ -83,7 +83,7 @@ do.ppca <- function(X, ndim=2){
   #   5. Projection
   M = (t(mlW)%*%mlW)+(diag(ncol(mlW))*mlsig2)
   SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
-  projection = t(SOL$x)
+  projection = aux.adjprojection(t(SOL$x))
 
   #------------------------------------------------------------------------
   ## RETURN

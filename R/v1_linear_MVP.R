@@ -14,7 +14,7 @@
 #' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{algorithm}{name of the algorithm.}
 #' }
 #'
@@ -117,7 +117,7 @@ do.mvp <- function(X, label, ndim=2){
   #   4. solve geigen with lowest
   LHS = t(ppX)%*%M%*%ppX
   RHS = t(ppX)%*%L%*%ppX
-  projection_second = aux.geigen(LHS,RHS,ndim,maximal=FALSE)
+  projection_second = aux.adjprojection(aux.geigen(LHS,RHS,ndim,maximal=FALSE))
   projection_all = projection_first%*%projection_second
 
   #------------------------------------------------------------------------

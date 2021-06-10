@@ -9,16 +9,14 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param lbd nonnegative number to control the degree of self-representation by imposing row-sparsity.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
@@ -51,7 +49,7 @@
 #' @rdname feature_RSR
 #' @concept feature_methods
 #' @export
-do.rsr <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whiten","decorrelate"), lbd=1.0){
+do.rsr <- function(X, ndim=2, lbd=1.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -61,35 +59,23 @@ do.rsr <- function(X, ndim=2, preprocess=c("null","center","scale","cscale","whi
   #   2. ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){stop("* do.rsr : 'ndim' is a positive integer in [1,#(covariates)).")}
-  #   3. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  #   4. lbd
+  #   3. lbd
   if ((length(lbd)>1)||(lbd<0)){
     stop("* do.rsr : 'lbd' should be a nonnegative real number.")
   }
 
   #------------------------------------------------------------------------
   ## COMPUTATION
-  #   1. data preprocessing
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
-
-  #   2. main computation
-  score      = method_rsr(pX, lbd, sqrt(10*.Machine$double.eps))
+  score      = method_rsr(X, lbd, sqrt(10*.Machine$double.eps))
   idxvec     = base::order(score, decreasing=TRUE)[1:ndim]
   projection = aux.featureindicator(p,ndim,idxvec)
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pX%*%projection
+  result$Y = X%*%projection
   result$featidx = idxvec
-  result$trfinfo = trfinfo
   result$projection = projection
-  return(result)
+  result$algorithm = "linear:RSR"
+  return(structure(result, class="Rdimtools"))
 }

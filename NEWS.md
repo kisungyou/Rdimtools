@@ -1,3 +1,8 @@
+# Rdimtools 1.0.8
+
+* Change of maintainer's contact.
+* Some functions are converted to pure C++.
+
 # Rdimtools 1.0.7
 
 * Fixed an error in `do.olpp()` thanks to Nicholas Spyrison.

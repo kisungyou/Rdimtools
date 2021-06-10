@@ -36,17 +36,15 @@
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
-#' @param preprocess an additional option for preprocessing the data.
-#' Default is "null". See also \code{\link{aux.preprocess}} for more details.
 #' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{lscore}{a length-\eqn{p} vector of laplacian scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @references
@@ -56,8 +54,7 @@
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
-                      preprocess=c("null","center","scale","cscale","whiten","decorrelate"), t=10.0){
+do.lscore <- function(X, ndim=2, type=c("proportion",0.1),t=10.0){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -73,31 +70,31 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
   nbdtype = type
   nbdsymmetric = "union"
   #   4. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "null"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
+  # if (missing(preprocess)){
+  #   algpreprocess = "null"
+  # } else {
+  #   algpreprocess = match.arg(preprocess)
+  # }
   #   5. t : kernel bandwidth
   t = as.double(t)
   if (!check_NumMM(t, 1e-15, Inf, compact=TRUE)){stop("* do.lscore : 't' is a kernel bandwidth parameter in (0,Inf).")}
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # #   1. preprocessing of data : note that output pX still has (n-by-p) format
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   2. build neighborhood information
-  nbdstruct = aux.graphnbd(pX,method="euclidean",
+  nbdstruct = aux.graphnbd(X,method="euclidean",
                            type=nbdtype,symmetric=nbdsymmetric)
   nbdmask   = nbdstruct$mask
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN PART FOR LAPLACIAN SCORE
   #   1. weight matrix
-  Dsqmat  = exp(-(as.matrix(dist(pX))^2)/t)
+  Dsqmat  = exp(-(as.matrix(dist(X))^2)/t)
   S       = Dsqmat*nbdmask
   diag(S) = 0
   #   2. auxiliary matrices
@@ -109,7 +106,7 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
   fscore = rep(0,p)
   for (j in 1:p){
     # 3-1. select each feature
-    fr = as.vector(pX[,j])
+    fr = as.vector(X[,j])
     # 3-2. adjust fr
     corrector  = as.double(sum(fr*D1)/sum(n1*D1))
     frtilde    = fr-corrector
@@ -127,10 +124,10 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = pX%*%projection
+  result$Y = X%*%projection
   result$lscore  = fscore
   result$featidx = idxvec
-  result$trfinfo = trfinfo
   result$projection = projection
-  return(result)
+  result$algorithm  = "linear:LSCORE"
+  return(structure(result, class="Rdimtools"))
 }

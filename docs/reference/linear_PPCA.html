@@ -152,7 +152,7 @@ negative values if sample covariance given the data is rank-deficient." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Probabilistic Principal Component Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/linear_PPCA.R'><code>R/linear_PPCA.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_linear_PPCA.R'><code>R/v1_linear_PPCA.R</code></a></small>
     <div class="hidden name"><code>linear_PPCA.Rd</code></div>
     </div>
 
@@ -164,11 +164,7 @@ as it is relevant to the error model. Also, for high-dimensional problem, it is 
 negative values if sample covariance given the data is rank-deficient.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.ppca</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.ppca</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -182,21 +178,16 @@ and columns represent independent variables.</p></td>
       <th>ndim</th>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
-    <tr>
-      <th>preprocess</th>
-      <td><p>an option for preprocessing the data. This supports three methods.
-Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
-<dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are principal components.</p></dd>
+<dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
 <dt>mle.sigma2</dt><dd><p>MLE for \(\sigma^2\).</p></dd>
 <dt>mle.W</dt><dd><p>MLE of a \((p\times ndim)\) mapping from latent to observation in column major.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 
@@ -213,7 +204,8 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## use iris data</span>
+    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
+<span class='co'>## use iris data</span>
 <span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
 <span class='va'>subid</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>50</span><span class='op'>)</span>
@@ -221,16 +213,17 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
 <span class='va'>label</span> <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
 <span class='co'>## Compare PCA and PPCA</span>
-<span class='va'>PCA</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, preprocess<span class='op'>=</span><span class='st'>"center"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in do.pca(X, ndim = 2, preprocess = "center"): unused argument (preprocess = "center")</span></div><div class='input'><span class='va'>PPCA</span> <span class='op'>&lt;-</span> <span class='fu'>do.ppca</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span>, preprocess<span class='op'>=</span><span class='st'>"center"</span><span class='op'>)</span>
+<span class='va'>PCA</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>PPCA</span> <span class='op'>&lt;-</span> <span class='fu'>do.ppca</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## Visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>PCA</span><span class='op'>$</span><span class='va'>Y</span>,  pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"PCA"</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; <span class='error'>Error in plot(PCA$Y, pch = 19, col = label, main = "PCA"): object 'PCA' not found</span></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>PPCA</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"PPCA"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
-</div><div class='img'><img src='linear_PPCA-1.png' alt='' width='700' height='433' /></div><div class='input'>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>PPCA</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"PPCA"</span><span class='op'>)</span>
+</div><div class='img'><img src='linear_PPCA-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
+<span class='co'># }</span>
+
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

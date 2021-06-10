@@ -149,7 +149,7 @@ adopts two-stage reduction scheme with local approximation." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Piecewise Laplacian-based Projection (PLP)</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/nonlinear_PLP.R'><code>R/nonlinear_PLP.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_nonlinear_PLP.R'><code>R/v1_nonlinear_PLP.R</code></a></small>
     <div class="hidden name"><code>nonlinear_PLP.Rd</code></div>
     </div>
 
@@ -158,12 +158,7 @@ adopts two-stage reduction scheme with local approximation." />
 adopts two-stage reduction scheme with local approximation.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.plp</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"whiten"</span>, <span class='st'>"decorrelate"</span><span class='op'>)</span>,
-  type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.2</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.plp</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.2</span><span class='op'>)</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -178,11 +173,6 @@ and columns represent independent variables.</p></td>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>type</th>
       <td><p>a vector of neighborhood graph construction. Following types are supported;
 <code><a href='https://rdrr.io/r/base/c.html'>c("knn",k)</a></code>, <code><a href='https://rdrr.io/r/base/c.html'>c("enn",radius)</a></code>, and <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",ratio)</a></code>.
@@ -193,9 +183,9 @@ among all data points. See also <code><a href='aux.graphnbd.html'>aux.graphnbd</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 

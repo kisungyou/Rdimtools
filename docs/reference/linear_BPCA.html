@@ -154,7 +154,7 @@ corresponding column vector of mp.W to be selected as potential basis." />
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Bayesian Principal Component Analysis</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/linear_BPCA.R'><code>R/linear_BPCA.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_linear_BPCA.R'><code>R/v1_linear_BPCA.R</code></a></small>
     <div class="hidden name"><code>linear_BPCA.Rd</code></div>
     </div>
 
@@ -168,13 +168,7 @@ relative weight for each base in that the smaller \(\alpha\) value is, the more 
 corresponding column vector of <code>mp.W</code> to be selected as potential basis.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.bpca</span><span class='op'>(</span>
-  <span class='va'>X</span>,
-  ndim <span class='op'>=</span> <span class='fl'>2</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
-  reltol <span class='op'>=</span> <span class='fl'>1e-04</span>,
-  maxiter <span class='op'>=</span> <span class='fl'>123</span>
-<span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>do.bpca</span><span class='op'>(</span><span class='va'>X</span>, ndim <span class='op'>=</span> <span class='fl'>2</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -189,30 +183,25 @@ and columns represent independent variables.</p></td>
       <td><p>an integer-valued target dimension.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an option for preprocessing the data. Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code>
-for more details.</p></td>
-    </tr>
-    <tr>
-      <th>reltol</th>
-      <td><p>stopping criterion for iterative update for EM algorithm.</p></td>
-    </tr>
-    <tr>
-      <th>maxiter</th>
-      <td><p>maximum number of iterations allowed for EM algorithm.</p></td>
+      <th>...</th>
+      <td><p>extra parameters including</p><dl>
+<dt>maxiter</dt><dd><p>maximum number of iterations (default: 100).</p></dd>
+<dt>reltol</dt><dd><p>relative tolerance stopping criterion (default: 1e-4).</p></dd>
+
+</dl></td>
     </tr>
     </table>
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
-<dt>projection</dt><dd><p>a \((p\times ndim)\)  whose columns are principal components.</p></dd>
+<dt>projection</dt><dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
 <dt>mp.itercount</dt><dd><p>the number of iterations taken for EM algorithm to converge.</p></dd>
 <dt>mp.sigma2</dt><dd><p>estimated \(\sigma^2\) value via EM algorithm.</p></dd>
 <dt>mp.alpha</dt><dd><p>length-<code>ndim-1</code> vector of relative weight for each base in <code>mp.W</code>.</p></dd>
 <dt>mp.W</dt><dd><p>an \((ndim\times ndim-1)\) matrix from EM update.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 
@@ -237,15 +226,17 @@ In <em>Advances in Neural Information Processing Systems</em>, volume 11, 382--3
 <span class='va'>X</span>     <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
 <span class='va'>lab</span>   <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
 
-<span class='co'>## compare PCA and BPCA</span>
-<span class='va'>out1</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>X</span>,  ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>out2</span>  <span class='op'>&lt;-</span> <span class='fu'>do.bpca</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='co'>## compare BPCA with others</span>
+<span class='va'>out1</span>  <span class='op'>&lt;-</span> <span class='fu'>do.bpca</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>out2</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.pca.html'>do.pca</a></span><span class='op'>(</span><span class='va'>X</span>,  ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
+<span class='va'>out3</span>  <span class='op'>&lt;-</span> <span class='fu'><a href='do.lda.html'>do.lda</a></span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>lab</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
 
 <span class='co'>## visualize</span>
 <span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>2</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, cex<span class='op'>=</span><span class='fl'>0.8</span>, main<span class='op'>=</span><span class='st'>"PCA"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, cex<span class='op'>=</span><span class='fl'>0.8</span>, main<span class='op'>=</span><span class='st'>"BPCA"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, cex<span class='op'>=</span><span class='fl'>0.8</span>, main<span class='op'>=</span><span class='st'>"Bayesian PCA"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, cex<span class='op'>=</span><span class='fl'>0.8</span>, main<span class='op'>=</span><span class='st'>"PCA"</span><span class='op'>)</span>
+<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, col<span class='op'>=</span><span class='va'>lab</span>, pch<span class='op'>=</span><span class='fl'>19</span>, cex<span class='op'>=</span><span class='fl'>0.8</span>, main<span class='op'>=</span><span class='st'>"LDA"</span><span class='op'>)</span>
 <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
 <span class='op'>}</span>
 

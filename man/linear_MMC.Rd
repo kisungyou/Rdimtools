@@ -18,7 +18,7 @@ and columns represent independent variables.}
 a named \code{Rdimtools} S3 object containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-\item{projection}{a \eqn{(p\times ndim)} whose columns are principal components.}
+\item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 \item{algorithm}{name of the algorithm.}
 }
 }

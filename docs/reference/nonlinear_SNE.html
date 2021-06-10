@@ -150,7 +150,7 @@ do.sne fully adopts algorithm details in an original paper by Hinton and Roweis 
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Stochastic Neighbor Embedding</h1>
-    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/nonlinear_SNE.R'><code>R/nonlinear_SNE.R</code></a></small>
+    <small class="dont-index">Source: <a href='https://github.com/kisungyou/Rdimtools/blob/master/R/v1_nonlinear_SNE.R'><code>R/v1_nonlinear_SNE.R</code></a></small>
     <div class="hidden name"><code>nonlinear_SNE.Rd</code></div>
     </div>
 
@@ -169,7 +169,6 @@ description in high-dimensional - possible, nonlinear - subspace on low-dimensio
   jitter <span class='op'>=</span> <span class='fl'>0.3</span>,
   jitterdecay <span class='op'>=</span> <span class='fl'>0.99</span>,
   momentum <span class='op'>=</span> <span class='fl'>0.5</span>,
-  preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"null"</span>, <span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"scale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>,
   pca <span class='op'>=</span> <span class='cn'>TRUE</span>,
   pcascale <span class='op'>=</span> <span class='cn'>FALSE</span>,
   symmetric <span class='op'>=</span> <span class='cn'>FALSE</span>
@@ -211,11 +210,6 @@ description in high-dimensional - possible, nonlinear - subspace on low-dimensio
       <td><p>level of acceleration in learning.</p></td>
     </tr>
     <tr>
-      <th>preprocess</th>
-      <td><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
-    </tr>
-    <tr>
       <th>pca</th>
       <td><p>whether to use PCA as preliminary step; <code>TRUE</code> for using it, <code>FALSE</code> otherwise.</p></td>
     </tr>
@@ -231,10 +225,10 @@ Default is "null". See also <code><a href='aux.preprocess.html'>aux.preprocess</
 
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>a named list containing</p><dl>
+    <p>a named <code>Rdimtools</code> S3 object containing</p><dl>
 <dt>Y</dt><dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
-<dt>trfinfo</dt><dd><p>a list containing information for out-of-sample prediction.</p></dd>
 <dt>vars</dt><dd><p>a vector containing betas used in perplexity matching.</p></dd>
+<dt>algorithm</dt><dd><p>name of the algorithm.</p></dd>
 
 </dl>
 

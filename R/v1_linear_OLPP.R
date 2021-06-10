@@ -92,7 +92,7 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
   # trfinfo = tmplist$info
   # pX      = tmplist$pX
-  pX = X
+  # pX = X
 
   ## MAIN COMPUTATION
   #   step 1. PCA preprocessing
@@ -133,7 +133,7 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   #   2. return output
   result = list()
-  result$Y = pX%*%proj_all
+  result$Y = X%*%proj_all
   result$projection = proj_all
   result$algorithm  = "linear:OLPP"
   return(structure(result, class="Rdimtools"))

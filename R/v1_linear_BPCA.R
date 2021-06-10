@@ -11,20 +11,20 @@
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
-#' @param preprocess an option for preprocessing the data. Default is "center". See also \code{\link{aux.preprocess}}
-#' for more details.
-#' @param reltol stopping criterion for iterative update for EM algorithm.
-#' @param maxiter maximum number of iterations allowed for EM algorithm.
+#' @param ... extra parameters including \describe{
+#' \item{maxiter}{maximum number of iterations (default: 100).}
+#' \item{reltol}{relative tolerance stopping criterion (default: 1e-4).}
+#' }
 #'
-#' @return a named list containing
+#' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
-#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
-#' \item{projection}{a \eqn{(p\times ndim)}  whose columns are principal components.}
+#' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
 #' \item{mp.itercount}{the number of iterations taken for EM algorithm to converge.}
 #' \item{mp.sigma2}{estimated \eqn{\sigma^2} value via EM algorithm.}
 #' \item{mp.alpha}{length-\code{ndim-1} vector of relative weight for each base in \code{mp.W}.}
 #' \item{mp.W}{an \eqn{(ndim\times ndim-1)} matrix from EM update.}
+#' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @seealso \code{\link{do.pca}}, \code{\link{do.ppca}}
@@ -41,23 +41,24 @@
 #' X     = as.matrix(iris[subid,1:4])
 #' lab   = as.factor(iris[subid,5])
 #'
-#' ## compare PCA and BPCA
-#' out1  <- do.pca(X,  ndim=2)
-#' out2  <- do.bpca(X, ndim=2)
+#' ## compare BPCA with others
+#' out1  <- do.bpca(X, ndim=2)
+#' out2  <- do.pca(X,  ndim=2)
+#' out3  <- do.lda(X, lab, ndim=2)
 #'
 #' ## visualize
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(out1$Y, col=lab, pch=19, cex=0.8, main="PCA")
-#' plot(out2$Y, col=lab, pch=19, cex=0.8, main="BPCA")
+#' par(mfrow=c(1,3))
+#' plot(out1$Y, col=lab, pch=19, cex=0.8, main="Bayesian PCA")
+#' plot(out2$Y, col=lab, pch=19, cex=0.8, main="PCA")
+#' plot(out3$Y, col=lab, pch=19, cex=0.8, main="LDA")
 #' par(opar)
 #' }
 #'
 #' @rdname linear_BPCA
 #' @concept linear_methods
 #' @export
-do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrelate","whiten"),
-                    reltol=1e-4, maxiter=123){
+do.bpca <- function(X, ndim=2, ...){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   # 1. data X
@@ -66,33 +67,30 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrela
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>=ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("* do.bpca : 'ndim' is a positive integer in [1,#(covariates)).")
   }
-  # 3. preprocess
-  if (missing(preprocess)){
-    algpreprocess = "center"
-  } else {
-    algpreprocess = match.arg(preprocess)
-  }
-  # 4. reltol and maxiter : I trust users.. Never
-  mepsil = .Machine$double.eps
-  if (is.na(reltol)||is.infinite(reltol)||(reltol<mepsil)||(reltol>=1)||(!is.numeric(reltol))){
-    stop("* do.bpca : 'reltol' should be in [machine epsilon,1)")
-  }
-  reltol = as.double(reltol)
-  if ((!is.numeric(maxiter))||(maxiter<5)||(is.na(maxiter))||(is.infinite(maxiter))){
-    stop("* do.bpca : 'maxiter' is a positive integer greater than or equal to 5.")
-  }
-  maxiter = as.integer(maxiter)
 
+  # Extra parameters
+  params  = list(...)
+  pnames  = names(params)
+  if ("reltol"%in%pnames){
+    reltol = max(.Machine$double.eps, as.double(params$reltol))
+  } else {
+    reltol = 10^(-4)
+  }
+  if ("maxiter"%in%pnames){
+    maxiter = max(5, round(params$maxiter))
+  } else {
+    maxiter = 100
+  }
 
   #------------------------------------------------------------------------
   ## COMPUTATION
-  #   1. Preprocessing the data
-  tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  trfinfo = tmplist$info
-  pX      = tmplist$pX
+  # #   1. Preprocessing the data
+  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
+  # trfinfo = tmplist$info
+  # pX      = tmplist$pX
 
   #   2. Run using Rcpp
-  rcppbpca = method_bpca(t(pX), reltol, maxiter);
+  rcppbpca = method_bpca(t(X), reltol, maxiter)
 
   #   3. we select alpha with smallest values only.
   smallidx = order(as.vector(rcppbpca$alpha))[1:ndim]
@@ -100,19 +98,21 @@ do.bpca <- function(X, ndim=2, preprocess=c("center","scale","cscale","decorrela
   mlsig2 = rcppbpca$sig2
   mlW    = rcppbpca$W[,smallidx]
   M = (t(mlW)%*%mlW)+(diag(ncol(mlW))*mlsig2)
-  SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
-  projection = t(SOL$x)
+  # SOL = aux.bicgstab(M, t(mlW), verbose=FALSE)
+  # projection = t(SOL$x)
+  SOL = base::solve(M, t(mlW))
+  projection = aux.adjprojection(t(SOL))
 
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y          = pX%*%projection
-  result$trfinfo    = trfinfo
+  result$Y          = X%*%projection
   result$projection = projection
   result$mp.itercount = rcppbpca$itercount # number of iterations
   result$mp.sigma2  = rcppbpca$sig2
   result$mp.alpha   = rcppbpca$alpha
   result$mp.W       = rcppbpca$W
-  return(result)
+  result$algorithm  = "linear:BPCA"
+  return(structure(result, class="Rdimtools"))
 }
 
