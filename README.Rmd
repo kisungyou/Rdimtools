@@ -19,7 +19,7 @@ knitr::opts_chunk$set(
 # Rdimtools <a href='https://kisungyou.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
-[![CRAN_Status_Badge](http://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
+[![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
 [![Travis-CI Build Status](https://travis-ci.org/kisungyou/Rdimtools.svg?branch=master)](https://travis-ci.org/kisungyou/Rdimtools)
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
@@ -81,7 +81,7 @@ plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Map
 
 ## Minimal Example : Dimension Estimation
 
-![](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif)
+![](https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif)
 
 Swill Roll is a classic example of 2-dimensional manifold embedded in $\mathbb{R}^3$ and one of 11 famous model-based samples from `aux.gensamples()` function. Given the ground truth that $d=2$, let's apply several methods for intrinsic dimension estimation.
 
@@ -113,4 +113,4 @@ We can observe that all 5 methods we tested estimated the intrinsic dimension ar
 
 ## Acknowledgements
 
-The logo icon is made by [Freepik](https://www.flaticon.com/authors/freepik/) from [www.flaticon.com](https://www.flaticon.com/).The rotating Swiss Roll image is taken from [Dinoj Surendran](http://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.
+The logo icon is made by [Freepik](https://www.flaticon.com/authors/freepik/) from [www.flaticon.com](https://www.flaticon.com/).The rotating Swiss Roll image is taken from [Dinoj Surendran](https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)'s website.

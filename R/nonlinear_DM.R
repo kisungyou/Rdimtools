@@ -95,7 +95,7 @@ do.dm <- function(X,ndim=2,preprocess=c("null","center","scale","cscale","decorr
   trfinfo = tmplist$info
   pX      = tmplist$pX
 
-  # 4. Main Computation : Scheme by Ann B. Lee (http://www.stat.cmu.edu/~annlee/software.htm)
+  # 4. Main Computation : Scheme by Ann B. Lee (https://www.stat.cmu.edu/~annlee/software.htm)
   #   4-1. compute symmetric graph laplacian
   K = exp(-((as.matrix(dist(pX)))^2)/bandwidth)
   v = diag(1/sqrt(rowSums(K)))
