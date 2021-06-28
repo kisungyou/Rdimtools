@@ -55,6 +55,8 @@ convention to vectorize it. For each digit, 1100 examples are given." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -76,9 +78,15 @@ convention to vectorize it. For each digit, 1100 examples are given." />
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -92,7 +100,7 @@ convention to vectorize it. For each digit, 1100 examples are given." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -120,19 +128,19 @@ convention to vectorize it. For each digit, 1100 examples are given." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kisung_you">
-    <span class="fas fa-twitter"></span>
+    <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kisungyou/Rdimtools">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kisungyou@outlook.com">
-    <span class="fas fa-envelope"></span>
+    <span class="fa fa-envelope"></span>
      
   </a>
 </li>
@@ -160,7 +168,7 @@ of each digit is given as a \(16\times 16\) matrix of grayscale image, it is
 convention to vectorize it. For each digit, 1100 examples are given.</p>
     </div>
 
-    <pre class="usage"><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>)</span></code></pre></div>
 
 
     <h2 class="hasAnchor" id="format"><a class="anchor" href="#format"></a>Format</h2>
@@ -173,19 +181,20 @@ convention to vectorize it. For each digit, 1100 examples are given.</p>
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'># load the data</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>)</span>
-
-<span class='co'># visualize</span>
-<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span>, mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span>, pty<span class='op'>=</span><span class='st'>"s"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>4400</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 4</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>9900</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 9</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>6600</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 6</span>
-</div><div class='img'><img src='usps-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
-<span class='co'># }</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'># load the data</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'># visualize</span></span>
+<span class='r-in'><span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span>, mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span>, pty<span class='op'>=</span><span class='st'>"s"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>4400</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 4</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>9900</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 9</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/image.html'>image</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/t.html'>t</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>matrix</a></span><span class='op'>(</span><span class='va'>usps</span><span class='op'>$</span><span class='va'>data</span><span class='op'>[</span><span class='fl'>6600</span>,<span class='op'>]</span>,nrow<span class='op'>=</span><span class='fl'>16</span><span class='op'>)</span><span class='op'>[</span><span class='fl'>16</span><span class='op'>:</span><span class='fl'>1</span>,<span class='op'>]</span><span class='op'>)</span><span class='op'>)</span> <span class='co'># last of digit 6</span></span>
+<span class='r-plt'><img src='usps-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -197,11 +206,11 @@ convention to vectorize it. For each digit, 1100 examples are given.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Kisung You.</p>
+  <p><p>Developed by Kisung You.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -209,6 +218,8 @@ convention to vectorize it. For each digit, 1100 examples are given.</p>
 
   
 
+
+  
 
   </body>
 </html>

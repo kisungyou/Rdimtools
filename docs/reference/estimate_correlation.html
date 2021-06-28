@@ -58,6 +58,8 @@ $$dim(S) = \lim \frac{\log C(r)}{\log r}$$ as \(r\rightarrow 0\), where
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -79,9 +81,15 @@ $$dim(S) = \lim \frac{\log C(r)}{\log r}$$ as \(r\rightarrow 0\), where
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -95,7 +103,7 @@ $$dim(S) = \lim \frac{\log C(r)}{\log r}$$ as \(r\rightarrow 0\), where
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -123,19 +131,19 @@ $$dim(S) = \lim \frac{\log C(r)}{\log r}$$ as \(r\rightarrow 0\), where
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kisung_you">
-    <span class="fas fa-twitter"></span>
+    <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kisungyou/Rdimtools">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kisungyou@outlook.com">
-    <span class="fas fa-envelope"></span>
+    <span class="fa fa-envelope"></span>
      
   </a>
 </li>
@@ -166,7 +174,7 @@ $$dim(S) = \lim \frac{\log C(r)}{\log r}$$ as \(r\rightarrow 0\), where
 \(C(r)=\lim (2/(N-1)*N)\sum_i^N \sum_{j=i+1}^N I(\|x_i-x_j\|\le r)\).</p>
     </div>
 
-    <pre class="usage"><span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X</span>, nlevel <span class='op'>=</span> <span class='fl'>50</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lm"</span>, <span class='st'>"cut"</span><span class='op'>)</span>, cut <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.9</span><span class='op'>)</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X</span>, nlevel <span class='op'>=</span> <span class='fl'>50</span>, method <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"lm"</span>, <span class='st'>"cut"</span><span class='op'>)</span>, cut <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0.1</span>, <span class='fl'>0.9</span><span class='op'>)</span><span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -205,7 +213,7 @@ the entire grid of values, and <code>"cut"</code> to trim extreme points. <code>
 
 <p>Even though we could use arbitrary <code>cut</code> to compute estimated dimension, it is also possible to
 use visual inspection. According to the theory, if the function returns an <code>output</code>, we can plot
-<code><a href='https://rdrr.io/r/graphics/plot.default.html'>plot(log(output$r), log(output$Cr))</a></code> and use the linear slope in the middle as desired dimension of data.</p>
+<code>plot(log(output$r), log(output$Cr))</code> and use the linear slope in the middle as desired dimension of data.</p>
     <h2 class="hasAnchor" id="automatic-choice-of-r-"><a class="anchor" href="#automatic-choice-of-r-"></a>Automatic choice of \(r\)</h2>
 
     
@@ -220,35 +228,36 @@ in a log-equidistant manner.</p>
 <em>Physica D: Nonlinear Phenomena</em>, <b>9</b>(1-2), 189--208.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='est.boxcount.html'>est.boxcount</a></code></p></div>
+    <div class='dont-index'><p><code><a href='estimate_boxcount.html'>est.boxcount</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'># \donttest{</span>
-<span class='co'>## generate three different dataset</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span>
-<span class='va'>X1</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"swiss"</span><span class='op'>)</span>
-<span class='va'>X2</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"ribbon"</span><span class='op'>)</span>
-<span class='va'>X3</span> <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"twinpeaks"</span><span class='op'>)</span>
-
-<span class='co'>## compute</span>
-<span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X1</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X2</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X3</span><span class='op'>)</span>
-
-<span class='co'>## visually verify : all should have approximate slope of 2.</span>
-<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"swiss roll"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"ribbon"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"twinpeaks"</span><span class='op'>)</span>
-</div><div class='img'><img src='estimate_correlation-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
-<span class='co'># }</span>
-
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'># \donttest{</span></span>
+<span class='r-in'><span class='co'>## generate three different dataset</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>X1</span> <span class='op'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"swiss"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>X2</span> <span class='op'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"ribbon"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>X3</span> <span class='op'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>dname<span class='op'>=</span><span class='st'>"twinpeaks"</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## compute</span></span>
+<span class='r-in'><span class='va'>out1</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X1</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out2</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out3</span> <span class='op'>=</span> <span class='fu'>est.correlation</span><span class='op'>(</span><span class='va'>X3</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## visually verify : all should have approximate slope of 2.</span></span>
+<span class='r-in'><span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"swiss roll"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"ribbon"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>r</span><span class='op'>)</span>, <span class='fu'><a href='https://rdrr.io/r/base/Log.html'>log</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Cr</span><span class='op'>)</span>, main<span class='op'>=</span><span class='st'>"twinpeaks"</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='estimate_correlation-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span></span>
+<span class='r-in'><span class='co'># }</span></span>
+<span class='r-in'></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -260,11 +269,11 @@ in a log-equidistant manner.</p>
 
       <footer>
       <div class="copyright">
-  <p>Developed by Kisung You.</p>
+  <p><p>Developed by Kisung You.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -272,6 +281,8 @@ in a log-equidistant manner.</p>
 
   
 
+
+  
 
   </body>
 </html>

@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://kisungyou.com/Rdimtools/404.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/LICENSE-text.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/LICENSE.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/articles/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/articles/quick-start.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/authors.html</loc>
+  </url>
+  <url>
     <loc>https://kisungyou.com/Rdimtools/index.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/news/index.html</loc>
   </url>
   <url>
     <loc>https://kisungyou.com/Rdimtools/reference/aux_gensamples.html</loc>
@@ -137,6 +158,9 @@
   </url>
   <url>
     <loc>https://kisungyou.com/Rdimtools/reference/feature_WDFS.html</loc>
+  </url>
+  <url>
+    <loc>https://kisungyou.com/Rdimtools/reference/index.html</loc>
   </url>
   <url>
     <loc>https://kisungyou.com/Rdimtools/reference/iris.html</loc>
@@ -503,8 +527,5 @@
   </url>
   <url>
     <loc>https://kisungyou.com/Rdimtools/reference/usps.html</loc>
-  </url>
-  <url>
-    <loc>https://kisungyou.com/Rdimtools/articles/quick-start.html</loc>
   </url>
 </urlset>

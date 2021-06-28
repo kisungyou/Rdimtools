@@ -57,6 +57,8 @@ authors provided a detour for rank correcting mechanism but it is omitted for pr
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -78,9 +80,15 @@ authors provided a detour for rank correcting mechanism but it is omitted for pr
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -94,7 +102,7 @@ authors provided a detour for rank correcting mechanism but it is omitted for pr
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -122,19 +130,19 @@ authors provided a detour for rank correcting mechanism but it is omitted for pr
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kisung_you">
-    <span class="fas fa-twitter"></span>
+    <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kisungyou/Rdimtools">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kisungyou@outlook.com">
-    <span class="fas fa-envelope"></span>
+    <span class="fa fa-envelope"></span>
      
   </a>
 </li>
@@ -164,13 +172,13 @@ is removed in order to respect original work. For 1-dimensional projection, whic
 authors provided a detour for rank correcting mechanism but it is omitted for practical reason.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.lea</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>do.lea</span><span class='op'>(</span>
   <span class='va'>X</span>,
   ndim <span class='op'>=</span> <span class='fl'>2</span>,
   type <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"proportion"</span>, <span class='fl'>0.1</span><span class='op'>)</span>,
   symmetric <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"union"</span>, <span class='st'>"intersect"</span>, <span class='st'>"asymmetric"</span><span class='op'>)</span>,
   preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -187,18 +195,18 @@ and columns represent independent variables.</p></td>
     <tr>
       <th>type</th>
       <td><p>a vector of neighborhood graph construction. Following types are supported;
-<code><a href='https://rdrr.io/r/base/c.html'>c("knn",k)</a></code>, <code><a href='https://rdrr.io/r/base/c.html'>c("enn",radius)</a></code>, and <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",ratio)</a></code>.
-Default is <code><a href='https://rdrr.io/r/base/c.html'>c("proportion",0.1)</a></code>, connecting about 1/10 of nearest data points
-among all data points. See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+<code>c("knn",k)</code>, <code>c("enn",radius)</code>, and <code>c("proportion",ratio)</code>.
+Default is <code>c("proportion",0.1)</code>, connecting about 1/10 of nearest data points
+among all data points. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>symmetric</th>
-      <td><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>. See also <code><a href='aux.graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
+      <td><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>. See also <code><a href='aux_graphnbd.html'>aux.graphnbd</a></code> for more details.</p></td>
     </tr>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
@@ -218,35 +226,35 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
 <em>IFP-TR, UIUC</em>, <b>2005</b>, 2--05.</p>
     <h2 class="hasAnchor" id="see-also"><a class="anchor" href="#see-also"></a>See also</h2>
 
-    <div class='dont-index'><p><code><a href='do.npe.html'>do.npe</a></code></p></div>
+    <div class='dont-index'><p><code><a href='linear_NPE.html'>do.npe</a></code></p></div>
     <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
 
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span>
-<span class='co'>## use iris dataset</span>
-<span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>subid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>50</span><span class='op'>)</span>
-<span class='va'>X</span>     <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span>
-<span class='va'>lab</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span>
-
-<span class='co'>## compare LEA with LLE and another approximation NPE</span>
-<span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='do.lle.html'>do.lle</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='do.npe.html'>do.npe</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.lea</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span>
-
-<span class='co'>## visual comparison</span>
-<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"LLE"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"NPE"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"LEA"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
-<span class='op'>}</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='kw'>if</span> <span class='op'>(</span><span class='cn'>FALSE</span><span class='op'>)</span> <span class='op'>{</span></span>
+<span class='r-in'><span class='co'>## use iris dataset</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/utils/data.html'>data</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>subid</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/sample.html'>sample</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>150</span>, <span class='fl'>50</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>X</span>     <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>1</span><span class='op'>:</span><span class='fl'>4</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>lab</span>   <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/factor.html'>as.factor</a></span><span class='op'>(</span><span class='va'>iris</span><span class='op'>[</span><span class='va'>subid</span>,<span class='fl'>5</span><span class='op'>]</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## compare LEA with LLE and another approximation NPE</span></span>
+<span class='r-in'><span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'><a href='nonlinear_LLE.html'>do.lle</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'><a href='linear_NPE.html'>do.npe</a></span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.lea</span><span class='op'>(</span><span class='va'>X</span>, ndim<span class='op'>=</span><span class='fl'>2</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## visual comparison</span></span>
+<span class='r-in'><span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"LLE"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"NPE"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>lab</span>, main<span class='op'>=</span><span class='st'>"LEA"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span></span>
+<span class='r-in'><span class='op'>}</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -258,11 +266,11 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
 
       <footer>
       <div class="copyright">
-  <p>Developed by Kisung You.</p>
+  <p><p>Developed by Kisung You.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -270,6 +278,8 @@ Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess
 
   
 
+
+  
 
   </body>
 </html>

@@ -56,6 +56,8 @@ segregating different-class data distinct from each other." />
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -77,9 +79,15 @@ segregating different-class data distinct from each other." />
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -93,7 +101,7 @@ segregating different-class data distinct from each other." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -121,19 +129,19 @@ segregating different-class data distinct from each other." />
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kisung_you">
-    <span class="fas fa-twitter"></span>
+    <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kisungyou/Rdimtools">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kisungyou@outlook.com">
-    <span class="fas fa-envelope"></span>
+    <span class="fa fa-envelope"></span>
      
   </a>
 </li>
@@ -162,14 +170,14 @@ data points maintain their original neighborhood information while
 segregating different-class data distinct from each other.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>do.lde</span><span class='op'>(</span>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>do.lde</span><span class='op'>(</span>
   <span class='va'>X</span>,
   <span class='va'>label</span>,
   ndim <span class='op'>=</span> <span class='fl'>2</span>,
   t <span class='op'>=</span> <span class='fl'>1</span>,
   numk <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/Extremes.html'>max</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/Round.html'>ceiling</a></span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/nrow.html'>nrow</a></span><span class='op'>(</span><span class='va'>X</span><span class='op'>)</span><span class='op'>/</span><span class='fl'>10</span><span class='op'>)</span>, <span class='fl'>2</span><span class='op'>)</span>,
   preprocess <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"center"</span>, <span class='st'>"scale"</span>, <span class='st'>"cscale"</span>, <span class='st'>"decorrelate"</span>, <span class='st'>"whiten"</span><span class='op'>)</span>
-<span class='op'>)</span></pre>
+<span class='op'>)</span></code></pre></div>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -197,7 +205,7 @@ segregating different-class data distinct from each other.</p>
     <tr>
       <th>preprocess</th>
       <td><p>an additional option for preprocessing the data.
-Default is "center". See also <code><a href='aux.preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
+Default is "center". See also <code><a href='aux_preprocess.html'>aux.preprocess</a></code> for more details.</p></td>
     </tr>
     </table>
 
@@ -220,30 +228,31 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
     <p>Kisung You</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## generate data of 2 types with clear difference</span>
-<span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span>
-<span class='va'>diff</span> <span class='op'>=</span> <span class='fl'>15</span>
-<span class='va'>dt1</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>-</span><span class='va'>diff</span>;
-<span class='va'>dt2</span>  <span class='op'>=</span> <span class='fu'><a href='aux.gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>+</span><span class='va'>diff</span>;
-
-<span class='co'>## merge the data and create a label correspondingly</span>
-<span class='va'>X</span>      <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>dt1</span>,<span class='va'>dt2</span><span class='op'>)</span>
-<span class='va'>label</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span>
-
-<span class='co'>## try different neighborhood size</span>
-<span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span>
-<span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span>
-<span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>25</span><span class='op'>)</span>
-
-<span class='co'>## visualize</span>
-<span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=5"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=10"</span><span class='op'>)</span>
-<span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=25"</span><span class='op'>)</span>
-</div><div class='img'><img src='linear_LDE-1.png' alt='' width='700' height='433' /></div><div class='input'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span>
-
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## generate data of 2 types with clear difference</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/base/Random.html'>set.seed</a></span><span class='op'>(</span><span class='fl'>100</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>diff</span> <span class='op'>=</span> <span class='fl'>15</span></span>
+<span class='r-in'><span class='va'>dt1</span>  <span class='op'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>-</span><span class='va'>diff</span>;</span>
+<span class='r-in'><span class='va'>dt2</span>  <span class='op'>=</span> <span class='fu'><a href='aux_gensamples.html'>aux.gensamples</a></span><span class='op'>(</span>n<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span><span class='op'>+</span><span class='va'>diff</span>;</span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## merge the data and create a label correspondingly</span></span>
+<span class='r-in'><span class='va'>X</span>      <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/cbind.html'>rbind</a></span><span class='op'>(</span><span class='va'>dt1</span>,<span class='va'>dt2</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>label</span>  <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/rep.html'>rep</a></span><span class='op'>(</span><span class='fl'>1</span><span class='op'>:</span><span class='fl'>2</span>, each<span class='op'>=</span><span class='fl'>50</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## try different neighborhood size</span></span>
+<span class='r-in'><span class='va'>out1</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>5</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out2</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>10</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>out3</span> <span class='op'>&lt;-</span> <span class='fu'>do.lde</span><span class='op'>(</span><span class='va'>X</span>, <span class='va'>label</span>, numk<span class='op'>=</span><span class='fl'>25</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+<span class='r-in'><span class='co'>## visualize</span></span>
+<span class='r-in'><span class='va'>opar</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>no.readonly<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span>mfrow<span class='op'>=</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>1</span>,<span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out1</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=5"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out2</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=10"</span><span class='op'>)</span></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/plot.default.html'>plot</a></span><span class='op'>(</span><span class='va'>out3</span><span class='op'>$</span><span class='va'>Y</span>, pch<span class='op'>=</span><span class='fl'>19</span>, col<span class='op'>=</span><span class='va'>label</span>, main<span class='op'>=</span><span class='st'>"LDE::k=25"</span><span class='op'>)</span></span>
+<span class='r-plt'><img src='linear_LDE-1.png' alt='' width='700' height='433' /></span>
+<span class='r-in'><span class='fu'><a href='https://rdrr.io/r/graphics/par.html'>par</a></span><span class='op'>(</span><span class='va'>opar</span><span class='op'>)</span></span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -255,11 +264,11 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
 
       <footer>
       <div class="copyright">
-  <p>Developed by Kisung You.</p>
+  <p><p>Developed by Kisung You.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -267,6 +276,8 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
 
   
 
+
+  
 
   </body>
 </html>

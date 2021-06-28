@@ -53,6 +53,8 @@
 
 
 
+
+
 <!-- mathjax -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script>
@@ -74,9 +76,15 @@
 </script>
 
 
+  
+
+  
+
   </head>
 
   <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -90,7 +98,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.8</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
       </span>
     </div>
 
@@ -118,19 +126,19 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
   <a href="https://twitter.com/kisung_you">
-    <span class="fas fa-twitter"></span>
+    <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
   <a href="https://github.com/kisungyou/Rdimtools">
-    <span class="fas fa-github"></span>
+    <span class="fa fa-github"></span>
      
   </a>
 </li>
 <li>
   <a href="../mailto:kisungyou@outlook.com">
-    <span class="fas fa-envelope"></span>
+    <span class="fa fa-envelope"></span>
      
   </a>
 </li>
@@ -156,19 +164,20 @@
     <p>This function is mainly used for tracking progress for this package.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>aux.pkgstat</span><span class='op'>(</span><span class='op'>)</span></pre>
+    <div class="ref-usage sourceCode"><pre class='sourceCode r'><code><span class='fu'>aux.pkgstat</span><span class='op'>(</span><span class='op'>)</span></code></pre></div>
 
 
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='co'>## run with following command</span>
-<span class='fu'>aux.pkgstat</span><span class='op'>(</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; [1] "* Number of functions available in Rdimtools package"
-#&gt; [1] "*  cat1{do. } manifold learning techniques           : 141"
-#&gt; [1] "*  cat2{est.} intrinsic dimension estimation methods : 17"
-#&gt; [1] "*  cat3{oos.} out-of-sample projection methods       : 1"
-#&gt; [1] "*  cat4{aux.} auxiliary functions available          : 6"</div><div class='input'>
-</div></pre>
+    <div class="ref-examples sourceCode"><pre class='sourceCode r'><code><span class='r-in'><span class='co'>## run with following command</span></span>
+<span class='r-in'><span class='fu'>aux.pkgstat</span><span class='op'>(</span><span class='op'>)</span></span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "* Number of functions available in Rdimtools package"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "*  cat1{do. } manifold learning techniques           : 141"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "*  cat2{est.} intrinsic dimension estimation methods : 17"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "*  cat3{oos.} out-of-sample projection methods       : 1"</span>
+<span class='r-out co'><span class='r-pr'>#&gt;</span> [1] "*  cat4{aux.} auxiliary functions available          : 6"</span>
+<span class='r-in'></span>
+</code></pre></div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
@@ -180,11 +189,11 @@
 
       <footer>
       <div class="copyright">
-  <p>Developed by Kisung You.</p>
+  <p><p>Developed by Kisung You.</p></p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p></p>
 </div>
 
       </footer>
@@ -192,6 +201,8 @@
 
   
 
+
+  
 
   </body>
 </html>

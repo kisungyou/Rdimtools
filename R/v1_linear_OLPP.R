@@ -3,7 +3,9 @@
 #' Orthogonal Locality Preserving Projection (OLPP) is a variant of \code{do.lpp}, which
 #' extracts orthogonal basis functions to reconstruct the data in a more intuitive fashion.
 #' It adopts PCA as preprocessing step and uses only one eigenvector at each iteration in that
-#' it might incur warning messages for solving near-singular system of linear equations.
+#' it might incur warning messages for solving near-singular system of linear equations. Current
+#' implementation may not return an orthogonal projection matrix as of the paper. We plan to
+#' fix this issue in the near future.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' @param ndim an integer-valued target dimension.
@@ -11,9 +13,8 @@
 #'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
 #'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 #'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
-#' @param symmetric one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
+#' @param symmetric either \code{"intersect"} or \code{"union"} is supported. Default is \code{"union"}.
 #' See also \code{\link{aux.graphnbd}} for more details.
-#' @param weight \code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.
 #' @param t bandwidth for heat kernel in \eqn{(0,\infty)}
 #'
 #'
@@ -54,15 +55,25 @@
 #' @rdname linear_OLPP
 #' @concept linear_methods
 #' @export
-do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect","asymmetric"),
-                    weight=TRUE,t=1.0){
+do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","intersect"),t=1.0){
   # Preprocessing : typecheck is always first step to perform.
   aux.typecheck(X)
   if ((!is.numeric(ndim))||(ndim<1)||(ndim>ncol(X))||is.infinite(ndim)||is.na(ndim)){
     stop("*do.olpp : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   ndim   = as.integer(ndim)
-  pcadim = ndim + 1
+  pcatgt = sum(base::eigen(stats::cov(X))$values>0)
+  if (pcatgt <= ndim){
+    pcarun  = dt_pca(X, ndim, FALSE)
+    pcaproj = pcarun$projection
+
+    result = list()
+    result$Y = X%*%pcaproj
+    result$projection = pcaproj
+    result$algorithm  = "linear:OLPP"
+    return(structure(result, class="Rdimtools"))
+  }
+  pcadim = min(base::ncol(X)-1, pcatgt)
 
   # Preprocessing 2 : parameters
   # 2-1. aux.graphnbd
@@ -75,10 +86,10 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   nbdtype = type;
   nbdsymmetric = match.arg(symmetric)
-  algweight = weight
-  if (!is.logical(algweight)){
-    stop("* do.olpp : 'weight' should be a logical variable.")
-  }
+  # algweight = weight
+  # if (!is.logical(algweight)){
+  #   stop("* do.olpp : 'weight' should be a logical variable.")
+  # }
   # if (missing(preprocess)){
   #   algpreprocess = "center"
   # } else {
@@ -108,7 +119,7 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
 
   pXpca = dt_pca(X, pcadim, FALSE)
   Xpca  = pXpca$Y
-  Wpca  = aux.adjprojection(pXpca$projection)
+  Wpca  = (pXpca$projection)
 
   #   step 2. adjacency graph
   #   here, wD is now Distance Matrix, which is denoted as S in the note.
@@ -116,16 +127,19 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   D     = nbdstruct$dist
   Dmask = nbdstruct$mask
   nD    = ncol(D)
-  # 5. process : nbd binarization
-  wD = Dmask*D
+  wD    = Dmask*D
   idnan = is.na(wD)
-  wD[idnan] = 0
-  if (!algweight){
-    wD = wD*exp(-matrix(as.double(Dmask),nrow=nD)/t)
-  }
+  # if (!algweight){
+  #   wD = wD*exp(-matrix(as.double(Dmask),nrow=nD)/t)
+  # }
+
+  S = exp(-(wD^2)/1.0)
+  S[idnan] = 0
+
 
   #   step 3. main projection matrix
-  Wolpp = aux.adjprojection(method_olpp(t(Xpca), wD, ndim));
+  # Wolpp = aux.adjprojection(method_olpp(t(Xpca), wD, ndim));
+  Wolpp = (olpp_R(Xpca, S, ndim))
 
   #   step 4. computation !
   #   1. adjust projection matrix
@@ -138,3 +152,37 @@ do.olpp <- function(X,ndim=2,type=c("proportion",0.1),symmetric=c("union","inter
   result$algorithm  = "linear:OLPP"
   return(structure(result, class="Rdimtools"))
 }
+
+
+
+# auxiliary ---------------------------------------------------------------
+#' @keywords internal
+#' @noRd
+olpp_R <- function(X, S, ndim){
+  # prepare
+  D = base::diag(base::rowSums(S))
+  L = D-S
+  p = base::ncol(X)
+
+  # preliminary computation
+  XDXt.inv = base::solve(t(X)%*%D%*%X)
+  XLXt     = t(X)%*%L%*%X
+
+  # initialize
+  a1 = base::eigen(XDXt.inv%*%XLXt)$vectors[,p]
+  B  = t(a1)%*%base::solve(t(X)%*%D%*%X, a1)
+
+  # iterate
+  A = matrix(a1, ncol=1)
+  for (i in 1:(ndim-1)){
+    # compute the eigenvector
+    Mk = (diag(p) - XDXt.inv%*%(A%*%base::solve(B,t(A))))%*%XDXt.inv%*%XLXt
+    # update others
+    a.now = base::eigen(Mk)$vectors[,p]
+    A     = cbind(A, a.now)
+    B     = t(A)%*%XDXt.inv%*%A
+  }
+  colnames(A) = NULL
+  return(A)
+}
+
