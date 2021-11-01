@@ -20,6 +20,7 @@ a named list containing containing \describe{
 It is a minimum neighbor distance estimator of the intrinsic dimension based on Maximum Likelihood principle.
 }
 \examples{
+\donttest{
 ## create 3 datasets of intrinsic dimension 2.
 set.seed(100)
 X1 = aux.gensamples(dname="swiss")
@@ -36,6 +37,7 @@ line1 = paste0("* est.mindml : 'swiss'  estiamte is ",round(out1$estdim,2))
 line2 = paste0("* est.mindml : 'ribbon' estiamte is ",round(out2$estdim,2))
 line3 = paste0("* est.mindml : 'saddle' estiamte is ",round(out3$estdim,2))
 cat(paste0(line1,"\n",line2,"\n",line3))
+}
 
 }
 \references{

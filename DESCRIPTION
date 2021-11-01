@@ -12,7 +12,7 @@ LazyData: true
 Depends: R (>= 3.0.0)
 Imports: CVXR (>= 1.0), MASS, RANN, Rcpp (>= 0.12.15), RcppDE, Rcsdp, Rdpack, RSpectra, graphics, maotai (>= 0.1.8), mclustcomp, stats, utils
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 RdMacros: Rdpack
 URL: https://kisungyou.com/Rdimtools/
 BugReports: https://github.com/kisungyou/Rdimtools/issues

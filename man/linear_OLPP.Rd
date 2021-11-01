@@ -8,8 +8,7 @@ do.olpp(
   X,
   ndim = 2,
   type = c("proportion", 0.1),
-  symmetric = c("union", "intersect", "asymmetric"),
-  weight = TRUE,
+  symmetric = c("union", "intersect"),
   t = 1
 )
 }
@@ -23,10 +22,8 @@ do.olpp(
 Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
 among all data points. See also \code{\link{aux.graphnbd}} for more details.}
 
-\item{symmetric}{one of \code{"intersect"}, \code{"union"} or \code{"asymmetric"} is supported. Default is \code{"union"}.
+\item{symmetric}{either \code{"intersect"} or \code{"union"} is supported. Default is \code{"union"}.
 See also \code{\link{aux.graphnbd}} for more details.}
-
-\item{weight}{\code{TRUE} to perform LPP on weighted graph, or \code{FALSE} otherwise.}
 
 \item{t}{bandwidth for heat kernel in \eqn{(0,\infty)}}
 }
@@ -42,7 +39,9 @@ a named \code{Rdimtools} S3 object containing
 Orthogonal Locality Preserving Projection (OLPP) is a variant of \code{do.lpp}, which
 extracts orthogonal basis functions to reconstruct the data in a more intuitive fashion.
 It adopts PCA as preprocessing step and uses only one eigenvector at each iteration in that
-it might incur warning messages for solving near-singular system of linear equations.
+it might incur warning messages for solving near-singular system of linear equations. Current
+implementation may not return an orthogonal projection matrix as of the paper. We plan to
+fix this issue in the near future.
 }
 \examples{
 \dontrun{

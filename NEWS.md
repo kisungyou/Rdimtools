@@ -1,3 +1,7 @@
+# Rdimtools 1.0.9
+
+* Change of some estimation methods to return implicit variables.
+
 # Rdimtools 1.0.8
 
 * Change of maintainer's contact.
