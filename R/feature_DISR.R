@@ -10,8 +10,8 @@
 #' @param ndim an integer-valued target dimension.
 #' @param preprocess an additional option for preprocessing the data.
 #' Default is "null". See also \code{\link{aux.preprocess}} for more details.
-#' @param lbd1 nonnegative number to control the degree of self-representation.
-#' @param lbd2 nonnegative number to control the degree of feature similarity.
+#' @param lbd1 nonnegative number to control the degree of regularization of the self-representation.
+#' @param lbd2 nonnegative number to control the degree of feature diversity. \code{lbd2=1} gives equal weight to self-representation and diversity.
 #'
 #' @return a named list containing
 #' \describe{
