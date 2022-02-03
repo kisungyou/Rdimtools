@@ -17,7 +17,7 @@
 #' @importFrom MASS sammon
 #' @importFrom mclustcomp mclustcomp
 #' @importFrom utils packageVersion combn getFromNamespace
-#' @importFrom RSpectra eigs svds
+#' @importFrom RSpectra eigs svds eigs_sym
 #' @importFrom stats dist cov rnorm runif kmeans cor var sd approx lm coef coefficients as.dist hclust cutree quantile median integrate optimize
 #' @importFrom graphics par image plot hist
 #' @importFrom Rcpp evalCpp

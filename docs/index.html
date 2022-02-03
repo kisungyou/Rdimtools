@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
       </span>
     </div>
 
@@ -75,13 +75,13 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://twitter.com/kisung_you">
+  <a href="https://twitter.com/kisung_you" class="external-link">
     <span class="fa fa-twitter"></span>
      
   </a>
 </li>
 <li>
-  <a href="https://github.com/kisungyou/Rdimtools">
+  <a href="https://github.com/kisungyou/Rdimtools" class="external-link">
     <span class="fa fa-github"></span>
      
   </a>
@@ -104,33 +104,33 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="rdimtools-" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#rdimtools-" class="anchor" aria-hidden="true"></a>Rdimtools <a href="https://kisungyou.com/Rdimtools/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="section level1">
+<div class="page-header"><h1 id="rdimtools-">Rdimtools <a href="https://kisungyou.com/Rdimtools/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<a class="anchor" aria-label="anchor" href="#rdimtools-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p><strong>Rdimtools</strong> is an R package for dimension reduction (DR) - including feature selection and manifold learning - and intrnsic dimension estimation (IDE) methods. We aim at building one of the <em>most comprehensive</em> toolbox available online, where current version delivers 141 DR algorithms and 17 IDE methods.</p>
+<p><strong>Rdimtools</strong> is an R package for dimension reduction (DR) - including feature selection and manifold learning - and intrnsic dimension estimation (IDE) methods. We aim at building one of the <em>most comprehensive</em> toolbox available online, where current version delivers 142 DR algorithms and 17 IDE methods.</p>
 <p>The philosophy is simple, <strong>the more we have at hands, the better we can play</strong>.</p>
-<div id="elephant" class="section level2">
-<h2 class="hasAnchor">
-<a href="#elephant" class="anchor" aria-hidden="true"></a>Elephant</h2>
+<div class="section level2">
+<h2 id="elephant">Elephant<a class="anchor" aria-label="anchor" href="#elephant"></a>
+</h2>
 <p>Our logo characterizes the foundational nature of multivariate data analysis; we may be blind people wrangling the data to see an <a href="https://en.wikipedia.org/wiki/Blind_men_and_an_elephant" class="external-link">elephant</a> to grasp an idea of what the data looks like with partial information from each algorithm.</p>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor" aria-hidden="true"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install a release version from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"Rdimtools"</span><span class="op">)</span></code></pre></div>
 <p>or the development version from github:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co">## install.packages("devtools")</span>
-<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org//reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kisungyou/Rdimtools"</span><span class="op">)</span></code></pre></div>
+<span class="fu">devtools</span><span class="fu">::</span><span class="fu"><a href="https://devtools.r-lib.org/reference/remote-reexports.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"kisungyou/Rdimtools"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="minimal-example--dimension-reduction" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minimal-example--dimension-reduction" class="anchor" aria-hidden="true"></a>Minimal Example : Dimension Reduction</h2>
+<div class="section level2">
+<h2 id="minimal-example--dimension-reduction">Minimal Example : Dimension Reduction<a class="anchor" aria-label="anchor" href="#minimal-example--dimension-reduction"></a>
+</h2>
 <p>Here is an example of dimension reduction on the famous <code>iris</code> dataset. Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># load the library</span>
@@ -152,9 +152,9 @@
 <span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mydfm</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, xlab<span class="op">=</span><span class="st">"axis 1"</span>, ylab<span class="op">=</span><span class="st">"axis 2"</span>, main<span class="op">=</span><span class="st">"Diffusion Maps"</span><span class="op">)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
-<div id="minimal-example--dimension-estimation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#minimal-example--dimension-estimation" class="anchor" aria-hidden="true"></a>Minimal Example : Dimension Estimation</h2>
+<div class="section level2">
+<h2 id="minimal-example--dimension-estimation">Minimal Example : Dimension Estimation<a class="anchor" aria-label="anchor" href="#minimal-example--dimension-estimation"></a>
+</h2>
 <p><img src="https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
 <p>Swill Roll is a classic example of 2-dimensional manifold embedded in ℝ<sup>3</sup> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <em>d</em> = 2, let’s apply several methods for intrinsic dimension estimation.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -181,9 +181,9 @@
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
 <p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <em>d</em> = 2. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
 </div>
-<div id="acknowledgements" class="section level2">
-<h2 class="hasAnchor">
-<a href="#acknowledgements" class="anchor" aria-hidden="true"></a>Acknowledgements</h2>
+<div class="section level2">
+<h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
+</h2>
 <p>The logo icon is made by <a href="https://www.flaticon.com/authors/freepik/" class="external-link">Freepik</a> from <a href="https://www.flaticon.com/" class="external-link">www.flaticon.com</a>.The rotating Swiss Roll image is taken from <a href="https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html" class="external-link">Dinoj Surendran</a>’s website.</p>
 </div>
 </div>
@@ -193,12 +193,9 @@
     <div class="links">
 <h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=Rdimtools">https://​cloud.r-project.org/​package=Rdimtools</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/kisungyou/Rdimtools/">https://​github.com/​kisungyou/​Rdimtools/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/kisungyou/Rdimtools/issues">https://​github.com/​kisungyou/​Rdimtools/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=Rdimtools" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/kisungyou/Rdimtools/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/kisungyou/Rdimtools/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
 
@@ -206,16 +203,23 @@
 <h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
 
 
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing Rdimtools</a></li>
+</ul>
+</div>
+
 <div class="developers">
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li>Kisung You <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8584-459X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">More on authors...</a></li>
+<li>Kisung You <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-8584-459X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
 
@@ -239,7 +243,7 @@
 
 <div class="pkgdown">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 1.6.1.9001.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>

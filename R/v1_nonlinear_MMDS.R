@@ -51,7 +51,11 @@ do.mmds <- function(X, ndim=2, ...){
   #------------------------------------------------------------------------
   # Preprocessing
   if (!is.matrix(X)){stop("* do.mmds : 'X' should be a matrix.")}
-  myndim = min(max(1, round(ndim)), ncol(X)-1)
+  p = base::ncol(X)
+  myndim = as.integer(ndim)
+  if (!check_ndim(myndim,p)){
+    stop("* do.mmds : 'ndim' is a positive integer in [1,#(covariates)].")
+  }
 
   # Extra parameters
   params  = list(...)

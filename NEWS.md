@@ -1,6 +1,7 @@
 # Rdimtools 1.0.9
 
 * Change of some estimation methods to return implicit variables.
+* `do.dppca()` added : dual probabilistic principal component analysis.
 
 # Rdimtools 1.0.8
 
@@ -27,8 +28,8 @@
 
 # Rdimtools 1.0.3
 
-* Fixed memory leaks in `do.sne` and `do.tsne`.
-* `do.lsls` added as a supervised feature selection method.
+* Fixed memory leaks in `do.sne()` and `do.tsne()`.
+* `do.lsls()` added as a supervised feature selection method.
 
 # Rdimtools 1.0.2
 
