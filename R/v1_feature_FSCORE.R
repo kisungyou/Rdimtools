@@ -1,6 +1,6 @@
 #' Fisher Score
 #'
-#' Fisher Score (FSCORE) is a supervised linear feature extraction method. For each
+#' Fisher Score \insertCite{fisher_use_1936}{Rdimtools} is a supervised linear feature extraction method. For each
 #' feature/variable, it computes Fisher score, a ratio of between-class variance to within-class variance.
 #' The algorithm selects variables with largest Fisher scores and returns an indicator projection matrix.
 #'
@@ -8,16 +8,22 @@
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
+#' @param ... extra parameters including \describe{
+#' \item{preprocess}{an additional option for preprocessing the data.
+#' Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.}
+#' }
 #'
 #' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## use iris data
 #' ## it is known that feature 3 and 4 are more important.
 #' data(iris)
@@ -36,15 +42,15 @@
 #' plot(out1$Y, pch=19, col=iris.lab, main="LDA")
 #' plot(out2$Y, pch=19, col=iris.lab, main="Fisher Score")
 #' par(opar)
+#' }
 #'
 #' @references
-#' \insertRef{fisher_use_1936}{Rdimtools}
+#' \insertAllCited{}
 #'
 #' @rdname feature_FSCORE
-#' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.fscore <- function(X, label, ndim=2){
+do.fscore <- function(X, label, ndim=2, ...){
   #------------------------------------------------------------------------
   ## PREPROCESSING
   #   1. data matrix
@@ -71,11 +77,26 @@ do.fscore <- function(X, label, ndim=2){
   }
 
   #------------------------------------------------------------------------
+  ## PREPROCESSING
+  #   check
+  params = list(...)
+  pnames = names(params)
+  if ("preprocess"%in%pnames){
+    par_preprocess = tolower(params$preprocess)
+  } else {
+    par_preprocess = "null"
+  }
+  #   transform
+  tmplist = aux.preprocess.hidden(X, type=par_preprocess, algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
+
+  #------------------------------------------------------------------------
   ## COMPUTATION : MAIN COMPUTATION FOR LSDF
   #   1. compute Fisher score for each feature
   fscore = rep(0,p)
   for (i in 1:p){
-    vecfr     = as.vector(X[,i])
+    vecfr     = as.vector(pX[,i])
     fscore[i] = fscore_single(vecfr, label, ulabel, C)
   }
   #   2. select the largest ones
@@ -86,10 +107,11 @@ do.fscore <- function(X, label, ndim=2){
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = X%*%projection
+  result$Y = pX%*%projection
   result$featidx = idxvec
   result$projection = projection
   result$algorithm = "linear:FSCORE"
+  result$trfinfo   = trfinfo
   return(structure(result, class="Rdimtools"))
 }
 

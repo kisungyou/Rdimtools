@@ -1,6 +1,6 @@
 #' Adaptive Dimension Reduction
 #'
-#' Adaptive Dimension Reduction (ADR) iteratively finds the best subspace to perform data clustering. It can be regarded as
+#' Adaptive Dimension Reduction \insertCite{ding_adaptive_2002}{Rdimtools} iteratively finds the best subspace to perform data clustering. It can be regarded as
 #' one of remedies for clustering in high dimensional space. Eigenvectors of a between-cluster scatter matrix are used
 #' as basis of projection.
 #'
@@ -15,6 +15,7 @@
 #' \describe{
 #' \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{algorithm}{name of the algorithm.}
 #' }
 #'
@@ -42,10 +43,9 @@
 #' }
 #'
 #' @references
-#' \insertRef{ding_adaptive_2002}{Rdimtools}
+#' \insertAllCited{}
 #'
 #' @seealso  \code{\link{do.ldakm}}
-#' @author Kisung You
 #' @rdname linear_ADR
 #' @concept linear_methods
 #' @export
@@ -75,39 +75,27 @@ do.adr <- function(X, ndim=2, ...){
   } else {
     maxiter = 100
   }
-
-  # #   3. preprocess
-  # if (missing(preprocess)){
-  #   algpreprocess = "center"
-  # } else {
-  #   algpreprocess = match.arg(preprocess)
-  # }
-  # #   4. maxiter
-  # maxiter = as.integer(maxiter)
-  # if (!check_NumMM(maxiter,3,1000000)){stop("* do.adr : 'maxiter' should be a large positive integer.")}
-  # #   5. abstol
-  # abstol = as.double(abstol)
-  # if (!check_NumMM(abstol,0,0.5,compact=FALSE)){stop("* do.adr : 'abstol' should be a small nonnegative number for stopping criterion.")}
+  preprocess = "cscale" # this is used by the paper.
 
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
-  # #   1. preprocessing of data
-  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  # trfinfo = tmplist$info
-  # pX      = tmplist$pX
+  #   1. preprocessing
+  tmplist = aux.preprocess.hidden(X, type=preprocess, algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
   #   2. initialize
-  Uold = ldakm_PCAbasis(X, ndim)
+  Uold = ldakm_PCAbasis(pX, ndim)
   #   3. iterate
   incstop = 10.0
   citer   = 1
   while (incstop > abstol){
     # 3-1. LDA-KM(1) : k-means in projected space
-    projected = X%*%Uold
+    projected = pX%*%Uold
     pXkmeans  = kmeans(projected, k)
     # 3-2. LDA-KM(2) : learn again
     # 1. build H
     H = ldakm_BuildH(pXkmeans$cluster)   # H : (n-times-k)
-    M = t(X)%*%H%*%aux.pinv(t(H)%*%H)   # M : (p-times-k)
+    M = t(pX)%*%H%*%aux.pinv(t(H)%*%H)   # M : (p-times-k)
     # 2. build Sw (p-by-p)
     # Swterm1 = t(pX)-(M%*%t(H))
     # Sw = Swterm1%*%t(Swterm1)
@@ -130,8 +118,9 @@ do.adr <- function(X, ndim=2, ...){
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = X%*%projection
+  result$Y = pX%*%projection
   result$projection = projection
+  result$trfinfo    = trfinfo
   result$algorithm  = "linear:ADR"
   return(structure(result, class="Rdimtools"))
 }

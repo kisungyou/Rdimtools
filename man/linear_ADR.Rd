@@ -21,11 +21,12 @@ a named \code{Rdimtools} S3 object containing
 \describe{
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{algorithm}{name of the algorithm.}
 }
 }
 \description{
-Adaptive Dimension Reduction (ADR) iteratively finds the best subspace to perform data clustering. It can be regarded as
+Adaptive Dimension Reduction \insertCite{ding_adaptive_2002}{Rdimtools} iteratively finds the best subspace to perform data clustering. It can be regarded as
 one of remedies for clustering in high dimensional space. Eigenvectors of a between-cluster scatter matrix are used
 as basis of projection.
 }
@@ -54,12 +55,9 @@ par(opar)
 
 }
 \references{
-\insertRef{ding_adaptive_2002}{Rdimtools}
+\insertAllCited{}
 }
 \seealso{
 \code{\link{do.ldakm}}
-}
-\author{
-Kisung You
 }
 \concept{linear_methods}

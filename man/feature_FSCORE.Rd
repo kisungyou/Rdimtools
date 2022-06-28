@@ -4,7 +4,7 @@
 \alias{do.fscore}
 \title{Fisher Score}
 \usage{
-do.fscore(X, label, ndim = 2)
+do.fscore(X, label, ndim = 2, ...)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -13,6 +13,11 @@ and columns represent independent variables.}
 \item{label}{a length-\eqn{n} vector of data class labels.}
 
 \item{ndim}{an integer-valued target dimension.}
+
+\item{...}{extra parameters including \describe{
+\item{preprocess}{an additional option for preprocessing the data.
+Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.}
+}}
 }
 \value{
 a named \code{Rdimtools} S3 object containing
@@ -20,15 +25,17 @@ a named \code{Rdimtools} S3 object containing
 \item{Y}{an \eqn{(n\times ndim)} matrix whose rows are embedded observations.}
 \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{algorithm}{name of the algorithm.}
 }
 }
 \description{
-Fisher Score (FSCORE) is a supervised linear feature extraction method. For each
+Fisher Score \insertCite{fisher_use_1936}{Rdimtools} is a supervised linear feature extraction method. For each
 feature/variable, it computes Fisher score, a ratio of between-class variance to within-class variance.
 The algorithm selects variables with largest Fisher scores and returns an indicator projection matrix.
 }
 \examples{
+\donttest{
 ## use iris data
 ## it is known that feature 3 and 4 are more important.
 data(iris)
@@ -47,12 +54,10 @@ par(mfrow=c(1,2))
 plot(out1$Y, pch=19, col=iris.lab, main="LDA")
 plot(out2$Y, pch=19, col=iris.lab, main="Fisher Score")
 par(opar)
+}
 
 }
 \references{
-\insertRef{fisher_use_1936}{Rdimtools}
-}
-\author{
-Kisung You
+\insertAllCited{}
 }
 \concept{feature_methods}

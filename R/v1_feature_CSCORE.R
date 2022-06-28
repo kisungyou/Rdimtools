@@ -1,6 +1,6 @@
 #' Constraint Score
 #'
-#' Constraint Score is a filter-type algorithm for feature selection using pairwise constraints.
+#' Constraint Score \insertCite{zhang_constraint_2008a}{Rdimtools} is a filter-type algorithm for feature selection using pairwise constraints.
 #' It first marks all pairwise constraints as same- and different-cluster and
 #' construct a feature score for both constraints. It takes ratio or difference of
 #' feature score vectors and selects the indices with smallest values.
@@ -9,8 +9,12 @@
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of class labels.
 #' @param ndim an integer-valued target dimension.
-#' @param score type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} and \code{"difference"} method. See the paper from the reference for more details.
-#' @param lambda a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method.
+#' @param ... extra parameters including \describe{
+#' \item{preprocess}{an additional option for preprocessing the data.
+#' Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.}
+#' \item{score}{type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} (default) and \code{"difference"} method. See the paper from the reference for more details.}
+#' \item{lambda}{a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method. (default: 0.5).}
+#' }
 #'
 #' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
@@ -18,6 +22,7 @@
 #' \item{cscore}{a length-\eqn{p} vector of constraint scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{algorithm}{name of the algorithm.}
 #' }
 #'
@@ -46,18 +51,17 @@
 #' }
 #'
 #' @references
-#' \insertRef{zhang_constraint_2008a}{Rdimtools}
+#' \insertAllCited{}
 #'
 #' @seealso \code{\link{do.cscoreg}}
 #' @rdname feature_CSCORE
-#' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.cscore <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.5){
+do.cscore <- function(X, label, ndim=2, ...){
   #------------------------------------------------------------------------
   # BASIC
   if (!is.matrix(X)){
-    stop("* do.fa : 'X' should be a matrix.")
+    stop("* do.cscore : 'X' should be a matrix.")
   }
   m     = nrow(X)
   n     = ncol(X)
@@ -66,17 +70,44 @@ do.cscore <- function(X, label, ndim=2, score=c("ratio","difference"), lambda=0.
     stop("* do.cscore : 'ndim' is a positive integer in [1,#(covariates)].")
   }
   label   = as.integer(check_label(label, m))
-  myscore = match.arg(score)
-  mylbd   = as.double(lambda)
+
+  # IMPLICIT
+  params = list(...)
+  pnames = names(params)
+
+  if ("score"%in%pnames){
+    par_score = match.arg(tolower(params$score), c("ratio","difference"))
+  } else {
+    par_score = "ratio"
+  }
+  if ("lambda"%in%pnames){
+    par_lbd = as.double(params$lambda)
+  } else {
+    par_lbd = 0.5
+  }
+
+  #------------------------------------------------------------------------
+  ## PREPROCESSING
+  #  case matching
+  if ("preprocess"%in%pnames){
+    preprocess = tolower(params$preprocess)
+  } else {
+    preprocess = "null"
+  }
+  #  transformation
+  tmplist = aux.preprocess.hidden(X, type=preprocess, algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
   #------------------------------------------------------------------------
   ## COMPUTATION
-  output = dt_cscore(X, ndim, label, myscore, mylbd)
+  output = dt_cscore(pX, ndim, label, par_score, par_lbd)
 
   #------------------------------------------------------------------------
   ## WRAP AND RETURN
   output$cscore  = as.vector(output$cscore)
   output$featidx = round(as.vector(output$featidx))
+  output$trfinfo = trfinfo
   return(structure(output, class="Rdimtools"))
 
   # #   1. compute SM and SC matrix

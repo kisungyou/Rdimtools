@@ -41,7 +41,7 @@ is multiplied by drate, becoming smaller in magnitude."><meta property="og:image
   <a href="../news/index.html">News</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -96,7 +96,9 @@ is multiplied by <code>drate</code>, becoming smaller in magnitude.</p>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.spe</span><span class="op">(</span>
   <span class="va">X</span>,
   ndim <span class="op">=</span> <span class="fl">2</span>,
-  proximity <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>     <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"euclidean"</span><span class="op">)</span> <span class="op">}</span>,
+  proximity <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">{</span>
+     <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="va">x</span>, method <span class="op">=</span> <span class="st">"euclidean"</span><span class="op">)</span>
+ <span class="op">}</span>,
   C <span class="op">=</span> <span class="fl">50</span>,
   S <span class="op">=</span> <span class="fl">50</span>,
   lambda <span class="op">=</span> <span class="fl">1</span>,
@@ -178,7 +180,7 @@ and columns represent independent variables.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
 </div>
 
       </footer></div>

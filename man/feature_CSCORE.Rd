@@ -4,7 +4,7 @@
 \alias{do.cscore}
 \title{Constraint Score}
 \usage{
-do.cscore(X, label, ndim = 2, score = c("ratio", "difference"), lambda = 0.5)
+do.cscore(X, label, ndim = 2, ...)
 }
 \arguments{
 \item{X}{an \eqn{(n\times p)} matrix whose rows are observations
@@ -14,9 +14,12 @@ and columns represent independent variables.}
 
 \item{ndim}{an integer-valued target dimension.}
 
-\item{score}{type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} and \code{"difference"} method. See the paper from the reference for more details.}
-
-\item{lambda}{a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method.}
+\item{...}{extra parameters including \describe{
+\item{preprocess}{an additional option for preprocessing the data.
+Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.}
+\item{score}{type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} (default) and \code{"difference"} method. See the paper from the reference for more details.}
+\item{lambda}{a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method. (default: 0.5).}
+}}
 }
 \value{
 a named \code{Rdimtools} S3 object containing
@@ -25,11 +28,12 @@ a named \code{Rdimtools} S3 object containing
 \item{cscore}{a length-\eqn{p} vector of constraint scores. Indices with smallest values are selected.}
 \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+\item{trfinfo}{a list containing information for out-of-sample prediction.}
 \item{algorithm}{name of the algorithm.}
 }
 }
 \description{
-Constraint Score is a filter-type algorithm for feature selection using pairwise constraints.
+Constraint Score \insertCite{zhang_constraint_2008a}{Rdimtools} is a filter-type algorithm for feature selection using pairwise constraints.
 It first marks all pairwise constraints as same- and different-cluster and
 construct a feature score for both constraints. It takes ratio or difference of
 feature score vectors and selects the indices with smallest values.
@@ -60,12 +64,9 @@ par(opar)
 
 }
 \references{
-\insertRef{zhang_constraint_2008a}{Rdimtools}
+\insertAllCited{}
 }
 \seealso{
 \code{\link{do.cscoreg}}
-}
-\author{
-Kisung You
 }
 \concept{feature_methods}
