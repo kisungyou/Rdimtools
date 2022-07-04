@@ -8,10 +8,10 @@
 #' @param X an \eqn{(n\times p)} matrix whose rows are observations
 #' and columns represent independent variables.
 #' @param label a length-\eqn{n} vector of class labels.
-#' @param ndim an integer-valued target dimension.
+#' @param ndim an integer-valued target dimension (default: 2).
 #' @param ... extra parameters including \describe{
 #' \item{preprocess}{an additional option for preprocessing the data.
-#' Default is \code{"null"}. See also \code{\link{aux.preprocess}} for more details.}
+#' See also \code{\link{aux.preprocess}} for more details (default: \code{"null"}).}
 #' \item{score}{type of score measures from two score vectors of same- and different-class pairwise constraints; \code{"ratio"} (default) and \code{"difference"} method. See the paper from the reference for more details.}
 #' \item{lambda}{a penalty value for different-class pairwise constraints. Only valid for \code{"difference"} scoring method. (default: 0.5).}
 #' }

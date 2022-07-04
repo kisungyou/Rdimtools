@@ -1,6 +1,6 @@
 #' Laplacian Score
 #'
-#' Laplacian Score (LSCORE) is an unsupervised linear feature extraction method. For each
+#' Laplacian Score \insertCite{he_laplacian_2005}{Rdimtools} is an unsupervised linear feature extraction method. For each
 #' feature/variable, it computes Laplacian score based on an observation that data from the
 #' same class are often close to each other. Its power of locality preserving property is used, and
 #' the algorithm selects variables with smallest scores.
@@ -31,12 +31,15 @@
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
 #' and columns represent independent variables.
-#' @param ndim an integer-valued target dimension.
-#' @param type a vector of neighborhood graph construction. Following types are supported;
-#'  \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
-#'  Default is \code{c("proportion",0.1)}, connecting about 1/10 of nearest data points
-#'  among all data points. See also \code{\link{aux.graphnbd}} for more details.
-#' @param t bandwidth parameter for heat kernel in \eqn{(0,\infty)}.
+#' @param ndim an integer-valued target dimension (default: 2).
+#' @param ... extra parameters including \describe{
+#' \item{preprocess}{an additional option for preprocessing the data.
+#' See also \code{\link{aux.preprocess}} for more details (default: \code{"null"}).}
+#' \item{type}{a vector of neighborhood graph construction. Following types are supported;
+#' \code{c("knn",k)}, \code{c("enn",radius)}, and \code{c("proportion",ratio)}.
+#' See also \code{\link{aux.graphnbd}} for more details (default: \code{c("proportion",0.1)}).}
+#' \item{t}{bandwidth parameter for heat kernel in \eqn{(0,\infty)} (default: \code{1}).}
+#' }
 #'
 #' @return a named \code{Rdimtools} S3 object containing
 #' \describe{
@@ -44,57 +47,78 @@
 #' \item{lscore}{a length-\eqn{p} vector of laplacian scores. Indices with smallest values are selected.}
 #' \item{featidx}{a length-\eqn{ndim} vector of indices with highest scores.}
 #' \item{projection}{a \eqn{(p\times ndim)} whose columns are basis for projection.}
+#' \item{trfinfo}{a list containing information for out-of-sample prediction.}
 #' \item{algorithm}{name of the algorithm.}
 #' }
 #'
 #' @references
-#' \insertRef{he_laplacian_2005}{Rdimtools}
+#' \insertAllCited{}
 #'
 #' @rdname feature_LSCORE
 #' @author Kisung You
 #' @concept feature_methods
 #' @export
-do.lscore <- function(X, ndim=2, type=c("proportion",0.1),t=10.0){
+do.lscore <- function(X, ndim=2, ...){
   #------------------------------------------------------------------------
-  ## PREPROCESSING
-  #   1. data matrix
+  # INPUT : EXPLICIT
+  # data matrix
   aux.typecheck(X)
   n = nrow(X)
   p = ncol(X)
-  #   2. ndim
+
+  # ndim
   ndim = as.integer(ndim)
   if (!check_ndim(ndim,p)){
     stop("* do.lscore : 'ndim' is a positive integer in [1,#(covariates)].")
   }
-  #   3. type
-  nbdtype = type
-  nbdsymmetric = "union"
-  #   4. preprocess
-  # if (missing(preprocess)){
-  #   algpreprocess = "null"
-  # } else {
-  #   algpreprocess = match.arg(preprocess)
-  # }
-  #   5. t : kernel bandwidth
-  t = as.double(t)
-  if (!check_NumMM(t, 1e-15, Inf, compact=TRUE)){stop("* do.lscore : 't' is a kernel bandwidth parameter in (0,Inf).")}
+
+  # INPUT : IMPLICIT
+  params = list(...)
+  pnames = names(params)
+
+  # implicit 1. preprocessing
+  if ("preprocess"%in%pnames){
+    par_preprocess = tolower(params$preprocess)
+  } else {
+    par_preprocess = "null"
+  }
+
+  # implicit 2. neighborhood graph
+  if ("type"%in%pnames){
+    par_type = params$type
+  } else {
+    par_type = c("proportion",0.1)
+  }
+  par_symmetric = "union"
+
+  # implicit 3. heat kernel
+  if ("t"%in%pnames){
+    par_t = as.double(params$t)
+    if (!check_NumMM(par_t, 1e-15, Inf, compact=TRUE)){
+      stop("* do.lscore : 't' is a kernel bandwidth parameter in (0,Inf).")
+    }
+  } else {
+    par_t = 1.0
+  }
 
   #------------------------------------------------------------------------
-  ## COMPUTATION : PRELIMINARY
-  # #   1. preprocessing of data : note that output pX still has (n-by-p) format
-  # tmplist = aux.preprocess.hidden(X,type=algpreprocess,algtype="linear")
-  # trfinfo = tmplist$info
-  # pX      = tmplist$pX
+  # COMPUTATION : PRELIMINARY
+  # 1. preprocessing
+  tmplist = aux.preprocess.hidden(X, type=par_preprocess, algtype="linear")
+  trfinfo = tmplist$info
+  pX      = tmplist$pX
 
-  #   2. build neighborhood information
-  nbdstruct = aux.graphnbd(X,method="euclidean",
-                           type=nbdtype,symmetric=nbdsymmetric)
+  # 2. neighborhood graph
+  nbdstruct = aux.graphnbd(pX,
+                           method="euclidean",
+                           type=par_type,
+                           symmetric=par_symmetric)
   nbdmask   = nbdstruct$mask
 
   #------------------------------------------------------------------------
   ## COMPUTATION : MAIN PART FOR LAPLACIAN SCORE
   #   1. weight matrix
-  Dsqmat  = exp(-(as.matrix(dist(X))^2)/t)
+  Dsqmat  = exp(-(as.matrix(dist(pX))^2)/par_t)
   S       = Dsqmat*nbdmask
   diag(S) = 0
   #   2. auxiliary matrices
@@ -106,7 +130,7 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),t=10.0){
   fscore = rep(0,p)
   for (j in 1:p){
     # 3-1. select each feature
-    fr = as.vector(X[,j])
+    fr = as.vector(pX[,j])
     # 3-2. adjust fr
     corrector  = as.double(sum(fr*D1)/sum(n1*D1))
     frtilde    = fr-corrector
@@ -124,10 +148,11 @@ do.lscore <- function(X, ndim=2, type=c("proportion",0.1),t=10.0){
   #------------------------------------------------------------------------
   ## RETURN
   result = list()
-  result$Y = X%*%projection
+  result$Y = pX%*%projection
   result$lscore  = fscore
   result$featidx = idxvec
   result$projection = projection
+  result$trfinfo    = trfinfo
   result$algorithm  = "linear:LSCORE"
   return(structure(result, class="Rdimtools"))
 }
