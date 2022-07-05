@@ -3,7 +3,7 @@ pkgdown: 2.0.3
 pkgdown_sha: ~
 articles:
   quick-start: quick-start.html
-last_built: 2022-07-05T00:36Z
+last_built: 2022-07-05T02:40Z
 urls:
   reference: https://kisungyou.com/Rdimtools/reference
   article: https://kisungyou.com/Rdimtools/articles
