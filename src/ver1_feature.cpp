@@ -14,6 +14,9 @@ using namespace std;
 // 01. CSCORE
 // 02. LASSO
 // 03. ENET
+// 04. FOSMOD
+//     - orthogonalize given a set of orthogonal vectors
+//     - compute cross squared-correlation coefficient
 
 arma::uvec dt_feature_smallidx(arma::vec x, int k){
   arma::uvec indices = arma::sort_index(x, "ascend");
@@ -380,3 +383,57 @@ Rcpp::List dt_enet(arma::mat& X, int ndim, arma::vec& y, double lambda1, double 
   ));
 }
 
+// 04. FOSMOD - orthogonalize given a set of orthogonal vectors ================
+// [[Rcpp::export]]
+arma::mat cpp_fosmod_orthogonalize_vec(arma::vec &orthovec, arma::mat &others){
+  int N = others.n_rows;
+  int P = others.n_cols;
+
+  arma::vec alpha(N,fill::zeros);
+  arma::mat output(N,P,fill::zeros);
+
+  for (int p=0; p<P; p++){
+    alpha = others.col(p);
+    output.col(p) = others.col(p) - (arma::dot(alpha, orthovec)/arma::dot(orthovec,orthovec))*orthovec;
+  }
+  return(output);
+}
+// [[Rcpp::export]]
+arma::mat cpp_fosmod_orthogonalize(arma::mat &orthovecs, arma::mat &others){
+  int N = others.n_rows;
+  int P = others.n_cols;
+  int K = orthovecs.n_cols;
+
+  arma::vec tmp(N,fill::zeros);
+  arma::vec alpha(N,fill::zeros);
+  arma::mat output(N,P,fill::zeros);
+  for (int p=0; p<P; p++){
+    alpha = others.col(p);
+    tmp   = others.col(p);
+    for (int k=0; k<K; k++){
+      tmp -= (arma::dot(alpha, orthovecs.col(k))/arma::dot(orthovecs.col(k),orthovecs.col(k)))*orthovecs.col(k);
+    }
+    output.col(p) = tmp;
+  }
+  return(output);
+}
+
+// 04. FOSMOD - compute cross squared-correlation coefficient ==================
+double cpp_fosmod_crosscorr_2vecs(arma::vec x, arma::vec y){
+  return(std::pow(arma::dot(x,y), 2.0)/(arma::dot(x,x)*arma::dot(y,y)));
+}
+// [[Rcpp::export]]
+arma::rowvec cpp_fosmod_crosscorr(arma::mat &data, arma::mat &ortho){
+  int N = data.n_cols;
+  int M = ortho.n_cols;
+
+  arma::mat outmat(N,M,fill::zeros);
+  for (int n=0; n<N; n++){
+    for (int m=0; m<M; m++){
+      outmat(n,m) = cpp_fosmod_crosscorr_2vecs(data.col(n), ortho.col(m));
+    }
+  }
+
+  arma::rowvec output = arma::mean(outmat, 0); // length-M
+  return(output);
+}
