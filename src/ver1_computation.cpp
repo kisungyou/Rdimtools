@@ -310,3 +310,17 @@ arma::vec v2aux_pagerank(arma::mat& A){
   // return
   return(Rold);
 }
+
+// [[Rcpp::export]]
+arma::mat v2aux_pdist2(arma::mat &X, arma::mat &Y){
+  int M = X.n_rows;
+  int N = Y.n_rows;
+
+  arma::mat output(M,N,fill::zeros);
+  for (int m=0; m<M; m++){
+    for (int n=0; n<N; n++){
+      output(m,n) = arma::norm(X.row(m)-Y.row(n),2);
+    }
+  }
+  return(output);
+}

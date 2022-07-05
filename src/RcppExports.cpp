@@ -767,6 +767,18 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// v2aux_pdist2
+arma::mat v2aux_pdist2(arma::mat& X, arma::mat& Y);
+RcppExport SEXP _Rdimtools_v2aux_pdist2(SEXP XSEXP, SEXP YSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat& >::type X(XSEXP);
+    Rcpp::traits::input_parameter< arma::mat& >::type Y(YSEXP);
+    rcpp_result_gen = Rcpp::wrap(v2aux_pdist2(X, Y));
+    return rcpp_result_gen;
+END_RCPP
+}
 // dt_cscore
 Rcpp::List dt_cscore(arma::mat& X, int ndim, arma::uvec& label, std::string myscore, double mylbd);
 RcppExport SEXP _Rdimtools_dt_cscore(SEXP XSEXP, SEXP ndimSEXP, SEXP labelSEXP, SEXP myscoreSEXP, SEXP mylbdSEXP) {
@@ -1046,6 +1058,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_Rdimtools_bmds_compute_SSR", (DL_FUNC) &_Rdimtools_bmds_compute_SSR, 2},
     {"_Rdimtools_main_bmds", (DL_FUNC) &_Rdimtools_main_bmds, 9},
     {"_Rdimtools_v2aux_pagerank", (DL_FUNC) &_Rdimtools_v2aux_pagerank, 1},
+    {"_Rdimtools_v2aux_pdist2", (DL_FUNC) &_Rdimtools_v2aux_pdist2, 2},
     {"_Rdimtools_dt_cscore", (DL_FUNC) &_Rdimtools_dt_cscore, 5},
     {"_Rdimtools_admm_lasso", (DL_FUNC) &_Rdimtools_admm_lasso, 3},
     {"_Rdimtools_dt_lasso", (DL_FUNC) &_Rdimtools_dt_lasso, 4},

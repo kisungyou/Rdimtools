@@ -85,7 +85,7 @@ cmdscale."><meta property="og:image" content="https://kisungyou.com/Rdimtools/lo
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.mds</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.mds</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -94,6 +94,13 @@ cmdscale."><meta property="og:image" content="https://kisungyou.com/Rdimtools/lo
 <dd><p>an \((n\times p)\) matrix whose rows are observations and columns represent independent variables.</p></dd>
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+<dt>...</dt>
+<dd><p>extra parameters including</p><dl><dt>preprocess</dt>
+<dd><p>an additional option for preprocessing the data.
+Default is <code>"null"</code>. See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
+</dl></dd>
 </dl></div>
     <div id="value">
     <h2>Value</h2>
@@ -102,6 +109,9 @@ cmdscale."><meta property="og:image" content="https://kisungyou.com/Rdimtools/lo
 
 <dt>projection</dt>
 <dd><p>a \((p\times ndim)\) whose columns are basis for projection.</p></dd>
+
+<dt>trfinfo</dt>
+<dd><p>a list containing information for out-of-sample prediction.</p></dd>
 
 <dt>algorithm</dt>
 <dd><p>name of the algorithm.</p></dd>
@@ -113,10 +123,6 @@ cmdscale."><meta property="og:image" content="https://kisungyou.com/Rdimtools/lo
     <p>Kruskal JB (1964).
 “Multidimensional Scaling by Optimizing Goodness of Fit to a Nonmetric Hypothesis.”
 <em>Psychometrika</em>, <b>29</b>(1), 1--27.</p>
-    </div>
-    <div id="author">
-    <h2>Author</h2>
-    <p>Kisung You</p>
     </div>
 
     <div id="ref-examples">

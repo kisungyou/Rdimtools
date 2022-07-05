@@ -76,6 +76,12 @@ do.fosmod <- function(X, ndim=2, ...){
   } else {
     par_preprocess = "center"
   }
+  if (identical(par_preprocess, "null")){
+    stop("* do.fosmod : 'preprocess='null' is not accepted.")
+  }
+  if (par_preprocess%in%c("null","scale")){
+    stop("* do.fosmod : PFA does not allow a preprocessing scheme without centering.")
+  }
 
   #------------------------------------------------------------------------
   # COMPUTATION : PRELIMINARY

@@ -73,6 +73,9 @@ do.pca <- function(X, ndim=2, ...){
   } else {
     par_preprocess = "center"
   }
+  if (par_preprocess%in%c("null","scale")){
+    stop("* do.pca : PCA does not allow a preprocessing scheme without centering.")
+  }
 
   #------------------------------------------------------------------------
   # COMPUTE
