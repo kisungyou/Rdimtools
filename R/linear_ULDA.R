@@ -1,6 +1,6 @@
 #' Uncorrelated Linear Discriminant Analysis
 #'
-#' Uncorrelated LDA (ULDA) is an extension of LDA by using the uncorrelated discriminant transformation
+#' Uncorrelated LDA \insertCite{jin_face_2001}{Rdimtools} is an extension of LDA by using the uncorrelated discriminant transformation
 #' and Kahrunen-Loeve expansion of the basis.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations
@@ -37,7 +37,7 @@
 #' par(opar)
 #'
 #' @references
-#' \insertRef{jin_face_2001}{Rdimtools}
+#' \insertAllCite{}
 #'
 #' @seealso \code{\link{do.lda}}
 #' @author Kisung You
