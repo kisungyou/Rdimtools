@@ -31,7 +31,7 @@ a named list containing
 }
 }
 \description{
-Uncorrelated LDA (ULDA) is an extension of LDA by using the uncorrelated discriminant transformation
+Uncorrelated LDA \insertCite{jin_face_2001}{Rdimtools} is an extension of LDA by using the uncorrelated discriminant transformation
 and Kahrunen-Loeve expansion of the basis.
 }
 \examples{
@@ -55,7 +55,7 @@ par(opar)
 
 }
 \references{
-\insertRef{jin_face_2001}{Rdimtools}
+\insertAllCited{}
 }
 \seealso{
 \code{\link{do.lda}}

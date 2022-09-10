@@ -1,0 +1,16 @@
+bibentry(bibtype = "Article",
+  title       = "{Rdimtools}: An {R} Package for Dimension Reduction and Intrinsic Dimension Estimation",
+  author      = c(person(given = "Kisung",
+                          family = "You",
+                          email = "kisungyou@outlook.com"),
+                   person(given = "Dennis",
+                          family = "Shung",
+                          email = "dennis.shung@yale.edu")),
+  journal      = "Software Impacts",
+  year         = "2022",
+  volume       = "14",
+  issn         = "26659638",
+  pages        = "100414",
+  doi          = "10.1016/j.simpa.2022.100414",
+  header       = "To cite Rdimtools in publications use:"
+)

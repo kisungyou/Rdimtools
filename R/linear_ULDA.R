@@ -37,7 +37,7 @@
 #' par(opar)
 #'
 #' @references
-#' \insertAllCite{}
+#' \insertAllCited{}
 #'
 #' @seealso \code{\link{do.lda}}
 #' @author Kisung You
