@@ -4,6 +4,7 @@
 ^README-.*\.png$
 ^\.travis\.yml$
 ^extra_listdo\.*$
+^extra_listdo\.xlsx$
 ^extra_replace\.R$
 ^LICENSE\.md$
 ^_pkgdown\.yml$

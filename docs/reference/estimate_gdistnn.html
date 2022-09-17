@@ -25,7 +25,7 @@ is employed as an approximation of geodesic distance to locally estimate intrins
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -85,23 +85,32 @@ is employed as an approximation of geodesic distance to locally estimate intrins
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X</span>, k <span class="op">=</span> <span class="fl">5</span>, k1 <span class="op">=</span> <span class="fl">3</span>, k2 <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X</span>, k <span class="op">=</span> <span class="fl">5</span>, k1 <span class="op">=</span> <span class="fl">3</span>, k2 <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations.</p></dd>
+
+
 <dt>k</dt>
 <dd><p>the neighborhood size used for constructing a graph. We suggest it to be large enough to build a connected graph.</p></dd>
+
+
 <dt>k1</dt>
 <dd><p>local neighborhood parameter (smaller radius) for graph distance.</p></dd>
+
+
 <dt>k2</dt>
 <dd><p>local neighborhood parameter (larger radius)  for graph distance.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing containing</p><dl><dt>estdim</dt>
+    
+
+<p>a named list containing containing</p><dl><dt>estdim</dt>
 <dd><p>the global estimated dimension, which is averaged local dimension.</p></dd>
 
 <dt>estloc</dt>
@@ -122,46 +131,46 @@ is employed as an approximation of geodesic distance to locally estimate intrins
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## create 3 datasets of intrinsic dimension 2.</span></span>
-<span class="r-in"><span class="va">X1</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X2</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"ribbon"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X3</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"saddle"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## acquire an estimate for intrinsic dimension</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X1</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X2</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X3</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## print the results</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'swiss'  data is %.2f."</span>,<span class="va">out1</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## create 3 datasets of intrinsic dimension 2.</span></span></span>
+<span class="r-in"><span><span class="va">X1</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X2</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"ribbon"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X3</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"saddle"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## acquire an estimate for intrinsic dimension</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X1</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X2</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.gdistnn</span><span class="op">(</span><span class="va">X3</span>, k<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## print the results</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'swiss'  data is %.2f."</span>,<span class="va">out1</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "* est.gdistnn : estimated dimension for 'swiss'  data is 2.04."</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'ribbon' data is %.2f."</span>,<span class="va">out2</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'ribbon' data is %.2f."</span>,<span class="va">out2</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "* est.gdistnn : estimated dimension for 'ribbon' data is 2.34."</span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'saddle' data is %.2f."</span>,<span class="va">out3</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.gdistnn : estimated dimension for 'saddle' data is %.2f."</span>,<span class="va">out3</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "* est.gdistnn : estimated dimension for 'saddle' data is 2.46."</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'swiss'  estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'ribbon' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'saddle' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'swiss'  estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'ribbon' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.gdistnn : 'saddle' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.gdistnn : 'swiss'  estiamte is 2.04</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.gdistnn : 'ribbon' estiamte is 2.34</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.gdistnn : 'saddle' estiamte is 2.46</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## compare with local-dimension estimate</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Swiss'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Ribbon'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Saddle'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## compare with local-dimension estimate</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Swiss'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Ribbon'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/hist.html" class="external-link">hist</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estloc</span>, main<span class="op">=</span><span class="st">"Result-'Saddle'"</span>, xlab<span class="op">=</span><span class="st">"local dimension"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/abline.html" class="external-link">abline</a></span><span class="op">(</span>v<span class="op">=</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>, lwd<span class="op">=</span><span class="fl">3</span>, col<span class="op">=</span><span class="st">"red"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="estimate_gdistnn-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -176,7 +185,7 @@ is employed as an approximation of geodesic distance to locally estimate intrins
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

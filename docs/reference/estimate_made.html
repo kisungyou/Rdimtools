@@ -26,7 +26,7 @@ manifold-adaptive."><meta property="og:image" content="https://kisungyou.com/Rdi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -87,28 +87,37 @@ estimate to be independent of assumed dimensionality, authors claim this method 
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est.made</span><span class="op">(</span>
-  <span class="va">X</span>,
-  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,
-  maxdim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>, <span class="fl">15</span><span class="op">)</span>,
-  combine <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"vote"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">est.made</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  k <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  maxdim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span>, <span class="fl">15</span><span class="op">)</span>,</span>
+<span>  combine <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"mean"</span>, <span class="st">"median"</span>, <span class="st">"vote"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations.</p></dd>
+
+
 <dt>k</dt>
 <dd><p>size of neighborhood for analysis.</p></dd>
+
+
 <dt>maxdim</dt>
 <dd><p>maximum possible dimension allowed for the algorithm to investigate.</p></dd>
+
+
 <dt>combine</dt>
 <dd><p>method to aggregate local estimates for a single global estimate.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing containing</p><dl><dt>estdim</dt>
+    
+
+<p>a named list containing containing</p><dl><dt>estdim</dt>
 <dd><p>estimated global intrinsic dimension.</p></dd>
 
 <dt>estloc</dt>
@@ -129,25 +138,25 @@ In <em>ICML</em>, volume 227 of <em>ACM International Conference Proceeding Seri
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## create a data set of intrinsic dimension 2.</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## compare effect of 3 combining scheme</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"median"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"vote"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## print the results</span></span>
-<span class="r-in"><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'mean'   estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'median' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'vote'   estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## create a data set of intrinsic dimension 2.</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## compare effect of 3 combining scheme</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"mean"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"median"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.made</span><span class="op">(</span><span class="va">X</span>, combine<span class="op">=</span><span class="st">"vote"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## print the results</span></span></span>
+<span class="r-in"><span><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'mean'   estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'median' estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.made : 'vote'   estiamte is "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.made : 'mean'   estiamte is 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.made : 'median' estiamte is 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.made : 'vote'   estiamte is 1</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -162,7 +171,7 @@ In <em>ICML</em>, volume 227 of <em>ACM International Conference Proceeding Seri
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

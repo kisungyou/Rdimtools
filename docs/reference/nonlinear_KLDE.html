@@ -27,7 +27,7 @@ algorithm stops working any further due to its innate limitations of constructin
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -89,41 +89,58 @@ algorithm stops working any further due to its innate limitations of constructin
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.klde</span><span class="op">(</span>
-  <span class="va">X</span>,
-  <span class="va">label</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  t <span class="op">=</span> <span class="fl">1</span>,
-  numk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,
-  ktype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gaussian"</span>, <span class="fl">1</span><span class="op">)</span>,
-  kcentering <span class="op">=</span> <span class="cn">TRUE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.klde</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  <span class="va">label</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  t <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  numk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>, <span class="fl">2</span><span class="op">)</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,</span>
+<span>  ktype <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"gaussian"</span>, <span class="fl">1</span><span class="op">)</span>,</span>
+<span>  kcentering <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>a length-\(n\) vector of data class labels.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>t</dt>
 <dd><p>kernel bandwidth in \((0,\infty)\).</p></dd>
+
+
 <dt>numk</dt>
 <dd><p>the number of neighboring points for k-nn graph construction.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>ktype</dt>
 <dd><p>a vector containing name of a kernel and corresponding parameters. See also <code><a href="aux_kernelcov.html">aux.kernelcov</a></code> for complete description of Kernel Trick.</p></dd>
+
+
 <dt>kcentering</dt>
 <dd><p>a logical; <code>TRUE</code> to use centered Kernel matrix, <code>FALSE</code> otherwise.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -144,32 +161,32 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## generate data of 2 types with clear difference</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">diff</span> <span class="op">=</span> <span class="fl">25</span></span>
-<span class="r-in"><span class="va">dt1</span>  <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">-</span><span class="va">diff</span>;</span>
-<span class="r-in"><span class="va">dt2</span>  <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">+</span><span class="va">diff</span>;</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## merge the data and create a label correspondingly</span></span>
-<span class="r-in"><span class="va">X</span>      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dt1</span>,<span class="va">dt2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">label</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, each<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## try different neighborhood size</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=5"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=10"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=20"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## generate data of 2 types with clear difference</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">diff</span> <span class="op">=</span> <span class="fl">25</span></span></span>
+<span class="r-in"><span><span class="va">dt1</span>  <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">-</span><span class="va">diff</span>;</span></span>
+<span class="r-in"><span><span class="va">dt2</span>  <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">50</span><span class="op">)</span><span class="op">+</span><span class="va">diff</span>;</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## merge the data and create a label correspondingly</span></span></span>
+<span class="r-in"><span><span class="va">X</span>      <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">rbind</a></span><span class="op">(</span><span class="va">dt1</span>,<span class="va">dt2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label</span>  <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, each<span class="op">=</span><span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## try different neighborhood size</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.klde</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, numk<span class="op">=</span><span class="fl">20</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=10"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"k=20"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nonlinear_KLDE-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -184,7 +201,7 @@ In <em>2005 IEEE Computer Society Conference on Computer Vision and Pattern Reco
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

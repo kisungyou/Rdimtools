@@ -30,7 +30,7 @@ when given large-scale dataset, it may result in extremely deteriorated computat
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -95,38 +95,53 @@ when given large-scale dataset, it may result in extremely deteriorated computat
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.mve</span><span class="op">(</span>
-  <span class="va">X</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  knn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>,
-  kwidth <span class="op">=</span> <span class="fl">1</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"whiten"</span>, <span class="st">"decorrelate"</span><span class="op">)</span>,
-  tol <span class="op">=</span> <span class="fl">1e-04</span>,
-  maxiter <span class="op">=</span> <span class="fl">1000</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.mve</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  knn <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">ceiling</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span>,</span>
+<span>  kwidth <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"whiten"</span>, <span class="st">"decorrelate"</span><span class="op">)</span>,</span>
+<span>  tol <span class="op">=</span> <span class="fl">1e-04</span>,</span>
+<span>  maxiter <span class="op">=</span> <span class="fl">1000</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>knn</dt>
 <dd><p>size of \(k\)-nn neighborhood.</p></dd>
+
+
 <dt>kwidth</dt>
 <dd><p>bandwidth for Gaussian kernel.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>tol</dt>
 <dd><p>stopping criterion for incremental change.</p></dd>
+
+
 <dt>maxiter</dt>
 <dd><p>maximum number of iterations allowed.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -151,27 +166,27 @@ In Meila M, Shen X (eds.), <em>Proceedings of the Eleventh International Confere
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## generate ribbon-shaped data</span></span>
-<span class="r-in"><span class="co">## in order to pass CRAN pretest, n is set to be small.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"ribbon"</span>,n<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Compare MVU and MVE</span></span>
-<span class="r-in"><span class="co">#  Note that MVE actually requires much larger number of iterations</span></span>
-<span class="r-in"><span class="co">#  Here, due to CRAN limit, it was set as 7.</span></span>
-<span class="r-in"><span class="va">outMVU5</span>  <span class="op">&lt;-</span> <span class="fu"><a href="nonlinear_MVU.html">do.mvu</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"knn"</span>,<span class="fl">5</span><span class="op">)</span>, projtype<span class="op">=</span><span class="st">"kpca"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">outMVE5</span>  <span class="op">&lt;-</span> <span class="fu">do.mve</span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span>, knn<span class="op">=</span><span class="fl">5</span>, maxiter<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Visualize two comparisons</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVU5</span><span class="op">$</span><span class="va">Y</span>,  main<span class="op">=</span><span class="st">"MVU (k=5)"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVE5</span><span class="op">$</span><span class="va">Y</span>,  main<span class="op">=</span><span class="st">"MVE (k=5)"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## generate ribbon-shaped data</span></span></span>
+<span class="r-in"><span><span class="co">## in order to pass CRAN pretest, n is set to be small.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"ribbon"</span>,n<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Compare MVU and MVE</span></span></span>
+<span class="r-in"><span><span class="co">#  Note that MVE actually requires much larger number of iterations</span></span></span>
+<span class="r-in"><span><span class="co">#  Here, due to CRAN limit, it was set as 7.</span></span></span>
+<span class="r-in"><span><span class="va">outMVU5</span>  <span class="op">&lt;-</span> <span class="fu"><a href="nonlinear_MVU.html">do.mvu</a></span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"knn"</span>,<span class="fl">5</span><span class="op">)</span>, projtype<span class="op">=</span><span class="st">"kpca"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">outMVE5</span>  <span class="op">&lt;-</span> <span class="fu">do.mve</span><span class="op">(</span><span class="va">X</span>, ndim<span class="op">=</span><span class="fl">2</span>, knn<span class="op">=</span><span class="fl">5</span>, maxiter<span class="op">=</span><span class="fl">7</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Visualize two comparisons</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVU5</span><span class="op">$</span><span class="va">Y</span>,  main<span class="op">=</span><span class="st">"MVU (k=5)"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVE5</span><span class="op">$</span><span class="va">Y</span>,  main<span class="op">=</span><span class="st">"MVE (k=5)"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nonlinear_MVE-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -186,7 +201,7 @@ In Meila M, Shen X (eds.), <em>Proceedings of the Eleventh International Confere
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

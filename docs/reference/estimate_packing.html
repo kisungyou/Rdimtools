@@ -26,7 +26,7 @@ different results."><meta property="og:image" content="https://kisungyou.com/Rdi
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -87,19 +87,24 @@ different results.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps <span class="op">=</span> <span class="fl">0.01</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations.</p></dd>
+
+
 <dt>eps</dt>
 <dd><p>small positive number for stopping threshold.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing containing</p><dl><dt>estdim</dt>
+    
+
+<p>a named list containing containing</p><dl><dt>estdim</dt>
 <dd><p>estimated intrinsic dimension.</p></dd>
 
 
@@ -117,25 +122,25 @@ In <em>Proceedings of the 15th International Conference on Neural Information Pr
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## create 'swiss' roll dataset</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## try different eps values</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.001</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## print the results</span></span>
-<span class="r-in"><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.1   gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.01  gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.001 gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## create 'swiss' roll dataset</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## try different eps values</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">=</span> <span class="fu">est.packing</span><span class="op">(</span><span class="va">X</span>, eps<span class="op">=</span><span class="fl">0.001</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## print the results</span></span></span>
+<span class="r-in"><span><span class="va">line1</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.1   gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line2</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.01  gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">line3</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="st">"* est.packing : eps=0.001 gives "</span>,<span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">estdim</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/cat.html" class="external-link">cat</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste0</a></span><span class="op">(</span><span class="va">line1</span>,<span class="st">"\n"</span>,<span class="va">line2</span>,<span class="st">"\n"</span>,<span class="va">line3</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.packing : eps=0.1   gives 1.72</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.packing : eps=0.01  gives 1.62</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> * est.packing : eps=0.001 gives 2.34</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -150,7 +155,7 @@ In <em>Proceedings of the 15th International Conference on Neural Information Pr
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -29,7 +29,7 @@ when the bandwidth value is too small, it might suffer from numerical instabilit
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -93,13 +93,13 @@ when the bandwidth value is too small, it might suffer from numerical instabilit
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.kmvp</span><span class="op">(</span>
-  <span class="va">X</span>,
-  <span class="va">label</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,
-  bandwidth <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.kmvp</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  <span class="va">label</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,</span>
+<span>  bandwidth <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,19 +107,30 @@ when the bandwidth value is too small, it might suffer from numerical instabilit
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>a length-\(n\) vector of data class labels.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>bandwidth</dt>
 <dd><p>bandwidth parameter for heat kernel as the equation above.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -147,27 +158,27 @@ Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## use iris data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## perform KMVP with different bandwidths</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=0.1"</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=1"</span>,   col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=10"</span>,  col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## use iris data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## perform KMVP with different bandwidths</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">=</span> <span class="fu">do.kmvp</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, bandwidth<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=0.1"</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=1"</span>,   col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"bandwidth=10"</span>,  col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="linear_KMVP-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -182,7 +193,7 @@ Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

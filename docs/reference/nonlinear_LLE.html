@@ -27,7 +27,7 @@ optimality criterion suggested by authors."><meta property="og:image" content="h
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -89,16 +89,16 @@ optimality criterion suggested by authors.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.lle</span><span class="op">(</span>
-  <span class="va">X</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>,
-  symmetric <span class="op">=</span> <span class="st">"union"</span>,
-  weight <span class="op">=</span> <span class="cn">TRUE</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,
-  regtype <span class="op">=</span> <span class="cn">FALSE</span>,
-  regparam <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.lle</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  symmetric <span class="op">=</span> <span class="st">"union"</span>,</span>
+<span>  weight <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,</span>
+<span>  regtype <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  regparam <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,29 +106,46 @@ optimality criterion suggested by authors.</p>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>a vector of neighborhood graph construction. Following types are supported;
 <code>c("knn",k)</code>, <code>c("enn",radius)</code>, and <code>c("proportion",ratio)</code>.
 Default is <code>c("proportion",0.1)</code>, connecting about 1/10 of nearest data points
 among all data points. See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
+
+
 <dt>symmetric</dt>
 <dd><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>.
 See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
+
+
 <dt>weight</dt>
 <dd><p><code>TRUE</code> to perform LLE on weighted graph, or <code>FALSE</code> otherwise.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>regtype</dt>
 <dd><p><code>TRUE</code> for automatic regularization parameter selection, <code>FALSE</code> otherwise as default.</p></dd>
+
+
 <dt>regparam</dt>
 <dd><p>regularization parameter.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -152,30 +169,30 @@ Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## generate swiss-roll data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 1. connecting 10% of data for graph construction.</span></span>
-<span class="r-in"><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 2. constructing 20%-connected graph</span></span>
-<span class="r-in"><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.20</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 3. constructing 50%-connected with bigger regularization parameter</span></span>
-<span class="r-in"><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.5</span><span class="op">)</span>,regparam<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Visualize three different projections</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"5%"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"10%"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"50%+Binary"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## generate swiss-roll data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 1. connecting 10% of data for graph construction.</span></span></span>
+<span class="r-in"><span><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 2. constructing 20%-connected graph</span></span></span>
+<span class="r-in"><span><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.20</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 3. constructing 50%-connected with bigger regularization parameter</span></span></span>
+<span class="r-in"><span><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.lle</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.5</span><span class="op">)</span>,regparam<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Visualize three different projections</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"5%"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"10%"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"50%+Binary"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nonlinear_LLE-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -190,7 +207,7 @@ Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

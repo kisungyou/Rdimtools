@@ -25,7 +25,7 @@ local distance information in an iterative manner."><meta property="og:image" co
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -85,19 +85,24 @@ local distance information in an iterative manner.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">est.nearneighbor1</span><span class="op">(</span><span class="va">X</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">est.nearneighbor1</span><span class="op">(</span><span class="va">X</span>, K <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations.</p></dd>
+
+
 <dt>K</dt>
 <dd><p>maximum neighborhood size, smaller than \(p\).</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing containing</p><dl><dt>estdim</dt>
+    
+
+<p>a named list containing containing</p><dl><dt>estdim</dt>
 <dd><p>estimated intrinsic dimension.</p></dd>
 
 
@@ -115,16 +120,16 @@ local distance information in an iterative manner.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## create an example data with intrinsic dimension 2</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span>,<span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## acquire an estimate for intrinsic dimension</span></span>
-<span class="r-in"><span class="va">output</span> <span class="op">=</span> <span class="fu">est.nearneighbor1</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.nearneighbor1 : estimated dimension is %.2f."</span>,<span class="va">output</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## create an example data with intrinsic dimension 2</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cbind.html" class="external-link">cbind</a></span><span class="op">(</span><span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span>,<span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## acquire an estimate for intrinsic dimension</span></span></span>
+<span class="r-in"><span><span class="va">output</span> <span class="op">=</span> <span class="fu">est.nearneighbor1</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"* est.nearneighbor1 : estimated dimension is %.2f."</span>,<span class="va">output</span><span class="op">$</span><span class="va">estdim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "* est.nearneighbor1 : estimated dimension is 5.01."</span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -139,7 +144,7 @@ local distance information in an iterative manner.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

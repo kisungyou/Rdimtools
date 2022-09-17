@@ -25,7 +25,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM."
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -85,7 +85,7 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.<
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, mu <span class="op">=</span> <span class="fl">1</span>, rho <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, mu <span class="op">=</span> <span class="fl">1</span>, rho <span class="op">=</span> <span class="fl">1</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -93,12 +93,20 @@ we opt for formulating a problem as semidefinite relaxation and utilizing ADMM.<
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>mu</dt>
 <dd><p>an augmented Lagrangian parameter.</p></dd>
+
+
 <dt>rho</dt>
 <dd><p>a regularization parameter for sparsity.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters including</p><dl><dt>maxiter</dt>
 <dd><p>maximum number of iterations (default: 100).</p></dd>
@@ -111,10 +119,13 @@ and columns represent independent variables.</p></dd>
 
 
 </dl></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named <code>Rdimtools</code> S3 object containing</p><dl><dt>Y</dt>
+    
+
+<p>a named <code>Rdimtools</code> S3 object containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>projection</dt>
@@ -148,29 +159,29 @@ and columns represent independent variables.</p></dd>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## use iris data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span>, package<span class="op">=</span><span class="st">"Rdimtools"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lab</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## try different regularization parameters for sparsity</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=0.01"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=100"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## use iris data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span>, package<span class="op">=</span><span class="st">"Rdimtools"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lab</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## try different regularization parameters for sparsity</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">0.01</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.spca</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,rho<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=0.01"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"SPCA::rho=100"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="linear_SPCA-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -185,7 +196,7 @@ and columns represent independent variables.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

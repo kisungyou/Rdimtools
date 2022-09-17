@@ -27,7 +27,7 @@ see this Wikipedia page."><meta property="og:image" content="https://kisungyou.c
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -89,16 +89,16 @@ see this <a href="https://en.wikipedia.org/wiki/FastICA" class="external-link">W
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.ica</span><span class="op">(</span>
-  <span class="va">X</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  type <span class="op">=</span> <span class="st">"logcosh"</span>,
-  tpar <span class="op">=</span> <span class="fl">1</span>,
-  sym <span class="op">=</span> <span class="cn">FALSE</span>,
-  tol <span class="op">=</span> <span class="fl">1e-06</span>,
-  redundancy <span class="op">=</span> <span class="cn">TRUE</span>,
-  maxiter <span class="op">=</span> <span class="fl">100</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.ica</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  type <span class="op">=</span> <span class="st">"logcosh"</span>,</span>
+<span>  tpar <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  sym <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  tol <span class="op">=</span> <span class="fl">1e-06</span>,</span>
+<span>  redundancy <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  maxiter <span class="op">=</span> <span class="fl">100</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,18 +106,32 @@ see this <a href="https://en.wikipedia.org/wiki/FastICA" class="external-link">W
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>nonquadratic function, one of <code>"logcosh"</code>,<code>"exp"</code>, or <code>"poly"</code> be chosen.</p></dd>
+
+
 <dt>tpar</dt>
 <dd><p>a numeric parameter for <code>logcosh</code> and <code>exp</code> parameters that should be close to 1.</p></dd>
+
+
 <dt>sym</dt>
 <dd><p>a logical value; <code>FALSE</code> for not using symmetric decorrelation, <code>TRUE</code> otherwise.</p></dd>
+
+
 <dt>tol</dt>
 <dd><p>stopping criterion for iterative update.</p></dd>
+
+
 <dt>redundancy</dt>
 <dd><p>a logical value; <code>TRUE</code> for removing <code>NA</code> values after prewhitening, <code>FALSE</code> otherwise.</p></dd>
+
+
 <dt>maxiter</dt>
 <dd><p>maximum number of iterations allowed.</p>
 <dl><dt>Y</dt>
@@ -131,6 +145,7 @@ and columns represent independent variables.</p></dd>
 
 
 </dl></dd>
+
 </dl></div>
     <div id="details">
     <h2>Details</h2>
@@ -152,31 +167,31 @@ ISBN 978-0-471-40540-5.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## use iris dataset</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">lab</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 1. use logcosh function for transformation</span></span>
-<span class="r-in"><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"logcosh"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 2. use exponential function for transformation</span></span>
-<span class="r-in"><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"exp"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## 3. use polynomial function for transformation</span></span>
-<span class="r-in"><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"poly"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Visualize three different projections</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::logcosh"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::exp"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::poly"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## use iris dataset</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">lab</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 1. use logcosh function for transformation</span></span></span>
+<span class="r-in"><span><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"logcosh"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 2. use exponential function for transformation</span></span></span>
+<span class="r-in"><span><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"exp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## 3. use polynomial function for transformation</span></span></span>
+<span class="r-in"><span><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.ica</span><span class="op">(</span><span class="va">X</span>,ndim<span class="op">=</span><span class="fl">2</span>,type<span class="op">=</span><span class="st">"poly"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Visualize three different projections</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::logcosh"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::exp"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">lab</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"ICA::poly"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="linear_ICA-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -191,7 +206,7 @@ ISBN 978-0-471-40540-5.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

@@ -26,7 +26,7 @@ nearest neighborhood graph should be symmetrized."><meta property="og:image" con
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -87,21 +87,25 @@ nearest neighborhood graph should be symmetrized.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">aux.graphnbd</span><span class="op">(</span>
-  <span class="va">data</span>,
-  method <span class="op">=</span> <span class="st">"euclidean"</span>,
-  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>,
-  symmetric <span class="op">=</span> <span class="st">"union"</span>,
-  pval <span class="op">=</span> <span class="fl">2</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">aux.graphnbd</span><span class="op">(</span></span>
+<span>  <span class="va">data</span>,</span>
+<span>  method <span class="op">=</span> <span class="st">"euclidean"</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
+<span>  symmetric <span class="op">=</span> <span class="st">"union"</span>,</span>
+<span>  pval <span class="op">=</span> <span class="fl">2</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>data</dt>
 <dd><p>an \((n\times p)\) data matrix.</p></dd>
+
+
 <dt>method</dt>
 <dd><p>type of distance to be used. See also <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code>.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>a defining pattern of neighborhood criterion. One of</p><dl><dt>c("knn", k)</dt>
 <dd><p>knn with <code>k</code> a positive integer.</p></dd>
@@ -114,14 +118,21 @@ nearest neighborhood graph should be symmetrized.</p>
 
 
 </dl></dd>
+
+
 <dt>symmetric</dt>
 <dd><p>either ``intersect'' or ``union'' for symmetrization, or ``asymmetric''.</p></dd>
+
+
 <dt>pval</dt>
 <dd><p>a \(p\)-norm option for Minkowski distance.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>mask</dt>
+    
+
+<p>a named list containing</p><dl><dt>mask</dt>
 <dd><p>a binary matrix of indicating existence of an edge for each element.</p></dd>
 
 <dt>dist</dt>
@@ -156,26 +167,26 @@ nearest neighbors of each other and <code>union</code> for only either of them t
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## Generate data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Test three different types of neighborhood connectivity</span></span>
-<span class="r-in"><span class="va">nn1</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"knn"</span>,<span class="fl">20</span><span class="op">)</span><span class="op">)</span>         <span class="co"># knn with k=20</span></span>
-<span class="r-in"><span class="va">nn2</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"enn"</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>          <span class="co"># enn with radius = 1</span></span>
-<span class="r-in"><span class="va">nn3</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="co"># connecting 40% of edges</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## Visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn1</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"knn with k=20"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn2</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"enn with radius=1"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn3</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"proportion of ratio=0.4"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## Generate data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span> <span class="op">=</span> <span class="fu"><a href="aux_gensamples.html">aux.gensamples</a></span><span class="op">(</span>n<span class="op">=</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Test three different types of neighborhood connectivity</span></span></span>
+<span class="r-in"><span><span class="va">nn1</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"knn"</span>,<span class="fl">20</span><span class="op">)</span><span class="op">)</span>         <span class="co"># knn with k=20</span></span></span>
+<span class="r-in"><span><span class="va">nn2</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"enn"</span>,<span class="fl">1</span><span class="op">)</span><span class="op">)</span>          <span class="co"># enn with radius = 1</span></span></span>
+<span class="r-in"><span><span class="va">nn3</span> <span class="op">=</span> <span class="fu">aux.graphnbd</span><span class="op">(</span><span class="va">X</span>,type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.4</span><span class="op">)</span><span class="op">)</span> <span class="co"># connecting 40% of edges</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## Visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span>, pty<span class="op">=</span><span class="st">"s"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn1</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"knn with k=20"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn2</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"enn with radius=1"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/image.html" class="external-link">image</a></span><span class="op">(</span><span class="va">nn3</span><span class="op">$</span><span class="va">mask</span><span class="op">)</span>; <span class="fu"><a href="https://rdrr.io/r/graphics/title.html" class="external-link">title</a></span><span class="op">(</span><span class="st">"proportion of ratio=0.4"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="aux_graphnbd-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -190,7 +201,7 @@ nearest neighbors of each other and <code>union</code> for only either of them t
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

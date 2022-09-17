@@ -27,7 +27,7 @@ original semidefinite programming formulation."><meta property="og:image" conten
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -89,16 +89,16 @@ original semidefinite programming formulation.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.ree</span><span class="op">(</span>
-  <span class="va">X</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  W <span class="op">=</span> <span class="cn">NA</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"whiten"</span>, <span class="st">"decorrelate"</span><span class="op">)</span>,
-  initc <span class="op">=</span> <span class="fl">1</span>,
-  dmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"euclidean"</span>, <span class="st">"maximum"</span>, <span class="st">"manhattan"</span>, <span class="st">"canberra"</span>, <span class="st">"binary"</span>, <span class="st">"minkowski"</span><span class="op">)</span>,
-  maxiter <span class="op">=</span> <span class="fl">100</span>,
-  abstol <span class="op">=</span> <span class="fl">0.001</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.ree</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  W <span class="op">=</span> <span class="cn">NA</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"whiten"</span>, <span class="st">"decorrelate"</span><span class="op">)</span>,</span>
+<span>  initc <span class="op">=</span> <span class="fl">1</span>,</span>
+<span>  dmethod <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"euclidean"</span>, <span class="st">"maximum"</span>, <span class="st">"manhattan"</span>, <span class="st">"canberra"</span>, <span class="st">"binary"</span>, <span class="st">"minkowski"</span><span class="op">)</span>,</span>
+<span>  maxiter <span class="op">=</span> <span class="fl">100</span>,</span>
+<span>  abstol <span class="op">=</span> <span class="fl">0.001</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -106,25 +106,42 @@ original semidefinite programming formulation.</p>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>W</dt>
 <dd><p>an \((n\times n)\) weight matrix. Default is uniform weight of 1s.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>initc</dt>
 <dd><p>initial <code>c</code> value for subgradient iterating stepsize, \(c/\sqrt{i}\).</p></dd>
+
+
 <dt>dmethod</dt>
 <dd><p>a type of distance measure. See <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></code> for more details.</p></dd>
+
+
 <dt>maxiter</dt>
 <dd><p>maximum number of iterations for subgradient descent method.</p></dd>
+
+
 <dt>abstol</dt>
 <dd><p>stopping criterion for subgradient descent method.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>niter</dt>
@@ -148,29 +165,29 @@ In <em>Proceedings of the 23rd International Conference on Machine Learning</em>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## use iris data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## try different distance method</span></span>
-<span class="r-in"><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"euclidean"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"maximum"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"canberra"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize three different projections</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-euclidean"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-maximum"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-canberra"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## use iris data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>,<span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## try different distance method</span></span></span>
+<span class="r-in"><span><span class="va">output1</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"euclidean"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">output2</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"maximum"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">output3</span> <span class="op">&lt;-</span> <span class="fu">do.ree</span><span class="op">(</span><span class="va">X</span>, maxiter<span class="op">=</span><span class="fl">50</span>, dmethod<span class="op">=</span><span class="st">"canberra"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize three different projections</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-euclidean"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-maximum"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">output3</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, pch<span class="op">=</span><span class="fl">19</span>, main<span class="op">=</span><span class="st">"dmethod-canberra"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nonlinear_REE-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -185,7 +202,7 @@ In <em>Proceedings of the 23rd International Conference on Machine Learning</em>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

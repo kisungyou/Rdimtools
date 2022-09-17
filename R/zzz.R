@@ -9,14 +9,13 @@
 
   ## Print on Screen
   packageStartupMessage("** ------------------------------------------------------- **")
-  packageStartupMessage("** Rdimtools")
-  packageStartupMessage("**  - Dimension Reduction and Estimation Toolbox")
+  packageStartupMessage("** Rdimtools || Dimension Reduction and Estimation Toolbox")
   packageStartupMessage("**")
   packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
   packageStartupMessage("** Maintainer : Kisung You  (kisungyou@outlook.com)")
   packageStartupMessage("** Website    : https://kisungyou.com/Rdimtools/")
   packageStartupMessage("**")
-  packageStartupMessage("** Please share any bugs or suggestions to the maintainer.")
+  packageStartupMessage("** Please see 'citation('Rdimtools)' to cite the package. ")
   packageStartupMessage("** ------------------------------------------------------- **")
 }
 

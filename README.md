@@ -78,11 +78,9 @@ plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Map
 ![](https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif)
 
 Swill Roll is a classic example of 2-dimensional manifold embedded in
-![\\mathbb{R}^3](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%5Cmathbb%7BR%7D%5E3 "\mathbb{R}^3")
-and one of 11 famous model-based samples from `aux.gensamples()`
-function. Given the ground truth that
-![d=2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D2 "d=2"),
-let’s apply several methods for intrinsic dimension estimation.
+$\mathbb{R}^3$ and one of 11 famous model-based samples from
+`aux.gensamples()` function. Given the ground truth that $d=2$, let’s
+apply several methods for intrinsic dimension estimation.
 
 ``` r
 # generate sample data
@@ -110,10 +108,8 @@ text(x=xtick,  par("usr")[3],
 <img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
 
 We can observe that all 5 methods we tested estimated the intrinsic
-dimension around
-![d=2](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;d%3D2 "d=2").
-It should be noted that the estimated dimension may not be
-integer-valued due to characteristics of each method.
+dimension around $d=2$. It should be noted that the estimated dimension
+may not be integer-valued due to characteristics of each method.
 
 ## Acknowledgements
 

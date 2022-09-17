@@ -25,7 +25,7 @@ are considered in order to discover intrinsic structure of the data."><meta prop
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -85,16 +85,16 @@ are considered in order to discover intrinsic structure of the data.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.lsir</span><span class="op">(</span>
-  <span class="va">X</span>,
-  <span class="va">response</span>,
-  ndim <span class="op">=</span> <span class="fl">2</span>,
-  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>,
-  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,
-  ycenter <span class="op">=</span> <span class="cn">FALSE</span>,
-  numk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
-  tau <span class="op">=</span> <span class="fl">1</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.lsir</span><span class="op">(</span></span>
+<span>  <span class="va">X</span>,</span>
+<span>  <span class="va">response</span>,</span>
+<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
+<span>  h <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"decorrelate"</span>, <span class="st">"whiten"</span><span class="op">)</span>,</span>
+<span>  ycenter <span class="op">=</span> <span class="cn">FALSE</span>,</span>
+<span>  numk <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">max</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span><span class="op">/</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,</span>
+<span>  tau <span class="op">=</span> <span class="fl">1</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -102,25 +102,42 @@ are considered in order to discover intrinsic structure of the data.</p>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>response</dt>
 <dd><p>a length-\(n\) vector of response variable.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>h</dt>
 <dd><p>the number of slices to divide the range of response vector.</p></dd>
+
+
 <dt>preprocess</dt>
 <dd><p>an additional option for preprocessing the data.
 Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+
 <dt>ycenter</dt>
 <dd><p>a logical; <code>TRUE</code> to center the response variable, <code>FALSE</code> otherwise.</p></dd>
+
+
 <dt>numk</dt>
 <dd><p>size of determining neighborhood via \(k\)-nearest neighbor selection.</p></dd>
+
+
 <dt>tau</dt>
 <dd><p>regularization parameter for adjusting rank-deficient scatter matrix.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -148,36 +165,36 @@ Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## generate swiss roll with auxiliary dimensions</span></span>
-<span class="r-in"><span class="co">## it follows reference example from LSIR paper.</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">n</span>     <span class="op">=</span> <span class="fl">123</span></span>
-<span class="r-in"><span class="va">theta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">h</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">t</span>     <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">theta</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">t</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">=</span> <span class="fl">21</span><span class="op">*</span><span class="va">h</span></span>
-<span class="r-in"><span class="va">X</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">=</span> <span class="va">t</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">7</span><span class="op">*</span><span class="va">n</span><span class="op">)</span>, nrow<span class="op">=</span><span class="va">n</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## corresponding response vector</span></span>
-<span class="r-in"><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">5</span><span class="op">*</span><span class="va">pi</span><span class="op">*</span><span class="va">theta</span><span class="op">)</span><span class="op">+</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## try different number of neighborhoods</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">out3</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=5"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=10"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=25"</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## generate swiss roll with auxiliary dimensions</span></span></span>
+<span class="r-in"><span><span class="co">## it follows reference example from LSIR paper.</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">n</span>     <span class="op">=</span> <span class="fl">123</span></span></span>
+<span class="r-in"><span><span class="va">theta</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">h</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">t</span>     <span class="op">=</span> <span class="op">(</span><span class="fl">1</span><span class="op">+</span><span class="fl">2</span><span class="op">*</span><span class="va">theta</span><span class="op">)</span><span class="op">*</span><span class="op">(</span><span class="fl">3</span><span class="op">*</span><span class="va">pi</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">0</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">n</span>,<span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span><span class="op">[</span>,<span class="fl">1</span><span class="op">]</span> <span class="op">=</span> <span class="va">t</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">cos</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span><span class="op">[</span>,<span class="fl">2</span><span class="op">]</span> <span class="op">=</span> <span class="fl">21</span><span class="op">*</span><span class="va">h</span></span></span>
+<span class="r-in"><span><span class="va">X</span><span class="op">[</span>,<span class="fl">3</span><span class="op">]</span> <span class="op">=</span> <span class="va">t</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">t</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span><span class="op">[</span>,<span class="fl">4</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">7</span><span class="op">*</span><span class="va">n</span><span class="op">)</span>, nrow<span class="op">=</span><span class="va">n</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## corresponding response vector</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="fl">5</span><span class="op">*</span><span class="va">pi</span><span class="op">*</span><span class="va">theta</span><span class="op">)</span><span class="op">+</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="va">n</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/MathFun.html" class="external-link">sqrt</a></span><span class="op">(</span><span class="fl">0.1</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## try different number of neighborhoods</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">5</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">10</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">=</span> <span class="fu">do.lsir</span><span class="op">(</span><span class="va">X</span>, <span class="va">y</span>, numk<span class="op">=</span><span class="fl">25</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=5"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=10"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, main<span class="op">=</span><span class="st">"LSIR::nbd size=25"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="linear_LSIR-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -192,7 +209,7 @@ Default is "center". See also <code><a href="aux_preprocess.html">aux.preprocess
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

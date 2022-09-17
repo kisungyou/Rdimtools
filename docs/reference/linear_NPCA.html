@@ -24,7 +24,7 @@ projection vectors - or, basis for learned subspace - contain no negative values
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -83,7 +83,7 @@ projection vectors - or, basis for learned subspace - contain no negative values
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.npca</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.npca</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -91,8 +91,12 @@ projection vectors - or, basis for learned subspace - contain no negative values
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters including</p><dl><dt>maxiter</dt>
 <dd><p>maximum number of iterations (default: 100).</p></dd>
@@ -102,10 +106,13 @@ and columns represent independent variables.</p></dd>
 
 
 </dl></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named <code>Rdimtools</code> S3 object containing</p><dl><dt>Y</dt>
+    
+
+<p>a named <code>Rdimtools</code> S3 object containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>projection</dt>
@@ -133,28 +140,28 @@ In <em>2010 20th International Conference on Pattern Recognition</em>, 726--729.
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in"><span class="co">## use iris data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span>, package<span class="op">=</span><span class="st">"Rdimtools"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">50</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fl">50</span></span>
-<span class="r-in"><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## run NCPA and compare with others</span></span>
-<span class="r-in"><span class="va">outNPC</span> <span class="op">=</span> <span class="fu">do.npca</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">outPCA</span> <span class="op">=</span> <span class="fu"><a href="linear_PCA.html">do.pca</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">outMVP</span> <span class="op">=</span> <span class="fu"><a href="linear_MVP.html">do.mvp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outNPC</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"NPCA"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outPCA</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"PCA"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVP</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"MVP"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span><span class="co">## use iris data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span>, package<span class="op">=</span><span class="st">"Rdimtools"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">subid</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">150</span>, <span class="fl">50</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span> <span class="op">+</span> <span class="fl">50</span></span></span>
+<span class="r-in"><span><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## run NCPA and compare with others</span></span></span>
+<span class="r-in"><span><span class="va">outNPC</span> <span class="op">=</span> <span class="fu">do.npca</span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">outPCA</span> <span class="op">=</span> <span class="fu"><a href="linear_PCA.html">do.pca</a></span><span class="op">(</span><span class="va">X</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">outMVP</span> <span class="op">=</span> <span class="fu"><a href="linear_MVP.html">do.mvp</a></span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outNPC</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"NPCA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outPCA</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"PCA"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">outMVP</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"MVP"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -169,7 +176,7 @@ In <em>2010 20th International Conference on Pattern Recognition</em>, 726--729.
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

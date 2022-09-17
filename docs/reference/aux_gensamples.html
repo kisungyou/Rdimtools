@@ -24,7 +24,7 @@ Also incorporated a functionality to add white noise with degree noise."><meta p
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -83,21 +83,25 @@ Also incorporated a functionality to add white noise with degree <code>noise</co
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">aux.gensamples</span><span class="op">(</span>
-  n <span class="op">=</span> <span class="fl">496</span>,
-  noise <span class="op">=</span> <span class="fl">0.01</span>,
-  dname <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"swiss"</span>, <span class="st">"crown"</span>, <span class="st">"helix"</span>, <span class="st">"saddle"</span>, <span class="st">"ribbon"</span>, <span class="st">"bswiss"</span>, <span class="st">"cswiss"</span>,
-    <span class="st">"twinpeaks"</span>, <span class="st">"sinusoid"</span>, <span class="st">"mobius"</span>, <span class="st">"R12in72"</span><span class="op">)</span>,
-  <span class="va">...</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">aux.gensamples</span><span class="op">(</span></span>
+<span>  n <span class="op">=</span> <span class="fl">496</span>,</span>
+<span>  noise <span class="op">=</span> <span class="fl">0.01</span>,</span>
+<span>  dname <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"swiss"</span>, <span class="st">"crown"</span>, <span class="st">"helix"</span>, <span class="st">"saddle"</span>, <span class="st">"ribbon"</span>, <span class="st">"bswiss"</span>, <span class="st">"cswiss"</span>,</span>
+<span>    <span class="st">"twinpeaks"</span>, <span class="st">"sinusoid"</span>, <span class="st">"mobius"</span>, <span class="st">"R12in72"</span><span class="op">)</span>,</span>
+<span>  <span class="va">...</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>n</dt>
 <dd><p>the number of points to be generated.</p></dd>
+
+
 <dt>noise</dt>
 <dd><p>level of additive white noise.</p></dd>
+
+
 <dt>dname</dt>
 <dd><p>name of a predefined shape. Should be one of</p><dl><dt><code>"swiss"</code></dt>
 <dd><p>swiss roll</p></dd>
@@ -134,17 +138,22 @@ Also incorporated a functionality to add white noise with degree <code>noise</co
 
 
 </dl></dd>
+
+
 <dt>...</dt>
 <dd><p>extra parameters for the followings #'</p><table class="table table"><tr><td>parameter</td><td>dname</td><td>description</td></tr><tr><td><code>ntwist</code></td><td><code>"mobius"</code></td><td>number of twists</td></tr></table></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>an \((n\times p)\) matrix of generated data by row. For all methods other than <code>"R12in72"</code>, it returns a matrix with \(p=3\).</p>
+    
+
+<p>an \((n\times p)\) matrix of generated data by row. For all methods other than <code>"R12in72"</code>, it returns a matrix with \(p=3\).</p>
     </div>
     <div id="references">
     <h2>References</h2>
     <p>Hein M, Audibert J (2005).
-“Intrinsic Dimensionality Estimation of Submanifolds in \$R\^d\$.”
+“Intrinsic Dimensionality Estimation of Submanifolds in $R^d$.”
 In <em>Proceedings of the 22nd International Conference on Machine Learning</em>, 289--296.</p>
 <p>van der Maaten L (2009).
 “Learning a Parametric Embedding by Preserving Local Structure.”
@@ -157,14 +166,14 @@ In <em>Proceedings of the 22nd International Conference on Machine Learning</em>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># \donttest{</span></span>
-<span class="r-in"><span class="co">## generating toy example datasets</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat.swiss</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat.crown</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"crown"</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat.helix</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"helix"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># }</span></span>
-<span class="r-in"></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># \donttest{</span></span></span>
+<span class="r-in"><span><span class="co">## generating toy example datasets</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat.swiss</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"swiss"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat.crown</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"crown"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat.helix</span> <span class="op">=</span> <span class="fu">aux.gensamples</span><span class="op">(</span><span class="fl">50</span>, dname<span class="op">=</span><span class="st">"helix"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># }</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -179,7 +188,7 @@ In <em>Proceedings of the 22nd International Conference on Machine Learning</em>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

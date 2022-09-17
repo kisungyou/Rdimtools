@@ -28,7 +28,7 @@ scheme via beta."><meta property="og:image" content="https://kisungyou.com/Rdimt
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.0.9</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@ scheme via <code>beta</code>.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, ndim <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">1</span>, beta <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span>, ndim <span class="op">=</span> <span class="fl">2</span>, type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>, alpha <span class="op">=</span> <span class="fl">1</span>, beta <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,23 +99,36 @@ scheme via <code>beta</code>.</p>
     <dl><dt>X</dt>
 <dd><p>an \((n\times p)\) matrix or data frame whose rows are observations
 and columns represent independent variables.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>a length-\(n\) vector of data class labels.</p></dd>
+
+
 <dt>ndim</dt>
 <dd><p>an integer-valued target dimension.</p></dd>
+
+
 <dt>type</dt>
 <dd><p>a vector of neighborhood graph construction. Following types are supported;
 <code>c("knn",k)</code>, <code>c("enn",radius)</code>, and <code>c("proportion",ratio)</code>.
 Default is <code>c("proportion",0.1)</code>, connecting about 1/10 of nearest data points
 among all data points. See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
+
+
 <dt>alpha</dt>
 <dd><p>balancing parameter between model complexity and empirical loss.</p></dd>
+
+
 <dt>beta</dt>
 <dd><p>Tikhonov regularization parameter.</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a named list containing</p><dl><dt>Y</dt>
+    
+
+<p>a named list containing</p><dl><dt>Y</dt>
 <dd><p>an \((n\times ndim)\) matrix whose rows are embedded observations.</p></dd>
 
 <dt>trfinfo</dt>
@@ -139,30 +152,30 @@ In <em>2007 IEEE 11th International Conference on Computer Vision</em>, 1--7.</p
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co">## use iris data</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## copy a label and let 20% of elements be missing</span></span>
-<span class="r-in"><span class="va">nlabel</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">nmissing</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">nlabel</span><span class="op">*</span><span class="fl">0.20</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">label_missing</span> <span class="op">=</span> <span class="va">label</span></span>
-<span class="r-in"><span class="va">label_missing</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nlabel</span>, <span class="va">nmissing</span><span class="op">)</span><span class="op">]</span><span class="op">=</span><span class="cn">NA</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## compare true case with missing-label case</span></span>
-<span class="r-in"><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## use iris data</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="va">iris</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">X</span>     <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">iris</span><span class="op">$</span><span class="va">Species</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## copy a label and let 20% of elements be missing</span></span></span>
+<span class="r-in"><span><span class="va">nlabel</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">label</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">nmissing</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Round.html" class="external-link">round</a></span><span class="op">(</span><span class="va">nlabel</span><span class="op">*</span><span class="fl">0.20</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">label_missing</span> <span class="op">=</span> <span class="va">label</span></span></span>
+<span class="r-in"><span><span class="va">label_missing</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="va">nlabel</span>, <span class="va">nmissing</span><span class="op">)</span><span class="op">]</span><span class="op">=</span><span class="cn">NA</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## compare true case with missing-label case</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">=</span> <span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> * Semi-Supervised Learning : there is no missing labels. Consider using Supervised methods.</span>
-<span class="r-in"><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label_missing</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">## visualize</span></span>
-<span class="r-in"><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"true projection"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"20% missing labels"</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">=</span> <span class="fu">do.sda</span><span class="op">(</span><span class="va">X</span>, <span class="va">label_missing</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">## visualize</span></span></span>
+<span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"true projection"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, col<span class="op">=</span><span class="va">label</span>, main<span class="op">=</span><span class="st">"20% missing labels"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="linear_SDA-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -177,7 +190,7 @@ In <em>2007 IEEE 11th International Conference on Computer Vision</em>, 1--7.</p
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
