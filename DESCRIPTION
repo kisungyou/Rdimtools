@@ -14,7 +14,7 @@ Imports: CVXR (>= 1.0), MASS, RANN, Rcpp (>= 0.12.15), RcppDE, Rcsdp, Rdpack, RS
 LinkingTo: Rcpp, RcppArmadillo, RcppDist, maotai
 RoxygenNote: 7.2.1
 RdMacros: Rdpack
-URL: https://kisungyou.com/Rdimtools/
+URL: https://www.kisungyou.com/Rdimtools/
 BugReports: https://github.com/kisungyou/Rdimtools/issues
 Suggests: 
     knitr,

@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 
 
-# Rdimtools <a href='https://kisungyou.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
+# Rdimtools <a href='https://www.kisungyou.com/Rdimtools/'><img src='man/figures/logo.png' align="right" height="139" /></a>
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)

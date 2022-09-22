@@ -102,7 +102,9 @@ do.dne <- function(X, label, ndim=2, numk=max(ceiling(nrow(X)/10),2),
   #------------------------------------------------------------------------
   ## COMPUTATION : PRELIMINARY
   #   1. cost function :S-F
-  matS = diag(rowSums(matF))-matF
+  # arbitrary regularization
+  # matS = diag(rowSums(matF))-matF
+  matS    = diag(rowSums(matF))
   costobj = t(pX)%*%(matS-matF)%*%pX
 
   #   2. minimal eigenvectors

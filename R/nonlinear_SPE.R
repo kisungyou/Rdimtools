@@ -47,7 +47,7 @@
 #'
 #' @author Kisung You
 #' @rdname nonlinear_SPE
-#' @concept nonlinear_methods 
+#' @concept nonlinear_methods
 #' @export
 do.spe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")},
                    C = 50, S = 50, lambda = 1, drate=0.9){
@@ -83,7 +83,7 @@ do.spe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")}
   ## MAIN COMPUTATION
   # 1. Proximity Matrix R : don't forget to make it into a matrix.
   R = proximity(X)
-  if ((inherits(R, "dist"))||(class(R)=="dist")){
+  if (inherits(R, "dist")){
     R = as.matrix(R)
   }
   # 2. initial coordinates

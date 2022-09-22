@@ -1,3 +1,8 @@
+# Rdimtools 1.1.0
+
+* Removed arbitrary regularization in `do.dne()`.
+* Change of authorship.
+
 # Rdimtools 1.0.9
 
 * Change of some estimation methods to return implicit variables.
@@ -40,7 +45,7 @@
 
 # Rdimtools 1.0.1
 
-* NEWS reformatted and [package website](https://kisungyou.com/Rdimtools/) is now available.
+* NEWS reformatted and [package website](https://www.kisungyou.com/Rdimtools/) is now available.
 * Dependency on R package [ADMM](https://CRAN.R-project.org/package=ADMM) is removed.
 
 

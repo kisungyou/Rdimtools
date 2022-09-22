@@ -44,8 +44,7 @@ Whereas MVU aims at stretching through all direction by maximizing
 \eqn{\sum \lambda_i}, MVE only opts for unrolling the top eigenspectrum
 and chooses to shrink left-over spectral dimension. For ease of use,
 unlike kernel PCA, we only made use of Gaussian kernel for MVE. Note that
-we adopted \href{https://CRAN.R-project.org/package=Rcsdp}{Rcsdp} package in that
-when given large-scale dataset, it may result in extremely deteriorated computational performance.
+we adopted \pkg{Rcsdp} package in that when given large-scale dataset, it may result in extremely deteriorated computational performance.
 }
 \examples{
 \donttest{
