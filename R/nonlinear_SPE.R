@@ -24,6 +24,7 @@
 #' }
 #'
 #' @examples
+#' \donttest{
 #' ## load iris data
 #' data(iris)
 #' X     = as.matrix(iris[,1:4])
@@ -37,10 +38,11 @@
 #' ## Visualize
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(outM$Y, col=label, main="MDS")
-#' plot(out1$Y, col=label, main="SPE with L2 norm")
-#' plot(out2$Y, col=label, main="SPE with L1 norm")
+#' plot(outM$Y, pch=19, col=label, main="MDS")
+#' plot(out1$Y, pch=19, col=label, main="SPE with L2 norm")
+#' plot(out2$Y, pch=19, col=label, main="SPE with L1 norm")
 #' par(opar)
+#' }
 #'
 #' @references
 #' \insertRef{agrafiotis_stochastic_2003}{Rdimtools}

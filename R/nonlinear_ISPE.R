@@ -87,7 +87,7 @@ do.ispe <- function(X, ndim=2, proximity=function(x){dist(x, method="euclidean")
   # 1. Proximity Matrix R : don't forget to make it into a matrix.
   R = proximity(X)
   if (inherits(R,"dist")){
-    R = as.matrix
+    R = as.matrix(R)
   }
   # 2. initial coordinates
   iX = do.pca(X, ndim=ndim)$Y
