@@ -1,3 +1,8 @@
+# Rdimtools 1.1.1
+
+* Removed dependence on `Rcsdp` package.
+* Fixed potential errors with some examples.
+
 # Rdimtools 1.1.0
 
 * Removed arbitrary regularization in `do.dne()`.

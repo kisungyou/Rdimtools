@@ -8,12 +8,12 @@
 #' @noRd
 #' @name package-Rdimtools
 #' @aliases Rdimtools-package
-#' @import Rcsdp
 #' @import Rdpack
 #' @import CVXR
 #' @import RcppDE
 #' @import maotai
 #' @importFrom RANN nn2
+#' @importFrom ADMM admm.sdp
 #' @importFrom MASS sammon
 #' @importFrom mclustcomp mclustcomp
 #' @importFrom utils packageVersion combn getFromNamespace

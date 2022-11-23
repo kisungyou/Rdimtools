@@ -5,8 +5,7 @@
 #' Whereas MVU aims at stretching through all direction by maximizing
 #' \eqn{\sum \lambda_i}, MVE only opts for unrolling the top eigenspectrum
 #' and chooses to shrink left-over spectral dimension. For ease of use,
-#' unlike kernel PCA, we only made use of Gaussian kernel for MVE. Note that
-#' we adopted \pkg{Rcsdp} package in that when given large-scale dataset, it may result in extremely deteriorated computational performance.
+#' unlike kernel PCA, we only made use of Gaussian kernel for MVE.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
@@ -24,23 +23,24 @@
 #' }
 #'
 #' @examples
-#' \donttest{
-#' ## generate ribbon-shaped data
-#' ## in order to pass CRAN pretest, n is set to be small.
+#' \dontrun{
+#' ## use a small subset of iris data
 #' set.seed(100)
-#' X = aux.gensamples(dname="ribbon",n=25)
+#' id  = sample(1:150, 50)
+#' X   = as.matrix(iris[id,1:4])
+#' lab = as.factor(iris[id,5])
 #'
-#' ## Compare MVU and MVE
-#' #  Note that MVE actually requires much larger number of iterations
-#' #  Here, due to CRAN limit, it was set as 7.
-#' outMVU5  <- do.mvu(X, ndim=2, type=c("knn",5), projtype="kpca")
-#' outMVE5  <- do.mve(X, ndim=2, knn=5, maxiter=7)
+#' ## try different connectivity levels
+#' output1 <- do.mve(X, knn=5)
+#' output2 <- do.mve(X, knn=10)
+#' output3 <- do.mve(X, knn=20)
 #'
 #' ## Visualize two comparisons
 #' opar <- par(no.readonly=TRUE)
-#' par(mfrow=c(1,2))
-#' plot(outMVU5$Y,  main="MVU (k=5)")
-#' plot(outMVE5$Y,  main="MVE (k=5)")
+#' par(mfrow=c(1,3))
+#' plot(output1$Y, main="knn:k=5",  pch=19, col=lab)
+#' plot(output2$Y, main="knn:k=10", pch=19, col=lab)
+#' plot(output3$Y, main="knn:k=20", pch=19, col=lab)
 #' par(opar)
 #' }
 #'
@@ -54,7 +54,7 @@
 #' @export
 do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
                    preprocess=c("null","center","scale","cscale","whiten","decorrelate"),
-                   tol=1e-4, maxiter=1000){
+                   tol=1e-4, maxiter=10){
   #------------------------------------------------------------------------
   ## PARAMETER CHECK
   #   1. X : data matrix
@@ -127,6 +127,7 @@ do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
     B  = -(B1%*%t(B1))+(B2%*%t(B2))
     # 3. solve SDP via Rcsdp
     Knew = mve_single_csdp(A,B,C)
+    # Knew = mve_single_cvxr(A,B,C)
     # 4. update the cvtgap : I will use Frobenius norm
     cvtgap = base::norm(Kold-Knew,type="F")
     # 5. update Kold -> we will use Kold forever
@@ -177,7 +178,8 @@ mve_single_csdp <- function(A, B, C){
   # 1. settings
   N = nrow(B)
   nconstraints = sum(C)/2
-  setC = list(B)
+  # setC = list(B) ::{Rcsdp/ADMM}
+  setC = -B
   setK = list(type="s", size=N)
   # 2. iterating for conditions
   #   2-1. setup
@@ -188,7 +190,8 @@ mve_single_csdp <- function(A, B, C){
   for (i in 1:(N-1)){
     for (j in (i+1):N){
       if (C[i,j]==TRUE){
-        tmpA = list(simple_triplet_sym_matrix(i=c(i,i,j,j),j=c(i,j,i,j),v=c(1,-1,-1,1),n=N))
+        # tmpA = list(simple_triplet_sym_matrix(i=c(i,i,j,j),j=c(i,j,i,j),v=c(1,-1,-1,1),n=N))
+        tmpA = alt_triplet_matrix(i=c(i,i,j,j),j=c(i,j,i,j),v=c(1,-1,-1,1),n=N)
         tmpb = A[i,i]+A[j,j]-A[i,j]-A[j,i]
         setA[[iter]] = tmpA
         setb[iter]   = tmpb
@@ -197,8 +200,11 @@ mve_single_csdp <- function(A, B, C){
     }
   }
   #   2-3. sum to zero
-  setA[[iter]] = list(matrix(1,N,N)/N)
+  # setA[[iter]] = list(matrix(1,N,N)/N)
+  setA[[iter]] = matrix(1,N,N)/N
   setb[iter]   = 0
-  outCSDP   = (csdp(setC,setA,setb,setK, csdp.control(printlevel=0)))
-  return(matrix(outCSDP$X[[1]], nrow=N))
+  # outCSDP    = (csdp(setC,setA,setb,setK, csdp.control(printlevel=0)))
+  outCSDP      = ADMM::admm.sdp(setC, setA, setb)
+  return(outCSDP$X)
+  # return(matrix(outCSDP$X[[1]], nrow=N))
 }

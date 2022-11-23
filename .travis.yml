@@ -33,13 +33,13 @@ r:
   - release
 
 r-packages:
+	- ADMM
   - MASS
   - CVXR
   - Rcpp
   - RcppDE
   - RcppDist
   - RcppArmadillo
-  - Rcsdp
   - Rdpack
   - RSpectra
   - maotai

@@ -45,14 +45,14 @@ label = as.factor(iris[subid,5])
 ## let's compare with other methods
 out1 <- do.nnp(X, ndim=2)      # NNP
 out2 <- do.pca(X, ndim=2)      # PCA
-out3 <- do.lamp(X, ndim=2)     # LAMP
+out3 <- do.dm(X, ndim=2)     # Diffusion Maps
 
 ## visualize
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
 plot(out1$Y, pch=19, col=label, main="NNP")
 plot(out2$Y, pch=19, col=label, main="PCA")
-plot(out3$Y, pch=19, col=label, main="LAMP")
+plot(out3$Y, pch=19, col=label, main="Diffusion Maps")
 par(opar)
 }
 

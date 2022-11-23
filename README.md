@@ -12,7 +12,7 @@ Status](https://travis-ci.org/kisungyou/Rdimtools.svg?branch=master)](https://tr
 <!-- badges: end -->
 
 **Rdimtools** is an R package for dimension reduction (DR) - including
-feature selection and manifold learning - and intrnsic dimension
+feature selection and manifold learning - and intrinsic dimension
 estimation (IDE) methods. We aim at building one of the *most
 comprehensive* toolbox available online, where current version delivers
 145 DR algorithms and 17 IDE methods.

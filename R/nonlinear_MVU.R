@@ -4,9 +4,7 @@
 #' to exploit semidefinite programming in performing nonlinear dimensionality reduction by \emph{unfolding}
 #' neighborhood graph constructed in the original high-dimensional space. Its unfolding generates a gram
 #' matrix \eqn{K} in that we can choose from either directly finding embeddings (\code{"spectral"}) or
-#' use again Kernel PCA technique (\code{"kpca"}) to find low-dimensional representations. Note that
-#' since \code{do.mvu} depends on \href{https://CRAN.R-project.org/package=Rcsdp}{Rcsdp}, we cannot guarantee its computational
-#' efficiency when given a large dataset.
+#' use again Kernel PCA technique (\code{"kpca"}) to find low-dimensional representations.
 #'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations and columns represent independent variables.
 #' @param ndim an integer-valued target dimension.
@@ -26,9 +24,11 @@
 #'
 #' @examples
 #' \donttest{
-#' ## generate ribbon-shaped data with the small number of data
+#' ## use a small subset of iris data
 #' set.seed(100)
-#' X = aux.gensamples(dname="ribbon", n=25)
+#' id  = sample(1:150, 50)
+#' X   = as.matrix(iris[id,1:4])
+#' lab = as.factor(iris[id,5])
 #'
 #' ## try different connectivity levels
 #' output1 <- do.mvu(X, type=c("proportion", 0.10))
@@ -38,9 +38,9 @@
 #' ## visualize three different projections
 #' opar <- par(no.readonly=TRUE)
 #' par(mfrow=c(1,3))
-#' plot(output1$Y, main="10% connected")
-#' plot(output2$Y, main="25% connected")
-#' plot(output3$Y, main="50% connected")
+#' plot(output1$Y, main="10% connected", pch=19, col=lab)
+#' plot(output2$Y, main="25% connected", pch=19, col=lab)
+#' plot(output3$Y, main="50% connected", pch=19, col=lab)
 #' par(opar)
 #' }
 #'
@@ -113,7 +113,8 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
   N  = ncol(M2) # number of data points
   nconstraints = sum(M2)/2
   D2 = ((as.matrix(dist(pX)))^2)
-  C  = list(.simple_triplet_diag_sym_matrix(1,N))
+  # C  = list(.simple_triplet_diag_sym_matrix(1,N))
+  C  = -diag(N) # ADMM minimization/Rcsdp maximization
   K  = list(type="s",size=N)
   #   5-2. iterative computation
   iter = 1
@@ -122,7 +123,8 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
   for (it1 in 1:nrow(M2)){
     for (it2 in it1:ncol(M2)){
       if (M2[it1,it2]==TRUE){
-        tmpA = list(simple_triplet_sym_matrix(i=c(it1,it1,it2,it2),j=c(it1,it2,it1,it2),v=c(1,-1,-1,1),n=N))
+        # tmpA = list(simple_triplet_sym_matrix(i=c(it1,it1,it2,it2),j=c(it1,it2,it1,it2),v=c(1,-1,-1,1),n=N))
+        tmpA = alt_triplet_matrix(i=c(it1,it1,it2,it2),j=c(it1,it2,it1,it2),v=c(1,-1,-1,1),n=N)
         tmpb = D2[it1,it2]
         A[[iter]] = tmpA
         b[iter]   = tmpb
@@ -131,10 +133,12 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
     }
   }
   #   5-3. final update for mean centered constraint
-  A[[iter]] = list(matrix(1,N,N)/N)
+  A[[iter]] = matrix(1,N,N)/N
   b[iter]   = 0
-  outCSDP = csdp(C,A,b,K,csdp.control(printlevel=0))
-  KK      = as.matrix(outCSDP$X[[1]])
+  # outCSDP = csdp(C,A,b,K,csdp.control(printlevel=0))
+  outCSDP = ADMM::admm.sdp(C,A,b)
+  # KK      = as.matrix(outCSDP$X[[1]])
+  KK      = outCSDP$X
 
   if (all(projtype=="spectral")){
     # 6. Embedding : Spectral Method, directly from K
@@ -156,3 +160,18 @@ do.mvu <- function(X,ndim=2,type=c("proportion",0.1),
   result$trfinfo = trfinfo
   return(result)
 }
+
+# triplet alternative -----------------------------------------------------
+#' @keywords internal
+#' @noRd
+alt_triplet_matrix <- function(i,j,v,n){
+  output = array(0,c(n,n))
+  nobj = length(i)
+  for (it in 1:nobj){
+    output[i[it],j[it]] = v[it]
+  }
+  return(output)
+}
+
+
+

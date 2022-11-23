@@ -40,15 +40,15 @@ The method of Maximum Variance Unfolding(MVU), also known as Semidefinite Embedd
 to exploit semidefinite programming in performing nonlinear dimensionality reduction by \emph{unfolding}
 neighborhood graph constructed in the original high-dimensional space. Its unfolding generates a gram
 matrix \eqn{K} in that we can choose from either directly finding embeddings (\code{"spectral"}) or
-use again Kernel PCA technique (\code{"kpca"}) to find low-dimensional representations. Note that
-since \code{do.mvu} depends on \href{https://CRAN.R-project.org/package=Rcsdp}{Rcsdp}, we cannot guarantee its computational
-efficiency when given a large dataset.
+use again Kernel PCA technique (\code{"kpca"}) to find low-dimensional representations.
 }
 \examples{
 \donttest{
-## generate ribbon-shaped data with the small number of data
+## use a small subset of iris data
 set.seed(100)
-X = aux.gensamples(dname="ribbon", n=25)
+id  = sample(1:150, 50)
+X   = as.matrix(iris[id,1:4])
+lab = as.factor(iris[id,5])
 
 ## try different connectivity levels
 output1 <- do.mvu(X, type=c("proportion", 0.10))
@@ -58,9 +58,9 @@ output3 <- do.mvu(X, type=c("proportion", 0.50))
 ## visualize three different projections
 opar <- par(no.readonly=TRUE)
 par(mfrow=c(1,3))
-plot(output1$Y, main="10\% connected")
-plot(output2$Y, main="25\% connected")
-plot(output3$Y, main="50\% connected")
+plot(output1$Y, main="10\% connected", pch=19, col=lab)
+plot(output2$Y, main="25\% connected", pch=19, col=lab)
+plot(output3$Y, main="50\% connected", pch=19, col=lab)
 par(opar)
 }
 
