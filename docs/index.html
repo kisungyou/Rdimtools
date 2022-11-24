@@ -20,7 +20,7 @@
 <script src="pkgdown.js"></script><meta property="og:title" content="Dimension Reduction and Estimation Methods">
 <meta property="og:description" content="We provide linear and nonlinear dimension reduction techniques.
 	Intrinsic dimension estimation methods for exploratory analysis are also provided.
-	For more details on the package, see the paper by You (2020) &lt;arXiv:2005.11107&gt;.">
+	For more details on the package, see the paper by You and Shung (2022) &lt;doi:10.1016/j.simpa.2022.100414&gt;.">
 <meta property="og:image" content="https://kisungyou.com/Rdimtools/logo.png">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -48,7 +48,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
       </span>
     </div>
 
@@ -105,12 +105,12 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="rdimtools-">Rdimtools <a href="https://kisungyou.com/Rdimtools/"><img src="reference/figures/logo.png" align="right" height="139"></a>
+<div class="page-header"><h1 id="rdimtools-">Rdimtools <a href="https://www.kisungyou.com/Rdimtools/" class="external-link"><img src="reference/figures/logo.png" align="right" height="139"></a>
 <a class="anchor" aria-label="anchor" href="#rdimtools-"></a>
 </h1></div>
 <!-- badges: start -->
 
-<p><strong>Rdimtools</strong> is an R package for dimension reduction (DR) - including feature selection and manifold learning - and intrnsic dimension estimation (IDE) methods. We aim at building one of the <em>most comprehensive</em> toolbox available online, where current version delivers 145 DR algorithms and 17 IDE methods.</p>
+<p><strong>Rdimtools</strong> is an R package for dimension reduction (DR) - including feature selection and manifold learning - and intrinsic dimension estimation (IDE) methods. We aim at building one of the <em>most comprehensive</em> toolbox available online, where current version delivers 145 DR algorithms and 17 IDE methods.</p>
 <p>The philosophy is simple, <strong>the more we have at hands, the better we can play</strong>.</p>
 <div class="section level2">
 <h2 id="elephant">Elephant<a class="anchor" aria-label="anchor" href="#elephant"></a>
@@ -134,7 +134,7 @@
 <p>Here is an example of dimension reduction on the famous <code>iris</code> dataset. Principal Component Analysis (<code>do.pca</code>), Laplacian Score (<code>do.lscore</code>), and Diffusion Maps (<code>do.dm</code>) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># load the library</span></span>
-<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://kisungyou.com/Rdimtools/">Rdimtools</a></span><span class="op">)</span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://www.kisungyou.com/Rdimtools/" class="external-link">Rdimtools</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># load the data</span></span>
 <span><span class="va">X</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span>,<span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span><span class="op">)</span></span>
@@ -156,7 +156,7 @@
 <h2 id="minimal-example--dimension-estimation">Minimal Example : Dimension Estimation<a class="anchor" aria-label="anchor" href="#minimal-example--dimension-estimation"></a>
 </h2>
 <p><img src="https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif"></p>
-<p>Swill Roll is a classic example of 2-dimensional manifold embedded in <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;%5Cmathbb%7BR%7D%5E3" title="\mathbb{R}^3" alt="\mathbb{R}^3"> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;d%3D2" title="d=2" alt="d=2">, let’s apply several methods for intrinsic dimension estimation.</p>
+<p>Swill Roll is a classic example of 2-dimensional manifold embedded in <span class="math inline">ℝ<sup>3</sup></span> and one of 11 famous model-based samples from <code><a href="reference/aux_gensamples.html">aux.gensamples()</a></code> function. Given the ground truth that <span class="math inline"><em>d</em> = 2</span>, let’s apply several methods for intrinsic dimension estimation.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># generate sample data</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span>
@@ -179,7 +179,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/graphics/text.html" class="external-link">text</a></span><span class="op">(</span>x<span class="op">=</span><span class="va">xtick</span>,  <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="st">"usr"</span><span class="op">)</span><span class="op">[</span><span class="fl">3</span><span class="op">]</span>, </span>
 <span>     labels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Ustat"</span>,<span class="st">"correlation"</span>,<span class="st">"made"</span>,<span class="st">"mle1"</span>,<span class="st">"twonn"</span><span class="op">)</span>, pos<span class="op">=</span><span class="fl">1</span>, xpd <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
-<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <img src="https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&amp;space;%5Cbg_white&amp;space;d%3D2" title="d=2" alt="d=2">. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
+<p>We can observe that all 5 methods we tested estimated the intrinsic dimension around <span class="math inline"><em>d</em> = 2</span>. It should be noted that the estimated dimension may not be integer-valued due to characteristics of each method.</p>
 </div>
 <div class="section level2">
 <h2 id="acknowledgements">Acknowledgements<a class="anchor" aria-label="anchor" href="#acknowledgements"></a>
