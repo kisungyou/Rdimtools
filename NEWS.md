@@ -1,3 +1,7 @@
+# Rdimtools 1.1.2
+
+* Fixed an error in `do.lapeig()` thanks to Frithjof Kruggel (UC Irvine).
+
 # Rdimtools 1.1.1
 
 * Removed dependence on `Rcsdp` package.

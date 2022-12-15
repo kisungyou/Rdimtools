@@ -25,7 +25,7 @@ is a classic algorithm employing spectral graph theory."><meta property="og:imag
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">Rdimtools</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.2</span>
       </span>
     </div>
 
@@ -74,7 +74,7 @@ is a classic algorithm employing spectral graph theory."><meta property="og:imag
   <div class="col-md-9 contents">
     <div class="page-header">
     <h1>Laplacian Eigenmaps</h1>
-    <small class="dont-index">Source: <a href="https://github.com/kisungyou/Rdimtools/blob/HEAD/R/nonlinear_LAPEIG.R" class="external-link"><code>R/nonlinear_LAPEIG.R</code></a></small>
+    <small class="dont-index">Source: <a href="https://github.com/kisungyou/Rdimtools/blob/HEAD/R/v1_nonlinear_LAPEIG.R" class="external-link"><code>R/v1_nonlinear_LAPEIG.R</code></a></small>
     <div class="hidden name"><code>nonlinear_LAPEIG.Rd</code></div>
     </div>
 
@@ -85,15 +85,7 @@ is a classic algorithm employing spectral graph theory.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.lapeig</span><span class="op">(</span></span>
-<span>  <span class="va">X</span>,</span>
-<span>  ndim <span class="op">=</span> <span class="fl">2</span>,</span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>, <span class="fl">0.1</span><span class="op">)</span>,</span>
-<span>  symmetric <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"union"</span>, <span class="st">"intersect"</span>, <span class="st">"asymmetric"</span><span class="op">)</span>,</span>
-<span>  preprocess <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"null"</span>, <span class="st">"center"</span>, <span class="st">"scale"</span>, <span class="st">"cscale"</span>, <span class="st">"whiten"</span>, <span class="st">"decorrelate"</span><span class="op">)</span>,</span>
-<span>  weighted <span class="op">=</span> <span class="cn">FALSE</span>,</span>
-<span>  kernelscale <span class="op">=</span> <span class="fl">1</span></span>
-<span><span class="op">)</span></span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, ndim <span class="op">=</span> <span class="fl">2</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -107,29 +99,29 @@ and columns represent independent variables.</p></dd>
 <dd><p>an integer-valued target dimension.</p></dd>
 
 
+<dt>...</dt>
+<dd><p>extra parameters including</p><dl><dt>kernelscale</dt>
+<dd><p>kernel scale parameter. Default value is 1.0.</p></dd>
+
+<dt>preprocess</dt>
+<dd><p>an additional option for preprocessing the data.
+Default is <code>"null"</code>. See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
+
+<dt>symmetric</dt>
+<dd><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>. See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
+
 <dt>type</dt>
 <dd><p>a vector of neighborhood graph construction. Following types are supported;
 <code>c("knn",k)</code>, <code>c("enn",radius)</code>, and <code>c("proportion",ratio)</code>.
 Default is <code>c("proportion",0.1)</code>, connecting about 1/10 of nearest data points
 among all data points. See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
 
-
-<dt>symmetric</dt>
-<dd><p>one of <code>"intersect"</code>, <code>"union"</code> or <code>"asymmetric"</code> is supported. Default is <code>"union"</code>. See also <code><a href="aux_graphnbd.html">aux.graphnbd</a></code> for more details.</p></dd>
-
-
-<dt>preprocess</dt>
-<dd><p>an additional option for preprocessing the data.
-Default is "null". See also <code><a href="aux_preprocess.html">aux.preprocess</a></code> for more details.</p></dd>
-
-
 <dt>weighted</dt>
-<dd><p><code>TRUE</code> for weighted graph laplacian and <code>FALSE</code> for
+<dd><p>a logical; <code>TRUE</code> for weighted graph laplacian and <code>FALSE</code> for
 combinatorial laplacian where connectivity is represented as 1 or 0 only.</p></dd>
 
 
-<dt>kernelscale</dt>
-<dd><p>kernel scale parameter. Default value is 1.0.</p></dd>
+</dl></dd>
 
 </dl></div>
     <div id="value">
@@ -144,6 +136,9 @@ combinatorial laplacian where connectivity is represented as 1 or 0 only.</p></d
 
 <dt>trfinfo</dt>
 <dd><p>a list containing information for out-of-sample prediction.</p></dd>
+
+<dt>algorithm</dt>
+<dd><p>name of the algorithm.</p></dd>
 
 
 </dl></div>
@@ -169,16 +164,16 @@ combinatorial laplacian where connectivity is represented as 1 or 0 only.</p></d
 <span class="r-in"><span><span class="va">lab</span>   <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">as.factor</a></span><span class="op">(</span><span class="va">iris</span><span class="op">[</span><span class="va">subid</span>,<span class="fl">5</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## try different levels of connectivity</span></span></span>
-<span class="r-in"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.10</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.20</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.50</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out1</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.5</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out2</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.10</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">out3</span> <span class="op">&lt;-</span> <span class="fu">do.lapeig</span><span class="op">(</span><span class="va">X</span>, type<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"proportion"</span>,<span class="fl">0.25</span><span class="op">)</span>, weighted<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## Visualize</span></span></span>
 <span class="r-in"><span><span class="va">opar</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>no.readonly<span class="op">=</span><span class="cn">TRUE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span>mfrow<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>,<span class="fl">3</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"10% connected"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"20% connected"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"50% connected"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out1</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"5% connected"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out2</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"10% connected"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">out3</span><span class="op">$</span><span class="va">Y</span>, pch<span class="op">=</span><span class="fl">19</span>, col<span class="op">=</span><span class="va">lab</span>, main<span class="op">=</span><span class="st">"25% connected"</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="nonlinear_LAPEIG-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/par.html" class="external-link">par</a></span><span class="op">(</span><span class="va">opar</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
