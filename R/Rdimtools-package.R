@@ -4,7 +4,6 @@
 #' implemented using \pkg{RcppArmadillo} for efficient computations. Please see the reference
 #' from the \href{https://kisungyou.com/Rdimtools/}{package webpage}.
 #'
-#' @docType package
 #' @noRd
 #' @name package-Rdimtools
 #' @aliases Rdimtools-package

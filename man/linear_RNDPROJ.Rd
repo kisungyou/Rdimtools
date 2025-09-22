@@ -41,8 +41,8 @@ random projection technique, featured by the celebrated Johnson–Lindenstrauss 
 }
 \details{
 The Johnson-Lindenstrauss(JL) lemma states that given \eqn{0 < \epsilon < 1}, for a set
-\eqn{X} of \eqn{m} points in \eqn{R^N} and a number \eqn{n > 8log(m)/\epsilon^2},
-there is a linear map \eqn{f:R^N} to {R^n} such that
+\eqn{X} of \eqn{m} points in \eqn{\mathbb{R}^N} and a number \eqn{n > 8log(m)/\epsilon^2},
+there is a linear map \eqn{f} from \eqn{\mathbb{R}^N} to \eqn{\mathbb{R}^N} such that
 \deqn{(1-\epsilon)|u-v|^2 \le |f(u)-f(v)|^2 \le (1+\epsilon)|u-v|^2}
 for all \eqn{u,v} in \eqn{X}.
 

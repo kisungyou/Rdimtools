@@ -6,9 +6,9 @@
 <!-- badges: start -->
 
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
-[![Travis-CI Build
-Status](https://travis-ci.org/kisungyou/Rdimtools.svg?branch=master)](https://travis-ci.org/kisungyou/Rdimtools)
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
+[![CRAN
+Downloads](https://cranlogs.r-pkg.org/badges/grand-total/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
 
 **Rdimtools** is an R package for dimension reduction (DR) - including
@@ -65,13 +65,13 @@ mylap = do.lscore(X, ndim=2)
 mydfm = do.dm(X, ndim=2, bandwidth=10)
 
 # visualize
-par(mfrow=c(1,3))
-plot(mypca$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="PCA")
-plot(mylap$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Laplacian Score")
-plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Maps")
+par(mfrow=c(1,3), pty="s")
+plot(mypca$Y, pch=19, col=lab, xlab="PCA1", ylab="PCA2", main="PCA")
+plot(mylap$Y, pch=19, col=lab, xlab="LS1", ylab="LS2", main="Laplacian Score")
+plot(mydfm$Y, pch=19, col=lab, xlab="DM1", ylab="DM2", main="Diffusion Maps")
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" />
 
 ## Minimal Example : Dimension Estimation
 
@@ -105,7 +105,7 @@ text(x=xtick,  par("usr")[3],
      labels = c("Ustat","correlation","made","mle1","twonn"), pos=1, xpd = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
 
 We can observe that all 5 methods we tested estimated the intrinsic
 dimension around $d=2$. It should be noted that the estimated dimension

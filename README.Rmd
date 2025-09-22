@@ -20,8 +20,8 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
-[![Travis-CI Build Status](https://travis-ci.org/kisungyou/Rdimtools.svg?branch=master)](https://travis-ci.org/kisungyou/Rdimtools)
 [![](https://cranlogs.r-pkg.org/badges/Rdimtools)](https://cran.r-project.org/package=Rdimtools)
+[![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/Rdimtools?color=green)](https://cran.r-project.org/package=Rdimtools)
 <!-- badges: end -->
 
 ```{r echo=FALSE, include=FALSE}
@@ -58,7 +58,7 @@ devtools::install_github("kisungyou/Rdimtools")
 
 Here is an example of dimension reduction on the famous `iris` dataset. Principal Component Analysis (`do.pca`), Laplacian Score (`do.lscore`), and Diffusion Maps (`do.dm`) are compared, each from a family of algorithms for linear reduction, feature extraction, and nonlinear reduction.
 
-```{r message=FALSE, warning=FALSE, fig.align='center', fig.width=7}
+```{r message=FALSE, warning=FALSE, fig.align='center', out.width="90%"}
 # load the library
 library(Rdimtools)
 
@@ -72,10 +72,10 @@ mylap = do.lscore(X, ndim=2)
 mydfm = do.dm(X, ndim=2, bandwidth=10)
 
 # visualize
-par(mfrow=c(1,3))
-plot(mypca$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="PCA")
-plot(mylap$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Laplacian Score")
-plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Maps")
+par(mfrow=c(1,3), pty="s")
+plot(mypca$Y, pch=19, col=lab, xlab="PCA1", ylab="PCA2", main="PCA")
+plot(mylap$Y, pch=19, col=lab, xlab="LS1", ylab="LS2", main="Laplacian Score")
+plot(mydfm$Y, pch=19, col=lab, xlab="DM1", ylab="DM2", main="Diffusion Maps")
 ```
 
 
@@ -85,7 +85,7 @@ plot(mydfm$Y, pch=19, col=lab, xlab="axis 1", ylab="axis 2", main="Diffusion Map
 
 Swill Roll is a classic example of 2-dimensional manifold embedded in $\mathbb{R}^3$ and one of 11 famous model-based samples from `aux.gensamples()` function. Given the ground truth that $d=2$, let's apply several methods for intrinsic dimension estimation.
 
-```{r message=FALSE, warning=FALSE, fig.align='center', fig.width=7, fig.height=3}
+```{r message=FALSE, warning=FALSE, fig.align='center', out.width="80%"}
 # generate sample data
 set.seed(100)
 roll = aux.gensamples(dname="swiss")

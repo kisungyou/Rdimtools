@@ -12,7 +12,7 @@
   packageStartupMessage("** Rdimtools || Dimension Reduction and Estimation Toolbox")
   packageStartupMessage("**")
   packageStartupMessage("** Version    : ",this.version,"       (",this.year,")",sep="")
-  packageStartupMessage("** Maintainer : Kisung You  (kisungyou@outlook.com)")
+  packageStartupMessage("** Maintainer : Kisung You  (kisung.you@outlook.com)")
   packageStartupMessage("** Website    : https://kisungyou.com/Rdimtools/")
   packageStartupMessage("**")
   packageStartupMessage("** Please see 'citation('Rdimtools)' to cite the package. ")
