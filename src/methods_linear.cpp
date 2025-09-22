@@ -986,7 +986,7 @@ arma::vec method_disr(arma::mat& D, double lbd1, double lbd2){
     sylvA = StSinv;
     sylvB = (lbd2/rho)*onesM;
     sylvC = -(StSinv*(A+(Y3/rho)));
-    G     = arma::syl(sylvA, sylvB, sylvC);
+    G     = arma::sylvester(sylvA, sylvB, sylvC);
     for (int i=0;i<m;i++){
       G(i,i) = 0;
     }
