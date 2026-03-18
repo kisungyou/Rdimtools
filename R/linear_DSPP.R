@@ -5,8 +5,6 @@
 #' penalty graph. It follows an integration of global within-class structure into manifold learning
 #' under exploiting discriminative nature provided from label information.
 #'
-#'
-#'
 #' @param X an \eqn{(n\times p)} matrix or data frame whose rows are observations.
 #' @param label a length-\eqn{n} vector of data class labels.
 #' @param ndim an integer-valued target dimension.
@@ -186,8 +184,8 @@ dspp_compute_wi <- function(xi, Xi, lambda){
   si  = CVXR::Variable(n)
   obj = (CVXR::p_norm(xi-(Xi%*%si),p=2) + lambda*CVXR::p_norm(si,p=1))
   constr = list(si>=0)
-  prob   = CVXR::Problem(Minimize(obj), constr)
-  result = solve(prob)
+  prob   = CVXR::Problem(CVXR::Minimize(obj), constr)
+  result = CVXR::psolve(prob)
   return(as.vector(result$getValue(si)))
 }
 #' @keywords internal

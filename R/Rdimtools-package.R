@@ -8,7 +8,7 @@
 #' @name package-Rdimtools
 #' @aliases Rdimtools-package
 #' @import Rdpack
-#' @import CVXR
+#' @importFrom CVXR matrix_trace Variable Problem psolve sum_entries norm1 p_norm Minimize Maximize
 #' @import RcppDE
 #' @import maotai
 #' @importFrom RANN nn2

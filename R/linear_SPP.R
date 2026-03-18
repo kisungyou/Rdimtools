@@ -112,7 +112,7 @@ spp_compute_si <- function(xi, Xi, reltol){
   si  = CVXR::Variable(n)
   obj = CVXR::norm1(si)
   constr = list(CVXR::p_norm(xi-(Xi%*%si),p=2)<=reltol,(sum(si)==1))
-  prob = CVXR::Problem(Minimize(obj), constr)
-  result = solve(prob)
+  prob = CVXR::Problem(CVXR::Minimize(obj), constr)
+  result = CVXR::psolve(prob)
   return(as.vector(result$getValue(si)))
 }

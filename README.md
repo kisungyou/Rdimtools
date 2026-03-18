@@ -71,7 +71,7 @@ plot(mylap$Y, pch=19, col=lab, xlab="LS1", ylab="LS2", main="Laplacian Score")
 plot(mydfm$Y, pch=19, col=lab, xlab="DM1", ylab="DM2", main="Diffusion Maps")
 ```
 
-<img src="man/figures/README-unnamed-chunk-2-1.png" width="90%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-2-1.png" alt="" width="90%" style="display: block; margin: auto;" />
 
 ## Minimal Example : Dimension Estimation
 
@@ -105,7 +105,7 @@ text(x=xtick,  par("usr")[3],
      labels = c("Ustat","correlation","made","mle1","twonn"), pos=1, xpd = TRUE)
 ```
 
-<img src="man/figures/README-unnamed-chunk-3-1.png" width="80%" style="display: block; margin: auto;" />
+<img src="man/figures/README-unnamed-chunk-3-1.png" alt="" width="80%" style="display: block; margin: auto;" />
 
 We can observe that all 5 methods we tested estimated the intrinsic
 dimension around $d=2$. It should be noted that the estimated dimension

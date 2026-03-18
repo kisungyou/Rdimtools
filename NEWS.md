@@ -1,3 +1,7 @@
+# Rdimtools 1.1.4
+
+* Change of `CVXR` package-related routines per its API change.
+
 # Rdimtools 1.1.2
 
 * Fixed an error in `do.lapeig()` thanks to Frithjof Kruggel (UC Irvine).

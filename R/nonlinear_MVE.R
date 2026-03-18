@@ -154,7 +154,7 @@ do.mve <- function(X, ndim=2, knn=ceiling(nrow(X)/10), kwidth=1.0,
 mve_single_cvxr <- function(A, B, C){
   N = nrow(B)
   Ktmp = CVXR::Variable(N,N,PSD=TRUE)
-  obj  = Maximize(matrix_trace(Ktmp%*%B))
+  obj  = CVXR::Maximize(CVXR::matrix_trace(Ktmp%*%B))
   constr1 = list(CVXR::sum_entries(Ktmp)==0)
   constr2 = list()
   iter = 1
@@ -167,7 +167,7 @@ mve_single_cvxr <- function(A, B, C){
     }
   }
   prob = CVXR::Problem(obj, c(constr1, constr2))
-  solprob = solve(prob)
+  solprob = CVXR::psolve(prob)
   Knew = as.matrix(solprob$getValue(Ktmp), nrow=N)
   return(Knew)
 }
