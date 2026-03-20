@@ -118,7 +118,6 @@ may not be integer-valued due to characteristics of each method.
 
 The logo icon is made by
 [Freepik](https://www.flaticon.com/authors/freepik/) from
-[www.flaticon.com](https://www.flaticon.com/).The rotating Swiss Roll
-image is taken from [Dinoj
-Surendran](https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.html)’s
-website.
+[www.flaticon.com](https://www.flaticon.com/). The rotating Swiss Roll
+image can be found on the late [Sam
+Roweis](https://cs.nyu.edu/home/people/in_memoriam/roweis/)’s website.
