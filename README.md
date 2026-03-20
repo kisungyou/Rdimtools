@@ -75,7 +75,10 @@ plot(mydfm$Y, pch=19, col=lab, xlab="DM1", ylab="DM2", main="Diffusion Maps")
 
 ## Minimal Example : Dimension Estimation
 
-![](https://people.cs.uchicago.edu/~dinoj/manifold/swissroll.gif)
+<p align="center">
+
+<img src="https://cs.nyu.edu/home/people/in_memoriam/roweis/lle/images/llemovg12.gif" width="400">
+</p>
 
 Swill Roll is a classic example of 2-dimensional manifold embedded in
 $\mathbb{R}^3$ and one of 11 famous model-based samples from
