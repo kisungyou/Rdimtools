@@ -1,3 +1,7 @@
+# Rdimtools 1.1.5
+
+* Changed the missing swiss roll example gif.
+
 # Rdimtools 1.1.4
 
 * Change of `CVXR` package-related routines per its API change.
